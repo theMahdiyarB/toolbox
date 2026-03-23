@@ -1,0 +1,34 @@
+{
+  "name": "جعبه‌ابزار آفلاین",
+  "short_name": "جعبه‌ابزار",
+  "description": "بیش از ۶۰ ابزار کاربردی — کاملاً آفلاین",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#006874",
+  "background_color": "#fafdfd",
+  "lang": "fa",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "productivity", "education"],
+  "shortcuts": [
+    { "name": "ماشین‌حساب",    "url": "./#calc",      "description": "محاسبات پایه و عبارات" },
+    { "name": "تقویم خورشیدی", "url": "./#jcal",      "description": "تقویم با مناسبت‌ها" },
+    { "name": "کد QR",         "url": "./#qr",        "description": "ساخت کد QR" },
+    { "name": "شماره ضروری",   "url": "./#emergency", "description": "اورژانس، پلیس، آتش‌نشانی" }
+  ]
+}

@@ -1,0 +1,26 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+
+# Build artifacts (this project has none, but just in case)
+dist/
+build/
+node_modules/
+
+# Environment
+.env
+.env.local
+
+# Deployment keys / secrets
+*.pem
+*.key
