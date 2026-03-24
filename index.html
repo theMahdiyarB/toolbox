@@ -1394,18 +1394,19 @@
         </div>
 
 
-        <span class="drawer-section-label">🎮 سرگرمی و بازی</span>
-        <div class="drawer-item" onclick="showTool('minigames')" data-tool="minigames">
-          <span class="drawer-item__icon">🎮</span>بازی‌های کوچک
+
+
+
+        <span class="drawer-section-label">🎨 طراحی و رنگ</span>
+        <div class="drawer-item" onclick="showTool('goldenratio')" data-tool="goldenratio">
+          <span class="drawer-item__icon">📏</span>نسبت طلایی
+        </div>
+        <div class="drawer-item" onclick="showTool('svgviewer')" data-tool="svgviewer">
+          <span class="drawer-item__icon">🖼️</span>نمایشگر SVG
         </div>
         <div class="drawer-item" onclick="showTool('wordcloud')" data-tool="wordcloud">
           <span class="drawer-item__icon">☁️</span>ابر کلمات
         </div>
-        <div class="drawer-item" onclick="showTool('compass')" data-tool="compass">
-          <span class="drawer-item__icon">🧭</span>قطب‌نما
-        </div>
-
-        <span class="drawer-section-label">🎨 طراحی و رنگ</span>
         <div class="drawer-item" onclick="showTool('colorpicker')" data-tool="colorpicker">
           <span class="drawer-item__icon">🖌️</span>تبدیل رنگ
         </div>
@@ -1432,13 +1433,7 @@
         </div>
 
 
-        <span class="drawer-section-label">📐 ابزارهای ویژه</span>
-        <div class="drawer-item" onclick="showTool('goldenratio')" data-tool="goldenratio">
-          <span class="drawer-item__icon">📏</span>نسبت طلایی
-        </div>
-        <div class="drawer-item" onclick="showTool('svgviewer')" data-tool="svgviewer">
-          <span class="drawer-item__icon">🖼️</span>نمایشگر SVG
-        </div>
+
 
         <span class="drawer-section-label">📁 فایل</span>
         <div class="drawer-item" onclick="showTool('imgcompress')" data-tool="imgcompress">
@@ -1454,7 +1449,14 @@
           <span class="drawer-item__icon">↔️</span>CSV ↔ JSON
         </div>
 
+
         <span class="drawer-section-label">🛠️ ایران و سیستم</span>
+        <div class="drawer-item" onclick="showTool('minigames')" data-tool="minigames">
+          <span class="drawer-item__icon">🎮</span>بازی‌های کوچک
+        </div>
+        <div class="drawer-item" onclick="showTool('compass')" data-tool="compass">
+          <span class="drawer-item__icon">🧭</span>قطب‌نما
+        </div>
         <div class="drawer-item" onclick="showTool('emergency')" data-tool="emergency">
           <span class="drawer-item__icon">🚨</span>شماره ضروری
         </div>
@@ -1653,20 +1655,16 @@
             </div>
 
 
-            <!-- ══ سرگرمی و بازی ══ -->
-            <div class="section" id="sec-fun">
-              <div class="section__title">🎮 سرگرمی و بازی</div>
-              <div class="tool-grid">
-                <div class="link-card" onclick="haptic(this);showTool('minigames')"><button class="fav-btn" data-tool="minigames" onclick="event.stopPropagation();toggleFav('minigames',this)">☆</button><span class="link-card__icon">🎮</span><span class="link-card__name">بازی‌های کوچک</span><span class="link-card__desc">دوز، مار و مارپله</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('wordcloud')"><button class="fav-btn" data-tool="wordcloud" onclick="event.stopPropagation();toggleFav('wordcloud',this)">☆</button><span class="link-card__icon">☁️</span><span class="link-card__name">ابر کلمات</span><span class="link-card__desc">سازنده کلمه‌نمای ابری</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('compass')"><button class="fav-btn" data-tool="compass" onclick="event.stopPropagation();toggleFav('compass',this)">☆</button><span class="link-card__icon">🧭</span><span class="link-card__name">قطب‌نما</span><span class="link-card__desc">جهت‌یابی آفلاین</span></div>
-              </div>
+
             </div>
 
             <!-- ══ طراحی و رنگ ══ -->
             <div class="section" id="sec-design">
               <div class="section__title">🎨 طراحی و رنگ</div>
               <div class="tool-grid">
+                <div class="link-card" onclick="haptic(this);showTool('goldenratio')"><button class="fav-btn" data-tool="goldenratio" onclick="event.stopPropagation();toggleFav('goldenratio',this)">☆</button><span class="link-card__icon">📏</span><span class="link-card__name">نسبت طلایی</span><span class="link-card__desc">محاسبه ابعاد متناسب با فی</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('svgviewer')"><button class="fav-btn" data-tool="svgviewer" onclick="event.stopPropagation();toggleFav('svgviewer',this)">☆</button><span class="link-card__icon">🖼️</span><span class="link-card__name">نمایشگر SVG</span><span class="link-card__desc">پیش‌نمایش زنده کدهای SVG</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('wordcloud')"><button class="fav-btn" data-tool="wordcloud" onclick="event.stopPropagation();toggleFav('wordcloud',this)">☆</button><span class="link-card__icon">☁️</span><span class="link-card__name">ابر کلمات</span><span class="link-card__desc">سازنده کلمه‌نمای ابری</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('colorpicker')"><button class="fav-btn" data-tool="colorpicker" onclick="event.stopPropagation();toggleFav('colorpicker',this)">☆</button><span class="link-card__icon">🖌️</span><span class="link-card__name">تبدیل رنگ</span><span class="link-card__desc">HEX، RGB، HSL، CMYK</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('colorpalette')"><span class="use-badge"></span><button class="fav-btn" data-tool="colorpalette" onclick="event.stopPropagation();toggleFav('colorpalette',this)">☆</button><span class="link-card__icon">🎨</span><span class="link-card__name">پالت رنگ تصویر</span><span class="link-card__desc">استخراج رنگ‌های غالب</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('wcag')"><span class="use-badge"></span><button class="fav-btn" data-tool="wcag" onclick="event.stopPropagation();toggleFav('wcag',this)">☆</button><span class="link-card__icon">♿</span><span class="link-card__name">کنتراست WCAG</span><span class="link-card__desc">دسترس‌پذیری رنگ AA/AAA</span></div>
@@ -1679,13 +1677,7 @@
             </div>
 
 
-            <!-- ══ ابزارهای ویژه ══ -->
-            <div class="section" id="sec-extra">
-              <div class="section__title">📐 ابزارهای ویژه</div>
-              <div class="tool-grid">
-                <div class="link-card" onclick="haptic(this);showTool('goldenratio')"><button class="fav-btn" data-tool="goldenratio" onclick="event.stopPropagation();toggleFav('goldenratio',this)">☆</button><span class="link-card__icon">📏</span><span class="link-card__name">نسبت طلایی</span><span class="link-card__desc">محاسبه ابعاد متناسب با فی</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('svgviewer')"><button class="fav-btn" data-tool="svgviewer" onclick="event.stopPropagation();toggleFav('svgviewer',this)">☆</button><span class="link-card__icon">🖼️</span><span class="link-card__name">نمایشگر SVG</span><span class="link-card__desc">پیش‌نمایش زنده کدهای SVG</span></div>
-              </div>
+
             </div>
 
             <!-- ══ فایل ══ -->
@@ -1703,6 +1695,8 @@
             <div class="section" id="sec-sys">
               <div class="section__title">🛠️ ایران و سیستم</div>
               <div class="tool-grid">
+                <div class="link-card" onclick="haptic(this);showTool('minigames')"><button class="fav-btn" data-tool="minigames" onclick="event.stopPropagation();toggleFav('minigames',this)">☆</button><span class="link-card__icon">🎮</span><span class="link-card__name">بازی‌های کوچک</span><span class="link-card__desc">دوز، مار</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('compass')"><button class="fav-btn" data-tool="compass" onclick="event.stopPropagation();toggleFav('compass',this)">☆</button><span class="link-card__icon">🧭</span><span class="link-card__name">قطب‌نما</span><span class="link-card__desc">جهت‌یابی آفلاین</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('emergency')"><button class="fav-btn" data-tool="emergency" onclick="event.stopPropagation();toggleFav('emergency',this)">☆</button><span class="link-card__icon">🚨</span><span class="link-card__name">شماره ضروری</span><span class="link-card__desc">اورژانس، پلیس، آتش‌نشانی</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('citycodes')"><button class="fav-btn" data-tool="citycodes" onclick="event.stopPropagation();toggleFav('citycodes',this)">☆</button><span class="link-card__icon">📞</span><span class="link-card__name">کد شهرها</span><span class="link-card__desc">پیش‌شماره تلفن ثابت</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('trafficfines')"><button class="fav-btn" data-tool="trafficfines" onclick="event.stopPropagation();toggleFav('trafficfines',this)">☆</button><span class="link-card__icon">🚗</span><span class="link-card__name">جرایم رانندگی</span><span class="link-card__desc">فهرست جرایم با مبلغ</span></div>
@@ -3807,7 +3801,7 @@
           <!-- DERIVATIVE -->
           <div id="calc-deriv-wrap">
             <label class="field-label">تابع f(x)</label>
-            <input type="text" id="calc-fn" class="text-input" placeholder="مثال: x**3 + 2*x**2 - x + 5  (معادل: x³ + 2x² − x + 5)" style="direction:ltr;font-family:'Courier New',monospace" oninput="calcDerivUpdate()">
+            <input type="text" id="calc-fn" class="text-input" placeholder="مثال: x^3 + 2*x^2 - x + 5  (معادل: x³ + 2x² − x + 5)" style="direction:ltr;font-family:'Courier New',monospace" oninput="calcDerivUpdate()">
             <label class="field-label" style="margin-top:8px">در نقطه x =</label>
             <input type="number" id="calc-deriv-x" class="text-input" value="1" step="any" oninput="calcDerivUpdate()">
             <div id="calc-deriv-res" style="margin-top:10px"></div>
@@ -7644,7 +7638,7 @@
           if (w) w.style.display = id===t ? '' : 'none';
           if (b) b.className = 'btn '+(id===t?'btn-filled':'btn-tonal');
         });
-        document.getElementById('ls-result').innerHTML = '';
+        const res = document.getElementById('ls-result'); if (res) res.innerHTML = '';
         var sRes = document.getElementById('ls-single-res');
         if (sRes) sRes.innerHTML = '';
       }
@@ -10480,4 +10474,1011 @@ function compassHandler(e) {
       }
     </script>
   </body>
-</html>
+</html<!-- ══ GRADIENT ══ -->
+        <div id="gradient" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">🌈 گرادیان CSS</div>
+          <div class="field-row">
+            <div class="field-col">
+              <label class="field-label">نوع</label
+              ><select
+                id="gr-type"
+                class="select-input"
+                onchange="updateGrad()"
+              >
+                <option value="linear">خطی</option>
+                <option value="radial">شعاعی</option>
+              </select>
+            </div>
+            <div class="field-col">
+              <label class="field-label">جهت</label
+              ><input
+                type="number"
+                id="gr-deg"
+                class="text-input"
+                value="135"
+                min="0"
+                max="360"
+                oninput="updateGrad()"
+              />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-col">
+              <label class="field-label">رنگ ۱</label
+              ><input
+                type="color"
+                id="gr-c1"
+                value="#667eea"
+                oninput="updateGrad()"
+                style="width: 100%"
+              />
+            </div>
+            <div class="field-col">
+              <label class="field-label">رنگ ۲</label
+              ><input
+                type="color"
+                id="gr-c2"
+                value="#764ba2"
+                oninput="updateGrad()"
+                style="width: 100%"
+              />
+            </div>
+            <div class="field-col">
+              <label class="field-label">رنگ ۳ (اختیاری)</label
+              ><input
+                type="color"
+                id="gr-c3"
+                value="#f64f59"
+                oninput="updateGrad()"
+                style="width: 100%"
+              />
+            </div>
+            <div class="field-col">
+              <label class="check-lbl" style="margin-top: 28px"
+                ><input
+                  type="checkbox"
+                  id="gr-3color"
+                  onchange="updateGrad()"
+                />
+                سه رنگ</label
+              >
+            </div>
+
+          <div class="tool-desc">گرادیان‌های خطی و شعاعی با دو یا سه رنگ می‌سازد. روی کد CSS خروجی کلیک کنید تا کپی شود.</div>
+        </div>
+          <div id="gr-preview" class="css-preview" style="height: 90px"></div>
+          <div
+            class="css-code-box"
+            id="gr-code"
+            onclick="copyText(this.textContent)"
+          >
+            کلیک کنید تا کپی شود
+          </div>
+        </div>
+
+        <!-- ══ SHADOW ══ -->
+        <div id="shadow" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">🌑 سایه CSS</div>
+          <div class="range-row">
+            <label>افقی</label
+            ><input
+              type="range"
+              id="sh-x"
+              min="-50"
+              max="50"
+              value="4"
+              oninput="
+                document.getElementById('sh-xv').textContent =
+                  this.value + 'px';
+                updateShad();
+              "
+            /><input type="number" id="sh-x-num" class="range-num-input" value="4" min="-50" max="50" step="1" style="width:60px;margin-right:4px;font-size:13px;padding:4px 6px;border:1px solid var(--m3-outline-variant);border-radius:6px;background:var(--m3-surface-container);color:var(--m3-on-surface);text-align:center" oninput="_syncRangeFromNum(this,'sh-x')"><span class="range-val" id="sh-xv">4px</span>
+          </div>
+          <div class="range-row">
+            <label>عمودی</label
+            ><input
+              type="range"
+              id="sh-y"
+              min="-50"
+              max="50"
+              value="4"
+              oninput="
+                document.getElementById('sh-yv').textContent =
+                  this.value + 'px';
+                updateShad();
+              "
+            /><input type="number" id="sh-y-num" class="range-num-input" value="4" min="-50" max="50" step="1" style="width:60px;margin-right:4px;font-size:13px;padding:4px 6px;border:1px solid var(--m3-outline-variant);border-radius:6px;background:var(--m3-surface-container);color:var(--m3-on-surface);text-align:center" oninput="_syncRangeFromNum(this,'sh-y')"><span class="range-val" id="sh-yv">4px</span>
+          </div>
+          <div class="range-row">
+            <label>پخش</label
+            ><input
+              type="range"
+              id="sh-bl"
+              min="0"
+              max="80"
+              value="8"
+              oninput="
+                document.getElementById('sh-blv').textContent =
+                  this.value + 'px';
+                updateShad();
+              "
+            /><input type="number" id="sh-bl-num" class="range-num-input" value="8" min="0" max="80" step="1" style="width:60px;margin-right:4px;font-size:13px;padding:4px 6px;border:1px solid var(--m3-outline-variant);border-radius:6px;background:var(--m3-surface-container);color:var(--m3-on-surface);text-align:center" oninput="_syncRangeFromNum(this,'sh-bl')"><span class="range-val" id="sh-blv">8px</span>
+          </div>
+          <div class="range-row">
+            <label>گسترش</label
+            ><input
+              type="range"
+              id="sh-sp"
+              min="-30"
+              max="30"
+              value="0"
+              oninput="
+                document.getElementById('sh-spv').textContent =
+                  this.value + 'px';
+                updateShad();
+              "
+            /><input type="number" id="sh-sp-num" class="range-num-input" value="0" min="-30" max="30" step="1" style="width:60px;margin-right:4px;font-size:13px;padding:4px 6px;border:1px solid var(--m3-outline-variant);border-radius:6px;background:var(--m3-surface-container);color:var(--m3-on-surface);text-align:center" oninput="_syncRangeFromNum(this,'sh-sp')"><span class="range-val" id="sh-spv">0px</span>
+          </div>
+          <div class="range-row">
+            <label>شفافیت</label
+            ><input
+              type="range"
+              id="sh-op"
+              min="0"
+              max="100"
+              value="25"
+              oninput="
+                document.getElementById('sh-opv').textContent =
+                  this.value + '%';
+                updateShad();
+              "
+            /><input type="number" id="sh-op-num" class="range-num-input" value="25" min="0" max="100" step="1" style="width:60px;margin-right:4px;font-size:13px;padding:4px 6px;border:1px solid var(--m3-outline-variant);border-radius:6px;background:var(--m3-surface-container);color:var(--m3-on-surface);text-align:center" oninput="_syncRangeFromNum(this,'sh-op')"><span class="range-val" id="sh-opv">25%</span>
+          </div>
+          <div class="field-row">
+            <div class="field-col">
+              <label class="field-label">رنگ سایه</label
+              ><input
+                type="color"
+                id="sh-col"
+                value="#000000"
+                oninput="updateShad()"
+                style="width: 100%"
+              />
+            </div>
+            <div class="field-col">
+              <label class="check-lbl" style="margin-top: 28px"
+                ><input type="checkbox" id="sh-inset" onchange="updateShad()" />
+                سایه داخلی</label
+              >
+            </div>
+          </div>
+          <div
+            id="sh-preview"
+            class="css-preview"
+            style="
+              background: var(--m3-surface-container-high);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <div
+              id="sh-box"
+              style="
+                width: 80px;
+                height: 80px;
+                background: var(--m3-primary);
+                border-radius: 10px;
+              "
+            ></div>
+          </div>
+          <div
+            class="css-code-box"
+            id="sh-code"
+            onclick="copyText(this.textContent)"
+          >
+            کلیک کنید تا کپی شود
+          </div>
+
+          <div class="tool-desc">با کنترل‌های تعاملی کد box-shadow تولید می‌کند. افست، پخش، گسترش و سایه داخلی قابل تنظیم است.</div>
+        </div>
+
+        <!-- ══ BORDER RADIUS ══ -->
+        <div id="borderrad" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">⬛ گوشه‌گرد CSS</div>
+          <div class="check-row">
+            <label class="check-lbl"
+              ><input
+                type="checkbox"
+                id="br-sync"
+                checked
+                onchange="syncBR()"
+              />
+              همه گوشه‌ها یکسان</label
+            >
+          </div>
+          <div class="range-row">
+            <label>↖ بالا-چپ</label
+            ><input
+              type="range"
+              id="br-tl"
+              min="0"
+              max="100"
+              value="8"
+              oninput="
+                syncBR();
+                updateBR();
+              "
+            /><input type="number" id="br-tl-num" class="range-num-input" value="8" min="0" max="100" step="1" style="width:60px;margin-right:4px;font-size:13px;padding:4px 6px;border:1px solid var(--m3-outline-variant);border-radius:6px;background:var(--m3-surface-container);color:var(--m3-on-surface);text-align:center" oninput="_syncRangeFromNum(this,'br-tl')"><span class="range-val" id="br-tlv">8px</span>
+          </div>
+          <div class="range-row">
+            <label>↗ بالا-راست</label
+            ><input
+              type="range"
+              id="br-tr"
+              min="0"
+              max="100"
+              value="8"
+              oninput="updateBR()"
+            /><input type="number" id="br-tr-num" class="range-num-input" value="8" min="0" max="100" step="1" style="width:60px;margin-right:4px;font-size:13px;padding:4px 6px;border:1px solid var(--m3-outline-variant);border-radius:6px;background:var(--m3-surface-container);color:var(--m3-on-surface);text-align:center" oninput="_syncRangeFromNum(this,'br-tr')"><span class="range-val" id="br-trv">8px</span>
+          </div>
+          <div class="range-row">
+            <label>↙ پایین-چپ</label
+            ><input
+              type="range"
+              id="br-bl"
+              min="0"
+              max="100"
+              value="8"
+              oninput="updateBR()"
+            /><input type="number" id="br-bl-num" class="range-num-input" value="8" min="0" max="100" step="1" style="width:60px;margin-right:4px;font-size:13px;padding:4px 6px;border:1px solid var(--m3-outline-variant);border-radius:6px;background:var(--m3-surface-container);color:var(--m3-on-surface);text-align:center" oninput="_syncRangeFromNum(this,'br-bl')"><span class="range-val" id="br-blv">8px</span>
+          </div>
+          <div class="range-row">
+            <label>↘ پایین-راست</label
+            ><input
+              type="range"
+              id="br-br"
+              min="0"
+              max="100"
+              value="8"
+              oninput="updateBR()"
+            /><input type="number" id="br-br-num" class="range-num-input" value="8" min="0" max="100" step="1" style="width:60px;margin-right:4px;font-size:13px;padding:4px 6px;border:1px solid var(--m3-outline-variant);border-radius:6px;background:var(--m3-surface-container);color:var(--m3-on-surface);text-align:center" oninput="_syncRangeFromNum(this,'br-br')"><span class="range-val" id="br-brv">8px</span>
+          </div>
+          <div
+            id="br-preview"
+            style="
+              width: 120px;
+              height: 120px;
+              background: var(--m3-primary);
+              margin: 14px auto;
+              transition: border-radius 0.2s;
+            "
+          ></div>
+          <div
+            class="css-code-box"
+            id="br-code"
+            onclick="copyText(this.textContent)"
+          >
+            کلیک کنید تا کپی شود
+          </div>
+
+          <div class="tool-desc">گوشه‌های المان را بصری تنظیم می‌کند. می‌توانید همه گوشه‌ها را یکسان یا هر گوشه را مستقل تنظیم کنید.</div>
+        </div>
+
+        <!-- ══ ASPECT RATIO ══ -->
+        <div id="aspect" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">📐 نسبت ابعاد</div>
+          <div class="field-row">
+            <div class="field-col">
+              <label class="field-label">عرض</label
+              ><input
+                type="number"
+                id="ar-w"
+                class="text-input"
+                value="1920"
+                oninput="calcAspect()"
+              />
+            </div>
+            <div class="field-col">
+              <label class="field-label">ارتفاع</label
+              ><input
+                type="number"
+                id="ar-h"
+                class="text-input"
+                value="1080"
+                oninput="calcAspect()"
+              />
+            </div>
+          </div>
+          <div class="data-list" style="margin-bottom: 14px">
+            <div class="data-row">
+              <span class="data-row__key">نسبت ابعاد</span
+              ><span class="data-row__val" id="ar-ratio">16:9</span>
+            </div>
+          </div>
+          <div class="field-row" style="align-items: flex-end">
+            <div class="field-col">
+              <label class="field-label">اگر عرض باشد:</label
+              ><input
+                type="number"
+                id="ar-sw"
+                class="text-input"
+                value="1280"
+                oninput="scaleAspect()"
+              />
+            </div>
+            <div class="field-col">
+              <label class="field-label">ارتفاع می‌شود:</label
+              ><input
+                type="number"
+                id="ar-sh"
+                class="text-input text-input--ro"
+                readonly
+              />
+            </div>
+          </div>
+
+          <div class="tool-desc">نسبت ابعاد را از عرض و ارتفاع محاسبه می‌کند. اگر یک بعد جدید داشته باشید، بعد دیگر با حفظ نسبت محاسبه می‌شود.</div>
+        </div>
+
+        <!-- ══ IMAGE COMPRESS ══ -->
+        <div id="imgcompress" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">🗜️ فشرده‌سازی تصویر</div>
+          <p
+            style="
+              font-size: 0.8rem;
+              color: var(--m3-on-surface-variant);
+              margin-bottom: 12px;
+            "
+          >
+            📌 تمام پردازش در مرورگر انجام می‌شود — هیچ فایلی روی سرور ذخیره
+            نمی‌شود
+          </p>
+          <div
+            class="upload-zone"
+            id="ic-zone"
+            onclick="document.getElementById('ic-file').click()"
+            ondragover="icDrag(event, true)"
+            ondragleave="icDrag(event, false)"
+            ondrop="icDrop(event)"
+          >
+            <input
+              type="file"
+              id="ic-file"
+              accept="image/*"
+              onchange="icLoad()"
+            />
+            <div class="upload-zone__icon">🖼️</div>
+            <div class="upload-zone__text">کلیک یا Drag & Drop تصویر</div>
+            <div class="upload-zone__limit">
+              حداکثر ۵۰ مگابایت · JPG، PNG، WebP
+            </div>
+
+          <div class="tool-desc">تصویر را در مرورگر با Canvas API فشرده می‌کند. هیچ فایلی به سرور ارسال نمی‌شود. WebP بهترین نسبت کیفیت به حجم را دارد.</div>
+        </div>
+          <div id="ic-info" style="display: none" class="file-info-bar"></div>
+          <div id="ic-err" class="tool-err"></div>
+          <div class="range-row" style="margin-top: 10px">
+            <label>کیفیت</label
+            ><input
+              type="range"
+              id="ic-quality"
+              min="5"
+              max="100"
+              value="80"
+              oninput="
+                document.getElementById('ic-qv').textContent = this.value + '%';
+                icRecompress();
+              "
+            /><span class="range-val" id="ic-qv">80%</span>
+          </div>
+          <div class="field-row" style="margin-top:10px;flex-wrap:wrap;gap:12px">
+            <div class="field-col">
+              <label class="field-label">فرمت خروجی</label>
+              <select id="ic-fmt" class="select-input" onchange="icRecompress()">
+                <option value="image/webp">WebP — بهترین فشرده‌سازی</option>
+                <option value="image/jpeg">JPEG</option>
+                <option value="image/png">PNG</option>
+              </select>
+            </div>
+            <div class="field-col">
+              <label class="field-label">حداکثر عرض/ارتفاع (px)</label>
+              <input type="number" id="ic-maxdim" class="text-input" value="1920" min="100" max="8000" step="10" oninput="icRecompress()">
+            </div>
+            <div class="field-col">
+              <label class="field-label">حداکثر حجم خروجی (KB)</label>
+              <input type="number" id="ic-maxkb" class="text-input" value="500" min="10" max="50000" step="10" oninput="icRecompress()">
+            </div>
+          </div>
+          <div id="ic-progress" style="display:none;margin-top:10px">
+            <div style="height:6px;background:var(--m3-surface-container-highest);border-radius:3px;overflow:hidden">
+              <div id="ic-prog-bar" style="height:100%;width:0%;background:var(--m3-primary);border-radius:3px;transition:width .3s"></div>
+            </div>
+            <div id="ic-prog-label" style="font-size:12px;color:var(--m3-on-surface-variant);margin-top:4px;text-align:center"></div>
+          </div>
+          <div
+            style="
+              display: flex;
+              gap: 14px;
+              margin-top: 10px;
+              flex-wrap: wrap;
+              align-items: center;
+            "
+          >
+            <img
+              id="ic-preview"
+              style="
+                display: none;
+                max-width: 100%;
+                max-height: 240px;
+                border-radius: 10px;
+                border: 1px solid var(--m3-outline-variant);
+              "
+            />
+          </div>
+          <div
+            id="ic-compare"
+            style="display: none; margin-top: 10px"
+            class="data-list"
+          >
+            <div class="data-row">
+              <span class="data-row__key">اندازه اصلی</span
+              ><span class="data-row__val" id="ic-orig-sz">—</span>
+            </div>
+            <div class="data-row">
+              <span class="data-row__key">اندازه فشرده</span
+              ><span class="data-row__val" id="ic-comp-sz">—</span>
+            </div>
+            <div class="data-row">
+              <span class="data-row__key">کاهش</span
+              ><span class="data-row__val" id="ic-saving">—</span>
+            </div>
+          </div>
+          <button
+            class="btn btn-filled"
+            id="ic-dl"
+            onclick="icDownload()"
+            style="display: none; margin-top: 10px"
+          >
+            💾 دانلود
+          </button>
+        </div>
+
+        <!-- ══ PDF COMPRESS ══ -->
+        <div id="pdfcompress" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">📄 فشرده‌سازی PDF</div>
+          <p
+            style="
+              font-size: 0.8rem;
+              color: var(--m3-on-surface-variant);
+              margin-bottom: 12px;
+            "
+          >
+            📌 PDF در مرورگر پردازش می‌شود — هیچ فایلی روی سرور ارسال نمی‌شود
+          </p>
+          <div
+            class="upload-zone"
+            id="pdf-zone"
+            onclick="document.getElementById('pdf-file').click()"
+            ondragover="pdfDrag(event, true)"
+            ondragleave="pdfDrag(event, false)"
+            ondrop="pdfDrop(event)"
+          >
+            <input
+              type="file"
+              id="pdf-file"
+              accept="application/pdf"
+              onchange="pdfLoad()"
+            />
+            <div class="upload-zone__icon">📄</div>
+            <div class="upload-zone__text">کلیک یا Drag & Drop فایل PDF</div>
+            <div class="upload-zone__limit">حداکثر ۵۰ مگابایت</div>
+
+          <div class="tool-desc">صفحات PDF را با pdf.js رندر کرده و با کیفیت کمتر ذخیره می‌کند. فایل هرگز به سرور ارسال نمی‌شود.</div>
+        </div>
+          <div id="pdf-err" class="tool-err"></div>
+          <div id="pdf-info" style="display: none" class="file-info-bar"></div>
+          <div class="range-row" style="margin-top: 10px">
+            <label>کیفیت تصویر</label
+            ><input
+              type="range"
+              id="pdf-q"
+              min="0.3"
+              max="1"
+              step="0.05"
+              value="0.7"
+              oninput="
+                document.getElementById('pdf-qv').textContent =
+                  Math.round(this.value * 100) + '%'
+              "
+            /><span class="range-val" id="pdf-qv">70%</span>
+          </div>
+          <div class="prog-wrap" id="pdf-prog-wrap" style="display: none">
+            <div class="prog-bar">
+              <div class="prog-fill" id="pdf-prog-fill"></div>
+            </div>
+            <div class="prog-lbl" id="pdf-prog-lbl">در حال پردازش…</div>
+          </div>
+          <div
+            id="pdf-res"
+            style="display: none"
+            class="data-list"
+            style="margin-top: 10px"
+          >
+            <div class="data-row">
+              <span class="data-row__key">صفحات</span
+              ><span class="data-row__val" id="pdf-pages">—</span>
+            </div>
+            <div class="data-row">
+              <span class="data-row__key">اندازه اصلی</span
+              ><span class="data-row__val" id="pdf-orig">—</span>
+            </div>
+            <div class="data-row">
+              <span class="data-row__key">اندازه خروجی</span
+              ><span class="data-row__val" id="pdf-out-sz">—</span>
+            </div>
+            <div class="data-row">
+              <span class="data-row__key">کاهش</span
+              ><span class="data-row__val" id="pdf-save">—</span>
+            </div>
+          </div>
+          <button
+            class="btn btn-filled"
+            id="pdf-dl"
+            onclick="pdfDownload()"
+            style="display: none; margin-top: 10px"
+          >
+            💾 دانلود PDF فشرده
+          </button>
+        </div>
+
+        <!-- ══ IMAGE TO BASE64 ══ -->
+        <div id="img2b64" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">🔄 تصویر ← Base64</div>
+          <div
+            class="upload-zone"
+            onclick="document.getElementById('i2b-file').click()"
+          >
+            <input
+              type="file"
+              id="i2b-file"
+              accept="image/*"
+              onchange="i2bLoad()"
+            />
+            <div class="upload-zone__icon">🖼️</div>
+            <div class="upload-zone__text">کلیک برای انتخاب تصویر</div>
+            <div class="upload-zone__limit">حداکثر ۵۰ مگابایت</div>
+
+          <div class="tool-desc">تصویر را به Base64 تبدیل می‌کند که مستقیم در CSS یا HTML قابل استفاده است.</div>
+        </div>
+          <div id="i2b-err" class="tool-err"></div>
+          <div id="i2b-res" style="display: none">
+            <div class="btn-row" style="margin-top: 10px">
+              <button class="btn btn-tonal" onclick="i2bCopy('data')">
+                📋 کپی Data URL
+              </button>
+              <button class="btn btn-tonal" onclick="i2bCopy('raw')">
+                📋 کپی Raw Base64
+              </button>
+            </div>
+            <textarea
+              id="i2b-out"
+              class="text-area mono text-input--ro"
+              style="min-height: 100px; font-size: 0.72rem"
+              readonly
+            ></textarea>
+            <div id="i2b-info" class="file-info-bar"></div>
+          </div>
+        </div>
+
+        <!-- ══ CSV/JSON ══ -->
+        <div id="csvjson" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">↔️ CSV ↔ JSON</div>
+          <div class="btn-row">
+            <button class="btn btn-filled" onclick="csv2json()">
+              CSV → JSON
+            </button>
+            <button class="btn btn-tonal" onclick="json2csv()">
+              JSON → CSV
+            </button>
+            <button class="btn btn-tonal" onclick="copyVal('cj-out')">
+              📋 کپی
+            </button>
+          </div>
+          <textarea
+            id="cj-in"
+            class="text-area mono"
+            style="min-height: 130px"
+            placeholder="CSV یا JSON ورودی را وارد کنید…"
+          ></textarea>
+          <textarea
+            id="cj-out"
+            class="text-area mono text-input--ro"
+            style="min-height: 130px"
+            readonly
+          ></textarea>
+
+          <div class="tool-desc">CSV را به آرایه JSON (ردیف اول به‌عنوان کلید) یا برعکس تبدیل می‌کند.</div>
+        </div>
+
+        <!-- ══ DEVICE INFO ══ -->
+        <div id="device" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">💻 اطلاعات دستگاه</div>
+          <button class="btn btn-filled" onclick="loadDevice()" style="margin-bottom:14px">
+            🔄 بروزرسانی
+          </button>
+          <div class="data-list" id="device-list"></div>
+          <div class="tool-desc">اطلاعات کامل دستگاه، مرورگر، شبکه، صفحه‌نمایش، سخت‌افزار، حافظه و تنظیمات مرورگر — مستقیماً از Browser API.</div>
+        </div>
+
+        <!-- ══ USER AGENT ══ -->
+        <div id="ua" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">ℹ️ تجزیه User Agent</div>
+          <textarea
+            id="ua-input"
+            class="text-area mono"
+            style="min-height: 70px"
+            placeholder="User Agent…"
+          ></textarea>
+          <button class="btn btn-filled" onclick="parseUA()">تجزیه</button>
+          <button
+            class="btn btn-tonal"
+            onclick="
+              document.getElementById('ua-input').value = navigator.userAgent;
+              parseUA();
+            "
+          >
+            UA فعلی
+          </button>
+          <div class="data-list" id="ua-res" style="margin-top: 12px"></div>
+
+          <div class="tool-desc">رشته User Agent را تجزیه و مرورگر، نسخه و سیستم‌عامل را استخراج می‌کند.</div>
+        </div>
+
+        <!-- ══ MORSE CODE ══ -->
+                <div id="morse" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">📡 کد مورس</div>
+          <div class="btn-row" style="margin-bottom:8px;flex-wrap:wrap">
+            <button class="btn btn-filled" id="morse-mode-t2m" onclick="setMorseMode('t2m')">متن ← مورس</button>
+            <button class="btn btn-tonal"  id="morse-mode-m2t" onclick="setMorseMode('m2t')">مورس ← متن</button>
+            <button class="btn btn-tonal"  id="morse-lang-en"  onclick="setMorseLang('en')">EN</button>
+            <button class="btn btn-tonal"  id="morse-lang-fa"  onclick="setMorseLang('fa')">FA فارسی</button>
+          </div>
+          <textarea id="morse-in"  class="text-area" style="min-height:80px" placeholder="متن یا کد مورس..." oninput="runMorse()"></textarea>
+          <textarea id="morse-out" class="text-area text-input--ro" style="min-height:80px;font-family:'Courier New',monospace;font-size:.88rem;direction:ltr;text-align:left" readonly></textarea>
+          <div class="btn-row" style="margin-top:6px;flex-wrap:wrap">
+            <button class="btn btn-tonal" onclick="copyVal('morse-out')">📋 کپی</button>
+            <button class="btn btn-tonal" onclick="morsePlayAudio()" id="morse-play-btn">🔊 پخش صدا</button>
+            <button class="btn btn-tonal" onclick="morseFlash()"    id="morse-flash-btn">🔦 چراغ‌قوه</button>
+            <button class="btn btn-tonal" onclick="morseStop()"     style="font-size:12px">⏹</button>
+          </div>
+          <div id="morse-vis" style="margin-top:10px;min-height:24px;font-family:'Courier New',monospace;font-size:1.3rem;letter-spacing:.2em;color:var(--m3-primary);text-align:center;word-break:break-all"></div>
+          <div class="tool-desc">کد مورس بین‌المللی (EN) و فارسی (FA). فاصله بین حروف: اسپیس | بین کلمات: /.<br>
+          <strong>چراغ‌قوه:</strong> فقط Chrome اندروید — به دسترسی دوربین نیاز دارد.</div>
+        </div>
+
+        <!-- ══ ROMAN NUMERALS ══ -->
+<!-- ══ ROMAN NUMERALS ══ -->
+        <div id="roman" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">Ⅰ اعداد رومی</div>
+          <div class="field-row">
+            <div class="field-col">
+              <label class="field-label">عدد دسیمال (1 تا 3999)</label>
+              <input type="number" id="roman-dec" class="text-input" min="1" max="3999" value="2025" oninput="decToRoman()">
+            </div>
+            <div class="field-col">
+              <label class="field-label">عدد رومی</label>
+              <input type="text" id="roman-out" class="text-input text-input--ro" style="font-size:1.5rem;font-weight:700;letter-spacing:.1em" readonly>
+            </div>
+          </div>
+          <label class="field-label" style="margin-top:4px">رومی به دسیمال</label>
+          <div class="field-row" style="align-items:center">
+            <input type="text" id="roman-in" class="text-input" placeholder="مثال: MMXXV" oninput="romanToDec()">
+            <input type="text" id="roman-dec-out" class="text-input text-input--ro" readonly style="max-width:130px">
+          </div>
+          <div class="tool-desc">I=1، V=5، X=10، L=50، C=100، D=500، M=1000. عدد کوچکتر قبل از بزرگتر تفریق می‌شود (مثلاً IV=4، IX=9).</div>
+        </div>
+
+        <!-- ══ ASCII TABLE ══ -->
+        <div id="asciitbl" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">🔤 جدول ASCII</div>
+          <input type="text" id="ascii-q" class="text-input" placeholder="جستجوی کاراکتر، کد یا توضیح..." oninput="filterASCII()">
+          <div style="max-height:380px;overflow-y:auto;border-radius:12px;border:1px solid var(--m3-outline-variant)">
+            <table style="width:100%;border-collapse:collapse;font-size:12.5px">
+              <thead style="position:sticky;top:0;background:var(--m3-surface-container-high);z-index:1">
+                <tr>
+                  <th style="padding:8px 12px;text-align:center">Dec</th>
+                  <th style="padding:8px 12px;text-align:center">Hex</th>
+                  <th style="padding:8px 12px;text-align:center">کاراکتر</th>
+                  <th style="padding:8px 12px;text-align:right">توضیح</th>
+                </tr>
+              </thead>
+              <tbody id="ascii-tbody"></tbody>
+            </table>
+          </div>
+          <div class="tool-desc">کدگذاری استاندارد برای کاراکترهای متنی. کدهای 0-31 کنترلی هستند، 32-126 قابل چاپ، و 127 کد Delete است.</div>
+        </div>
+
+
+        <!-- ══ WORLD CLOCK / TIMEZONE ══ -->
+        <div id="timezone" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">🌐 ساعت جهانی</div>
+          <div class="field-row" style="align-items:flex-end">
+            <div class="field-col">
+              <label class="field-label">تاریخ و ساعت مبدا</label>
+              <input type="datetime-local" id="tz-src" class="text-input" oninput="runTZ()">
+            </div>
+            <div class="field-col">
+              <label class="field-label">منطقه زمانی مبدا</label>
+              <select id="tz-from" class="select-input" onchange="runTZ()"></select>
+            </div>
+            <button class="btn btn-filled" onclick="tzNow()" style="flex-shrink:0;margin-bottom:1px">⏱ اکنون</button>
+          </div>
+          <div id="tz-jalali-now" style="font-size:13px;color:var(--m3-primary);padding:6px 0;font-weight:600"></div>
+          <div id="tz-grid" style="display:grid;gap:8px;margin-top:4px"></div>
+          <div class="tool-desc">یک ساعت را به مناطق زمانی اصلی دنیا نمایش می‌دهد. دکمه «اکنون» ساعت جاری را تنظیم می‌کند.</div>
+        </div>
+
+        <!-- ══ COUNTER ══ -->
+        <div id="counter" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">🔢 شمارنده</div>
+          <div style="text-align:center">
+            <div id="ctr-val" style="font-size:5.5rem;font-weight:700;color:var(--m3-primary);font-variant-numeric:tabular-nums;line-height:1.1;margin:10px 0">0</div>
+            <!-- Row 1: Big + and small - -->
+            <div style="display:flex;justify-content:center;align-items:center;gap:16px;margin-bottom:10px">
+              <button class="btn btn-tonal" onclick="haptic(this);ctrChange(-1)" style="font-size:1.2rem;min-width:52px;min-height:52px;border-radius:50%">−</button>
+              <button class="btn btn-filled" onclick="haptic(this);ctrChange(1)" style="font-size:2.8rem;min-width:96px;min-height:96px;border-radius:50%;padding:0;line-height:1">+</button>
+            </div>
+            <!-- Row 2: +10 and -10 -->
+            <div style="display:flex;justify-content:center;gap:12px;margin-bottom:10px">
+              <button class="btn btn-tonal" onclick="haptic(this);ctrChange(-10)" style="font-size:1rem;min-width:72px">−۱۰</button>
+              <button class="btn btn-tonal" onclick="haptic(this);ctrChange(10)" style="font-size:1rem;min-width:72px">+۱۰</button>
+            </div>
+            <div class="field-row" style="justify-content:center;gap:12px;align-items:center;max-width:260px;margin:0 auto">
+              <span style="font-size:13px;color:var(--m3-on-surface-variant)">گام:</span>
+              <input type="number" id="ctr-step" class="text-input" value="1" min="1" style="margin:0;width:90px">
+              <button class="btn btn-tonal" style="min-height:38px;padding:6px 14px" onclick="ctrLap()">ثبت</button>
+              <button class="btn btn-tonal" style="min-height:38px;padding:6px 14px" onclick="ctrReset()">ریست</button>
+            </div>
+          </div>
+          <div id="ctr-laps" style="display:none;margin-top:14px" class="lap-list"></div>
+          <div class="tool-desc">برای شمارش تعداد آیتم‌ها، افراد یا رویدادها. گام شمارش قابل تنظیم است. دکمه ثبت مقدار فعلی را ذخیره می‌کند.</div>
+        </div>
+
+        <!-- ══ MATRIX ══ -->
+        <div id="matrix" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">📊 ماشین‌حساب ماتریس</div>
+          <div class="field-row">
+            <div class="field-col">
+              <label class="field-label">ماتریس B</label>
+              <textarea id="mat-b" class="text-area" style="min-height:90px;font-family:'Courier New',monospace;direction:ltr;text-align:left;unicode-bidi:embed" placeholder="5 6&#10;7 8"></textarea>
+            </div>
+            <div class="field-col">
+              <label class="field-label">ماتریس A</label>
+              <textarea id="mat-a" class="text-area" style="min-height:90px;font-family:'Courier New',monospace;direction:ltr;text-align:left;unicode-bidi:embed" placeholder="1 2&#10;3 4"></textarea>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-filled" onclick="matOp('add')">A + B</button>
+            <button class="btn btn-tonal" onclick="matOp('sub')">A - B</button>
+            <button class="btn btn-tonal" onclick="matOp('mul')">A &times; B</button>
+            <button class="btn btn-tonal" onclick="matOp('transA')">ترانهاده A</button>
+            <button class="btn btn-tonal" onclick="matOp('detA')">دترمینان A</button>
+          </div>
+          <div id="mat-res" style="font-family:'Courier New',monospace;font-size:.9rem;background:var(--m3-surface-container);border-radius:10px;padding:14px;min-height:56px;white-space:pre;margin-top:4px;overflow-x:auto;direction:ltr;text-align:left;unicode-bidi:plaintext"></div>
+          <div class="tool-desc">جمع، تفریق، ضرب ماتریسی، ترانهاده (Transpose) و دترمینان (برای ماتریس 2x2 و 3x3). اعداد ردیف را با فاصله (اسپیس) و ردیف‌ها را با Enter جدا کنید.</div>
+        </div>
+
+        <!-- ══ NUMBER TO FARSI WORDS ══ -->
+                <div id="numwords" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">💬 عدد به حروف</div>
+          <input type="text" id="nw-in" class="text-input" placeholder="عدد وارد کنید — ۱۲۳۴۵۶۷ یا 1234567" oninput="numToWords()" style="font-size:1.15rem">
+          <div class="btn-row" style="margin-top:8px">
+            <button class="btn btn-filled"  id="nw-lang-fa" onclick="nwSetLang('fa')">فارسی</button>
+            <button class="btn btn-tonal"   id="nw-lang-en" onclick="nwSetLang('en')">English</button>
+          </div>
+          <div id="nw-out"    style="direction:rtl;text-align:right;font-size:1.1rem;font-weight:600;color:var(--m3-primary);padding:14px 16px;background:var(--m3-surface-container);border-radius:12px;min-height:52px;margin-top:8px;line-height:1.9"></div>
+          <div id="nw-out-en" style="display:none;direction:ltr;text-align:left;font-size:1.05rem;font-weight:600;color:var(--m3-primary);padding:14px 16px;background:var(--m3-surface-container);border-radius:12px;min-height:52px;margin-top:8px;line-height:1.9"></div>
+          <div class="btn-row" style="margin-top:8px;flex-wrap:wrap">
+            <button class="btn btn-tonal" onclick="copyToClipboard(document.getElementById(window._nwLang==='fa'?'nw-out':'nw-out-en').textContent)">📋 کپی</button>
+            <button class="btn btn-tonal" onclick="nwSpeak()" id="nw-speak-btn">🔊 خواندن</button>
+            <button class="btn btn-tonal" onclick="window.speechSynthesis&&window.speechSynthesis.cancel()" style="font-size:12px">⏹</button>
+          </div>
+          <div class="tool-desc">تبدیل عدد به نوشتار فارسی و انگلیسی. برای چک، قرارداد و اسناد رسمی مفید است.</div>
+        </div>
+
+        <!-- ══ TEXT ANALYZER ══ -->
+<!-- ══ TEXT ANALYZER ══ -->
+        <!-- ══ COLOR BLINDNESS ══ -->
+        <div id="colorblind" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">👁 شبیه‌ساز کوررنگی</div>
+          <div class="field-row" style="align-items:flex-end">
+            <div class="field-col">
+              <label class="field-label">انتخاب رنگ</label>
+              <input type="color" id="cb-pick" value="#3498db" oninput="runCB()" style="width:100%;height:50px">
+            </div>
+            <div class="field-col">
+              <label class="field-label">HEX</label>
+              <input type="text" id="cb-hex" class="text-input" value="#3498db" oninput="runCBhex()">
+            </div>
+          </div>
+          <div id="cb-swatches" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-top:10px"></div>
+          <div class="tool-desc">نمایش می‌دهد که رنگ برای افراد مبتلا به انواع کوررنگی چگونه دیده می‌شود. Deuteranopia: ناتوانی در دیدن سبز — Protanopia: قرمز — Tritanopia: آبی.</div>
+        </div>
+
+        <!-- ══ SHARE TOOL ══ -->
+        <div id="share" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">🔗 اشتراک‌گذاری</div>
+          <div class="tool-desc">QR کد جعبه‌ابزار را با دوستانت به اشتراک بگذار. همچنین می‌توانی لینک مستقیم هر ابزار را کپی کنی.</div>
+          <div style="text-align:center;margin:16px 0">
+            <div id="share-qr" style="display:inline-block;background:#fff;padding:14px;border-radius:16px;box-shadow:var(--m3-elevation-2)"></div>
+            <div style="margin-top:10px;font-size:13px;color:var(--m3-on-surface-variant)" id="share-url-lbl"></div>
+          </div>
+          <div class="field-row" style="margin-top:12px">
+            <input type="text" id="share-url-input" class="text-input" placeholder="آدرس سایت" style="direction:ltr;text-align:left" oninput="shareGenQR()">
+            <button class="btn btn-tonal" onclick="shareGenQR()" style="flex-shrink:0">🔄 تولید QR</button>
+          </div>
+          <div class="btn-row" style="margin-top:8px">
+            <button class="btn btn-filled" onclick="shareCopyLink()">📋 کپی لینک</button>
+            <button class="btn btn-tonal" onclick="shareNative()" id="share-native-btn" style="display:none">↗️ اشتراک‌گذاری</button>
+          </div>
+          <div style="margin-top:20px;padding:16px;background:var(--m3-surface-container);border-radius:14px">
+            <div style="font-size:13px;font-weight:700;margin-bottom:10px;color:var(--m3-on-surface)">🔗 لینک مستقیم ابزارها</div>
+            <div style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:8px">هر ابزار یک لینک مستقیم دارد. مثال:</div>
+            <div style="font-family:'Courier New',monospace;font-size:12px;direction:ltr;background:var(--m3-surface-container-highest);padding:8px 12px;border-radius:8px;cursor:pointer" onclick="copyToClipboard(window.location.origin + window.location.pathname + '#calc')" title="کلیک برای کپی">
+              <span id="share-example-url"></span>#calc
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ PWA INSTALL TOOL ══ -->
+        <div id="pwa" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">📲 نصب اپ (PWA)</div>
+          <div class="tool-desc">جعبه‌ابزار را روی موبایل یا دسکتاپ نصب کن. پس از نصب، <strong>بدون هیچ اینترنتی</strong> کار می‌کند.</div>
+
+          <div style="display:grid;gap:12px;margin:16px 0">
+            <div style="background:var(--m3-surface-container);border-radius:14px;padding:16px">
+              <div style="font-weight:700;margin-bottom:10px;font-size:14px">📱 اندروید (Chrome / Samsung Browser)</div>
+              <ol style="padding-right:20px;font-size:13px;color:var(--m3-on-surface-variant);line-height:2">
+                <li>سایت را در Chrome باز کن</li>
+                <li>روی منو (⋮) بزن</li>
+                <li>گزینه «افزودن به صفحه اصلی» یا «نصب اپ» را انتخاب کن</li>
+                <li>تأیید کن — آیکون روی صفحه اصلی ظاهر می‌شود</li>
+              </ol>
+            </div>
+            <div style="background:var(--m3-surface-container);border-radius:14px;padding:16px">
+              <div style="font-weight:700;margin-bottom:10px;font-size:14px">🍎 iPhone / iPad (Safari)</div>
+              <ol style="padding-right:20px;font-size:13px;color:var(--m3-on-surface-variant);line-height:2">
+                <li>سایت را در Safari باز کن</li>
+                <li>دکمه اشتراک‌گذاری (□↑) را بزن</li>
+                <li>گزینه «Add to Home Screen» را انتخاب کن</li>
+                <li>نام دلخواه را وارد کن و «Add» بزن</li>
+              </ol>
+            </div>
+            <div style="background:var(--m3-surface-container);border-radius:14px;padding:16px">
+              <div style="font-weight:700;margin-bottom:10px;font-size:14px">💻 ویندوز / مک (Chrome / Edge)</div>
+              <ol style="padding-right:20px;font-size:13px;color:var(--m3-on-surface-variant);line-height:2">
+                <li>سایت را در Chrome یا Edge باز کن</li>
+                <li>آیکون نصب (⊕) در نوار آدرس را بزن، یا از منو «Install app» را انتخاب کن</li>
+                <li>تأیید کن — برنامه مثل یک app جداگانه باز می‌شود</li>
+              </ol>
+            </div>
+          </div>
+
+          <div id="pwa-install-wrap" style="text-align:center;margin:8px 0;display:none">
+            <button class="btn btn-filled" onclick="pwaTriggerInstall()" style="font-size:15px;padding:12px 32px">📲 نصب همین الان</button>
+            <div style="font-size:12px;color:var(--m3-on-surface-variant);margin-top:8px">مرورگر شما نصب خودکار را پشتیبانی می‌کند</div>
+          </div>
+
+          <div style="margin-top:16px;background:color-mix(in srgb,var(--m3-primary) 6%,var(--m3-surface-container));border:1px solid color-mix(in srgb,var(--m3-primary) 20%,transparent);border-radius:14px;padding:14px;font-size:13px">
+            <strong>✅ پس از نصب:</strong><br>
+            <span style="color:var(--m3-on-surface-variant);line-height:2">تمام ابزارها کاملاً آفلاین در دسترس هستند. نیازی به اینترنت نیست — حتی برای اولین بار (اگر Service Worker کش شده باشد).</span>
+          </div>
+        </div>
+
+        <div id="dateconv" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">🗓️ مبدل تاریخ</div>
+          <div class="tool-desc">تبدیل دقیق بین تقویم‌های خورشیدی (شمسی)، میلادی و قمری (هجری). از الگوریتم بورکوفسکی استفاده می‌شود.</div>
+          <div class="btn-row" style="margin-bottom:14px">
+            <button class="btn btn-filled" id="dc-tab-j" onclick="dcSetTab('j')" style="flex:1">خورشیدی</button>
+            <button class="btn btn-tonal" id="dc-tab-g" onclick="dcSetTab('g')" style="flex:1">میلادی</button>
+            <button class="btn btn-tonal" id="dc-tab-h" onclick="dcSetTab('h')" style="flex:1">قمری</button>
+          </div>
+          <!-- Jalali input -->
+          <div id="dc-in-j">
+            <label class="field-label">تاریخ خورشیدی</label>
+            <div class="field-row">
+              <div class="field-col"><input type="number" id="dc-jy" class="text-input" placeholder="سال" value="1403" min="1200" max="1500" oninput="dcConvert()"></div>
+              <div class="field-col"><select id="dc-jm" class="select-input" onchange="dcConvert()"><option value="1">فروردین</option><option value="2">اردیبهشت</option><option value="3">خرداد</option><option value="4">تیر</option><option value="5">مرداد</option><option value="6">شهریور</option><option value="7">مهر</option><option value="8">آبان</option><option value="9">آذر</option><option value="10">دی</option><option value="11">بهمن</option><option value="12">اسفند</option></select></div>
+              <div class="field-col"><input type="number" id="dc-jd" class="text-input" placeholder="روز" value="1" min="1" max="31" oninput="dcConvert()"></div>
+            </div>
+          </div>
+          <!-- Gregorian input -->
+          <div id="dc-in-g" style="display:none">
+            <label class="field-label">تاریخ میلادی</label>
+            <input type="date" id="dc-gdate" class="text-input" oninput="dcConvert()">
+          </div>
+          <!-- Hijri input -->
+          <div id="dc-in-h" style="display:none">
+            <label class="field-label">تاریخ قمری</label>
+            <div class="field-row">
+              <div class="field-col"><input type="number" id="dc-hy" class="text-input" placeholder="سال" value="1446" min="1300" max="1600" oninput="dcConvert()"></div>
+              <div class="field-col"><select id="dc-hm" class="select-input" onchange="dcConvert()"><option value="1">محرم</option><option value="2">صفر</option><option value="3">ربیع‌الاول</option><option value="4">ربیع‌الثانی</option><option value="5">جمادی‌الاول</option><option value="6">جمادی‌الثانی</option><option value="7">رجب</option><option value="8">شعبان</option><option value="9">رمضان</option><option value="10">شوال</option><option value="11">ذی‌القعده</option><option value="12">ذی‌الحجه</option></select></div>
+              <div class="field-col"><input type="number" id="dc-hd" class="text-input" placeholder="روز" value="1" min="1" max="30" oninput="dcConvert()"></div>
+            </div>
+          </div>
+          <div id="dc-result" style="margin-top:12px"></div>
+          <button class="btn btn-tonal" onclick="dcToday()" style="margin-top:8px">📅 امروز</button>
+        </div>
+
+        <!-- ══ PRAYER TIMES ══ -->
+        <div id="prayer" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">🕌 اوقات شرعی</div>
+          <div class="tool-desc">محاسبه اوقات شرعی بر اساس روش تهران (IPPI) — کاملاً آفلاین. موقعیت مکانی دستگاه شما استفاده می‌شود یا می‌توانید مختصات را دستی وارد کنید.</div>
+          <div class="field-row">
+            <div class="field-col">
+              <label class="field-label">عرض جغرافیایی</label>
+              <input type="number" id="pt-lat" class="text-input" placeholder="مثلاً 35.6892" step="0.0001" value="35.6892">
+            </div>
+            <div class="field-col">
+              <label class="field-label">طول جغرافیایی</label>
+              <input type="number" id="pt-lng" class="text-input" placeholder="مثلاً 51.3890" step="0.0001" value="51.3890">
+            </div>
+            <div class="field-col">
+              <label class="field-label">تاریخ</label>
+              <input type="date" id="pt-date" class="text-input">
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-filled" onclick="calcPrayer()">محاسبه</button>
+            <button class="btn btn-tonal" onclick="ptGetLocation()">📍 موقعیت من</button>
+          </div>
+          <div id="pt-city" style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:8px"></div>
+          <div id="pt-result"></div>
+        </div>
+
+        <!-- ══ QIBLA FINDER ══ -->
+        <div id="qibla" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">🧭 قبله‌نما</div>
+          <div class="tool-desc">محاسبه جهت قبله (کعبه مشرفه) از هر نقطه‌ای روی زمین — آفلاین کامل.</div>
+          <div class="field-row">
+            <div class="field-col">
+              <label class="field-label">عرض جغرافیایی</label>
+              <input type="number" id="qb-lat" class="text-input" placeholder="مثلاً 35.6892" step="0.0001" value="35.6892">
+            </div>
+            <div class="field-col">
+              <label class="field-label">طول جغرافیایی</label>
+              <input type="number" id="qb-lng" class="text-input" placeholder="مثلاً 51.3890" step="0.0001" value="51.3890">
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-filled" onclick="calcQibla()">محاسبه قبله</button>
+            <button class="btn btn-tonal" onclick="qbGetLocation()">📍 موقعیت من</button>
+          </div>
+          <div id="qb-result" style="margin-top:14px;text-align:center"></div>
+        </div>
+
+        >
