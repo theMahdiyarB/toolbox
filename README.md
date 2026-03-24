@@ -22,6 +22,8 @@
 ### 🧮 محاسبه و ریاضی
 | ابزار | توضیح |
 |-------|--------|
+| نسبت طلایی | محاسبه ابعاد متناسب با عدد فی (۱.۶۱۸) |
+| نمایشگر SVG | پیش‌نمایش زنده کدهای SVG |
 | ماشین‌حساب | محاسبات پایه و عبارات |
 | ماشین‌حساب علمی | sin، cos، log، توان، کسر |
 | حسابان | مشتق عددی، انتگرال، حد (شامل بی‌نهایت)، نمودار تابع |
@@ -49,14 +51,17 @@
 ### 😀 ایموجی و اِموتیکون
 تمام ایموجی‌های Unicode با جستجو، اِموتیکون‌های متنی ASCII و کائوموجی (۳۰۰+)
 
+### 🎮 سرگرمی و بازی
+بازی‌های کوچک (دوز، مار)، سازنده ابر کلمات (Word Cloud)، قطب‌نما آفلاین
+
 ### 💻 توسعه
 فرمت‌دهی JSON/XML، HTML Escaper، هش رمزنگاری (SHA-1/256/512 + MD5)، JWT Parser، PX↔REM، Base64، تست Regex، Cron Parser، تجزیه URL، تبدیل مبنا، جدول ASCII، ابزار کدگذاری، نمودار داده، مولد JSON آزمایشی، عدد به حروف فارسی
 
 ### ⚡ مولدها
-رمز عبور، UUID/ULID، عدد/IP/رنگ تصادفی، داده ساختگی فارسی، کارت اعتباری تستی، آواتار SVG، تصویر جایگزین، کد QR (ساخت + اسکن)، بارکد Code-128
+رمز عبور، UUID/ULID، عدد/IP/رنگ تصادفی، داده ساختگی فارسی، کارت اعتباری تستی، آواتار SVG، تصویر جایگزین، کد QR پیشرفته (vCard + تنظیمات)، بارکد Code-128
 
 ### 🎨 طراحی و رنگ
-تبدیل رنگ (HEX↔RGB↔HSL↔CMYK↔HSV)، پالت رنگ از تصویر (K-Means)، کنتراست WCAG (AA/AAA)، شبیه‌ساز کوررنگی، گرادیان/سایه/گوشه‌گرد CSS، نسبت ابعاد
+تبدیل رنگ، پالت رنگ از تصویر (استخراج ۵ رنگ با K-Means)، کنتراست WCAG (AA/AAA)، شبیه‌ساز کوررنگی، گرادیان/سایه/گوشه‌گرد CSS، نسبت ابعاد
 
 ### 📁 فایل — کاملاً آفلاین
 فشرده‌سازی تصویر، فشرده‌سازی PDF، تصویر → Base64، CSV ↔ JSON
@@ -139,6 +144,11 @@ npx serve .
 | [PDF.js](https://mozilla.github.io/pdf.js/) | 3.x | رندر PDF | `pdfjs/build/` |
 | [وزیرمتن](https://github.com/rastikerdar/vazirmatn) | 33.x | فونت متغیر فارسی | `Vazirmatn-VF.ttf` |
 | [jsPDF](https://github.com/parallax/jsPDF) | 2.5.1 | خروجی PDF | بارگذاری از CDN (نیاز به اینترنت) |
+| [math.js](https://mathjs.org/) | 14.x | محاسبات ریاضی | `lib/math.js` |
+| [function-plot](https://mauriciopoppe.github.io/function-plot/) | 1.x | رسم نمودار توابع | `lib/function-plot.js` |
+| [qr-code-styling](https://qr-code-styling.com/) | 1.5.0 | استایل پیشرفته QR | `lib/qr-code-styling.js` |
+| [html2canvas](https://html2canvas.hertzen.com/) | 1.4.1 | تبدیل HTML به Canvas | `lib/html2canvas.js` |
+| [wordcloud2.js](https://github.com/timdream/wordcloud2.js) | 1.2.2 | ساخت ابر کلمات | `lib/wordcloud2.js` |
 
 ---
 
