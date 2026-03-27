@@ -15,6 +15,7 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="main.css" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+    <script src="https://tapi.bale.ai/miniapp.js?3"></script>
     <script src="lib/math.js"></script>
     <script src="lib/function-plot.js"></script>
     <script src="lib/qrcode.js"></script>
@@ -1639,6 +1640,34 @@
       }
       .footer-muted a:hover { text-decoration: underline; }
     </style>
+    <script>
+      // ── Bale MiniApp integration ──────────────────────────
+      var IS_BALE = !!(window.Bale && window.Bale.WebApp);
+      if (IS_BALE) {
+        // Sync Bale's color scheme with the app's theme system
+        var _baleScheme = Bale.WebApp.colorScheme; // 'dark' | 'light'
+        document.documentElement.setAttribute('data-theme', _baleScheme);
+        try { localStorage.setItem('theme', _baleScheme); } catch(_) {}
+        // Expand to full screen immediately
+        Bale.WebApp.expand();
+        // Tell Bale the app is ready as soon as the DOM is parsed
+        document.addEventListener('DOMContentLoaded', function() {
+          Bale.WebApp.ready();
+        });
+        // If user changes theme inside Bale while app is open, keep in sync
+        Bale.WebApp.onEvent('themeChanged', function() {
+          var s = Bale.WebApp.colorScheme;
+          document.documentElement.setAttribute('data-theme', s);
+          try { localStorage.setItem('theme', s); } catch(_) {}
+          var fab = document.querySelector('.theme-fab');
+          if (fab) fab.textContent = s === 'dark' ? '☀️' : '🌙';
+        });
+        // Hide theme FAB and PWA install — Bale handles these natively
+        document.documentElement.style.setProperty('--_bale-fab-display', 'none');
+      }
+      
+    </script>
+  </head>
   </head>
   <body>
     <div
@@ -1648,7 +1677,7 @@
     ></div>
     <nav class="side-drawer" id="side-drawer">
       <div class="drawer-header">
-        <span class="drawer-brand-icon">🧰</span>
+        <span class="drawer-brand-icon"><🧰></span>
         <span class="drawer-brand-text">جعبه‌ابزار آفلاین</span>
         <button class="drawer-close" onclick="closeDrawer()">✕</button>
       </div>
@@ -2009,7 +2038,7 @@
             <div class="home-hero-bg home-hero-bg--1"></div>
             <div class="home-hero-bg home-hero-bg--2"></div>
             <div class="home-hero-content">
-              <div class="home-hero__icon">🧰</div>
+              <div class="home-hero__icon"><img src="favicon.png" alt="Icon" /></div>
               <h1 class="home-hero__title">جعبه‌ابزار آفلاین</h1>
               <p class="home-hero__sub">
                 بیش از ۹۰ ابزار — کاملاً آفلاین، بدون نیاز به اینترنت
@@ -7045,7 +7074,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 2.2 - ۱۴۰۵/۰۱/۰۷
+          ℹ️ نسخه 2.4 - ۱۴۰۵/۰۱/۰۸
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -7054,7 +7083,8 @@
     </footer>
     </div><!-- /page-wrapper -->
 
-    <button class="theme-fab" onclick="toggleTheme()" title="تغییر پوسته">
+    <button class="theme-fab" onclick="toggleTheme()" title="تغییر پوسته"
+      style="display: var(--_bale-fab-display, flex)">
       🌙
     </button>
     <div id="copy-toast">کپی شد!</div>
@@ -7156,10 +7186,21 @@
         document.getElementById('page-title').textContent = title;
         closeDrawer();
         window.scrollTo(0, 0);
-        // Update URL hash
-        if (pushState) {
+        // Update URL hash (skip history manipulation inside Bale — use Memory Routing via BackButton)
+        if (pushState && !IS_BALE) {
           const hash = id === 'home' ? '' : '#' + id;
           history.pushState({tool: id}, title, hash || window.location.pathname);
+        }
+        // Bale BackButton: show when inside a tool, hide on home
+        if (IS_BALE) {
+          if (id === 'home') {
+            Bale.WebApp.BackButton.hide();
+          } else {
+            Bale.WebApp.BackButton.show();
+            Bale.WebApp.BackButton.onClick(function() {
+              showTool('home');
+            });
+          }
         }
         // Tool-specific inits
         if (id === 'device') loadDevice();
@@ -10203,8 +10244,8 @@
         citSetType('book');
         calcGolden();
 
-        // Register Service Worker for offline support
-        if ('serviceWorker' in navigator) {
+        // Register Service Worker for offline support (not needed inside Bale)
+        if ('serviceWorker' in navigator && !IS_BALE) {
           navigator.serviceWorker.register('sw.js').catch(() => {});
         }
       });
