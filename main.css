@@ -1373,35 +1373,401 @@ h1, h2, h3, h4, h5, h6 {
 
 .tool-title { font-size: 1.6rem; font-weight: 900; color: var(--m3-on-surface); margin-bottom: var(--m3-spacing-24); }
 
-/* Form Elements */
+/* ─── Form Layout Helpers ─────────────────────────────── */
 .field-row { display: flex; gap: var(--m3-spacing-16); flex-wrap: wrap; margin-bottom: var(--m3-spacing-16); }
-.field-col { flex: 1; min-width: 200px; }
+.field-col  { flex: 1; min-width: 200px; }
 
+/* ─── Legacy label (standalone label outside the field wrapper) ─── */
 .field-label {
-  display: block; margin-bottom: 8px; font-size: 0.9rem;
-  font-weight: 700; color: var(--m3-on-surface-variant);
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--m3-on-surface-variant);
 }
 
+
+/* ════════════════════════════════════════════════════════════
+   M3 OUTLINED TEXT FIELD
+   Anatomy (from spec image):
+     1. Container outline (1px → 2px on focus)
+     2. Label text — floats from inside to the notch
+     3. Leading icon (optional, .field--leading-icon)
+     4. Trailing icon (optional, .field--trailing-icon)
+     5. Input / caret
+     6. Supporting text (below container)
+
+   Usage:
+     <div class="field">
+       <div class="field__container">
+         <input class="field__input" id="x" placeholder=" ">
+         <label class="field__label" for="x">Label text</label>
+       </div>
+       <span class="field__support">Supporting text</span>
+     </div>
+
+   For textarea:  add class "field--textarea" on .field
+   For select:    use <select class="field__input">
+   With icons:    add "field--leading-icon" or "field--trailing-icon" on .field,
+                  then <span class="field__icon field__icon--lead">…</span>
+                       <span class="field__icon field__icon--trail">…</span>
+   Error state:   add "field--error" on .field
+   Disabled:      add "disabled" attr on the input + "field--disabled" on .field
+   ════════════════════════════════════════════════════════════ */
+
+/* Spec measurements:
+   Container height:       56px (text) | auto (textarea)
+   Corner radius:          4px  (M3 spec for outlined)
+   Outline width:          1px enabled, 2px focused/error
+   Label size idle:        16px (body-large)
+   Label size floating:    12px (body-small)
+   Label float translate:  -50% from container top
+   Horizontal padding:     16px
+   Label-to-text gap:      0 (label IS the placeholder concept)
+   Supporting text:        12px, 16px below container
+*/
+
+:root {
+  --field-height:          56px;
+  --field-radius:          4px;      /* M3 spec: 4dp for outlined */
+  --field-pad-h:           16px;
+  --field-outline:         var(--m3-outline);
+  --field-outline-focused: var(--m3-primary);
+  --field-label-color:     var(--m3-on-surface-variant);
+  --field-label-focused:   var(--m3-primary);
+  --field-input-color:     var(--m3-on-surface);
+  --field-support-color:   var(--m3-on-surface-variant);
+  --field-bg:              transparent; /* Outlined fields: transparent bg */
+  /* Label float destination: sits centred on the top outline stroke */
+  --field-label-float-y:   -50%;
+}
+
+/* ── Wrapper ─────────────────────────────────────────── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  /* margin-bottom pushed to callers via .field-row or direct margin */
+}
+
+.field + .field,
+.field-row .field { margin-bottom: 0; }  /* rows control spacing */
+
+/* ── Container (the visible outlined box) ─────────────── */
+.field__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: var(--field-height);
+  border-radius: var(--field-radius);
+  /* The outline is simulated with box-shadow so we can animate width cleanly */
+  box-shadow: inset 0 0 0 1px var(--field-outline);
+  background-color: var(--field-bg);
+  transition:
+    box-shadow var(--m3-duration-fast) var(--m3-ease-standard);
+  cursor: text;
+}
+
+/* Textarea variant: auto-height */
+.field--textarea .field__container {
+  height: auto;
+  align-items: flex-start;
+}
+
+/* ── The outline notch for the floating label ─────────── */
+/* We use a CSS clip trick: a pseudo-element "cuts" the top border where
+   the label sits. Works by placing a background-coloured element behind
+   the label text, exactly as wide as the label, that masks the outline. */
+
+/* ── Input element ────────────────────────────────────── */
+.field__input {
+  width: 100%;
+  height: 100%;
+  padding: 0 var(--field-pad-h);
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--field-input-color);
+  font: inherit;
+  font-size: 1rem;          /* body-large / 16sp */
+  font-weight: 400;
+  line-height: 1.5;
+  caret-color: var(--field-outline-focused);
+  /* Ensure input text doesn't sit under the floating label */
+  padding-top: 0;
+}
+
+/* Textarea */
+.field--textarea .field__input {
+  height: auto;
+  min-height: 120px;
+  resize: vertical;
+  padding-top: 20px;
+  padding-bottom: 12px;
+  align-self: stretch;
+}
+
+/* Select arrow */
+.field__input[type=""] ,
+select.field__input {
+  appearance: none;
+  -webkit-appearance: none;
+  /* space for custom arrow */
+  padding-inline-end: 40px;
+  cursor: pointer;
+}
+
+/* ── Floating Label ───────────────────────────────────── */
+.field__label {
+  /* Absolute, vertically centred inside the container at rest */
+  position: absolute;
+  inset-inline-start: var(--field-pad-h);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+
+  /* Typography: body-large at rest */
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  color: var(--field-label-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 2 * var(--field-pad-h));
+
+  /* Notch background: masks the outline behind the label when floating */
+  padding: 0 4px;
+  margin-inline-start: -4px;
+  background: transparent; /* filled in when floating */
+
+  /* Transition: position + size + color */
+  transition:
+    top var(--m3-duration-fast) var(--m3-ease-standard),
+    transform var(--m3-duration-fast) var(--m3-ease-standard),
+    font-size var(--m3-duration-fast) var(--m3-ease-standard),
+    color var(--m3-duration-fast) var(--m3-ease-standard),
+    background-color var(--m3-duration-fast) var(--m3-ease-standard),
+    letter-spacing var(--m3-duration-fast) var(--m3-ease-standard);
+}
+
+/* Textarea: label anchored near top */
+.field--textarea .field__label {
+  top: 20px;
+  transform: none;
+}
+
+/* ── Floating state triggers ──────────────────────────── */
+/* Label floats when: (a) input has focus, OR (b) input has a value
+   We use placeholder=" " (a single space) trick so :placeholder-shown
+   tells us the field is empty vs. filled.                            */
+
+/* When the field has content (not showing placeholder = has value) */
+.field__input:not(:placeholder-shown) ~ .field__label,
+/* When focused */
+.field__input:focus ~ .field__label,
+/* Autofill */
+.field__input:-webkit-autofill ~ .field__label {
+  /* Float to the top outline */
+  top: 0;
+  transform: translateY(-50%);
+  font-size: 0.75rem;       /* body-small / 12sp */
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  /* Notch mask: use the card/surface background color to cut the outline */
+  background-color: var(--m3-surface-container-low);
+  color: var(--field-label-color);
+}
+
+/* For textarea: float differently */
+.field--textarea .field__input:not(:placeholder-shown) ~ .field__label,
+.field--textarea .field__input:focus ~ .field__label {
+  top: 0;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: var(--m3-surface-container-low);
+}
+
+/* ── Focus state ─────────────────────────────────────── */
+.field__container:focus-within {
+  box-shadow: inset 0 0 0 2px var(--field-outline-focused);
+}
+
+.field__input:focus ~ .field__label {
+  color: var(--field-label-focused);
+}
+
+/* ── Hover state ─────────────────────────────────────── */
+.field__container:not(:focus-within):hover {
+  box-shadow: inset 0 0 0 1px var(--m3-on-surface);
+}
+.field__container:not(:focus-within):hover .field__label {
+  color: var(--m3-on-surface);
+}
+
+/* ── Supporting text ──────────────────────────────────── */
+.field__support {
+  display: block;
+  padding: 4px var(--field-pad-h) 0;
+  font-size: 0.75rem;       /* 12sp */
+  font-weight: 400;
+  line-height: 1.33;
+  letter-spacing: 0.04em;
+  color: var(--field-support-color);
+  min-height: 20px; /* reserve space even if empty */
+}
+
+/* ── Icons ────────────────────────────────────────────── */
+.field__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.25rem;        /* 20dp icon */
+  color: var(--m3-on-surface-variant);
+  width: 48px;               /* 48dp touch target */
+  height: var(--field-height);
+  transition: color var(--m3-duration-fast) var(--m3-ease-standard);
+}
+
+.field__icon--lead {
+  padding-inline-end: 0;
+  padding-inline-start: 4px;
+}
+
+.field__icon--trail {
+  padding-inline-start: 0;
+  padding-inline-end: 4px;
+  cursor: pointer;
+}
+
+/* Adjust input padding when icons present */
+.field--leading-icon .field__input {
+  padding-inline-start: 4px;
+}
+.field--leading-icon .field__label {
+  inset-inline-start: 52px; /* 48px icon + 4px gap */
+}
+.field--trailing-icon .field__input {
+  padding-inline-end: 4px;
+}
+
+/* Icon color on focus */
+.field__container:focus-within .field__icon--trail {
+  color: var(--m3-on-surface-variant);
+}
+
+/* ── Error state ──────────────────────────────────────── */
+.field--error .field__container {
+  box-shadow: inset 0 0 0 1px var(--m3-error);
+}
+.field--error .field__container:focus-within {
+  box-shadow: inset 0 0 0 2px var(--m3-error);
+}
+.field--error .field__label,
+.field--error .field__input:focus ~ .field__label,
+.field--error .field__input:not(:placeholder-shown) ~ .field__label {
+  color: var(--m3-error);
+}
+.field--error .field__support {
+  color: var(--m3-error);
+}
+.field--error .field__icon {
+  color: var(--m3-error);
+}
+
+/* ── Disabled state ───────────────────────────────────── */
+.field--disabled .field__container {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--m3-on-surface) 38%, transparent);
+  pointer-events: none;
+}
+.field--disabled .field__input {
+  color: color-mix(in srgb, var(--m3-on-surface) 38%, transparent);
+  cursor: not-allowed;
+}
+.field--disabled .field__label {
+  color: color-mix(in srgb, var(--m3-on-surface) 38%, transparent);
+}
+.field--disabled .field__support {
+  color: color-mix(in srgb, var(--m3-on-surface) 38%, transparent);
+}
+
+/* ── Dark theme notch background override ─────────────── */
+[data-theme="dark"] .field__input:not(:placeholder-shown) ~ .field__label,
+[data-theme="dark"] .field__input:focus ~ .field__label,
+[data-theme="dark"] .field__input:-webkit-autofill ~ .field__label,
+[data-theme="dark"] .field--textarea .field__input:not(:placeholder-shown) ~ .field__label,
+[data-theme="dark"] .field--textarea .field__input:focus ~ .field__label {
+  background-color: var(--m3-surface-container-low);
+}
+
+/* ── Select chevron (custom arrow) ───────────────────────── */
+.field__container:has(select.field__input)::after {
+  content: '▾';
+  position: absolute;
+  inset-inline-end: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: var(--m3-on-surface-variant);
+  pointer-events: none;
+  transition: color var(--m3-duration-fast);
+}
+.field__container:has(select.field__input):focus-within::after {
+  color: var(--m3-primary);
+}
+
+/* ── Backward-compat shims ────────────────────────────────
+   The old .text-input / .text-area / .select-input classes
+   still exist so un-migrated tools degrade gracefully.
+   They now render as M3 outlined fields without the floating
+   label (label is rendered as .field-label above the box).   */
 .text-input, .text-area, .select-input {
-  width: 100%; padding: 16px;
-  border-radius: var(--m3-shape-lg);
+  width: 100%;
+  padding: 15px var(--field-pad-h);  /* 15px + 1px border = 16px visual */
+  border-radius: var(--field-radius);
   border: 1px solid var(--m3-outline);
-  background-color: var(--m3-surface);
-  color: var(--m3-on-surface); font-size: 1rem;
-  transition: border-color var(--m3-duration-fast), box-shadow var(--m3-duration-fast), background-color var(--m3-duration-fast);
+  background-color: transparent;
+  color: var(--m3-on-surface);
+  font: inherit;
+  font-size: 1rem;
+  transition:
+    border-color var(--m3-duration-fast) var(--m3-ease-standard),
+    box-shadow var(--m3-duration-fast) var(--m3-ease-standard);
 }
 .text-input:hover, .text-area:hover, .select-input:hover {
-  background-color: var(--m3-surface-container-lowest); border-color: var(--m3-on-surface);
+  border-color: var(--m3-on-surface);
 }
 .text-input:focus, .text-area:focus, .select-input:focus {
-  border-color: var(--m3-primary); outline: none;
-  background-color: var(--m3-surface-container-lowest);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--m3-primary) 20%, transparent);
+  border: 2px solid var(--m3-primary);
+  padding: 14px var(--field-pad-h);  /* compensate for extra border px */
+  outline: none;
 }
 .text-area { resize: vertical; min-height: 120px; }
 
 .text-input--large { font-size: 2rem; text-align: left; direction: ltr; font-weight: 800; padding: 24px; }
-.text-input--ro { background-color: var(--m3-surface-container); border-color: var(--m3-outline-variant); cursor: default; color: var(--m3-on-surface-variant); }
+.text-input--ro { border-color: var(--m3-outline-variant); cursor: default; color: var(--m3-on-surface-variant); }
+
+/* ── Tool-card surface context: adjust notch bg ───────── */
+/* When the field is inside a .tool-card, the notch should match
+   the card background, not the page background.                  */
+.tool-card .field__input:not(:placeholder-shown) ~ .field__label,
+.tool-card .field__input:focus ~ .field__label,
+.tool-card .field--textarea .field__input:not(:placeholder-shown) ~ .field__label,
+.tool-card .field--textarea .field__input:focus ~ .field__label {
+  background-color: var(--m3-surface-container-low);
+}
+
+/* ── Inline / compact variant ─────────────────────────── */
+.field--compact .field__container { height: 44px; }
+.field--compact .field__input { font-size: 0.875rem; }
+.field--compact .field__label { font-size: 0.875rem; }
+.field--compact .field__input:not(:placeholder-shown) ~ .field__label,
+.field--compact .field__input:focus ~ .field__label {
+  font-size: 0.7rem;
+}
 
 
 /* ════════════════════════════════════════════════════════════
@@ -1626,4 +1992,348 @@ body.is-searching .section-heading {
   #back-to-top {
     bottom: var(--m3-spacing-24);
   }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   24. M3 OUTLINED TEXT FIELDS (Material 3 Expressive)
+   Spec: https://m3.material.io/components/text-fields/specs
+   ════════════════════════════════════════════════════════════
+
+   Structure:
+   <div class="m3-field [m3-field--error] [m3-field--populated]">
+     <div class="m3-field__container">
+       <span class="m3-field__leading-icon">🔍</span>  <!-- optional -->
+       <label class="m3-field__label">Label text</label>
+       <input  class="m3-field__input" ... />
+       <span class="m3-field__trailing-icon">✕</span> <!-- optional -->
+     </div>
+     <span class="m3-field__support">Supporting text</span> <!-- optional -->
+   </div>
+   ════════════════════════════════════════════════════════════ */
+
+/* ── Container ── */
+.m3-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  margin-bottom: var(--m3-spacing-12);
+  position: relative;
+}
+
+.m3-field__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 56px;               /* M3 spec: 56dp tall */
+  border-radius: var(--m3-shape-md); /* 12px = M3 Expressive outlined shape */
+  border: 1px solid var(--m3-outline);
+  padding: 0 16px;
+  gap: 12px;
+  background: transparent;
+  cursor: text;
+  /* Smooth border transition */
+  transition:
+    border-color var(--m3-duration-fast) var(--m3-ease-standard),
+    border-width  var(--m3-duration-fast) var(--m3-ease-standard);
+}
+
+/* ── Floating Label ── */
+.m3-field__label {
+  position: absolute;
+  /* Resting position: vertically centred inside the container */
+  top: 50%;
+  transform: translateY(-50%);
+  /* In RTL layout the label starts at the inline-start side.
+     We use `inset-inline-start` so it works for both LTR and RTL pages. */
+  inset-inline-start: 16px;
+  color: var(--m3-on-surface-variant);
+  font-size: 1rem;            /* body-large resting */
+  font-weight: 400;
+  line-height: 1;
+  pointer-events: none;
+  white-space: nowrap;
+  /* Smooth float animation */
+  transition:
+    top       var(--m3-duration-normal) var(--m3-ease-emphasized),
+    transform var(--m3-duration-normal) var(--m3-ease-emphasized),
+    font-size var(--m3-duration-normal) var(--m3-ease-emphasized),
+    color     var(--m3-duration-fast)   var(--m3-ease-standard),
+    background var(--m3-duration-fast)  var(--m3-ease-standard),
+    padding   var(--m3-duration-fast)   var(--m3-ease-standard);
+  /* Ensure label sits on top of the border line */
+  z-index: 1;
+}
+
+/* When the field has a leading icon, push label to the right */
+.m3-field--has-leading .m3-field__label {
+  inset-inline-start: calc(16px + 24px + 12px); /* icon(24) + gap(12) */
+}
+
+/* ── Floated state: focus OR populated ── */
+.m3-field__container:focus-within .m3-field__label,
+.m3-field--populated .m3-field__label,
+.m3-field__input:not(:placeholder-shown) ~ .m3-field__label,
+.m3-field__container:has(.m3-field__input:not(:placeholder-shown)) .m3-field__label,
+.m3-field__container:has(select.m3-field__input) .m3-field__label {
+  /* Float up to sit on the top border */
+  top: 0;
+  transform: translateY(-50%);
+  font-size: 0.75rem;          /* label-small: 12sp */
+  font-weight: 500;
+  /* The notch: give the label a background that "cuts" the border */
+  background: var(--m3-surface);
+  padding: 0 4px;
+  /* When inside a tool-card, the background behind the label is the card surface */
+}
+
+/* Adjust notch background for dark containers */
+[data-theme="dark"] .m3-field__container:focus-within .m3-field__label,
+[data-theme="dark"] .m3-field--populated .m3-field__label,
+[data-theme="dark"] .m3-field__container:has(.m3-field__input:not(:placeholder-shown)) .m3-field__label,
+[data-theme="dark"] .m3-field__container:has(select.m3-field__input) .m3-field__label {
+  background: var(--m3-surface);
+}
+
+/* Floated label inside tool-card gets the card's background */
+.tool-card .m3-field__container:focus-within .m3-field__label,
+.tool-card .m3-field--populated .m3-field__label,
+.tool-card .m3-field__container:has(.m3-field__input:not(:placeholder-shown)) .m3-field__label,
+.tool-card .m3-field__container:has(select.m3-field__input) .m3-field__label {
+  background: var(--m3-surface-container-low);
+}
+
+/* When leading icon present and label is floated, reset the indent */
+.m3-field--has-leading .m3-field__container:focus-within .m3-field__label,
+.m3-field--has-leading .m3-field--populated .m3-field__label,
+.m3-field--has-leading .m3-field__container:has(.m3-field__input:not(:placeholder-shown)) .m3-field__label {
+  inset-inline-start: 16px; /* floated label goes back to container edge */
+}
+
+/* ── Focus state: thicker primary border + primary label ── */
+.m3-field__container:focus-within {
+  border-width: 2px;
+  border-color: var(--m3-primary);
+}
+
+.m3-field__container:focus-within .m3-field__label {
+  color: var(--m3-primary);
+}
+
+/* ── Error state ── */
+.m3-field--error .m3-field__container {
+  border-color: var(--m3-error);
+}
+.m3-field--error .m3-field__container:focus-within {
+  border-color: var(--m3-error);
+  border-width: 2px;
+}
+.m3-field--error .m3-field__label,
+.m3-field--error .m3-field__container:focus-within .m3-field__label {
+  color: var(--m3-error);
+}
+.m3-field--error .m3-field__support {
+  color: var(--m3-error);
+}
+
+/* ── Disabled state ── */
+.m3-field--disabled .m3-field__container {
+  border-color: color-mix(in srgb, var(--m3-on-surface) 12%, transparent);
+  cursor: not-allowed;
+  opacity: 0.38;
+}
+.m3-field--disabled .m3-field__input {
+  pointer-events: none;
+}
+
+/* ── The actual input / textarea / select ── */
+.m3-field__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--m3-on-surface);
+  font-family: 'Vazirmatn', system-ui, sans-serif;
+  font-size: 1rem;            /* body-large: 16sp */
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 16px 0 4px;        /* top padding so text clears the floated label */
+  caret-color: var(--m3-primary);
+  /* hide the default placeholder (we use the floating label) */
+}
+
+/* Placeholder is kept transparent so label acts as placeholder */
+.m3-field__input::placeholder {
+  color: transparent;
+}
+
+/* After focus, if user wants a real placeholder shown, reveal it */
+.m3-field__container:focus-within .m3-field__input::placeholder {
+  color: var(--m3-on-surface-variant);
+  opacity: 0.7;
+}
+
+/* Textarea variant */
+textarea.m3-field__input {
+  resize: vertical;
+  min-height: 96px;
+  padding-top: 24px;          /* more top pad for multiline */
+  align-self: stretch;
+}
+
+/* Select variant */
+select.m3-field__input {
+  cursor: pointer;
+  /* Remove default appearance but keep it functional */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Custom select arrow (RTL-aware) */
+.m3-field__container:has(select) {
+  /* add padding-inline-end to make room for custom arrow */
+  padding-inline-end: 40px;
+}
+.m3-field__container:has(select)::after {
+  content: '▾';
+  position: absolute;
+  inset-inline-end: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--m3-on-surface-variant);
+  font-size: 1rem;
+  pointer-events: none;
+  transition: transform var(--m3-duration-fast) var(--m3-ease-standard);
+}
+.m3-field__container:has(select:focus)::after {
+  color: var(--m3-primary);
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* ── Icons ── */
+.m3-field__leading-icon,
+.m3-field__trailing-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: var(--m3-on-surface-variant);
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: color var(--m3-duration-fast) var(--m3-ease-standard);
+}
+
+.m3-field__container:focus-within .m3-field__leading-icon {
+  color: var(--m3-primary);
+}
+
+button.m3-field__trailing-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  margin: 0;
+  width: 32px;
+  height: 32px;
+  transition:
+    background-color var(--m3-duration-fast) var(--m3-ease-standard),
+    color             var(--m3-duration-fast) var(--m3-ease-standard);
+}
+
+button.m3-field__trailing-icon:hover {
+  background-color: color-mix(in srgb, var(--m3-on-surface) 8%, transparent);
+  color: var(--m3-on-surface);
+}
+
+/* ── Supporting text ── */
+.m3-field__support {
+  font-size: 0.75rem;         /* body-small: 12sp */
+  font-weight: 400;
+  line-height: 1.33;
+  color: var(--m3-on-surface-variant);
+  padding: 0 16px;
+}
+
+/* ── Read-only variant ── */
+.m3-field__input[readonly],
+.m3-field__input[readonly]:focus {
+  color: var(--m3-on-surface-variant);
+  caret-color: transparent;
+  cursor: default;
+}
+
+.m3-field--readonly .m3-field__container {
+  border-color: var(--m3-outline-variant);
+  background: color-mix(in srgb, var(--m3-on-surface) 4%, transparent);
+}
+
+.m3-field--readonly .m3-field__container:focus-within {
+  border-color: var(--m3-outline-variant);
+  border-width: 1px;
+}
+
+/* ── Large variant (calculator-style display) ── */
+.m3-field--large .m3-field__input {
+  font-size: 1.9rem;
+  font-weight: 800;
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: embed;
+  padding-top: 20px;
+}
+
+/* ── Monospace variant ── */
+.m3-field--mono .m3-field__input {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  direction: ltr;
+  text-align: left;
+}
+
+/* ── Center variant (time inputs etc.) ── */
+.m3-field--center .m3-field__input {
+  text-align: center;
+}
+
+/* ── Legacy compatibility: field-label + text-input siblings
+   (for elements NOT yet wrapped in .m3-field, keep old look
+   but still improved) ── */
+.field-label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--m3-on-surface-variant);
+  letter-spacing: 0.02em;
+}
+
+/* Number input: hide spin buttons */
+.m3-field__input[type="number"]::-webkit-inner-spin-button,
+.m3-field__input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+.m3-field__input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Focus ring for keyboard nav */
+.m3-field__container:focus-within {
+  box-shadow: none; /* border handles focus indication per M3 */
+}
+
+/* Hover state */
+.m3-field__container:not(:focus-within):hover {
+  border-color: var(--m3-on-surface);
+}
+
+/* Remove focus-ring on the native input since the container handles it */
+.m3-field__input:focus {
+  outline: none;
+  box-shadow: none;
 }

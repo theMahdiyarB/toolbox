@@ -676,6 +676,10 @@ body.is-searching .section-result-badge { display: inline-flex; }
         </a>
     </div>
     <div class="rail-items">
+        <a href="#media" class="rail-item">
+            <span class="rail-item-icon">🎬</span>
+            <span class="rail-item-label">رسانه</span>
+        </a>
         <a href="#chat" class="rail-item active">
             <span class="rail-item-icon">💬</span>
             <span class="rail-item-label">پیام</span>
@@ -687,10 +691,6 @@ body.is-searching .section-result-badge { display: inline-flex; }
         <a href="#upload" class="rail-item">
             <span class="rail-item-icon">📤</span>
             <span class="rail-item-label">آپلود</span>
-        </a>
-        <a href="#media" class="rail-item">
-            <span class="rail-item-icon">🎬</span>
-            <span class="rail-item-label">رسانه</span>
         </a>
         <a href="#software" class="rail-item">
             <span class="rail-item-icon">📦</span>
@@ -720,6 +720,10 @@ body.is-searching .section-result-badge { display: inline-flex; }
 
 <!-- ════ BOTTOM NAV ════ -->
 <nav class="bottom-navigation-bar" aria-label="ناوبری پایین">
+    <a href="#media" class="bottom-nav-item">
+        <span class="bottom-nav-icon">🎬</span>
+        <span class="bottom-nav-label">رسانه</span>
+    </a>
     <a href="#chat" class="bottom-nav-item active">
         <span class="bottom-nav-icon">💬</span>
         <span class="bottom-nav-label">پیام</span>
@@ -727,10 +731,6 @@ body.is-searching .section-result-badge { display: inline-flex; }
     <a href="#mirrors" class="bottom-nav-item">
         <span class="bottom-nav-icon">🔄</span>
         <span class="bottom-nav-label">میرور</span>
-    </a>
-    <a href="#media" class="bottom-nav-item">
-        <span class="bottom-nav-icon">🎬</span>
-        <span class="bottom-nav-label">رسانه</span>
     </a>
     <a href="#software" class="bottom-nav-item">
         <span class="bottom-nav-icon">📦</span>
@@ -789,6 +789,456 @@ body.is-searching .section-result-badge { display: inline-flex; }
     </div>
 </section>
 
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION: MEDIA
+════════════════════════════════════════════════════════ -->
+
+<hr class="section-hr" aria-hidden="true">
+<section class="section" id="media">
+    <div class="container">
+        <div class="section-heading">
+            <div class="section-heading-icon">🎬</div>
+            <div>
+                <h2>فیلم، موسیقی و رسانه</h2>
+                <p>خدمات ویدئو، پادکست و اخبار داخلی</p>
+            </div>
+        
+            <span class="section-result-badge"></span>
+        </div>
+
+        <!-- Film -->
+        <div class="info-card" style="margin-bottom:20px;">
+            <div class="info-card__header">
+                <span class="info-card__emoji">🎞️</span>
+                <div><div class="info-card__title">فیلم و سریال</div></div>
+            </div>
+            <div class="cards-grid">
+                <a href="https://namava.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📺</div><div class="link-card__title">نماوا</div></div>
+                    <div class="link-card__url">namava.ir</div>
+                    <div class="link-card__desc">اشتراکی و دارای حذفیات</div>
+                </a>
+                <a href="https://www.filimo.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎞️</div><div class="link-card__title">فیلیمو</div></div>
+                    <div class="link-card__url">filimo.com</div>
+                    <div class="link-card__desc">اشتراکی و دارای حذفیات</div>
+                </a>
+                <a href="https://filmnet.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎥</div><div class="link-card__title">فیلم‌نت</div></div>
+                    <div class="link-card__url">filmnet.ir</div>
+                    <div class="link-card__desc">رایگان و دارای حذفیات</div>
+                </a>
+                <a href="https://www.aparat.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">▶️</div><div class="link-card__title">آپارات</div></div>
+                    <div class="link-card__url">aparat.com</div>
+                    <div class="link-card__desc">اشتراک ویدیو (جایگزین YouTube)</div>
+                </a>
+                <a href="https://www.namasha.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🖥️</div><div class="link-card__title">نماشا</div></div>
+                    <div class="link-card__url">namasha.com</div>
+                    <div class="link-card__desc">اشتراک ویدیو</div>
+                </a>
+                <a href="https://www.gapfilm.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎦</div><div class="link-card__title">گپ‌فیلم</div></div>
+                    <div class="link-card__url">gapfilm.ir</div>
+                    <div class="link-card__desc">رایگان و دارای حذفیات</div>
+                </a>
+                <a href="https://digitoon.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎨</div><div class="link-card__title">دیجی‌تون</div></div>
+                    <div class="link-card__url">digitoon.ir</div>
+                    <div class="link-card__desc">انیمیشن و محتوای کودک رایگان</div>
+                </a>
+                <a href="https://kanape.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🛋</div><div class="link-card__title">کاناپه</div></div>
+                    <div class="link-card__url">kanape.ir</div>
+                    <div class="link-card__desc">انیمیشن و محتوای کودک اشتراکی</div>
+                </a>
+                <a href="https://afarinak.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🔺</div><div class="link-card__title">آفرینک</div></div>
+                    <div class="link-card__url">afarinak.com</div>
+                    <div class="link-card__desc">انیمیشن و محتوای کودک اشتراکی</div>
+                </a>
+                <a href="https://funibo.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🔴</div><div class="link-card__title">فانیبو</div></div>
+                    <div class="link-card__url">funibo.com</div>
+                    <div class="link-card__desc">انیمیشن و انیمه رایگان</div>
+                </a>
+                <a href="https://animegate.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">⛩</div><div class="link-card__title">انیمه گیت</div></div>
+                    <div class="link-card__url">animegate.ir</div>
+                    <div class="link-card__desc">انیمه اشتراکی</div>
+                </a>
+                <a href="https://tmk.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎭</div><div class="link-card__title">تماشاخونه</div></div>
+                    <div class="link-card__url">tmk.ir</div>
+                    <div class="link-card__desc">رایگان و دارای حذفیات</div>
+                </a>
+                <a href="https://sheyda.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌸</div><div class="link-card__title">شیدا</div></div>
+                    <div class="link-card__url">sheyda.com</div>
+                    <div class="link-card__desc">اشتراکی و دارای حذفیات</div>
+                </a>
+                <a href="https://lenz.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🔍</div><div class="link-card__title">لنز</div></div>
+                    <div class="link-card__url">lenz.ir</div>
+                    <div class="link-card__desc">رایگان و دارای حذفیات</div>
+                </a>
+                <a href="https://plan.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">▶️</div><div class="link-card__title">پلان</div></div>
+                    <div class="link-card__url">plan.ir</div>
+                    <div class="link-card__desc">رایگان و دارای حذفیات</div>
+                </a>
+                <a href="https://bamabin.cam" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🔻</div><div class="link-card__title">بامابین</div></div>
+                    <div class="link-card__url">bamabin.cam</div>
+                    <div class="link-card__desc">اشتراکی</div>
+                </a>
+                <a href="https://anten.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">⚽️</div><div class="link-card__title">آنتن</div></div>
+                    <div class="link-card__url">anten.ir</div>
+                    <div class="link-card__desc">محتوای ورزشی زنده و ضبط‌شده</div>
+                </a>
+                <a href="https://telewebion.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📺</div><div class="link-card__title">تلوبیون</div></div>
+                    <div class="link-card__url">telewebion.ir</div>
+                    <div class="link-card__desc">محتوای زنده و ضبط‌شده صداوسیما</div>
+                </a>
+                <a href="https://hexdl.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎬</div><div class="link-card__title">هکس‌دی‌ال</div></div>
+                    <div class="link-card__url">hexdl.com</div>
+                    <div class="link-card__desc">رایگان</div>
+                </a>
+                <a href="https://www.myf2mi.top" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌟</div><div class="link-card__title">فیلم2مدیا</div></div>
+                    <div class="link-card__url">myf2mi.top</div>
+                    <div class="link-card__desc">فیلم و سریال بدون حذفیات و رایگان</div>
+                </a>
+                <a href="https://www.f2mc.top" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌟</div><div class="link-card__title">فیلم2مدیا (بک‌آپ)</div></div>
+                    <div class="link-card__url">f2mc.top</div>
+                    <div class="link-card__desc">فیلم و سریال بدون حذفیات و رایگان</div>
+                </a>
+                <a href="https://www.f2md.top" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌟</div><div class="link-card__title">فیلم2مدیا (بک‌آپ)</div></div>
+                    <div class="link-card__url">f2md.top</div>
+                    <div class="link-card__desc">فیلم و سریال بدون حذفیات و رایگان</div>
+                </a>
+                <a href="https://www.numberlands.click" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌟</div><div class="link-card__title">فیلم2مدیا (بک‌آپ)</div></div>
+                    <div class="link-card__url">numberlands.click</div>
+                    <div class="link-card__desc">فیلم و سریال بدون حذفیات و رایگان</div>
+                </a>
+                <a href="https://upera.tv" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">▶️</div><div class="link-card__title">آپرا</div></div>
+                    <div class="link-card__url">upera.tv</div>
+                    <div class="link-card__desc">رایگان</div>
+                </a>
+                <a href="https://aryazdh.ir/bebinto" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">👀</div><div class="link-card__title">ببینیتو</div></div>
+                    <div class="link-card__url">aryazdh.ir/bebinto</div>
+                    <div class="link-card__desc">رایگان</div>
+                </a>
+                <a href="https://vipofilm.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">👀</div><div class="link-card__title">ویپو فیلم</div></div>
+                    <div class="link-card__url">vipofilm.com</div>
+                    <div class="link-card__desc">رایگان</div>
+                </a>
+                <a href="https://baxmovie.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">▶️</div><div class="link-card__title">بکس‌مووی</div></div>
+                    <div class="link-card__url">baxmovie.com</div>
+                </a>
+                <a href="https://dls.iran-gamecenter-host.com/DonyayeSerial/offline_archive.html" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">دنیای سریال (آرشیو)</div></div>
+                    <div class="link-card__url">iran-gamecenter-host.com</div>
+                </a>
+                <a href="https://dls2.iran-gamecenter-host.com/DonyayeSerial/offline_archive.html" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">دنیای سریال (آرشیو ۲)</div></div>
+                    <div class="link-card__url">iran-gamecenter-host.com</div>
+                </a>
+                <a href="https://dls4.iran-gamecenter-host.com/DonyayeSerial/offline_archive.html" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">دنیای سریال (آرشیو ۴)</div></div>
+                    <div class="link-card__url">iran-gamecenter-host.com</div>
+                </a>
+                <a href="https://dls5.iran-gamecenter-host.com/DonyayeSerial/offline_archive.html" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">دنیای سریال (آرشیو ۵)</div></div>
+                    <div class="link-card__url">iran-gamecenter-host.com</div>
+                </a>
+                <a href="https://dls6.iran-gamecenter-host.com/DonyayeSerial/offline_archive.html" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">دنیای سریال (آرشیو ۶)</div></div>
+                    <div class="link-card__url">iran-gamecenter-host.com</div>
+                </a>
+                <a href="https://dls7.iran-gamecenter-host.com/DonyayeSerial/offline_archive.html" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">دنیای سریال (آرشیو ۷)</div></div>
+                    <div class="link-card__url">iran-gamecenter-host.com</div>
+                </a>
+                <a href="https://dl2.sermoviedown.pw" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">سرمووی (آرشیو ۲)</div></div>
+                    <div class="link-card__url">sermoviedown.pw</div>
+                </a>
+                <a href="https://dl3.sermoviedown.pw" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">سرمووی (آرشیو ۳)</div></div>
+                    <div class="link-card__url">sermoviedown.pw</div>
+                </a>
+                <a href="https://dl4.sermoviedown.pw" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">سرمووی (آرشیو ۴)</div></div>
+                    <div class="link-card__url">sermoviedown.pw</div>
+                </a>
+                <a href="https://dl5.sermoviedown.pw" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">سرمووی (آرشیو ۵)</div></div>
+                    <div class="link-card__url">sermoviedown.pw</div>
+                </a>
+                <a href="https://dl11.sermoviedown.pw" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">سرمووی (آرشیو ۱۱)</div></div>
+                    <div class="link-card__url">sermoviedown.pw</div>
+                </a>
+                <a href="https://dl12.sermoviedown.pw" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">سرمووی (آرشیو ۱۲)</div></div>
+                    <div class="link-card__url">sermoviedown.pw</div>
+                </a>
+                <a href="https://rio.ggusers.com/Series" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎬</div><div class="link-card__title">Rio</div></div>
+                    <div class="link-card__url">rio.ggusers.com</div>
+                    <div class="link-card__desc">آرشیو سریال</div>
+                </a>
+                <a href="https://nairobi.saymyname.website/Series" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎬</div><div class="link-card__title">Nairobi</div></div>
+                    <div class="link-card__url">nairobi.saymyname.website</div>
+                    <div class="link-card__desc">آرشیو سریال</div>
+                </a>
+                <a href="https://berlin.saymyname.website" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎬</div><div class="link-card__title">Berlin</div></div>
+                    <div class="link-card__url">berlin.saymyname.website</div>
+                    <div class="link-card__desc">آرشیو فیلم</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Music -->
+        <div class="info-card" style="margin-bottom:20px;">
+            <div class="info-card__header">
+                <span class="info-card__emoji">🎵</span>
+                <div><div class="info-card__title">موسیقی و پادکست</div></div>
+            </div>
+            <div class="cards-grid">
+                <a href="https://beeptunes.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎧</div><div class="link-card__title">بیپ‌تونز</div></div>
+                    <div class="link-card__url">beeptunes.com</div>
+                    <div class="link-card__desc">استریم موسیقی فارسی</div>
+                </a>
+                <a href="https://www.vmusic.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎶</div><div class="link-card__title">والا موزیک</div></div>
+                    <div class="link-card__url">vmusic.ir</div>
+                </a>
+                <a href="https://musicdel.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">❤️</div><div class="link-card__title">موزیکدل</div></div>
+                    <div class="link-card__url">musicdel.ir</div>
+                </a>
+                <a href="https://radio.9craft.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📻</div><div class="link-card__title">رادیو ۹کرفت</div></div>
+                    <div class="link-card__url">radio.9craft.ir</div>
+                </a>
+                <a href="https://avapedia.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🔊</div><div class="link-card__title">آوا پدیا</div></div>
+                    <div class="link-card__url">avapedia.com</div>
+                </a>
+                <a href="https://ir-music.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎧</div><div class="link-card__title">آی آر موزیک</div></div>
+                    <div class="link-card__url">ir-music.ir</div>
+                </a>
+                <a href="https://aparatmusic.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎵</div><div class="link-card__title">آپارات موزیک</div></div>
+                    <div class="link-card__url">aparatmusic.com</div>
+                </a>
+                <a href="https://melodify.app" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🟡</div><div class="link-card__title">ملودیفای</div></div>
+                    <div class="link-card__url">melodify.app</div>
+                </a>
+                <a href="https://musilon.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎶</div><div class="link-card__title">موزیلون</div></div>
+                    <div class="link-card__url">musilon.com</div>
+                </a>
+                <a href="https://melovaz.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">▶️</div><div class="link-card__title">ملواز</div></div>
+                    <div class="link-card__url">melovaz.ir</div>
+                </a>
+                <a href="https://beelody.net" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🅱️</div><div class="link-card__title">بیلودی</div></div>
+                    <div class="link-card__url">beelody.net</div>
+                </a>
+                <a href="https://ravkadeh.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎙️</div><div class="link-card__title">پادکست راوکده</div></div>
+                    <div class="link-card__url">ravkadeh.ir</div>
+                    <div class="link-card__desc">پادکست تاریخی و فرهنگی فارسی</div>
+                </a>
+                <a href="https://rokhpodcast.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎤</div><div class="link-card__title">پادکست رخ</div></div>
+                    <div class="link-card__url">rokhpodcast.ir</div>
+                    <div class="link-card__desc">پادکست تاریخی فارسی</div>
+                </a>
+                <a href="http://ketabjibipodcast.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📒</div><div class="link-card__title">پادکست کتاب جیبی</div></div>
+                    <div class="link-card__url">ketabjibipodcast.com</div>
+                    <div class="link-card__desc">پادکست خلاصه کتاب فارسی</div>
+                </a>
+                <a href="https://shenoto.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🔴</div><div class="link-card__title">شنوتو</div></div>
+                    <div class="link-card__url">shenoto.com</div>
+                    <div class="link-card__desc">پادگیر ایرانی</div>
+                </a>
+                <a href="https://fidibo.com/podcasts" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🐘</div><div class="link-card__title">پادکست‌های فیدیبو</div></div>
+                    <div class="link-card__url">fidibo.com/podcasts</div>
+                    <div class="link-card__desc">لیست پادکست‌ها</div>
+                </a>
+                <a href="http://book.iranseda.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">▶️</div><div class="link-card__title">کتاب گویا ایران صدا</div></div>
+                    <div class="link-card__url">book.iranseda.ir</div>
+                    <div class="link-card__desc">پایگاه کتاب گویای فارسی صداوسیما</div>
+                </a>
+                <a href="https://khoondan.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📖</div><div class="link-card__title">خوندن</div></div>
+                    <div class="link-card__url">khoondan.ir</div>
+                    <div class="link-card__desc">سامانه‌ی هوشمند مطالعه</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- News -->
+        <div class="info-card">
+            <div class="info-card__header">
+                <span class="info-card__emoji">📰</span>
+                <div><div class="info-card__title">اخبار و رسانه</div></div>
+            </div>
+            <div class="cards-grid">
+                <a href="https://darsotoon.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🟦</div><div class="link-card__title">درستون</div></div>
+                    <div class="link-card__url">darsotoon.ir</div>
+                    <div class="link-card__desc">تجمیع خبرهای داخلی</div>
+                </a>
+                <a href="https://dasteaval.news" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">☝️</div><div class="link-card__title">دست اول</div></div>
+                    <div class="link-card__url">dasteaval.news</div>
+                    <div class="link-card__desc">تجمیع خبرهای داخلی</div>
+                </a>
+                <a href="https://irna.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📡</div><div class="link-card__title">ایرنا</div></div>
+                    <div class="link-card__url">irna.ir</div>
+                    <div class="link-card__desc">خبرگزاری جمهوری اسلامی</div>
+                </a>
+                <a href="https://isna.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📰</div><div class="link-card__title">ایسنا</div></div>
+                    <div class="link-card__url">isna.ir</div>
+                </a>
+                <a href="https://farsnews.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📋</div><div class="link-card__title">فارس نیوز</div></div>
+                    <div class="link-card__url">farsnews.ir</div>
+                </a>
+                <a href="https://khabaronline.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🗞️</div><div class="link-card__title">خبرآنلاین</div></div>
+                    <div class="link-card__url">khabaronline.ir</div>
+                </a>
+                <a href="https://asriran.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">⏰</div><div class="link-card__title">عصر ایران</div></div>
+                    <div class="link-card__url">asriran.com</div>
+                </a>
+                <a href="https://entekhab.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🔵</div><div class="link-card__title">انتخاب</div></div>
+                    <div class="link-card__url">entekhab.ir</div>
+                </a>
+                <a href="https://sharghdaily.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📄</div><div class="link-card__title">شرق</div></div>
+                    <div class="link-card__url">sharghdaily.com</div>
+                </a>
+                <a href="https://zoomit.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🔬</div><div class="link-card__title">زومیت</div></div>
+                    <div class="link-card__url">zoomit.ir</div>
+                    <div class="link-card__desc">اخبار فناوری</div>
+                </a>
+                <a href="https://digiato.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">💻</div><div class="link-card__title">دیجیاتو</div></div>
+                    <div class="link-card__url">digiato.com</div>
+                    <div class="link-card__desc">اخبار فناوری و دیجیتال</div>
+                </a>
+                <a href="https://ilna.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🔴</div><div class="link-card__title">ایلنا</div></div>
+                    <div class="link-card__url">ilna.ir</div>
+                    <div class="link-card__desc">خبرگزاری کار ایران</div>
+                </a>
+                <a href="https://mehrnews.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📢</div><div class="link-card__title">مهر</div></div>
+                    <div class="link-card__url">mehrnews.com</div>
+                </a>
+                <a href="https://tabnak.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📰</div><div class="link-card__title">تابناک</div></div>
+                    <div class="link-card__url">tabnak.ir</div>
+                </a>
+                <a href="https://tasnimnews.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📣</div><div class="link-card__title">تسنیم</div></div>
+                    <div class="link-card__url">tasnimnews.com</div>
+                </a>
+                <a href="https://fararu.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🗞️</div><div class="link-card__title">فرارو</div></div>
+                    <div class="link-card__url">fararu.com</div>
+                </a>
+                <a href="https://hammihanonline.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🤝</div><div class="link-card__title">هم‌میهن</div></div>
+                    <div class="link-card__url">hammihanonline.ir</div>
+                </a>
+                <a href="https://eghtesadonline.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">💹</div><div class="link-card__title">اقتصاد آنلاین</div></div>
+                    <div class="link-card__url">eghtesadonline.com</div>
+                </a>
+                <a href="https://vijiat.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📱</div><div class="link-card__title">ویجیاتو</div></div>
+                    <div class="link-card__url">vijiat.ir</div>
+                    <div class="link-card__desc">رسانه موبایل و گجت</div>
+                </a>
+                <a href="https://roziyato.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌅</div><div class="link-card__title">روزیاتو</div></div>
+                    <div class="link-card__url">roziyato.com</div>
+                    <div class="link-card__desc">رسانه سبک زندگی</div>
+                </a>
+                <a href="https://zoomon.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">💰</div><div class="link-card__title">زومان</div></div>
+                    <div class="link-card__url">zoomon.ir</div>
+                    <div class="link-card__desc">رسانه اقتصادی</div>
+                </a>
+                <a href="https://pedal.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🚗</div><div class="link-card__title">پدال</div></div>
+                    <div class="link-card__url">pedal.ir</div>
+                    <div class="link-card__desc">رسانه خودرو</div>
+                </a>
+                <a href="https://zoomg.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎮</div><div class="link-card__title">زومجی</div></div>
+                    <div class="link-card__url">zoomg.ir</div>
+                    <div class="link-card__desc">رسانه بازی و سرگرمی</div>
+                </a>
+                <a href="https://filmzi.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎬</div><div class="link-card__title">فیلمزی</div></div>
+                    <div class="link-card__url">filmzi.com</div>
+                    <div class="link-card__desc">رسانه سینما و تلویزیون</div>
+                </a>
+                <a href="https://kojaro.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🏔️</div><div class="link-card__title">کجارو</div></div>
+                    <div class="link-card__url">kojaro.com</div>
+                    <div class="link-card__desc">رسانه گردشگری</div>
+                </a>
+                <a href="https://peivast.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🔗</div><div class="link-card__title">پیوست</div></div>
+                    <div class="link-card__url">peivast.com</div>
+                    <div class="link-card__desc">رسانه کسب‌وکار دیجیتال</div>
+                </a>
+                <a href="https://hooshio.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🔹</div><div class="link-card__title">هوشیو</div></div>
+                    <div class="link-card__url">hooshio.com</div>
+                    <div class="link-card__desc">رسانه هوش مصنوعی</div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
 
 <!-- ════════════════════════════════════════════════════════
      SECTION: CHAT
@@ -1298,6 +1748,11 @@ body.is-searching .section-result-badge { display: inline-flex; }
                     <div class="link-card__url">punkpaste.ir</div>
                     <div class="link-card__desc">حجم مجاز ۷۰۰ مگابایت و ۲۴ ساعت انقضا - بدون نیاز به ثبت‌نام</div>
                 </a>
+                <a href="http://kalbod-team.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🟣</div><div class="link-card__title">تیم کالبد</div></div>
+                    <div class="link-card__url">kalbod-team.ir</div>
+                    <div class="link-card__desc">حجم مجاز ۲۰۰ مگابایت و ۳ روز انقضا - بدون نیاز به ثبت‌نام</div>
+                </a>
                 <a href="https://files.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">☁️</div><div class="link-card__title">فایلز</div></div>
                     <div class="link-card__url">files.ir</div>
@@ -1334,437 +1789,6 @@ body.is-searching .section-result-badge { display: inline-flex; }
     </div>
     
 
-</section>
-
-<!-- ════════════════════════════════════════════════════════
-     SECTION: MEDIA
-════════════════════════════════════════════════════════ -->
-
-
-<hr class="section-hr" aria-hidden="true">
-<section class="section" id="media">
-    <div class="container">
-        <div class="section-heading">
-            <div class="section-heading-icon">🎬</div>
-            <div>
-                <h2>فیلم، موسیقی و رسانه</h2>
-                <p>خدمات ویدئو، پادکست و اخبار داخلی</p>
-            </div>
-        
-            <span class="section-result-badge"></span>
-        </div>
-
-        <!-- Film -->
-        <div class="info-card" style="margin-bottom:20px;">
-            <div class="info-card__header">
-                <span class="info-card__emoji">🎞️</span>
-                <div><div class="info-card__title">فیلم و سریال</div></div>
-            </div>
-            <div class="cards-grid">
-                <a href="https://namava.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📺</div><div class="link-card__title">نماوا</div></div>
-                    <div class="link-card__url">namava.ir</div>
-                    <div class="link-card__desc">اشتراکی و دارای حذفیات</div>
-                </a>
-                <a href="https://www.filimo.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎞️</div><div class="link-card__title">فیلیمو</div></div>
-                    <div class="link-card__url">filimo.com</div>
-                    <div class="link-card__desc">اشتراکی و دارای حذفیات</div>
-                </a>
-                <a href="https://filmnet.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎥</div><div class="link-card__title">فیلم‌نت</div></div>
-                    <div class="link-card__url">filmnet.ir</div>
-                    <div class="link-card__desc">رایگان و دارای حذفیات</div>
-                </a>
-                <a href="https://www.aparat.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">▶️</div><div class="link-card__title">آپارات</div></div>
-                    <div class="link-card__url">aparat.com</div>
-                    <div class="link-card__desc">اشتراک ویدیو (جایگزین YouTube)</div>
-                </a>
-                <a href="https://www.namasha.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🖥️</div><div class="link-card__title">نماشا</div></div>
-                    <div class="link-card__url">namasha.com</div>
-                    <div class="link-card__desc">اشتراک ویدیو</div>
-                </a>
-                <a href="https://www.gapfilm.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎦</div><div class="link-card__title">گپ‌فیلم</div></div>
-                    <div class="link-card__url">gapfilm.ir</div>
-                    <div class="link-card__desc">رایگان و دارای حذفیات</div>
-                </a>
-                <a href="https://digitoon.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎨</div><div class="link-card__title">دیجی‌تون</div></div>
-                    <div class="link-card__url">digitoon.ir</div>
-                    <div class="link-card__desc">انیمیشن و محتوای کودک رایگان</div>
-                </a>
-                <a href="https://kanape.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🛋</div><div class="link-card__title">کاناپه</div></div>
-                    <div class="link-card__url">kanape.ir</div>
-                    <div class="link-card__desc">انیمیشن و محتوای کودک اشتراکی</div>
-                </a>
-                <a href="https://afarinak.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔺</div><div class="link-card__title">آفرینک</div></div>
-                    <div class="link-card__url">afarinak.com</div>
-                    <div class="link-card__desc">انیمیشن و محتوای کودک اشتراکی</div>
-                </a>
-                <a href="https://animegate.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">⛩</div><div class="link-card__title">انیمه گیت</div></div>
-                    <div class="link-card__url">animegate.ir</div>
-                    <div class="link-card__desc">انیمه اشتراکی</div>
-                </a>
-                <a href="https://tmk.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎭</div><div class="link-card__title">تماشاخونه</div></div>
-                    <div class="link-card__url">tmk.ir</div>
-                    <div class="link-card__desc">رایگان و دارای حذفیات</div>
-                </a>
-                <a href="https://sheyda.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🌸</div><div class="link-card__title">شیدا</div></div>
-                    <div class="link-card__url">sheyda.com</div>
-                    <div class="link-card__desc">اشتراکی و دارای حذفیات</div>
-                </a>
-                <a href="https://lenz.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔍</div><div class="link-card__title">لنز</div></div>
-                    <div class="link-card__url">lenz.ir</div>
-                    <div class="link-card__desc">رایگان و دارای حذفیات</div>
-                </a>
-                <a href="https://plan.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">▶️</div><div class="link-card__title">پلان</div></div>
-                    <div class="link-card__url">plan.ir</div>
-                    <div class="link-card__desc">رایگان و دارای حذفیات</div>
-                </a>
-                <a href="https://bamabin.cam" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔻</div><div class="link-card__title">بامابین</div></div>
-                    <div class="link-card__url">bamabin.cam</div>
-                    <div class="link-card__desc">اشتراکی</div>
-                </a>
-                <a href="https://anten.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">⚽️</div><div class="link-card__title">آنتن</div></div>
-                    <div class="link-card__url">anten.ir</div>
-                    <div class="link-card__desc">محتوای ورزشی زنده و ضبط‌شده</div>
-                </a>
-                <a href="https://telewebion.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📺</div><div class="link-card__title">تلوبیون</div></div>
-                    <div class="link-card__url">telewebion.ir</div>
-                    <div class="link-card__desc">محتوای زنده و ضبط‌شده صداوسیما</div>
-                </a>
-                <a href="https://hexdl.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎬</div><div class="link-card__title">هکس‌دی‌ال</div></div>
-                    <div class="link-card__url">hexdl.com</div>
-                    <div class="link-card__desc">رایگان</div>
-                </a>
-                <a href="https://www.myf2mi.top" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🌟</div><div class="link-card__title">فیلم2مدیا</div></div>
-                    <div class="link-card__url">myf2mi.top</div>
-                    <div class="link-card__desc">فیلم و سریال بدون حذفیات و رایگان</div>
-                </a>
-                <a href="https://www.f2mc.top" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🌟</div><div class="link-card__title">فیلم2مدیا (بک‌آپ)</div></div>
-                    <div class="link-card__url">f2mc.top</div>
-                    <div class="link-card__desc">فیلم و سریال بدون حذفیات و رایگان</div>
-                </a>
-                <a href="https://www.f2md.top" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🌟</div><div class="link-card__title">فیلم2مدیا (بک‌آپ)</div></div>
-                    <div class="link-card__url">f2md.top</div>
-                    <div class="link-card__desc">فیلم و سریال بدون حذفیات و رایگان</div>
-                </a>
-                <a href="https://www.numberlands.click" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🌟</div><div class="link-card__title">فیلم2مدیا (بک‌آپ)</div></div>
-                    <div class="link-card__url">numberlands.click</div>
-                    <div class="link-card__desc">فیلم و سریال بدون حذفیات و رایگان</div>
-                </a>
-                <a href="https://upera.tv" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">▶️</div><div class="link-card__title">آپرا</div></div>
-                    <div class="link-card__url">upera.tv</div>
-                    <div class="link-card__desc">رایگان</div>
-                </a>
-                <a href="https://aryazdh.ir/bebinto" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">👀</div><div class="link-card__title">ببینیتو</div></div>
-                    <div class="link-card__url">aryazdh.ir/bebinto</div>
-                    <div class="link-card__desc">رایگان</div>
-                </a>
-                <a href="https://vipofilm.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">👀</div><div class="link-card__title">ویپو فیلم</div></div>
-                    <div class="link-card__url">vipofilm.com</div>
-                    <div class="link-card__desc">رایگان</div>
-                </a>
-                <a href="https://baxmovie.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">▶️</div><div class="link-card__title">بکس‌مووی</div></div>
-                    <div class="link-card__url">baxmovie.com</div>
-                </a>
-                <a href="https://dls.iran-gamecenter-host.com/DonyayeSerial/offline_archive.html" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">دنیای سریال (آرشیو)</div></div>
-                    <div class="link-card__url">iran-gamecenter-host.com</div>
-                </a>
-                <a href="https://dls2.iran-gamecenter-host.com/DonyayeSerial/offline_archive.html" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">دنیای سریال (آرشیو ۲)</div></div>
-                    <div class="link-card__url">iran-gamecenter-host.com</div>
-                </a>
-                <a href="https://dls4.iran-gamecenter-host.com/DonyayeSerial/offline_archive.html" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">دنیای سریال (آرشیو ۴)</div></div>
-                    <div class="link-card__url">iran-gamecenter-host.com</div>
-                </a>
-                <a href="https://dls5.iran-gamecenter-host.com/DonyayeSerial/offline_archive.html" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">دنیای سریال (آرشیو ۵)</div></div>
-                    <div class="link-card__url">iran-gamecenter-host.com</div>
-                </a>
-                <a href="https://dls6.iran-gamecenter-host.com/DonyayeSerial/offline_archive.html" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">دنیای سریال (آرشیو ۶)</div></div>
-                    <div class="link-card__url">iran-gamecenter-host.com</div>
-                </a>
-                <a href="https://dls7.iran-gamecenter-host.com/DonyayeSerial/offline_archive.html" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">دنیای سریال (آرشیو ۷)</div></div>
-                    <div class="link-card__url">iran-gamecenter-host.com</div>
-                </a>
-                <a href="https://dl2.sermoviedown.pw" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">سرمووی (آرشیو ۲)</div></div>
-                    <div class="link-card__url">sermoviedown.pw</div>
-                </a>
-                <a href="https://dl3.sermoviedown.pw" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">سرمووی (آرشیو ۳)</div></div>
-                    <div class="link-card__url">sermoviedown.pw</div>
-                </a>
-                <a href="https://dl4.sermoviedown.pw" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">سرمووی (آرشیو ۴)</div></div>
-                    <div class="link-card__url">sermoviedown.pw</div>
-                </a>
-                <a href="https://dl5.sermoviedown.pw" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">سرمووی (آرشیو ۵)</div></div>
-                    <div class="link-card__url">sermoviedown.pw</div>
-                </a>
-                <a href="https://dl11.sermoviedown.pw" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">سرمووی (آرشیو ۱۱)</div></div>
-                    <div class="link-card__url">sermoviedown.pw</div>
-                </a>
-                <a href="https://dl12.sermoviedown.pw" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📼</div><div class="link-card__title">سرمووی (آرشیو ۱۲)</div></div>
-                    <div class="link-card__url">sermoviedown.pw</div>
-                </a>
-                <a href="https://rio.ggusers.com/Series" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎬</div><div class="link-card__title">Rio</div></div>
-                    <div class="link-card__url">rio.ggusers.com</div>
-                    <div class="link-card__desc">آرشیو سریال</div>
-                </a>
-                <a href="https://nairobi.saymyname.website/Series" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎬</div><div class="link-card__title">Nairobi</div></div>
-                    <div class="link-card__url">nairobi.saymyname.website</div>
-                    <div class="link-card__desc">آرشیو سریال</div>
-                </a>
-                <a href="https://berlin.saymyname.website" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎬</div><div class="link-card__title">Berlin</div></div>
-                    <div class="link-card__url">berlin.saymyname.website</div>
-                    <div class="link-card__desc">آرشیو فیلم</div>
-                </a>
-            </div>
-        </div>
-
-        <!-- Music -->
-        <div class="info-card" style="margin-bottom:20px;">
-            <div class="info-card__header">
-                <span class="info-card__emoji">🎵</span>
-                <div><div class="info-card__title">موسیقی و پادکست</div></div>
-            </div>
-            <div class="cards-grid">
-                <a href="https://beeptunes.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎧</div><div class="link-card__title">بیپ‌تونز</div></div>
-                    <div class="link-card__url">beeptunes.com</div>
-                    <div class="link-card__desc">استریم موسیقی فارسی</div>
-                </a>
-                <a href="https://www.vmusic.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎶</div><div class="link-card__title">والا موزیک</div></div>
-                    <div class="link-card__url">vmusic.ir</div>
-                </a>
-                <a href="https://musicdel.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">❤️</div><div class="link-card__title">موزیکدل</div></div>
-                    <div class="link-card__url">musicdel.ir</div>
-                </a>
-                <a href="https://radio.9craft.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📻</div><div class="link-card__title">رادیو ۹کرفت</div></div>
-                    <div class="link-card__url">radio.9craft.ir</div>
-                </a>
-                <a href="https://avapedia.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔊</div><div class="link-card__title">آوا پدیا</div></div>
-                    <div class="link-card__url">avapedia.com</div>
-                </a>
-                <a href="https://ir-music.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎧</div><div class="link-card__title">آی آر موزیک</div></div>
-                    <div class="link-card__url">ir-music.ir</div>
-                </a>
-                <a href="https://aparatmusic.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎵</div><div class="link-card__title">آپارات موزیک</div></div>
-                    <div class="link-card__url">aparatmusic.com</div>
-                </a>
-                <a href="https://melodify.app" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🟡</div><div class="link-card__title">ملودیفای</div></div>
-                    <div class="link-card__url">melodify.app</div>
-                </a>
-                <a href="https://musilon.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎶</div><div class="link-card__title">موزیلون</div></div>
-                    <div class="link-card__url">musilon.com</div>
-                </a>
-                <a href="https://melovaz.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">▶️</div><div class="link-card__title">ملواز</div></div>
-                    <div class="link-card__url">melovaz.ir</div>
-                </a>
-                <a href="https://beelody.net" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🅱️</div><div class="link-card__title">بیلودی</div></div>
-                    <div class="link-card__url">beelody.net</div>
-                </a>
-                <a href="https://ravkadeh.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎙️</div><div class="link-card__title">پادکست راوکده</div></div>
-                    <div class="link-card__url">ravkadeh.ir</div>
-                    <div class="link-card__desc">پادکست تاریخی و فرهنگی فارسی</div>
-                </a>
-                <a href="https://rokhpodcast.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎤</div><div class="link-card__title">پادکست رخ</div></div>
-                    <div class="link-card__url">rokhpodcast.ir</div>
-                    <div class="link-card__desc">پادکست تاریخی فارسی</div>
-                </a>
-                <a href="http://ketabjibipodcast.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📒</div><div class="link-card__title">پادکست کتاب جیبی</div></div>
-                    <div class="link-card__url">ketabjibipodcast.com</div>
-                    <div class="link-card__desc">پادکست خلاصه کتاب فارسی</div>
-                </a>
-                <a href="https://shenoto.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔴</div><div class="link-card__title">شنوتو</div></div>
-                    <div class="link-card__url">shenoto.com</div>
-                    <div class="link-card__desc">پادگیر ایرانی</div>
-                </a>
-                <a href="https://fidibo.com/podcasts" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🐘</div><div class="link-card__title">پادکست‌های فیدیبو</div></div>
-                    <div class="link-card__url">fidibo.com/podcasts</div>
-                    <div class="link-card__desc">لیست پادکست‌ها</div>
-                </a>
-            </div>
-        </div>
-
-        <!-- News -->
-        <div class="info-card">
-            <div class="info-card__header">
-                <span class="info-card__emoji">📰</span>
-                <div><div class="info-card__title">اخبار و رسانه</div></div>
-            </div>
-            <div class="cards-grid">
-                <a href="https://darsotoon.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🟦</div><div class="link-card__title">درستون</div></div>
-                    <div class="link-card__url">darsotoon.ir</div>
-                    <div class="link-card__desc">تجمیع خبرهای داخلی</div>
-                </a>
-                <a href="https://irna.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📡</div><div class="link-card__title">ایرنا</div></div>
-                    <div class="link-card__url">irna.ir</div>
-                    <div class="link-card__desc">خبرگزاری جمهوری اسلامی</div>
-                </a>
-                <a href="https://isna.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📰</div><div class="link-card__title">ایسنا</div></div>
-                    <div class="link-card__url">isna.ir</div>
-                </a>
-                <a href="https://farsnews.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📋</div><div class="link-card__title">فارس نیوز</div></div>
-                    <div class="link-card__url">farsnews.ir</div>
-                </a>
-                <a href="https://khabaronline.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🗞️</div><div class="link-card__title">خبرآنلاین</div></div>
-                    <div class="link-card__url">khabaronline.ir</div>
-                </a>
-                <a href="https://asriran.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">⏰</div><div class="link-card__title">عصر ایران</div></div>
-                    <div class="link-card__url">asriran.com</div>
-                </a>
-                <a href="https://entekhab.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔵</div><div class="link-card__title">انتخاب</div></div>
-                    <div class="link-card__url">entekhab.ir</div>
-                </a>
-                <a href="https://sharghdaily.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📄</div><div class="link-card__title">شرق</div></div>
-                    <div class="link-card__url">sharghdaily.com</div>
-                </a>
-                <a href="https://zoomit.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔬</div><div class="link-card__title">زومیت</div></div>
-                    <div class="link-card__url">zoomit.ir</div>
-                    <div class="link-card__desc">اخبار فناوری</div>
-                </a>
-                <a href="https://digiato.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">💻</div><div class="link-card__title">دیجیاتو</div></div>
-                    <div class="link-card__url">digiato.com</div>
-                    <div class="link-card__desc">اخبار فناوری و دیجیتال</div>
-                </a>
-                <a href="https://ilna.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔴</div><div class="link-card__title">ایلنا</div></div>
-                    <div class="link-card__url">ilna.ir</div>
-                    <div class="link-card__desc">خبرگزاری کار ایران</div>
-                </a>
-                <a href="https://mehrnews.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📢</div><div class="link-card__title">مهر</div></div>
-                    <div class="link-card__url">mehrnews.com</div>
-                </a>
-                <a href="https://tabnak.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📰</div><div class="link-card__title">تابناک</div></div>
-                    <div class="link-card__url">tabnak.ir</div>
-                </a>
-                <a href="https://tasnimnews.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📣</div><div class="link-card__title">تسنیم</div></div>
-                    <div class="link-card__url">tasnimnews.com</div>
-                </a>
-                <a href="https://fararu.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🗞️</div><div class="link-card__title">فرارو</div></div>
-                    <div class="link-card__url">fararu.com</div>
-                </a>
-                <a href="https://hammihanonline.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🤝</div><div class="link-card__title">هم‌میهن</div></div>
-                    <div class="link-card__url">hammihanonline.ir</div>
-                </a>
-                <a href="https://eghtesadonline.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">💹</div><div class="link-card__title">اقتصاد آنلاین</div></div>
-                    <div class="link-card__url">eghtesadonline.com</div>
-                </a>
-                <a href="https://vijiat.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📱</div><div class="link-card__title">ویجیاتو</div></div>
-                    <div class="link-card__url">vijiat.ir</div>
-                    <div class="link-card__desc">رسانه موبایل و گجت</div>
-                </a>
-                <a href="https://roziyato.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🌅</div><div class="link-card__title">روزیاتو</div></div>
-                    <div class="link-card__url">roziyato.com</div>
-                    <div class="link-card__desc">رسانه سبک زندگی</div>
-                </a>
-                <a href="https://zoomon.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">💰</div><div class="link-card__title">زومان</div></div>
-                    <div class="link-card__url">zoomon.ir</div>
-                    <div class="link-card__desc">رسانه اقتصادی</div>
-                </a>
-                <a href="https://pedal.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🚗</div><div class="link-card__title">پدال</div></div>
-                    <div class="link-card__url">pedal.ir</div>
-                    <div class="link-card__desc">رسانه خودرو</div>
-                </a>
-                <a href="https://zoomg.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎮</div><div class="link-card__title">زومجی</div></div>
-                    <div class="link-card__url">zoomg.ir</div>
-                    <div class="link-card__desc">رسانه بازی و سرگرمی</div>
-                </a>
-                <a href="https://filmzi.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🎬</div><div class="link-card__title">فیلمزی</div></div>
-                    <div class="link-card__url">filmzi.com</div>
-                    <div class="link-card__desc">رسانه سینما و تلویزیون</div>
-                </a>
-                <a href="https://kojaro.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🏔️</div><div class="link-card__title">کجارو</div></div>
-                    <div class="link-card__url">kojaro.com</div>
-                    <div class="link-card__desc">رسانه گردشگری</div>
-                </a>
-                <a href="https://peivast.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔗</div><div class="link-card__title">پیوست</div></div>
-                    <div class="link-card__url">peivast.com</div>
-                    <div class="link-card__desc">رسانه کسب‌وکار دیجیتال</div>
-                </a>
-                <a href="https://hooshio.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔹</div><div class="link-card__title">هوشیو</div></div>
-                    <div class="link-card__url">hooshio.com</div>
-                    <div class="link-card__desc">رسانه هوش مصنوعی</div>
-                </a>
-            </div>
-        </div>
-
-    </div>
 </section>
 
 <!-- ════════════════════════════════════════════════════════
@@ -1946,6 +1970,10 @@ body.is-searching .section-result-badge { display: inline-flex; }
                     <div class="link-card__top"><div class="link-card__emoji">🔗</div><div class="link-card__title">ریسمون</div></div>
                     <div class="link-card__url">reymon.ir</div>
                 </a>
+                <a href="https://search.bertina.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🟡</div><div class="link-card__title">برتینا</div></div>
+                    <div class="link-card__url">search.bertina.ir</div>
+                </a>
             </div>
         </div>
 
@@ -2007,6 +2035,10 @@ body.is-searching .section-result-badge { display: inline-flex; }
                     <div class="link-card__top"><div class="link-card__emoji">💬</div><div class="link-card__title">GapGPT</div></div>
                     <div class="link-card__url">gapgpt.app</div>
                 </a>
+                <a href="https://ivira.ai" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🟣</div><div class="link-card__title">ویرا</div></div>
+                    <div class="link-card__url">ivira.ai</div>
+                </a>
                 <a href="https://okian.ai" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🌊</div><div class="link-card__title">اُکیان</div></div>
                     <div class="link-card__url">okian.ai</div>
@@ -2015,13 +2047,53 @@ body.is-searching .section-result-badge { display: inline-flex; }
                     <div class="link-card__top"><div class="link-card__emoji">⚡</div><div class="link-card__title">زیگپ</div></div>
                     <div class="link-card__url">zigap.ir</div>
                 </a>
-                <a href="https://ivira.ai" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🤖</div><div class="link-card__title">ویرا</div></div>
-                    <div class="link-card__url">ivira.ai</div>
-                </a>
                 <a href="https://metisai.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🧬</div><div class="link-card__title">متیس</div></div>
                     <div class="link-card__url">metisai.ir</div>
+                </a>
+                <a href="https://chat.boofai.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🦉</div><div class="link-card__title">بوف</div></div>
+                    <div class="link-card__url">chat.boofai.com</div>
+                </a>
+                <a href="https://panel.roboo.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🤖</div><div class="link-card__title">روبو</div></div>
+                    <div class="link-card__url">panel.roboo.ir</div>
+                </a>
+                <a href="https://houshyar24.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">😀</div><div class="link-card__title">هوشیار ۲۴</div></div>
+                    <div class="link-card__url">houshyar24.ir</div>
+                </a>
+                <a href="https://chat.hooshzy.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">👁‍🗨</div><div class="link-card__title">هوش‌زی</div></div>
+                    <div class="link-card__url">chat.hooshzy.ir</div>
+                </a>
+                <a href="https://app.doona.ai" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🧡</div><div class="link-card__title">دونا</div></div>
+                    <div class="link-card__url">app.doona.ai</div>
+                </a>
+                <a href="https://kasku.ai" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🦜</div><div class="link-card__title">کاسکو</div></div>
+                    <div class="link-card__url">kasku.ai</div>
+                </a>
+                <a href="https://chat.smartbytes.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🦏</div><div class="link-card__title">راینو</div></div>
+                    <div class="link-card__url">chat.smartbytes.ir</div>
+                </a>
+                <a href="https://hooshang.ai" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">👻</div><div class="link-card__title">هوشنگ</div></div>
+                    <div class="link-card__url">hooshang.ai</div>
+                </a>
+                <a href="https://llm.bertina.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🟡</div><div class="link-card__title">هوش مصنوعی برتینا</div></div>
+                    <div class="link-card__url">llm.bertina.ir</div>
+                </a>
+                <a href="https://khodnevisai.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">✒️</div><div class="link-card__title">خودنویس</div></div>
+                    <div class="link-card__url">khodnevisai.com</div>
+                </a>
+                <a href="https://llm.targoman.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🖋</div><div class="link-card__title">هوش مصنوعی ترگمان</div></div>
+                    <div class="link-card__url">llm.targoman.ir</div>
                 </a>
             </div>
         </div>
@@ -3458,7 +3530,7 @@ body.is-searching .section-result-badge { display: inline-flex; }
             <div class="footer-title">منابع و خدمات داخلی ایران 🇮🇷</div>
             <div class="footer-subtitle">گردآوری‌شده برای دسترسی آسان‌تر در شرایط محدودیت اینترنت</div>
             <div class="footer-subtitle" style="margin-top:4px;font-size:0.75rem;opacity:0.6;">
-                ۱۴۰۵/۰۱/۰۳ — به‌روزرسانی مداوم
+                ۱۴۰۵/۰۱/۰۷ — به‌روزرسانی مداوم
             </div>
             <a href="https://mahdiyar.info"><div class="footer-subtitle">بازگشت به جعبه‌ابزار ←</div></a>
         </div>

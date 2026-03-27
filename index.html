@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>جعبه‌ابزار آفلاین</title>
-    <meta name="description" content="بیش از ۵۰ ابزار کاربردی — کاملاً آفلاین، بدون نیاز به اینترنت">
+    <meta name="description" content="بیش از ۹۰ ابزار کاربردی — کاملاً آفلاین، بدون نیاز به اینترنت">
     <meta name="theme-color" content="#006874">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,13 +15,16 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="main.css" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+    <script src="lib/math.js"></script>
+    <script src="lib/function-plot.js"></script>
     <script src="lib/qrcode.js"></script>
     <script src="lib/jsQR.js"></script>
+    <script src="lib/qr-code-styling.js"></script>
     <script src="lib/browser-image-compression.js"></script>
     <!-- PDF.js: load as module and expose pdfjsLib globally for use in classic scripts -->
     <script type="module">
-      import * as pdfjsLib from './pdfjs/build/pdf.mjs';
-      pdfjsLib.GlobalWorkerOptions.workerSrc = './pdfjs/build/pdf.worker.mjs';
+      import * as pdfjsLib from './lib/pdf.mjs';
+      pdfjsLib.GlobalWorkerOptions.workerSrc = './lib/pdf.worker.mjs';
       window.pdfjsLib = pdfjsLib;
       window._pdfjsReady = true;
       window.dispatchEvent(new Event('pdfjsready'));
@@ -186,24 +189,39 @@
       #home {
         margin-top: 0 !important;
       }
-      /* Back to home button shown inside each tool */
+      /* Back to home button — M3 text button style */
       .tool-back-btn {
         display: inline-flex;
         align-items: center;
-        gap: 7px;
-        background: none;
-        border: 1.5px solid var(--m3-outline-variant);
-        border-radius: 50px;
-        padding: 7px 16px;
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--m3-on-surface-variant);
+        gap: 8px;
+        background: transparent;
+        border: none;
+        border-radius: 9999px;
+        padding: 0 12px;
+        height: 40px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        letter-spacing: 0.006em;
+        color: var(--m3-primary);
         cursor: pointer;
-        margin-bottom: 18px;
+        margin-bottom: 16px;
         font-family: inherit;
-        transition: background .15s, border-color .15s, color .15s;
+        position: relative;
+        overflow: hidden;
+        transition: background-color 0.15s;
       }
-      .tool-back-btn:hover { background: var(--m3-surface-container-high); border-color: var(--m3-primary); color: var(--m3-primary); }
+      .tool-back-btn::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: var(--m3-primary);
+        opacity: 0;
+        transition: opacity 0.15s;
+        pointer-events: none;
+      }
+      .tool-back-btn:hover::before  { opacity: 0.08; }
+      .tool-back-btn:active::before { opacity: 0.12; }
       /* Share & install cards on homepage */
       .share-install-row {
         display: grid;
@@ -585,6 +603,8 @@
       /* TOOL CARDS */
       .tool-card {
         background: var(--m3-surface-container-low);
+        /* Custom prop so .field__label notch can inherit the surface */
+        --field-bg: var(--m3-surface-container-low);
         border: 1px solid var(--m3-outline-variant);
         border-radius: 20px;
         padding: 24px;
@@ -613,102 +633,511 @@
         color: var(--m3-on-surface);
       }
 
-      /* FORM */
-      .field-label {
-        display: block;
-        margin-bottom: 5px;
-        font-size: 12.5px;
-        font-weight: 600;
-        color: var(--m3-on-surface-variant);
-      }
-      .text-input,
-      .text-area,
-      .select-input {
-        width: 100%;
-        padding: 10px 13px;
-        border-radius: 10px;
-        border: 1.5px solid var(--m3-outline-variant);
-        background: var(--m3-surface-container-highest);
-        color: var(--m3-on-surface);
-        font-size: 0.9rem;
-        font-family: inherit;
-        margin-bottom: 12px;
-        transition: border-color 0.2s;
-        box-sizing: border-box;
-      }
-      .text-input:focus,
-      .text-area:focus,
-      .select-input:focus {
-        border-color: var(--m3-primary);
-        border-width: 2px;
-        outline: none;
-      }
-      .text-area {
-        resize: vertical;
-        min-height: 90px;
-      }
-      .mono {
-        font-family: "Courier New", monospace !important;
-        font-size: 0.85rem !important;
-      }
-      .text-input--large {
-        font-size: 1.9rem;
-        text-align: left;
-        direction: ltr;
-        unicode-bidi: embed;
-      }
-      .text-input--ro {
-        background: var(--m3-surface-container);
-        cursor: default;
-      }
-      .field-row {
+      /* ════════════════════════════════════════════════════
+         M3 EXPRESSIVE OUTLINED TEXT FIELD
+         Spec: https://m3.material.io/components/text-fields/specs
+         Shape: 16dp (M3 Expressive large shape for inputs)
+         ════════════════════════════════════════════════════ */
+
+      /* ── Layout helpers ── */
+      .field-row { display: flex; gap: 12px; flex-wrap: wrap; }
+      .field-col  { flex: 1; min-width: 150px; }
+
+      /* ── .field wrapper ── */
+      .field {
         display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
+        flex-direction: column;
+        margin-bottom: 16px;
+        position: relative;
       }
-      .field-col {
-        flex: 1;
-        min-width: 150px;
+      .field-row .field,
+      .field-col .field { margin-bottom: 0; }
+
+      /* ── .field__container — the outlined box ──
+         M3 Expressive spec: 16dp corner radius for outlined text fields.
+         We use inset box-shadow for the outline so no border-width change
+         ever causes a layout shift or double-border artefact.            */
+      .field__container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        min-height: 56px;          /* M3 spec: 56dp */
+        border-radius: 16px;       /* M3 Expressive large shape */
+        /* Use border for the outline — crisp, no glow, respects radius */
+        border: 1px solid var(--m3-outline);
+        background: transparent;
+        cursor: text;
+        /* pad accounts for 1px border so content never shifts */
+        padding: 0 15px;
+        gap: 8px;
+        transition:
+          border-color 0.15s var(--m3-ease-standard),
+          border-width  0.15s var(--m3-ease-standard);
+      }
+      .field--textarea .field__container {
+        height: auto;
+        align-items: flex-start;
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+      /* Hover */
+      .field__container:not(:focus-within):hover {
+        border-color: var(--m3-on-surface);
+      }
+      .field__container:not(:focus-within):hover .field__label {
+        color: var(--m3-on-surface);
+      }
+      /* Focus: 2dp primary — compensate padding so no layout shift */
+      .field__container:focus-within {
+        border-width: 2px;
+        border-color: var(--m3-primary);
+        padding: 0 14px;
+      }
+      .field--textarea .field__container:focus-within {
+        padding-top: 7px;
+        padding-bottom: 7px;
       }
 
-      /* BUTTONS */
-      .btn {
-        border-radius: 50px;
-        padding: 9px 20px;
-        min-height: 38px;
-        font-size: 13.5px;
-        font-weight: 600;
+      /* ── .field__input ── */
+      .field__input {
+        flex: 1;
+        min-width: 0;
+        height: 100%;
+        padding: 18px 0 6px;      /* top pad clears the floating label */
+        border: none;
+        outline: none;
+        background: transparent;
+        color: var(--m3-on-surface);
+        font: inherit;
+        font-size: 1rem;
+        caret-color: var(--m3-primary);
+        box-sizing: border-box;
+      }
+      /* Placeholder stays hidden — floating label acts as the placeholder */
+      .field__input::placeholder { color: transparent; }
+      .field__container:focus-within .field__input::placeholder {
+        color: var(--m3-on-surface-variant);
+        opacity: 0.6;
+      }
+      .field--textarea .field__input {
+        height: auto;
+        min-height: 90px;
+        resize: vertical;
+        padding-top: 20px;
+        padding-bottom: 8px;
+        align-self: stretch;
+      }
+      select.field__input {
+        appearance: none;
+        -webkit-appearance: none;
+        padding-inline-end: 24px;
+        cursor: pointer;
+        /* color-scheme tells the browser which OS-native theme to use
+           for the dropdown popup — set to 'light' by default,
+           toggled to 'dark' by JS on theme switch               */
+        color-scheme: light;
+        background-color: transparent;
+      }
+      /* Dark theme: select native popup gets dark OS rendering */
+      [data-theme="dark"] select.field__input,
+      [data-theme="dark"] .select-input {
+        color-scheme: dark;
+        background-color: var(--m3-surface-container-highest);
+        color: var(--m3-on-surface);
+      }
+      /* Light: white bg for the field itself */
+      select.field__input option,
+      .select-input option {
+        background: #ffffff;
+        color: #191c1c;
+      }
+      /* Dark: options get the dark surface */
+      [data-theme="dark"] select.field__input option,
+      [data-theme="dark"] .select-input option {
+        background: #2a3b3e;
+        color: #dce4e6;
+      }
+      .select-input {
+        appearance: none;
+        -webkit-appearance: none;
+        color-scheme: light;
+      }
+      [data-theme="dark"] .select-input {
+        color-scheme: dark;
+      }
+      /* Hide number spinners */
+      .field__input[type="number"]::-webkit-inner-spin-button,
+      .field__input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+      .field__input[type="number"] { appearance: textfield; -moz-appearance: textfield; }
+
+      /* ── .field__label — floating label ── */
+      .field__label {
+        position: absolute;
+        /* Resting: vertically centred inside container */
+        inset-inline-start: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        font-size: 1rem;            /* body-large: 16sp at rest */
+        font-weight: 400;
+        line-height: 1;
+        color: var(--m3-on-surface-variant);
+        /* The notch: transparent until floating */
+        padding: 0 4px;
+        background: transparent;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: calc(100% - 32px);
+        z-index: 1;
+        transition:
+          top          0.2s var(--m3-ease-emphasized),
+          transform    0.2s var(--m3-ease-emphasized),
+          font-size    0.2s var(--m3-ease-emphasized),
+          font-weight  0.2s var(--m3-ease-emphasized),
+          color        0.15s var(--m3-ease-standard),
+          background   0.15s var(--m3-ease-standard);
+      }
+      /* Textarea: label starts at top not centre */
+      .field--textarea .field__label {
+        top: 18px;
+        transform: none;
+      }
+
+      /* ── Floating state: input has value OR is focused ──
+         Uses the :placeholder-shown trick: input must have placeholder=" "   */
+      .field__input:not(:placeholder-shown) ~ .field__label,
+      .field__input:focus ~ .field__label,
+      .field__input:-webkit-autofill ~ .field__label,
+      select.field__input ~ .field__label {          /* selects always show value */
+        top: 0;
+        transform: translateY(-50%);
+        font-size: 0.75rem;         /* label-small: 12sp */
+        font-weight: 500;
+        /* Notch bg inherits from card via --field-bg, falls back to
+           surface-container-low (which matches .tool-card)        */
+        background: var(--field-bg, var(--m3-surface-container-low));
+        color: var(--m3-on-surface-variant);
+      }
+      /* Focus tint */
+      .field__input:focus ~ .field__label {
+        color: var(--m3-primary);
+      }
+      /* Textarea float */
+      .field--textarea .field__input:not(:placeholder-shown) ~ .field__label,
+      .field--textarea .field__input:focus ~ .field__label {
+        top: 0;
+        transform: translateY(-50%);
+        font-size: 0.75rem;
+        font-weight: 500;
+        background: var(--field-bg, var(--m3-surface-container-low));
+      }
+      .field--textarea .field__input:focus ~ .field__label {
+        color: var(--m3-primary);
+      }
+
+      /* ── .field__support — helper/error text below the box ── */
+      .field__support {
+        display: block;
+        padding: 4px 16px 0;
+        font-size: 0.75rem;         /* body-small: 12sp */
+        line-height: 1.33;
+        color: var(--m3-on-surface-variant);
+      }
+
+      /* ── Icons inside the container ── */
+      .field__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        font-size: 1.1rem;
+        color: var(--m3-on-surface-variant);
+        transition: color 0.15s;
+        align-self: center;
+      }
+      .field__container:focus-within .field__icon { color: var(--m3-primary); }
+      button.field__icon {
+        background: none;
         border: none;
         cursor: pointer;
+        padding: 4px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        transition: background-color 0.15s, color 0.15s;
+      }
+      button.field__icon:hover {
+        background: color-mix(in srgb, var(--m3-on-surface) 8%, transparent);
+      }
+      /* When leading icon present, shift label to clear it */
+      .field--leading-icon .field__label { inset-inline-start: calc(16px + 24px + 8px); }
+      .field--leading-icon .field__input:not(:placeholder-shown) ~ .field__label,
+      .field--leading-icon .field__input:focus ~ .field__label {
+        inset-inline-start: 16px;   /* floated label goes back to edge */
+      }
+
+      /* Custom chevron for <select> */
+      .field__container:has(select.field__input)::after {
+        content: '▾';
+        position: absolute;
+        inset-inline-end: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1rem;
+        color: var(--m3-on-surface-variant);
+        pointer-events: none;
+        transition: color 0.15s, transform 0.2s;
+      }
+      .field__container:has(select.field__input):focus-within::after {
+        color: var(--m3-primary);
+        transform: translateY(-50%) rotate(180deg);
+      }
+
+      /* ── Error state ── */
+      .field--error .field__container {
+        border-color: var(--m3-error);
+      }
+      .field--error .field__container:focus-within {
+        border-width: 2px;
+        border-color: var(--m3-error);
+        padding: 0 14px;
+      }
+      .field--error .field__label,
+      .field--error .field__input:focus ~ .field__label,
+      .field--error .field__input:not(:placeholder-shown) ~ .field__label {
+        color: var(--m3-error);
+      }
+      .field--error .field__support { color: var(--m3-error); }
+
+      /* ── Disabled state ── */
+      .field--disabled .field__container {
+        border-color: color-mix(in srgb, var(--m3-on-surface) 12%, transparent);
+        opacity: 0.38;
+        pointer-events: none;
+        cursor: not-allowed;
+      }
+
+      /* ── Read-only variant ── */
+      .field--readonly .field__container {
+        border-color: var(--m3-outline-variant);
+        background: color-mix(in srgb, var(--m3-on-surface) 4%, transparent);
+      }
+      .field--readonly .field__container:focus-within {
+        border-width: 1px;
+        border-color: var(--m3-outline-variant);
+        padding: 0 15px;
+      }
+      .field--readonly .field__input { color: var(--m3-on-surface-variant); cursor: default; }
+
+      /* ── Dark theme: --field-bg is already set on .tool-card
+         and resolves to the dark token automatically.
+         This rule is kept for fields outside .tool-card.     ── */
+      [data-theme="dark"] .field__input:not(:placeholder-shown) ~ .field__label,
+      [data-theme="dark"] .field__input:focus ~ .field__label,
+      [data-theme="dark"] select.field__input ~ .field__label,
+      [data-theme="dark"] .field--textarea .field__input:not(:placeholder-shown) ~ .field__label,
+      [data-theme="dark"] .field--textarea .field__input:focus ~ .field__label {
+        background: var(--field-bg, var(--m3-surface-container-low));
+      }
+
+      /* ── Large variant (display/result inputs) ── */
+      .field--large .field__input {
+        font-size: 1.9rem;
+        font-weight: 800;
+        direction: ltr;
+        text-align: left;
+        unicode-bidi: embed;
+        padding-top: 22px;
+      }
+
+      /* ── Monospace variant ── */
+      .field--mono .field__input {
+        font-family: 'Courier New', monospace;
+        font-size: 0.85rem;
+        direction: ltr;
+        text-align: left;
+      }
+
+      /* ── Centre variant (time / small numeric inputs) ── */
+      .field--center .field__input { text-align: center; }
+
+      /* ── Legacy bare inputs (fallback before JS upgrade runs) ──
+         These look like outlined fields without a floating label.
+         The JS upgrader wraps them automatically.                  */
+      .text-input, .text-area, .select-input {
+        width: 100%;
+        padding: 14px 15px;
+        border-radius: 16px;
+        border: 1px solid var(--m3-outline);
+        background: transparent;
+        color: var(--m3-on-surface);
+        font: inherit;
+        font-size: 1rem;
+        margin-bottom: 4px;
+        transition: border-color 0.15s;
+        box-sizing: border-box;
+        outline: none;
+      }
+      .text-input:hover, .text-area:hover, .select-input:hover {
+        border-color: var(--m3-on-surface);
+      }
+      .text-input:focus, .text-area:focus, .select-input:focus {
+        border-width: 2px;
+        border-color: var(--m3-primary);
+        padding: 13px 14px;
+      }
+      .text-area { resize: vertical; min-height: 90px; }
+      .text-input--large  { font-size: 1.9rem; text-align: left; direction: ltr; unicode-bidi: embed; }
+      .text-input--ro     { border-color: var(--m3-outline-variant); cursor: default; color: var(--m3-on-surface-variant); }
+      .text-input--center { text-align: center; }
+      .mono { font-family: "Courier New", monospace !important; font-size: 0.85rem !important; direction: ltr; text-align: left; }
+
+      /* ── Standalone field-label (above bare legacy inputs) ── */
+      .field-label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        color: var(--m3-on-surface-variant);
+      }
+
+      /* ════════════════════════════════════════════════════
+         M3 BUTTONS — Material 3 spec
+         5 variants: filled, tonal, elevated, outlined, text
+         Height: 40dp  |  Shape: full-pill (full)
+         Padding: 24dp horizontal  |  Label: label-large 14sp 500w
+         State layers: 8% hover, 10% pressed, 12% focused
+         ════════════════════════════════════════════════════ */
+      .btn {
         display: inline-flex;
         align-items: center;
-        gap: 7px;
+        justify-content: center;
+        gap: 8px;
+        height: 40px;
+        padding: 0 24px;
+        border-radius: 9999px;       /* full pill per M3 spec */
+        border: none;
         font-family: inherit;
+        font-size: 0.875rem;         /* 14sp label-large */
+        font-weight: 500;
+        letter-spacing: 0.006em;
+        line-height: 1.43;
+        cursor: pointer;
+        white-space: nowrap;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
         transition:
-          filter 0.2s,
-          box-shadow 0.2s;
+          background-color 0.15s var(--m3-ease-standard),
+          box-shadow       0.15s var(--m3-ease-standard),
+          color            0.15s var(--m3-ease-standard);
+        /* Ripple / state layer via ::before */
       }
+      .btn::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: currentColor;
+        opacity: 0;
+        transition: opacity 0.15s;
+        pointer-events: none;
+      }
+      .btn:hover::before  { opacity: 0.08; }
+      .btn:active::before { opacity: 0.12; }
+      .btn:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--m3-primary) 30%, transparent);
+      }
+      .btn:disabled {
+        opacity: 0.38;
+        cursor: not-allowed;
+        box-shadow: none !important;
+      }
+      /* Icon-only size reduction */
+      .btn--icon-only {
+        width: 40px;
+        padding: 0;
+      }
+
+      /* Filled — highest emphasis. Primary container. */
       .btn-filled {
-        background: var(--m3-primary);
+        background-color: var(--m3-primary);
         color: var(--m3-on-primary);
+        box-shadow: none;
       }
       .btn-filled:hover {
-        filter: brightness(1.08);
         box-shadow: var(--m3-elevation-1);
       }
+      .btn-filled:active {
+        box-shadow: none;
+      }
+
+      /* Filled Tonal — secondary-container. Medium-high emphasis. */
       .btn-tonal {
-        background: var(--m3-secondary-container);
+        background-color: var(--m3-secondary-container);
         color: var(--m3-on-secondary-container);
+        box-shadow: none;
       }
       .btn-tonal:hover {
-        filter: brightness(0.93);
         box-shadow: var(--m3-elevation-1);
       }
+
+      /* Elevated — surface + shadow. Low emphasis. */
+      .btn-elevated {
+        background-color: var(--m3-surface-container-low);
+        color: var(--m3-primary);
+        box-shadow: var(--m3-elevation-1);
+      }
+      .btn-elevated:hover {
+        box-shadow: var(--m3-elevation-2);
+      }
+
+      /* Outlined — medium emphasis. No fill, 1dp outline. */
+      .btn-outlined {
+        background-color: transparent;
+        color: var(--m3-primary);
+        box-shadow: inset 0 0 0 1px var(--m3-outline);
+      }
+      .btn-outlined:hover {
+        background-color: color-mix(in srgb, var(--m3-primary) 8%, transparent);
+      }
+      .btn-outlined:active {
+        background-color: color-mix(in srgb, var(--m3-primary) 12%, transparent);
+      }
+
+      /* Text — lowest emphasis. No container. */
+      .btn-text {
+        background-color: transparent;
+        color: var(--m3-primary);
+        padding: 0 12px;
+      }
+      .btn-text:hover {
+        background-color: color-mix(in srgb, var(--m3-primary) 8%, transparent);
+      }
+
+      /* Error variant (for destructive actions) */
+      .btn-filled.btn-error {
+        background-color: var(--m3-error);
+        color: var(--m3-on-error);
+      }
+
       .btn-row {
         display: flex;
-        gap: 7px;
+        gap: 8px;
         flex-wrap: wrap;
         margin-bottom: 10px;
+        align-items: center;
+      }
+      /* Small variant for tight spaces (32dp height) */
+      .btn.btn-sm {
+        height: 32px;
+        font-size: 0.8rem;
+        padding: 0 16px;
       }
 
       /* DATA LIST */
@@ -866,14 +1295,76 @@
         text-align: center;
         flex-shrink: 0;
       }
+      /* ── M3 Color Picker — wraps native input[type="color"] in a styled swatch ── */
       input[type="color"] {
-        height: 42px;
-        padding: 3px 7px;
-        border-radius: 10px;
-        border: 1.5px solid var(--m3-outline-variant);
-        background: var(--m3-surface-container-highest);
+        /* Visually hidden but still interactable so .click() works */
+        -webkit-appearance: none;
+        appearance: none;
+        border: none;
+        outline: none;
+        padding: 0;
+        margin: 0;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        position: absolute;
+        inset-inline-start: 0;
+        top: 0;
+        /* NOT pointer-events:none — must receive the programmatic click */
+        pointer-events: auto;
+        z-index: -1;
+        overflow: hidden;
         cursor: pointer;
-        margin-bottom: 12px;
+      }
+      /* The visible M3 swatch button */
+      .m3-color-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        height: 56px;
+        padding: 0 15px 0 8px;
+        border-radius: 16px;
+        border: 1px solid var(--m3-outline);
+        background: transparent;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--m3-on-surface);
+        transition: border-color 0.15s;
+        position: relative;
+        min-width: 100%;
+        box-sizing: border-box;
+      }
+      .m3-color-btn:hover {
+        border-color: var(--m3-on-surface);
+      }
+      .m3-color-btn:focus-within {
+        border-width: 2px;
+        border-color: var(--m3-primary);
+        padding: 0 14px 0 7px;
+      }
+      .m3-color-btn__swatch {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        flex-shrink: 0;
+        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15);
+        transition: background 0.15s;
+      }
+      .m3-color-btn__label {
+        flex: 1;
+        text-align: right;
+        direction: ltr;
+        font-family: 'Courier New', monospace;
+        font-size: 0.85rem;
+        letter-spacing: 0.04em;
+        color: var(--m3-on-surface-variant);
+      }
+      .m3-color-btn__icon {
+        font-size: 1rem;
+        color: var(--m3-on-surface-variant);
+        flex-shrink: 0;
       }
       input[type="checkbox"] {
         accent-color: var(--m3-primary);
@@ -1102,6 +1593,7 @@
       /* Tool description */
       .tool-desc {
         margin-top: 24px;
+        margin-bottom: 20px;   /* space before next field label */
         padding-top: 18px;
         border-top: 1px solid var(--m3-outline-variant);
         font-size: 0.84rem;
@@ -1293,11 +1785,11 @@
         <div class="drawer-item" onclick="showTool('textfix')" data-tool="textfix">
           <span class="drawer-item__icon">🔤</span>رفع خرابی متن
         </div>
-        <div class="drawer-item" onclick="showTool('emoticons')" data-tool="emoticons">
+        <div class="drawer-item" onclick="showTool('emojis')" data-tool="emojis">
           <span class="drawer-item__icon">😀</span>ایموجی
         </div>
         <div class="drawer-item" onclick="showTool('emotcn')" data-tool="emotcn">
-          <span class="drawer-item__icon">:‑)</span>اِموتیکون متنی
+          <span class="drawer-item__icon">:‑)</span>اِموتیکون (Kaomoji)
         </div>
 
         <span class="drawer-section-label">💻 توسعه</span>
@@ -1457,7 +1949,6 @@
         <div class="drawer-item" onclick="showTool('wordcloud')" data-tool="wordcloud">
           <span class="drawer-item__icon">☁️</span>ابر کلمات
         </div>
-        <span class="drawer-section-label">🧭 ابزارهای جدید</span>
         <div class="drawer-item" onclick="showTool('compass')" data-tool="compass">
           <span class="drawer-item__icon">🧭</span>قطب‌نما
         </div>
@@ -1480,7 +1971,7 @@
           <span class="drawer-item__icon">📚</span>استناد دانشگاهی
         </div>
         <div class="drawer-item" onclick="showTool('langscores')" data-tool="langscores">
-          <span class="drawer-item__icon">🗣️</span>نمرات زبان
+          <span class="drawer-item__icon">🎓</span>محاسبه نمره
         </div>
         <div class="drawer-item" onclick="showTool('keypair')" data-tool="keypair">
           <span class="drawer-item__icon">🔐</span>کلیدهای RSA
@@ -1521,7 +2012,7 @@
               <div class="home-hero__icon">🧰</div>
               <h1 class="home-hero__title">جعبه‌ابزار آفلاین</h1>
               <p class="home-hero__sub">
-                بیش از ۵۰ ابزار — کاملاً آفلاین، بدون نیاز به اینترنت
+                بیش از ۹۰ ابزار — کاملاً آفلاین، بدون نیاز به اینترنت
               </p>
               <div class="search-wrap">
                 <span class="search-icon">🔍</span>
@@ -1541,17 +2032,17 @@
 
           <div class="home-sections">
             <!-- CTA -->
-            <div class="iran-cta" role="link" tabindex="0" onclick="location.href='./iran.html'" onkeydown="if(event.key==='Enter'||event.key===' ')location.href='./iran.html'">
+            <div class="iran-cta" role="link" tabindex="0" onclick="location.href='./iran'" onkeydown="if(event.key==='Enter'||event.key===' ')location.href='./iran.html'">
               <div class="iran-cta__flag">🇮🇷</div>
               <div class="iran-cta__body">
                 <div class="iran-cta__title">منابع و سرویس‌های ایران</div>
                 <div class="iran-cta__desc">مجموعه لینک‌ها، ابزارها و سرویس‌های قابل دسترس در شرایط محدودیت اینترنت — سرورهای چت، میرورها، رسانه و بیشتر.</div>
                 <div class="iran-cta__chips">
-                  <a class="iran-cta__chip" href="./iran.html#chat" onclick="event.stopPropagation()">💬 پیام‌رسان</a>
-                  <a class="iran-cta__chip" href="./iran.html#mirrors" onclick="event.stopPropagation()">🔄 میرورها</a>
-                  <a class="iran-cta__chip" href="./iran.html#media" onclick="event.stopPropagation()">🎬 رسانه</a>
-                  <a class="iran-cta__chip" href="./iran.html#software" onclick="event.stopPropagation()">📦 نرم‌افزار</a>
-                  <a class="iran-cta__chip" href="./iran.html#services" onclick="event.stopPropagation()">🏛️ سرویس‌ها</a>
+                  <a class="iran-cta__chip" href="./iran#chat" onclick="event.stopPropagation()">💬 پیام‌رسان</a>
+                  <a class="iran-cta__chip" href="./iran#mirrors" onclick="event.stopPropagation()">🔄 میرورها</a>
+                  <a class="iran-cta__chip" href="./iran#media" onclick="event.stopPropagation()">🎬 رسانه</a>
+                  <a class="iran-cta__chip" href="./iran#software" onclick="event.stopPropagation()">📦 نرم‌افزار</a>
+                  <a class="iran-cta__chip" href="./iran#services" onclick="event.stopPropagation()">🏛️ سرویس‌ها</a>
                 </div>
               </div>
               <svg class="iran-cta__arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1633,7 +2124,7 @@
                 <div class="link-card" onclick="haptic(this);showTool('numconvert')"><button class="fav-btn" data-tool="numconvert" onclick="event.stopPropagation();toggleFav('numconvert',this)">☆</button><span class="link-card__icon">🔢</span><span class="link-card__name">تبدیل اعداد</span><span class="link-card__desc">فارسی/عربی ↔ لاتین</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('textfix')"><span class="use-badge"></span><button class="fav-btn" data-tool="textfix" onclick="event.stopPropagation();toggleFav('textfix',this)">☆</button><span class="link-card__icon">🔤</span><span class="link-card__name">رفع خرابی متن</span><span class="link-card__desc">تصحیح ی/ک و کدگذاری</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('notes')"><button class="fav-btn" data-tool="notes" onclick="event.stopPropagation();toggleFav('notes',this)">☆</button><span class="link-card__icon">📝</span><span class="link-card__name">یادداشت و چک‌لیست</span><span class="link-card__desc">ذخیره در مرورگر</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('emoticons')"><button class="fav-btn" data-tool="emoticons" onclick="event.stopPropagation();toggleFav('emoticons',this)">☆</button><span class="link-card__icon">😀</span><span class="link-card__name">ایموجی</span><span class="link-card__desc">تمام ایموجی‌های Unicode</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('emojis')"><button class="fav-btn" data-tool="emojis" onclick="event.stopPropagation();toggleFav('emojis',this)">☆</button><span class="link-card__icon">😀</span><span class="link-card__name">ایموجی</span><span class="link-card__desc">تمام ایموجی‌های Unicode</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('emotcn')"><button class="fav-btn" data-tool="emotcn" onclick="event.stopPropagation();toggleFav('emotcn',this)">☆</button><span class="link-card__icon">:‑)</span><span class="link-card__name">اِموتیکون متنی</span><span class="link-card__desc">صورتک‌های ASCII و کائوموجی</span></div>
               </div>
             </div>
@@ -1658,6 +2149,9 @@
                 <div class="link-card" onclick="haptic(this);showTool('chart')"><span class="use-badge"></span><button class="fav-btn" data-tool="chart" onclick="event.stopPropagation();toggleFav('chart',this)">☆</button><span class="link-card__icon">📊</span><span class="link-card__name">نمودار داده</span><span class="link-card__desc">CSV/JSON → نمودار</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('fakejson')"><span class="use-badge"></span><button class="fav-btn" data-tool="fakejson" onclick="event.stopPropagation();toggleFav('fakejson',this)">☆</button><span class="link-card__icon">🗄️</span><span class="link-card__name">مولد JSON آزمایشی</span><span class="link-card__desc">داده ساختگی با طرح دلخواه</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('numwords')"><button class="fav-btn" data-tool="numwords" onclick="event.stopPropagation();toggleFav('numwords',this)">☆</button><span class="link-card__icon">💬</span><span class="link-card__name">عدد به حروف</span><span class="link-card__desc">نوشتن عدد به فارسی</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('seotools')"><button class="fav-btn" data-tool="seotools" onclick="event.stopPropagation();toggleFav('seotools',this)">☆</button><span class="link-card__icon">🔍</span><span class="link-card__name">متا تگ SEO</span><span class="link-card__desc">OpenGraph، Twitter Cards</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('htaccess')"><button class="fav-btn" data-tool="htaccess" onclick="event.stopPropagation();toggleFav('htaccess',this)">☆</button><span class="link-card__icon">⚙️</span><span class="link-card__name">مولد .htaccess</span><span class="link-card__desc">ریدایرکت، کش، HTTPS</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('keypair')"><button class="fav-btn" data-tool="keypair" onclick="event.stopPropagation();toggleFav('keypair',this)">☆</button><span class="link-card__icon">🔐</span><span class="link-card__name">کلیدهای RSA/ECC</span><span class="link-card__desc">تولید کلید عمومی/خصوصی</span></div>
               </div>
             </div>
 
@@ -1696,7 +2190,6 @@
                 <div class="link-card" onclick="haptic(this);showTool('svgviewer')"><button class="fav-btn" data-tool="svgviewer" onclick="event.stopPropagation();toggleFav('svgviewer',this)">☆</button><span class="link-card__icon">🖼️</span><span class="link-card__name">پیش‌نمایش SVG</span><span class="link-card__desc">رندر کد SVG به صورت زنده</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('gridbuilder')"><button class="fav-btn" data-tool="gridbuilder" onclick="event.stopPropagation();toggleFav('gridbuilder',this)">☆</button><span class="link-card__icon">⚏</span><span class="link-card__name">مولد Grid/Flexbox</span><span class="link-card__desc">طراح بصری CSS Grid و Flexbox</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('imgpalette')"><button class="fav-btn" data-tool="imgpalette" onclick="event.stopPropagation();toggleFav('imgpalette',this)">☆</button><span class="link-card__icon">🎨</span><span class="link-card__name">پالت رنگ تعاملی</span><span class="link-card__desc">استخراج و ویرایش رنگ از تصویر</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('watermark')"><button class="fav-btn" data-tool="watermark" onclick="event.stopPropagation();toggleFav('watermark',this)">☆</button><span class="link-card__icon">💧</span><span class="link-card__name">واترمارک تصویر</span><span class="link-card__desc">افزودن لوگو یا متن به تصویر</span></div>
               </div>
             </div>
 
@@ -1708,6 +2201,7 @@
                 <div class="link-card" onclick="haptic(this);showTool('pdfcompress')"><button class="fav-btn" data-tool="pdfcompress" onclick="event.stopPropagation();toggleFav('pdfcompress',this)">☆</button><span class="link-card__icon">📄</span><span class="link-card__name">فشرده‌سازی PDF</span><span class="link-card__desc">کاهش حجم تصاویر PDF</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('img2b64')"><button class="fav-btn" data-tool="img2b64" onclick="event.stopPropagation();toggleFav('img2b64',this)">☆</button><span class="link-card__icon">🔄</span><span class="link-card__name">تصویر → Base64</span><span class="link-card__desc">برای CSS و HTML</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('csvjson')"><button class="fav-btn" data-tool="csvjson" onclick="event.stopPropagation();toggleFav('csvjson',this)">☆</button><span class="link-card__icon">↔️</span><span class="link-card__name">CSV ↔ JSON</span><span class="link-card__desc">تبدیل دوطرفه</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('watermark')"><button class="fav-btn" data-tool="watermark" onclick="event.stopPropagation();toggleFav('watermark',this)">☆</button><span class="link-card__icon">💧</span><span class="link-card__name">واترمارک تصویر</span><span class="link-card__desc">افزودن لوگو یا متن به تصویر</span></div>
               </div>
             </div>
 
@@ -1742,35 +2236,11 @@
                 <div class="link-card" onclick="haptic(this);showTool('eisenhower')"><button class="fav-btn" data-tool="eisenhower" onclick="event.stopPropagation();toggleFav('eisenhower',this)">☆</button><span class="link-card__icon">⬜</span><span class="link-card__name">ماتریس آیزنهاور</span><span class="link-card__desc">اولویت‌بندی کارها ۴ بخشی</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('decmatrix')"><button class="fav-btn" data-tool="decmatrix" onclick="event.stopPropagation();toggleFav('decmatrix',this)">☆</button><span class="link-card__icon">📊</span><span class="link-card__name">ماتریس تصمیم</span><span class="link-card__desc">رتبه‌بندی گزینه‌ها با وزن</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('citation')"><button class="fav-btn" data-tool="citation" onclick="event.stopPropagation();toggleFav('citation',this)">☆</button><span class="link-card__icon">📚</span><span class="link-card__name">استناد دانشگاهی</span><span class="link-card__desc">APA، MLA، Chicago</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('langscores')"><button class="fav-btn" data-tool="langscores" onclick="event.stopPropagation();toggleFav('langscores',this)">☆</button><span class="link-card__icon">🗣️</span><span class="link-card__name">نمرات زبان</span><span class="link-card__desc">IELTS ↔ TOEFL، محاسبه Overall</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('langscores')"><button class="fav-btn" data-tool="langscores" onclick="event.stopPropagation();toggleFav('langscores',this)">☆</button><span class="link-card__icon">🗣️</span><span class="link-card__name">محاسبه نمره</span><span class="link-card__desc">IELTS ↔ TOEFL، محاسبه Overall</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('keypair')"><button class="fav-btn" data-tool="keypair" onclick="event.stopPropagation();toggleFav('keypair',this)">☆</button><span class="link-card__icon">🔐</span><span class="link-card__name">کلیدهای RSA/ECC</span><span class="link-card__desc">تولید کلید عمومی/خصوصی</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('htaccess')"><button class="fav-btn" data-tool="htaccess" onclick="event.stopPropagation();toggleFav('htaccess',this)">☆</button><span class="link-card__icon">⚙️</span><span class="link-card__name">مولد htaccess</span><span class="link-card__desc">ریدایرکت، کش، HTTPS</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('seotools')"><button class="fav-btn" data-tool="seotools" onclick="event.stopPropagation();toggleFav('seotools',this)">☆</button><span class="link-card__icon">🔍</span><span class="link-card__name">متا تگ SEO</span><span class="link-card__desc">OpenGraph، Twitter Cards</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('audiotools')"><button class="fav-btn" data-tool="audiotools" onclick="event.stopPropagation();toggleFav('audiotools',this)">☆</button><span class="link-card__icon">🔊</span><span class="link-card__name">ابزار صوتی</span><span class="link-card__desc">تولید فرکانس و سانسور صدا</span></div>
-              </div>
-            </div>
-
-            <!-- ══ ابزارهای جدید ══ -->
-            <div class="section" id="sec-new">
-              <div class="section__title">🆕 ابزارهای جدید</div>
-              <div class="tool-grid">
-                <div class="link-card" onclick="haptic(this);showTool('imgpalette')"><button class="fav-btn" data-tool="imgpalette" onclick="event.stopPropagation();toggleFav('imgpalette',this)">☆</button><span class="link-card__icon">🎨</span><span class="link-card__name">پالت رنگ تعاملی</span><span class="link-card__desc">نقاط کشیدنی روی تصویر</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('minigames')"><button class="fav-btn" data-tool="minigames" onclick="event.stopPropagation();toggleFav('minigames',this)">☆</button><span class="link-card__icon">🕹️</span><span class="link-card__name">بازی‌های کوچک</span><span class="link-card__desc">دوز، مار، حافظه، ۲۰۴۸</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('wordcloud')"><button class="fav-btn" data-tool="wordcloud" onclick="event.stopPropagation();toggleFav('wordcloud',this)">☆</button><span class="link-card__icon">☁️</span><span class="link-card__name">ابر کلمات</span><span class="link-card__desc">تصویرسازی کلمات پرتکرار</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('compass')"><button class="fav-btn" data-tool="compass" onclick="event.stopPropagation();toggleFav('compass',this)">☆</button><span class="link-card__icon">🧭</span><span class="link-card__name">قطب‌نما</span><span class="link-card__desc">جهت‌یاب با حسگر دستگاه</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('goldenratio')"><button class="fav-btn" data-tool="goldenratio" onclick="event.stopPropagation();toggleFav('goldenratio',this)">☆</button><span class="link-card__icon">🌀</span><span class="link-card__name">نسبت طلایی</span><span class="link-card__desc">محاسبه φ با SVG</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('svgviewer')"><button class="fav-btn" data-tool="svgviewer" onclick="event.stopPropagation();toggleFav('svgviewer',this)">☆</button><span class="link-card__icon">🖼️</span><span class="link-card__name">پیش‌نمایش SVG</span><span class="link-card__desc">ویرایش و دانلود SVG/PNG</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('gridbuilder')"><button class="fav-btn" data-tool="gridbuilder" onclick="event.stopPropagation();toggleFav('gridbuilder',this)">☆</button><span class="link-card__icon">📐</span><span class="link-card__name">مولد CSS Grid</span><span class="link-card__desc">Grid و Flexbox بصری</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('bmc')"><button class="fav-btn" data-tool="bmc" onclick="event.stopPropagation();toggleFav('bmc',this)">☆</button><span class="link-card__icon">📊</span><span class="link-card__name">بوم مدل کسب‌وکار</span><span class="link-card__desc">Business Model Canvas</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('eisenhower')"><button class="fav-btn" data-tool="eisenhower" onclick="event.stopPropagation();toggleFav('eisenhower',this)">☆</button><span class="link-card__icon">📋</span><span class="link-card__name">ماتریس آیزنهاور</span><span class="link-card__desc">اولویت‌بندی وظایف</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('citation')"><button class="fav-btn" data-tool="citation" onclick="event.stopPropagation();toggleFav('citation',this)">☆</button><span class="link-card__icon">📚</span><span class="link-card__name">مولد استناد</span><span class="link-card__desc">APA، MLA، Chicago</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('langscores')"><button class="fav-btn" data-tool="langscores" onclick="event.stopPropagation();toggleFav('langscores',this)">☆</button><span class="link-card__icon">🎓</span><span class="link-card__name">نمرات زبان</span><span class="link-card__desc">IELTS، TOEFL، تبدیل</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('keypair')"><button class="fav-btn" data-tool="keypair" onclick="event.stopPropagation();toggleFav('keypair',this)">☆</button><span class="link-card__icon">🔐</span><span class="link-card__name">مولد کلید RSA/ECC</span><span class="link-card__desc">Web Crypto API</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('htaccess')"><button class="fav-btn" data-tool="htaccess" onclick="event.stopPropagation();toggleFav('htaccess',this)">☆</button><span class="link-card__icon">⚙️</span><span class="link-card__name">مولد .htaccess</span><span class="link-card__desc">Apache config آماده</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('decmatrix')"><button class="fav-btn" data-tool="decmatrix" onclick="event.stopPropagation();toggleFav('decmatrix',this)">☆</button><span class="link-card__icon">⚖️</span><span class="link-card__name">ماتریس تصمیم‌گیری</span><span class="link-card__desc">امتیازدهی وزن‌دار</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('watermark')"><button class="fav-btn" data-tool="watermark" onclick="event.stopPropagation();toggleFav('watermark',this)">☆</button><span class="link-card__icon">🏷️</span><span class="link-card__name">واترمارک تصویر</span><span class="link-card__desc">لوگو یا متن روی تصویر</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('seotools')"><button class="fav-btn" data-tool="seotools" onclick="event.stopPropagation();toggleFav('seotools',this)">☆</button><span class="link-card__icon">🔍</span><span class="link-card__name">مولد متا تگ SEO</span><span class="link-card__desc">OG، Twitter Cards</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('audiotools')"><button class="fav-btn" data-tool="audiotools" onclick="event.stopPropagation();toggleFav('audiotools',this)">☆</button><span class="link-card__icon">🎵</span><span class="link-card__name">ابزار صوتی</span><span class="link-card__desc">مولد فرکانس + بیپ/سانسور</span></div>
               </div>
             </div>
 
@@ -3607,23 +4077,11 @@
           <div class="field-row">
             <div class="field-col">
               <label class="field-label">رنگ زمینه</label
-              ><input
-                type="color"
-                id="ph-bg"
-                value="#e0e0e0"
-                oninput="genPH()"
-                style="width: 100%"
-              />
+              ><button type="button" class="m3-color-btn" style="min-width:100%;" onclick="document.getElementById('ph-bg').click()" id="ph-bg-btn"><span class="m3-color-btn__swatch" id="ph-bg-swatch" style="background:#e0e0e0"></span><span class="m3-color-btn__label" id="ph-bg-lbl">#e0e0e0</span><span class="m3-color-btn__icon">🎨</span><input type="color" id="ph-bg" value="#e0e0e0" oninput="genPH();_syncColorBtn('ph-bg')"></button>
             </div>
             <div class="field-col">
               <label class="field-label">رنگ متن</label
-              ><input
-                type="color"
-                id="ph-col"
-                value="#757575"
-                oninput="genPH()"
-                style="width: 100%"
-              />
+              ><button type="button" class="m3-color-btn" style="min-width:100%;" onclick="document.getElementById('ph-col').click()" id="ph-col-btn"><span class="m3-color-btn__swatch" id="ph-col-swatch" style="background:#757575"></span><span class="m3-color-btn__label" id="ph-col-lbl">#757575</span><span class="m3-color-btn__icon">🎨</span><input type="color" id="ph-col" value="#757575" oninput="genPH();_syncColorBtn('ph-col')"></button>
             </div>
             <div class="field-col">
               <label class="field-label">متن دلخواه</label
@@ -3720,11 +4178,11 @@
             </div>
             <div class="field-col">
               <label class="field-label">رنگ جلو</label>
-              <input type="color" id="qr-fg" value="#000000" oninput="qrAutoGen()"/>
+              <button type="button" class="m3-color-btn" style="min-width:100%;" onclick="document.getElementById('qr-fg').click()" id="qr-fg-btn"><span class="m3-color-btn__swatch" id="qr-fg-swatch" style="background:#000000"></span><span class="m3-color-btn__label" id="qr-fg-lbl">#000000</span><span class="m3-color-btn__icon">🎨</span><input type="color" id="qr-fg" value="#000000" oninput="qrAutoGen();_syncColorBtn('qr-fg')"></button>
             </div>
             <div class="field-col">
               <label class="field-label">رنگ پس‌زمینه</label>
-              <input type="color" id="qr-bg" value="#ffffff" oninput="qrAutoGen()"/>
+              <button type="button" class="m3-color-btn" style="min-width:100%;" onclick="document.getElementById('qr-bg').click()" id="qr-bg-btn"><span class="m3-color-btn__swatch" id="qr-bg-swatch" style="background:#ffffff"></span><span class="m3-color-btn__label" id="qr-bg-lbl">#ffffff</span><span class="m3-color-btn__icon">🎨</span><input type="color" id="qr-bg" value="#ffffff" oninput="qrAutoGen();_syncColorBtn('qr-bg')"></button>
             </div>
           </div>
 
@@ -3802,7 +4260,7 @@
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
           <div class="tool-title">🎨 تبدیل رنگ</div>
           <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
-            <input type="color" id="cp-picker" value="#3498db" oninput="cpFromPicker()" style="width:56px;height:56px;border:none;border-radius:12px;cursor:pointer;background:none;padding:2px">
+            <button type="button" class="m3-color-btn" style="min-width:80px;height:80px;border-radius:20px;flex-direction:column;gap:6px;padding:8px" onclick="document.getElementById('cp-picker').click()" id="cp-picker-btn"><span class="m3-color-btn__swatch" id="cp-picker-swatch" style="background:#3498db;width:52px;height:52px;border-radius:14px"></span><span style="font-size:0.7rem;color:var(--m3-on-surface-variant)">انتخاب</span><input type="color" id="cp-picker" value="#3498db" oninput="cpFromPicker();_syncColorBtn('cp-picker')"></button>
             <div id="cp-swatch" style="width:56px;height:56px;border-radius:12px;border:1px solid var(--m3-outline-variant);background:#3498db;flex-shrink:0"></div>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
@@ -3810,42 +4268,42 @@
               <label class="field-label">HEX</label>
               <div style="display:flex;gap:4px">
                 <input type="text" id="cp-hex" class="text-input" value="#3498db" placeholder="#rrggbb" oninput="cpFromHex()" style="direction:ltr;text-align:left;font-family:'Courier New',monospace">
-                <button class="btn btn-tonal" onclick="copyVal('cp-hex')" style="flex-shrink:0;padding:6px 10px">📋</button>
+                <button class="btn btn-tonal" onclick="copyVal('cp-hex')" style="flex-shrink:0;align-self:flex-end;padding:0 12px">📋</button>
               </div>
             </div>
             <div>
               <label class="field-label">RGB</label>
               <div style="display:flex;gap:4px">
                 <input type="text" id="cp-rgb" class="text-input" placeholder="rgb(r, g, b)" oninput="cpFromRgb()" style="direction:ltr;text-align:left;font-family:'Courier New',monospace">
-                <button class="btn btn-tonal" onclick="copyVal('cp-rgb')" style="flex-shrink:0;padding:6px 10px">📋</button>
+                <button class="btn btn-tonal" onclick="copyVal('cp-rgb')" style="flex-shrink:0;align-self:flex-end;padding:0 12px">📋</button>
               </div>
             </div>
             <div>
               <label class="field-label">HSL</label>
               <div style="display:flex;gap:4px">
                 <input type="text" id="cp-hsl" class="text-input" placeholder="hsl(h, s%, l%)" oninput="cpFromHsl()" style="direction:ltr;text-align:left;font-family:'Courier New',monospace">
-                <button class="btn btn-tonal" onclick="copyVal('cp-hsl')" style="flex-shrink:0;padding:6px 10px">📋</button>
+                <button class="btn btn-tonal" onclick="copyVal('cp-hsl')" style="flex-shrink:0;align-self:flex-end;padding:0 12px">📋</button>
               </div>
             </div>
             <div>
               <label class="field-label">CMYK</label>
               <div style="display:flex;gap:4px">
                 <input type="text" id="cp-cmyk" class="text-input" placeholder="cmyk(c%, m%, y%, k%)" oninput="cpFromCmyk()" style="direction:ltr;text-align:left;font-family:'Courier New',monospace">
-                <button class="btn btn-tonal" onclick="copyVal('cp-cmyk')" style="flex-shrink:0;padding:6px 10px">📋</button>
+                <button class="btn btn-tonal" onclick="copyVal('cp-cmyk')" style="flex-shrink:0;align-self:flex-end;padding:0 12px">📋</button>
               </div>
             </div>
             <div>
               <label class="field-label">HSV/HSB</label>
               <div style="display:flex;gap:4px">
                 <input type="text" id="cp-hsv" class="text-input" placeholder="hsv(h, s%, v%)" readonly style="direction:ltr;text-align:left;font-family:'Courier New',monospace;opacity:.7">
-                <button class="btn btn-tonal" onclick="copyVal('cp-hsv')" style="flex-shrink:0;padding:6px 10px">📋</button>
+                <button class="btn btn-tonal" onclick="copyVal('cp-hsv')" style="flex-shrink:0;align-self:flex-end;padding:0 12px">📋</button>
               </div>
             </div>
             <div>
               <label class="field-label">CSS Name</label>
               <div style="display:flex;gap:4px">
                 <input type="text" id="cp-name" class="text-input" placeholder="—" readonly style="direction:ltr;text-align:left;opacity:.7">
-                <button class="btn btn-tonal" onclick="copyVal('cp-name')" style="flex-shrink:0;padding:6px 10px">📋</button>
+                <button class="btn btn-tonal" onclick="copyVal('cp-name')" style="flex-shrink:0;align-self:flex-end;padding:0 12px">📋</button>
               </div>
             </div>
           </div>
@@ -3884,33 +4342,15 @@
           <div class="field-row">
             <div class="field-col">
               <label class="field-label">رنگ ۱</label
-              ><input
-                type="color"
-                id="gr-c1"
-                value="#667eea"
-                oninput="updateGrad()"
-                style="width: 100%"
-              />
+              ><button type="button" class="m3-color-btn" style="min-width:100%;" onclick="document.getElementById('gr-c1').click()" id="gr-c1-btn"><span class="m3-color-btn__swatch" id="gr-c1-swatch" style="background:#667eea"></span><span class="m3-color-btn__label" id="gr-c1-lbl">#667eea</span><span class="m3-color-btn__icon">🎨</span><input type="color" id="gr-c1" value="#667eea" oninput="updateGrad();_syncColorBtn('gr-c1')"></button>
             </div>
             <div class="field-col">
               <label class="field-label">رنگ ۲</label
-              ><input
-                type="color"
-                id="gr-c2"
-                value="#764ba2"
-                oninput="updateGrad()"
-                style="width: 100%"
-              />
+              ><button type="button" class="m3-color-btn" style="min-width:100%;" onclick="document.getElementById('gr-c2').click()" id="gr-c2-btn"><span class="m3-color-btn__swatch" id="gr-c2-swatch" style="background:#764ba2"></span><span class="m3-color-btn__label" id="gr-c2-lbl">#764ba2</span><span class="m3-color-btn__icon">🎨</span><input type="color" id="gr-c2" value="#764ba2" oninput="updateGrad();_syncColorBtn('gr-c2')"></button>
             </div>
             <div class="field-col">
               <label class="field-label">رنگ ۳ (اختیاری)</label
-              ><input
-                type="color"
-                id="gr-c3"
-                value="#f64f59"
-                oninput="updateGrad()"
-                style="width: 100%"
-              />
+              ><button type="button" class="m3-color-btn" style="min-width:100%;" onclick="document.getElementById('gr-c3').click()" id="gr-c3-btn"><span class="m3-color-btn__swatch" id="gr-c3-swatch" style="background:#f64f59"></span><span class="m3-color-btn__label" id="gr-c3-lbl">#f64f59</span><span class="m3-color-btn__icon">🎨</span><input type="color" id="gr-c3" value="#f64f59" oninput="updateGrad();_syncColorBtn('gr-c3')"></button>
             </div>
             <div class="field-col">
               <label class="check-lbl" style="margin-top: 28px"
@@ -4017,13 +4457,7 @@
           <div class="field-row">
             <div class="field-col">
               <label class="field-label">رنگ سایه</label
-              ><input
-                type="color"
-                id="sh-col"
-                value="#000000"
-                oninput="updateShad()"
-                style="width: 100%"
-              />
+              ><button type="button" class="m3-color-btn" style="min-width:100%;" onclick="document.getElementById('sh-col').click()" id="sh-col-btn"><span class="m3-color-btn__swatch" id="sh-col-swatch" style="background:#000000"></span><span class="m3-color-btn__label" id="sh-col-lbl">#000000</span><span class="m3-color-btn__icon">🎨</span><input type="color" id="sh-col" value="#000000" oninput="updateShad();_syncColorBtn('sh-col')"></button>
             </div>
             <div class="field-col">
               <label class="check-lbl" style="margin-top: 28px"
@@ -4699,7 +5133,7 @@
           <div class="field-row" style="align-items:flex-end">
             <div class="field-col">
               <label class="field-label">انتخاب رنگ</label>
-              <input type="color" id="cb-pick" value="#3498db" oninput="runCB()" style="width:100%;height:50px">
+              <button type="button" class="m3-color-btn" style="min-width:100%;" onclick="document.getElementById('cb-pick').click()" id="cb-pick-btn"><span class="m3-color-btn__swatch" id="cb-pick-swatch" style="background:#3498db"></span><span class="m3-color-btn__label" id="cb-pick-lbl">#3498db</span><span class="m3-color-btn__icon">🎨</span><input type="color" id="cb-pick" value="#3498db" oninput="runCB();_syncColorBtn('cb-pick')"></button>
             </div>
             <div class="field-col">
               <label class="field-label">HEX</label>
@@ -4886,8 +5320,21 @@
             <div class="data-row"><span class="data-row__key">🏦 اورژانس بانکی</span><span class="data-row__val" style="font-size:1.3rem;font-weight:700" onclick="copyToClipboard('114')">۱۱۴</span></div>
             <div class="data-row"><span class="data-row__key">⛽ اضطرار سوخت</span><span class="data-row__val" style="font-size:1.3rem;font-weight:700" onclick="copyToClipboard('192')">۱۹۲</span></div>
             <div class="data-row"><span class="data-row__key">🛡️ دفاع غیرعامل</span><span class="data-row__val" style="font-size:1.3rem;font-weight:700" onclick="copyToClipboard('196')">۱۹۶</span></div>
+            <div class="data-row"><span class="data-row__key">🚗 پلیس راه</span><span class="data-row__val" style="font-size:1.3rem;font-weight:700" onclick="copyToClipboard('120')">۱۲۰</span></div>
+            <div class="data-row"><span class="data-row__key">💊 داروخانه شبانه‌روزی</span><span class="data-row__val" style="font-size:1.3rem;font-weight:700" onclick="copyToClipboard('191')">۱۹۱</span></div>
+            <div class="data-row"><span class="data-row__key">🌤️ هواشناسی</span><span class="data-row__val" style="font-size:1.3rem;font-weight:700" onclick="copyToClipboard('134')">۱۳۴</span></div>
+            <div class="data-row"><span class="data-row__key">✈️ اطلاعات پرواز</span><span class="data-row__val" style="font-size:1.3rem;font-weight:700" onclick="copyToClipboard('199')">۱۹۹</span></div>
+            <div class="data-row"><span class="data-row__key">🔴 هلال احمر</span><span class="data-row__val" style="font-size:1.3rem;font-weight:700;color:var(--m3-error)" onclick="copyToClipboard('112')">۱۱۲</span></div>
           </div>
-          <div style="font-size:11px;color:var(--m3-on-surface-variant)">روی هر شماره بزنید تا کپی شود.</div>
+          <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--m3-outline-variant)">
+            <div style="font-weight:700;font-size:13px;margin-bottom:8px;color:var(--m3-primary)">🧠 سامانه‌های مشاوره</div>
+            <div class="data-list">
+              <div class="data-row"><span class="data-row__key">📞 مشاوره تلفنی رایگان (وزارت بهداشت)</span><span class="data-row__val" style="font-size:1.2rem;font-weight:700" onclick="copyToClipboard('4030')">۴۰۳۰</span></div>
+              <div class="data-row"><span class="data-row__key">💚 صدای مشاور بهزیستی (۸ص–۱۲ش)</span><span class="data-row__val" style="font-size:1.2rem;font-weight:700" onclick="copyToClipboard('1480')">۱۴۸۰</span></div>
+              <div class="data-row"><span class="data-row__key">🏥 ره‌آوار — بحران روزبه (۱۴–۲۴)</span><span class="data-row__val" style="font-size:.95rem;font-weight:700;direction:ltr" onclick="copyToClipboard('02154467000')">۰۲۱–۵۴۴۶۷۰۰۰</span></div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--m3-on-surface-variant);margin-top:8px">روی هر شماره بزنید تا کپی شود.</div>
         </div>
 
         <!-- ══ CITY CODES ══ -->
@@ -5045,7 +5492,7 @@
 
           <!-- SINGLE VARIABLE -->
           <div id="ls-single">
-            <label class="field-label">معادله را وارد کنید (همانند کتاب درسی)</label>
+            <label class="field-label">معادله را وارد کنید</label>
             <input type="text" id="ls-eq" class="text-input mono" placeholder="مثال: 2x+5=20  یا  x^2+4x-5=0  یا  sin(x)=0.5  یا  e^x=8"
               style="direction:ltr;font-family:'Courier New',monospace;font-size:1.05rem" oninput="lsSolveSingle()">
             <div style="font-size:12px;color:var(--m3-on-surface-variant);margin:4px 0 8px;background:var(--m3-surface-container);padding:8px 10px;border-radius:8px;direction:ltr;text-align:left">
@@ -5251,8 +5698,8 @@
           <div class="tool-desc">نقشه مترو — تصاویر JPG را در پوشه maps/ قرار دهید: tehran-metro.jpg و غیره. برای دانلود فایل PDF اصلی از دکمه دانلود استفاده کنید.</div>
         </div>
 
-        <!-- ══ EMOTICONS ══ -->
-        <div id="emoticons" class="tool-card">
+        <!-- ══ emojis ══ -->
+        <div id="emojis" class="tool-card">
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
           <div class="tool-title">😀 ایموجی</div>
           <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center">
@@ -5281,9 +5728,8 @@
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
           <div class="tool-title">∫ حسابان</div>
           <details style="margin-bottom:10px">
-            <summary style="cursor:pointer;font-size:13px;color:var(--m3-primary);font-weight:600;padding:6px 0">📖 راهنمای ورود فرمول (همانند کتاب درسی)</summary>
+            <summary style="cursor:pointer;font-size:13px;color:var(--m3-primary);font-weight:600;padding:6px 0">📖 راهنمای ورود فرمول</summary>
             <div style="background:var(--m3-surface-container);border-radius:10px;padding:12px 14px;font-size:13px;line-height:1.9;margin-top:6px">
-              <strong>✅ فرمول‌ها را مثل کتاب بنویسید — پشتیبانی از math.js:</strong>
               <div style="display:grid;grid-template-columns:auto 1fr;gap:3px 16px;margin:8px 0;direction:ltr;text-align:left;font-size:12px;font-family:'Courier New',monospace">
                 <span>x²</span><span>x^2 &nbsp;یا&nbsp; x**2</span>
                 <span>x³</span><span>x^3</span>
@@ -5305,7 +5751,7 @@
                 <span>e</span><span>e</span>
                 <span>2x</span><span>2*x &nbsp;(ضربدر الزامی)</span>
               </div>
-              <strong>مثال‌ها (همان‌طور که در کتاب می‌نویسید):</strong>
+              <strong>مثال‌ها:</strong>
               <div style="direction:ltr;text-align:left;font-size:12px;font-family:'Courier New',monospace;line-height:2;margin-top:4px;background:var(--m3-surface-container-highest);padding:8px;border-radius:8px">
                 <div>x² + 3x − 5 = 0 &nbsp;→&nbsp; <em>x^2 + 3*x - 5 = 0</em></div>
                 <div>sin(x)·eˣ &nbsp;→&nbsp; <em>sin(x) * e^x</em></div>
@@ -5395,14 +5841,14 @@
             <div id="calc-special-pts" style="margin-top:6px;font-size:12px"></div>
           </div>
 
-          <div class="tool-desc">ابزار حسابان — مشتق عددی، انتگرال (روش سیمپسون)، حد دوطرفه و نمودار تابع. توابع را با نماد JavaScript وارد کنید (راهنمای بالا).</div>
+          <div class="tool-desc">ابزار حسابان — مشتق عددی، انتگرال (روش سیمپسون)، حد دوطرفه و نمودار تابع. توابع را طبق راهنمای بالا وارد کنید.</div>
         </div>
 
 
         <!-- ══ TEXT EMOTICONS (ASCII + Kaomoji) ══ -->
         <div id="emotcn" class="tool-card">
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
-          <div class="tool-title">:‑) اِموتیکون متنی</div>
+          <div class="tool-title">:‑) اِموتیکون (Kaomoji)</div>
           <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center">
             <input type="text" id="etcn-search" class="text-input" placeholder="جستجو... مثال: happy, sad, bear" oninput="emotcnSearch()" style="flex:1;min-width:140px">
             <select id="etcn-cat" class="select-input" onchange="emotcnFilter()" style="min-width:130px">
@@ -5418,7 +5864,7 @@
           </div>
           <div id="etcn-copied" style="display:none;text-align:center;color:var(--m3-primary);font-size:13px;margin-bottom:6px;font-weight:600">✅ کپی شد!</div>
           <div id="etcn-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px;max-height:440px;overflow-y:auto"></div>
-          <div class="tool-desc">کلیک روی هر اِموتیکون آن را کپی می‌کند. اِموتیکون‌ها کاراکترهای متنی هستند و در همه جا کار می‌کنند.</div>
+          <div class="tool-desc">کلیک روی هر اِموتیکون آن را کپی می‌کند. اِموتیکون‌ها (Kaomoji) کاراکترهای متنی هستند و در همه جا کار می‌کنند.</div>
         </div>
 
                 <!-- ══ POMODORO ══ -->
@@ -5618,14 +6064,14 @@
             <div class="field-col">
               <label class="field-label">رنگ متن</label>
               <div style="display:flex;gap:6px;align-items:center">
-                <input type="color" id="wcag-fg" value="#000000" oninput="wcagCalc()" style="width:44px;height:44px;border:none;border-radius:8px;cursor:pointer">
+                <button type="button" class="m3-color-btn" style="min-width:56px;height:56px;border-radius:14px;padding:8px;flex-shrink:0" onclick="document.getElementById('wcag-fg').click()" id="wcag-fg-btn"><span class="m3-color-btn__swatch" id="wcag-fg-swatch" style="background:#000000;width:36px;height:36px;border-radius:10px"></span><input type="color" id="wcag-fg" value="#000000" oninput="wcagCalc();_syncColorBtn('wcag-fg')"></button>
                 <input type="text" id="wcag-fg-hex" class="text-input" value="#000000" style="direction:ltr;font-family:monospace" oninput="wcagFromHex('fg')">
               </div>
             </div>
             <div class="field-col">
               <label class="field-label">رنگ پس‌زمینه</label>
               <div style="display:flex;gap:6px;align-items:center">
-                <input type="color" id="wcag-bg" value="#ffffff" oninput="wcagCalc()" style="width:44px;height:44px;border:none;border-radius:8px;cursor:pointer">
+                <button type="button" class="m3-color-btn" style="min-width:56px;height:56px;border-radius:14px;padding:8px;flex-shrink:0" onclick="document.getElementById('wcag-bg').click()" id="wcag-bg-btn"><span class="m3-color-btn__swatch" id="wcag-bg-swatch" style="background:#ffffff;width:36px;height:36px;border-radius:10px"></span><input type="color" id="wcag-bg" value="#ffffff" oninput="wcagCalc();_syncColorBtn('wcag-bg')"></button>
                 <input type="text" id="wcag-bg-hex" class="text-input" value="#ffffff" style="direction:ltr;font-family:monospace" oninput="wcagFromHex('bg')">
               </div>
             </div>
@@ -5833,7 +6279,7 @@
         <!-- ══ LANGUAGE SCORES ══ -->
         <div id="langscores" class="tool-card">
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
-          <div class="tool-title">🗣️ مبدل نمرات زبان</div>
+          <div class="tool-title">🎓 محاسبه نمره</div>
           <div class="btn-row" style="margin-bottom:12px">
             <button class="btn btn-filled" id="ls2-tab-ielts" onclick="ls2SetTab('ielts')">IELTS</button>
             <button class="btn btn-tonal"  id="ls2-tab-toefl" onclick="ls2SetTab('toefl')">TOEFL</button>
@@ -6061,7 +6507,7 @@
               <button class="btn btn-filled" id="at-play-btn" onclick="atTogglePlay()">▶ شروع</button>
               <button class="btn btn-tonal" onclick="atStop()">⏹ توقف</button>
             </div>
-            <canvas id="at-canvas" width="400" height="80" style="width:100%;background:var(--m3-surface-container);border-radius:10px;margin-top:10px"></canvas>
+            <canvas id="at-canvas" width="400" height="80" style="width:100%;border-radius:10px;background:var(--m3-surface-container);margin-top:8px;display:none"></canvas>
           </div>
 
           <!-- Beep/silence tool -->
@@ -6308,11 +6754,12 @@
         <!-- ══ LANGUAGE SCORES ══ -->
         <div id="langscores" class="tool-card">
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
-          <div class="tool-title">🎓 مبدل و محاسبه‌گر نمرات زبان</div>
+          <div class="tool-title">🎓 محاسبه نمره</div>
           <div class="btn-row" style="margin-bottom:10px">
             <button class="btn btn-filled" id="ls2-tab-ielts" onclick="ls2SetTab('ielts')">IELTS</button>
             <button class="btn btn-tonal"  id="ls2-tab-toefl" onclick="ls2SetTab('toefl')">TOEFL iBT</button>
             <button class="btn btn-tonal"  id="ls2-tab-conv"  onclick="ls2SetTab('conv')">تبدیل IELTS↔TOEFL</button>
+            <button class="btn btn-tonal"  id="ls2-tab-gpa"   onclick="ls2SetTab('gpa')">GPA / نمره</button>
           </div>
           <!-- IELTS -->
           <div id="ls2-ielts">
@@ -6348,7 +6795,40 @@
             </div>
             <div id="conv-result" style="margin-top:10px"></div>
           </div>
-          <div class="tool-desc">محاسبه میانگین گرد‌شده IELTS (روش رسمی British Council)، محاسبه TOEFL، و جدول تقریبی تبدیل.</div>
+          <!-- GPA -->
+          <div id="ls2-gpa" style="display:none">
+            <div class="btn-row" style="margin-bottom:10px;flex-wrap:wrap">
+              <button class="btn btn-filled" id="gpa-tab-calc" onclick="gpaSetTab('calc')">محاسبه GPA</button>
+              <button class="btn btn-tonal"  id="gpa-tab-conv" onclick="gpaSetTab('conv')">تبدیل مقیاس</button>
+            </div>
+            <div id="gpa-calc">
+              <div style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:8px">نمرات و واحدها را وارد کنید:</div>
+              <div id="gpa-rows" style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px"></div>
+              <div class="btn-row" style="gap:6px;margin-bottom:8px">
+                <button class="btn btn-tonal" onclick="gpaAddRow()" style="font-size:12px">＋ درس جدید</button>
+                <select id="gpa-scale" class="select-input" style="max-width:130px" onchange="gpaCalc()">
+                  <option value="4">مقیاس ۴</option>
+                  <option value="20">مقیاس ۲۰</option>
+                  <option value="100">مقیاس ۱۰۰</option>
+                </select>
+              </div>
+              <div id="gpa-result"></div>
+            </div>
+            <div id="gpa-conv" style="display:none">
+              <div style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:10px">تبدیل بین مقیاس‌های نمره‌دهی:</div>
+              <div class="field-row" style="align-items:flex-end;gap:8px">
+                <div class="field-col"><label class="field-label">نمره ورودی</label><input type="number" id="gpa-in-val" class="text-input" placeholder="مثلاً ۱۶" step="0.01" oninput="gpaConvert()"></div>
+                <div class="field-col"><label class="field-label">از مقیاس</label>
+                  <select id="gpa-in-scale" class="select-input" onchange="gpaConvert()">
+                    <option value="4">مقیاس ۴</option>
+                    <option value="20" selected>مقیاس ۲۰</option>
+                    <option value="100">مقیاس ۱۰۰</option>
+                  </select></div>
+              </div>
+              <div id="gpa-conv-result" style="margin-top:10px"></div>
+            </div>
+          </div>
+          <div class="tool-desc">IELTS، TOEFL iBT، تبدیل دوطرفه، GPA در مقیاس‌های ۴/۲۰/۱۰۰.</div>
         </div>
 
         <!-- ══ KEY PAIR GENERATOR ══ -->
@@ -6536,7 +7016,7 @@
               <button class="btn btn-tonal" onclick="atPlayFreq(432)">432Hz</button>
               <button class="btn btn-tonal" onclick="atPlayFreq(1000)">1kHz</button>
             </div>
-            <canvas id="at-canvas" width="500" height="80" style="width:100%;border-radius:10px;background:var(--m3-surface-container);margin-top:8px;display:block"></canvas>
+            <canvas id="at-canvas" width="500" height="80" style="width:100%;border-radius:10px;background:var(--m3-surface-container);margin-top:8px;display:none"></canvas>
           </div>
           <!-- Beep/Censor -->
           <div id="at-beep-wrap" style="display:none">
@@ -6565,7 +7045,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 2.0 - ۱۴۰۵/۰۱/۰۱
+          ℹ️ نسخه 2.2 - ۱۴۰۵/۰۱/۰۷
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -6641,7 +7121,7 @@
         linsolve:'حل معادله', enctools:'ابزار کدگذاری',
         jcal:'تقویم خورشیدی', geometry:'هندسه — محیط و مساحت',
         qrread:'خواندن QR', periodic:'جدول تناوبی', metromap:'نقشه مترو و BRT',
-        emoticons:'ایموجی', calculus:'حسابان', emotcn:'اِموتیکون متنی', pomodoro:'تایمر پومودورو', resistor:'مقاومت رنگی', chart:'نمودار داده', fakejson:'مولد JSON آزمایشی', subnet:'محاسبه‌گر Subnet', textfix:'تبدیل متن و کدگذاری', colorpalette:'پالت رنگ تصویر', wcag:'کنتراست رنگ WCAG',
+        emojis:'ایموجی', calculus:'حسابان', emotcn:'اِموتیکون متنی', pomodoro:'تایمر پومودورو', resistor:'مقاومت رنگی', chart:'نمودار داده', fakejson:'مولد JSON آزمایشی', subnet:'محاسبه‌گر Subnet', textfix:'تبدیل متن و کدگذاری', colorpalette:'پالت رنگ تصویر', wcag:'کنتراست رنگ WCAG',
         imgpalette:'پالت رنگ تعاملی',
         minigames:'بازی‌های کوچک',
         wordcloud:'ابر کلمات',
@@ -6652,7 +7132,7 @@
         bmc:'بوم مدل کسب‌وکار',
         eisenhower:'ماتریس آیزنهاور',
         citation:'مولد استناد',
-        langscores:'نمرات زبان',
+        langscores:'محاسبه نمره',
         keypair:'مولد کلید RSA/ECC',
         htaccess:'مولد .htaccess',
         decmatrix:'ماتریس تصمیم‌گیری',
@@ -6697,7 +7177,7 @@
         if (id === 'geometry') geoRender();
         if (id === 'linsolve') lsSetTab('single');
         if (id === 'enctools') encSetMode('txt');
-        if (id === 'emoticons') emoRender();
+        if (id === 'emojis') emoRender();
         if (id === 'pomodoro' && typeof pomodoroInit==='function') pomodoroInit();
         if (id === 'chart') chartRender();
         if (id === 'emotcn') emotcnRender();
@@ -7773,32 +8253,7 @@
       // ══════════════════════════════════════════════════════
       //  QR CODE
       // ══════════════════════════════════════════════════════
-      let _qrObj=null;
-      const _QR_ECC={L:QRCode.CorrectLevel.L,M:QRCode.CorrectLevel.M,Q:QRCode.CorrectLevel.Q,H:QRCode.CorrectLevel.H};
-      function generateQR(){
-        const text=document.getElementById('qr-input').value.trim();
-        const size=Math.max(64,Math.min(512,parseInt(document.getElementById('qr-size').value)||256));
-        const fg=document.getElementById('qr-fg').value,bg=document.getElementById('qr-bg').value;
-        const level=document.getElementById('qr-level').value;
-        const errBox=document.getElementById('qr-error'),output=document.getElementById('qr-output');
-        errBox.style.display='none';
-        if(!text){output.style.display='none';errBox.textContent='⚠ متن وارد کنید';errBox.style.display='block';return;}
-        if(_qrObj){try{_qrObj.clear();}catch(_){}  _qrObj=null;}
-        document.getElementById('qr-render').innerHTML='';
-        output.style.display='block';
-        try {
-          _qrObj=new QRCode(document.getElementById('qr-render'),{text,width:size,height:size,colorDark:fg,colorLight:bg,correctLevel:_QR_ECC[level]??QRCode.CorrectLevel.M});
-          document.getElementById('qr-status').textContent=`${text.length} کاراکتر · ECC ${level} · ${size}×${size} px`;
-        }catch(err){output.style.display='none';errBox.textContent='✖ '+err.message;errBox.style.display='block';}
-      }
-      function dlQR(){
-        const c=document.querySelector('#qr-render canvas')||document.querySelector('#qr-render img');
-        if(!c) return;
-        const a=document.createElement('a');
-        a.download='qr.png';
-        a.href=c.tagName==='CANVAS'?c.toDataURL():c.src;
-        a.click();
-      }
+      // generateQR / dlQR defined further below (full version with QRCodeStyling support)
 
       // ══════════════════════════════════════════════════════
       //  BARCODE (Code-128)
@@ -7885,7 +8340,7 @@
           document.getElementById('cp-picker').value=normHex;
         }catch(_){}
       }
-      function cpFromPicker(){const h=document.getElementById('cp-picker').value;document.getElementById('cp-hex').value=h;cpUpdate(h);}
+      function cpFromPicker(){const h=document.getElementById('cp-picker').value;document.getElementById('cp-hex').value=h;cpUpdate(h);_syncColorBtn('cp-picker');}
       function cpFromHex(){const h=document.getElementById('cp-hex').value.trim();if(/^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.test(h))cpUpdate(h.startsWith('#')?h:'#'+h);}
       function cpFromRgb(){
         const v=document.getElementById('cp-rgb').value;
@@ -8149,13 +8604,13 @@
           }
           const lib=window.pdfjsLib;
           if(!lib){
-            errEl.textContent='PDF.js بارگذاری نشد — مطمئن شوید فایل pdfjs/build/pdf.mjs در پروژه وجود دارد و از طریق یک سرور (http/https) باز می‌کنید.';
+            errEl.textContent='PDF.js بارگذاری نشد — مطمئن شوید فایل lib/pdf.mjs در پروژه وجود دارد و از طریق یک سرور (http/https) باز می‌کنید.';
             infoEl.style.display='none';
             return;
           }
           try{
             infoEl.textContent='⏳ در حال تجزیه PDF...';
-            lib.GlobalWorkerOptions.workerSrc='./pdfjs/build/pdf.worker.mjs';
+            lib.GlobalWorkerOptions.workerSrc='./lib/pdf.worker.mjs';
             const arr=new Uint8Array(e.target.result);
             _pdfDoc=await lib.getDocument({data:arr}).promise;
             document.getElementById('pdf-pages').textContent=_pdfDoc.numPages;
@@ -11353,7 +11808,7 @@
       }
 
       // ══════════════════════════════════════════════════════
-      //  EMOTICONS — 500+ emojis with categories
+      //  EMOJIS — 500+ emojis with categories
       // ══════════════════════════════════════════════════════
       const EMO_DATA = [
         {e:'😀',n:'grinning',c:'faces'},{e:'😃',n:'big smile',c:'faces'},{e:'😄',n:'grin',c:'faces'},{e:'😁',n:'beaming',c:'faces'},{e:'😆',n:'laughing',c:'faces'},{e:'😅',n:'sweat smile',c:'faces'},{e:'🤣',n:'rolling floor',c:'faces'},{e:'😂',n:'joy tears',c:'faces'},{e:'🙂',n:'slight smile',c:'faces'},{e:'🙃',n:'upside down',c:'faces'},{e:'😉',n:'winking',c:'faces'},{e:'😊',n:'blush',c:'faces'},{e:'😇',n:'halo angel',c:'faces'},{e:'🥰',n:'hearts face',c:'faces'},{e:'😍',n:'heart eyes',c:'faces'},{e:'🤩',n:'star struck',c:'faces'},{e:'😘',n:'kissing heart',c:'faces'},{e:'😗',n:'kissing',c:'faces'},{e:'😚',n:'kissing closed',c:'faces'},{e:'🥲',n:'smiling tear',c:'faces'},{e:'😋',n:'savoring',c:'faces'},{e:'😛',n:'tongue',c:'faces'},{e:'😜',n:'winking tongue',c:'faces'},{e:'🤪',n:'zany crazy',c:'faces'},{e:'😝',n:'squinting tongue',c:'faces'},{e:'🤑',n:'money mouth',c:'faces'},{e:'🤗',n:'hugging',c:'faces'},{e:'🤭',n:'hand mouth',c:'faces'},{e:'🤫',n:'shushing quiet',c:'faces'},{e:'🤔',n:'thinking',c:'faces'},{e:'🤐',n:'zipper mouth',c:'faces'},{e:'🤨',n:'raised eyebrow',c:'faces'},{e:'😐',n:'neutral face',c:'faces'},{e:'😑',n:'expressionless',c:'faces'},{e:'😶',n:'no mouth',c:'faces'},{e:'😏',n:'smirk',c:'faces'},{e:'😒',n:'unamused',c:'faces'},{e:'🙄',n:'eye roll',c:'faces'},{e:'😬',n:'grimace',c:'faces'},{e:'🤥',n:'lying face',c:'faces'},{e:'😌',n:'relieved',c:'faces'},{e:'😔',n:'pensive',c:'faces'},{e:'😪',n:'sleepy',c:'faces'},{e:'🤤',n:'drooling',c:'faces'},{e:'😴',n:'sleeping',c:'faces'},{e:'😷',n:'mask sick',c:'faces'},{e:'🤒',n:'thermometer sick',c:'faces'},{e:'🤕',n:'bandage hurt',c:'faces'},{e:'🤢',n:'nauseated',c:'faces'},{e:'🤮',n:'vomiting',c:'faces'},{e:'🤧',n:'sneezing',c:'faces'},{e:'🥵',n:'hot face',c:'faces'},{e:'🥶',n:'cold face',c:'faces'},{e:'🥴',n:'woozy',c:'faces'},{e:'😵',n:'dizzy face',c:'faces'},{e:'🤯',n:'exploding head',c:'faces'},{e:'🤠',n:'cowboy hat',c:'faces'},{e:'🥳',n:'partying',c:'faces'},{e:'🥸',n:'disguised',c:'faces'},{e:'😎',n:'sunglasses cool',c:'faces'},{e:'🤓',n:'nerd glasses',c:'faces'},{e:'🧐',n:'monocle',c:'faces'},{e:'😕',n:'confused',c:'faces'},{e:'😟',n:'worried',c:'faces'},{e:'🙁',n:'frowning',c:'faces'},{e:'😮',n:'open mouth',c:'faces'},{e:'😯',n:'hushed',c:'faces'},{e:'😲',n:'astonished',c:'faces'},{e:'😳',n:'flushed',c:'faces'},{e:'🥺',n:'pleading eyes',c:'faces'},{e:'😦',n:'frowning open',c:'faces'},{e:'😧',n:'anguished',c:'faces'},{e:'😨',n:'fearful',c:'faces'},{e:'😰',n:'anxious sweat',c:'faces'},{e:'😢',n:'crying',c:'faces'},{e:'😭',n:'loudly crying',c:'faces'},{e:'😱',n:'screaming fear',c:'faces'},{e:'😖',n:'confounded',c:'faces'},{e:'😣',n:'persevering',c:'faces'},{e:'😞',n:'disappointed',c:'faces'},{e:'😓',n:'downcast sweat',c:'faces'},{e:'😩',n:'weary',c:'faces'},{e:'😫',n:'tired',c:'faces'},{e:'🥱',n:'yawning',c:'faces'},{e:'😤',n:'triumph',c:'faces'},{e:'😡',n:'angry pouting',c:'faces'},{e:'😠',n:'angry mad',c:'faces'},{e:'🤬',n:'swearing cursing',c:'faces'},{e:'😈',n:'devil smile',c:'faces'},{e:'👿',n:'angry devil',c:'faces'},{e:'💀',n:'skull death',c:'faces'},{e:'☠️',n:'skull crossbones',c:'faces'},{e:'💩',n:'poop pile',c:'faces'},{e:'🤡',n:'clown face',c:'faces'},{e:'👹',n:'ogre monster',c:'faces'},{e:'👺',n:'goblin',c:'faces'},{e:'👻',n:'ghost',c:'faces'},{e:'👽',n:'alien',c:'faces'},{e:'👾',n:'space invader',c:'faces'},{e:'🤖',n:'robot',c:'faces'},
@@ -11406,61 +11861,123 @@
         if (tab==='graph') { calcGraphInit(); _cgDrawPlot(); }
         if (tab==='deriv') calcDerivUpdate();
       }
+      function _calcNorm(expr) {
+        return expr
+          .replace(/X/g,'x').replace(/π/g,'pi').replace(/\bpi\b/gi,'pi')
+          .replace(/\^/g,'**')
+          .replace(/([0-9])\s*([a-zA-Z(])/g,'$1*$2')
+          .replace(/\bln\s*\(/g,'log(')
+          .replace(/\babs\s*\(/g,'abs(')
+          .replace(/\bsqrt\s*\(/g,'sqrt(');
+      }
       function _calcEval(expr, x) {
-        var e = expr.replace(/X/g,'x').replace(/π/g,'Math.PI').replace(/\bpi\b/gi,'Math.PI').replace(/\be\b/g,'Math.E');
-        return Function('"use strict";var x='+x+';return ('+e+');')();
+        try {
+          const e = _calcNorm(expr);
+          if (typeof math !== 'undefined') return math.evaluate(e, {x: x});
+          const fe = e.replace(/\bpi\b/g,'Math.PI').replace(/\be\b/g,'Math.E')
+            .replace(/\bsin\b/g,'Math.sin').replace(/\bcos\b/g,'Math.cos')
+            .replace(/\btan\b/g,'Math.tan').replace(/\bsqrt\b/g,'Math.sqrt')
+            .replace(/\blog\b/g,'Math.log').replace(/\blog10\b/g,'Math.log10')
+            .replace(/\babs\b/g,'Math.abs').replace(/\bexp\b/g,'Math.exp');
+          return Function('"use strict";var x='+x+';return ('+fe+');')();
+        } catch(_) { return NaN; }
       }
       function calcDerivUpdate() {
-        var fn  = (document.getElementById('calc-fn')||{}).value||'';
-        var xv  = parseFloat((document.getElementById('calc-deriv-x')||{}).value)||0;
-        var res = document.getElementById('calc-deriv-res');
-        if (!fn||!res) return;
-        fn = fn.trim();
-        if (!fn) { res.innerHTML=''; return; }
+        var fn=(document.getElementById('calc-fn')||{}).value||'';
+        var xv=parseFloat((document.getElementById('calc-deriv-x')||{}).value); if(isNaN(xv))xv=0;
+        var res=document.getElementById('calc-deriv-res');
+        if(!res)return; fn=fn.trim(); if(!fn){res.innerHTML='';return;}
+        var steps=[], derivStr='', derivVal, fval;
         try {
-          var h=1e-7, fp=_calcEval(fn,xv+h), fm=_calcEval(fn,xv-h);
-          var deriv=(fp-fm)/(2*h), fval=_calcEval(fn,xv);
-          res.innerHTML='<div class="data-list"><div class="data-row"><span class="data-row__key">f('+xv+')</span><span class="data-row__val" style="direction:ltr;text-align:left">'+(+fval.toFixed(10))+'</span></div>'
-            +'<div class="data-row"><span class="data-row__key">f\'('+xv+')</span><span class="data-row__val" style="font-weight:700;color:var(--m3-primary);direction:ltr;text-align:left">'+(+deriv.toFixed(10))+'</span></div></div>';
-        } catch(e) {
-          res.innerHTML='<div style="color:var(--m3-error);padding:8px;font-size:13px">خطا: '+e.message+'</div>';
-        }
+          fval=_calcEval(fn,xv);
+          if(typeof math!=='undefined'){
+            try{
+              var nd=math.derivative(_calcNorm(fn),'x');
+              derivStr=nd.toString();
+              try{derivStr=math.simplify(nd).toString();}catch(_){}
+              derivVal=math.evaluate(derivStr,{x:xv});
+              steps.push('f(x) = '+fn);
+              steps.push("f'(x) = "+derivStr+' (نمادین)');
+              steps.push("f'("+xv+') = '+( +derivVal.toFixed(8) ));
+            }catch(_){
+              var h=1e-7,fp=_calcEval(fn,xv+h),fm=_calcEval(fn,xv-h);
+              derivVal=(fp-fm)/(2*h);
+              steps.push('f(x) = '+fn);
+              steps.push("مشتق عددی (تفاضل مرکزی): h = 1×10⁻⁷");
+              steps.push("f'("+xv+') ≈ '+( +derivVal.toFixed(8) ));
+            }
+          } else {
+            var h2=1e-7,fp2=_calcEval(fn,xv+h2),fm2=_calcEval(fn,xv-h2);
+            derivVal=(fp2-fm2)/(2*h2);
+            steps.push('مشتق عددی، h=1×10⁻⁷');
+          }
+          var stepsHtml='<details style="margin-bottom:8px"><summary style="cursor:pointer;font-size:13px;color:var(--m3-primary);font-weight:600">📋 مراحل حل</summary>'
+            +'<div style="background:var(--m3-surface-container);border-radius:8px;padding:10px;margin-top:6px;direction:ltr">'
+            +steps.map((s,i)=>'<div style="padding:3px 0;font-size:12.5px">'+(i+1)+'. '+s+'</div>').join('')+'</div></details>';
+          res.innerHTML=stepsHtml+'<div class="data-list">'
+            +'<div class="data-row"><span class="data-row__key">f('+xv+')</span><span class="data-row__val" style="direction:ltr">'+(isFinite(fval)?+fval.toFixed(8):fval)+'</span></div>'
+            +(derivStr?'<div class="data-row"><span class="data-row__key">مشتق نمادین</span><span class="data-row__val" style="direction:ltr;font-size:12px;font-family:monospace">'+derivStr+'</span></div>':'')
+            +'<div class="data-row"><span class="data-row__key">مشتق در x='+xv+'</span><span class="data-row__val" style="font-weight:700;color:var(--m3-primary);direction:ltr">'+(isFinite(derivVal)?+derivVal.toFixed(8):derivVal)+'</span></div></div>';
+        }catch(e){res.innerHTML='<div style="color:var(--m3-error);padding:8px;font-size:13px">خطا: '+e.message+'</div>';}
       }
       function calcIntegrate() {
         var fn=(document.getElementById('calc-ifn')||{}).value||'';
-        var a=parseFloat((document.getElementById('calc-ia')||{}).value)||0;
-        var b=parseFloat((document.getElementById('calc-ib')||{}).value)||0;
+        var a=parseFloat((document.getElementById('calc-ia')||{}).value);
+        var b=parseFloat((document.getElementById('calc-ib')||{}).value);
         var res=document.getElementById('calc-integ-res');
-        if (!fn||!res) return;
-        fn=fn.trim(); if(!fn){res.innerHTML='';return;}
-        try {
+        if(!res)return; fn=fn.trim(); if(!fn){res.innerHTML='';return;}
+        if(isNaN(a)||isNaN(b)){res.innerHTML='<div style="color:var(--m3-error);padding:8px">بازه نامعتبر</div>';return;}
+        try{
           var n=1000,h=(b-a)/n,sum=_calcEval(fn,a)+_calcEval(fn,b);
-          for(var i=1;i<n;i++) sum+=(i%2===0?2:4)*_calcEval(fn,a+i*h);
+          for(var i=1;i<n;i++)sum+=(i%2===0?2:4)*_calcEval(fn,a+i*h);
           var result=(h/3)*sum;
-          res.innerHTML='<div class="data-list"><div class="data-row"><span class="data-row__key">∫ f(x) dx از '+a+' تا '+b+'</span><span class="data-row__val" style="font-weight:700;color:var(--m3-primary);direction:ltr;text-align:left">'+(+result.toFixed(10))+'</span></div></div>';
-        } catch(e) {
-          res.innerHTML='<div style="color:var(--m3-error);padding:8px;font-size:13px">خطا: '+e.message+'</div>';
-        }
+          var steps=['f(x) = '+fn,'روش سیمپسون یک‌سوم، n=1000 زیربازه','بازه: ['+a+', '+b+']','h = '+(b-a)+'/1000 = '+h.toPrecision(4),'∫ ≈ (h/3)(f(a)+4f(x₁)+2f(x₂)+…+f(b))','نتیجه = '+(+result.toFixed(8))];
+          var sh='<details style="margin-bottom:8px"><summary style="cursor:pointer;font-size:13px;color:var(--m3-primary);font-weight:600">📋 مراحل</summary>'
+            +'<div style="background:var(--m3-surface-container);border-radius:8px;padding:10px;margin-top:6px;direction:ltr">'
+            +steps.map((s,i)=>'<div style="padding:3px 0;font-size:12.5px">'+(i+1)+'. '+s+'</div>').join('')+'</div></details>';
+          res.innerHTML=sh+'<div class="data-list"><div class="data-row"><span class="data-row__key">∫f(x)dx از '+a+' تا '+b+'</span><span class="data-row__val" style="font-weight:700;color:var(--m3-primary);direction:ltr">'+(+result.toFixed(8))+'</span></div></div>';
+        }catch(e){res.innerHTML='<div style="color:var(--m3-error);padding:8px;font-size:13px">خطا: '+e.message+'</div>';}
       }
       function calcLimit() {
         var fn=(document.getElementById('calc-lfn')||{}).value||'';
-        var x0=parseFloat((document.getElementById('calc-lx')||{}).value)||0;
+        var x0raw=((document.getElementById('calc-lx')||{}).value||'0').trim();
         var res=document.getElementById('calc-limit-res');
-        if (!fn||!res) return;
-        fn=fn.trim(); if(!fn){res.innerHTML='';return;}
-        try {
-          var eps=1e-8;
-          var left=_calcEval(fn,x0-eps), right=_calcEval(fn,x0+eps);
-          var limitVal=(isFinite(left)&&isFinite(right))?(left+right)/2:NaN;
-          var converges=Math.abs(left-right)<1e-5&&isFinite(left)&&isFinite(right);
-          res.innerHTML='<div class="data-list">'
-            +'<div class="data-row"><span class="data-row__key">حد از چپ (x→'+x0+'⁻)</span><span class="data-row__val" style="direction:ltr;text-align:left">'+(isFinite(left)?+left.toFixed(8):'∞')+'</span></div>'
-            +'<div class="data-row"><span class="data-row__key">حد از راست (x→'+x0+'⁺)</span><span class="data-row__val" style="direction:ltr;text-align:left">'+(isFinite(right)?+right.toFixed(8):'∞')+'</span></div>'
-            +'<div class="data-row"><span class="data-row__key">lim f(x)</span><span class="data-row__val" style="font-weight:700;color:'+(converges?'var(--m3-primary)':'var(--m3-error)')+';direction:ltr;text-align:left">'+(converges?(+limitVal.toFixed(8)):'وجود ندارد')+'</span></div>'
-            +'</div>';
-        } catch(e) {
-          res.innerHTML='<div style="color:var(--m3-error);padding:8px;font-size:13px">خطا: '+e.message+'</div>';
-        }
+        if(!res)return; fn=fn.trim(); if(!fn){res.innerHTML='';return;}
+        var x0;
+        if(x0raw==='Infinity'||x0raw==='+Infinity')x0=Infinity;
+        else if(x0raw==='-Infinity')x0=-Infinity;
+        else x0=parseFloat(x0raw);
+        if(isNaN(x0)){res.innerHTML='<div style="color:var(--m3-error);padding:8px">مقدار x نامعتبر</div>';return;}
+        var steps=[],left,right,limitVal,converges;
+        try{
+          steps.push('f(x) = '+fn);
+          steps.push('x \u2192 '+(isFinite(x0)?x0:(x0>0?'+\u221e':'\u2212\u221e')));
+          if(!isFinite(x0)){
+            var sg=x0>0?1:-1,v1=_calcEval(fn,sg*1e6),v2=_calcEval(fn,sg*1e9),v3=_calcEval(fn,sg*1e12);
+            left=v2;right=v3;limitVal=v3;
+            converges=isFinite(v1)&&isFinite(v2)&&isFinite(v3)&&Math.abs(v3-v2)<Math.abs(v2-v1)*0.01+1e-6;
+            steps.push('f(\xb110\u2076) = '+(isFinite(v1)?+v1.toFixed(6):'\u221e'));
+            steps.push('f(\xb110\u2079) = '+(isFinite(v2)?+v2.toFixed(6):'\u221e'));
+            steps.push('f(\xb110\xb9\xb2) = '+(isFinite(v3)?+v3.toFixed(6):'\u221e'));
+          }else{
+            var eps=1e-8;
+            left=_calcEval(fn,x0-eps);right=_calcEval(fn,x0+eps);
+            converges=Math.abs(left-right)<1e-5&&isFinite(left)&&isFinite(right);
+            limitVal=(left+right)/2;
+            steps.push('حد چپ  f('+x0+'\u2212\u03b5) = '+(isFinite(left)?+left.toFixed(8):'\u221e'));
+            steps.push('حد راست f('+x0+'+\u03b5) = '+(isFinite(right)?+right.toFixed(8):'\u221e'));
+            steps.push(converges?'حد دوطرفه مساوی \u2713':'حد دوطرفه نامساوی \u2717');
+          }
+          var fmtV=function(v){return !isFinite(v)&&v>0?'+\u221e':!isFinite(v)&&v<0?'\u2212\u221e':isNaN(v)?'تعریف نشده':(+v.toFixed(8))+'';};
+          var x0lbl=!isFinite(x0)?(x0>0?'+\u221e':'\u2212\u221e'):x0raw;
+          var sh='<details style="margin-bottom:8px"><summary style="cursor:pointer;font-size:13px;color:var(--m3-primary);font-weight:600">\uD83D\uDCCB مراحل</summary>'
+            +'<div style="background:var(--m3-surface-container);border-radius:8px;padding:10px;margin-top:6px;direction:ltr">'
+            +steps.map(function(s,i){return '<div style="padding:3px 0;font-size:12.5px">'+(i+1)+'. '+s+'</div>';}).join('')+'</div></details>';
+          res.innerHTML=sh+'<div class="data-list">'
+            +(isFinite(x0)?'<div class="data-row"><span class="data-row__key">حد از چپ</span><span class="data-row__val" style="direction:ltr">'+fmtV(left)+'</span></div>'
+              +'<div class="data-row"><span class="data-row__key">حد از راست</span><span class="data-row__val" style="direction:ltr">'+fmtV(right)+'</span></div>':'')
+            +'<div class="data-row"><span class="data-row__key">lim f(x) \u2192 '+x0lbl+'</span><span class="data-row__val" style="font-weight:700;color:'+(converges?'var(--m3-primary)':'var(--m3-error)')+';direction:ltr">'+(converges?fmtV(limitVal):'وجود ندارد')+'</span></div></div>';
+        }catch(e){res.innerHTML='<div style="color:var(--m3-error);padding:8px;font-size:13px">خطا: '+e.message+'</div>';}
       }
       function calcPlot() {
         var fn=(document.getElementById('calc-gfn')||{}).value||'';
@@ -12926,7 +13443,7 @@
         const c = document.getElementById('icp-canvas');
         const scaleX = _icpImg.width / c.width;
         const scaleY = _icpImg.height / c.height;
-        const d = h.getContext('2d').getImageData(Math.round(x*scaleX), Math.round(y*scaleY), 1, 1).data;
+        const d = h.getContext('2d',{willReadFrequently:true}).getImageData(Math.round(x*scaleX), Math.round(y*scaleY), 1, 1).data;
         return [d[0], d[1], d[2]];
       }
       function icpExtract(n) {
@@ -13130,19 +13647,45 @@
         }
         function step(){
           const head={x:(snake[0].x+dir.x+W)%W,y:(snake[0].y+dir.y+H)%H};
-          if(snake.some(s=>s.x===head.x&&s.y===head.y)){clearInterval(interval);running=false;alert('بازی تمام! امتیاز: '+score);return;}
+          if(snake.some(s=>s.x===head.x&&s.y===head.y)){clearInterval(interval);running=false;if(typeof showToast==='function')showToast('بازی تمام! امتیاز: '+score);return;}
           snake.unshift(head);
-          if(head.x===food.x&&head.y===food.y){score++;food=rndFood();document.getElementById('snake-score').textContent='امتیاز: '+score;}
+          if(head.x===food.x&&head.y===food.y){score++;food=rndFood();const ss=document.getElementById('snake-score');if(ss)ss.textContent='امتیاز: '+score;}
           else snake.pop();
           draw();
         }
         window.snakeToggle=()=>{running=!running;running?interval=setInterval(step,140):clearInterval(interval);};
-        window.snakeReset=()=>{clearInterval(interval);snake=[{x:7,y:6},{x:6,y:6}];dir={x:1,y:0};food=rndFood();running=false;score=0;document.getElementById('snake-score').textContent='امتیاز: 0';draw();};
+        window.snakeReset=()=>{clearInterval(interval);snake=[{x:7,y:6},{x:6,y:6}];dir={x:1,y:0};food=rndFood();running=false;score=0;const ssr=document.getElementById('snake-score');if(ssr)ssr.textContent='امتیاز: 0';draw();};
         document.addEventListener('keydown',e=>{if(!running)return;const map={'ArrowUp':{x:0,y:-1},'ArrowDown':{x:0,y:1},'ArrowLeft':{x:-1,y:0},'ArrowRight':{x:1,y:0},'w':{x:0,y:-1},'s':{x:0,y:1},'a':{x:-1,y:0},'d':{x:1,y:0}};const nd=map[e.key];if(nd&&(nd.x!==(-dir.x)||nd.y!==(-dir.y))){dir=nd;e.preventDefault();}});
         draw();
       }
 
       // Memory cards
+      function mgDots(area) {
+        const N=4;
+        let hLines=Array.from({length:N+1},()=>Array(N).fill(0));
+        let vLines=Array.from({length:N},()=>Array(N+1).fill(0));
+        let boxes=Array.from({length:N},()=>Array(N).fill(0));
+        let score={p:0,ai:0},turn=1,gameOver=false;
+        function countSides(i,j){return(hLines[i][j]||0)+(hLines[i+1]?.[j]||0)+(vLines[i][j]||0)+(vLines[i][j+1]||0);}
+        function checkBoxes(){let formed=0;for(let i=0;i<N;i++)for(let j=0;j<N;j++){if(!boxes[i][j]&&hLines[i][j]&&hLines[i+1]?.[j]&&vLines[i][j]&&vLines[i][j+1]){boxes[i][j]=turn;if(turn===1)score.p++;else score.ai++;formed++;}}return formed;}
+        function aiMove(){
+          for(let i=0;i<N;i++)for(let j=0;j<N;j++){if(!boxes[i][j]&&countSides(i,j)===3){if(!hLines[i][j]){hLines[i][j]=2;return;}if(!hLines[i+1]?.[j]&&hLines[i+1]){hLines[i+1][j]=2;return;}if(!vLines[i][j]){vLines[i][j]=2;return;}if(!vLines[i][j+1]){vLines[i][j+1]=2;return;}}}
+          const moves=[];for(let i=0;i<=N;i++)for(let j=0;j<N;j++)if(!hLines[i][j])moves.push(['h',i,j]);for(let i=0;i<N;i++)for(let j=0;j<=N;j++)if(!vLines[i][j])moves.push(['v',i,j]);
+          if(moves.length){const m=moves[Math.floor(Math.random()*moves.length)];if(m[0]==='h')hLines[m[1]][m[2]]=2;else vLines[m[1]][m[2]]=2;}
+        }
+        function render(){
+          const DOT=7,SZ=56,PAD=18,W2=PAD*2+SZ*N,H2=PAD*2+SZ*N;
+          area.innerHTML=`<div style="font-size:13px;font-weight:700;margin-bottom:6px;color:var(--m3-on-surface)">شما <span style="color:#2196f3">●</span>: ${score.p} — کامپیوتر <span style="color:#e91e63">●</span>: ${score.ai} &nbsp;<span style="font-size:11px;color:var(--m3-primary)">${gameOver?'بازی تمام!':turn===1?'نوبت شما':'درحال فکر کردن…'}</span></div>
+          <svg width="${W2}" height="${H2}" style="cursor:pointer;max-width:100%"></svg>
+          <button class="btn btn-tonal" onclick="mgDots(document.getElementById('mg-area'))" style="margin-top:10px;font-size:12px">↺ بازی جدید</button>`;
+          const svg=area.querySelector('svg');if(!svg)return;
+          for(let i=0;i<N;i++)for(let j=0;j<N;j++){if(boxes[i][j]){const r=document.createElementNS('http://www.w3.org/2000/svg','rect');r.setAttribute('x',PAD+j*SZ+DOT/2+1);r.setAttribute('y',PAD+i*SZ+DOT/2+1);r.setAttribute('width',SZ-DOT-2);r.setAttribute('height',SZ-DOT-2);r.setAttribute('fill',boxes[i][j]===1?'rgba(33,150,243,0.25)':'rgba(233,30,99,0.25)');svg.appendChild(r);}}
+          for(let i=0;i<=N;i++)for(let j=0;j<N;j++){const ln=document.createElementNS('http://www.w3.org/2000/svg','line');ln.setAttribute('x1',PAD+j*SZ+DOT);ln.setAttribute('y1',PAD+i*SZ);ln.setAttribute('x2',PAD+(j+1)*SZ-DOT);ln.setAttribute('y2',PAD+i*SZ);ln.setAttribute('stroke-width','5');ln.setAttribute('stroke-linecap','round');if(hLines[i][j])ln.setAttribute('stroke',hLines[i][j]===1?'#2196f3':'#e91e63');else{ln.setAttribute('stroke','rgba(128,128,128,0.2)');if(!gameOver&&turn===1)ln.style.cursor='pointer';if(!gameOver&&turn===1)ln.addEventListener('click',()=>{hLines[i][j]=1;const f=checkBoxes();if(!f){turn=2;render();setTimeout(()=>{aiMove();const af=checkBoxes();if(!af)turn=1;if(score.p+score.ai===N*N)gameOver=true;render();},350);}else{if(score.p+score.ai===N*N)gameOver=true;render();}});}svg.appendChild(ln);}
+          for(let i=0;i<N;i++)for(let j=0;j<=N;j++){const ln=document.createElementNS('http://www.w3.org/2000/svg','line');ln.setAttribute('x1',PAD+j*SZ);ln.setAttribute('y1',PAD+i*SZ+DOT);ln.setAttribute('x2',PAD+j*SZ);ln.setAttribute('y2',PAD+(i+1)*SZ-DOT);ln.setAttribute('stroke-width','5');ln.setAttribute('stroke-linecap','round');if(vLines[i][j])ln.setAttribute('stroke',vLines[i][j]===1?'#2196f3':'#e91e63');else{ln.setAttribute('stroke','rgba(128,128,128,0.2)');if(!gameOver&&turn===1)ln.style.cursor='pointer';if(!gameOver&&turn===1)ln.addEventListener('click',()=>{vLines[i][j]=1;const f=checkBoxes();if(!f){turn=2;render();setTimeout(()=>{aiMove();const af=checkBoxes();if(!af)turn=1;if(score.p+score.ai===N*N)gameOver=true;render();},350);}else{if(score.p+score.ai===N*N)gameOver=true;render();}});}svg.appendChild(ln);}
+          for(let i=0;i<=N;i++)for(let j=0;j<=N;j++){const c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',PAD+j*SZ);c.setAttribute('cy',PAD+i*SZ);c.setAttribute('r',DOT/2+1);c.setAttribute('fill','var(--m3-on-surface)');svg.appendChild(c);}
+        }
+        render();
+      }
       function mgMemory(area) {
         const EMOJIS=['🍕','🎸','🚀','🌈','🐬','🎨','🦋','🍀'];
         const cards=[...EMOJIS,...EMOJIS].sort(()=>Math.random()-.5).map((e,i)=>({id:i,emoji:e,flipped:false,matched:false}));
@@ -13216,44 +13759,54 @@
         if (!text.trim()) return;
         const maxW = parseInt(document.getElementById('wc-max').value) || 80;
         const scheme = document.getElementById('wc-scheme').value;
+        const isDark = document.documentElement.getAttribute('data-theme')==='dark';
         const stopwords = _wcLang==='fa' ? WC_STOPWORDS_FA : WC_STOPWORDS_EN;
-        const words = text.toLowerCase().replace(/[^\u0600-\u06FF\u0750-\u077F\u0041-\u007A\u0030-\u0039\s]/g,' ').split(/\s+/).filter(w => w.length>1 && !stopwords.has(w));
+        const words = text.toLowerCase()
+          .replace(/[^؀-ۿݐ-ݿA-z0-9\s]/g,' ')
+          .split(/\s+/).filter(w => w.length>1 && !stopwords.has(w));
         const freq = {};
         words.forEach(w => { freq[w]=(freq[w]||0)+1; });
         const sorted = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,maxW);
         if (!sorted.length) return;
         const maxFreq = sorted[0][1];
         const c = document.getElementById('wc-canvas');
-        const W = c.offsetWidth || 500, H = 320;
-        c.width = W; c.height = H; c.style.display='block';
+        const dpr = window.devicePixelRatio||1;
+        const cssW = c.offsetWidth||600, cssH=360;
+        c.width=cssW*dpr; c.height=cssH*dpr;
+        c.style.height=cssH+'px'; c.style.display='block';
         const ctx = c.getContext('2d');
-        ctx.clearRect(0,0,W,H);
-        const placed = [];
-        const palette = scheme==='rainbow' ? (i)=>`hsl(${(i*137.5)%360},70%,45%)` :
-                        scheme==='mono'    ? ()=>'var(--m3-on-surface)' :
-                        (i) => i===0?'var(--m3-primary)':'color-mix(in srgb,var(--m3-primary) '+(30+Math.floor(70*(1-i/sorted.length)))+'%,var(--m3-on-surface-variant))';
-        sorted.forEach(([word, count], i) => {
-          const size = Math.round(12 + (count/maxFreq) * 36);
-          ctx.font = `${size}px Vazirmatn, sans-serif`;
-          ctx.fillStyle = palette(i);
-          const tw = ctx.measureText(word).width;
-          // Spiral placement
-          for (let r=0; r<W/2; r+=6) {
-            const angle = r * 0.5;
-            const cx = W/2 + r*Math.cos(angle);
-            const cy = H/2 + r*Math.sin(angle)*0.7;
-            const x = cx - tw/2, y = cy + size/2;
-            const rect = {x, y:cy-size, w:tw, h:size};
-            const overlap = placed.some(p => x<p.x+p.w && x+tw>p.x && cy-size<p.y+p.h && cy>p.y);
-            if (!overlap && x>4 && x+tw<W-4 && cy-size>4 && cy<H-4) {
-              ctx.fillText(word, x, cy);
-              placed.push(rect);
-              break;
+        ctx.scale(dpr,dpr);
+        const W=cssW, H=cssH;
+        ctx.fillStyle = isDark?'#1a2027':'#fafafa';
+        ctx.fillRect(0,0,W,H);
+        const palette = scheme==='rainbow'
+          ? (i) => `hsl(${(i*47+200)%360},65%,${isDark?65:40}%)`
+          : scheme==='mono'
+          ? () => isDark?'#e0e0e0':'#333'
+          : (i) => { const h=[210,340,120,30,270,180,60]; return `hsl(${h[i%h.length]},${isDark?60:55}%,${isDark?65:40}%)`; };
+        // Pixel-grid collision map
+        const GRID=4, gW=Math.ceil(W/GRID), gH=Math.ceil(H/GRID);
+        const occ=new Uint8Array(gW*gH);
+        function mark(x,y,w,h){const x0=Math.max(0,Math.floor(x/GRID)),y0=Math.max(0,Math.floor(y/GRID)),x1=Math.min(gW-1,Math.ceil((x+w)/GRID)),y1=Math.min(gH-1,Math.ceil((y+h)/GRID));for(let gy=y0;gy<=y1;gy++)for(let gx=x0;gx<=x1;gx++)occ[gy*gW+gx]=1;}
+        function free(x,y,w,h){const x0=Math.max(0,Math.floor(x/GRID)),y0=Math.max(0,Math.floor(y/GRID)),x1=Math.min(gW-1,Math.ceil((x+w)/GRID)),y1=Math.min(gH-1,Math.ceil((y+h)/GRID));for(let gy=y0;gy<=y1;gy++)for(let gx=x0;gx<=x1;gx++){if(occ[gy*gW+gx])return false;}return true;}
+        sorted.forEach(([word,count],i) => {
+          const sz=Math.round(11+(count/maxFreq)*Math.min(48,Math.max(18,W/12)));
+          ctx.font=`${sz}px Vazirmatn,Arial,sans-serif`;
+          ctx.fillStyle=palette(i);
+          const tw=ctx.measureText(word).width+4, th=sz+4;
+          let placed=false;
+          for(let startA=0;startA<Math.PI*2&&!placed;startA+=Math.PI/3){
+            for(let t=0;t<350&&!placed;t+=0.18){
+              const r=t*(W/130), angle=t*0.42+startA;
+              const tx=W/2+r*Math.cos(angle)-tw/2, ty=H/2+r*Math.sin(angle)*0.65-th/2;
+              if(tx<2||tx+tw>W-2||ty<2||ty+th>H-2)continue;
+              if(free(tx,ty,tw,th)){ctx.fillText(word,tx+2,ty+sz+2);mark(tx,ty,tw,th);placed=true;}
             }
+            if(placed)break;
           }
         });
-        const dlBtn = document.getElementById('wc-dl-btn');
-        if (dlBtn) dlBtn.style.display = 'inline-flex';
+        const dlBtn=document.getElementById('wc-dl-btn');
+        if(dlBtn)dlBtn.style.display='inline-flex';
       }
       function wcDownload() {
         const c = document.getElementById('wc-canvas');
@@ -13514,20 +14067,22 @@
       // ══════════════════════════════════════════════════════════
       const EIS_KEY='eisenhower-data';
       const EIS_LABELS=['🔴 فوری + مهم','🟡 مهم + غیرفوری','🟠 فوری + غیرمهم','⚪ غیرفوری + غیرمهم'];
-      const EIS_COLORS=['#fff0f0','#fffce0','#fff4e0','#f5f5f5'];
+      const EIS_COLORS=null; // use CSS tokens
       function eisLoad(){try{return JSON.parse(localStorage.getItem(EIS_KEY)||'[[],[],[],[]]');}catch(_){return[[],[],[],[]];}}
       function eisSave(data){try{localStorage.setItem(EIS_KEY,JSON.stringify(data));}catch(_){}}
       function eisRender(){
         const data=eisLoad();
         const grid=document.getElementById('eis-grid');
         if(!grid)return;
+        const EIS_BG=['var(--m3-error-container)','var(--m3-tertiary-container)','var(--m3-secondary-container)','var(--m3-surface-container-high)'];
+        const EIS_FG=['var(--m3-on-error-container)','var(--m3-on-tertiary-container)','var(--m3-on-secondary-container)','var(--m3-on-surface)'];
         grid.innerHTML=EIS_LABELS.map((lbl,q)=>`
-          <div style="background:${EIS_COLORS[q]};border-radius:14px;padding:12px;min-height:120px">
-            <div style="font-weight:700;font-size:12px;margin-bottom:8px;color:var(--m3-on-surface)">${lbl}</div>
+          <div style="background:${EIS_BG[q]};border-radius:14px;padding:12px;min-height:120px">
+            <div style="font-weight:700;font-size:12px;margin-bottom:8px;color:${EIS_FG[q]}">${lbl}</div>
             <div id="eis-q-${q}" style="display:flex;flex-direction:column;gap:4px">
-              ${data[q].map((t,i)=>`<div style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.7);border-radius:8px;padding:4px 8px">
-                <span style="flex:1;font-size:12px">${t}</span>
-                <button onclick="eisDelete(${q},${i})" style="background:none;border:none;cursor:pointer;font-size:.85rem;opacity:0.5">✕</button>
+              ${data[q].map((t,i)=>`<div style="display:flex;align-items:center;gap:6px;background:color-mix(in srgb,${EIS_FG[q]} 8%,transparent);border-radius:8px;padding:4px 8px">
+                <span style="flex:1;font-size:12px;color:${EIS_FG[q]}">${t}</span>
+                <button onclick="eisDelete(${q},${i})" style="background:none;border:none;cursor:pointer;font-size:.85rem;opacity:0.5;color:${EIS_FG[q]}">✕</button>
               </div>`).join('')}
             </div>
           </div>`).join('');
@@ -13585,11 +14140,14 @@
       //  LANGUAGE SCORES
       // ══════════════════════════════════════════════════════════
       function ls2SetTab(t){
-        ['ielts','toefl','conv'].forEach(x=>{
+        ['ielts','toefl','conv','gpa'].forEach(x=>{
           const b=document.getElementById('ls2-tab-'+x);const w=document.getElementById('ls2-'+x);
           if(b)b.className='btn '+(x===t?'btn-filled':'btn-tonal');
           if(w)w.style.display=x===t?'':'none';
         });
+        if(t==='gpa'&&document.getElementById('gpa-rows')&&!document.getElementById('gpa-rows').children.length){gpaAddRow();gpaAddRow();gpaAddRow();}
+        if(t==='ielts')calcIELTS();
+        if(t==='toefl')calcTOEFL();
       }
       function calcIELTS(){
         const scores=['ielts-l','ielts-r','ielts-w','ielts-s'].map(id=>parseFloat((document.getElementById(id)||{}).value)||0);
@@ -13625,6 +14183,57 @@
           document.getElementById('conv-ielts').value=sorted[0][0];
           resEl.innerHTML=`<div class="data-list"><div class="data-row"><span class="data-row__key">IELTS معادل</span><span class="data-row__val" style="color:var(--m3-primary);font-weight:700">${sorted[0][0]}</span></div></div>`;
         }
+      }
+
+      // ── GPA Calculator ─────────────────────────────────────────────
+      var _gpaRowId=0;
+      function gpaAddRow(){
+        var list=document.getElementById('gpa-rows');if(!list)return;
+        var id=_gpaRowId++;
+        var row=document.createElement('div');
+        row.id='gpa-row-'+id;row.style.cssText='display:flex;gap:6px;align-items:center';
+        row.innerHTML='<input type="text" placeholder="نام درس" class="text-input" style="flex:2;font-size:13px">'
+          +'<input type="number" placeholder="نمره" class="text-input gpa-score" step="0.01" style="flex:1;font-size:13px" oninput="gpaCalc()">'
+          +'<input type="number" placeholder="واحد" class="text-input gpa-unit" min="0.5" step="0.5" value="3" style="flex:1;font-size:13px" oninput="gpaCalc()">'
+          +'<button onclick="document.getElementById(\'gpa-row-'+id+'\').remove();gpaCalc()" style="background:none;border:none;cursor:pointer;color:var(--m3-on-surface-variant);font-size:1rem;padding:0 2px">✕</button>';
+        list.appendChild(row);
+      }
+      function _gpaTo4(v,s){if(s===4)return Math.min(4,Math.max(0,v));if(s===20){if(v>=17)return 4;if(v>=14)return 3+(v-14)/3;if(v>=12)return 2+(v-12)/2;if(v>=10)return 1+(v-10)/2;return Math.max(0,v/10);}if(s===100){if(v>=93)return 4;if(v>=90)return 3.7;if(v>=87)return 3.3;if(v>=83)return 3;if(v>=80)return 2.7;if(v>=77)return 2.3;if(v>=73)return 2;if(v>=70)return 1.7;if(v>=67)return 1.3;if(v>=63)return 1;if(v>=60)return 0.7;return 0;}return 0;}
+      function _gpaTo20(v,s){if(s===20)return Math.min(20,Math.max(0,v));if(s===4)return(v/4)*20;if(s===100)return(v/100)*20;return 0;}
+      function _gpaTo100(v,s){if(s===100)return Math.min(100,Math.max(0,v));if(s===4)return(v/4)*100;if(s===20)return(v/20)*100;return 0;}
+      function _gpaLetter(g4){return g4>=3.7?'A+':g4>=3.3?'A':g4>=3?'A−':g4>=2.7?'B+':g4>=2.3?'B':g4>=2?'B−':g4>=1.7?'C+':g4>=1.3?'C':g4>=1?'C−':g4>=0.7?'D+':g4>0?'D':'F';}
+      function gpaCalc(){
+        var scaleEl=document.getElementById('gpa-scale');
+        var scale=scaleEl?parseInt(scaleEl.value):4;
+        var rows=document.querySelectorAll('#gpa-rows>div');
+        var wSum=0,tU=0,grades=[];
+        rows.forEach(row=>{var sc=parseFloat(row.querySelector('.gpa-score')?.value),un=parseFloat(row.querySelector('.gpa-unit')?.value)||0;if(!isNaN(sc)&&un>0){wSum+=sc*un;tU+=un;grades.push({sc,un});}});
+        var res=document.getElementById('gpa-result');if(!res)return;
+        if(!grades.length||!tU){res.innerHTML='';return;}
+        var avg=wSum/tU;
+        var g4=_gpaTo4(avg,scale),g20=_gpaTo20(avg,scale),g100=_gpaTo100(avg,scale);
+        res.innerHTML='<div class="data-list">'
+          +'<div class="data-row"><span class="data-row__key">'+grades.length+' درس — '+tU+' واحد</span><span class="data-row__val">میانگین موزون</span></div>'
+          +'<div class="data-row"><span class="data-row__key">مقیاس '+scale+'</span><span class="data-row__val" style="font-size:1.4rem;font-weight:900;color:var(--m3-primary)">'+avg.toFixed(2)+'</span></div>'
+          +'<div class="data-row"><span class="data-row__key">GPA (مقیاس ۴)</span><span class="data-row__val" style="font-weight:700;color:var(--m3-primary)">'+g4.toFixed(2)+' — '+_gpaLetter(g4)+'</span></div>'
+          +'<div class="data-row"><span class="data-row__key">معادل مقیاس ۲۰</span><span class="data-row__val">'+g20.toFixed(2)+' / 20</span></div>'
+          +'<div class="data-row"><span class="data-row__key">معادل مقیاس ۱۰۰</span><span class="data-row__val">'+g100.toFixed(1)+' / 100</span></div>'
+          +'</div>';
+      }
+      function gpaSetTab(t){
+        ['calc','conv'].forEach(x=>{var b=document.getElementById('gpa-tab-'+x);var w=document.getElementById('gpa-'+x);if(b)b.className='btn '+(x===t?'btn-filled':'btn-tonal');if(w)w.style.display=x===t?'':'none';});
+      }
+      function gpaConvert(){
+        var val=parseFloat((document.getElementById('gpa-in-val')||{}).value);
+        var scale=parseInt((document.getElementById('gpa-in-scale')||{}).value)||20;
+        var res=document.getElementById('gpa-conv-result');if(!res)return;
+        if(isNaN(val)){res.innerHTML='';return;}
+        var g4=_gpaTo4(val,scale),g20=_gpaTo20(val,scale),g100=_gpaTo100(val,scale);
+        res.innerHTML='<div class="data-list">'
+          +'<div class="data-row"><span class="data-row__key">GPA (مقیاس ۴)</span><span class="data-row__val" style="font-weight:700;color:var(--m3-primary)">'+g4.toFixed(2)+' — '+_gpaLetter(g4)+'</span></div>'
+          +'<div class="data-row"><span class="data-row__key">مقیاس ۲۰</span><span class="data-row__val">'+g20.toFixed(2)+' / 20</span></div>'
+          +'<div class="data-row"><span class="data-row__key">مقیاس ۱۰۰</span><span class="data-row__val">'+g100.toFixed(1)+' / 100</span></div>'
+          +'</div>';
       }
 
       // ══════════════════════════════════════════════════════════
@@ -13853,6 +14462,7 @@
         _atOsc.connect(_atGain);_atGain.connect(anal);anal.connect(ctx.destination);
         _atOsc.start();_atPlaying=true;
         const btn=document.getElementById('at-play-btn');if(btn)btn.textContent='⏸ مکث';
+        const cshow=document.getElementById('at-canvas');if(cshow)cshow.style.display='block';
         // Draw waveform
         const c=document.getElementById('at-canvas');
         if(c){const cctx=c.getContext('2d');const buf=new Uint8Array(anal.fftSize);
@@ -13862,7 +14472,7 @@
             buf.forEach((v,i)=>{const x=i/buf.length*c.width,y=(v/128-1)*c.height/2+c.height/2;i===0?cctx.moveTo(x,y):cctx.lineTo(x,y);});
             cctx.stroke();_atRAF=requestAnimationFrame(draw);}draw();}
       }
-      function atStop(){if(_atOsc){try{_atOsc.stop();}catch(_){}}_atOsc=null;_atPlaying=false;const btn=document.getElementById('at-play-btn');if(btn)btn.textContent='▶ شروع';if(_atRAF)cancelAnimationFrame(_atRAF);}
+      function atStop(){if(_atOsc){try{_atOsc.stop();}catch(_){}}_atOsc=null;_atPlaying=false;const btn=document.getElementById('at-play-btn');if(btn)btn.textContent='▶ شروع';if(_atRAF)cancelAnimationFrame(_atRAF);const chide=document.getElementById('at-canvas');if(chide)chide.style.display='none';}
       function atUpdateFreq(){if(_atOsc&&_atPlaying)_atOsc.frequency.value=parseFloat((document.getElementById('at-freq')||{}).value)||440;}
       function atPlayFreq(hz){document.getElementById('at-freq').value=hz;atStop();atPlay();}
       function atLoadAudio(inp){
@@ -13916,6 +14526,188 @@
       }
 
 
+    </script>
+
+    <!-- ══════════════════════════════════════════════════════════
+         M3 OUTLINED TEXT FIELD AUTO-UPGRADER
+         Finds every .field-label + bare input/select/textarea pair
+         and wraps them in the proper .field > .field__container
+         structure so they get the full floating-label treatment.
+         Skips: search bars, inputs already inside .field.
+    ══════════════════════════════════════════════════════════ -->
+    <script>
+    (function initM3Fields() {
+
+      function upgradePair(label, input) {
+        // Skip if already inside a .field wrapper
+        if (input.closest('.field')) return;
+        // Skip search inputs
+        if (input.classList.contains('search-input')) return;
+        if (input.closest('.search-wrap, .hero-search-bar')) return;
+
+        const isTextarea = input.tagName === 'TEXTAREA';
+        const isSelect   = input.tagName === 'SELECT';
+        const isReadonly = input.readOnly || input.classList.contains('text-input--ro');
+        const isLarge    = input.classList.contains('text-input--large');
+        const isCenter   = input.classList.contains('text-input--center');
+        const isMono     = input.classList.contains('mono');
+
+        /* ── Build .field wrapper ── */
+        const field = document.createElement('div');
+        field.className = 'field';
+        if (isTextarea) field.classList.add('field--textarea');
+        if (isReadonly) field.classList.add('field--readonly');
+        if (isLarge)    field.classList.add('field--large');
+        if (isCenter)   field.classList.add('field--center');
+        if (isMono)     field.classList.add('field--mono');
+
+        /* ── Build .field__container ── */
+        const container = document.createElement('div');
+        container.className = 'field__container';
+
+        /* ── Build floating .field__label ── */
+        const floatLabel = document.createElement('label');
+        floatLabel.className = 'field__label';
+        floatLabel.textContent = label.textContent.trim();
+        if (input.id) floatLabel.setAttribute('for', input.id);
+
+        /* ── Upgrade the input ── */
+        // Remove old classes; add field__input
+        input.classList.remove('text-input', 'text-area', 'select-input');
+        input.classList.add('field__input');
+        input.style.marginBottom = '';
+
+        // The floating label trick: input needs placeholder=" " so
+        // :not(:placeholder-shown) fires when it has a value.
+        if (!isTextarea && !isSelect) {
+          if (!input.placeholder || input.placeholder === '') {
+            input.setAttribute('placeholder', ' ');
+          }
+        }
+        // Selects always show the value → add populated modifier immediately
+        if (isSelect) field.classList.add('field--populated');
+
+        /* ── Assemble: container = [floatLabel, input] ── */
+        // The label must come BEFORE the input in DOM for ~ sibling selector to work,
+        // BUT the floating-label CSS uses input:focus ~ label which requires
+        // label AFTER input. Switch order: input first, label second.
+        container.appendChild(input);       // input first
+        container.appendChild(floatLabel);  // label second (sibling selector: input ~ label)
+
+        field.appendChild(container);
+
+        /* ── Insert in place of the original label ── */
+        label.parentNode.insertBefore(field, label);
+        label.remove();
+
+        /* ── Populated state tracking ── */
+        function checkPopulated() {
+          const hasVal = input.value !== '' && input.value !== null;
+          field.classList.toggle('field--populated', !!hasVal || isSelect);
+        }
+        checkPopulated();
+        input.addEventListener('input', checkPopulated);
+        input.addEventListener('change', checkPopulated);
+
+        // Click container → focus input
+        container.addEventListener('click', e => {
+          if (e.target !== input) input.focus();
+        });
+      }
+
+      function upgradeAll() {
+        document.querySelectorAll('.field-label').forEach(label => {
+          // Find the immediately following element sibling
+          let next = label.nextElementSibling;
+          if (!next) return;
+          if (!['INPUT', 'TEXTAREA', 'SELECT'].includes(next.tagName)) return;
+          upgradePair(label, next);
+        });
+      }
+
+      // Run once DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', upgradeAll);
+      } else {
+        upgradeAll();
+      }
+
+      // Re-run when tool panels are revealed (they start as display:none)
+      const observer = new MutationObserver(() => upgradeAll());
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style', 'class']
+      });
+
+      window.upgradeM3Fields = upgradeAll;
+    })();
+
+    // ══════════════════════════════════════════════════════════════
+    //  M3 COLOR BUTTON SYNC
+    //  Updates swatch background + hex label when the hidden color
+    //  input value changes.
+    // ══════════════════════════════════════════════════════════════
+    function _syncColorBtn(id) {
+      const inp = document.getElementById(id);
+      if (!inp) return;
+      const val = inp.value;
+      const swatch = document.getElementById(id + '-swatch');
+      const lbl    = document.getElementById(id + '-lbl');
+      if (swatch) swatch.style.background = val;
+      if (lbl)    lbl.textContent = val;
+      // Keep the legacy cp-swatch div in sync for the color picker tool
+      if (id === 'cp-picker') {
+        const legacySwatch = document.getElementById('cp-swatch');
+        if (legacySwatch) legacySwatch.style.background = val;
+      }
+    }
+
+    // ── Init: sync all color swatches on DOMContentLoaded ───────
+    function _initColorBtns() {
+      document.querySelectorAll('.m3-color-btn input[type="color"]').forEach(function(inp) {
+        if (inp.id) _syncColorBtn(inp.id);
+        // Also wire oninput in case the HTML attribute was missed
+        inp.addEventListener('input', function() { _syncColorBtn(this.id); });
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', _initColorBtns);
+    } else {
+      _initColorBtns();
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  THEME TOGGLE — apply color-scheme to all selects on switch
+    // ══════════════════════════════════════════════════════════════
+    function _applySelectColorScheme() {
+      const dark = document.body.dataset.theme === 'dark' ||
+                   document.documentElement.dataset.theme === 'dark';
+      document.querySelectorAll('select').forEach(function(sel) {
+        sel.style.colorScheme = dark ? 'dark' : 'light';
+        if (dark) {
+          sel.style.backgroundColor = 'var(--m3-surface-container-highest)';
+          sel.style.color = 'var(--m3-on-surface)';
+        } else {
+          sel.style.backgroundColor = '';
+          sel.style.color = '';
+        }
+      });
+    }
+
+    (function patchThemeToggle() {
+      const obs = new MutationObserver(_applySelectColorScheme);
+      obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+      obs.observe(document.body,            { attributes: true, attributeFilter: ['data-theme'] });
+    })();
+
+    // Also apply on initial load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', _applySelectColorScheme);
+    } else {
+      _applySelectColorScheme();
+    }
     </script>
   </body>
 </html>

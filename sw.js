@@ -6,7 +6,7 @@
 //    - External/opaque requests: Network-only (skip)
 // ============================================================
 
-const CACHE_VERSION = 'toolbox-v2.0';
+const CACHE_VERSION = 'toolbox-v2.2';
 const CACHE_SHELL   = CACHE_VERSION + '-shell';   // HTML, CSS, JS, fonts
 const CACHE_ASSETS  = CACHE_VERSION + '-assets';  // images, maps, large files
 
@@ -23,9 +23,12 @@ const SHELL_URLS = [
   './Vazirmatn-VF.ttf',
   './lib/qrcode.js',
   './lib/jsQR.js',
+  './lib/qr-code-styling.js',
   './lib/browser-image-compression.js',
-  './pdfjs/build/pdf.mjs',
-  './pdfjs/build/pdf.worker.mjs',
+  './lib/pdf.mjs',
+  './lib/pdf.worker.mjs',
+  './lib/function-plot.js',
+  './lib/math.js',
 ];
 
 // ── Install: cache app shell ──────────────────────────────
