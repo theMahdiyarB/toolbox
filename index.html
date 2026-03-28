@@ -1639,6 +1639,12 @@
         font-weight: 600;
       }
       .footer-muted a:hover { text-decoration: underline; }
+      @media (max-width: 600px) {
+        .feature-cards {
+          grid-template-columns: repeat(2, 1fr) !important;
+        }
+      }
+
     </style>
     <script>
       // ── Bale MiniApp integration ──────────────────────────
@@ -2061,7 +2067,7 @@
 
           <div class="home-sections">
             <!-- Feature highlights -->
-            <div class="share-install-row" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 24px;">
+            <div class="share-install-row feature-cards" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 24px;">
               <div class="share-card" style="background: color-mix(in srgb, var(--m3-primary) 7%, var(--m3-surface-container-low))">
                 <div class="share-card__icon">🔒</div>
                 <div class="share-card__title">حریم خصوصی کامل</div>
@@ -7101,7 +7107,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 2.5 - ۱۴۰۵/۰۱/۰۸
+          ℹ️ نسخه 2.6 - ۱۴۰۵/۰۱/۰۸
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
