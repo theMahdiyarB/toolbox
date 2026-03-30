@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package version="2.0" unique-identifier="BookId" xmlns="http://www.idpf.org/2007/opf">
+  <opf:metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <meta name="cover" content="img1" xmlns="" />
+    <dc:identifier id="BookId">urn:uuid:67280850-1636-46bf-96bc-6426a65b49f1</dc:identifier>
+    <dc:title>سهراب سپهری</dc:title>
+    <dc:language>fa</dc:language>
+    <dc:creator opf:role="aut">سهراب سپهری</dc:creator>
+  </opf:metadata>
+  <manifest>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
+    <item id="id1" href="fonts/irsans.ttf" media-type="application/x-font-ttf" />
+    <item id="stylesheet1" href="style.css" media-type="text/css" />
+    <item id="img1" href="images/cover.png" media-type="image/png" />
+    <item id="html1" href="titlepage.xhtml" media-type="application/xhtml+xml" />
+    <item id="html2" href="promo.xhtml" media-type="application/xhtml+xml" />
+    <item id="html3" href="bio.xhtml" media-type="application/xhtml+xml" />
+    <item id="html4" href="cat5101.xhtml" media-type="application/xhtml+xml" />
+    <item id="html5" href="cat5101sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html6" href="cat5102.xhtml" media-type="application/xhtml+xml" />
+    <item id="html7" href="cat5102sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html8" href="cat5103.xhtml" media-type="application/xhtml+xml" />
+    <item id="html9" href="cat5103sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html10" href="cat5104.xhtml" media-type="application/xhtml+xml" />
+    <item id="html11" href="cat5104sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html12" href="cat5105.xhtml" media-type="application/xhtml+xml" />
+    <item id="html13" href="cat5105sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html14" href="cat5106.xhtml" media-type="application/xhtml+xml" />
+    <item id="html15" href="cat5106sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html16" href="cat5107.xhtml" media-type="application/xhtml+xml" />
+    <item id="html17" href="cat5107sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html18" href="cat5108.xhtml" media-type="application/xhtml+xml" />
+    <item id="html19" href="cat5108sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html20" href="cat5100.xhtml" media-type="application/xhtml+xml" />
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="html1" />
+    <itemref idref="html2" />
+    <itemref idref="html3" />
+    <itemref idref="html4" />
+    <itemref idref="html5" />
+    <itemref idref="html6" />
+    <itemref idref="html7" />
+    <itemref idref="html8" />
+    <itemref idref="html9" />
+    <itemref idref="html10" />
+    <itemref idref="html11" />
+    <itemref idref="html12" />
+    <itemref idref="html13" />
+    <itemref idref="html14" />
+    <itemref idref="html15" />
+    <itemref idref="html16" />
+    <itemref idref="html17" />
+    <itemref idref="html18" />
+    <itemref idref="html19" />
+    <itemref idref="html20" />
+  </spine>
+  <guide />
+</package>

@@ -1374,7 +1374,7 @@ h1, h2, h3, h4, h5, h6 {
 .tool-title { font-size: 1.6rem; font-weight: 900; color: var(--m3-on-surface); margin-bottom: var(--m3-spacing-24); }
 
 /* ─── Form Layout Helpers ─────────────────────────────── */
-.field-row { display: flex; gap: var(--m3-spacing-16); flex-wrap: wrap; margin-bottom: var(--m3-spacing-16); }
+.field-row { display: flex; gap: var(--m3-spacing-16); flex-wrap: wrap; margin-bottom: 16px; }
 .field-col  { flex: 1; min-width: 200px; }
 
 /* ─── Legacy label (standalone label outside the field wrapper) ─── */
@@ -1726,16 +1726,21 @@ select.field__input {
    label (label is rendered as .field-label above the box).   */
 .text-input, .text-area, .select-input {
   width: 100%;
-  padding: 15px var(--field-pad-h);  /* 15px + 1px border = 16px visual */
+  padding: 12px var(--field-pad-h);
   border-radius: var(--field-radius);
   border: 1px solid var(--m3-outline);
-  background-color: transparent;
+  background-color: var(--m3-surface-container);
   color: var(--m3-on-surface);
   font: inherit;
   font-size: 1rem;
+  box-sizing: border-box;
   transition:
     border-color var(--m3-duration-fast) var(--m3-ease-standard),
     box-shadow var(--m3-duration-fast) var(--m3-ease-standard);
+}
+.select-input {
+  -webkit-appearance: auto;
+  appearance: auto;
 }
 .text-input:hover, .text-area:hover, .select-input:hover {
   border-color: var(--m3-on-surface);

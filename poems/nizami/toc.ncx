@@ -1,0 +1,2346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:604807c7-5a41-4b4e-a7f4-4897420838f8" />
+    <meta name="dtb:depth" content="1" />
+    <meta name="dtb:totalPageCount" content="0" />
+    <meta name="dtb:maxPageNumber" content="0" />
+  </head>
+  <docTitle>
+    <text> نظامی</text>
+  </docTitle>
+  <docAuthor>
+    <text>نظامی</text>
+  </docAuthor>
+  <navMap>
+    <navPoint id="navid1" playOrder="1">
+      <navLabel>
+        <text>معرفی گنجور</text>
+      </navLabel>
+      <content src="promo.xhtml" />
+    </navPoint>
+    <navPoint id="navid2" playOrder="2">
+      <navLabel>
+        <text>دربارهٔ نظامی</text>
+      </navLabel>
+      <content src="bio.xhtml" />
+    </navPoint>
+    <navPoint id="navid3" playOrder="3">
+      <navLabel>
+        <text>نظامی</text>
+      </navLabel>
+      <content src="cat110.xhtml" />
+      <navPoint id="navid3x1" playOrder="4">
+        <navLabel>
+          <text>خمسه</text>
+        </navLabel>
+        <content src="cat111.xhtml" />
+        <navPoint id="navid3x1x1" playOrder="5">
+          <navLabel>
+            <text>خسرو و شیرین</text>
+          </navLabel>
+          <content src="cat112.xhtml" />
+          <navPoint id="navid3x1x1x1" playOrder="6">
+            <navLabel>
+              <text>بخش ۱ - سرآغاز : خداوندا در توفیق بگشای</text>
+            </navLabel>
+            <content src="cat112sec1.xhtml#poem-8865" />
+          </navPoint>
+          <navPoint id="navid3x1x1x2" playOrder="7">
+            <navLabel>
+              <text>بخش ۲ - در توحید باری : به نام آنکه هستی نام ازو یافت</text>
+            </navLabel>
+            <content src="cat112sec1.xhtml#poem-8866" />
+          </navPoint>
+          <navPoint id="navid3x1x1x3" playOrder="8">
+            <navLabel>
+              <text>بخش ۳ - در استدلال نظر و توفیق شناخت : خبر داری که سیاحان افلاک</text>
+            </navLabel>
+            <content src="cat112sec1.xhtml#poem-8867" />
+          </navPoint>
+          <navPoint id="navid3x1x1x4" playOrder="9">
+            <navLabel>
+              <text>بخش ۴ - آمرزش خواستن : خدایا چون گل ما را سرشتی</text>
+            </navLabel>
+            <content src="cat112sec1.xhtml#poem-8868" />
+          </navPoint>
+          <navPoint id="navid3x1x1x5" playOrder="10">
+            <navLabel>
+              <text>بخش ۵ - در نعت رسول اکرم صلی الله علیه وسلم : محمد کافرینش هست خاکش</text>
+            </navLabel>
+            <content src="cat112sec1.xhtml#poem-8869" />
+          </navPoint>
+          <navPoint id="navid3x1x1x6" playOrder="11">
+            <navLabel>
+              <text>بخش ۶ - در سابقه نظم کتاب : چو طالع موکب دولت روان کرد</text>
+            </navLabel>
+            <content src="cat112sec1.xhtml#poem-8870" />
+          </navPoint>
+          <navPoint id="navid3x1x1x7" playOrder="12">
+            <navLabel>
+              <text>بخش ۷ - در ستایش طغرل ارسلان : چون سلطان جوان شاه جوانبخت</text>
+            </navLabel>
+            <content src="cat112sec1.xhtml#poem-8871" />
+          </navPoint>
+          <navPoint id="navid3x1x1x8" playOrder="13">
+            <navLabel>
+              <text>بخش ۸ - ستایش اتابک اعظم شمس‌الدین ابوجعفر محمدبن ایلدگز</text>
+            </navLabel>
+            <content src="cat112sec1.xhtml#poem-8872" />
+          </navPoint>
+          <navPoint id="navid3x1x1x9" playOrder="14">
+            <navLabel>
+              <text>بخش ۹ - خطاب زمین بوس : زهی دارنده اورنگ شاهی</text>
+            </navLabel>
+            <content src="cat112sec1.xhtml#poem-8873" />
+          </navPoint>
+          <navPoint id="navid3x1x1x10" playOrder="15">
+            <navLabel>
+              <text>بخش ۱۰ - در مدح شاه مظفرالدین قزل ارسلان : سبک باش ای نسیم صبح گاهی</text>
+            </navLabel>
+            <content src="cat112sec1.xhtml#poem-8874" />
+          </navPoint>
+          <navPoint id="navid3x1x1x11" playOrder="16">
+            <navLabel>
+              <text>بخش ۱۱ - در پژوهش این کتاب : مرا چون هاتف دل دید دمساز</text>
+            </navLabel>
+            <content src="cat112sec1.xhtml#poem-8875" />
+          </navPoint>
+          <navPoint id="navid3x1x1x12" playOrder="17">
+            <navLabel>
+              <text>بخش ۱۲ - سخنی چند در عشق : مراکز عشق به ناید شعاری</text>
+            </navLabel>
+            <content src="cat112sec1.xhtml#poem-8876" />
+          </navPoint>
+          <navPoint id="navid3x1x1x13" playOrder="18">
+            <navLabel>
+              <text>بخش ۱۳ - عذر انگیزی در نظم کتاب : در آن مدت که من در بسته بودم</text>
+            </navLabel>
+            <content src="cat112sec2.xhtml#poem-8877" />
+          </navPoint>
+          <navPoint id="navid3x1x1x14" playOrder="19">
+            <navLabel>
+              <text>بخش ۱۴ - آغاز داستان خسرو و شیرین : چنین گفت آن سخن گوی کهن زاد</text>
+            </navLabel>
+            <content src="cat112sec2.xhtml#poem-8878" />
+          </navPoint>
+          <navPoint id="navid3x1x1x15" playOrder="20">
+            <navLabel>
+              <text>بخش ۱۵ - عشرت خسرو در مرغزار و سیاست هرمز : قضا را از قضا یک روز شادان</text>
+            </navLabel>
+            <content src="cat112sec2.xhtml#poem-8879" />
+          </navPoint>
+          <navPoint id="navid3x1x1x16" playOrder="21">
+            <navLabel>
+              <text>بخش ۱۶ - شفیع انگیختن خسرو پیران را پیش پدر : چو خسرو دید کان خواری بر او رفت</text>
+            </navLabel>
+            <content src="cat112sec2.xhtml#poem-8880" />
+          </navPoint>
+          <navPoint id="navid3x1x1x17" playOrder="22">
+            <navLabel>
+              <text>بخش ۱۷ - به خواب دیدن خسرو نیای خویش انوشیروان را : چو آمد زلف شب در عطر رسائی</text>
+            </navLabel>
+            <content src="cat112sec2.xhtml#poem-8881" />
+          </navPoint>
+          <navPoint id="navid3x1x1x18" playOrder="23">
+            <navLabel>
+              <text>بخش ۱۸ - حکایت کردن شاپور از شیرین و شبدیز : ندیمی خاص بودش نام شاپور</text>
+            </navLabel>
+            <content src="cat112sec2.xhtml#poem-8882" />
+          </navPoint>
+          <navPoint id="navid3x1x1x19" playOrder="24">
+            <navLabel>
+              <text>بخش ۱۹ - رفتن شاپور در ارمن به طلب شیرین : زمین بوسید شاپور سخندان</text>
+            </navLabel>
+            <content src="cat112sec2.xhtml#poem-8883" />
+          </navPoint>
+          <navPoint id="navid3x1x1x20" playOrder="25">
+            <navLabel>
+              <text>بخش ۲۰ - نمودن شاپور صورت خسرو را بار اول : چو مشگین جعد شب را شانه کردند</text>
+            </navLabel>
+            <content src="cat112sec2.xhtml#poem-8884" />
+          </navPoint>
+          <navPoint id="navid3x1x1x21" playOrder="26">
+            <navLabel>
+              <text>بخش ۲۱ - نمودن شاپور صورت خسرو را بار دوم : چو بر زد بامدادن بور گلرنگ</text>
+            </navLabel>
+            <content src="cat112sec2.xhtml#poem-8885" />
+          </navPoint>
+          <navPoint id="navid3x1x1x22" playOrder="27">
+            <navLabel>
+              <text>بخش ۲۲ - نمودن شاپور صورت خسرو را بار سوم : شباهنگام کاین عنقای فرتوت</text>
+            </navLabel>
+            <content src="cat112sec2.xhtml#poem-8886" />
+          </navPoint>
+          <navPoint id="navid3x1x1x23" playOrder="28">
+            <navLabel>
+              <text>بخش ۲۳ - پیدا شدن شاپور : برآمد ناگه مرغ فسون ساز</text>
+            </navLabel>
+            <content src="cat112sec2.xhtml#poem-8887" />
+          </navPoint>
+          <navPoint id="navid3x1x1x24" playOrder="29">
+            <navLabel>
+              <text>بخش ۲۴ - گریختن شیرین از نزد مهین بانو به مداین : چو برزد بامدادان خازن چین</text>
+            </navLabel>
+            <content src="cat112sec3.xhtml#poem-8888" />
+          </navPoint>
+          <navPoint id="navid3x1x1x25" playOrder="30">
+            <navLabel>
+              <text>بخش ۲۵ - دیدن خسرو شیرین را در چشمه سار : سخن گوینده پیر پارسی خوان</text>
+            </navLabel>
+            <content src="cat112sec3.xhtml#poem-8889" />
+          </navPoint>
+          <navPoint id="navid3x1x1x26" playOrder="31">
+            <navLabel>
+              <text>بخش ۲۶ - رسیدن شیرین به مشگوی خسرو در مداین : فلک چون کار سازیها نماید</text>
+            </navLabel>
+            <content src="cat112sec3.xhtml#poem-8890" />
+          </navPoint>
+          <navPoint id="navid3x1x1x27" playOrder="32">
+            <navLabel>
+              <text>بخش ۲۷ - ترتیب کردن کوشک برای شیرین : چو شیرین در مداین مهد بگشاد</text>
+            </navLabel>
+            <content src="cat112sec3.xhtml#poem-8891" />
+          </navPoint>
+          <navPoint id="navid3x1x1x28" playOrder="33">
+            <navLabel>
+              <text>بخش ۲۸ - رسیدن خسرو به ارمن نزد مهین بانو : چو خسرو دور شد زان چشمه آب</text>
+            </navLabel>
+            <content src="cat112sec3.xhtml#poem-8892" />
+          </navPoint>
+          <navPoint id="navid3x1x1x29" playOrder="34">
+            <navLabel>
+              <text>بخش ۲۹ - مجلس بزم خسرو و باز آمدن شاپور : یکی شب از شب نوروز خوشتر</text>
+            </navLabel>
+            <content src="cat112sec3.xhtml#poem-8893" />
+          </navPoint>
+          <navPoint id="navid3x1x1x30" playOrder="35">
+            <navLabel>
+              <text>بخش ۳۰ - رفتن شاپور دیگر بار به طلب شیرین : خوشا ملکا که ملک زندگانی است</text>
+            </navLabel>
+            <content src="cat112sec3.xhtml#poem-8894" />
+          </navPoint>
+          <navPoint id="navid3x1x1x31" playOrder="36">
+            <navLabel>
+              <text>بخش ۳۱ - آگاهی خسرو از مرگ پدر : نشسته شاه روزی نیم هشیار</text>
+            </navLabel>
+            <content src="cat112sec3.xhtml#poem-8895" />
+          </navPoint>
+          <navPoint id="navid3x1x1x32" playOrder="37">
+            <navLabel>
+              <text>بخش ۳۲ - بر تخت نشستن خسرو بجای پدر : چو شد معلوم کز حکم الهی</text>
+            </navLabel>
+            <content src="cat112sec4.xhtml#poem-8896" />
+          </navPoint>
+          <navPoint id="navid3x1x1x33" playOrder="38">
+            <navLabel>
+              <text>بخش ۳۳ - باز آوردن شاپور شیرین را پیش مهین بانو : چو شیرین را ز قصر آورد شاپور</text>
+            </navLabel>
+            <content src="cat112sec4.xhtml#poem-8897" />
+          </navPoint>
+          <navPoint id="navid3x1x1x34" playOrder="39">
+            <navLabel>
+              <text>بخش ۳۴ - گریختن خسرو از بهرام چوبین : کلید رای فتح آمد پدید است</text>
+            </navLabel>
+            <content src="cat112sec4.xhtml#poem-8898" />
+          </navPoint>
+          <navPoint id="navid3x1x1x35" playOrder="40">
+            <navLabel>
+              <text>بخش ۳۵ - بهم رسیدن خسرو و شیرین در شکارگاه : چنین گوید جهان دیده سخنگوی</text>
+            </navLabel>
+            <content src="cat112sec4.xhtml#poem-8899" />
+          </navPoint>
+          <navPoint id="navid3x1x1x36" playOrder="41">
+            <navLabel>
+              <text>بخش ۳۶ - اندرز و سوگند دادن مهین بانو شیرین را : چو دهقان دانه در گل پاک ریزد</text>
+            </navLabel>
+            <content src="cat112sec4.xhtml#poem-8900" />
+          </navPoint>
+          <navPoint id="navid3x1x1x37" playOrder="42">
+            <navLabel>
+              <text>بخش ۳۷ - صفت بهار و عیش خسرو و شیرین : چو پیر سبز پوش آسمانی</text>
+            </navLabel>
+            <content src="cat112sec4.xhtml#poem-8901" />
+          </navPoint>
+          <navPoint id="navid3x1x1x38" playOrder="43">
+            <navLabel>
+              <text>بخش ۳۸ - شیرکشتن خسرو در بزمگاه : ملک عزم تماشا کرد روزی</text>
+            </navLabel>
+            <content src="cat112sec4.xhtml#poem-8902" />
+          </navPoint>
+          <navPoint id="navid3x1x1x39" playOrder="44">
+            <navLabel>
+              <text>بخش ۳۹ - افسانه گفتن خسرو و شیرین و شاپور و دختران : فرو زنده شبی روشنتر از روز</text>
+            </navLabel>
+            <content src="cat112sec4.xhtml#poem-8903" />
+          </navPoint>
+          <navPoint id="navid3x1x1x40" playOrder="45">
+            <navLabel>
+              <text>بخش ۴۰ - افسانه‌سرائی ده دختر : فرنگیس اولین مرکب روان کرد</text>
+            </navLabel>
+            <content src="cat112sec4.xhtml#poem-8904" />
+          </navPoint>
+          <navPoint id="navid3x1x1x41" playOrder="46">
+            <navLabel>
+              <text>بخش ۴۱ - مراد طلبیدن خسرو از شیرین و مانع شدن او : شبی از جمله شبهای بهاری</text>
+            </navLabel>
+            <content src="cat112sec4.xhtml#poem-8905" />
+          </navPoint>
+          <navPoint id="navid3x1x1x42" playOrder="47">
+            <navLabel>
+              <text>بخش ۴۲ - به خشم رفتن خسرو از پیش شیرین و رفتن به روم و پیوند او با مریم</text>
+            </navLabel>
+            <content src="cat112sec5.xhtml#poem-8906" />
+          </navPoint>
+          <navPoint id="navid3x1x1x43" playOrder="48">
+            <navLabel>
+              <text>بخش ۴۳ - جنگ خسرو با بهرام و گریختن بهرام : چو روزی چند شاه آنجا طرب کرد</text>
+            </navLabel>
+            <content src="cat112sec5.xhtml#poem-8907" />
+          </navPoint>
+          <navPoint id="navid3x1x1x44" playOrder="49">
+            <navLabel>
+              <text>بخش ۴۴ - بر تخت نشستن خسرو به مدائن بار دوم : چو سر بر کرد ماه از برج ماهی</text>
+            </navLabel>
+            <content src="cat112sec5.xhtml#poem-8908" />
+          </navPoint>
+          <navPoint id="navid3x1x1x45" playOrder="50">
+            <navLabel>
+              <text>بخش ۴۵ - نالیدن شیرین در جدائی خسرو : چنین در دفتر آورد آن سخن‌سنج</text>
+            </navLabel>
+            <content src="cat112sec5.xhtml#poem-8909" />
+          </navPoint>
+          <navPoint id="navid3x1x1x46" playOrder="51">
+            <navLabel>
+              <text>بخش ۴۶ - وصیت کردن مهین بانو شیرین را : مهین بانو دلش دادی شب و روز</text>
+            </navLabel>
+            <content src="cat112sec5.xhtml#poem-8910" />
+          </navPoint>
+          <navPoint id="navid3x1x1x47" playOrder="52">
+            <navLabel>
+              <text>بخش ۴۷ - نشستن شیرین به پادشاهی بر جای مهین بانو : چون بر شیرین مقرر گشت شاهی</text>
+            </navLabel>
+            <content src="cat112sec5.xhtml#poem-8911" />
+          </navPoint>
+          <navPoint id="navid3x1x1x48" playOrder="53">
+            <navLabel>
+              <text>بخش ۴۸ - آگهی خسرو از مرگ بهرام چوبین : چو شاهنشاه صبح آمد بر اورنگ</text>
+            </navLabel>
+            <content src="cat112sec5.xhtml#poem-8912" />
+          </navPoint>
+          <navPoint id="navid3x1x1x49" playOrder="54">
+            <navLabel>
+              <text>بخش ۴۹ - بزم‌آرائی خسرو : چهارم روز مجلس تازه کردند</text>
+            </navLabel>
+            <content src="cat112sec5.xhtml#poem-8913" />
+          </navPoint>
+          <navPoint id="navid3x1x1x50" playOrder="55">
+            <navLabel>
+              <text>بخش ۵۰ - (سی لحن باربد) : در آمد باربد چون بلبل مست</text>
+            </navLabel>
+            <content src="cat112sec5.xhtml#poem-8914" />
+          </navPoint>
+          <navPoint id="navid3x1x1x51" playOrder="56">
+            <navLabel>
+              <text>بخش ۵۱ - شفاعت کردن خسرو پیش مریم از شیرین : چو بدر از جیب گردون سر برآورد</text>
+            </navLabel>
+            <content src="cat112sec5.xhtml#poem-8915" />
+          </navPoint>
+          <navPoint id="navid3x1x1x52" playOrder="57">
+            <navLabel>
+              <text>بخش ۵۲ - فرستادن خسرو شاپور را به طلب شیرین : شفاعت کرد روزی شه به شاپور</text>
+            </navLabel>
+            <content src="cat112sec6.xhtml#poem-8916" />
+          </navPoint>
+          <navPoint id="navid3x1x1x53" playOrder="58">
+            <navLabel>
+              <text>بخش ۵۳ - آغاز عشق فرهاد : پری پیکر نگار پرنیان پوش</text>
+            </navLabel>
+            <content src="cat112sec6.xhtml#poem-8917" />
+          </navPoint>
+          <navPoint id="navid3x1x1x54" playOrder="59">
+            <navLabel>
+              <text>بخش ۵۴ - زاری کردن فرهاد از عشق شیرین : چو دل در مهر شیرین بست فرهاد</text>
+            </navLabel>
+            <content src="cat112sec6.xhtml#poem-8918" />
+          </navPoint>
+          <navPoint id="navid3x1x1x55" playOrder="60">
+            <navLabel>
+              <text>بخش ۵۵ - آگاهی یافتن خسرو از عشق فرهاد : یکی محرم ز نزدیکان درگاه</text>
+            </navLabel>
+            <content src="cat112sec6.xhtml#poem-8919" />
+          </navPoint>
+          <navPoint id="navid3x1x1x56" playOrder="61">
+            <navLabel>
+              <text>بخش ۵۶ - رای زدن خسرو در کار فرهاد : ز نزدیکان خود با محرمی چند</text>
+            </navLabel>
+            <content src="cat112sec6.xhtml#poem-8920" />
+          </navPoint>
+          <navPoint id="navid3x1x1x57" playOrder="62">
+            <navLabel>
+              <text>بخش ۵۷ - مناظره خسرو با فرهاد : نخستین بار گفتش کز کجائی</text>
+            </navLabel>
+            <content src="cat112sec6.xhtml#poem-8921" />
+          </navPoint>
+          <navPoint id="navid3x1x1x58" playOrder="63">
+            <navLabel>
+              <text>بخش ۵۸ - کوه کندن فرهاد و زاری او : چو شد پرداخته فرهاد را چنگ</text>
+            </navLabel>
+            <content src="cat112sec6.xhtml#poem-8922" />
+          </navPoint>
+          <navPoint id="navid3x1x1x59" playOrder="64">
+            <navLabel>
+              <text>بخش ۵۹ - رفتن شیرین به کوه بیستون و سقط شدن اسب وی : مبارک روزی از خوش روزگاران</text>
+            </navLabel>
+            <content src="cat112sec7.xhtml#poem-8923" />
+          </navPoint>
+          <navPoint id="navid3x1x1x60" playOrder="65">
+            <navLabel>
+              <text>بخش ۶۰ - آگاهی خسرو از رفتن شیرین نزد فرهاد و کشتن فرهاد به مکر</text>
+            </navLabel>
+            <content src="cat112sec7.xhtml#poem-8924" />
+          </navPoint>
+          <navPoint id="navid3x1x1x61" playOrder="66">
+            <navLabel>
+              <text>بخش ۶۱ - تعزیت‌نامه خسرو به شیرین به افسوس : سراینده چنین افکند بنیاد</text>
+            </navLabel>
+            <content src="cat112sec7.xhtml#poem-8925" />
+          </navPoint>
+          <navPoint id="navid3x1x1x62" playOrder="67">
+            <navLabel>
+              <text>بخش ۶۲ - مردن مریم و تعزیت‌نامه شیرین به خسرو از راه باد افراه</text>
+            </navLabel>
+            <content src="cat112sec7.xhtml#poem-8926" />
+          </navPoint>
+          <navPoint id="navid3x1x1x63" playOrder="68">
+            <navLabel>
+              <text>بخش ۶۳ - رسیدن نامه شیرین به خسرو : چو خسرو نامه شیرین فرو خواند</text>
+            </navLabel>
+            <content src="cat112sec7.xhtml#poem-8927" />
+          </navPoint>
+          <navPoint id="navid3x1x1x64" playOrder="69">
+            <navLabel>
+              <text>بخش ۶۴ - صفت داد و دهش خسرو : جهان خسرو که تا گردون کمر بست</text>
+            </navLabel>
+            <content src="cat112sec7.xhtml#poem-8928" />
+          </navPoint>
+          <navPoint id="navid3x1x1x65" playOrder="70">
+            <navLabel>
+              <text>بخش ۶۵ - شنیدن خسرو اوصاف شکر اسپهانی را : به آیین جهانداران یکی روز</text>
+            </navLabel>
+            <content src="cat112sec7.xhtml#poem-8929" />
+          </navPoint>
+          <navPoint id="navid3x1x1x66" playOrder="71">
+            <navLabel>
+              <text>بخش ۶۶ - تنها ماندن شیرین و زاری کردن وی : ملک دانسته بود از رای پر نور</text>
+            </navLabel>
+            <content src="cat112sec8.xhtml#poem-8930" />
+          </navPoint>
+          <navPoint id="navid3x1x1x67" playOrder="72">
+            <navLabel>
+              <text>بخش ۶۷ - رفتن خسرو سوی قصر شیرین به بهانه شکار : چو عالم بر زد آن زرین علم را</text>
+            </navLabel>
+            <content src="cat112sec8.xhtml#poem-8931" />
+          </navPoint>
+          <navPoint id="navid3x1x1x68" playOrder="73">
+            <navLabel>
+              <text>بخش ۶۸ - دیدن خسرو شیرین را و سخن گفتن با شیرین : چو خسرو دید ماه خرگهی را</text>
+            </navLabel>
+            <content src="cat112sec8.xhtml#poem-8932" />
+          </navPoint>
+          <navPoint id="navid3x1x1x69" playOrder="74">
+            <navLabel>
+              <text>بخش ۶۹ - پاسخ دادن شیرین خسرو را : جوابش داد سرو لاله رخسار</text>
+            </navLabel>
+            <content src="cat112sec8.xhtml#poem-8933" />
+          </navPoint>
+          <navPoint id="navid3x1x1x70" playOrder="75">
+            <navLabel>
+              <text>بخش ۷۰ - پاسخ دادن خسرو شیرین را : دگر باره جهاندار از سر مهر</text>
+            </navLabel>
+            <content src="cat112sec8.xhtml#poem-8934" />
+          </navPoint>
+          <navPoint id="navid3x1x1x71" playOrder="76">
+            <navLabel>
+              <text>بخش ۷۱ - پاسخ دادن شیرین خسرو را : دگر ره لعبت طاوس پیکر</text>
+            </navLabel>
+            <content src="cat112sec8.xhtml#poem-8935" />
+          </navPoint>
+          <navPoint id="navid3x1x1x72" playOrder="77">
+            <navLabel>
+              <text>بخش ۷۲ - پاسخ خسرو شیرین را : ملک بار دگر گفت از دل افروز</text>
+            </navLabel>
+            <content src="cat112sec8.xhtml#poem-8936" />
+          </navPoint>
+          <navPoint id="navid3x1x1x73" playOrder="78">
+            <navLabel>
+              <text>بخش ۷۳ - پاسخ دادن شیرین به خسرو : ز راه پاسخ آن ماه قصب پوش</text>
+            </navLabel>
+            <content src="cat112sec8.xhtml#poem-8937" />
+          </navPoint>
+          <navPoint id="navid3x1x1x74" playOrder="79">
+            <navLabel>
+              <text>بخش ۷۴ - پاسخ دادن خسرو شیرین را : ملک چون دید ناز آن نیازی</text>
+            </navLabel>
+            <content src="cat112sec9.xhtml#poem-8938" />
+          </navPoint>
+          <navPoint id="navid3x1x1x75" playOrder="80">
+            <navLabel>
+              <text>بخش ۷۵ - پاسخ دادن شیرین خسرو را : به خدمت شمسه خوبان خلخ</text>
+            </navLabel>
+            <content src="cat112sec9.xhtml#poem-8939" />
+          </navPoint>
+          <navPoint id="navid3x1x1x76" playOrder="81">
+            <navLabel>
+              <text>بخش ۷۶ - پاسخ خسرو شیرین را : چو خسرو دید کان معشوق طناز</text>
+            </navLabel>
+            <content src="cat112sec9.xhtml#poem-8940" />
+          </navPoint>
+          <navPoint id="navid3x1x1x77" playOrder="82">
+            <navLabel>
+              <text>بخش ۷۷ - پاسخ دادن شیرین خسرو را : اجازت داد شیرین باز لب را</text>
+            </navLabel>
+            <content src="cat112sec9.xhtml#poem-8941" />
+          </navPoint>
+          <navPoint id="navid3x1x1x78" playOrder="83">
+            <navLabel>
+              <text>بخش ۷۸ - بازگشتن خسرو از قصر شیرین : شباهنگام کاهوی ختن گرد</text>
+            </navLabel>
+            <content src="cat112sec9.xhtml#poem-8942" />
+          </navPoint>
+          <navPoint id="navid3x1x1x79" playOrder="84">
+            <navLabel>
+              <text>بخش ۷۹ - پشیمان شدن شیرین از رفتن خسرو : همان صاحب سخن پیر کهن سال</text>
+            </navLabel>
+            <content src="cat112sec9.xhtml#poem-8943" />
+          </navPoint>
+          <navPoint id="navid3x1x1x80" playOrder="85">
+            <navLabel>
+              <text>بخش ۸۰ - غزل گفتن نکیسا از زبان شیرین : نکیسا بر طریقی کان صنم خواست</text>
+            </navLabel>
+            <content src="cat112sec9.xhtml#poem-8944" />
+          </navPoint>
+          <navPoint id="navid3x1x1x81" playOrder="86">
+            <navLabel>
+              <text>بخش ۸۱ - سرود گفتن باربد از زبان خسرو : نکیسا چون زد این افسانه بر چنگ</text>
+            </navLabel>
+            <content src="cat112sec9.xhtml#poem-8945" />
+          </navPoint>
+          <navPoint id="navid3x1x1x82" playOrder="87">
+            <navLabel>
+              <text>بخش ۸۲ - سرود گفتن نکیسا از زبان شیرین : چو بر زد باربد زین سان نوائی</text>
+            </navLabel>
+            <content src="cat112sec10.xhtml#poem-8946" />
+          </navPoint>
+          <navPoint id="navid3x1x1x83" playOrder="88">
+            <navLabel>
+              <text>بخش ۸۳ - سرود گفتن باربد از زبان خسرو : نکیسا چون زد این طیاره بر چنگ</text>
+            </navLabel>
+            <content src="cat112sec10.xhtml#poem-8947" />
+          </navPoint>
+          <navPoint id="navid3x1x1x84" playOrder="89">
+            <navLabel>
+              <text>بخش ۸۴ - سرود گفتن نکیسا از زبان شیرین : چو رود باربد این پرده پرداخت</text>
+            </navLabel>
+            <content src="cat112sec10.xhtml#poem-8948" />
+          </navPoint>
+          <navPoint id="navid3x1x1x85" playOrder="90">
+            <navLabel>
+              <text>بخش ۸۵ - غزل گفتن باربد از زبان خسرو : نکیسا چون زد این افسانه بر ساز</text>
+            </navLabel>
+            <content src="cat112sec10.xhtml#poem-8949" />
+          </navPoint>
+          <navPoint id="navid3x1x1x86" playOrder="91">
+            <navLabel>
+              <text>بخش ۸۶ - سرود گفتن نیکسا از زبان شیرین : نکیسا در ترنم جادوی ساخت</text>
+            </navLabel>
+            <content src="cat112sec10.xhtml#poem-8950" />
+          </navPoint>
+          <navPoint id="navid3x1x1x87" playOrder="92">
+            <navLabel>
+              <text>بخش ۸۷ - سرود گفتن باربد از زبان خسرو : نکیسا چون ز شاه آتش برانگیخت</text>
+            </navLabel>
+            <content src="cat112sec10.xhtml#poem-8951" />
+          </navPoint>
+          <navPoint id="navid3x1x1x88" playOrder="93">
+            <navLabel>
+              <text>بخش ۸۸ - بیرون آمدن شیرین از خرگاه : حکایت بر گرفته شاه و شاپور</text>
+            </navLabel>
+            <content src="cat112sec10.xhtml#poem-8952" />
+          </navPoint>
+          <navPoint id="navid3x1x1x89" playOrder="94">
+            <navLabel>
+              <text>بخش ۸۹ - آوردن خسرو شیرین را از قصر به مدائن : به پیروزی چو بر پیروزه گون تخت</text>
+            </navLabel>
+            <content src="cat112sec10.xhtml#poem-8953" />
+          </navPoint>
+          <navPoint id="navid3x1x1x90" playOrder="95">
+            <navLabel>
+              <text>بخش ۹۰ - زفاف خسرو و شیرین : سعادت چون گلی پرورد خواهد</text>
+            </navLabel>
+            <content src="cat112sec10.xhtml#poem-8954" />
+          </navPoint>
+          <navPoint id="navid3x1x1x91" playOrder="96">
+            <navLabel>
+              <text>بخش ۹۱ - اندرز شیرین خسرو را در داد و دانش : به نزهت بود روزی با دل‌افروز</text>
+            </navLabel>
+            <content src="cat112sec10.xhtml#poem-8955" />
+          </navPoint>
+          <navPoint id="navid3x1x1x92" playOrder="97">
+            <navLabel>
+              <text>بخش ۹۲ - سوال و جواب خسرو و بزرگ امید : چو خسرو دید کان یار گرامی</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8956" />
+          </navPoint>
+          <navPoint id="navid3x1x1x93" playOrder="98">
+            <navLabel>
+              <text>بخش ۹۳ - اولین جنبش : خبر ده کاولین جنبش چه چیز است</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8957" />
+          </navPoint>
+          <navPoint id="navid3x1x1x94" playOrder="99">
+            <navLabel>
+              <text>بخش ۹۴ - چگونگی فلک : دگرباره به پرسیدش جهاندار</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8958" />
+          </navPoint>
+          <navPoint id="navid3x1x1x95" playOrder="100">
+            <navLabel>
+              <text>بخش ۹۵ - اجرام کواکب : دگر ره گفت کاجرام کواکب</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8959" />
+          </navPoint>
+          <navPoint id="navid3x1x1x96" playOrder="101">
+            <navLabel>
+              <text>بخش ۹۶ - مبداء و معاد : دگر ره گفت ما اینجا چرائیم</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8960" />
+          </navPoint>
+          <navPoint id="navid3x1x1x97" playOrder="102">
+            <navLabel>
+              <text>بخش ۹۷ - گذشتن از جهان : دگر ره گفت کای دریای دربار</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8961" />
+          </navPoint>
+          <navPoint id="navid3x1x1x98" playOrder="103">
+            <navLabel>
+              <text>بخش ۹۸ - در بقای جان : دگر باره شه بیدار بختش</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8962" />
+          </navPoint>
+          <navPoint id="navid3x1x1x99" playOrder="104">
+            <navLabel>
+              <text>بخش ۹۹ - در چگونگی دیدار کالبد در خواب : دگر ره گفت اگر جان هست حاصل</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8963" />
+          </navPoint>
+          <navPoint id="navid3x1x1x100" playOrder="105">
+            <navLabel>
+              <text>بخش ۱۰۰ - در یاد کردن دوره زندگی پس از مرگ : دگر ره گفت بعد از زندگانی</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8964" />
+          </navPoint>
+          <navPoint id="navid3x1x1x101" playOrder="106">
+            <navLabel>
+              <text>بخش ۱۰۱ - چگونگی زمین و هوا : دگر ره گفت کز دور فلک خیز</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8965" />
+          </navPoint>
+          <navPoint id="navid3x1x1x102" playOrder="107">
+            <navLabel>
+              <text>بخش ۱۰۲ - در پاس تندرستی از راه اعتدال : دگر باره بگفتش کای خردمند</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8966" />
+          </navPoint>
+          <navPoint id="navid3x1x1x103" playOrder="108">
+            <navLabel>
+              <text>بخش ۱۰۳ - چگونگی رفتن جان از جسم : دگر ره باز پرسیدش که جانها</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8967" />
+          </navPoint>
+          <navPoint id="navid3x1x1x104" playOrder="109">
+            <navLabel>
+              <text>بخش ۱۰۴ - تمثیل موبد اول : یکی گفتا بدان ماند که در خواب</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8968" />
+          </navPoint>
+          <navPoint id="navid3x1x1x105" playOrder="110">
+            <navLabel>
+              <text>بخش ۱۰۵ - تمثیل موبد دوم : دوم موبد به قصری کرد مانند</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8969" />
+          </navPoint>
+          <navPoint id="navid3x1x1x106" playOrder="111">
+            <navLabel>
+              <text>بخش ۱۰۶ - تمثیل موبد سوم : سوم موبد چنان زد داستانی</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8970" />
+          </navPoint>
+          <navPoint id="navid3x1x1x107" playOrder="112">
+            <navLabel>
+              <text>بخش ۱۰۷ - تمثیل موبد چهارم : چهارم مرد موبد گفت کاین راز</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8971" />
+          </navPoint>
+          <navPoint id="navid3x1x1x108" playOrder="113">
+            <navLabel>
+              <text>بخش ۱۰۸ - در نبوت پیغمبر اکرم : سخن چون شد به معصومان حوالت</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8972" />
+          </navPoint>
+          <navPoint id="navid3x1x1x109" playOrder="114">
+            <navLabel>
+              <text>بخش ۱۰۹ - گفتن چهل قصه از کلیله و دمنه با چهل نکته : بزرگ امید چون گلبرگ بشکفت</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8973" />
+          </navPoint>
+          <navPoint id="navid3x1x1x110" playOrder="115">
+            <navLabel>
+              <text>بخش ۱۱۰ - حکمت و اندرز سرائی حکیم نظامی : دلا از روشنی شمعی برافروز</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8974" />
+          </navPoint>
+          <navPoint id="navid3x1x1x111" playOrder="116">
+            <navLabel>
+              <text>بخش ۱۱۱ - صفت شیرویه و انجام کار خسرو : چو خسرو تخته حکمت در آموخت</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8975" />
+          </navPoint>
+          <navPoint id="navid3x1x1x112" playOrder="117">
+            <navLabel>
+              <text>بخش ۱۱۲ - کشتن شیرویه خسرو را : شبی تاریک نور از ماه برده</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8976" />
+          </navPoint>
+          <navPoint id="navid3x1x1x113" playOrder="118">
+            <navLabel>
+              <text>بخش ۱۱۳ - جان دادن شیرین در دخمه خسرو : چو صبح از خواب نوشین سر برآورد</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8977" />
+          </navPoint>
+          <navPoint id="navid3x1x1x114" playOrder="119">
+            <navLabel>
+              <text>بخش ۱۱۴ - نتیجه افسانه خسرو و شیرین : تو کز عبرت بدین افسانه مانی</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8978" />
+          </navPoint>
+          <navPoint id="navid3x1x1x115" playOrder="120">
+            <navLabel>
+              <text>بخش ۱۱۵ - در نصیحت فرزند خود محمد گوید : ببین ای هفت ساله قره‌العین</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8979" />
+          </navPoint>
+          <navPoint id="navid3x1x1x116" playOrder="121">
+            <navLabel>
+              <text>بخش ۱۱۶ - در خواب دیدن خسرو پیغمبر اکرم را : چنین گفت آن سخن پرداز شبخیز</text>
+            </navLabel>
+            <content src="cat112sec11.xhtml#poem-8980" />
+          </navPoint>
+          <navPoint id="navid3x1x1x117" playOrder="122">
+            <navLabel>
+              <text>بخش ۱۱۷ - نامه نبشتن پیغمبر به خسرو : خداوندی که خلاق‌الوجود است</text>
+            </navLabel>
+            <content src="cat112sec12.xhtml#poem-8981" />
+          </navPoint>
+          <navPoint id="navid3x1x1x118" playOrder="123">
+            <navLabel>
+              <text>بخش ۱۱۸ - معراج پیغمبر : شبی رخ تافته زین دیر فانی</text>
+            </navLabel>
+            <content src="cat112sec12.xhtml#poem-8982" />
+          </navPoint>
+          <navPoint id="navid3x1x1x119" playOrder="124">
+            <navLabel>
+              <text>بخش ۱۱۹ - اندرز و ختم کتاب : نظامی هان و هان تا زنده باشی</text>
+            </navLabel>
+            <content src="cat112sec12.xhtml#poem-8983" />
+          </navPoint>
+          <navPoint id="navid3x1x1x120" playOrder="125">
+            <navLabel>
+              <text>بخش ۱۲۰ - طلب کردن طغرل شاه حکیم نظامی را : چو داد اندیشه جادو دماغم</text>
+            </navLabel>
+            <content src="cat112sec12.xhtml#poem-8984" />
+          </navPoint>
+          <navPoint id="navid3x1x1x121" playOrder="126">
+            <navLabel>
+              <text>بخش ۱۲۱ - تأسف بر مرگ شمس‌الدین محمد جهان پهلوان : چه می‌گفتم سخن محمل کجا راند</text>
+            </navLabel>
+            <content src="cat112sec12.xhtml#poem-8985" />
+          </navPoint>
+        </navPoint>
+        <navPoint id="navid3x1x2" playOrder="132">
+          <navLabel>
+            <text>لیلی و مجنون</text>
+          </navLabel>
+          <content src="cat113.xhtml" />
+          <navPoint id="navid3x1x2x1" playOrder="133">
+            <navLabel>
+              <text>بخش ۱ - به نام ایزد بخشاینده : ای نام تو بهترین سرآغاز</text>
+            </navLabel>
+            <content src="cat113sec1.xhtml#poem-9003" />
+          </navPoint>
+          <navPoint id="navid3x1x2x2" playOrder="134">
+            <navLabel>
+              <text>بخش ۲ - نعت پیغمبر اکرم (ص) : ای شاه سوار ملک هستی</text>
+            </navLabel>
+            <content src="cat113sec1.xhtml#poem-9004" />
+          </navPoint>
+          <navPoint id="navid3x1x2x3" playOrder="135">
+            <navLabel>
+              <text>بخش ۳ - برهان قاطع در حدوث آفرینش : در نوبت بار عام دادن</text>
+            </navLabel>
+            <content src="cat113sec1.xhtml#poem-9005" />
+          </navPoint>
+          <navPoint id="navid3x1x2x4" playOrder="136">
+            <navLabel>
+              <text>بخش ۴ - سبب نظم کتاب : روزی به مبارکی و شادی</text>
+            </navLabel>
+            <content src="cat113sec1.xhtml#poem-9006" />
+          </navPoint>
+          <navPoint id="navid3x1x2x5" playOrder="137">
+            <navLabel>
+              <text>بخش ۵ - در مدح شروانشاه اختسان بن منوچهر : سر خیل سپاه تاجداران</text>
+            </navLabel>
+            <content src="cat113sec1.xhtml#poem-9007" />
+          </navPoint>
+          <navPoint id="navid3x1x2x6" playOrder="138">
+            <navLabel>
+              <text>بخش ۶ - خطاب زمین بوس : ای عالم جان و جان عالم</text>
+            </navLabel>
+            <content src="cat113sec1.xhtml#poem-9008" />
+          </navPoint>
+          <navPoint id="navid3x1x2x7" playOrder="139">
+            <navLabel>
+              <text>بخش ۷ - سپردن فرزند خویش به فرزند شروانشاه : چون گوهر سرخ صبحگاهی</text>
+            </navLabel>
+            <content src="cat113sec2.xhtml#poem-9009" />
+          </navPoint>
+          <navPoint id="navid3x1x2x8" playOrder="140">
+            <navLabel>
+              <text>بخش ۸ - در شکایت حسودان و منکران : بر جوش دلا که وقت جوش است</text>
+            </navLabel>
+            <content src="cat113sec2.xhtml#poem-9010" />
+          </navPoint>
+          <navPoint id="navid3x1x2x9" playOrder="141">
+            <navLabel>
+              <text>بخش ۹ - در نصیحت فرزند خود محمد نظامی : ای چارده ساله قرة‌العین</text>
+            </navLabel>
+            <content src="cat113sec2.xhtml#poem-9011" />
+          </navPoint>
+          <navPoint id="navid3x1x2x10" playOrder="142">
+            <navLabel>
+              <text>بخش ۱۰ - یاد کردن بعضی از گذشتگان خویش : ساقی به کجا که می‌پرستم</text>
+            </navLabel>
+            <content src="cat113sec2.xhtml#poem-9012" />
+          </navPoint>
+          <navPoint id="navid3x1x2x11" playOrder="143">
+            <navLabel>
+              <text>بخش ۱۱ - آغاز داستان : گوینده داستان چنین گفت</text>
+            </navLabel>
+            <content src="cat113sec2.xhtml#poem-9013" />
+          </navPoint>
+          <navPoint id="navid3x1x2x12" playOrder="144">
+            <navLabel>
+              <text>بخش ۱۲ - عاشق شدن لیلی و مجنون به یکدیگر : هر روز که صبح بردمیدی</text>
+            </navLabel>
+            <content src="cat113sec2.xhtml#poem-9014" />
+          </navPoint>
+          <navPoint id="navid3x1x2x13" playOrder="145">
+            <navLabel>
+              <text>بخش ۱۳ - در صفت عشق مجنون : سلطان سریر صبح خیزان</text>
+            </navLabel>
+            <content src="cat113sec2.xhtml#poem-9015" />
+          </navPoint>
+          <navPoint id="navid3x1x2x14" playOrder="146">
+            <navLabel>
+              <text>بخش ۱۴ - رفتن پدر مجنون به خواستاری لیلی : چون راه دیار دوست بستند</text>
+            </navLabel>
+            <content src="cat113sec2.xhtml#poem-9016" />
+          </navPoint>
+          <navPoint id="navid3x1x2x15" playOrder="147">
+            <navLabel>
+              <text>بخش ۱۵ - زاری کردن مجنون در عشق لیلی : مجنون چو شنید پند خویشان</text>
+            </navLabel>
+            <content src="cat113sec3.xhtml#poem-9017" />
+          </navPoint>
+          <navPoint id="navid3x1x2x16" playOrder="148">
+            <navLabel>
+              <text>بخش ۱۶ - بردن پدر مجنون را به خانه کعبه : چون رایت عشق آن جهانگیر</text>
+            </navLabel>
+            <content src="cat113sec3.xhtml#poem-9018" />
+          </navPoint>
+          <navPoint id="navid3x1x2x17" playOrder="149">
+            <navLabel>
+              <text>بخش ۱۷ - پند دادن پدر مجنون را : چون دید پدر به حال فرزند</text>
+            </navLabel>
+            <content src="cat113sec3.xhtml#poem-9019" />
+          </navPoint>
+          <navPoint id="navid3x1x2x18" playOrder="150">
+            <navLabel>
+              <text>بخش ۱۸ - حکایت : کبکی به دهن گرفت موری</text>
+            </navLabel>
+            <content src="cat113sec3.xhtml#poem-9020" />
+          </navPoint>
+          <navPoint id="navid3x1x2x19" playOrder="151">
+            <navLabel>
+              <text>بخش ۱۹ - در احوال لیلی : سر دفتر آیت نکوئی</text>
+            </navLabel>
+            <content src="cat113sec3.xhtml#poem-9021" />
+          </navPoint>
+          <navPoint id="navid3x1x2x20" playOrder="152">
+            <navLabel>
+              <text>بخش ۲۰ - خواستاری ابن‌سلام لیلی را : فهرست کش نشاط این باغ</text>
+            </navLabel>
+            <content src="cat113sec3.xhtml#poem-9022" />
+          </navPoint>
+          <navPoint id="navid3x1x2x21" playOrder="153">
+            <navLabel>
+              <text>بخش ۲۱ - رسیدن نوفل به مجنون : لیلی پس پرده عماری</text>
+            </navLabel>
+            <content src="cat113sec3.xhtml#poem-9023" />
+          </navPoint>
+          <navPoint id="navid3x1x2x22" playOrder="154">
+            <navLabel>
+              <text>بخش ۲۲ - جنگ کردن نوفل با قبیله لیلی : نوفل ز چنین عتاب دلکش</text>
+            </navLabel>
+            <content src="cat113sec4.xhtml#poem-9024" />
+          </navPoint>
+          <navPoint id="navid3x1x2x23" playOrder="155">
+            <navLabel>
+              <text>بخش ۲۳ - عتاب کردن مجنون با نوفل : مجنون چو شنید بوی آزرم</text>
+            </navLabel>
+            <content src="cat113sec4.xhtml#poem-9025" />
+          </navPoint>
+          <navPoint id="navid3x1x2x24" playOrder="156">
+            <navLabel>
+              <text>بخش ۲۴ - مصاف کردن نوفل بار دوم : گنجینه گشای این خزینه</text>
+            </navLabel>
+            <content src="cat113sec4.xhtml#poem-9026" />
+          </navPoint>
+          <navPoint id="navid3x1x2x25" playOrder="157">
+            <navLabel>
+              <text>بخش ۲۵ - رهانیدن مجنون آهوان را : سازنده ارغنون این ساز</text>
+            </navLabel>
+            <content src="cat113sec4.xhtml#poem-9027" />
+          </navPoint>
+          <navPoint id="navid3x1x2x26" playOrder="158">
+            <navLabel>
+              <text>بخش ۲۶ - سخن گفتن مجنون با زاغ : شبگیر که چرخ لاجوردی</text>
+            </navLabel>
+            <content src="cat113sec4.xhtml#poem-9028" />
+          </navPoint>
+          <navPoint id="navid3x1x2x27" playOrder="159">
+            <navLabel>
+              <text>بخش ۲۷ - بردن پیرزن مجنون را در خرگاه لیلی : چون نور چراغ آسمان گرد</text>
+            </navLabel>
+            <content src="cat113sec4.xhtml#poem-9029" />
+          </navPoint>
+          <navPoint id="navid3x1x2x28" playOrder="160">
+            <navLabel>
+              <text>بخش ۲۸ - دادن پدر لیلی را به ابن‌سلام : غواص جواهر معانی</text>
+            </navLabel>
+            <content src="cat113sec4.xhtml#poem-9030" />
+          </navPoint>
+          <navPoint id="navid3x1x2x29" playOrder="161">
+            <navLabel>
+              <text>بخش ۲۹ - آگاهی مجنون از شوهر کردن لیلی : فرزانه سخن سرای بغداد</text>
+            </navLabel>
+            <content src="cat113sec4.xhtml#poem-9031" />
+          </navPoint>
+          <navPoint id="navid3x1x2x30" playOrder="162">
+            <navLabel>
+              <text>بخش ۳۰ - رفتن پدر مجنون به دیدن فرزند : دهقان فصیح پارسی زاد</text>
+            </navLabel>
+            <content src="cat113sec5.xhtml#poem-9032" />
+          </navPoint>
+          <navPoint id="navid3x1x2x31" playOrder="163">
+            <navLabel>
+              <text>بخش ۳۱ - وداع کردن پدر مجنون را : چون دید پدر که دردمند است</text>
+            </navLabel>
+            <content src="cat113sec5.xhtml#poem-9033" />
+          </navPoint>
+          <navPoint id="navid3x1x2x32" playOrder="164">
+            <navLabel>
+              <text>بخش ۳۲ - آگاهی مجنون از مرگ پدر : روزی ز قضا به وقت شبگیر</text>
+            </navLabel>
+            <content src="cat113sec5.xhtml#poem-9034" />
+          </navPoint>
+          <navPoint id="navid3x1x2x33" playOrder="165">
+            <navLabel>
+              <text>بخش ۳۳ - انس مجنون با وحوش و سباع : صاحب خبر فسانه پرداز</text>
+            </navLabel>
+            <content src="cat113sec5.xhtml#poem-9035" />
+          </navPoint>
+          <navPoint id="navid3x1x2x34" playOrder="166">
+            <navLabel>
+              <text>بخش ۳۴ - نیایش کردن مجنون به درگاه خدای تعالی : رخشنده شبی چو روز روشن</text>
+            </navLabel>
+            <content src="cat113sec5.xhtml#poem-9036" />
+          </navPoint>
+          <navPoint id="navid3x1x2x35" playOrder="167">
+            <navLabel>
+              <text>بخش ۳۵ - رسیدن نامه لیلی به مجنون : روزی و چه روز عالم افروز</text>
+            </navLabel>
+            <content src="cat113sec5.xhtml#poem-9037" />
+          </navPoint>
+          <navPoint id="navid3x1x2x36" playOrder="168">
+            <navLabel>
+              <text>بخش ۳۶ - نامه مجنون در پاسخ لیلی : بود اول آن خجسته پرگار</text>
+            </navLabel>
+            <content src="cat113sec6.xhtml#poem-9038" />
+          </navPoint>
+          <navPoint id="navid3x1x2x37" playOrder="169">
+            <navLabel>
+              <text>بخش ۳۷ - آمدن سلیم عامری خال مجنون به دیدن او : صراف سخن به لفظ چون زر</text>
+            </navLabel>
+            <content src="cat113sec6.xhtml#poem-9039" />
+          </navPoint>
+          <navPoint id="navid3x1x2x38" playOrder="170">
+            <navLabel>
+              <text>بخش ۳۸ - دیدن مادر مجنون را : مادر چو ز دور در پسر دید</text>
+            </navLabel>
+            <content src="cat113sec6.xhtml#poem-9040" />
+          </navPoint>
+          <navPoint id="navid3x1x2x39" playOrder="171">
+            <navLabel>
+              <text>بخش ۳۹ - آگاهی مجنون از وفات مادر : چون شاهسوار چرخ گردان</text>
+            </navLabel>
+            <content src="cat113sec6.xhtml#poem-9041" />
+          </navPoint>
+          <navPoint id="navid3x1x2x40" playOrder="172">
+            <navLabel>
+              <text>بخش ۴۰ - خواندن لیلی مجنون را : لیلی نه که لعبت حصاری</text>
+            </navLabel>
+            <content src="cat113sec6.xhtml#poem-9042" />
+          </navPoint>
+          <navPoint id="navid3x1x2x41" playOrder="173">
+            <navLabel>
+              <text>بخش ۴۱ - غزل خواندن مجنون نزد لیلی : آیا تو کجا و ما کجائیم</text>
+            </navLabel>
+            <content src="cat113sec6.xhtml#poem-9043" />
+          </navPoint>
+          <navPoint id="navid3x1x2x42" playOrder="174">
+            <navLabel>
+              <text>بخش ۴۲ - آشنا شدن سلام بغدادی با مجنون : دانای سخن چنین کند یاد</text>
+            </navLabel>
+            <content src="cat113sec6.xhtml#poem-9044" />
+          </navPoint>
+          <navPoint id="navid3x1x2x43" playOrder="175">
+            <navLabel>
+              <text>بخش ۴۳ - وفات یافتن ابن سلام شوهر لیلی : هر نکته که بر نشان کاریست</text>
+            </navLabel>
+            <content src="cat113sec6.xhtml#poem-9045" />
+          </navPoint>
+          <navPoint id="navid3x1x2x44" playOrder="176">
+            <navLabel>
+              <text>بخش ۴۴ - صفت رسیدن خزان و در گذشتن لیلی : شرطست که وقت برگ‌ریزان</text>
+            </navLabel>
+            <content src="cat113sec7.xhtml#poem-9046" />
+          </navPoint>
+          <navPoint id="navid3x1x2x45" playOrder="177">
+            <navLabel>
+              <text>بخش ۴۵ - وفات مجنون بر روضه لیلی : انگشت کش سخن سرایان</text>
+            </navLabel>
+            <content src="cat113sec7.xhtml#poem-9047" />
+          </navPoint>
+          <navPoint id="navid3x1x2x46" playOrder="178">
+            <navLabel>
+              <text>بخش ۴۶ - ختم کتاب به نام شروانشاه : شاها ملکا جهان پناها</text>
+            </navLabel>
+            <content src="cat113sec7.xhtml#poem-9048" />
+          </navPoint>
+        </navPoint>
+        <navPoint id="navid3x1x3" playOrder="311">
+          <navLabel>
+            <text>هفت پیکر</text>
+          </navLabel>
+          <content src="cat114.xhtml" />
+          <navPoint id="navid3x1x3x1" playOrder="312">
+            <navLabel>
+              <text>بخش ۱ - به نام ایزد بخشاینده : ای جهان دیده بود خویش از تو</text>
+            </navLabel>
+            <content src="cat114sec1.xhtml#poem-9049" />
+          </navPoint>
+          <navPoint id="navid3x1x3x2" playOrder="313">
+            <navLabel>
+              <text>بخش ۲ - در نعت پیغمبر اکرم : نقطه خط اولین پرگار</text>
+            </navLabel>
+            <content src="cat114sec1.xhtml#poem-9050" />
+          </navPoint>
+          <navPoint id="navid3x1x3x3" playOrder="314">
+            <navLabel>
+              <text>بخش ۳ - معراج پیغمبر اکرم : چون نگنجید در جهان تاجش</text>
+            </navLabel>
+            <content src="cat114sec1.xhtml#poem-9051" />
+          </navPoint>
+          <navPoint id="navid3x1x3x4" playOrder="315">
+            <navLabel>
+              <text>بخش ۴ - سبب نظم کتاب : چون اشارت رسید پنهانی</text>
+            </navLabel>
+            <content src="cat114sec1.xhtml#poem-9052" />
+          </navPoint>
+          <navPoint id="navid3x1x3x5" playOrder="316">
+            <navLabel>
+              <text>بخش ۵ - دعای پادشاه سعید علاء الدین کرپ ارسلان : ای دل از این خیال سازی چند</text>
+            </navLabel>
+            <content src="cat114sec1.xhtml#poem-9053" />
+          </navPoint>
+          <navPoint id="navid3x1x3x6" playOrder="317">
+            <navLabel>
+              <text>بخش ۶ - ستایش سخن و حکمت و اندرز : آنچه او هم نوست و هم کهن است</text>
+            </navLabel>
+            <content src="cat114sec1.xhtml#poem-9054" />
+          </navPoint>
+          <navPoint id="navid3x1x3x7" playOrder="318">
+            <navLabel>
+              <text>بخش ۷ - در نصیحت فرزند خویش محمد : ای پسر هان و هان ترا گفتم</text>
+            </navLabel>
+            <content src="cat114sec2.xhtml#poem-9055" />
+          </navPoint>
+          <navPoint id="navid3x1x3x8" playOrder="319">
+            <navLabel>
+              <text>بخش ۸ - آغاز داستان بهرام : گوهر آمای گنج خانه راز</text>
+            </navLabel>
+            <content src="cat114sec2.xhtml#poem-9056" />
+          </navPoint>
+          <navPoint id="navid3x1x3x9" playOrder="320">
+            <navLabel>
+              <text>بخش ۹ - صفت سمنار و ساختن قصر خورنق : رفت منذر به اتفاق پدر</text>
+            </navLabel>
+            <content src="cat114sec2.xhtml#poem-9057" />
+          </navPoint>
+          <navPoint id="navid3x1x3x10" playOrder="321">
+            <navLabel>
+              <text>بخش ۱۰ - صفت خورنق و ناپیدا شدن نعمان : چون خورنق به فر بهرامی</text>
+            </navLabel>
+            <content src="cat114sec2.xhtml#poem-9058" />
+          </navPoint>
+          <navPoint id="navid3x1x3x11" playOrder="322">
+            <navLabel>
+              <text>بخش ۱۱ - شکار کردن بهرام و داغ کردن گوران : چون سهیل جمال بهرامی</text>
+            </navLabel>
+            <content src="cat114sec2.xhtml#poem-9059" />
+          </navPoint>
+          <navPoint id="navid3x1x3x12" playOrder="323">
+            <navLabel>
+              <text>بخش ۱۲ - کشتن بهرام اژدها را و گنج یافتن : روزی از روضه بهشتی خویش</text>
+            </navLabel>
+            <content src="cat114sec2.xhtml#poem-9060" />
+          </navPoint>
+          <navPoint id="navid3x1x3x13" playOrder="324">
+            <navLabel>
+              <text>بخش ۱۳ - دیدن بهرام صورت هفت پیکر را در خورنق : شاه روزی رسیده بود ز دشت</text>
+            </navLabel>
+            <content src="cat114sec2.xhtml#poem-9061" />
+          </navPoint>
+          <navPoint id="navid3x1x3x14" playOrder="325">
+            <navLabel>
+              <text>بخش ۱۴ - آگاهی بهرام از وفات پدر : چون ز بهرام گور با پدرش</text>
+            </navLabel>
+            <content src="cat114sec2.xhtml#poem-9062" />
+          </navPoint>
+          <navPoint id="navid3x1x3x15" playOrder="326">
+            <navLabel>
+              <text>بخش ۱۵ - لشگر کشیدن بهرام به ایران : بس کن ای جادوی سخن پیوند</text>
+            </navLabel>
+            <content src="cat114sec2.xhtml#poem-9063" />
+          </navPoint>
+          <navPoint id="navid3x1x3x16" playOrder="327">
+            <navLabel>
+              <text>بخش ۱۶ - نامه پادشاه ایران به بهرام‌گور : اول نامه بود نام خدای</text>
+            </navLabel>
+            <content src="cat114sec3.xhtml#poem-9064" />
+          </navPoint>
+          <navPoint id="navid3x1x3x17" playOrder="328">
+            <navLabel>
+              <text>بخش ۱۷ - پاسخ دادن بهرام ایرانیان را : چونکه خواننده خواند نامه تمام</text>
+            </navLabel>
+            <content src="cat114sec3.xhtml#poem-9065" />
+          </navPoint>
+          <navPoint id="navid3x1x3x18" playOrder="329">
+            <navLabel>
+              <text>بخش ۱۸ - برگرفتن بهرام تاج را از میان دو شیر : بامدادان که صبح زرین تاج</text>
+            </navLabel>
+            <content src="cat114sec3.xhtml#poem-9066" />
+          </navPoint>
+          <navPoint id="navid3x1x3x19" playOrder="330">
+            <navLabel>
+              <text>بخش ۱۹ - بر تخت نشستن بهرام به جای پدر : طالع تخت و پادشاهی او</text>
+            </navLabel>
+            <content src="cat114sec3.xhtml#poem-9067" />
+          </navPoint>
+          <navPoint id="navid3x1x3x20" playOrder="331">
+            <navLabel>
+              <text>بخش ۲۰ - داستان بهرام با کنیزک خویش : شاه روزی شکار کرد پسند</text>
+            </navLabel>
+            <content src="cat114sec3.xhtml#poem-9068" />
+          </navPoint>
+          <navPoint id="navid3x1x3x21" playOrder="332">
+            <navLabel>
+              <text>بخش ۲۱ - بردن سرهنگ بهرام‌گور را به مهمانی : شاه بهرام روزی از سر تخت</text>
+            </navLabel>
+            <content src="cat114sec3.xhtml#poem-9069" />
+          </navPoint>
+          <navPoint id="navid3x1x3x22" playOrder="333">
+            <navLabel>
+              <text>بخش ۲۲ - لشکر کشیدن خاقان چین به جنگ بهرام‌گور : چون برآمد ز ماه تا ماهی</text>
+            </navLabel>
+            <content src="cat114sec4.xhtml#poem-9070" />
+          </navPoint>
+          <navPoint id="navid3x1x3x23" playOrder="334">
+            <navLabel>
+              <text>بخش ۲۳ - عتاب کردن بهرام با سران لشگر : روزی از طالع مبارک بخت</text>
+            </navLabel>
+            <content src="cat114sec4.xhtml#poem-9071" />
+          </navPoint>
+          <navPoint id="navid3x1x3x24" playOrder="335">
+            <navLabel>
+              <text>بخش ۲۴ - خواستن بهرام دختر شاهان هفت اقلیم را : شه به ناز و نشاط شد مشغول</text>
+            </navLabel>
+            <content src="cat114sec4.xhtml#poem-9072" />
+          </navPoint>
+          <navPoint id="navid3x1x3x25" playOrder="336">
+            <navLabel>
+              <text>بخش ۲۵ - صفت بزم بهرام در زمستان و ساختن هفت گنبد : روزی از صبح فتح نورانی</text>
+            </navLabel>
+            <content src="cat114sec4.xhtml#poem-9073" />
+          </navPoint>
+          <navPoint id="navid3x1x3x26" playOrder="337">
+            <navLabel>
+              <text>بخش ۲۶ - نشستن بهرام روز شنبه در گنبد سیاه و افسانه گفتن دختر پادشاه اقلیم اول</text>
+            </navLabel>
+            <content src="cat114sec4.xhtml#poem-9074" />
+          </navPoint>
+          <navPoint id="navid3x1x3x27" playOrder="338">
+            <navLabel>
+              <text>بخش ۲۷ - نشستن بهرام روز یکشنبه در گنبد زرد و افسانه گفتن دختر پادشاه اقلیم دوم</text>
+            </navLabel>
+            <content src="cat114sec5.xhtml#poem-9075" />
+          </navPoint>
+          <navPoint id="navid3x1x3x28" playOrder="339">
+            <navLabel>
+              <text>بخش ۲۸ - نشستن بهرام روز دوشنبه در گنبد سبز و افسانه گفتن دختر پادشاه اقلیم سوم</text>
+            </navLabel>
+            <content src="cat114sec5.xhtml#poem-9076" />
+          </navPoint>
+          <navPoint id="navid3x1x3x29" playOrder="340">
+            <navLabel>
+              <text>بخش ۲۹ - نشستن بهرام روز سه‌شنبه در گنبد سرخ و افسانه گفتن دختر پادشاه اقلیم چهارم</text>
+            </navLabel>
+            <content src="cat114sec5.xhtml#poem-9077" />
+          </navPoint>
+          <navPoint id="navid3x1x3x30" playOrder="341">
+            <navLabel>
+              <text>بخش ۳۰ - نشستن بهرام روز چهارشنبه در گنبد پیروزه رنگ و افسانه گفتن دختر پادشاه اقلیم پنجم</text>
+            </navLabel>
+            <content src="cat114sec6.xhtml#poem-9078" />
+          </navPoint>
+          <navPoint id="navid3x1x3x31" playOrder="342">
+            <navLabel>
+              <text>بخش ۳۱ - نشستن بهرام روز پنجشنبه در گنبد صندلی و افسانه گفتن دختر پادشاه اقلیم ششم</text>
+            </navLabel>
+            <content src="cat114sec6.xhtml#poem-9079" />
+          </navPoint>
+          <navPoint id="navid3x1x3x32" playOrder="343">
+            <navLabel>
+              <text>بخش ۳۲ - نشستن بهرام روز آدینه در گنبد سپید و افسانه گفتن دختر پادشاه اقلیم هفتم</text>
+            </navLabel>
+            <content src="cat114sec7.xhtml#poem-9080" />
+          </navPoint>
+          <navPoint id="navid3x1x3x33" playOrder="344">
+            <navLabel>
+              <text>بخش ۳۳ - آگاهی بهرام از لشکرگشی خاقان چین بار دوم : چون به تثلیث مشتری و زحل</text>
+            </navLabel>
+            <content src="cat114sec7.xhtml#poem-9081" />
+          </navPoint>
+          <navPoint id="navid3x1x3x34" playOrder="345">
+            <navLabel>
+              <text>بخش ۳۴ - اندرز گرفتن بهرام از شبان : شه چو تنگ آمدی ز تنگی کار</text>
+            </navLabel>
+            <content src="cat114sec7.xhtml#poem-9082" />
+          </navPoint>
+          <navPoint id="navid3x1x3x35" playOrder="346">
+            <navLabel>
+              <text>بخش ۳۵ - شکایت کردن هفت مظلوم : اولین شخص گفت با بهرام</text>
+            </navLabel>
+            <content src="cat114sec8.xhtml#poem-9083" />
+          </navPoint>
+          <navPoint id="navid3x1x3x36" playOrder="347">
+            <navLabel>
+              <text>بخش ۳۶ - کشتن بهرام وزیر ظالم را : چون زمین از گلیم گرد آلود</text>
+            </navLabel>
+            <content src="cat114sec8.xhtml#poem-9084" />
+          </navPoint>
+          <navPoint id="navid3x1x3x37" playOrder="348">
+            <navLabel>
+              <text>بخش ۳۷ - فرجام کار بهرام و ناپدید شدن او در غار : لعل پیوند این علاقه در</text>
+            </navLabel>
+            <content src="cat114sec8.xhtml#poem-9085" />
+          </navPoint>
+          <navPoint id="navid3x1x3x38" playOrder="349">
+            <navLabel>
+              <text>بخش ۳۸ - در ختم کتاب و دعای علاء الدین کرپ ارسلان : چون فروزنده شد به عکس و عیار</text>
+            </navLabel>
+            <content src="cat114sec8.xhtml#poem-9086" />
+          </navPoint>
+        </navPoint>
+        <navPoint id="navid3x1x4" playOrder="661">
+          <navLabel>
+            <text>شرف نامه</text>
+          </navLabel>
+          <content src="cat115.xhtml" />
+          <navPoint id="navid3x1x4x1" playOrder="662">
+            <navLabel>
+              <text>بخش ۱ - به نام ایزد بخشاینده : خدایا جهان پادشاهی تو راست</text>
+            </navLabel>
+            <content src="cat115sec1.xhtml#poem-9150" />
+          </navPoint>
+          <navPoint id="navid3x1x4x2" playOrder="663">
+            <navLabel>
+              <text>بخش ۲ - مناجات به درگاه باری عز شأنه : بزرگا بزرگی دها بی کسم</text>
+            </navLabel>
+            <content src="cat115sec1.xhtml#poem-9151" />
+          </navPoint>
+          <navPoint id="navid3x1x4x3" playOrder="664">
+            <navLabel>
+              <text>بخش ۳ - در نعت خواجه کاینات : فرستاده خاص پروردگار</text>
+            </navLabel>
+            <content src="cat115sec1.xhtml#poem-9152" />
+          </navPoint>
+          <navPoint id="navid3x1x4x4" playOrder="665">
+            <navLabel>
+              <text>بخش ۴ - در معراج پیغمبر اکرم : شبی کاسمان مجلس افروز کرد</text>
+            </navLabel>
+            <content src="cat115sec1.xhtml#poem-9153" />
+          </navPoint>
+          <navPoint id="navid3x1x4x5" playOrder="666">
+            <navLabel>
+              <text>بخش ۵ - در سابقهٔ نظم شرفنامه : شبی چون سحر زیور آراسته</text>
+            </navLabel>
+            <content src="cat115sec1.xhtml#poem-9154" />
+          </navPoint>
+          <navPoint id="navid3x1x4x6" playOrder="667">
+            <navLabel>
+              <text>بخش ۶ - در حسب حال و انجام روزگار : بیا ساقی آن می نشان ده مرا</text>
+            </navLabel>
+            <content src="cat115sec1.xhtml#poem-9155" />
+          </navPoint>
+          <navPoint id="navid3x1x4x7" playOrder="668">
+            <navLabel>
+              <text>بخش ۷ - در شرف این نامه بر دیگر نامه‌ها : بیا ساقی از سر بنه خواب را</text>
+            </navLabel>
+            <content src="cat115sec1.xhtml#poem-9156" />
+          </navPoint>
+          <navPoint id="navid3x1x4x8" playOrder="669">
+            <navLabel>
+              <text>بخش ۸ - تعلیم خضر در گفتن داستان : بیا ساقی آن ارغوانی شراب</text>
+            </navLabel>
+            <content src="cat115sec2.xhtml#poem-9157" />
+          </navPoint>
+          <navPoint id="navid3x1x4x9" playOrder="670">
+            <navLabel>
+              <text>بخش ۹ - ستایش اتابیک اعظم نصرةالدین ابوبکربن محمد : بیا ساقی آن آب یاقوت‌وار</text>
+            </navLabel>
+            <content src="cat115sec2.xhtml#poem-9158" />
+          </navPoint>
+          <navPoint id="navid3x1x4x10" playOrder="671">
+            <navLabel>
+              <text>بخش ۱۰ - فرو گفتن داستان به طریق ایجاز : بیا ساقی آن راحت‌انگیز روح</text>
+            </navLabel>
+            <content src="cat115sec2.xhtml#poem-9159" />
+          </navPoint>
+          <navPoint id="navid3x1x4x11" playOrder="672">
+            <navLabel>
+              <text>بخش ۱۱ - رغبت نظامی به نظم شرف‌نامه : بیا ساقی از خنب دهقان پیر</text>
+            </navLabel>
+            <content src="cat115sec2.xhtml#poem-9160" />
+          </navPoint>
+          <navPoint id="navid3x1x4x12" playOrder="673">
+            <navLabel>
+              <text>بخش ۱۲ - آغاز داستان و نسب اسکندر : بیا ساقی آن آب حیوان گوار</text>
+            </navLabel>
+            <content src="cat115sec2.xhtml#poem-9161" />
+          </navPoint>
+          <navPoint id="navid3x1x4x13" playOrder="674">
+            <navLabel>
+              <text>بخش ۱۳ - دانش آموختن اسکندر از نقوماجس حکیم پدر ارسطو</text>
+            </navLabel>
+            <content src="cat115sec2.xhtml#poem-9162" />
+          </navPoint>
+          <navPoint id="navid3x1x4x14" playOrder="675">
+            <navLabel>
+              <text>بخش ۱۴ - پادشاهی اسکندر به جای پدر : بیا ساقی از خود رهائیم ده</text>
+            </navLabel>
+            <content src="cat115sec2.xhtml#poem-9163" />
+          </navPoint>
+          <navPoint id="navid3x1x4x15" playOrder="676">
+            <navLabel>
+              <text>بخش ۱۵ - تظلم مصریان از زنگیان پیش اسکندر : بیا ساقی آن شربت جانفزای</text>
+            </navLabel>
+            <content src="cat115sec3.xhtml#poem-9164" />
+          </navPoint>
+          <navPoint id="navid3x1x4x16" playOrder="677">
+            <navLabel>
+              <text>بخش ۱۶ - پیکار اسکندر با لشگر زنگبار : بیا ساقی آن می‌که رومی وشست</text>
+            </navLabel>
+            <content src="cat115sec3.xhtml#poem-9165" />
+          </navPoint>
+          <navPoint id="navid3x1x4x17" playOrder="678">
+            <navLabel>
+              <text>بخش ۱۷ - باز گشتن اسکندر از جنگ زنگ با فیروزی : بیا ساقی از می مرا مست کن</text>
+            </navLabel>
+            <content src="cat115sec3.xhtml#poem-9166" />
+          </navPoint>
+          <navPoint id="navid3x1x4x18" playOrder="679">
+            <navLabel>
+              <text>بخش ۱۸ - سگالش نمودن اسکندر بر جنگ دارا : بیا ساقی آن می‌که فرخ پیست</text>
+            </navLabel>
+            <content src="cat115sec4.xhtml#poem-9167" />
+          </navPoint>
+          <navPoint id="navid3x1x4x19" playOrder="680">
+            <navLabel>
+              <text>بخش ۱۹ - آیینه ساختن اسکندر : بیا ساقی که لعل پالوده را</text>
+            </navLabel>
+            <content src="cat115sec4.xhtml#poem-9168" />
+          </navPoint>
+          <navPoint id="navid3x1x4x20" playOrder="681">
+            <navLabel>
+              <text>بخش ۲۰ - خراج خواستن دارا از اسکندر : بیا ساقی آن جام آیینه فام</text>
+            </navLabel>
+            <content src="cat115sec4.xhtml#poem-9169" />
+          </navPoint>
+          <navPoint id="navid3x1x4x21" playOrder="682">
+            <navLabel>
+              <text>بخش ۲۱ - شتافتن اسکندر به جنگ دارا : بیا ساقی آن راوق روح بخش</text>
+            </navLabel>
+            <content src="cat115sec4.xhtml#poem-9170" />
+          </navPoint>
+          <navPoint id="navid3x1x4x22" playOrder="683">
+            <navLabel>
+              <text>بخش ۲۲ - رای زدن دارا با بزرگان ایران : بیا ساقی آن آتش توبه سوز</text>
+            </navLabel>
+            <content src="cat115sec4.xhtml#poem-9171" />
+          </navPoint>
+          <navPoint id="navid3x1x4x23" playOrder="684">
+            <navLabel>
+              <text>بخش ۲۳ - نامه دارا به اسکندر : به نامه بزرگ ایزد داد بخش</text>
+            </navLabel>
+            <content src="cat115sec5.xhtml#poem-9172" />
+          </navPoint>
+          <navPoint id="navid3x1x4x24" playOrder="685">
+            <navLabel>
+              <text>بخش ۲۴ - پاسخ نامه دارا از جانب اسکندر : سرنامه نام جهاندار پاک</text>
+            </navLabel>
+            <content src="cat115sec5.xhtml#poem-9173" />
+          </navPoint>
+          <navPoint id="navid3x1x4x25" playOrder="686">
+            <navLabel>
+              <text>بخش ۲۵ - جنگ دارا با اسکندر : بیا ساقی از باده بردار بند</text>
+            </navLabel>
+            <content src="cat115sec5.xhtml#poem-9174" />
+          </navPoint>
+          <navPoint id="navid3x1x4x26" playOrder="687">
+            <navLabel>
+              <text>بخش ۲۶ - کشتن سرهنگان دارا را : بیا ساقی از من مرا دور کن</text>
+            </navLabel>
+            <content src="cat115sec5.xhtml#poem-9175" />
+          </navPoint>
+          <navPoint id="navid3x1x4x27" playOrder="688">
+            <navLabel>
+              <text>بخش ۲۷ - نشستن اسکندر بر جای دارا : بیا ساقی آن خون رنگین رز</text>
+            </navLabel>
+            <content src="cat115sec6.xhtml#poem-9176" />
+          </navPoint>
+          <navPoint id="navid3x1x4x28" playOrder="689">
+            <navLabel>
+              <text>بخش ۲۸ - ویران کردن اسکندر آتشکده‌های ایران زمین را</text>
+            </navLabel>
+            <content src="cat115sec6.xhtml#poem-9177" />
+          </navPoint>
+          <navPoint id="navid3x1x4x29" playOrder="690">
+            <navLabel>
+              <text>بخش ۲۹ - خواستاری اسکندر روشنک را : بیا ساقی آن آب جوی بهشت</text>
+            </navLabel>
+            <content src="cat115sec6.xhtml#poem-9178" />
+          </navPoint>
+          <navPoint id="navid3x1x4x30" playOrder="691">
+            <navLabel>
+              <text>بخش ۳۰ - به پادشاهی نشستن اسکندر در اصطخر : بیا ساقی آن شب‌چراغ مغان</text>
+            </navLabel>
+            <content src="cat115sec6.xhtml#poem-9179" />
+          </navPoint>
+          <navPoint id="navid3x1x4x31" playOrder="692">
+            <navLabel>
+              <text>بخش ۳۱ - فرستادن اسکندر روشنک را به روم : بیا ساقی آن صرف بیجاده رنگ</text>
+            </navLabel>
+            <content src="cat115sec7.xhtml#poem-9180" />
+          </navPoint>
+          <navPoint id="navid3x1x4x32" playOrder="693">
+            <navLabel>
+              <text>بخش ۳۲ - رفتن اسکندر به جانب مغرب و زیارت کعبه : بیا ساقی آن می‌که محنت برست</text>
+            </navLabel>
+            <content src="cat115sec7.xhtml#poem-9181" />
+          </navPoint>
+          <navPoint id="navid3x1x4x33" playOrder="694">
+            <navLabel>
+              <text>بخش ۳۳ - داستان نوشابه پادشاه بردع : بیا ساقی آن می‌که جان پرور است</text>
+            </navLabel>
+            <content src="cat115sec7.xhtml#poem-9182" />
+          </navPoint>
+          <navPoint id="navid3x1x4x34" playOrder="695">
+            <navLabel>
+              <text>بخش ۳۴ - بزم اسکندر با نوشابه : بیا ساقی از باده جامی بیار</text>
+            </navLabel>
+            <content src="cat115sec8.xhtml#poem-9183" />
+          </navPoint>
+          <navPoint id="navid3x1x4x35" playOrder="696">
+            <navLabel>
+              <text>بخش ۳۵ - رفتن اسکندر به کوه البرز : باید ساقی آن شیر شنگرف گون</text>
+            </navLabel>
+            <content src="cat115sec8.xhtml#poem-9184" />
+          </navPoint>
+          <navPoint id="navid3x1x4x36" playOrder="697">
+            <navLabel>
+              <text>بخش ۳۶ - گشودن اسکندر دز دربند را به دعای زاهد : بیا ساقی آن می‌که ناز آورد</text>
+            </navLabel>
+            <content src="cat115sec8.xhtml#poem-9185" />
+          </navPoint>
+          <navPoint id="navid3x1x4x37" playOrder="698">
+            <navLabel>
+              <text>بخش ۳۷ - رفتن اسکندر به دز سریر : بیا ساقی از می‌دلم تازه کن</text>
+            </navLabel>
+            <content src="cat115sec8.xhtml#poem-9186" />
+          </navPoint>
+          <navPoint id="navid3x1x4x38" playOrder="699">
+            <navLabel>
+              <text>بخش ۳۸ - رفتن اسکندر به غار کیخسرو : بیا ساقی آن جام کیخسروی</text>
+            </navLabel>
+            <content src="cat115sec8.xhtml#poem-9187" />
+          </navPoint>
+          <navPoint id="navid3x1x4x39" playOrder="700">
+            <navLabel>
+              <text>بخش ۳۹ - رفتن اسکندر به ری و خراسان : بیا ساقی آن جام زرین بیار</text>
+            </navLabel>
+            <content src="cat115sec9.xhtml#poem-9188" />
+          </navPoint>
+          <navPoint id="navid3x1x4x40" playOrder="701">
+            <navLabel>
+              <text>بخش ۴۰ - رفتن اسکندر به هندوستان : بیا ساقی آن زر بگداخته</text>
+            </navLabel>
+            <content src="cat115sec9.xhtml#poem-9189" />
+          </navPoint>
+          <navPoint id="navid3x1x4x41" playOrder="702">
+            <navLabel>
+              <text>بخش ۴۱ - رسیدن نامهٔ اسکندر به کید هندو : چنین بود در نامهٔ شاه روم</text>
+            </navLabel>
+            <content src="cat115sec9.xhtml#poem-9190" />
+          </navPoint>
+          <navPoint id="navid3x1x4x42" playOrder="703">
+            <navLabel>
+              <text>بخش ۴۲ - رفتن اسکندر از هندوستان به چین : بیا ساقی آن آب چون ارغوان</text>
+            </navLabel>
+            <content src="cat115sec9.xhtml#poem-9191" />
+          </navPoint>
+          <navPoint id="navid3x1x4x43" playOrder="704">
+            <navLabel>
+              <text>بخش ۴۳ - سگالش خاقان در پاسخ اسکندر : بیا ساقی آن بادهٔ چون گلاب</text>
+            </navLabel>
+            <content src="cat115sec10.xhtml#poem-9192" />
+          </navPoint>
+          <navPoint id="navid3x1x4x44" playOrder="705">
+            <navLabel>
+              <text>بخش ۴۴ - مناظرهٔ نقاشان رومی و چینی : بیا ساقی آن می‌که جان پرورست</text>
+            </navLabel>
+            <content src="cat115sec10.xhtml#poem-9193" />
+          </navPoint>
+          <navPoint id="navid3x1x4x45" playOrder="706">
+            <navLabel>
+              <text>بخش ۴۵ - مهمانی کردن خاقان چین اسکندر را : بیا ساقی آزاد کن گردنم</text>
+            </navLabel>
+            <content src="cat115sec10.xhtml#poem-9194" />
+          </navPoint>
+          <navPoint id="navid3x1x4x46" playOrder="707">
+            <navLabel>
+              <text>بخش ۴۶ - بازگشتن اسکندر از چین : بیا ساقی امشب به می‌کن شتاب</text>
+            </navLabel>
+            <content src="cat115sec11.xhtml#poem-9195" />
+          </navPoint>
+          <navPoint id="navid3x1x4x47" playOrder="708">
+            <navLabel>
+              <text>بخش ۴۷ - رسیدن اسکندر به دشت قفچاق : بیا ساقی آن باده بر دست گیر</text>
+            </navLabel>
+            <content src="cat115sec11.xhtml#poem-9196" />
+          </navPoint>
+          <navPoint id="navid3x1x4x48" playOrder="709">
+            <navLabel>
+              <text>بخش ۴۸ - رسیدن اسکندر به کشور روس : بیا ساقی آن بکر پوشیده روی</text>
+            </navLabel>
+            <content src="cat115sec11.xhtml#poem-9197" />
+          </navPoint>
+          <navPoint id="navid3x1x4x49" playOrder="710">
+            <navLabel>
+              <text>بخش ۴۹ - جنگ اول اسکندر با روسیان : بیا ساقی آن زیبق تافته</text>
+            </navLabel>
+            <content src="cat115sec11.xhtml#poem-9198" />
+          </navPoint>
+          <navPoint id="navid3x1x4x50" playOrder="711">
+            <navLabel>
+              <text>بخش ۵۰ - جنگ دوم اسکندر با روسیان : دگر روز کاین ساقی صبح خیز</text>
+            </navLabel>
+            <content src="cat115sec11.xhtml#poem-9199" />
+          </navPoint>
+          <navPoint id="navid3x1x4x51" playOrder="712">
+            <navLabel>
+              <text>بخش ۵۱ - جنگ سوم اسکندر با روسیان : دگر روز کاین ترک سلطان شکوه</text>
+            </navLabel>
+            <content src="cat115sec11.xhtml#poem-9200" />
+          </navPoint>
+          <navPoint id="navid3x1x4x52" playOrder="713">
+            <navLabel>
+              <text>بخش ۵۲ - جنگ چهارم اسکندر با روسیان : چو خورشید برزد سر از سبز میل</text>
+            </navLabel>
+            <content src="cat115sec11.xhtml#poem-9201" />
+          </navPoint>
+          <navPoint id="navid3x1x4x53" playOrder="714">
+            <navLabel>
+              <text>بخش ۵۳ - جنگ پنجم اسکندر باروسیان : دگر روز کین طاق پیروزه رنگ</text>
+            </navLabel>
+            <content src="cat115sec12.xhtml#poem-9202" />
+          </navPoint>
+          <navPoint id="navid3x1x4x54" playOrder="715">
+            <navLabel>
+              <text>بخش ۵۴ - جنگ ششم اسکندر با روسیان : چنین تا یکی روز کاین چرخ پیر</text>
+            </navLabel>
+            <content src="cat115sec12.xhtml#poem-9203" />
+          </navPoint>
+          <navPoint id="navid3x1x4x55" playOrder="716">
+            <navLabel>
+              <text>بخش ۵۵ - جنگ هفتم اسکندر با روسیان : سپیده چو سر برزد از باختر</text>
+            </navLabel>
+            <content src="cat115sec12.xhtml#poem-9204" />
+          </navPoint>
+          <navPoint id="navid3x1x4x56" playOrder="717">
+            <navLabel>
+              <text>بخش ۵۶ - پیروزی یافتن اسکندر بر روسیان : بیا ساقی آن رنگ داده عبیر</text>
+            </navLabel>
+            <content src="cat115sec12.xhtml#poem-9205" />
+          </navPoint>
+          <navPoint id="navid3x1x4x57" playOrder="718">
+            <navLabel>
+              <text>بخش ۵۷ - رهائی یافتن نوشابه : بیا ساقی آن جام گوهر فشان</text>
+            </navLabel>
+            <content src="cat115sec12.xhtml#poem-9206" />
+          </navPoint>
+          <navPoint id="navid3x1x4x58" playOrder="719">
+            <navLabel>
+              <text>بخش ۵۸ - نشاط کردن اسکندر با کنیزک چینی : بیا ساقی آن آب آتش خیال</text>
+            </navLabel>
+            <content src="cat115sec12.xhtml#poem-9207" />
+          </navPoint>
+          <navPoint id="navid3x1x4x59" playOrder="720">
+            <navLabel>
+              <text>بخش ۵۹ - افسانه آب حیوان : بیا ساقی آن جام رخشنده می</text>
+            </navLabel>
+            <content src="cat115sec13.xhtml#poem-9208" />
+          </navPoint>
+          <navPoint id="navid3x1x4x60" playOrder="721">
+            <navLabel>
+              <text>بخش ۶۰ - رفتن اسکندر به ظلمات : بیا ساقی آن خاک ظلمات رنگ</text>
+            </navLabel>
+            <content src="cat115sec13.xhtml#poem-9209" />
+          </navPoint>
+          <navPoint id="navid3x1x4x61" playOrder="722">
+            <navLabel>
+              <text>بخش ۶۱ - بیرون آمدن اسکندر از ظلمات : بیا ساقی آن می‌که او دلکشست</text>
+            </navLabel>
+            <content src="cat115sec13.xhtml#poem-9210" />
+          </navPoint>
+          <navPoint id="navid3x1x4x62" playOrder="723">
+            <navLabel>
+              <text>بخش ۶۲ - باز آمدن اسکندر به روم : بیا ساقی آن باده بردار زود</text>
+            </navLabel>
+            <content src="cat115sec13.xhtml#poem-9211" />
+          </navPoint>
+          <navPoint id="navid3x1x4x63" playOrder="724">
+            <navLabel>
+              <text>بخش ۶۳ - در ستایش اتابک نصرةالدین : بیا ساقی آن جام روشن چو ماه</text>
+            </navLabel>
+            <content src="cat115sec13.xhtml#poem-9212" />
+          </navPoint>
+        </navPoint>
+        <navPoint id="navid3x1x5" playOrder="1386">
+          <navLabel>
+            <text>خردنامه</text>
+          </navLabel>
+          <content src="cat116.xhtml" />
+          <navPoint id="navid3x1x5x1" playOrder="1387">
+            <navLabel>
+              <text>بخش ۱ - به نام ایزد بخشاینده : خرد هر کجا گنجی آرد پدید</text>
+            </navLabel>
+            <content src="cat116sec1.xhtml#poem-9213" />
+          </navPoint>
+          <navPoint id="navid3x1x5x2" playOrder="1388">
+            <navLabel>
+              <text>بخش ۲ - نیایش به درگاه باریتعالی : خدایا توئی بنده را دستگیر</text>
+            </navLabel>
+            <content src="cat116sec1.xhtml#poem-9214" />
+          </navPoint>
+          <navPoint id="navid3x1x5x3" playOrder="1389">
+            <navLabel>
+              <text>بخش ۳ - در نعت پیغمبر اکرم : محمد که بی‌دعوی تخت و تاج</text>
+            </navLabel>
+            <content src="cat116sec1.xhtml#poem-9215" />
+          </navPoint>
+          <navPoint id="navid3x1x5x4" playOrder="1390">
+            <navLabel>
+              <text>بخش ۴ - تازه کردن داستان و یاد دوستان : به هر مدتی گردش روزگار</text>
+            </navLabel>
+            <content src="cat116sec1.xhtml#poem-9216" />
+          </navPoint>
+          <navPoint id="navid3x1x5x5" playOrder="1391">
+            <navLabel>
+              <text>بخش ۵ - در اندازه هر کاری نگهداشتن : چو فیاض دریا درآمد به موج</text>
+            </navLabel>
+            <content src="cat116sec1.xhtml#poem-9217" />
+          </navPoint>
+          <navPoint id="navid3x1x5x6" playOrder="1392">
+            <navLabel>
+              <text>بخش ۶ - در ستایش ممدوح : شنیدم که بالای این سبز فرش</text>
+            </navLabel>
+            <content src="cat116sec1.xhtml#poem-9218" />
+          </navPoint>
+          <navPoint id="navid3x1x5x7" playOrder="1393">
+            <navLabel>
+              <text>بخش ۷ - خطاب زمین بوس : زهی آفتابی که از دور دست</text>
+            </navLabel>
+            <content src="cat116sec1.xhtml#poem-9219" />
+          </navPoint>
+          <navPoint id="navid3x1x5x8" playOrder="1394">
+            <navLabel>
+              <text>بخش ۸ - آغار داستان : سر فیلسوفان یونان گروه</text>
+            </navLabel>
+            <content src="cat116sec1.xhtml#poem-9220" />
+          </navPoint>
+          <navPoint id="navid3x1x5x9" playOrder="1395">
+            <navLabel>
+              <text>بخش ۹ - در اینکه چرا اسکندر را ذوالقرنین گویند : بساز ای مغنی ره دلپسند</text>
+            </navLabel>
+            <content src="cat116sec1.xhtml#poem-9221" />
+          </navPoint>
+          <navPoint id="navid3x1x5x10" playOrder="1396">
+            <navLabel>
+              <text>بخش ۱۰ - داستان اسکندر با شبان دانا : مغنی بیا ز اول صبح بام</text>
+            </navLabel>
+            <content src="cat116sec2.xhtml#poem-9222" />
+          </navPoint>
+          <navPoint id="navid3x1x5x11" playOrder="1397">
+            <navLabel>
+              <text>بخش ۱۱ - افسانهٔ ارشمیدس با کنیزک چینی : مغنی یکی نغمه بنواز زود</text>
+            </navLabel>
+            <content src="cat116sec2.xhtml#poem-9223" />
+          </navPoint>
+          <navPoint id="navid3x1x5x12" playOrder="1398">
+            <navLabel>
+              <text>بخش ۱۲ - افسانهٔ ماریه قبطیه : مغنی ره باستانی بزن</text>
+            </navLabel>
+            <content src="cat116sec2.xhtml#poem-9224" />
+          </navPoint>
+          <navPoint id="navid3x1x5x13" playOrder="1399">
+            <navLabel>
+              <text>بخش ۱۳ - افسانهٔ نانوای بینوا و توانگری وی به طالع پسر</text>
+            </navLabel>
+            <content src="cat116sec2.xhtml#poem-9225" />
+          </navPoint>
+          <navPoint id="navid3x1x5x14" playOrder="1400">
+            <navLabel>
+              <text>بخش ۱۴ - انکار کردن هفتاد حکیم سخن هرمس را و هلاک شدن ایشان</text>
+            </navLabel>
+            <content src="cat116sec2.xhtml#poem-9226" />
+          </navPoint>
+          <navPoint id="navid3x1x5x15" playOrder="1401">
+            <navLabel>
+              <text>بخش ۱۵ - اغانی ساختن افلاطون بر مالش ارسطو : مغنی سماعی برانگیز گرم</text>
+            </navLabel>
+            <content src="cat116sec2.xhtml#poem-9227" />
+          </navPoint>
+          <navPoint id="navid3x1x5x16" playOrder="1402">
+            <navLabel>
+              <text>بخش ۱۶ - حکایت انگشتری و شبان : مغنی بیا چنگ را ساز کن</text>
+            </navLabel>
+            <content src="cat116sec3.xhtml#poem-9228" />
+          </navPoint>
+          <navPoint id="navid3x1x5x17" playOrder="1403">
+            <navLabel>
+              <text>بخش ۱۷ - احوال سقراط با اسکندر : مغنی بدان ساز تیمار سوز</text>
+            </navLabel>
+            <content src="cat116sec3.xhtml#poem-9229" />
+          </navPoint>
+          <navPoint id="navid3x1x5x18" playOrder="1404">
+            <navLabel>
+              <text>بخش ۱۸ - گفتار حکیم هند با اسکندر : مغنی غنا را درآور به جوش</text>
+            </navLabel>
+            <content src="cat116sec3.xhtml#poem-9230" />
+          </navPoint>
+          <navPoint id="navid3x1x5x19" playOrder="1405">
+            <navLabel>
+              <text>بخش ۱۹ - خلوت ساختن اسکندر با هفت حکیم در آفرینش نخست</text>
+            </navLabel>
+            <content src="cat116sec3.xhtml#poem-9231" />
+          </navPoint>
+          <navPoint id="navid3x1x5x20" playOrder="1406">
+            <navLabel>
+              <text>بخش ۲۰ - گفتار ارسطو : ارسطوی روشندل هوشمند</text>
+            </navLabel>
+            <content src="cat116sec3.xhtml#poem-9232" />
+          </navPoint>
+          <navPoint id="navid3x1x5x21" playOrder="1407">
+            <navLabel>
+              <text>بخش ۲۱ - گفتار والیس : چنین راند والیس دانا سخن</text>
+            </navLabel>
+            <content src="cat116sec3.xhtml#poem-9233" />
+          </navPoint>
+          <navPoint id="navid3x1x5x22" playOrder="1408">
+            <navLabel>
+              <text>بخش ۲۲ - گفتار بلیناس : بلیناس دانا به زانو نشست</text>
+            </navLabel>
+            <content src="cat116sec3.xhtml#poem-9234" />
+          </navPoint>
+          <navPoint id="navid3x1x5x23" playOrder="1409">
+            <navLabel>
+              <text>بخش ۲۳ - گفتار سقراط : چو سقراط را داد نوبت سخن</text>
+            </navLabel>
+            <content src="cat116sec3.xhtml#poem-9235" />
+          </navPoint>
+          <navPoint id="navid3x1x5x24" playOrder="1410">
+            <navLabel>
+              <text>بخش ۲۴ - گفتار فرفوریوس : پس آنگه که خاک زمین داد بوس</text>
+            </navLabel>
+            <content src="cat116sec3.xhtml#poem-9236" />
+          </navPoint>
+          <navPoint id="navid3x1x5x25" playOrder="1411">
+            <navLabel>
+              <text>بخش ۲۵ - گفتار هرمس : چو قفل آزمائی به هرمس رسید</text>
+            </navLabel>
+            <content src="cat116sec3.xhtml#poem-9237" />
+          </navPoint>
+          <navPoint id="navid3x1x5x26" playOrder="1412">
+            <navLabel>
+              <text>بخش ۲۶ - گفتار افلاطون : فلاطون که بر جمله بود اوستاد</text>
+            </navLabel>
+            <content src="cat116sec3.xhtml#poem-9238" />
+          </navPoint>
+          <navPoint id="navid3x1x5x27" playOrder="1413">
+            <navLabel>
+              <text>بخش ۲۷ - گفتار اسکندر : چو ختم سخن قرعه بر شاه زد</text>
+            </navLabel>
+            <content src="cat116sec4.xhtml#poem-9239" />
+          </navPoint>
+          <navPoint id="navid3x1x5x28" playOrder="1414">
+            <navLabel>
+              <text>بخش ۲۸ - گفتار حکیم نظامی : نظامی بر این در مجنبان کلید</text>
+            </navLabel>
+            <content src="cat116sec4.xhtml#poem-9240" />
+          </navPoint>
+          <navPoint id="navid3x1x5x29" playOrder="1415">
+            <navLabel>
+              <text>بخش ۲۹ - رسیدن اسکندر به پیغمبری : مغنی سحرگاه بر بانگ رود</text>
+            </navLabel>
+            <content src="cat116sec4.xhtml#poem-9241" />
+          </navPoint>
+          <navPoint id="navid3x1x5x30" playOrder="1416">
+            <navLabel>
+              <text>بخش ۳۰ - خردنامه ارسطو : چنین بود در نامهٔ رهنمای</text>
+            </navLabel>
+            <content src="cat116sec4.xhtml#poem-9242" />
+          </navPoint>
+          <navPoint id="navid3x1x5x31" playOrder="1417">
+            <navLabel>
+              <text>بخش ۳۱ - خردنامه افلاطون : دگر روز کز عطسهٔ آفتاب</text>
+            </navLabel>
+            <content src="cat116sec4.xhtml#poem-9243" />
+          </navPoint>
+          <navPoint id="navid3x1x5x32" playOrder="1418">
+            <navLabel>
+              <text>بخش ۳۲ - خردنامه سقراط : سوم روز کین طاق بازیچه رنگ</text>
+            </navLabel>
+            <content src="cat116sec4.xhtml#poem-9244" />
+          </navPoint>
+          <navPoint id="navid3x1x5x33" playOrder="1419">
+            <navLabel>
+              <text>بخش ۳۳ - جهانگردی اسکندر با دعوی پیغمبری : سحرگه که سربرگرفتم ز خواب</text>
+            </navLabel>
+            <content src="cat116sec4.xhtml#poem-9245" />
+          </navPoint>
+          <navPoint id="navid3x1x5x34" playOrder="1420">
+            <navLabel>
+              <text>بخش ۳۴ - رسیدن اسکندر به عرض جنوب و ده سرپرستان : مغنی دلم دور گشت از شکیب</text>
+            </navLabel>
+            <content src="cat116sec5.xhtml#poem-9246" />
+          </navPoint>
+          <navPoint id="navid3x1x5x35" playOrder="1421">
+            <navLabel>
+              <text>بخش ۳۵ - گذار کردن اسکندر دیگر باره به هندوستان : مغنی مدار از غنا دست باز</text>
+            </navLabel>
+            <content src="cat116sec5.xhtml#poem-9247" />
+          </navPoint>
+          <navPoint id="navid3x1x5x36" playOrder="1422">
+            <navLabel>
+              <text>بخش ۳۶ - رسیدن اسکندر به حد شمال و بستن سد یاجوج : مغنی دل تنگ را چاره نیست</text>
+            </navLabel>
+            <content src="cat116sec5.xhtml#poem-9248" />
+          </navPoint>
+          <navPoint id="navid3x1x5x37" playOrder="1423">
+            <navLabel>
+              <text>بخش ۳۷ - بازگشتن اسکندر از حد شمال به عزم روم : مغنی بساز ازدم جان‌فزای</text>
+            </navLabel>
+            <content src="cat116sec6.xhtml#poem-9249" />
+          </navPoint>
+          <navPoint id="navid3x1x5x38" playOrder="1424">
+            <navLabel>
+              <text>بخش ۳۸ - وصیت نامه اسکندر : مغنی توئی مرغ ساعت شناس</text>
+            </navLabel>
+            <content src="cat116sec6.xhtml#poem-9250" />
+          </navPoint>
+          <navPoint id="navid3x1x5x39" playOrder="1425">
+            <navLabel>
+              <text>بخش ۳۹ - سوگند نامه اسکندر به سوی مادر : مغنی دگر باره بنواز رود</text>
+            </navLabel>
+            <content src="cat116sec6.xhtml#poem-9251" />
+          </navPoint>
+          <navPoint id="navid3x1x5x40" playOrder="1426">
+            <navLabel>
+              <text>بخش ۴۰ - رسیدن نامه اسکندر به مادرش : مغنی یک امشب برآواز چنگ</text>
+            </navLabel>
+            <content src="cat116sec6.xhtml#poem-9252" />
+          </navPoint>
+          <navPoint id="navid3x1x5x41" playOrder="1427">
+            <navLabel>
+              <text>بخش ۴۱ - نالیدن اسکندروس در مرگ پدر و رها کردن پادشاهی</text>
+            </navLabel>
+            <content src="cat116sec6.xhtml#poem-9253" />
+          </navPoint>
+          <navPoint id="navid3x1x5x42" playOrder="1428">
+            <navLabel>
+              <text>بخش ۴۲ - انجامش روزگار ارسطو : مغنی دلم سیر گشت از نفیر</text>
+            </navLabel>
+            <content src="cat116sec6.xhtml#poem-9254" />
+          </navPoint>
+          <navPoint id="navid3x1x5x43" playOrder="1429">
+            <navLabel>
+              <text>بخش ۴۳ - انجامش روزگار هرمس : مغنی بدان جرهٔ جان نواز</text>
+            </navLabel>
+            <content src="cat116sec6.xhtml#poem-9255" />
+          </navPoint>
+          <navPoint id="navid3x1x5x44" playOrder="1430">
+            <navLabel>
+              <text>بخش ۴۴ - انجامش روزگار افلاطون : مغنی برآرای لحنی درست</text>
+            </navLabel>
+            <content src="cat116sec6.xhtml#poem-9256" />
+          </navPoint>
+          <navPoint id="navid3x1x5x45" playOrder="1431">
+            <navLabel>
+              <text>بخش ۴۵ - انجامش روزگار بلیناس : مغنی درین پرده دیرسال</text>
+            </navLabel>
+            <content src="cat116sec6.xhtml#poem-9257" />
+          </navPoint>
+          <navPoint id="navid3x1x5x46" playOrder="1432">
+            <navLabel>
+              <text>بخش ۴۶ - انجامش روزگار فرفوریوس : ببار ای مغنی نوائی شگفت</text>
+            </navLabel>
+            <content src="cat116sec6.xhtml#poem-9258" />
+          </navPoint>
+          <navPoint id="navid3x1x5x47" playOrder="1433">
+            <navLabel>
+              <text>بخش ۴۷ - انجامش روزگار سقراط : درآرای مغنی سرم را ز خواب</text>
+            </navLabel>
+            <content src="cat116sec7.xhtml#poem-9259" />
+          </navPoint>
+          <navPoint id="navid3x1x5x48" playOrder="1434">
+            <navLabel>
+              <text>بخش ۴۸ - انجامش روزگار نظامی : مغنی ره مش جان بساز</text>
+            </navLabel>
+            <content src="cat116sec7.xhtml#poem-9260" />
+          </navPoint>
+          <navPoint id="navid3x1x5x49" playOrder="1435">
+            <navLabel>
+              <text>بخش ۴۹ - ستایش ملک عز الدین مسعود بن ارسلان : مغنی ره رامش آور پدید</text>
+            </navLabel>
+            <content src="cat116sec7.xhtml#poem-9261" />
+          </navPoint>
+          <navPoint id="navid3x1x5x50" playOrder="1436">
+            <navLabel>
+              <text>بخش ۵۰ - انجامش اقبال‌نامه : چو گوهر برون آمد از کان کوه</text>
+            </navLabel>
+            <content src="cat116sec7.xhtml#poem-9262" />
+          </navPoint>
+        </navPoint>
+        <navPoint id="navid3x1x6" playOrder="2823">
+          <navLabel>
+            <text>مخزن الاسرار</text>
+          </navLabel>
+          <content src="cat117.xhtml" />
+          <navPoint id="navid3x1x6x1" playOrder="2824">
+            <navLabel>
+              <text>بخش ۱ - آغاز سخن : بسم‌الله الرحمن الرحیم</text>
+            </navLabel>
+            <content src="cat117sec1.xhtml#poem-9263" />
+          </navPoint>
+          <navPoint id="navid3x1x6x2" playOrder="2825">
+            <navLabel>
+              <text>بخش ۲ - (مناجات اول) در سیاست و قهر یزدان : ای همه هستی زتو پیدا شده</text>
+            </navLabel>
+            <content src="cat117sec1.xhtml#poem-9264" />
+          </navPoint>
+          <navPoint id="navid3x1x6x3" playOrder="2826">
+            <navLabel>
+              <text>بخش ۳ - (مناجات دوم) در بخشایش و عفو یزدان : ای به ازل بوده و نابوده ما</text>
+            </navLabel>
+            <content src="cat117sec1.xhtml#poem-9265" />
+          </navPoint>
+          <navPoint id="navid3x1x6x4" playOrder="2827">
+            <navLabel>
+              <text>بخش ۴ - در نعت رسول اکرم : تخته اول که الف نقش بست</text>
+            </navLabel>
+            <content src="cat117sec1.xhtml#poem-9266" />
+          </navPoint>
+          <navPoint id="navid3x1x6x5" playOrder="2828">
+            <navLabel>
+              <text>بخش ۵ - در معراج : نیم شبی کان ملک نیمروز</text>
+            </navLabel>
+            <content src="cat117sec1.xhtml#poem-9267" />
+          </navPoint>
+          <navPoint id="navid3x1x6x6" playOrder="2829">
+            <navLabel>
+              <text>بخش ۶ - نعت اول : شمسه نه مسند هفت اختران</text>
+            </navLabel>
+            <content src="cat117sec1.xhtml#poem-9268" />
+          </navPoint>
+          <navPoint id="navid3x1x6x7" playOrder="2830">
+            <navLabel>
+              <text>بخش ۷ - نعت دوم : ای تن تو پاک‌تر از جان پاک</text>
+            </navLabel>
+            <content src="cat117sec1.xhtml#poem-9269" />
+          </navPoint>
+          <navPoint id="navid3x1x6x8" playOrder="2831">
+            <navLabel>
+              <text>بخش ۸ - نعت سوم : ای مدنی برقع و مکی نقاب</text>
+            </navLabel>
+            <content src="cat117sec1.xhtml#poem-9270" />
+          </navPoint>
+          <navPoint id="navid3x1x6x9" playOrder="2832">
+            <navLabel>
+              <text>بخش ۹ - نعت چهارم : ای گهر تاج فرستادگان</text>
+            </navLabel>
+            <content src="cat117sec1.xhtml#poem-9271" />
+          </navPoint>
+          <navPoint id="navid3x1x6x10" playOrder="2833">
+            <navLabel>
+              <text>بخش ۱۰ - در مدح ملک فخرالدین بهرامشاه بن داود : من که درین دایره دهربند</text>
+            </navLabel>
+            <content src="cat117sec1.xhtml#poem-9272" />
+          </navPoint>
+          <navPoint id="navid3x1x6x11" playOrder="2834">
+            <navLabel>
+              <text>بخش ۱۱ - خطاب زمین بوس : ای شرف گوهر آدم به تو</text>
+            </navLabel>
+            <content src="cat117sec1.xhtml#poem-9273" />
+          </navPoint>
+          <navPoint id="navid3x1x6x12" playOrder="2835">
+            <navLabel>
+              <text>بخش ۱۲ - در مقام و مرتبت این نامه : منکه سراینده این نوگلم</text>
+            </navLabel>
+            <content src="cat117sec1.xhtml#poem-9274" />
+          </navPoint>
+          <navPoint id="navid3x1x6x13" playOrder="2836">
+            <navLabel>
+              <text>بخش ۱۳ - گفتار در فضیلت سخن : جنبش اول که قلم برگفت</text>
+            </navLabel>
+            <content src="cat117sec1.xhtml#poem-9275" />
+          </navPoint>
+          <navPoint id="navid3x1x6x14" playOrder="2837">
+            <navLabel>
+              <text>بخش ۱۴ - برتری سخن منظوم از منثور : چونکه نسخته سخن سرسری</text>
+            </navLabel>
+            <content src="cat117sec1.xhtml#poem-9276" />
+          </navPoint>
+          <navPoint id="navid3x1x6x15" playOrder="2838">
+            <navLabel>
+              <text>بخش ۱۵ - در توصیف شب و شناختن دل : چون سپر انداختن آفتاب</text>
+            </navLabel>
+            <content src="cat117sec2.xhtml#poem-9277" />
+          </navPoint>
+          <navPoint id="navid3x1x6x16" playOrder="2839">
+            <navLabel>
+              <text>بخش ۱۶ - خلوت اول در پرورش دل : رایض من چون ادب آغاز کرد</text>
+            </navLabel>
+            <content src="cat117sec2.xhtml#poem-9278" />
+          </navPoint>
+          <navPoint id="navid3x1x6x17" playOrder="2840">
+            <navLabel>
+              <text>بخش ۱۷ - ثمره خلوت اول : باد نقاب از طرفی برگرفت</text>
+            </navLabel>
+            <content src="cat117sec2.xhtml#poem-9279" />
+          </navPoint>
+          <navPoint id="navid3x1x6x18" playOrder="2841">
+            <navLabel>
+              <text>بخش ۱۸ - خلوت دوم در عشرت شبانه : خواجه یکی شب به تمنای جنس</text>
+            </navLabel>
+            <content src="cat117sec2.xhtml#poem-9280" />
+          </navPoint>
+          <navPoint id="navid3x1x6x19" playOrder="2842">
+            <navLabel>
+              <text>بخش ۱۹ - ثمره خلوت دوم : عمر بر آن فرش ازل بافته</text>
+            </navLabel>
+            <content src="cat117sec2.xhtml#poem-9281" />
+          </navPoint>
+          <navPoint id="navid3x1x6x20" playOrder="2843">
+            <navLabel>
+              <text>بخش ۲۰ - مقالت اول در آفرینش آدم : اول کاین عشق پرستی نبود</text>
+            </navLabel>
+            <content src="cat117sec2.xhtml#poem-9282" />
+          </navPoint>
+          <navPoint id="navid3x1x6x21" playOrder="2844">
+            <navLabel>
+              <text>بخش ۲۱ - داستان پادشاه نومید و آمرزش یافتن او : دادگری دید برای صواب</text>
+            </navLabel>
+            <content src="cat117sec2.xhtml#poem-9283" />
+          </navPoint>
+          <navPoint id="navid3x1x6x22" playOrder="2845">
+            <navLabel>
+              <text>بخش ۲۲ - مقالت دوم در عدل و نگهداری انصاف : ای ملک جانوران رای تو</text>
+            </navLabel>
+            <content src="cat117sec2.xhtml#poem-9284" />
+          </navPoint>
+          <navPoint id="navid3x1x6x23" playOrder="2846">
+            <navLabel>
+              <text>بخش ۲۳ - حکایت نوشیروان با وزیر خود : صیدکنان مرکب نوشیروان</text>
+            </navLabel>
+            <content src="cat117sec2.xhtml#poem-9285" />
+          </navPoint>
+          <navPoint id="navid3x1x6x24" playOrder="2847">
+            <navLabel>
+              <text>بخش ۲۴ - مقالت سوم در حوادث عالم : یک نفس ای خواجه دامن کشان</text>
+            </navLabel>
+            <content src="cat117sec2.xhtml#poem-9286" />
+          </navPoint>
+          <navPoint id="navid3x1x6x25" playOrder="2848">
+            <navLabel>
+              <text>بخش ۲۵ - حکایت سلیمان با دهقان : روزی از آنجا که فراغی رسید</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9287" />
+          </navPoint>
+          <navPoint id="navid3x1x6x26" playOrder="2849">
+            <navLabel>
+              <text>بخش ۲۶ - مقالت چهارم در رعایت از رعیت : ای سپهر افکنده ز مردانگی</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9288" />
+          </navPoint>
+          <navPoint id="navid3x1x6x27" playOrder="2850">
+            <navLabel>
+              <text>بخش ۲۷ - داستان پیر زن با سلطان سنجر : پیرزنی را ستمی درگرفت</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9289" />
+          </navPoint>
+          <navPoint id="navid3x1x6x28" playOrder="2851">
+            <navLabel>
+              <text>بخش ۲۸ - مقالت پنجم در وصف پیری : روز خوش عمر به شبخوش رسید</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9290" />
+          </navPoint>
+          <navPoint id="navid3x1x6x29" playOrder="2852">
+            <navLabel>
+              <text>بخش ۲۹ - داستان پیر خشت‌زن : در طرف شام یکی پیر بود</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9291" />
+          </navPoint>
+          <navPoint id="navid3x1x6x30" playOrder="2853">
+            <navLabel>
+              <text>بخش ۳۰ - مقالت ششم در اعتبار موجودات : لعبت بازی پس این پرده هست</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9292" />
+          </navPoint>
+          <navPoint id="navid3x1x6x31" playOrder="2854">
+            <navLabel>
+              <text>بخش ۳۱ - داستان سگ و صیاد و روباه : صید گری بود عجب تیز بین</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9293" />
+          </navPoint>
+          <navPoint id="navid3x1x6x32" playOrder="2855">
+            <navLabel>
+              <text>بخش ۳۲ - مقالت هفتم در فضیلت آدمی بر حیوانات : ای به زمین بر چو فلک نازنین</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9294" />
+          </navPoint>
+          <navPoint id="navid3x1x6x33" playOrder="2856">
+            <navLabel>
+              <text>بخش ۳۳ - داستان فریدون با آهو : صبحدمی با دو سه اهل درون</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9295" />
+          </navPoint>
+          <navPoint id="navid3x1x6x34" playOrder="2857">
+            <navLabel>
+              <text>بخش ۳۴ - مقالت هشتم در بیاین آفرینش : پیشتر از پیشتران وجود</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9296" />
+          </navPoint>
+          <navPoint id="navid3x1x6x35" playOrder="2858">
+            <navLabel>
+              <text>بخش ۳۵ - داستان میوه فروش و روباه : میوه فروشی که یمن جاش بود</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9297" />
+          </navPoint>
+          <navPoint id="navid3x1x6x36" playOrder="2859">
+            <navLabel>
+              <text>بخش ۳۶ - مقالت نهم در تک مونات دنیوی : ای ز شب وصل گرانمایه‌تر</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9298" />
+          </navPoint>
+          <navPoint id="navid3x1x6x37" playOrder="2860">
+            <navLabel>
+              <text>بخش ۳۷ - داستان زاهد توبه شکن : مسجدیئی بسته آفات شد</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9299" />
+          </navPoint>
+          <navPoint id="navid3x1x6x38" playOrder="2861">
+            <navLabel>
+              <text>بخش ۳۸ - مقالت دهم در نمودار آخرالزمان : ای فلک آهسته‌تر این دور چند</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9300" />
+          </navPoint>
+          <navPoint id="navid3x1x6x39" playOrder="2862">
+            <navLabel>
+              <text>بخش ۳۹ - داستان عیسی : پای مسیحا که جهان می‌نبشت</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9301" />
+          </navPoint>
+          <navPoint id="navid3x1x6x40" playOrder="2863">
+            <navLabel>
+              <text>بخش ۴۰ - مقالت یازدهم در بیوفائی دنیا : خیز و بساط فلکی درنورد</text>
+            </navLabel>
+            <content src="cat117sec3.xhtml#poem-9302" />
+          </navPoint>
+          <navPoint id="navid3x1x6x41" playOrder="2864">
+            <navLabel>
+              <text>بخش ۴۱ - داستان مبد صاحب نظر : مؤبدی از کشور هندوستان</text>
+            </navLabel>
+            <content src="cat117sec4.xhtml#poem-9303" />
+          </navPoint>
+          <navPoint id="navid3x1x6x42" playOrder="2865">
+            <navLabel>
+              <text>بخش ۴۲ - مقالت دوازدهم در وداع منزل خاک : خیز ووداعی بکن ایام را</text>
+            </navLabel>
+            <content src="cat117sec4.xhtml#poem-9304" />
+          </navPoint>
+          <navPoint id="navid3x1x6x43" playOrder="2866">
+            <navLabel>
+              <text>بخش ۴۳ - داستان دو حکیم متنازع : با دو حکیم از سر همخانگی</text>
+            </navLabel>
+            <content src="cat117sec4.xhtml#poem-9305" />
+          </navPoint>
+          <navPoint id="navid3x1x6x44" playOrder="2867">
+            <navLabel>
+              <text>بخش ۴۴ - مقالت سیزدهم در نکوهش جهان : پیری عالم نگر و تنگیش</text>
+            </navLabel>
+            <content src="cat117sec4.xhtml#poem-9306" />
+          </navPoint>
+          <navPoint id="navid3x1x6x45" playOrder="2868">
+            <navLabel>
+              <text>بخش ۴۵ - داستان حاجی و صوفی : کعبه روی عزم ره آغاز کرد</text>
+            </navLabel>
+            <content src="cat117sec4.xhtml#poem-9307" />
+          </navPoint>
+          <navPoint id="navid3x1x6x46" playOrder="2869">
+            <navLabel>
+              <text>بخش ۴۶ - مقالت چهاردهم در نکوهش غفلت : ای شده خشنود به یکبارگی</text>
+            </navLabel>
+            <content src="cat117sec4.xhtml#poem-9308" />
+          </navPoint>
+          <navPoint id="navid3x1x6x47" playOrder="2870">
+            <navLabel>
+              <text>بخش ۴۷ - داستان پادشاه ظالم با مرد راستگوی : پادشهی بود رعیت شکن</text>
+            </navLabel>
+            <content src="cat117sec4.xhtml#poem-9309" />
+          </navPoint>
+          <navPoint id="navid3x1x6x48" playOrder="2871">
+            <navLabel>
+              <text>بخش ۴۸ - مقالت پانزدهم در نکوهش رشگبران : هر نفس این پرده چابک رقیب</text>
+            </navLabel>
+            <content src="cat117sec4.xhtml#poem-9310" />
+          </navPoint>
+          <navPoint id="navid3x1x6x49" playOrder="2872">
+            <navLabel>
+              <text>بخش ۴۹ - داستان ملکزاده جوان با دشمنان پیر : قصد شنیدم که در اقصای مرو</text>
+            </navLabel>
+            <content src="cat117sec4.xhtml#poem-9311" />
+          </navPoint>
+          <navPoint id="navid3x1x6x50" playOrder="2873">
+            <navLabel>
+              <text>بخش ۵۰ - مقالت شانزدهم در چابک روی : ای بنسیمی علم افراخته</text>
+            </navLabel>
+            <content src="cat117sec4.xhtml#poem-9312" />
+          </navPoint>
+          <navPoint id="navid3x1x6x51" playOrder="2874">
+            <navLabel>
+              <text>بخش ۵۱ - داستان کودک مجروح : کودکی از جمله آزادگان</text>
+            </navLabel>
+            <content src="cat117sec4.xhtml#poem-9313" />
+          </navPoint>
+          <navPoint id="navid3x1x6x52" playOrder="2875">
+            <navLabel>
+              <text>بخش ۵۲ - مقالت هفدهم در پرستش و تجرید : ای ز خدا غافل و از خویشتن</text>
+            </navLabel>
+            <content src="cat117sec4.xhtml#poem-9314" />
+          </navPoint>
+          <navPoint id="navid3x1x6x53" playOrder="2876">
+            <navLabel>
+              <text>بخش ۵۳ - داستان پیر و مرید : رهروی از جمله پیران کار</text>
+            </navLabel>
+            <content src="cat117sec4.xhtml#poem-9315" />
+          </navPoint>
+          <navPoint id="navid3x1x6x54" playOrder="2877">
+            <navLabel>
+              <text>بخش ۵۴ - مقالت هیجدهم در نکوهش دورویان : قلب زنی چند که برخاستند</text>
+            </navLabel>
+            <content src="cat117sec4.xhtml#poem-9316" />
+          </navPoint>
+          <navPoint id="navid3x1x6x55" playOrder="2878">
+            <navLabel>
+              <text>بخش ۵۵ - داستان جمشید با خاصگی محرم : خاصگیی محرم جمشید بود</text>
+            </navLabel>
+            <content src="cat117sec4.xhtml#poem-9317" />
+          </navPoint>
+          <navPoint id="navid3x1x6x56" playOrder="2879">
+            <navLabel>
+              <text>بخش ۵۶ - مقالت نوزدهم در استقبال آخرت : مجلس خلوت نگر آراسته</text>
+            </navLabel>
+            <content src="cat117sec5.xhtml#poem-9318" />
+          </navPoint>
+          <navPoint id="navid3x1x6x57" playOrder="2880">
+            <navLabel>
+              <text>بخش ۵۷ - داستان هارون‌الرشید با موی تراش : دور خلافت چو به هارون رسید</text>
+            </navLabel>
+            <content src="cat117sec5.xhtml#poem-9319" />
+          </navPoint>
+          <navPoint id="navid3x1x6x58" playOrder="2881">
+            <navLabel>
+              <text>بخش ۵۸ - مقالت بیستم در وقاحت ابنای عصر : ما که به خود دست برافشانده‌ایم</text>
+            </navLabel>
+            <content src="cat117sec5.xhtml#poem-9320" />
+          </navPoint>
+          <navPoint id="navid3x1x6x59" playOrder="2882">
+            <navLabel>
+              <text>بخش ۵۹ - داستان بلبل با باز : در چمن باغ چو گلبن شکفت</text>
+            </navLabel>
+            <content src="cat117sec5.xhtml#poem-9321" />
+          </navPoint>
+          <navPoint id="navid3x1x6x60" playOrder="2883">
+            <navLabel>
+              <text>بخش ۶۰ - انجام کتاب : صبحک الله صباح ای دبیر</text>
+            </navLabel>
+            <content src="cat117sec5.xhtml#poem-9322" />
+          </navPoint>
+        </navPoint>
+      </navPoint>
+    </navPoint>
+  </navMap>
+</ncx>

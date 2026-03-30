@@ -6,29 +6,29 @@
 //    - External/opaque requests: Network-only (skip)
 // ============================================================
 
-const CACHE_VERSION = 'toolbox-v2.6';
+const CACHE_VERSION = 'toolbox-v2.7';
 const CACHE_SHELL   = CACHE_VERSION + '-shell';   // HTML, CSS, JS, fonts
 const CACHE_ASSETS  = CACHE_VERSION + '-assets';  // images, maps, large files
 
 // App shell — precached on install
 const SHELL_URLS = [
-  './',
-  './index.html',
-  './iran.html',
-  './main.css',
-  './main.js',
-  './manifest.json',
-  './favicon.png',
-  './icon-512.png',
-  './Vazirmatn-VF.ttf',
-  './lib/qrcode.js',
-  './lib/jsQR.js',
-  './lib/qr-code-styling.js',
-  './lib/browser-image-compression.js',
-  './lib/pdf.mjs',
-  './lib/pdf.worker.mjs',
-  './lib/function-plot.js',
-  './lib/math.js',
+  '/',
+  '/index.html',
+  '/iran.html',
+  '/main.css',
+  '/main.js',
+  '/manifest.json',
+  '/favicon.png',
+  '/icon-512.png',
+  '/Vazirmatn-VF.ttf',
+  '/lib/qrcode.js',
+  '/lib/jsQR.js',
+  '/lib/qr-code-styling.js',
+  '/lib/browser-image-compression.js',
+  '/lib/pdf.mjs',
+  '/lib/pdf.worker.mjs',
+  '/lib/function-plot.js',
+  '/lib/math.js',
 ];
 
 // ── Install: cache app shell ──────────────────────────────
@@ -36,24 +36,18 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_SHELL)
       .then(function(cache) {
-        return Promise.allSettled(
-          SHELL_URLS.map(function(url) {
-            return cache.add(url).catch(function(err) {
-              console.warn('[SW] Precache failed:', url, err.message);
-            });
-          })
-        );
+        // addAll fails install if any file fails — ensures a complete shell
+        return cache.addAll(SHELL_URLS);
       })
       .then(function() {
-        // Take control immediately — don't wait for old tabs to close
         return self.skipWaiting();
       })
   );
 });
-
+ 
 // ── Activate: delete all old caches ──────────────────────
 self.addEventListener('activate', function(event) {
-  const KEEP = [CACHE_SHELL, CACHE_ASSETS];
+  var KEEP = [CACHE_SHELL, CACHE_ASSETS];
   event.waitUntil(
     caches.keys()
       .then(function(names) {
@@ -64,11 +58,9 @@ self.addEventListener('activate', function(event) {
         );
       })
       .then(function() {
-        // Take control of all open tabs immediately
         return self.clients.claim();
       })
       .then(function() {
-        // Tell all open tabs that a new version is active
         return self.clients.matchAll({ type: 'window' });
       })
       .then(function(clients) {
@@ -78,34 +70,61 @@ self.addEventListener('activate', function(event) {
       })
   );
 });
-
+ 
 // ── Fetch ─────────────────────────────────────────────────
 self.addEventListener('fetch', function(event) {
-  // Only handle GET
   if (event.request.method !== 'GET') return;
-
-  const url = new URL(event.request.url);
-
-  // Skip cross-origin requests entirely (fonts CDN, etc.)
+ 
+  var url = new URL(event.request.url);
+ 
+  // Skip cross-origin (Bale SDK, CDN, external APIs)
   if (url.origin !== self.location.origin) return;
-
-  const path = url.pathname;
-
-  // ── Large on-demand files (maps, PDFs): Cache-First ──
-  // Not precached, but cached on first access and served offline after
+ 
+  var path = url.pathname;
+ 
+  // Large on-demand files: Cache-First
   if (path.startsWith('/maps/') || path.endsWith('.pdf')) {
     event.respondWith(cacheFirst(event.request, CACHE_ASSETS));
     return;
   }
-
-  // ── App shell (HTML, CSS, JS, fonts): Stale-While-Revalidate ──
-  // Serve from cache instantly, update cache in background
+ 
+  // ── Navigation requests (opening PWA from home screen, typing URL) ──
+  // This is the critical path for offline PWA launch.
+  // Browser sends these as mode:'navigate' — intercept and serve from cache.
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      caches.match('/index.html', { cacheName: CACHE_SHELL })
+        .then(function(cached) {
+          if (cached) {
+            // Revalidate in background for next visit
+            fetch(event.request)
+              .then(function(response) {
+                if (response && response.ok) {
+                  caches.open(CACHE_SHELL).then(function(c) {
+                    c.put(event.request, response);
+                  });
+                }
+              })
+              .catch(function() {});
+            return cached;
+          }
+          // Not in cache yet — try network
+          return fetch(event.request).catch(function() {
+            return new Response(
+              '<h1 dir="rtl" style="font-family:sans-serif;text-align:center;padding:40px">برای اولین بار باید آنلاین باشید تا اپ کش شود</h1>',
+              { status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+            );
+          });
+        })
+    );
+    return;
+  }
+ 
+  // All other same-origin requests: Stale-While-Revalidate
   event.respondWith(staleWhileRevalidate(event.request, CACHE_SHELL));
 });
-
+ 
 // ── Strategy: Cache-First ────────────────────────────────
-// Serve from cache if available, fetch and cache if not.
-// Good for large immutable files.
 function cacheFirst(request, cacheName) {
   return caches.open(cacheName).then(function(cache) {
     return cache.match(request).then(function(cached) {
@@ -124,29 +143,27 @@ function cacheFirst(request, cacheName) {
     });
   });
 }
-
+ 
 // ── Strategy: Stale-While-Revalidate ─────────────────────
-// Serve from cache immediately (no waiting), then fetch fresh
-// copy and update cache silently for next time.
 function staleWhileRevalidate(request, cacheName) {
   return caches.open(cacheName).then(function(cache) {
     return cache.match(request).then(function(cached) {
-      // Kick off a background fetch regardless
       var fetchPromise = fetch(request).then(function(response) {
         if (response && response.ok && response.type !== 'opaque') {
           cache.put(request, response.clone());
         }
         return response;
       }).catch(function() {
-        // Network failed — that's fine, we have the cache
         return null;
       });
-
-      // Return cache immediately if available, otherwise wait for network
-      return cached || fetchPromise.then(function(r) {
-        return r || caches.match('./index.html').then(function(c) {
-          return c || new Response('آفلاین', { status: 503 });
-        });
+ 
+      if (cached) return cached;
+      return fetchPromise.then(function(r) {
+        if (r) return r;
+        return caches.match('/index.html', { cacheName: CACHE_SHELL })
+          .then(function(c) {
+            return c || new Response('آفلاین', { status: 503 });
+          });
       });
     });
   });

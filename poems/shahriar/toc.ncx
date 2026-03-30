@@ -1,0 +1,1188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:408de73e-974c-42f6-88a8-5fd75139fc52" />
+    <meta name="dtb:depth" content="1" />
+    <meta name="dtb:totalPageCount" content="0" />
+    <meta name="dtb:maxPageNumber" content="0" />
+  </head>
+  <docTitle>
+    <text> شهریار</text>
+  </docTitle>
+  <docAuthor>
+    <text>شهریار</text>
+  </docAuthor>
+  <navMap>
+    <navPoint id="navid1" playOrder="1">
+      <navLabel>
+        <text>معرفی گنجور</text>
+      </navLabel>
+      <content src="promo.xhtml" />
+    </navPoint>
+    <navPoint id="navid2" playOrder="2">
+      <navLabel>
+        <text>دربارهٔ شهریار</text>
+      </navLabel>
+      <content src="bio.xhtml" />
+    </navPoint>
+    <navPoint id="navid3" playOrder="3">
+      <navLabel>
+        <text>شهریار</text>
+      </navLabel>
+      <content src="cat372.xhtml" />
+      <navPoint id="navid3x1" playOrder="4">
+        <navLabel>
+          <text>گزیدهٔ غزلیات</text>
+        </navLabel>
+        <content src="cat373.xhtml" />
+        <navPoint id="navid3x1x1" playOrder="5">
+          <navLabel>
+            <text>غزل شمارهٔ ۱ - مکتب حافظ : گذار آرد مه من گاهگاه از اشتباه اینجا</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27065" />
+        </navPoint>
+        <navPoint id="navid3x1x2" playOrder="6">
+          <navLabel>
+            <text>غزل شمارهٔ ۲ - مناجات : علی ای همای رحمت تو چه آیتی خدا را</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27066" />
+        </navPoint>
+        <navPoint id="navid3x1x3" playOrder="7">
+          <navLabel>
+            <text>غزل شمارهٔ ۳ - غزاله صبا : به چشمک اینهمه مژگان به هم مزن یارا</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27067" />
+        </navPoint>
+        <navPoint id="navid3x1x4" playOrder="8">
+          <navLabel>
+            <text>غزل شمارهٔ ۴ - هفتاد سالگی : سنین عمر به هفتاد میرسد ما را</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27068" />
+        </navPoint>
+        <navPoint id="navid3x1x5" playOrder="9">
+          <navLabel>
+            <text>غزل شمارهٔ ۵ - ارباب زمستان : زمستان پوستین افزود بر تن کدخدایان را</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27069" />
+        </navPoint>
+        <navPoint id="navid3x1x6" playOrder="10">
+          <navLabel>
+            <text>غزل شمارهٔ ۶ - داغ لاله : بیداد رفت لاله بر باد رفته را</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27070" />
+        </navPoint>
+        <navPoint id="navid3x1x7" playOrder="11">
+          <navLabel>
+            <text>غزل شمارهٔ ۷ - طور تجلی : شب به هم درشکند زلف چلیپائی را</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27071" />
+        </navPoint>
+        <navPoint id="navid3x1x8" playOrder="12">
+          <navLabel>
+            <text>غزل شمارهٔ ۸ - در راه زندگانی : جوانی شمع ره کردم که جویم زندگانی را</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27072" />
+        </navPoint>
+        <navPoint id="navid3x1x9" playOrder="13">
+          <navLabel>
+            <text>غزل شمارهٔ ۹ - حالا چرا : آمدی جانم به قربانت ولی حالا چرا</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27073" />
+        </navPoint>
+        <navPoint id="navid3x1x10" playOrder="14">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۰ - ناکامیها : زندگی شد من و یک سلسله ناکامیها</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27074" />
+        </navPoint>
+        <navPoint id="navid3x1x11" playOrder="15">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۱ - دریاچه اشک : طبعم از لعل تو آموخت در افشانیها</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27075" />
+        </navPoint>
+        <navPoint id="navid3x1x12" playOrder="16">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۲ - آشیان عنقا : زین همرهان همراز من تنها توئی تنها بیا</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27076" />
+        </navPoint>
+        <navPoint id="navid3x1x13" playOrder="17">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۳ - سوز و ساز : باز کن نغمه جانسوزی از آن ساز امشب</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27077" />
+        </navPoint>
+        <navPoint id="navid3x1x14" playOrder="18">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۴ - ساز حبیب : صدای سوز دل شهریار و ساز حبیب</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27078" />
+        </navPoint>
+        <navPoint id="navid3x1x15" playOrder="19">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۵ - نقش حقایق : ای چشم خمارین که کشد سرمه خوابت</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27079" />
+        </navPoint>
+        <navPoint id="navid3x1x16" playOrder="20">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۶ - مرغ زخمی : ای جگر گوشه کیست دمسازت</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27080" />
+        </navPoint>
+        <navPoint id="navid3x1x17" playOrder="21">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۷ - دل درویش نوازت : ای چشم خمارین تو و افسانه نازت</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27081" />
+        </navPoint>
+        <navPoint id="navid3x1x18" playOrder="22">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۸ - خودپرستی خداپرستی : تا چشم دل به طلعت آن ماه منظر است</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27082" />
+        </navPoint>
+        <navPoint id="navid3x1x19" playOrder="23">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۹ - دیدار آشنا : ماهم که هاله ای به رخ از دود آهش است</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27083" />
+        </navPoint>
+        <navPoint id="navid3x1x20" playOrder="24">
+          <navLabel>
+            <text>غزل شمارهٔ ۲۰ - بر سر خاک ایرج : ایرجا سر بدرآور که امیر آمده است</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27084" />
+        </navPoint>
+        <navPoint id="navid3x1x21" playOrder="25">
+          <navLabel>
+            <text>غزل شمارهٔ ۲۱ - یکشب با قمر : از کوری چشم فلک امشب قمر اینجاست</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27085" />
+        </navPoint>
+        <navPoint id="navid3x1x22" playOrder="26">
+          <navLabel>
+            <text>غزل شمارهٔ ۲۲ - همت ای پیر : پاشو ای مست که دنیا همه دیوانه تست</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27086" />
+        </navPoint>
+        <navPoint id="navid3x1x23" playOrder="27">
+          <navLabel>
+            <text>غزل شمارهٔ ۲۳ - زکات زندگی : شب همه بی تو کار من شکوه به ماه کردنست</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27087" />
+        </navPoint>
+        <navPoint id="navid3x1x24" playOrder="28">
+          <navLabel>
+            <text>غزل شمارهٔ ۲۴ - سپاه من : منم که شعر و تغزل پناهگاه من است</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27088" />
+        </navPoint>
+        <navPoint id="navid3x1x25" playOrder="29">
+          <navLabel>
+            <text>غزل شمارهٔ ۲۵ - چراغ هدایت : کنون که فتنه فرا رفت و فرصتست ای دوست</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27089" />
+        </navPoint>
+        <navPoint id="navid3x1x26" playOrder="30">
+          <navLabel>
+            <text>غزل شمارهٔ ۲۶ - کاروان بی‌خبر : کاروان آمد و دلخواه به همراهش نیست</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27090" />
+        </navPoint>
+        <navPoint id="navid3x1x27" playOrder="31">
+          <navLabel>
+            <text>غزل شمارهٔ ۲۷ - چشم انتظار : ندار عشقم و با دل سر قمارم نیست</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27091" />
+        </navPoint>
+        <navPoint id="navid3x1x28" playOrder="32">
+          <navLabel>
+            <text>غزل شمارهٔ ۲۸ - فریده : هیچ آفریده ئی به جمال فریده نیست</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27092" />
+        </navPoint>
+        <navPoint id="navid3x1x29" playOrder="33">
+          <navLabel>
+            <text>غزل شمارهٔ ۲۹ - انتحار تدریجی : خجل شدم ز جوانی که زندگانی نیست</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27093" />
+        </navPoint>
+        <navPoint id="navid3x1x30" playOrder="34">
+          <navLabel>
+            <text>غزل شمارهٔ ۳۰ - کنج فنا : سری به سینه خود تا صفا توانی یافت</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27094" />
+        </navPoint>
+        <navPoint id="navid3x1x31" playOrder="35">
+          <navLabel>
+            <text>غزل شمارهٔ ۳۱ - چشم مست : برداشت پرده شمعم و پروانه پرگرفت</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27095" />
+        </navPoint>
+        <navPoint id="navid3x1x32" playOrder="36">
+          <navLabel>
+            <text>غزل شمارهٔ ۳۲ - مسافر مجنون : رفتم و بیشم نبود روی اقامت</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27096" />
+        </navPoint>
+        <navPoint id="navid3x1x33" playOrder="37">
+          <navLabel>
+            <text>غزل شمارهٔ ۳۳ - اشک شوق : دیر آمدی که دست ز دامن ندارمت</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27097" />
+        </navPoint>
+        <navPoint id="navid3x1x34" playOrder="38">
+          <navLabel>
+            <text>غزل شمارهٔ ۳۴ - ملال محبت : گاهی گر از ملال محبت بخوانمت</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27098" />
+        </navPoint>
+        <navPoint id="navid3x1x35" playOrder="39">
+          <navLabel>
+            <text>غزل شمارهٔ ۳۵ - دستم به دامانت : نه وصلت دیده بودم کاشکی ای گل نه هجرانت</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27099" />
+        </navPoint>
+        <navPoint id="navid3x1x36" playOrder="40">
+          <navLabel>
+            <text>غزل شمارهٔ ۳۶ - ویلن تاجبخش : شنیده ام که به شاهان عشق بخشی تاج</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27100" />
+        </navPoint>
+        <navPoint id="navid3x1x37" playOrder="41">
+          <navLabel>
+            <text>غزل شمارهٔ ۳۷ - دیوان و دیوانه : یا رب مباد کز پا جانان من بیفتد</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27101" />
+        </navPoint>
+        <navPoint id="navid3x1x38" playOrder="42">
+          <navLabel>
+            <text>غزل شمارهٔ ۳۸ - خزان جاودانی : مه من هنوز عشقت دل من فکار دارد</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27102" />
+        </navPoint>
+        <navPoint id="navid3x1x39" playOrder="43">
+          <navLabel>
+            <text>غزل شمارهٔ ۳۹ - گل پشت و رو ندارد : با رنگ و بویت ای گل گل رنگ و بو ندارد</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27103" />
+        </navPoint>
+        <navPoint id="navid3x1x40" playOrder="44">
+          <navLabel>
+            <text>غزل شمارهٔ ۴۰ - شتاب شباب : شباب عمر عجب با شتاب می گذرد</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27104" />
+        </navPoint>
+        <navPoint id="navid3x1x41" playOrder="45">
+          <navLabel>
+            <text>غزل شمارهٔ ۴۱ - وداع جوانی : جوانی حسرتا با من وداع جاودانی کرد</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27105" />
+        </navPoint>
+        <navPoint id="navid3x1x42" playOrder="46">
+          <navLabel>
+            <text>غزل شمارهٔ ۴۲ - طغرای امان : آمد آن شاهد دل برده و جان بازآورد</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27106" />
+        </navPoint>
+        <navPoint id="navid3x1x43" playOrder="47">
+          <navLabel>
+            <text>غزل شمارهٔ ۴۳ - ستاره صبح : چو آفتاب به شمشیر شعله برخیزد</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27107" />
+        </navPoint>
+        <navPoint id="navid3x1x44" playOrder="48">
+          <navLabel>
+            <text>غزل شمارهٔ ۴۴ - من نخواهد شد : رقیبت گر هنر هم دزدد از من من نخواهد شد</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27108" />
+        </navPoint>
+        <navPoint id="navid3x1x45" playOrder="49">
+          <navLabel>
+            <text>غزل شمارهٔ ۴۵ - رؤیای جوانی : کاش پیوسته گل و سبزه و صحرا باشد</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27109" />
+        </navPoint>
+        <navPoint id="navid3x1x46" playOrder="50">
+          <navLabel>
+            <text>غزل شمارهٔ ۴۶ - بهار زندانی : بی تو ای دل نکند لاله به بار آمده باشد</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27110" />
+        </navPoint>
+        <navPoint id="navid3x1x47" playOrder="51">
+          <navLabel>
+            <text>غزل شمارهٔ ۴۷ - عیدی عشاق : صبا به شوق در ایوان شهریار آمد</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27111" />
+        </navPoint>
+        <navPoint id="navid3x1x48" playOrder="52">
+          <navLabel>
+            <text>غزل شمارهٔ ۴۸ - یادی از ایرج : خوابم آشفت و سرخفته به دامان آمد</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27112" />
+        </navPoint>
+        <navPoint id="navid3x1x49" playOrder="53">
+          <navLabel>
+            <text>غزل شمارهٔ ۴۹ - افسانه شب : ماندم به چمن شب شد و مهتاب برآمد</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27113" />
+        </navPoint>
+        <navPoint id="navid3x1x50" playOrder="54">
+          <navLabel>
+            <text>غزل شمارهٔ ۵۰ - جلوه جلال : شبست و چشم من و شمع اشکبارانند</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27114" />
+        </navPoint>
+        <navPoint id="navid3x1x51" playOrder="55">
+          <navLabel>
+            <text>غزل شمارهٔ ۵۱ - مسافر همدان : مسافری که به رخ اشک حسرتم بدواند</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27115" />
+        </navPoint>
+        <navPoint id="navid3x1x52" playOrder="56">
+          <navLabel>
+            <text>غزل شمارهٔ ۵۲ - سیل روزگار : لبت تا در شکفتن لاله سیراب را ماند</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27116" />
+        </navPoint>
+        <navPoint id="navid3x1x53" playOrder="57">
+          <navLabel>
+            <text>غزل شمارهٔ ۵۳ - سرود ساربان : بهار آمد که بازم گل به باغ و بوستان خواند</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27117" />
+        </navPoint>
+        <navPoint id="navid3x1x54" playOrder="58">
+          <navLabel>
+            <text>غزل شمارهٔ ۵۴ - عید خون : نوجوانان وطن بستر به خاک و خون گرفتند</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27118" />
+        </navPoint>
+        <navPoint id="navid3x1x55" playOrder="59">
+          <navLabel>
+            <text>غزل شمارهٔ ۵۵ - درس محبت : روشنانی که به تاریکی شب گردانند</text>
+          </navLabel>
+          <content src="cat373sec1.xhtml#poem-27119" />
+        </navPoint>
+        <navPoint id="navid3x1x56" playOrder="60">
+          <navLabel>
+            <text>غزل شمارهٔ ۵۶ - هفت خوان عشق : سبوکشان که به ظلمات عشق خضر رهند</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27120" />
+        </navPoint>
+        <navPoint id="navid3x1x57" playOrder="61">
+          <navLabel>
+            <text>غزل شمارهٔ ۵۷ - بارگاه حافظ : شبها به کنج خلوتم آواز می دهند</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27121" />
+        </navPoint>
+        <navPoint id="navid3x1x58" playOrder="62">
+          <navLabel>
+            <text>غزل شمارهٔ ۵۸ - حافظ جاویدان : تا که از طارم میخانه نشان خواهد بود</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27122" />
+        </navPoint>
+        <navPoint id="navid3x1x59" playOrder="63">
+          <navLabel>
+            <text>غزل شمارهٔ ۵۹ - جلوه جانانه : شمعی فروخت چهره که پروانه تو بود</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27123" />
+        </navPoint>
+        <navPoint id="navid3x1x60" playOrder="64">
+          <navLabel>
+            <text>غزل شمارهٔ ۶۰ - خوابی و خماریی : دوش در خواب من آن لاله عذار آمده بود</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27124" />
+        </navPoint>
+        <navPoint id="navid3x1x61" playOrder="65">
+          <navLabel>
+            <text>غزل شمارهٔ ۶۱ - بازار شوق : یاد آن که جز به روی منش دیده وانبود</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27125" />
+        </navPoint>
+        <navPoint id="navid3x1x62" playOrder="66">
+          <navLabel>
+            <text>غزل شمارهٔ ۶۲ - او بود و او نبود : اشکش چکید و دیگرش آن آبرو نبود</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27126" />
+        </navPoint>
+        <navPoint id="navid3x1x63" playOrder="67">
+          <navLabel>
+            <text>غزل شمارهٔ ۶۳ - اشک ندامت : گربه پیرانه سرم بخت جوانی به سر آید</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27127" />
+        </navPoint>
+        <navPoint id="navid3x1x64" playOrder="68">
+          <navLabel>
+            <text>غزل شمارهٔ ۶۴ - روزه شکن : تا دهن بسته ام از نوش لبان میبرم آزار</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27128" />
+        </navPoint>
+        <navPoint id="navid3x1x65" playOrder="69">
+          <navLabel>
+            <text>غزل شمارهٔ ۶۵ - ای شیراز : دیدمت دورنمای در و بام ای شیراز</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27129" />
+        </navPoint>
+        <navPoint id="navid3x1x66" playOrder="70">
+          <navLabel>
+            <text>غزل شمارهٔ ۶۶ - بیاد استاد فرخ : فرخا از تو دلم ساخته با یاد هنوز</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27130" />
+        </navPoint>
+        <navPoint id="navid3x1x67" playOrder="71">
+          <navLabel>
+            <text>غزل شمارهٔ ۶۷ - سینمای خزان : شب است و باغ گلستان خزان رؤیاخیز</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27131" />
+        </navPoint>
+        <navPoint id="navid3x1x68" playOrder="72">
+          <navLabel>
+            <text>غزل شمارهٔ ۶۸ - جمال کعبه : اگر که شبرو عشقی چراغ ماهت بس</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27132" />
+        </navPoint>
+        <navPoint id="navid3x1x69" playOrder="73">
+          <navLabel>
+            <text>غزل شمارهٔ ۶۹ - افسانه روزگار : قمار عاشقان بردی ندارد از نداران پرس</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27133" />
+        </navPoint>
+        <navPoint id="navid3x1x70" playOrder="74">
+          <navLabel>
+            <text>غزل شمارهٔ ۷۰ - گله عاشق : آتشی زد شب هجرم به دل و جان که مپرس</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27134" />
+        </navPoint>
+        <navPoint id="navid3x1x71" playOrder="75">
+          <navLabel>
+            <text>غزل شمارهٔ ۷۱ - خدا حافظ : به تودیع توجان میخواهد از تن شد جدا حافظ</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27135" />
+        </navPoint>
+        <navPoint id="navid3x1x72" playOrder="76">
+          <navLabel>
+            <text>غزل شمارهٔ ۷۲ - شهید عشق : به خاک من گذری کن چو گل گریبان چاک</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27136" />
+        </navPoint>
+        <navPoint id="navid3x1x73" playOrder="77">
+          <navLabel>
+            <text>غزل شمارهٔ ۷۳ - غنای غم : از غم جدا مشو که غنا می دهد به دل</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27137" />
+        </navPoint>
+        <navPoint id="navid3x1x74" playOrder="78">
+          <navLabel>
+            <text>غزل شمارهٔ ۷۴ - یاران دغل : گر من از عشق غزالی غزلی ساخته ام</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27138" />
+        </navPoint>
+        <navPoint id="navid3x1x75" playOrder="79">
+          <navLabel>
+            <text>غزل شمارهٔ ۷۵ - هجران کشیده ام : دامن مکش به ناز که هجران کشیده ام</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27139" />
+        </navPoint>
+        <navPoint id="navid3x1x76" playOrder="80">
+          <navLabel>
+            <text>غزل شمارهٔ ۷۶ - زندان زندگی : تا هستم ای رفیق ندانی که کیستم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27140" />
+        </navPoint>
+        <navPoint id="navid3x1x77" playOrder="81">
+          <navLabel>
+            <text>غزل شمارهٔ ۷۷ - نالهٔ ناکامی : برو ای ترک که ترک تو ستمگر کردم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27141" />
+        </navPoint>
+        <navPoint id="navid3x1x78" playOrder="82">
+          <navLabel>
+            <text>غزل شمارهٔ ۷۸ - لاله سیراب : نفسی داشتم و ناله و شیون کردم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27142" />
+        </navPoint>
+        <navPoint id="navid3x1x79" playOrder="83">
+          <navLabel>
+            <text>غزل شمارهٔ ۷۹ - حراج عشق : چو بستی در بروی من به کوی صبر رو کردم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27143" />
+        </navPoint>
+        <navPoint id="navid3x1x80" playOrder="84">
+          <navLabel>
+            <text>غزل شمارهٔ ۸۰ - بخفت خفته و دولت بیدار : ماهم آمد به در خانه و در خانه نبودم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27144" />
+        </navPoint>
+        <navPoint id="navid3x1x81" playOrder="85">
+          <navLabel>
+            <text>غزل شمارهٔ ۸۱ - خمار انتظار : شب گذشته شتابان به رهگذار تو بودم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27145" />
+        </navPoint>
+        <navPoint id="navid3x1x82" playOrder="86">
+          <navLabel>
+            <text>غزل شمارهٔ ۸۲ - دوست ندیدم : به تیره بختی خود کس نه دیدم و نه شنیدم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27146" />
+        </navPoint>
+        <navPoint id="navid3x1x83" playOrder="87">
+          <navLabel>
+            <text>غزل شمارهٔ ۸۳ - گوهرفروش : یار و همسر نگرفتم که گرو بود سرم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27147" />
+        </navPoint>
+        <navPoint id="navid3x1x84" playOrder="88">
+          <navLabel>
+            <text>غزل شمارهٔ ۸۴ - در کوچه باغات شمران : دل شبست و به شمران سراغ باغ تو گیرم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27148" />
+        </navPoint>
+        <navPoint id="navid3x1x85" playOrder="89">
+          <navLabel>
+            <text>غزل شمارهٔ ۸۵ - چه میکشم : در وصل هم ز عشق تو ای گل در آتشم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27149" />
+        </navPoint>
+        <navPoint id="navid3x1x86" playOrder="90">
+          <navLabel>
+            <text>غزل شمارهٔ ۸۶ - نگین گم شده : گلچین که آمد ای گل من در چمن نباشم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27150" />
+        </navPoint>
+        <navPoint id="navid3x1x87" playOrder="91">
+          <navLabel>
+            <text>غزل شمارهٔ ۸۷ - دیگجوش : اگر چه رند و خراب و گدای خانه به دوشم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27151" />
+        </navPoint>
+        <navPoint id="navid3x1x88" playOrder="92">
+          <navLabel>
+            <text>غزل شمارهٔ ۸۸ - به مرغان چمن : خراب از باد پائیز خمارانگیز تهرانم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27152" />
+        </navPoint>
+        <navPoint id="navid3x1x89" playOrder="93">
+          <navLabel>
+            <text>غزل شمارهٔ ۸۹ - زیان شهرت : به مرگ چاره نجستم که در جهان مانم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27153" />
+        </navPoint>
+        <navPoint id="navid3x1x90" playOrder="94">
+          <navLabel>
+            <text>غزل شمارهٔ ۹۰ - چشمه قاف : از همه سوی جهان جلوه او می بینم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27154" />
+        </navPoint>
+        <navPoint id="navid3x1x91" playOrder="95">
+          <navLabel>
+            <text>غزل شمارهٔ ۹۱ - عهد قدیم : چه شد آن عهد قدیم و چه شد آن یار ندیم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27155" />
+        </navPoint>
+        <navPoint id="navid3x1x92" playOrder="96">
+          <navLabel>
+            <text>غزل شمارهٔ ۹۲ - حرم قدس : روی در کعبه این کاخ کبود آمده ایم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27156" />
+        </navPoint>
+        <navPoint id="navid3x1x93" playOrder="97">
+          <navLabel>
+            <text>غزل شمارهٔ ۹۳ - ساز عبادی : تا کی چو باد سربدوانی به وادیم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27157" />
+        </navPoint>
+        <navPoint id="navid3x1x94" playOrder="98">
+          <navLabel>
+            <text>غزل شمارهٔ ۹۴ - غزال و غزل : امشب از دولت می دفع ملالی کردیم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27158" />
+        </navPoint>
+        <navPoint id="navid3x1x95" playOrder="99">
+          <navLabel>
+            <text>غزل شمارهٔ ۹۵ - من و ما : مهتاب و سرشکی به هم آمیخته بودیم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27159" />
+        </navPoint>
+        <navPoint id="navid3x1x96" playOrder="100">
+          <navLabel>
+            <text>غزل شمارهٔ ۹۶ - وحشی شکار : تا کی در انتظار گذاری به زاریم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27160" />
+        </navPoint>
+        <navPoint id="navid3x1x97" playOrder="101">
+          <navLabel>
+            <text>غزل شمارهٔ ۹۷ - ترانه جاودان : ای شاخ گل که در پی گلچین دوانیم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27161" />
+        </navPoint>
+        <navPoint id="navid3x1x98" playOrder="102">
+          <navLabel>
+            <text>غزل شمارهٔ ۹۸ - جرس کاروان : از زندگانیم گله دارد جوانیم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27162" />
+        </navPoint>
+        <navPoint id="navid3x1x99" playOrder="103">
+          <navLabel>
+            <text>غزل شمارهٔ ۹۹ - باده وحدت : سر برآرید حریفان که سبوئی بزنیم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27163" />
+        </navPoint>
+        <navPoint id="navid3x1x100" playOrder="104">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۰۰ - خون سیاووش : هر سحر یاد کز آن زلف و بناگوش کنیم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27164" />
+        </navPoint>
+        <navPoint id="navid3x1x101" playOrder="105">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۰۱ - غزل یا لغز : بلبل عشقم و از آن گل خندان گویم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27165" />
+        </navPoint>
+        <navPoint id="navid3x1x102" playOrder="106">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۰۲ - شاعر افسانه : نیما غم دل گو که غریبانه بگرییم</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27166" />
+        </navPoint>
+        <navPoint id="navid3x1x103" playOrder="107">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۰۳ - تو بمان و دگران : از تو بگذشتم و بگذاشتمت با دگران</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27167" />
+        </navPoint>
+        <navPoint id="navid3x1x104" playOrder="108">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۰۴ - یوسف گم گشته : یا رب آن یوسف گم گشته به من بازرسان</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27168" />
+        </navPoint>
+        <navPoint id="navid3x1x105" playOrder="109">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۰۵ - کنج ملال : خلوتی داریم و حالی با خیال خویشتن</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27169" />
+        </navPoint>
+        <navPoint id="navid3x1x106" playOrder="110">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۰۶ - درس محبت : در بهاران سری از خاک برون آوردن</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27170" />
+        </navPoint>
+        <navPoint id="navid3x1x107" playOrder="111">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۰۷ - چه خواهد بودن : آسمان گو ندهد کام چه خواهد بودن</text>
+          </navLabel>
+          <content src="cat373sec2.xhtml#poem-27171" />
+        </navPoint>
+        <navPoint id="navid3x1x108" playOrder="112">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۰۸ - آئینه شاهی : ای کعبه دری باز به روی دل ما کن</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27172" />
+        </navPoint>
+        <navPoint id="navid3x1x109" playOrder="113">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۰۹ - گدا پادشاه کن : ای طلعت توخنده به خورشید و ماه کن</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27173" />
+        </navPoint>
+        <navPoint id="navid3x1x110" playOrder="114">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۱۰ - سه تار من : نالد به حال زار من امشب سه تار من</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27174" />
+        </navPoint>
+        <navPoint id="navid3x1x111" playOrder="115">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۱۱ - ناله های زار : به اختیار گرو برد چشم یار از من</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27175" />
+        </navPoint>
+        <navPoint id="navid3x1x112" playOrder="116">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۱۲ - گلهٔ خاموش : کس نیست در این گوشه فراموشتر از من</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27176" />
+        </navPoint>
+        <navPoint id="navid3x1x113" playOrder="117">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۱۳ - اقبال من : تیره گون شد کوکب بخت همایون فال من</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27177" />
+        </navPoint>
+        <navPoint id="navid3x1x114" playOrder="118">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۱۴ - جلوه جواله : این همه جلوه و در پرده نهانی گل من</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27178" />
+        </navPoint>
+        <navPoint id="navid3x1x115" playOrder="119">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۱۵ - به سروناز شیراز : باز شد روزنی از گلشن شیراز به من</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27179" />
+        </navPoint>
+        <navPoint id="navid3x1x116" playOrder="120">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۱۶ - بیاد مرحوم میرزاده عشقی : عشقی که درد عشق وطن بود درد او</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27180" />
+        </navPoint>
+        <navPoint id="navid3x1x117" playOrder="121">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۱۷ - یاد قدیم : یادم نکرد و شاد حریفی که یاد از او</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27181" />
+        </navPoint>
+        <navPoint id="navid3x1x118" playOrder="122">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۱۸ - انتظار فرج : ای آفتاب هاله ای از روی ماه تو</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27182" />
+        </navPoint>
+        <navPoint id="navid3x1x119" playOrder="123">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۱۹ - بمانیم که چه : سایه جان رفتنی استیم بمانیم که چه</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27183" />
+        </navPoint>
+        <navPoint id="navid3x1x120" playOrder="124">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۲۰ - غزال رمیده : نوشتم این غزل نغز با سواد دو دیده</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27184" />
+        </navPoint>
+        <navPoint id="navid3x1x121" playOrder="125">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۲۱ - یاد شهیار : کار گل زار شود گر تو به گلزار آئی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27185" />
+        </navPoint>
+        <navPoint id="navid3x1x122" playOrder="126">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۲۲ - غروب و مهتاب دریا : ای ماه شب دریا ای چشمه زیبائی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27186" />
+        </navPoint>
+        <navPoint id="navid3x1x123" playOrder="127">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۲۳ - طوطی خوش لهجه : مایه حسن ندارم که به بازار من آئی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27187" />
+        </navPoint>
+        <navPoint id="navid3x1x124" playOrder="128">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۲۴ - شیدائی : رندم و شهره به شوریدگی و شیدائی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27188" />
+        </navPoint>
+        <navPoint id="navid3x1x125" playOrder="129">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۲۵ - چشمه ابدیت : شکفته ام به تماشای چشم شهلائی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27189" />
+        </navPoint>
+        <navPoint id="navid3x1x126" playOrder="130">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۲۶ - ساز صبا : بزن که سوز دل من به ساز میگوئی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27190" />
+        </navPoint>
+        <navPoint id="navid3x1x127" playOrder="131">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۲۷ - شاهد گمراه : راه گم کرده و با رویی چو ماه آمده ای</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27191" />
+        </navPoint>
+        <navPoint id="navid3x1x128" playOrder="132">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۲۸ - وای وای من : هر دم چو توپ می زندم پشت پای وای</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27192" />
+        </navPoint>
+        <navPoint id="navid3x1x129" playOrder="133">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۲۹ - طوطی قناد : الا ای نوگل رعنا که رشک شاخ شمشادی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27193" />
+        </navPoint>
+        <navPoint id="navid3x1x130" playOrder="134">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۳۰ - مرغ بهشتی : شبی را با من ای ماه سحرخیزان سحرکردی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27194" />
+        </navPoint>
+        <navPoint id="navid3x1x131" playOrder="135">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۳۱ - ماه بر سر مهر : چه شد که بار دگر یاد آشنا کردی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27195" />
+        </navPoint>
+        <navPoint id="navid3x1x132" playOrder="136">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۳۲ - شمشیر قلم : نالم از دست تو ای ناله که تاثیر نکردی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27196" />
+        </navPoint>
+        <navPoint id="navid3x1x133" playOrder="137">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۳۳ - با روح صبا : ای صبا با توچه گفتند که خاموش شدی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27197" />
+        </navPoint>
+        <navPoint id="navid3x1x134" playOrder="138">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۳۴ - انتظار : باز امشب ای ستاره تابان نیامدی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27198" />
+        </navPoint>
+        <navPoint id="navid3x1x135" playOrder="139">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۳۵ - دیوانه و پری : آن کبوتر ز لب بام وفا شد سفری</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27199" />
+        </navPoint>
+        <navPoint id="navid3x1x136" playOrder="140">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۳۶ - مکتب طبیعت : فریب رهزن دیو و پری تو چون نخوری</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27200" />
+        </navPoint>
+        <navPoint id="navid3x1x137" playOrder="141">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۳۷ - پریشان روزگاری : زلف او برده قرار خاطر از من یادگاری</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27201" />
+        </navPoint>
+        <navPoint id="navid3x1x138" playOrder="142">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۳۸ - ماه کلیسا : ای پریچهره که آهنگ کلیسا داری</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27202" />
+        </navPoint>
+        <navPoint id="navid3x1x139" playOrder="143">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۳۹ - پری و فروغ : ز دریچه های چشمم نظری به ماه داری</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27203" />
+        </navPoint>
+        <navPoint id="navid3x1x140" playOrder="144">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۴۰ - خال برنده : دستی که گاه خنده بآن خال می بری</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27204" />
+        </navPoint>
+        <navPoint id="navid3x1x141" playOrder="145">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۴۱ - سیه چشمان شیرازی : دل و جانیکه دربردم من از ترکان قفقازی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27205" />
+        </navPoint>
+        <navPoint id="navid3x1x142" playOrder="146">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۴۲ - درس حال : اگر بلاکش بیداد را به داد رسی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27206" />
+        </navPoint>
+        <navPoint id="navid3x1x143" playOrder="147">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۴۳ - کاش یارب : در دیاری که در او نیست کسی یار کسی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27207" />
+        </navPoint>
+        <navPoint id="navid3x1x144" playOrder="148">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۴۴ - یار باقی کار باقی : رفتی و در دل هنوزم حسرت دیدار باقی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27208" />
+        </navPoint>
+        <navPoint id="navid3x1x145" playOrder="149">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۴۵ - زندانی خاک : نه عقلی و نه ادراکی و من خود خاک و خاشاکی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27209" />
+        </navPoint>
+        <navPoint id="navid3x1x146" playOrder="150">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۴۶ - جمع و تفریق : ای گل به شکر آنکه در این بوستان گلی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27210" />
+        </navPoint>
+        <navPoint id="navid3x1x147" playOrder="151">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۴۷ - مزد شبانی : خوشست پیری اگر مانده بود جان جوانی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27211" />
+        </navPoint>
+        <navPoint id="navid3x1x148" playOrder="152">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۴۸ - مقام انسانی : خلوتم چراغان کن ای چراغ روحانی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27212" />
+        </navPoint>
+        <navPoint id="navid3x1x149" playOrder="153">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۴۹ - شرم و عفت : نالدم پای که چند از پی یارم بدوانی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27213" />
+        </navPoint>
+        <navPoint id="navid3x1x150" playOrder="154">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۵۰ - نای شبان : ریختم با نوجوانی باز طرح زندگانی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27214" />
+        </navPoint>
+        <navPoint id="navid3x1x151" playOrder="155">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۵۱ - وا جوانی : بار دیگر گر فرود آرد سری با ما جوانی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27215" />
+        </navPoint>
+        <navPoint id="navid3x1x152" playOrder="156">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۵۲ - اخگر نهفته : ای دل به ساز عرش اگر گوش می کنی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27216" />
+        </navPoint>
+        <navPoint id="navid3x1x153" playOrder="157">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۵۳ - غوغا میکنی : ای غنچه خندان چرا خون در دل ما میکنی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27217" />
+        </navPoint>
+        <navPoint id="navid3x1x154" playOrder="158">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۵۴ - نی محزون : امشب ای ماه به درد دل من تسکینی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27218" />
+        </navPoint>
+        <navPoint id="navid3x1x155" playOrder="159">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۵۵ - نفرین : چو ابرویت نچمیدی به کام گوشه نشینی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27219" />
+        </navPoint>
+        <navPoint id="navid3x1x156" playOrder="160">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۵۶ - دالان بهشت : شاهد شکفته مخمور چون شمع صبحگاهی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27220" />
+        </navPoint>
+        <navPoint id="navid3x1x157" playOrder="161">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۵۷ - ماه هنرپیشه : تا چند کنیم از تو قناعت به نگاهی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27221" />
+        </navPoint>
+        <navPoint id="navid3x1x158" playOrder="162">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۵۸ - ماه سفرکرده : ماها تو سفر کردی و شب ماند و سیاهی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27222" />
+        </navPoint>
+        <navPoint id="navid3x1x159" playOrder="163">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۵۹ - جمال بقیت اللهی : سپاه صبح زد از ماه خیمه تا ماهی</text>
+          </navLabel>
+          <content src="cat373sec3.xhtml#poem-27223" />
+        </navPoint>
+        <navPoint id="navid3x1x160" playOrder="164">
+          <navLabel>
+            <text>غزل شمارهٔ ۱۶۰ - دنیای دل : چند بارد غم دنیا به تن تنهایی</text>
+          </navLabel>
+          <content src="cat373sec4.xhtml#poem-27224" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navid3x2" playOrder="169">
+        <navLabel>
+          <text>گزیدهٔ اشعار ترکی</text>
+        </navLabel>
+        <content src="cat1735.xhtml" />
+        <navPoint id="navid3x2x1" playOrder="170">
+          <navLabel>
+            <text>تورکون دیلی : تورکون دیلی تک سئوگیلی ایسته کلی دیل اولماز</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49097" />
+        </navPoint>
+        <navPoint id="navid3x2x2" playOrder="171">
+          <navLabel>
+            <text>بهجت آباد خاطره سی : اولدوز سایاراق گوزله میشم هر گئجه یاری</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49098" />
+        </navPoint>
+        <navPoint id="navid3x2x3" playOrder="172">
+          <navLabel>
+            <text>سهندیم : شاه داغیم، چال پاپاغیم، ائل دایاغیم، شانلی سهند´یم</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49099" />
+        </navPoint>
+        <navPoint id="navid3x2x4" playOrder="173">
+          <navLabel>
+            <text>حکیمه جان! : سن وطندن ساری قلبین دویونورسه،مارالیم!</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49100" />
+        </navPoint>
+        <navPoint id="navid3x2x5" playOrder="174">
+          <navLabel>
+            <text>ایمان مشتریسی : آمان اللاه یِئنه شیطان گلیب ایمان آپارا    </text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49101" />
+        </navPoint>
+        <navPoint id="navid3x2x6" playOrder="175">
+          <navLabel>
+            <text>یاتا بیلمه ییرم : بو گئجه من کی یاتا بیلمه ییرم باشی باشلاره قاتا بی ...</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49102" />
+        </navPoint>
+        <navPoint id="navid3x2x7" playOrder="176">
+          <navLabel>
+            <text>شاطر اوغلان : شاطر اوغلان گوروم آللاه سنه وئرسین برکت</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49103" />
+        </navPoint>
+        <navPoint id="navid3x2x8" playOrder="177">
+          <navLabel>
+            <text>زمان سسی ( با ترجمهٔ فارسی) : صبح اولدی هر طرفدن اوجالدی اذان سسی!</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49104" />
+        </navPoint>
+        <navPoint id="navid3x2x9" playOrder="178">
+          <navLabel>
+            <text>گئتمه ترسا بالاسی : ایذن وئر توی گئجه‌سی من ده سنه دایه‌گلیم</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49105" />
+        </navPoint>
+        <navPoint id="navid3x2x10" playOrder="179">
+          <navLabel>
+            <text>ناز ایله میسن : چوخلار اینجیکدی کی٬ سن اونلارا ناز ایله میسن</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49106" />
+        </navPoint>
+        <navPoint id="navid3x2x11" playOrder="180">
+          <navLabel>
+            <text>آزادلیق قوشی وارلیق : هر چند قوتولماق هله یوخ دارلیغمیزدان</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49107" />
+        </navPoint>
+        <navPoint id="navid3x2x12" playOrder="181">
+          <navLabel>
+            <text>غم باسدی قلیانیمی : قیشین قره قئییدی آلیب منیم جانیمی</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49108" />
+        </navPoint>
+        <navPoint id="navid3x2x13" playOrder="182">
+          <navLabel>
+            <text>پروانه و شمع : برق اولمادی ” قیزیم گئجه یاندیردی لاله نی</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49109" />
+        </navPoint>
+        <navPoint id="navid3x2x14" playOrder="183">
+          <navLabel>
+            <text>بلالی باش : یار گونومی گؤی اسگییه توتدو کی دور منی بوشا</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49110" />
+        </navPoint>
+        <navPoint id="navid3x2x15" playOrder="184">
+          <navLabel>
+            <text>ایمان ایله گئتدی : یغدی خیر و برکت سفره سین ، احسانیله گئتدی</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49111" />
+        </navPoint>
+        <navPoint id="navid3x2x16" playOrder="185">
+          <navLabel>
+            <text>آغیز یِئمیشی : بیر گون آغیز قالار بوش</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49112" />
+        </navPoint>
+        <navPoint id="navid3x2x17" playOrder="186">
+          <navLabel>
+            <text>دنیا نه یالان تاپماجادیر؟ : ایل کئچدی، باهار اولدو، خبر یوخ گولوموزدن،</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49113" />
+        </navPoint>
+        <navPoint id="navid3x2x18" playOrder="187">
+          <navLabel>
+            <text>هارا قاچسین اینسان؟ : جانا گلمیشیک بیز بو جانان الیندن</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49114" />
+        </navPoint>
+        <navPoint id="navid3x2x19" playOrder="188">
+          <navLabel>
+            <text>قاصد : ســـن یاریمین قاصدی سـن</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49115" />
+        </navPoint>
+        <navPoint id="navid3x2x20" playOrder="189">
+          <navLabel>
+            <text>گوزوم آیدین : گوزوم آیدین، گورورم سوگلی قارداشلاریمی</text>
+          </navLabel>
+          <content src="cat1735sec1.xhtml#poem-49116" />
+        </navPoint>
+        <navPoint id="navid3x2x21" playOrder="190">
+          <navLabel>
+            <text>چابالیر اوره ک سینه مده : آینایا باخاندا گؤردوم ، ساققالیما دن دوشوبدی</text>
+          </navLabel>
+          <content src="cat1735sec2.xhtml#poem-49117" />
+        </navPoint>
+        <navPoint id="navid3x2x22" playOrder="191">
+          <navLabel>
+            <text>اویون اولدوق : ایتیمیز قورد اولالی، بیزده قاییتدیق قویون اولدوق</text>
+          </navLabel>
+          <content src="cat1735sec2.xhtml#poem-49118" />
+        </navPoint>
+        <navPoint id="navid3x2x23" playOrder="192">
+          <navLabel>
+            <text>انس و جن ( با ترجمهٔ فارسی) : بار الاها سن بیزه وئر بو شیاطین دن نجات</text>
+          </navLabel>
+          <content src="cat1735sec2.xhtml#poem-49119" />
+        </navPoint>
+        <navPoint id="navid3x2x24" playOrder="193">
+          <navLabel>
+            <text>الله بویاغی : ایسلام اویاتدی خالق باشین قاوزایان قاچیر</text>
+          </navLabel>
+          <content src="cat1735sec2.xhtml#poem-49120" />
+        </navPoint>
+        <navPoint id="navid3x2x25" playOrder="194">
+          <navLabel>
+            <text>قافقازلی قارداشلار ایله گوروش : ای صفاسین اونودمایان قافقاز</text>
+          </navLabel>
+          <content src="cat1735sec2.xhtml#poem-49121" />
+        </navPoint>
+        <navPoint id="navid3x2x26" playOrder="195">
+          <navLabel>
+            <text>عؤمروُن نئجه گئچدی ؟ : بیر اوشاقلیقدا خوش اولدوم اودا یئر گؤی قاچاراق </text>
+          </navLabel>
+          <content src="cat1735sec2.xhtml#poem-49122" />
+        </navPoint>
+        <navPoint id="navid3x2x27" playOrder="196">
+          <navLabel>
+            <text>عزیزه ( با ترجمهٔ فارسی) : قطعه شعر زیبایی از استاد محمّد حسین بهجت تبریزی شه ...</text>
+          </navLabel>
+          <content src="cat1735sec2.xhtml#poem-49123" />
+        </navPoint>
+        <navPoint id="navid3x2x28" playOrder="197">
+          <navLabel>
+            <text>هلال محرم : محرم دیر ، خانیم زینب عزاسی</text>
+          </navLabel>
+          <content src="cat1735sec2.xhtml#poem-49124" />
+        </navPoint>
+        <navPoint id="navid3x2x29" playOrder="198">
+          <navLabel>
+            <text>خان ننه : خان ننه ، هایاندا قالدین</text>
+          </navLabel>
+          <content src="cat1735sec2.xhtml#poem-49125" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navid3x3" playOrder="368">
+        <navLabel>
+          <text>منظومهٔ حیدر بابا : ترجمهٔ فارسی  بهروز ثروتیان</text>
+        </navLabel>
+        <content src="cat372sec1.xhtml#poem-48848" />
+      </navPoint>
+    </navPoint>
+  </navMap>
+</ncx>

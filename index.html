@@ -1645,28 +1645,108 @@
         }
       }
 
+      /* Diwan Tool Styles */
+      #diwan-poems-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .diwan-poem-item {
+        background: var(--m3-surface-container);
+        border-radius: 12px;
+        padding: 12px 16px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .diwan-poem-item:hover {
+        background: var(--m3-surface-container-high);
+      }
+
+      .diwan-poem-title {
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--m3-on-surface);
+        margin-bottom: 4px;
+      }
+
+      .diwan-poem-preview {
+        font-size: 14px;
+        color: var(--m3-on-surface-variant);
+        line-height: 1.6;
+      }
+
+      #diwan-poem-content {
+        background: var(--m3-surface-container-low);
+        border-radius: 16px;
+        padding: 24px;
+      }
+
+      .diwan-poem-header {
+        text-align: center;
+        margin-bottom: 32px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--m3-outline-variant);
+      }
+
+      .diwan-poem-header h2 {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--m3-primary);
+        margin: 0;
+      }
+
+      .diwan-beyt {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 20px;
+        line-height: 2;
+      }
+
+      .diwan-mesra {
+        font-size: 16px;
+        color: var(--m3-on-surface);
+      }
+
+      .diwan-mesra:first-child {
+        text-align: right;
+      }
+
+      .diwan-mesra:last-child {
+        text-align: left;
+      }
+
+      .diwan-single-mesra {
+        grid-column: 1 / -1;
+        text-align: center;
+        font-size: 16px;
+        color: var(--m3-on-surface);margin-bottom: 20px;
+      }
+
+      @media (max-width: 600px) {
+        .diwan-beyt {
+          grid-template-columns: 1fr;gap: 8px;
+        }
+        
+        .diwan-mesra:first-child,
+        .diwan-mesra:last-child {
+          text-align: center;
+        }
+      }
+
+
     </style>
     <script>
       // ── Bale MiniApp integration ──────────────────────────
       var IS_BALE = !!(window.Bale && window.Bale.WebApp);
       if (IS_BALE) {
-        // Sync Bale's color scheme with the app's theme system
-        var _baleScheme = Bale.WebApp.colorScheme; // 'dark' | 'light'
-        document.documentElement.setAttribute('data-theme', _baleScheme);
-        try { localStorage.setItem('theme', _baleScheme); } catch(_) {}
         // Expand to full screen immediately
         Bale.WebApp.expand();
         // Tell Bale the app is ready as soon as the DOM is parsed
         document.addEventListener('DOMContentLoaded', function() {
           Bale.WebApp.ready();
-        });
-        // If user changes theme inside Bale while app is open, keep in sync
-        Bale.WebApp.onEvent('themeChanged', function() {
-          var s = Bale.WebApp.colorScheme;
-          document.documentElement.setAttribute('data-theme', s);
-          try { localStorage.setItem('theme', s); } catch(_) {}
-          var fab = document.querySelector('.theme-fab');
-          if (fab) fab.textContent = s === 'dark' ? '☀️' : '🌙';
         });
         // Hide theme FAB and PWA install — Bale handles these natively
         document.documentElement.style.setProperty('--_bale-fab-display', 'none');
@@ -2286,6 +2366,7 @@
               <div class="tool-grid">
                 <div class="link-card" onclick="haptic(this);showTool('minigames')"><button class="fav-btn" data-tool="minigames" onclick="event.stopPropagation();toggleFav('minigames',this)">☆</button><span class="link-card__icon">🕹️</span><span class="link-card__name">بازی‌های کوچک</span><span class="link-card__desc">تیک‌تاک‌تو، مار، پک‌من و بیشتر</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('wordcloud')"><button class="fav-btn" data-tool="wordcloud" onclick="event.stopPropagation();toggleFav('wordcloud',this)">☆</button><span class="link-card__icon">☁️</span><span class="link-card__name">ابر کلمات</span><span class="link-card__desc">فارسی و انگلیسی</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('diwan')"><button class="fav-btn" data-tool="wordcloud" onclick="event.stopPropagation();toggleFav('wordcloud',this)">☆</button><span class="link-card__icon">📖</span><span class="link-card__name">دیوان شعر</span><span class="link-card__desc">جستجو و مطالعه اشعار</span></div>
               </div>
             </div>
 
@@ -2298,7 +2379,7 @@
                 <div class="link-card" onclick="haptic(this);showTool('eisenhower')"><button class="fav-btn" data-tool="eisenhower" onclick="event.stopPropagation();toggleFav('eisenhower',this)">☆</button><span class="link-card__icon">⬜</span><span class="link-card__name">ماتریس آیزنهاور</span><span class="link-card__desc">اولویت‌بندی کارها ۴ بخشی</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('decmatrix')"><button class="fav-btn" data-tool="decmatrix" onclick="event.stopPropagation();toggleFav('decmatrix',this)">☆</button><span class="link-card__icon">📊</span><span class="link-card__name">ماتریس تصمیم</span><span class="link-card__desc">رتبه‌بندی گزینه‌ها با وزن</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('citation')"><button class="fav-btn" data-tool="citation" onclick="event.stopPropagation();toggleFav('citation',this)">☆</button><span class="link-card__icon">📚</span><span class="link-card__name">استناد دانشگاهی</span><span class="link-card__desc">APA، MLA، Chicago</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('langscores')"><button class="fav-btn" data-tool="langscores" onclick="event.stopPropagation();toggleFav('langscores',this)">☆</button><span class="link-card__icon">🗣️</span><span class="link-card__name">محاسبه نمره</span><span class="link-card__desc">IELTS ↔ TOEFL، محاسبه Overall</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('langscores')"><button class="fav-btn" data-tool="langscores" onclick="event.stopPropagation();toggleFav('langscores',this)">☆</button><span class="link-card__icon">🎓</span><span class="link-card__name">محاسبه نمره</span><span class="link-card__desc">IELTS ↔ TOEFL، محاسبه Overall</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('keypair')"><button class="fav-btn" data-tool="keypair" onclick="event.stopPropagation();toggleFav('keypair',this)">☆</button><span class="link-card__icon">🔐</span><span class="link-card__name">کلیدهای RSA/ECC</span><span class="link-card__desc">تولید کلید عمومی/خصوصی</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('htaccess')"><button class="fav-btn" data-tool="htaccess" onclick="event.stopPropagation();toggleFav('htaccess',this)">☆</button><span class="link-card__icon">⚙️</span><span class="link-card__name">مولد htaccess</span><span class="link-card__desc">ریدایرکت، کش، HTTPS</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('seotools')"><button class="fav-btn" data-tool="seotools" onclick="event.stopPropagation();toggleFav('seotools',this)">☆</button><span class="link-card__icon">🔍</span><span class="link-card__name">متا تگ SEO</span><span class="link-card__desc">OpenGraph، Twitter Cards</span></div>
@@ -5422,7 +5503,7 @@
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
           <div class="tool-title">🏦 محاسبه سود سپرده</div>
           <div class="tool-desc">محاسبه سود سپرده بانکی با نرخ ساده و مرکب.</div>
-          <div class="field-row">
+          <div class="field-row" style="margin-bottom:14px">
             <div class="field-col">
               <label class="field-label">مبلغ سپرده (تومان)</label>
               <input type="number" id="dep-amt" class="text-input" value="100000000" placeholder="مبلغ">
@@ -5432,7 +5513,7 @@
               <input type="number" id="dep-rate" class="text-input" value="23" step="0.1" placeholder="%">
             </div>
           </div>
-          <div class="field-row">
+          <div class="field-row" style="margin-bottom:14px">
             <div class="field-col">
               <label class="field-label">مدت (ماه)</label>
               <input type="number" id="dep-months" class="text-input" value="12" placeholder="ماه">
@@ -5738,18 +5819,24 @@
         <div id="metromap" class="tool-card">
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
           <div class="tool-title">🚇 نقشه مترو و BRT</div>
-          <div class="btn-row" style="margin-bottom:8px;flex-wrap:wrap">
-            <button class="btn btn-filled" id="mm-tab-tehran"  onclick="mmSetCity('tehran')">تهران</button>
-            <button class="btn btn-tonal"  id="mm-tab-shiraz"  onclick="mmSetCity('shiraz')">شیراز</button>
-            <button class="btn btn-tonal"  id="mm-tab-isfahan" onclick="mmSetCity('isfahan')">اصفهان</button>
-            <button class="btn btn-tonal"  id="mm-tab-mashhad" onclick="mmSetCity('mashhad')">مشهد</button>
+          <!-- City selector — M3 segmented button -->
+          <div style="display:inline-flex;border:1.5px solid var(--m3-outline-variant);border-radius:50px;overflow:hidden;margin-bottom:12px;max-width:100%">
+            <button class="btn btn-filled" id="mm-tab-tehran"  onclick="mmSetCity('tehran')"
+              style="border-radius:0;border:none;padding:8px 16px;font-size:13px">🚇 تهران</button>
+            <button class="btn btn-tonal"  id="mm-tab-shiraz"  onclick="mmSetCity('shiraz')"
+              style="border-radius:0;border:none;border-inline-end:1px solid var(--m3-outline-variant);padding:8px 14px;font-size:13px">شیراز</button>
+            <button class="btn btn-tonal"  id="mm-tab-isfahan" onclick="mmSetCity('isfahan')"
+              style="border-radius:0;border:none;border-inline-end:1px solid var(--m3-outline-variant);padding:8px 14px;font-size:13px">اصفهان</button>
+            <button class="btn btn-tonal"  id="mm-tab-mashhad" onclick="mmSetCity('mashhad')"
+              style="border-radius:0;border:none;padding:8px 14px;font-size:13px">مشهد</button>
           </div>
-          <div class="btn-row" style="margin-bottom:8px;flex-wrap:wrap">
-            <button class="btn btn-tonal" onclick="mmZoom(0.15)" style="font-size:1.3rem;min-width:44px">＋</button>
-            <button class="btn btn-tonal" onclick="mmZoom(-0.15)" style="font-size:1.3rem;min-width:44px">－</button>
-            <button class="btn btn-tonal" onclick="mmZoomReset()">↺ ریست</button>
+          <!-- Map controls -->
+          <div class="btn-row" style="margin-bottom:10px;flex-wrap:wrap;gap:6px">
+            <button class="btn btn-tonal" onclick="mmZoom(0.15)"  style="min-width:44px;font-size:1.2rem" title="بزرگ‌نمایی">＋</button>
+            <button class="btn btn-tonal" onclick="mmZoom(-0.15)" style="min-width:44px;font-size:1.2rem" title="کوچک‌نمایی">－</button>
+            <button class="btn btn-tonal" onclick="mmZoomReset()">↺ ریست نما</button>
             <button class="btn btn-tonal" onclick="mmFullscreen()">⛶ تمام‌صفحه</button>
-            <button class="btn btn-tonal" id="mm-dl-btn" onclick="mmDownload()">⬇️ دانلود PDF</button>
+            <button class="btn btn-filled" id="mm-dl-btn" onclick="mmDownload()">⬇️ دانلود PDF</button>
           </div>
           <!-- Image viewer: pan+zoom with touch/mouse -->
           <div id="mm-wrap" style="overflow:hidden;border-radius:14px;border:1px solid var(--m3-outline-variant);background:#1a1a1a;position:relative;width:100%;height:70vh;cursor:grab;touch-action:none;user-select:none">
@@ -5878,27 +5965,25 @@
                   <option value="">انتخاب...</option>
                   <option value="x**2|-5|5">x²</option>
                   <option value="x**3|-3|3">x³</option>
-                  <option value="Math.sqrt(Math.abs(x))|-5|5">√|x|</option>
-                  <option value="Math.sqrt(x)|0|5">√x</option>
-                  <option value="Math.sin(x)|-6.28|6.28">sin(x)</option>
-                  <option value="Math.cos(x)|-6.28|6.28">cos(x)</option>
-                  <option value="Math.tan(x)|-1.5|1.5">tan(x)</option>
-                  <option value="Math.exp(x)|-3|3">eˣ</option>
-                  <option value="Math.log(x)|0.01|5">ln(x)</option>
+                  <option value="sqrt(abs(x))|-5|5">√|x|</option>
+                  <option value="sqrt(x)|0|5">√x</option>
+                  <option value="sin(x)|-6.28|6.28">sin(x)</option>
+                  <option value="cos(x)|-6.28|6.28">cos(x)</option>
+                  <option value="tan(x)|-1.5|1.5">tan(x)</option>
+                  <option value="exp(x)|-3|3">eˣ</option>
+                  <option value="log(x)|0.01|5">ln(x)</option>
                   <option value="1/x|-5|5">1/x</option>
-                  <option value="Math.sin(x)/x|-10|10">sin(x)/x</option>
+                  <option value="sin(x)/x|-10|10">sin(x)/x</option>
+                  <option value="x^2-4*x+3|-1|5">x²-4x+3</option>
+                  <option value="abs(x)|-5|5">|x|</option>
                 </select>
               </div>
             </div>
-            <div style="position:relative;margin-top:8px">
-              <canvas id="calc-canvas" style="width:100%;border-radius:12px;background:var(--m3-surface-container);display:block;cursor:crosshair;touch-action:none" height="280"></canvas>
-              <div id="calc-tooltip" style="display:none;position:absolute;background:var(--m3-inverse-surface);color:var(--m3-inverse-on-surface);font-size:11px;padding:4px 9px;border-radius:6px;pointer-events:none;font-family:'Courier New',monospace;white-space:nowrap;z-index:10"></div>
-            </div>
+            <div id="calc-fp-container" style="margin-top:8px;border-radius:12px;overflow:hidden;min-height:300px;background:var(--m3-surface-container)"></div>
             <div class="btn-row" style="margin-top:6px;gap:6px;flex-wrap:wrap">
-              <button class="btn btn-tonal" onclick="calcZoom(0.7)" style="font-size:1.1rem;min-width:40px">＋</button>
-              <button class="btn btn-tonal" onclick="calcZoom(1/0.7)" style="font-size:1.1rem;min-width:40px">－</button>
-              <button class="btn btn-tonal" onclick="calcZoomReset()" style="font-size:12px">↺ ریست</button>
-              <div id="calc-graph-info" style="font-size:11px;color:var(--m3-on-surface-variant);direction:ltr;padding:5px 0;flex:1;text-align:center;font-family:'Courier New',monospace"></div>
+              <button class="btn btn-tonal" onclick="calcFPZoom(1.3)" style="font-size:1.1rem;min-width:40px" title="بزرگ‌نمایی">＋</button>
+              <button class="btn btn-tonal" onclick="calcFPZoom(0.77)" style="font-size:1.1rem;min-width:40px" title="کوچک‌نمایی">－</button>
+              <button class="btn btn-tonal" onclick="calcFPReset()" style="font-size:12px">↺ ریست نما</button>
             </div>
             <div id="calc-special-pts" style="margin-top:6px;font-size:12px"></div>
           </div>
@@ -5922,6 +6007,31 @@
               <option value="love">❤ عشق</option>
               <option value="sad">😿 ناراحتی</option>
               <option value="magic">✨ ویژه</option>
+              <optgroup label="─── دیکشنری ۶۲k کائوموجی ───">
+                <option value="kj_smiling">😊 لبخند</option>
+                <option value="kj_heart">💕 قلب</option>
+                <option value="kj_kiss">😘 بوسه</option>
+                <option value="kj_blush">☺️ شرم</option>
+                <option value="kj_sad">😢 غم</option>
+                <option value="kj_crying">😭 گریه</option>
+                <option value="kj_anger">😠 خشم</option>
+                <option value="kj_dancing">💃 رقص</option>
+                <option value="kj_hug">🤗 بغل</option>
+                <option value="kj_sparkles">✨ درخشش</option>
+                <option value="kj_flower">🌸 گل</option>
+                <option value="kj_bear">🐻 خرس</option>
+                <option value="kj_running">🏃 دویدن</option>
+                <option value="kj_excited">🎉 هیجان</option>
+                <option value="kj_wink">😉 چشمک</option>
+                <option value="kj_flex">💪 قدرت</option>
+                <option value="kj_food">🍔 غذا</option>
+                <option value="kj_music">🎵 موسیقی</option>
+                <option value="kj_shrug">🤷 شانه</option>
+                <option value="kj_gun">🔫 اسلحه</option>
+                <option value="kj_thumbs_up">👍 تأیید</option>
+                <option value="kj_table_flip">┻━┻ میز</option>
+                <option value="kj_middle_finger">🖕 انگشت</option>
+              </optgroup>
             </select>
           </div>
           <div id="etcn-copied" style="display:none;text-align:center;color:var(--m3-primary);font-size:13px;margin-bottom:6px;font-weight:600">✅ کپی شد!</div>
@@ -6338,48 +6448,6 @@
           <div class="tool-desc">استناددهی استاندارد APA، MLA و Chicago برای کتاب، مقاله و وب‌سایت.</div>
         </div>
 
-        <!-- ══ LANGUAGE SCORES ══ -->
-        <div id="langscores" class="tool-card">
-          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
-          <div class="tool-title">🎓 محاسبه نمره</div>
-          <div class="btn-row" style="margin-bottom:12px">
-            <button class="btn btn-filled" id="ls2-tab-ielts" onclick="ls2SetTab('ielts')">IELTS</button>
-            <button class="btn btn-tonal"  id="ls2-tab-toefl" onclick="ls2SetTab('toefl')">TOEFL</button>
-            <button class="btn btn-tonal"  id="ls2-tab-conv" onclick="ls2SetTab('conv')">مبدل</button>
-          </div>
-          <!-- IELTS -->
-          <div id="ls2-ielts">
-            <div style="font-size:13px;color:var(--m3-on-surface-variant);margin-bottom:10px">نمره هر مهارت را وارد کنید (0 تا 9):</div>
-            <div class="field-row">
-              <div class="field-col"><label class="field-label">Listening</label><input type="number" id="ielts-l" class="text-input" min="0" max="9" step="0.5" placeholder="0-9" oninput="calcIELTS()"></div>
-              <div class="field-col"><label class="field-label">Reading</label><input type="number" id="ielts-r" class="text-input" min="0" max="9" step="0.5" placeholder="0-9" oninput="calcIELTS()"></div>
-              <div class="field-col"><label class="field-label">Writing</label><input type="number" id="ielts-w" class="text-input" min="0" max="9" step="0.5" placeholder="0-9" oninput="calcIELTS()"></div>
-              <div class="field-col"><label class="field-label">Speaking</label><input type="number" id="ielts-s" class="text-input" min="0" max="9" step="0.5" placeholder="0-9" oninput="calcIELTS()"></div>
-            </div>
-            <div id="ielts-result"></div>
-          </div>
-          <!-- TOEFL -->
-          <div id="ls2-toefl" style="display:none">
-            <div style="font-size:13px;color:var(--m3-on-surface-variant);margin-bottom:10px">نمره هر مهارت را وارد کنید (0 تا 30):</div>
-            <div class="field-row">
-              <div class="field-col"><label class="field-label">Reading</label><input type="number" id="toefl-r" class="text-input" min="0" max="30" placeholder="0-30" oninput="calcTOEFL()"></div>
-              <div class="field-col"><label class="field-label">Listening</label><input type="number" id="toefl-l" class="text-input" min="0" max="30" placeholder="0-30" oninput="calcTOEFL()"></div>
-              <div class="field-col"><label class="field-label">Speaking</label><input type="number" id="toefl-s" class="text-input" min="0" max="30" placeholder="0-30" oninput="calcTOEFL()"></div>
-              <div class="field-col"><label class="field-label">Writing</label><input type="number" id="toefl-w" class="text-input" min="0" max="30" placeholder="0-30" oninput="calcTOEFL()"></div>
-            </div>
-            <div id="toefl-result"></div>
-          </div>
-          <!-- Converter -->
-          <div id="ls2-conv" style="display:none">
-            <div class="field-row">
-              <div class="field-col"><label class="field-label">نمره IELTS</label><input type="number" id="conv-ielts" class="text-input" min="0" max="9" step="0.5" placeholder="0-9" oninput="convertLang('ielts')"></div>
-              <div class="field-col"><label class="field-label">نمره TOEFL</label><input type="number" id="conv-toefl" class="text-input" min="0" max="120" placeholder="0-120" oninput="convertLang('toefl')"></div>
-            </div>
-            <div id="conv-result"></div>
-          </div>
-          <div class="tool-desc">محاسبه نمره کلی IELTS و TOEFL و تبدیل دوطرفه آن‌ها.</div>
-        </div>
-
         <!-- ══ RSA/ECC KEYPAIR ══ -->
         <div id="keypair" class="tool-card">
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
@@ -6569,7 +6637,7 @@
               <button class="btn btn-filled" id="at-play-btn" onclick="atTogglePlay()">▶ شروع</button>
               <button class="btn btn-tonal" onclick="atStop()">⏹ توقف</button>
             </div>
-            <canvas id="at-canvas" width="400" height="80" style="width:100%;border-radius:10px;background:var(--m3-surface-container);margin-top:8px;display:none"></canvas>
+            <canvas id="at-canvas" width="400" height="80" style="width:100%;border-radius:10px;margin-top:8px;display:none"></canvas>
           </div>
 
           <!-- Beep/silence tool -->
@@ -7103,11 +7171,66 @@
           <div class="tool-desc">مولد فرکانس: هر فرکانس صوتی با شکل موج دلخواه. بیپ/سانسور: قسمتی از فایل صوتی را با بیپ یا سکوت جایگزین کنید.</div>
         </div>
 
+        <!-- ══ DIWAN (POETRY) ══ -->
+        <div id="diwan" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">📖 دیوان شعر</div>
+          <!-- Poet Selection -->
+          <div class="field-row" id="diwan-poet-select">
+            <div class="field-col">
+              <label class="field-label">انتخاب شاعر</label>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px;">
+                <button class="btn btn-filled" onclick="selectPoet('ferdowsi')" data-poet="ferdowsi">فردوسی</button>
+                <button class="btn btn-filled" onclick="selectPoet('hafez')" data-poet="hafez">حافظ</button>
+                <button class="btn btn-filled" onclick="selectPoet('saadi')" data-poet="saadi">سعدی</button>
+                <button class="btn btn-filled" onclick="selectPoet('rumi')" data-poet="rumi">مولانا</button>
+                <button class="btn btn-filled" onclick="selectPoet('sanai')" data-poet="sanai">سنایی</button>
+                <button class="btn btn-filled" onclick="selectPoet('jami')" data-poet="jami">جامی</button>
+                <button class="btn btn-filled" onclick="selectPoet('khayyam')" data-poet="khayyam">خیام</button>
+                <button class="btn btn-filled" onclick="selectPoet('nizami')" data-poet="nizami">نطامی</button>
+                <button class="btn btn-filled" onclick="selectPoet('shahriar')" data-poet="shahriar">شهریار</button>
+                <button class="btn btn-filled" onclick="selectPoet('sohrab-sepehri')" data-poet="sohrab-sepehri">سهراب سپهری</button>
+                <button class="btn btn-filled" onclick="selectPoet('vahshi')" data-poet="vahshi">وحشی بافقی</button>
+                <button class="btn btn-filled" onclick="selectPoet('forugh')" data-poet="forugh">فروغ فرخزاد</button>
+              </div>
+            </div></div>
+
+          <!-- Category Selection -->
+          <div class="field-row" id="diwan-category-select" style="display: none;">
+            <div class="field-col">
+              <button class="btn btn-text" onclick="backToPoets()" style="margin-bottom: 12px;">← بازگشت به انتخاب شاعر</button>
+              <label class="field-label">دسته‌بندی اشعار</label>
+              <div id="diwan-categories" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px;"></div>
+            </div>
+          </div>
+
+          <!-- Poems List -->
+          <div id="diwan-poems-view" style="display: none;">
+            <button class="btn btn-text" onclick="backToCategories()" style="margin-bottom: 12px;">← بازگشت به دسته‌بندی‌ها</button>
+            
+            <div class="field-row">
+              <div class="field-col">
+                <label class="field-label">جستجو در اشعار</label>
+                <input type="text" id="diwan-search" class="field-input" placeholder="جستجو در متن شعر..." oninput="searchPoems()">
+              </div>
+            </div>
+
+            <div id="diwan-poems-list" style="margin-top: 16px;"></div>
+          </div>
+
+          <!-- Poem Detail -->
+          <div id="diwan-poem-detail" style="display: none;">
+            <button class="btn btn-text" onclick="backToPoemsList()" style="margin-bottom: 12px;">← بازگشت به لیست</button>
+            <div id="diwan-poem-content"></div>
+          </div>
+        </div>
+
+
       </div><!-- /tool-container -->
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 2.6 - ۱۴۰۵/۰۱/۰۸
+          ℹ️ نسخه 2.7 - ۱۴۰۵/۰۱/۱۰
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -7258,7 +7381,7 @@
         if (id === 'calculus' && typeof calcSetTab === 'function') calcSetTab('deriv');
         if (typeof recentAdd === 'function') recentAdd(id);
         // New tool inits
-        if (id === 'minigames' && typeof mgSetGame === 'function') mgSetGame('ttt');
+        if (id === 'minigames' && typeof mgSetGame === 'function') { _mgCurrent=''; mgSetGame('ttt'); }
         if (id === 'compass' && typeof compassInit === 'function') compassInit();
         if (id === 'goldenratio' && typeof calcGolden === 'function') calcGolden();
         if (id === 'gridbuilder' && typeof gbRender === 'function') { gbSetMode('grid'); }
@@ -7334,13 +7457,27 @@
           if (fab) fab.textContent = t === 'dark' ? '☀️' : '🌙';
         }
         const sys = window.matchMedia('(prefers-color-scheme:dark)');
-        const saved = localStorage.getItem('theme');
-        applyTheme(saved || (sys.matches ? 'dark' : 'light'));
+
+        // Priority: Bale colorScheme > localStorage > system preference
+        var baleScheme = (typeof Bale !== 'undefined' && Bale.WebApp)
+          ? Bale.WebApp.colorScheme   // 'dark' | 'light'
+          : null;
+
+        var saved = localStorage.getItem('theme');
+        applyTheme(baleScheme || saved || (sys.matches ? 'dark' : 'light'));
+
         document.addEventListener('DOMContentLoaded', () => {
-          applyTheme(localStorage.getItem('theme') || (sys.matches ? 'dark' : 'light'));
+          var baleSchemeNow = (typeof Bale !== 'undefined' && Bale.WebApp)
+            ? Bale.WebApp.colorScheme : null;
+          applyTheme(baleSchemeNow || localStorage.getItem('theme') || (sys.matches ? 'dark' : 'light'));
         });
+
+        // Only follow system preference when not in Bale and no manual override
         sys.addEventListener('change', e => {
-          if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'dark' : 'light');
+          var inBale = typeof Bale !== 'undefined' && Bale.WebApp;
+          if (!inBale && !localStorage.getItem('theme')) {
+            applyTheme(e.matches ? 'dark' : 'light');
+          }
         });
       })();
 
@@ -10635,34 +10772,53 @@
         raw = raw.trim();
         if (!raw) { res.innerHTML=''; return; }
 
-        // Normalize: uppercase X→x, π→Math.PI
-        raw = raw.replace(/X/g,'x').replace(/π/g,'Math.PI').replace(/\bpi\b/gi,'Math.PI');
+        // Normalize for math.js: 2x→2*x, π→pi, ln→log, etc.
+        function _norm(s) {
+          return s
+            .replace(/X/g,'x').replace(/π/g,'pi').replace(/\bpi\b/gi,'pi')
+            .replace(/([0-9])\s*([a-zA-Z\(])/g,'$1*$2')
+            .replace(/\bln\s*\(/g,'log(').replace(/\bLn\s*\(/g,'log(')
+            .replace(/\be\b(?![a-zA-Z0-9_])/g,'e');
+        }
 
-        // Split on = sign
-        var sides = raw.split('=');
-        if (sides.length !== 2) {
+        // Split on FIRST = only (handles things like e^x = 8)
+        var eqIdx = raw.indexOf('=');
+        if (eqIdx < 0) {
           res.innerHTML = '<div style="color:var(--m3-error);padding:8px;font-size:13px">فرم معادله باید شامل علامت = باشد. مثال: 2x+5=20</div>';
           return;
         }
-
-        // Build f(x) = left - right, then solve f(x)=0
-        var expr = '(' + sides[0] + ') - (' + sides[1] + ')';
+        var lhs = _norm(raw.slice(0, eqIdx));
+        var rhs = _norm(raw.slice(eqIdx + 1));
+        var exprMath = '(' + lhs + ') - (' + rhs + ')';
         var steps = [];
 
-        // ── Detect degree ──────────────────────────────────
-        // Try to parse as ax^2 + bx + c = 0 by sampling
-        function evalF(x) {
-          try { return Function('"use strict";var x='+x+';return '+expr+';')(); }
-          catch(e) { return NaN; }
+        // Evaluation using math.js (preferred) or Function fallback
+        function evalF(xv) {
+          try {
+            if (typeof math !== 'undefined') return +math.evaluate(exprMath, {x: xv});
+            return Function('"use strict";var x='+xv+';return ('+exprMath+');')();
+          } catch(e) { return NaN; }
         }
 
-        var f0 = evalF(0), f1 = evalF(1), fm1 = evalF(-1), f2 = evalF(2);
-        var allFinite = [f0,f1,fm1,f2].every(isFinite);
-
-        if (!allFinite) {
-          res.innerHTML='<div style="color:var(--m3-error);padding:8px;font-size:13px">معادله نامعتبر است.</div>';
+        // Validate — try a few points
+        var probes = [0, 1, -1, 2, 0.5, Math.PI/4];
+        var finite = probes.map(evalF).filter(isFinite);
+        if (!finite.length) {
+          if (typeof math !== 'undefined') {
+            try { math.evaluate(exprMath, {x: 1}); }
+            catch(err) {
+              res.innerHTML = '<div style="color:var(--m3-error);padding:8px;font-size:13px">⚠️ خطای فرمول: ' + err.message + '</div>';
+              return;
+            }
+          }
+          res.innerHTML = '<div style="color:var(--m3-error);padding:8px;font-size:13px">معادله نامعتبر است — مقادیر تعریف‌شده‌ای پیدا نشد.</div>';
           return;
         }
+
+        // Use safe probe values (skip undefined points like log at x<0)
+        var f0=evalF(0.001), f1=evalF(1), fm1=evalF(-1), f2=evalF(2);
+        if(!isFinite(f0))f0=evalF(0.1);
+        if(!isFinite(fm1))fm1=evalF(-0.1);
 
         // Detect degree by finite differences
         // Δ1 = f(1)-f(0), Δ2 = f(2)-2f(1)+f(0), Δ3 = f(3)-3f(2)+3f(1)-f(0)
@@ -12060,687 +12216,126 @@
       }
 
       // ══════════════════════════════════════════════════════
-      //  GRAPH ENGINE — multi-curve, zoom, pan, tooltip, special points
+      //  GRAPH ENGINE — function-plot.js + math.js
       // ══════════════════════════════════════════════════════
       var _cgXa = -Math.PI*2, _cgXb = Math.PI*2;
-      var _cgYa = null, _cgYb = null;
-      var _cgDrag = false, _cgDragX0 = 0, _cgDragXa0 = 0, _cgDragXb0 = 0;
-      var _cgPinchD0 = 0, _cgPinchMidX = 0;
-      var _cgFnCount = 0;
-      var _cgEventsReady = false;
+      var _cgFnCount = 0, _cgFpInstance = null;
       var CURVE_COLORS = ['#2196f3','#e91e63','#4caf50','#ff9800','#9c27b0'];
 
-      // Init: add first curve input on tab open
       function calcGraphInit() {
         var list = document.getElementById('calc-fn-list');
         if (!list || list.children.length > 0) return;
         calcAddCurve();
       }
-
       function calcAddCurve() {
         var list = document.getElementById('calc-fn-list');
         if (!list || _cgFnCount >= 5) return;
         var idx = _cgFnCount++;
         var color = CURVE_COLORS[idx % CURVE_COLORS.length];
         var row = document.createElement('div');
-        row.style.cssText = 'display:flex;align-items:center;gap:6px';
+        row.style.cssText = 'display:flex;align-items:center;gap:6px;margin-bottom:4px';
         row.id = 'calc-fn-row-' + idx;
-        row.innerHTML =
-          '<div style="width:16px;height:16px;border-radius:3px;background:'+color+';flex-shrink:0"></div>'
-          + '<input type="text" id="calc-gfn-'+idx+'" class="text-input" placeholder="f'+(idx+1)+'(x) — مثال: Math.sin(x)" '
+        row.innerHTML = '<div style="width:14px;height:14px;border-radius:3px;background:'+color+';flex-shrink:0"></div>'
+          + '<input type="text" id="calc-gfn-'+idx+'" class="text-input" '
+          + 'placeholder="f'+(idx+1)+'(x) — sin(x), x^2-4, log(x)" '
           + 'style="direction:ltr;font-family:\'Courier New\',monospace;flex:1" oninput="_cgDrawPlot()">'
           + (idx > 0 ? '<button onclick="calcRemoveCurve('+idx+')" style="background:none;border:none;cursor:pointer;color:var(--m3-on-surface-variant);font-size:1.1rem;padding:0 4px">✕</button>' : '');
         list.appendChild(row);
       }
-
-      function calcRemoveCurve(idx) {
-        var row = document.getElementById('calc-fn-row-' + idx);
-        if (row) row.remove();
-        _cgDrawPlot();
-      }
-
+      function calcRemoveCurve(idx) { var row=document.getElementById('calc-fn-row-'+idx); if(row)row.remove(); _cgDrawPlot(); }
       function calcApplyPreset() {
-        var sel = document.getElementById('calc-preset');
-        if (!sel || !sel.value) return;
-        var p = sel.value.split('|');
-        // Put into first input
-        var f0 = document.getElementById('calc-gfn-0');
-        if (f0) f0.value = p[0] || '';
-        var xa = document.getElementById('calc-gxa');
-        var xb = document.getElementById('calc-gxb');
-        if (xa) xa.value = p[1] || '-6.28';
-        if (xb) xb.value = p[2] || '6.28';
-        sel.value = '';
-        _cgXa = parseFloat(xa.value); _cgXb = parseFloat(xb.value);
-        _cgYa = null; _cgYb = null;
+        var sel=document.getElementById('calc-preset'); if(!sel||!sel.value)return;
+        var p=sel.value.split('|');
+        var f0=document.getElementById('calc-gfn-0'); if(f0)f0.value=p[0]||'';
+        var xa=document.getElementById('calc-gxa'), xb=document.getElementById('calc-gxb');
+        if(xa)xa.value=p[1]||'-6.28'; if(xb)xb.value=p[2]||'6.28';
+        sel.value=''; _cgXa=parseFloat(xa?xa.value:'-6.28'); _cgXb=parseFloat(xb?xb.value:'6.28');
         _cgDrawPlot();
       }
-
-      function calcZoom(factor) {
-        var mid = (_cgXa + _cgXb) / 2, half = (_cgXb - _cgXa) / 2 * factor;
-        _cgXa = mid - half; _cgXb = mid + half;
-        _cgYa = null; _cgYb = null;
-        var xa = document.getElementById('calc-gxa'), xb = document.getElementById('calc-gxb');
-        if (xa) xa.value = +_cgXa.toPrecision(5);
-        if (xb) xb.value = +_cgXb.toPrecision(5);
-        _cgDrawPlot();
+      function calcFPZoom(f){var mid=(_cgXa+_cgXb)/2,h=(_cgXb-_cgXa)/2*f;_cgXa=mid-h;_cgXb=mid+h;var xa=document.getElementById('calc-gxa'),xb=document.getElementById('calc-gxb');if(xa)xa.value=+_cgXa.toPrecision(5);if(xb)xb.value=+_cgXb.toPrecision(5);_cgDrawPlot();}
+      function calcFPReset(){_cgXa=-Math.PI*2;_cgXb=Math.PI*2;var xa=document.getElementById('calc-gxa'),xb=document.getElementById('calc-gxb');if(xa)xa.value='-6.28';if(xb)xb.value='6.28';_cgDrawPlot();}
+      function calcZoom(f){calcFPZoom(f<1?1.3:0.77);}
+      function calcZoomReset(){calcFPReset();}
+      function calcPlot(){_cgDrawPlot();}
+      function _cgGetFns(){var fns=[];for(var i=0;i<5;i++){var el=document.getElementById('calc-gfn-'+i);if(el&&el.value.trim())fns.push({expr:el.value.trim(),color:CURVE_COLORS[i%CURVE_COLORS.length]});}return fns;}
+      function _fpNorm(e){return e.replace(/X/g,'x').replace(/π/g,'pi').replace(/pi/gi,'pi').replace(/([0-9])\s*([a-zA-Z\(])/g,'$1*$2').replace(/ln\s*\(/g,'log(').replace(/e(?![a-zA-Z0-9_])/g,'e');}
+      function _cgDrawPlot(){
+        var fns=_cgGetFns();
+        var xaEl=document.getElementById('calc-gxa'),xbEl=document.getElementById('calc-gxb');
+        if(xaEl&&!isNaN(parseFloat(xaEl.value)))_cgXa=parseFloat(xaEl.value);
+        if(xbEl&&!isNaN(parseFloat(xbEl.value)))_cgXb=parseFloat(xbEl.value);
+        if(_cgXa>=_cgXb)_cgXb=_cgXa+1;
+        var container=document.getElementById('calc-fp-container');
+        if(!container)return;
+        if(!fns.length){container.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:300px;color:var(--m3-on-surface-variant);font-size:14px">تابع را وارد کنید</div>';var sp=document.getElementById('calc-special-pts');if(sp)sp.innerHTML='';return;}
+        var data=fns.map(function(f){return{fn:_fpNorm(f.expr),color:f.color,graphType:'polyline'};});
+        try{
+          if(typeof functionPlot==='undefined')throw new Error('function-plot.js بارگذاری نشده');
+          _cgFpInstance=functionPlot({target:container,width:Math.max(280,(container.offsetWidth||340)),height:300,grid:true,xAxis:{domain:[_cgXa,_cgXb]},data:data,tip:{xLine:true,yLine:true}});
+          _cgFpInstance.on('all:zoom',function(){try{var d=_cgFpInstance.meta.xScale.domain();_cgXa=d[0];_cgXb=d[1];if(xaEl)xaEl.value=+_cgXa.toPrecision(5);if(xbEl)xbEl.value=+_cgXb.toPrecision(5);}catch(e2){}});
+          _cgShowSpecialPts(fns);
+        }catch(err){container.innerHTML='<div style="padding:14px;color:var(--m3-error);font-size:13px">خطا: '+err.message+'</div>';}
       }
-
-      function calcZoomReset() {
-        var xa = parseFloat((document.getElementById('calc-gxa')||{}).value);
-        var xb = parseFloat((document.getElementById('calc-gxb')||{}).value);
-        _cgXa = isNaN(xa) ? -Math.PI*2 : xa;
-        _cgXb = isNaN(xb) ?  Math.PI*2 : xb;
-        _cgYa = null; _cgYb = null;
-        _cgDrawPlot();
-      }
-
-      function _cgGetFns() {
-        var fns = [];
-        for (var i = 0; i < 5; i++) {
-          var el = document.getElementById('calc-gfn-' + i);
-          if (el && el.value.trim()) fns.push({ expr: el.value.trim(), color: CURVE_COLORS[i] });
-        }
-        return fns;
-      }
-
-      function _cgDrawPlot() {
-        var fns = _cgGetFns();
-        var xaEl = document.getElementById('calc-gxa'), xbEl = document.getElementById('calc-gxb');
-        var xaIn = xaEl ? parseFloat(xaEl.value) : NaN;
-        var xbIn = xbEl ? parseFloat(xbEl.value) : NaN;
-        if (!isNaN(xaIn) && !isNaN(xbIn) && xaIn < xbIn) { _cgXa = xaIn; _cgXb = xbIn; }
-
-        var canvas = document.getElementById('calc-canvas');
-        if (!canvas) return;
-        var dpr = window.devicePixelRatio || 1;
-        var cssW = canvas.offsetWidth || 360, cssH = 280;
-        canvas.width = cssW * dpr; canvas.height = cssH * dpr;
-        canvas.style.height = cssH + 'px';
-        var ctx = canvas.getContext('2d');
-        ctx.scale(dpr, dpr);
-        var W = cssW, H = cssH;
-        var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        ctx.fillStyle = isDark ? '#1a2027' : '#f5f5f5';
-        ctx.fillRect(0, 0, W, H);
-
-        if (!fns.length) {
-          ctx.fillStyle = isDark ? '#555' : '#aaa';
-          ctx.font = '13px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-          ctx.fillText('تابع را وارد کنید', W/2, H/2);
-          var sp = document.getElementById('calc-special-pts');
-          if (sp) sp.innerHTML = '';
-          return;
-        }
-
-        // Evaluate all curves
-        var N = 600;
-        var allCurves = fns.map(function(f) {
-          var pts = [];
-          for (var i = 0; i <= N; i++) {
-            var x = _cgXa + (_cgXb - _cgXa) * i / N;
-            try { var y = _calcEval(f.expr, x); pts.push(isFinite(y) ? [x, y] : null); }
-            catch(e) { pts.push(null); }
-          }
-          return pts;
-        });
-
-        // Auto Y range (5th–95th percentile to avoid outliers)
-        if (_cgYa === null || _cgYb === null) {
-          var allY = [];
-          allCurves.forEach(function(pts) { pts.forEach(function(p) { if (p) allY.push(p[1]); }); });
-          if (!allY.length) return;
-          allY.sort(function(a,b){return a-b;});
-          var lo = allY[Math.floor(allY.length*0.05)], hi = allY[Math.floor(allY.length*0.95)];
-          var pad5 = (Math.abs(hi-lo)||1)*0.08;
-          _cgYa = lo - pad5; _cgYb = hi + pad5;
-        }
-        var yRange = _cgYb - _cgYa || 1;
-
-        // Layout — extra left pad for y-axis labels
-        var pad = {l:54, r:16, t:20, b:36};
-        var plotW = W - pad.l - pad.r, plotH = H - pad.t - pad.b;
-        function toCanX(x) { return pad.l + (x - _cgXa) / (_cgXb - _cgXa) * plotW; }
-        function toCanY(y) { return pad.t + (_cgYb - y) / yRange * plotH; }
-        function fromCanX(cx) { return _cgXa + (cx - pad.l) / plotW * (_cgXb - _cgXa); }
-        function fromCanY(cy) { return _cgYb - (cy - pad.t) / plotH * yRange; }
-
-        // Store for event handlers
-        canvas._cgFromCanX = fromCanX; canvas._cgFromCanY = fromCanY;
-        canvas._cgToCanX = toCanX; canvas._cgToCanY = toCanY;
-        canvas._cgPad = pad; canvas._cgPlotW = plotW; canvas._cgPlotH = plotH;
-
-        // Grid
-        var gridC = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.07)';
-        var axisC = isDark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)';
-        var lblC  = isDark ? '#9a9' : '#777';
-        ctx.font = '10px monospace'; ctx.textBaseline = 'middle';
-
-        var fnLow = fns.map(function(f){return f.expr.toLowerCase();}).join('');
-        var isTrig = fnLow.indexOf('sin')>=0||fnLow.indexOf('cos')>=0||fnLow.indexOf('tan')>=0;
-        var piLbls = isTrig && Math.abs((_cgXb-_cgXa) % Math.PI) < 0.2;
-
-        // X axis label: "x"
-        ctx.fillStyle = lblC; ctx.textAlign = 'left'; ctx.textBaseline = 'top';
-        ctx.fillText('x', W - pad.r + 2, H - pad.b + 4);
-        // Y axis label: "f(x)"
-        ctx.save(); ctx.translate(10, pad.t + plotH/2);
-        ctx.rotate(-Math.PI/2); ctx.textAlign='center'; ctx.textBaseline='top';
-        ctx.fillText('f(x)', 0, 0); ctx.restore();
-
-        _cgNiceTicks(_cgXa, _cgXb, 6).forEach(function(tx) {
-          var cx = toCanX(tx);
-          if (cx < pad.l || cx > W - pad.r) return;
-          ctx.strokeStyle = gridC; ctx.lineWidth = 1;
-          ctx.beginPath(); ctx.moveTo(cx, pad.t); ctx.lineTo(cx, H - pad.b); ctx.stroke();
-          ctx.fillStyle = lblC; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
-          ctx.fillText(piLbls ? _fmtPi(tx) : _fmtN(tx), cx, H - pad.b + 4);
-        });
-
-        _cgNiceTicks(_cgYa, _cgYb, 5).forEach(function(ty) {
-          var cy = toCanY(ty);
-          if (cy < pad.t || cy > H - pad.b) return;
-          ctx.strokeStyle = gridC; ctx.lineWidth = 1;
-          ctx.beginPath(); ctx.moveTo(pad.l, cy); ctx.lineTo(W - pad.r, cy); ctx.stroke();
-          ctx.fillStyle = lblC; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
-          ctx.fillText(_fmtN(ty), pad.l - 4, cy);
-        });
-
-        // Axes
-        ctx.strokeStyle = axisC; ctx.lineWidth = 1.5;
-        if (_cgYa <= 0 && _cgYb >= 0) { var ay=toCanY(0); ctx.beginPath(); ctx.moveTo(pad.l,ay); ctx.lineTo(W-pad.r,ay); ctx.stroke(); }
-        if (_cgXa <= 0 && _cgXb >= 0) { var ax=toCanX(0); ctx.beginPath(); ctx.moveTo(ax,pad.t); ctx.lineTo(ax,H-pad.b); ctx.stroke(); }
-        ctx.strokeStyle = isDark?'rgba(255,255,255,0.1)':'rgba(0,0,0,0.12)'; ctx.lineWidth=1;
-        ctx.strokeRect(pad.l, pad.t, plotW, plotH);
-
-        // Draw curves
-        allCurves.forEach(function(pts, fi) {
-          ctx.save();
-          ctx.beginPath();
-          ctx.rect(pad.l, pad.t, plotW, plotH); // clip to plot area
-          ctx.clip();
-          ctx.strokeStyle = fns[fi].color; ctx.lineWidth = 2.2;
-          ctx.lineJoin = 'round'; ctx.lineCap = 'round';
-          ctx.beginPath();
-          var penDown = false, prevY = null;
-          pts.forEach(function(p) {
-            if (!p) { penDown = false; prevY = null; return; }
-            if (prevY !== null && Math.abs(p[1] - prevY) / yRange > 8) { penDown = false; }
-            prevY = p[1];
-            var cx2 = toCanX(p[0]), cy2 = toCanY(p[1]);
-            if (!penDown) { ctx.moveTo(cx2, cy2); penDown = true; }
-            else ctx.lineTo(cx2, cy2);
-          });
-          ctx.stroke();
-          ctx.restore();
-        });
-
-        // Special points — ALL curves
-        var allSpecial = [];
-        fns.forEach(function(f, fi) {
-          _cgFindSpecial(f.expr, _cgXa, _cgXb, N).forEach(function(sp) {
-            var cx2 = toCanX(sp.x), cy2 = toCanY(sp.y);
-            if (cx2<pad.l||cx2>W-pad.r||cy2<pad.t||cy2>H-pad.b) return;
-            ctx.beginPath(); ctx.arc(cx2, cy2, 4.5, 0, Math.PI*2);
-            ctx.fillStyle = fns[fi].color; ctx.fill();
-            ctx.strokeStyle='#fff'; ctx.lineWidth=1.5; ctx.stroke();
-            allSpecial.push({x:sp.x, y:sp.y, type:sp.type, color:fns[fi].color});
-          });
-        });
-
-        // Special points legend
-        var spEl = document.getElementById('calc-special-pts');
-        if (spEl) {
-          if (allSpecial.length) {
-            spEl.innerHTML = '<div style="font-size:11px;color:var(--m3-on-surface-variant);margin-bottom:3px">نقاط ویژه:</div>'
-              + allSpecial.map(function(p) {
-                var lbl = {root:'ریشه',max:'ماکزیمم',min:'مینیمم',inflect:'عطف'}[p.type]||p.type;
-                return '<span style="display:inline-block;margin:2px 4px 2px 0;background:'+p.color+'22;border:1px solid '
-                  +p.color+';border-radius:5px;padding:1px 7px;font-size:11px;direction:ltr">'
-                  +lbl+' ('+_fmtN(p.x)+', '+_fmtN(p.y)+')</span>';
-              }).join('');
-          } else { spEl.innerHTML = ''; }
-        }
-
-        // Setup events once
-        if (!_cgEventsReady) { _cgEventsReady = true; _cgSetupEvents(canvas); }
-      }
-
-      function _cgSetupEvents(canvas) {
-        var tooltip = document.getElementById('calc-tooltip');
-        var info    = document.getElementById('calc-graph-info');
-
-        function showAt(cx, cy) {
-          var p = canvas._cgPad;
-          // Ignore if in axis margin areas
-          if (!p || cx < p.l || cx > canvas.offsetWidth - p.r || cy < p.t || cy > canvas.offsetHeight - p.b) {
-            if (tooltip) tooltip.style.display = 'none';
-            if (info) info.textContent = '';
-            return;
-          }
-          var hx = canvas._cgFromCanX(cx);
-          var fns = _cgGetFns();
-          if (!fns.length) return;
-          var parts = ['x=' + _fmtN(hx)];
-          fns.forEach(function(f, i) {
-            try {
-              var hy = _calcEval(f.expr, hx);
-              if (isFinite(hy)) parts.push('f'+(fns.length>1?(i+1):'')+'='+_fmtN(hy));
-            } catch(e2){}
-          });
-          var txt = parts.join('  ');
-          if (tooltip) {
-            tooltip.textContent = txt; tooltip.style.display = 'block';
-            var tx = cx + 12, ty = cy - 24;
-            if (tx + 180 > canvas.offsetWidth) tx = cx - 190;
-            if (ty < 4) ty = cy + 10;
-            tooltip.style.left = tx + 'px'; tooltip.style.top = ty + 'px';
-          }
-          if (info) info.textContent = txt;
-        }
-
-        canvas.addEventListener('mousemove', function(e) {
-          if (_cgDrag) {
-            var dx = e.clientX - _cgDragX0;
-            var dw = dx / (canvas._cgPlotW||1) * (_cgXb - _cgXa);
-            _cgXa = _cgDragXa0 - dw; _cgXb = _cgDragXb0 - dw;
-            _cgYa = null; _cgYb = null;
-            var xa=document.getElementById('calc-gxa'),xb=document.getElementById('calc-gxb');
-            if(xa)xa.value=+_cgXa.toPrecision(5); if(xb)xb.value=+_cgXb.toPrecision(5);
-            _cgDrawPlot(); return;
-          }
-          var r = canvas.getBoundingClientRect();
-          showAt(e.clientX - r.left, e.clientY - r.top);
-        });
-        canvas.addEventListener('mousedown', function(e) {
-          _cgDrag=true; _cgDragX0=e.clientX; _cgDragXa0=_cgXa; _cgDragXb0=_cgXb;
-          canvas.style.cursor='grabbing';
-        });
-        window.addEventListener('mouseup', function(){ _cgDrag=false; canvas.style.cursor='crosshair'; });
-        canvas.addEventListener('mouseleave', function(){
-          if(tooltip)tooltip.style.display='none'; if(info)info.textContent='';
-        });
-        canvas.addEventListener('wheel', function(e) {
-          e.preventDefault();
-          var r=canvas.getBoundingClientRect(), mx=e.clientX-r.left;
-          var pivot = canvas._cgFromCanX ? canvas._cgFromCanX(mx) : (_cgXa+_cgXb)/2;
-          var f = e.deltaY>0?1.15:0.87;
-          _cgXa=pivot+(_cgXa-pivot)*f; _cgXb=pivot+(_cgXb-pivot)*f;
-          _cgYa=null; _cgYb=null;
-          var xa=document.getElementById('calc-gxa'),xb=document.getElementById('calc-gxb');
-          if(xa)xa.value=+_cgXa.toPrecision(5); if(xb)xb.value=+_cgXb.toPrecision(5);
-          _cgDrawPlot();
-        },{passive:false});
-        // Touch
-        canvas.addEventListener('touchstart',function(e){
-          if(e.touches.length===1){
-            _cgDrag=true; _cgDragX0=e.touches[0].clientX; _cgDragXa0=_cgXa; _cgDragXb0=_cgXb;
-          } else if(e.touches.length===2){
-            _cgDrag=false;
-            _cgPinchD0=Math.abs(e.touches[0].clientX-e.touches[1].clientX);
-            _cgPinchMidX=(e.touches[0].clientX+e.touches[1].clientX)/2;
-          }
-          e.preventDefault();
-        },{passive:false});
-        canvas.addEventListener('touchmove',function(e){
-          e.preventDefault();
-          if(e.touches.length===1&&_cgDrag){
-            var dx=e.touches[0].clientX-_cgDragX0, dw=dx/(canvas._cgPlotW||1)*(_cgXb-_cgXa);
-            _cgXa=_cgDragXa0-dw; _cgXb=_cgDragXb0-dw; _cgYa=null; _cgYb=null;
-            var xa=document.getElementById('calc-gxa'),xb=document.getElementById('calc-gxb');
-            if(xa)xa.value=+_cgXa.toPrecision(5); if(xb)xb.value=+_cgXb.toPrecision(5);
-            _cgDrawPlot();
-          } else if(e.touches.length===2){
-            var d=Math.abs(e.touches[0].clientX-e.touches[1].clientX);
-            var f=(_cgPinchD0||1)/(d||1);
-            var r2=canvas.getBoundingClientRect();
-            var pivot2=canvas._cgFromCanX?canvas._cgFromCanX(_cgPinchMidX-r2.left):(_cgXa+_cgXb)/2;
-            _cgXa=pivot2+(_cgXa-pivot2)*f; _cgXb=pivot2+(_cgXb-pivot2)*f;
-            _cgYa=null; _cgYb=null; _cgPinchD0=d;
-            _cgPinchMidX=(e.touches[0].clientX+e.touches[1].clientX)/2;
-            var xa2=document.getElementById('calc-gxa'),xb2=document.getElementById('calc-gxb');
-            if(xa2)xa2.value=+_cgXa.toPrecision(5); if(xb2)xb2.value=+_cgXb.toPrecision(5);
-            _cgDrawPlot();
-          }
-        },{passive:false});
-        canvas.addEventListener('touchend',function(e){
-          _cgDrag=false;
-          if(e.changedTouches.length===1){
-            var r3=canvas.getBoundingClientRect();
-            showAt(e.changedTouches[0].clientX-r3.left, e.changedTouches[0].clientY-r3.top);
-            setTimeout(function(){if(tooltip)tooltip.style.display='none';},2500);
-          }
-        });
-      }
-
-      function _cgFindSpecial(expr, xa, xb, N) {
-        var pts=[], h=(xb-xa)/N, prev=null;
-        for(var i=0;i<=N;i++){
-          var x=xa+h*i, y,d1;
-          try{y=_calcEval(expr,x); d1=(_calcEval(expr,x+1e-6)-_calcEval(expr,x-1e-6))/2e-6;}
-          catch(e){prev=null;continue;}
-          if(!isFinite(y)){prev=null;continue;}
-          if(prev){
-            if(prev.y*y<0){
-              var rx=_cgBisect(expr,prev.x,x,0,'y');
-              if(rx!==null)pts.push({x:rx,y:0,type:'root'});
+      function _cgShowSpecialPts(fns){
+        var spEl=document.getElementById('calc-special-pts');
+        if(!spEl||!fns.length){if(spEl)spEl.innerHTML='';return;}
+        var all=[];
+        fns.forEach(function(f){
+          var expr=_fpNorm(f.expr),N=500,h=(_cgXb-_cgXa)/N,prev=null;
+          for(var i=0;i<=N;i++){
+            var x=_cgXa+h*i,y,d1;
+            try{if(typeof math==='undefined'){prev=null;continue;}y=+math.evaluate(expr,{x:x});d1=(+math.evaluate(expr,{x:x+1e-5})-+math.evaluate(expr,{x:x-1e-5}))/2e-5;}catch(e){prev=null;continue;}
+            if(!isFinite(y)){prev=null;continue;}
+            if(prev){
+              if(prev.y*y<0){var a2=prev.x,b2=x;for(var bi=0;bi<40;bi++){var m=(a2+b2)/2,fm=NaN;try{fm=+math.evaluate(expr,{x:m});}catch(e2){break;}if(!isFinite(fm)||Math.abs(b2-a2)<1e-9)break;if(prev.y*fm<=0)b2=m;else a2=m;}all.push({x:(a2+b2)/2,y:0,type:'root',color:f.color});}
+              if(isFinite(d1)&&isFinite(prev.d1)&&prev.d1*d1<0&&Math.abs(prev.d1)<1e5){try{var ey=+math.evaluate(expr,{x:(prev.x+x)/2});if(isFinite(ey))all.push({x:(prev.x+x)/2,y:ey,type:d1<prev.d1?'max':'min',color:f.color});}catch(e3){}}
             }
-            if(prev.d1*d1<0&&Math.abs(prev.d1)<1e6){
-              var ex=_cgBisect(expr,prev.x,x,0,'d1');
-              if(ex!==null){try{var ey=_calcEval(expr,ex);if(isFinite(ey))pts.push({x:ex,y:ey,type:d1<prev.d1?'max':'min'});}catch(e2){}}
-            }
+            prev={x:x,y:y,d1:d1};
           }
-          prev={x:x,y:y,d1:d1};
-        }
-        return pts.filter(function(p,i){return !pts.some(function(q,j){return j<i&&Math.abs(q.x-p.x)<h*2;});}).slice(0,10);
+        });
+        all=all.filter(function(p,i){return!all.some(function(q,j){return j<i&&Math.abs(q.x-p.x)<0.05;});}).slice(0,12);
+        if(all.length){spEl.innerHTML='<div style="font-size:11px;color:var(--m3-on-surface-variant);margin-bottom:4px">نقاط ویژه:</div>'+all.map(function(p){var lbl={root:'ریشه',max:'ماکزیمم',min:'مینیمم'}[p.type]||p.type;return'<span style="display:inline-block;margin:2px 3px 2px 0;background:'+p.color+'22;border:1px solid '+p.color+';border-radius:5px;padding:1px 7px;font-size:11px;direction:ltr">'+lbl+' ('+_fmtN(p.x)+', '+_fmtN(p.y)+')</span>';}).join('');}else{spEl.innerHTML='';}
       }
-      function _cgBisect(expr,a,b,target,mode){
-        for(var i=0;i<30;i++){
-          var m=(a+b)/2,va,vm;
-          try{
-            if(mode==='y'){va=_calcEval(expr,a)-target;vm=_calcEval(expr,m)-target;}
-            else{va=(_calcEval(expr,a+1e-6)-_calcEval(expr,a-1e-6))/2e-6;vm=(_calcEval(expr,m+1e-6)-_calcEval(expr,m-1e-6))/2e-6;}
-          }catch(e){return null;}
-          if(!isFinite(va)||!isFinite(vm))return null;
-          if(Math.abs(b-a)<1e-10)return m;
-          if(va*vm<=0)b=m;else a=m;
-        }
-        return(a+b)/2;
-      }
-      function _cgNiceTicks(lo,hi,maxN){
-        var range=hi-lo; if(range<=0)return[lo];
-        var step=Math.pow(10,Math.floor(Math.log10(range/maxN)));
-        var nice=[1,2,2.5,5,10],best=step*10;
-        for(var i=0;i<nice.length;i++){var s=step*nice[i];if(Math.floor(range/s)<=maxN){best=s;break;}}
-        var tks=[],start=Math.ceil(lo/best)*best;
-        for(var t=start;t<=hi+best*0.01;t+=best){tks.push(Math.round(t/best)*best);if(tks.length>maxN+2)break;}
-        return tks;
-      }
-      function _fmtN(v){
-        if(v===0)return'0';
-        if(Math.abs(v)>=1e5||(Math.abs(v)<0.001&&v!==0))return v.toExponential(2);
-        return parseFloat(v.toPrecision(4))+'';
-      }
-      function _fmtPi(v){
-        if(v===0)return'0';
-        var r=v/Math.PI,fr=_nearFrac(r,8);
-        if(fr){if(fr[0]===1&&fr[1]===1)return'π';if(fr[0]===-1&&fr[1]===1)return'−π';if(fr[1]===1)return fr[0]+'π';return fr[0]+'/'+fr[1]+'π';}
-        return _fmtN(v);
-      }
-      function _nearFrac(x,maxD){
-        for(var d=1;d<=maxD;d++){var n=Math.round(x*d);if(Math.abs(x-n/d)<0.01)return[n,d];}
-        return null;
-      }
+      function _fmtN(v){if(v===0)return'0';if(Math.abs(v)>=1e5||(Math.abs(v)<0.001&&v!==0))return v.toExponential(2);return parseFloat(v.toPrecision(4))+'';}
+      function _fmtPi(v){if(v===0)return'0';var r=v/Math.PI,fr=_nearFrac(r,8);if(fr){if(fr[0]===1&&fr[1]===1)return'π';if(fr[0]===-1&&fr[1]===1)return'−π';if(fr[1]===1)return fr[0]+'π';return fr[0]+'/'+fr[1]+'π';}return _fmtN(v);}
+      function _nearFrac(x,maxD){for(var d=1;d<=maxD;d++){var n=Math.round(x*d);if(Math.abs(x-n/d)<0.01)return[n,d];}return null;}
 
 
       // ══════════════════════════════════════════════════════
-      const EMOTCN_DATA = [
-        // Western Classic
-        {e:':-)',   n:'happy smile',              c:'western'},
-        {e:':)',    n:'happy smile short',         c:'western'},
-        {e:':-D',  n:'big grin laugh',             c:'western'},
-        {e:':D',   n:'big grin',                   c:'western'},
-        {e:';-)',   n:'wink',                       c:'western'},
-        {e:';)',    n:'wink short',                 c:'western'},
-        {e:':-P',  n:'tongue out playful',         c:'western'},
-        {e:':P',   n:'tongue out',                 c:'western'},
-        {e:':-(',  n:'sad unhappy frown',           c:'western'},
-        {e:':(',   n:'sad frown short',             c:'western'},
-        {e:':-|',  n:'neutral expressionless',      c:'western'},
-        {e:':-/',  n:'skeptical unsure',            c:'western'},
-        {e:':-\\', n:'confused unsure',           c:'western'},
-        {e:':-O',  n:'surprised shocked open',      c:'western'},
-        {e:':O',   n:'surprised open mouth',        c:'western'},
-        {e:':-*',  n:'kiss',                        c:'western'},
-        {e:':*',   n:'kiss short',                  c:'western'},
-        {e:'B-)',   n:'cool sunglasses',            c:'western'},
-        {e:'8-)',   n:'glasses cool',               c:'western'},
-        {e:'>:-(',  n:'angry mad',                  c:'western'},
-        {e:':-#',  n:'embarrassed braces',          c:'western'},
-        {e:":'-(", n:'crying tears',                c:'western'},
-        {e:":')",  n:'happy crying',                c:'western'},
-        {e:'O:-)', n:'angel halo innocent',         c:'western'},
-        {e:'0:-)', n:'angel halo',                  c:'western'},
-        {e:':-$',  n:'embarrassed money',           c:'western'},
-        {e:':-X',  n:'sealed lips quiet',           c:'western'},
-        {e:':-Z',  n:'sleeping tired',              c:'western'},
-        {e:'>:-)',  n:'devil evil',                 c:'western'},
-        {e:'\u007d-)',   n:'devil smiling',              c:'western'},
-        {e:'<3',   n:'heart love',                  c:'western'},
-        {e:'</3',  n:'broken heart sad',            c:'western'},
-        {e:'<333', n:'many hearts love',            c:'western'},
-        {e:'XD',   n:'laughing hard',               c:'western'},
-        {e:'xD',   n:'laughing',                    c:'western'},
-        {e:'=D',   n:'big smile happy',             c:'western'},
-        {e:'=)',   n:'smile happy',                  c:'western'},
-        {e:':]',   n:'smile bracket',               c:'western'},
-        {e:':[',   n:'frown bracket',               c:'western'},
-        {e:'>.<',  n:'annoyed frustrated',          c:'western'},
-        {e:'^_^',  n:'happy content',               c:'western'},
-        {e:'^.^',  n:'cute happy',                  c:'western'},
-        {e:'-_-',  n:'unimpressed bored',           c:'western'},
-        {e:'o_O',  n:'confused raised eyebrow',     c:'western'},
-        {e:'O_o',  n:'confused surprised',          c:'western'},
-        {e:'o_o',  n:'blank stare',                 c:'western'},
-        {e:'T_T',  n:'crying sad tears',            c:'western'},
-        {e:'>_<',  n:'frustrated angry',            c:'western'},
-        {e:'n_n',  n:'happy content cute',          c:'western'},
-        {e:'*_*',  n:'starstruck amazed',           c:'western'},
-        {e:'u_u',  n:'sad disappointed',            c:'western'},
-        {e:'e_e',  n:'skeptical side eye',          c:'western'},
-        // Kaomoji Japanese
-        {e:'(^_^)',      n:'happy kaomoji',          c:'kaomoji'},
-        {e:'(*^_^*)',    n:'happy blushing',         c:'kaomoji'},
-        {e:'(＾▽＾)',    n:'happy grin',             c:'kaomoji'},
-        {e:'(^o^)',      n:'happy singing',          c:'kaomoji'},
-        {e:'(≧◡≦)',     n:'happy overjoyed',         c:'kaomoji'},
-        {e:'(◕‿◕)',     n:'cute happy',              c:'kaomoji'},
-        {e:'(✿◠‿◠)',    n:'cute flower',             c:'kaomoji'},
-        {e:'(●´ω｀●)',  n:'shy cute',                c:'kaomoji'},
-        {e:'(⌒‿⌒)',     n:'gentle smile',            c:'kaomoji'},
-        {e:'ヽ(・∀・)ﾉ', n:'excited happy wave',     c:'kaomoji'},
-        {e:'(≧ω≦)',     n:'very excited happy',      c:'kaomoji'},
-        {e:'(ˆ◡ˆ)',     n:'happy serene',            c:'kaomoji'},
-        {e:'(T_T)',      n:'crying sad',              c:'kaomoji'},
-        {e:'(TдT)',      n:'crying crying',           c:'kaomoji'},
-        {e:'(；一_一)',  n:'speechless unamused',      c:'kaomoji'},
-        {e:'(￣_￣)',    n:'unimpressed',             c:'kaomoji'},
-        {e:'(¬_¬)',      n:'skeptical displeased',   c:'kaomoji'},
-        {e:'(´-ω-`)',   n:'sad melancholy',           c:'kaomoji'},
-        {e:'(•ᴖ•｡)',    n:'sad quiet',               c:'kaomoji'},
-        {e:'(;へ:)',     n:'crying shame',            c:'kaomoji'},
-        {e:'ಠ_ಠ',       n:'disapproval judgement',   c:'kaomoji'},
-        {e:'ಠ╭╮ಠ',      n:'very disapprove',         c:'kaomoji'},
-        {e:'(╯°□°）╯︵ ┻━┻', n:'table flip rage',  c:'kaomoji'},
-        {e:'┬──┬◡ﾉ(° -°ﾉ)', n:'put table back calm', c:'kaomoji'},
-        {e:'( ͡° ͜ʖ ͡°)', n:'lenny face',            c:'kaomoji'},
-        {e:'¯\_(ツ)_/¯', n:'shrug whatever',        c:'kaomoji'},
-        {e:'(ง •̀_•́)ง', n:'fight determined',       c:'kaomoji'},
-        {e:'(∩｀-´)⊃━☆ﾟ.*', n:'wizard magic cast', c:'kaomoji'},
-        {e:'ヾ(≧▽≦*)o', n:'very excited',            c:'kaomoji'},
-        {e:'(*￣3￣)╭',  n:'blowing kiss',            c:'kaomoji'},
-        {e:'(づ｡◕‿‿◕｡)づ', n:'hug cute',           c:'kaomoji'},
-        {e:'(っ＾▿＾)っ', n:'hug happy',             c:'kaomoji'},
-        {e:'ʕ•ᴥ•ʔ',     n:'bear cute',              c:'animals'},
-        {e:'(=^･ω･^=)', n:'cat happy',               c:'animals'},
-        {e:'(=^･ｪ･^=)', n:'cat cute',               c:'animals'},
-        {e:"='·.·'=",    n:'cat simple',             c:'animals'},
-        {e:'ฅ^•ﻌ•^ฅ',   n:'cat pawing',             c:'animals'},
-        {e:'(◕ᴥ◕)',     n:'bear face',               c:'animals'},
-        {e:'(^（ェ）^)', n:'bear panda',              c:'animals'},
-        {e:'V•ᴥ•V',     n:'dog face',                c:'animals'},
-        {e:'(∪｡∪)｡｡｡zzZ', n:'cat sleeping',       c:'animals'},
-        {e:'>^..^<',     n:'cat simple 2',           c:'animals'},
-        {e:'(>ω<)',      n:'cute angry cat',          c:'animals'},
-        {e:'/ᐠ｡ꞈ｡ᐟ/',  n:'cat whiskers',           c:'animals'},
-        {e:'U・ᴥ・U',    n:'dog happy',              c:'animals'},
-        {e:"'•.•'",      n:'kitty small',            c:'animals'},
-        {e:'(∩•͜•)⊃━━━━ ~~', n:'cat wizard',        c:'animals'},
-        {e:'(ᵔᴥᵔ)',     n:'bear smile',              c:'animals'},
-        // Love
-        {e:'(｡♥‿♥｡)', n:'in love',                  c:'love'},
-        {e:'(♡˙︶˙♡)', n:'happy love',               c:'love'},
-        {e:'(◍•ᴗ•◍)❤', n:'love cute',               c:'love'},
-        {e:'(˘̩̩̩̩̩̩╭╮˘̩̩̩̩̩̩)', n:'missing you',           c:'love'},
-        {e:'♡(˃͈ દ ˂͈ ༶ )', n:'overwhelmed love',    c:'love'},
-        {e:'(✿ ♡‿♡)',  n:'flower love',              c:'love'},
-        {e:'(っ˘̩╭╮˘̩)っ', n:'need hug love',        c:'love'},
-        {e:'(・∀・)♡',  n:'heart happy',              c:'love'},
-        {e:'⃛ヾ(๑❛ ▿ ❛๑)⃛', n:'sparkle love',      c:'love'},
-        {e:'(♥ω♥*)',   n:'in love blush',            c:'love'},
-        {e:'<(^_^)>',  n:'love hug arms',            c:'love'},
-        {e:'(づ ◕‿◕ )づ', n:'hugging love',          c:'love'},
-        // Sad
-        {e:'(◞‸◟)',     n:'sad pitiful',             c:'sad'},
-        {e:'(╥_╥)',     n:'crying sad',              c:'sad'},
-        {e:'(。•́︿•̀。)', n:'sad pouty',              c:'sad'},
-        {e:'(′д`♥)',    n:'crying sad heart',        c:'sad'},
-        {e:'(˃̣̣̥᷄⌂˂̣̣̥᷅)', n:'deep sad',              c:'sad'},
-        {e:'(ノД`)',     n:'crying shame',            c:'sad'},
-        {e:'(｡>﹏<｡)', n:'upset nervous',             c:'sad'},
-        {e:'(╯︵╰,)',   n:'defeated sad',             c:'sad'},
-        {e:'｡ﾟ(ﾟ´ω`ﾟ)ﾟ｡', n:'sobbing',             c:'sad'},
-        {e:'(っ- ‸ – ς)', n:'sad quiet inside',      c:'sad'},
-        {e:"(ToT)",     n:'crying hard',              c:'sad'},
-        // Actions
-        {e:'m(_ _)m',   n:'bow apology',             c:'actions'},
-        {e:'(#`ﾛ´)',    n:'angry fuming',             c:'actions'},
-        {e:'(ﾉ≧∇≦)ﾉ',  n:'excited cheering',        c:'actions'},
-        {e:'d(-_^)b',   n:'thumbs up both cool',     c:'actions'},
-        {e:'(￣^￣)ゞ', n:'salute soldier',           c:'actions'},
-        {e:'ε=ε=ε=┌(;*´Д`)ﾉ', n:'running fast',    c:'actions'},
-        {e:'└(＾▽＾)┘', n:'dance happy',             c:'actions'},
-        {e:'ヽ(´▽`)/',  n:'raise hands yay',         c:'actions'},
-        {e:'(⌐■_■)',   n:'cool deal with it',        c:'actions'},
-        {e:'(╯·_·）╯', n:'angry flip',              c:'actions'},
-        {e:'(o^^)o',    n:'excited ready',            c:'actions'},
-        {e:'(*•̀ᴗ•́*)و', n:'determined fist',        c:'actions'},
-        // Magic / Special
-        {e:'(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧', n:'magic sparkle wizard', c:'magic'},
-        {e:'✧*｡٩(ˊᗜˋ*)و✧*｡', n:'sparkle happy magic', c:'magic'},
-        {e:'(*☻-☻*)',   n:'robot eyes',              c:'magic'},
-        {e:'(>'-')> ♥ <('-'<)', n:'kirby dance love', c:'magic'},
-        {e:'(>^_^)><(^_^<)', n:'hug kirby',          c:'magic'},
-        {e:'₍₍ (ง˘ω˘)ว ⁾⁾', n:'boxing ghost',       c:'magic'},
-        {e:'(´• ω •`) ♡', n:'cute heart',            c:'magic'},
-        {e:'〜(꒪꒳꒪)〜', n:'spinning confused',      c:'magic'},
-        {e:'(ˊ•͈ ꇴ •͈ˋ)', n:'sweet face',           c:'magic'},
-        {e:'ᕕ( ᐛ )ᕗ',   n:'happy go lucky march',  c:'magic'},
-        {e:'(ノ﹏ヽ)',   n:'overwhelmed sad',         c:'magic'},
-        {e:'♪┏(・o･)┛♪', n:'dancing music',         c:'magic'},
-        {e:'(ᅌᴗᅌ* )',  n:'serene peaceful',         c:'magic'},
-        // Additional Western
-        {e:':-]',    n:'smiling bracket',         c:'western'},
-        {e:':-[',    n:'frowning bracket',         c:'western'},
-        {e:'8-D',    n:'grinning glasses',         c:'western'},
-        {e:'x-)',    n:'dead happy x eyes',        c:'western'},
-        {e:'+_+',    n:'dizzy dead swirl',         c:'western'},
-        {e:'>_>',    n:'looking right shifty',     c:'western'},
-        {e:'<_<',    n:'looking left suspicious',  c:'western'},
-        {e:'@_@',    n:'crazy spiraling eyes',     c:'western'},
-        {e:'*o*',    n:'amazed star eyes',         c:'western'},
-        {e:'O.O',    n:'wide eyes shocked',        c:'western'},
-        {e:'ʘ_ʘ',    n:'wide eyes stare',          c:'western'},
-        {e:'>:D',    n:'evil grin',                c:'western'},
-        {e:'>:)',     n:'evil smile smirk',        c:'western'},
-        {e:'>:(',     n:'very angry mad',          c:'western'},
-        {e:'C:',     n:'very happy big grin',      c:'western'},
-        {e:':3',     n:'cute cat smile',           c:'western'},
-        {e:';3',     n:'cute wink cat',            c:'western'},
-        {e:'uwu',    n:'cute affectionate warm',   c:'western'},
-        {e:'owo',    n:'cute surprised wonder',    c:'western'},
-        {e:'TwT',    n:'crying cute sad',          c:'western'},
-        {e:'QwQ',    n:'crying sad cute',          c:'western'},
-        {e:':v',     n:'pacman mouth',             c:'western'},
-        {e:'|-)',    n:'sleepy tired zz',           c:'western'},
-        {e:'[:-)',   n:'listening headphones',     c:'western'},
-        {e:':-&',    n:'tongue tied embarrassed',  c:'western'},
-        {e:':-$',    n:'embarrassed money mouth',  c:'western'},
-        {e:'<(^_^)>',n:'hug arms love',            c:'western'},
-        {e:'(^3^)',   n:'kiss puckered lips',      c:'western'},
-        // Additional Kaomoji
-        {e:'(⌒▽⌒)',    n:'happy carefree bright',   c:'kaomoji'},
-        {e:'(*^ω^*)',   n:'happy blushing shy',      c:'kaomoji'},
-        {e:'(ﾉ^ヮ^)ﾉ',  n:'cheer excited raise',     c:'kaomoji'},
-        {e:'щ(ﾟДﾟщ)',   n:'why anguished hands',     c:'kaomoji'},
-        {e:'(╬ಠ益ಠ)',   n:'furious rage anger',       c:'kaomoji'},
-        {e:'(•̀ᴗ•́)و',  n:'excited determined',       c:'kaomoji'},
-        {e:'Σ(っ°Д°;)っ','n':'panic shocked',          c:'kaomoji'},
-        {e:'(ó_ò)',     n:'moody upset sullen',       c:'kaomoji'},
-        {e:'ヽ(´ー｀)ノ', n:'carefree relaxed peace',  c:'kaomoji'},
-        {e:'(っ´▽`)っ',  n:'happy hug giving open',   c:'kaomoji'},
-        {e:'(/^▽^)/',   n:'cheer arms up happy',     c:'kaomoji'},
-        {e:'~(˘▾˘~)',   n:'happy dance grooving',    c:'kaomoji'},
-        {e:'(づ￣ ³￣)づ','n':'blowing kiss lean',      c:'kaomoji'},
-        {e:'(๑˃ᴗ˂)ﻭ',  n:'excited fist pump yes',   c:'kaomoji'},
-        {e:'(☞ﾟヮﾟ)☞',  n:'pointing finger gun',     c:'kaomoji'},
-        {e:'☜(ﾟヮﾟ☜)',  n:'pointing left finger',    c:'kaomoji'},
-        {e:'눈_눈',      n:'korean eyes suspicious',  c:'kaomoji'},
-        {e:'( •_•)>⌐■-■','n':'put on sunglasses',     c:'kaomoji'},
-        {e:'(ó﹏ò｡)',   n:'sad lip quiver',           c:'kaomoji'},
-        {e:'o(╥﹏╥)o',  n:'crying sad arms out',     c:'kaomoji'},
-        {e:'Σ>―(〃°ω°〃)♡→','n':'love arrow shot heart', c:'kaomoji'},
-        {e:'(｡ŏ﹏ŏ)',   n:'distressed sad',          c:'kaomoji'},
-        {e:'(●´ω｀●)',  n:'shy blushing cute',        c:'kaomoji'},
-        {e:'(*￣▽￣*)',  n:'smug satisfied',          c:'kaomoji'},
-        {e:'(¬‿¬)',     n:'suspicious smug side',    c:'kaomoji'},
-        {e:'(ﾉ◕ヮ◕)ﾉ',  n:'excited raise sparkle',   c:'kaomoji'},
-        // Additional animals
-        {e:'(ﾐↀωↀﾐ)',   n:'cat intense stare',        c:'animals'},
-        {e:'(⁎˃ᆺ˂)',    n:'bear cub cute',            c:'animals'},
-        {e:'^•ﻌ•^',     n:'cat simple happy',         c:'animals'},
-        {e:'(=^･ᆽ･^=)', n:'cat intense face',         c:'animals'},
-        {e:'ʕ￫ᴥ￩ʔ',    n:'bear looking sideways',    c:'animals'},
-        {e:'(◕ω◕✿)',    n:'cat flower cute girl',     c:'animals'},
-        {e:'(⁎❛ᴗ❛⁎)',   n:'bear happy shy cheeks',   c:'animals'},
-        {e:'/╲/( •̀ ω •́ )/╱\\','n':'cat arms excited', c:'animals'},
-        {e:'(ᗒᗨᗕ)',     n:'alien wide grin',          c:'animals'},
-        {e:'(ᐢ._.ᐢ)',   n:'hamster cute',             c:'animals'},
-        {e:'(ᵔᵕᵔ)',     n:'bear bliss happy',         c:'animals'},
-        {e:'=^._.^= ∫', n:'cat draping tail',         c:'animals'},
-        // Additional love
-        {e:'(灬♥ω♥灬)', n:'in love deeply hearts',    c:'love'},
-        {e:'(◕‿◕)♡',    n:'cute heart eyes',          c:'love'},
-        {e:'( ˘ ³˘)♥',  n:'kiss heart lean',         c:'love'},
-        {e:'(♡°▽°♡)',   n:'hearts eyes floating',    c:'love'},
-        {e:'♡(˃ᵕ˂)',    n:'heart happy smiling',     c:'love'},
-        {e:'(*˘︶˘*).｡.:*♡','n':'dreamy love float', c:'love'},
-        {e:'(人*´∀｀)',  n:'happy love person',       c:'love'},
-        {e:'(っ˘з(˘⌣˘ )','n':'couple kiss love',      c:'love'},
-        // Additional actions
-        {e:'(ﾉ°▽°)ﾉ⌒✰', n:'throwing star excited',   c:'actions'},
-        {e:'ᕦ(ò_óˇ)ᕤ',  n:'flexing strong power',    c:'actions'},
-        {e:'(ó_ò)..zzzZZ','n':'falling asleep',        c:'actions'},
-        {e:'✌(◕‿-)✌',   n:'peace two hands wink',     c:'actions'},
-        {e:'└(^o^)┘',   n:'celebrating raise arms',   c:'actions'},
-        {e:'(ᕗ ͠° ਊ ͠° )ᕗ','n':'pumped fist going',  c:'actions'},
-        {e:'m(._.)m',   n:'bow apology humble',       c:'actions'},
-        {e:'(ง •̀_•́)ง', n:'fight bring it on',       c:'actions'},
-        {e:'ヽ(°〇°)ﾉ',  n:'alarmed startled panic',  c:'actions'},
-        {e:'(ﾉ*゜▽゜*)',  n:'jumping joy surprised',  c:'actions'},
-        // Additional magic
-        {e:'꒰˶• ꒳ •˶꒱✧','n':'cute sparkle content',  c:'magic'},
-        {e:'(｡◕‿◕｡)',   n:'adorable wide eyes',       c:'magic'},
-        {e:'(っ◔◡◔)っ ♥','n':'giving heart hug',       c:'magic'},
-        {e:'♩♪♫♬',      n:'music notes melody song',  c:'magic'},
-        {e:'( っ◕‿◕)っ',  n:'coming hug wide arms',   c:'magic'},
-        {e:'━☆ﾟ.*・｡ﾟ', n:'shooting star trail',      c:'magic'},
-        {e:'*:･ﾟ✧',     n:'sparkle stars twinkle',    c:'magic'},
-        {e:'(✿ヘᴥヘ)',   n:'flower bear magic cute',   c:'magic'},
-        {e:'(ᗜˬᗜ)✧',   n:'cute alien wink sparkle',  c:'magic'},
-        {e:'〜(∇￣〜)',   n:'sneaky approaching someone','c':'magic'},
-        {e:'(∩｀-´)⊃━━━☆ﾟ','n':'casting spell wizard', c:'magic'},
-        {e:'✧*｡٩(ˊᗜˋ*)و✧*｡','n':'sparkle cheer magic charm', c:'magic'},
-      ];
+      let EMOTCN_DATA = [];
+      let _emotcnLoaded = false;
+      
+      // Lazy load emoticon data when first accessed
+      async function loadEmoticons() {
+        if (_emotcnLoaded) return;
+        _emotcnLoaded = true;
+        try {
+          const response = await fetch('lib/emoticon_dict.json');
+          if (!response.ok) throw new Error('HTTP ' + response.status);
+          const dictData = await response.json();
+          EMOTCN_DATA = Object.entries(dictData).map(([emoticon, data]) => ({
+            e: emoticon,
+            n: (data.new_tags || data.original_tags || []).join(' '),
+            c: (data.original_tags && data.original_tags[0]) || 'general'
+          }));
+          if (EMOTCN_DATA.length === 0) console.warn('No emoticons found in lib/emoticon_dict.json');
+          else console.log('Loaded ' + EMOTCN_DATA.length + ' emoticons');
+        } catch (err) {
+          console.error('Failed to load emoticon_dict.json:', err);
+          EMOTCN_DATA = [];
+        }
+      }
 
       let _etcnCurrentData = EMOTCN_DATA;
-      function emotcnRender(data) {
+      async function emotcnRender(data) {
+        await loadEmoticons();
         const g = document.getElementById('etcn-grid');
         if (!g) return;
         const items = data !== undefined ? data : _etcnCurrentData;
-        g.innerHTML = items.map(item => {
-          const safe = item.e.replace(/</g,'&lt;').replace(/>/g,'&gt;');
-          return `<button onclick="emotcnCopy('${item.e.replace(/'/g,"\'").replace(/\\/g,'\\\\')}')" title="${item.n}" style="font-size:.85rem;font-family:'Courier New',monospace;background:var(--m3-surface-container);border:1px solid var(--m3-outline-variant);border-radius:8px;padding:6px 4px;cursor:pointer;word-break:break-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background .1s;min-height:40px" onmouseover="this.style.background='var(--m3-surface-container-high)'" onmouseout="this.style.background='var(--m3-surface-container)'">${safe}</button>`;
+        g.innerHTML = items.length === 0 ? '<div style="padding:20px;color:var(--m3-on-surface-variant)">درحال بارگیری...</div>' : items.map(item => {
+          const emote = String(item.e || '');
+          const safe = emote.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+          return `<button onclick="emotcnCopy('${emote.replace(/'/g,"\'").replace(/\\/g,'\\\\')}')" title="${item.n}" style="font-size:.85rem;font-family:'Courier New',monospace;background:var(--m3-surface-container);border:1px solid var(--m3-outline-variant);border-radius:8px;padding:6px 4px;cursor:pointer;word-break:break-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background .1s;min-height:40px" onmouseover="this.style.background='var(--m3-surface-container-high)'" onmouseout="this.style.background='var(--m3-surface-container)'">${safe}</button>`;
         }).join('');
       }
       function emotcnCopy(text) {
@@ -12749,10 +12344,24 @@
         const fb = document.getElementById('etcn-copied');
         if (fb) { fb.style.display='block'; clearTimeout(fb._t); fb._t=setTimeout(()=>{fb.style.display='none';},1200); }
       }
-      function emotcnSearch() {
+      async function emotcnSearch() {
+        await loadEmoticons();
         const q = document.getElementById('etcn-search').value.toLowerCase().trim();
         const cat = document.getElementById('etcn-cat').value;
-        _etcnCurrentData = EMOTCN_DATA.filter(e => (!cat||e.c===cat) && (!q||e.n.includes(q)||e.e.toLowerCase().includes(q)));
+        let pool;
+        if (cat && cat.startsWith('kj_')) {
+          // Pull from kaomoji dict
+          const tagKey = cat.slice(3).replace(/_/g,' ');
+          const altKey = tagKey.replace(/ /g,'_');
+          pool = (window.KAOMOJI_DICT_DATA || [])
+            .filter(item => item.new_tags.some(t => t===tagKey || t===altKey))
+            .map(item => ({e:item.kaomoji, n:item.new_tags.join(' '), c:cat}));
+          if (!pool.length) pool = EMOTCN_DATA; // fallback
+        } else {
+          pool = EMOTCN_DATA.filter(e => !cat || e.c === cat);
+        }
+        if (q) pool = pool.filter(e => e.n.toLowerCase().includes(q) || e.e.toLowerCase().includes(q));
+        _etcnCurrentData = pool;
         emotcnRender(_etcnCurrentData);
       }
       function emotcnFilter() {
@@ -13642,7 +13251,10 @@
       // ══════════════════════════════════════════════════════════
       //  MINI GAMES
       // ══════════════════════════════════════════════════════════
+      var _mgCurrent = '';
       function mgSetGame(name) {
+        if (name === _mgCurrent) return;
+        _mgCurrent = name;
         ['ttt','snake','dots','memory','2048'].forEach(g => {
           const b = document.getElementById('mg-tab-'+g);
           if (b) b.className = 'btn ' + (g===name?'btn-filled':'btn-tonal');
@@ -13702,34 +13314,134 @@
 
       // Snake
       function mgSnake(area) {
-        const SIZE=20, W=15, H=13;
-        let snake=[{x:7,y:6},{x:6,y:6}], dir={x:1,y:0}, food={x:12,y:6}, running=false, score=0, interval=null;
+        const SIZE=22, W=15, H=13;
+        let snake=[{x:7,y:6},{x:6,y:6}], dir={x:1,y:0}, nextDir={x:1,y:0};
+        let food={x:12,y:6}, running=false, score=0, interval=null;
+        let snakeKH=null, snakeTX=0, snakeTY=0;
+
         function rndFood(){let f;do{f={x:Math.floor(Math.random()*W),y:Math.floor(Math.random()*H)}}while(snake.some(s=>s.x===f.x&&s.y===f.y));return f;}
-        area.innerHTML=`<canvas id="snake-c" width="${W*SIZE}" height="${H*SIZE}" style="border-radius:12px;display:block;background:var(--m3-surface-container)"></canvas>
-          <div id="snake-score" style="font-size:15px;font-weight:700;margin-top:8px">امتیاز: 0</div>
+
+        // Resolve CSS vars to real colors (canvas doesn't support them)
+        function resolveColor(cssVar){
+          const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+          const map={'bg':isDark?'#1a2228':'#ecf4f3','primary':isDark?'#4dd0e1':'#006874','food':'#ef5350','grid':isDark?'rgba(255,255,255,0.05)':'rgba(0,0,0,0.05)'};
+          return map[cssVar]||'#888';
+        }
+
+        area.innerHTML=`
+          <canvas id="snake-c" width="${W*SIZE}" height="${H*SIZE}"
+            style="border-radius:14px;display:block;max-width:100%;touch-action:none"></canvas>
+          <div id="snake-score" style="font-size:15px;font-weight:700;margin-top:10px;text-align:center">امتیاز: 0</div>
           <div class="btn-row" style="margin-top:8px;justify-content:center">
-            <button class="btn btn-filled" onclick="snakeToggle()">▶ شروع</button>
+            <button class="btn btn-filled" id="snake-start-btn" onclick="snakeToggle()">▶ شروع</button>
             <button class="btn btn-tonal" onclick="snakeReset()">↺ ریست</button>
           </div>
-          <div style="font-size:12px;color:var(--m3-on-surface-variant);margin-top:6px">کنترل: فلش‌ها یا WASD</div>`;
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:12px">
+            <button class="btn btn-tonal" style="width:52px;height:44px;font-size:1.3rem" onclick="snakeDir(0,-1)">↑</button>
+            <div style="display:flex;gap:4px">
+              <button class="btn btn-tonal" style="width:52px;height:44px;font-size:1.3rem" onclick="snakeDir(-1,0)">←</button>
+              <button class="btn btn-tonal" style="width:52px;height:44px;font-size:1.3rem" onclick="snakeDir(0,1)">↓</button>
+              <button class="btn btn-tonal" style="width:52px;height:44px;font-size:1.3rem" onclick="snakeDir(1,0)">→</button>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--m3-on-surface-variant);margin-top:8px;text-align:center">
+            فلش / WASD / swipe / دکمه‌های بالا
+          </div>`;
+
         function draw(){
-          const c=document.getElementById('snake-c');if(!c)return;
+          const c=document.getElementById('snake-c'); if(!c)return;
           const ctx=c.getContext('2d');
-          ctx.fillStyle='var(--m3-surface-container)';ctx.fillRect(0,0,W*SIZE,H*SIZE);
-          ctx.fillStyle='#ff5252';ctx.fillRect(food.x*SIZE+2,food.y*SIZE+2,SIZE-4,SIZE-4);
-          snake.forEach((s,i)=>{ctx.fillStyle=i===0?'var(--m3-primary)':'color-mix(in srgb,var(--m3-primary) 60%,transparent)';ctx.fillRect(s.x*SIZE+1,s.y*SIZE+1,SIZE-2,SIZE-2);});
+          const bg=resolveColor('bg'), primary=resolveColor('primary'), grid=resolveColor('grid');
+          ctx.fillStyle=bg; ctx.fillRect(0,0,W*SIZE,H*SIZE);
+          // Grid
+          ctx.strokeStyle=grid; ctx.lineWidth=0.5;
+          for(let i=0;i<=W;i++){ctx.beginPath();ctx.moveTo(i*SIZE,0);ctx.lineTo(i*SIZE,H*SIZE);ctx.stroke();}
+          for(let j=0;j<=H;j++){ctx.beginPath();ctx.moveTo(0,j*SIZE);ctx.lineTo(W*SIZE,j*SIZE);ctx.stroke();}
+          // Food
+          ctx.fillStyle='#ef5350'; ctx.shadowColor='#ef5350'; ctx.shadowBlur=10;
+          ctx.beginPath(); ctx.arc(food.x*SIZE+SIZE/2,food.y*SIZE+SIZE/2,SIZE/2-2,0,Math.PI*2); ctx.fill();
+          ctx.shadowBlur=0;
+          // Snake
+          snake.forEach((s,i)=>{
+            const alpha=Math.max(0.35,1-i*0.04);
+            if(i===0){ctx.fillStyle=primary;}
+            else{
+              const hex=Math.round(alpha*255).toString(16).padStart(2,'0');
+              ctx.fillStyle=primary+hex;
+            }
+            const r=i===0?5:3;
+            ctx.beginPath();
+            if(ctx.roundRect){ctx.roundRect(s.x*SIZE+1,s.y*SIZE+1,SIZE-2,SIZE-2,r);ctx.fill();}
+            else{ctx.fillRect(s.x*SIZE+1,s.y*SIZE+1,SIZE-2,SIZE-2);}
+          });
         }
+
         function step(){
+          dir={...nextDir};
           const head={x:(snake[0].x+dir.x+W)%W,y:(snake[0].y+dir.y+H)%H};
-          if(snake.some(s=>s.x===head.x&&s.y===head.y)){clearInterval(interval);running=false;if(typeof showToast==='function')showToast('بازی تمام! امتیاز: '+score);return;}
+          if(snake.some(s=>s.x===head.x&&s.y===head.y)){
+            clearInterval(interval); running=false;
+            const btn=document.getElementById('snake-start-btn');
+            if(btn)btn.textContent='▶ شروع';
+            if(typeof showToast==='function')showToast('بازی تمام! امتیاز: '+score);
+            // Death flash
+            const c2=document.getElementById('snake-c');
+            if(c2){const ctx2=c2.getContext('2d');ctx2.fillStyle='rgba(211,47,47,0.3)';ctx2.fillRect(0,0,W*SIZE,H*SIZE);}
+            return;
+          }
           snake.unshift(head);
-          if(head.x===food.x&&head.y===food.y){score++;food=rndFood();const ss=document.getElementById('snake-score');if(ss)ss.textContent='امتیاز: '+score;}
-          else snake.pop();
+          if(head.x===food.x&&head.y===food.y){
+            score++; food=rndFood();
+            const ss=document.getElementById('snake-score');
+            if(ss)ss.textContent='امتیاز: '+score;
+          } else snake.pop();
           draw();
         }
-        window.snakeToggle=()=>{running=!running;running?interval=setInterval(step,140):clearInterval(interval);};
-        window.snakeReset=()=>{clearInterval(interval);snake=[{x:7,y:6},{x:6,y:6}];dir={x:1,y:0};food=rndFood();running=false;score=0;const ssr=document.getElementById('snake-score');if(ssr)ssr.textContent='امتیاز: 0';draw();};
-        document.addEventListener('keydown',e=>{if(!running)return;const map={'ArrowUp':{x:0,y:-1},'ArrowDown':{x:0,y:1},'ArrowLeft':{x:-1,y:0},'ArrowRight':{x:1,y:0},'w':{x:0,y:-1},'s':{x:0,y:1},'a':{x:-1,y:0},'d':{x:1,y:0}};const nd=map[e.key];if(nd&&(nd.x!==(-dir.x)||nd.y!==(-dir.y))){dir=nd;e.preventDefault();}});
+
+        window.snakeDir=(dx,dy)=>{
+          const nd={x:dx,y:dy};
+          if(running&&(nd.x!==(-dir.x)||nd.y!==(-dir.y)))nextDir=nd;
+        };
+
+        window.snakeToggle=()=>{
+          running=!running;
+          const btn=document.getElementById('snake-start-btn');
+          if(running){interval=setInterval(step,150);if(btn)btn.textContent='⏸ مکث';}
+          else{clearInterval(interval);if(btn)btn.textContent='▶ شروع';}
+        };
+
+        window.snakeReset=()=>{
+          clearInterval(interval);
+          snake=[{x:7,y:6},{x:6,y:6}]; dir={x:1,y:0}; nextDir={x:1,y:0};
+          food=rndFood(); running=false; score=0;
+          const ss=document.getElementById('snake-score'); if(ss)ss.textContent='امتیاز: 0';
+          const btn=document.getElementById('snake-start-btn'); if(btn)btn.textContent='▶ شروع';
+          draw();
+        };
+
+        // Keyboard handler — scoped to minigames active
+        if(snakeKH)document.removeEventListener('keydown',snakeKH);
+        snakeKH=e=>{
+          if(!document.getElementById('minigames')?.classList.contains('active'))return;
+          const map={'ArrowUp':{x:0,y:-1},'ArrowDown':{x:0,y:1},'ArrowLeft':{x:-1,y:0},'ArrowRight':{x:1,y:0},
+                     'w':{x:0,y:-1},'s':{x:0,y:1},'a':{x:-1,y:0},'d':{x:1,y:0}};
+          const nd=map[e.key];
+          if(nd){e.preventDefault();if(running&&(nd.x!==(-dir.x)||nd.y!==(-dir.y)))nextDir=nd;}
+        };
+        document.addEventListener('keydown',snakeKH);
+
+        // Touch swipe on canvas
+        const cv=document.getElementById('snake-c');
+        if(cv){
+          cv.addEventListener('touchstart',e=>{snakeTX=e.touches[0].clientX;snakeTY=e.touches[0].clientY;e.preventDefault();},{passive:false});
+          cv.addEventListener('touchend',e=>{
+            const dx=e.changedTouches[0].clientX-snakeTX, dy=e.changedTouches[0].clientY-snakeTY;
+            if(Math.abs(dx)<12&&Math.abs(dy)<12)return;
+            e.preventDefault();
+            if(Math.abs(dx)>Math.abs(dy))window.snakeDir(dx>0?1:-1,0);
+            else window.snakeDir(0,dy>0?1:-1);
+          },{passive:false});
+        }
         draw();
       }
 
@@ -13743,9 +13455,32 @@
         function countSides(i,j){return(hLines[i][j]||0)+(hLines[i+1]?.[j]||0)+(vLines[i][j]||0)+(vLines[i][j+1]||0);}
         function checkBoxes(){let formed=0;for(let i=0;i<N;i++)for(let j=0;j<N;j++){if(!boxes[i][j]&&hLines[i][j]&&hLines[i+1]?.[j]&&vLines[i][j]&&vLines[i][j+1]){boxes[i][j]=turn;if(turn===1)score.p++;else score.ai++;formed++;}}return formed;}
         function aiMove(){
-          for(let i=0;i<N;i++)for(let j=0;j<N;j++){if(!boxes[i][j]&&countSides(i,j)===3){if(!hLines[i][j]){hLines[i][j]=2;return;}if(!hLines[i+1]?.[j]&&hLines[i+1]){hLines[i+1][j]=2;return;}if(!vLines[i][j]){vLines[i][j]=2;return;}if(!vLines[i][j+1]){vLines[i][j+1]=2;return;}}}
-          const moves=[];for(let i=0;i<=N;i++)for(let j=0;j<N;j++)if(!hLines[i][j])moves.push(['h',i,j]);for(let i=0;i<N;i++)for(let j=0;j<=N;j++)if(!vLines[i][j])moves.push(['v',i,j]);
-          if(moves.length){const m=moves[Math.floor(Math.random()*moves.length)];if(m[0]==='h')hLines[m[1]][m[2]]=2;else vLines[m[1]][m[2]]=2;}
+          // Priority 1: complete any box with 3 sides already drawn
+          for(let i=0;i<N;i++)for(let j=0;j<N;j++){
+            if(!boxes[i][j]&&countSides(i,j)===3){
+              if(!hLines[i][j]){hLines[i][j]=2;return;}
+              if(i+1<=N&&hLines[i+1]!==undefined&&!hLines[i+1][j]){hLines[i+1][j]=2;return;}
+              if(!vLines[i][j]){vLines[i][j]=2;return;}
+              if(!vLines[i][j+1]){vLines[i][j+1]=2;return;}
+            }
+          }
+          // Priority 2: avoid giving opponent a 3-sided box
+          const safeMoves=[], risky=[];
+          const check=(type,r,c)=>{
+            let gives=false;
+            if(type==='h'){hLines[r][c]=2;}else{vLines[r][c]=2;}
+            for(let i=0;i<N;i++)for(let j=0;j<N;j++){if(!boxes[i][j]&&countSides(i,j)===3)gives=true;}
+            if(type==='h'){hLines[r][c]=0;}else{vLines[r][c]=0;}
+            return gives;
+          };
+          for(let i=0;i<=N;i++)for(let j=0;j<N;j++){
+            if(!hLines[i][j]){(check('h',i,j)?risky:safeMoves).push(['h',i,j]);}
+          }
+          for(let i=0;i<N;i++)for(let j=0;j<=N;j++){
+            if(!vLines[i][j]){(check('v',i,j)?risky:safeMoves).push(['v',i,j]);}
+          }
+          const pool=safeMoves.length?safeMoves:risky;
+          if(pool.length){const m=pool[Math.floor(Math.random()*pool.length)];if(m[0]==='h')hLines[m[1]][m[2]]=2;else vLines[m[1]][m[2]]=2;}
         }
         function render(){
           const DOT=7,SZ=56,PAD=18,W2=PAD*2+SZ*N,H2=PAD*2+SZ*N;
@@ -13754,8 +13489,8 @@
           <button class="btn btn-tonal" onclick="mgDots(document.getElementById('mg-area'))" style="margin-top:10px;font-size:12px">↺ بازی جدید</button>`;
           const svg=area.querySelector('svg');if(!svg)return;
           for(let i=0;i<N;i++)for(let j=0;j<N;j++){if(boxes[i][j]){const r=document.createElementNS('http://www.w3.org/2000/svg','rect');r.setAttribute('x',PAD+j*SZ+DOT/2+1);r.setAttribute('y',PAD+i*SZ+DOT/2+1);r.setAttribute('width',SZ-DOT-2);r.setAttribute('height',SZ-DOT-2);r.setAttribute('fill',boxes[i][j]===1?'rgba(33,150,243,0.25)':'rgba(233,30,99,0.25)');svg.appendChild(r);}}
-          for(let i=0;i<=N;i++)for(let j=0;j<N;j++){const ln=document.createElementNS('http://www.w3.org/2000/svg','line');ln.setAttribute('x1',PAD+j*SZ+DOT);ln.setAttribute('y1',PAD+i*SZ);ln.setAttribute('x2',PAD+(j+1)*SZ-DOT);ln.setAttribute('y2',PAD+i*SZ);ln.setAttribute('stroke-width','5');ln.setAttribute('stroke-linecap','round');if(hLines[i][j])ln.setAttribute('stroke',hLines[i][j]===1?'#2196f3':'#e91e63');else{ln.setAttribute('stroke','rgba(128,128,128,0.2)');if(!gameOver&&turn===1)ln.style.cursor='pointer';if(!gameOver&&turn===1)ln.addEventListener('click',()=>{hLines[i][j]=1;const f=checkBoxes();if(!f){turn=2;render();setTimeout(()=>{aiMove();const af=checkBoxes();if(!af)turn=1;if(score.p+score.ai===N*N)gameOver=true;render();},350);}else{if(score.p+score.ai===N*N)gameOver=true;render();}});}svg.appendChild(ln);}
-          for(let i=0;i<N;i++)for(let j=0;j<=N;j++){const ln=document.createElementNS('http://www.w3.org/2000/svg','line');ln.setAttribute('x1',PAD+j*SZ);ln.setAttribute('y1',PAD+i*SZ+DOT);ln.setAttribute('x2',PAD+j*SZ);ln.setAttribute('y2',PAD+(i+1)*SZ-DOT);ln.setAttribute('stroke-width','5');ln.setAttribute('stroke-linecap','round');if(vLines[i][j])ln.setAttribute('stroke',vLines[i][j]===1?'#2196f3':'#e91e63');else{ln.setAttribute('stroke','rgba(128,128,128,0.2)');if(!gameOver&&turn===1)ln.style.cursor='pointer';if(!gameOver&&turn===1)ln.addEventListener('click',()=>{vLines[i][j]=1;const f=checkBoxes();if(!f){turn=2;render();setTimeout(()=>{aiMove();const af=checkBoxes();if(!af)turn=1;if(score.p+score.ai===N*N)gameOver=true;render();},350);}else{if(score.p+score.ai===N*N)gameOver=true;render();}});}svg.appendChild(ln);}
+          for(let i=0;i<=N;i++)for(let j=0;j<N;j++){const ln=document.createElementNS('http://www.w3.org/2000/svg','line');ln.setAttribute('x1',PAD+j*SZ+DOT);ln.setAttribute('y1',PAD+i*SZ);ln.setAttribute('x2',PAD+(j+1)*SZ-DOT);ln.setAttribute('y2',PAD+i*SZ);ln.setAttribute('stroke-width','5');ln.setAttribute('stroke-linecap','round');if(hLines[i][j])ln.setAttribute('stroke',hLines[i][j]===1?'#2196f3':'#e91e63');else{ln.setAttribute('stroke','rgba(128,128,128,0.2)');if(!gameOver&&turn===1)ln.style.cursor='pointer';if(!gameOver&&turn===1)ln.addEventListener('click',()=>{hLines[i][j]=1;const f=checkBoxes();if(!f){turn=2;render();setTimeout(()=>{let cont=true;while(cont){aiMove();const af=checkBoxes();cont=(af>0);if(score.p+score.ai===N*N){gameOver=true;cont=false;}}if(!gameOver)turn=1;render();},400);}else{if(score.p+score.ai===N*N)gameOver=true;render();}});}svg.appendChild(ln);}
+          for(let i=0;i<N;i++)for(let j=0;j<=N;j++){const ln=document.createElementNS('http://www.w3.org/2000/svg','line');ln.setAttribute('x1',PAD+j*SZ);ln.setAttribute('y1',PAD+i*SZ+DOT);ln.setAttribute('x2',PAD+j*SZ);ln.setAttribute('y2',PAD+(i+1)*SZ-DOT);ln.setAttribute('stroke-width','5');ln.setAttribute('stroke-linecap','round');if(vLines[i][j])ln.setAttribute('stroke',vLines[i][j]===1?'#2196f3':'#e91e63');else{ln.setAttribute('stroke','rgba(128,128,128,0.2)');if(!gameOver&&turn===1)ln.style.cursor='pointer';if(!gameOver&&turn===1)ln.addEventListener('click',()=>{vLines[i][j]=1;const f=checkBoxes();if(!f){turn=2;render();setTimeout(()=>{let cont=true;while(cont){aiMove();const af=checkBoxes();cont=(af>0);if(score.p+score.ai===N*N){gameOver=true;cont=false;}}if(!gameOver)turn=1;render();},400);}else{if(score.p+score.ai===N*N)gameOver=true;render();}});}svg.appendChild(ln);}
           for(let i=0;i<=N;i++)for(let j=0;j<=N;j++){const c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',PAD+j*SZ);c.setAttribute('cy',PAD+i*SZ);c.setAttribute('r',DOT/2+1);c.setAttribute('fill','var(--m3-on-surface)');svg.appendChild(c);}
         }
         render();
@@ -13794,8 +13529,11 @@
         function addRandom(b){const empty=[];b.forEach((r,i)=>r.forEach((v,j)=>{if(!v)empty.push([i,j])}));if(!empty.length)return;const[i,j]=empty[Math.floor(Math.random()*empty.length)];b[i][j]=Math.random()<.9?2:4;}
         addRandom(board);addRandom(board);
         function slide(row){const f=row.filter(v=>v);const merged=[];let skip=false;for(let i=0;i<f.length;i++){if(!skip&&i<f.length-1&&f[i]===f[i+1]){merged.push(f[i]*2);score+=f[i]*2;skip=true;}else if(!skip){merged.push(f[i]);}else{skip=false;}}return [...merged,...Array(N-merged.length).fill(0)];}
-        function move(d){let moved=false;const nb=board.map(r=>r.slice());if(d==='left'){nb.forEach((r,i)=>{const s=slide(r);if(s.some((v,j)=>v!==board[i][j])&&(moved=true))nb[i]=s;});}
-        else if(d==='right'){nb.forEach((r,i)=>{const s=slide([...r].reverse()).reverse();if(s.some((v,j)=>v!==board[i][j])&&(moved=true))nb[i]=s;});}
+        // In RTL layout: arrow-right presses → merge toward higher array index (visual right = "left" in data)
+        // ArrowLeft key = user wants tiles to go visually left = data right (reversed)
+        function move(d){let moved=false;const nb=board.map(r=>r.slice());
+        if(d==='right'){nb.forEach((r,i)=>{const s=slide(r);if(s.some((v,j)=>v!==board[i][j])&&(moved=true))nb[i]=s;});}
+        else if(d==='left'){nb.forEach((r,i)=>{const s=slide([...r].reverse()).reverse();if(s.some((v,j)=>v!==board[i][j])&&(moved=true))nb[i]=s;});}
         else if(d==='up'){for(let j=0;j<N;j++){const col=nb.map(r=>r[j]);const s=slide(col);s.forEach((v,i)=>{if(v!==board[i][j])moved=true;nb[i][j]=v;});}}
         else if(d==='down'){for(let j=0;j<N;j++){const col=nb.map(r=>r[j]).reverse();const s=slide(col).reverse();s.forEach((v,i)=>{if(v!==board[i][j])moved=true;nb[i][j]=v;});}}
         if(moved){board=nb;addRandom(board);}render();}
@@ -13808,14 +13546,33 @@
             <div style="font-size:12px;color:var(--m3-on-surface-variant);margin-top:8px">فلش‌ها یا swipe</div>`;
         }
         render();
-        document.addEventListener('keydown',e=>{
+        // Arrow keys — prevent page scroll, handle RTL direction
+        const g2048kh=e=>{
           const map={'ArrowLeft':'left','ArrowRight':'right','ArrowUp':'up','ArrowDown':'down'};
-          if(map[e.key]&&document.getElementById('minigames')?.classList.contains('active')){move(map[e.key]);e.preventDefault();}
-        });
-        // Swipe
+          if(map[e.key]&&document.getElementById('minigames')?.classList.contains('active')){
+            e.preventDefault(); e.stopPropagation(); move(map[e.key]);
+          }
+        };
+        document.addEventListener('keydown',g2048kh);
+
+        // Swipe — prevent page scroll when swiping vertically
         let tx=0,ty=0;
         area.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
-        area.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)>Math.abs(dy)){move(dx>0?'right':'left');}else{move(dy>0?'down':'up');}},{passive:true});
+        area.addEventListener('touchend',e=>{
+          const dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+          if(Math.abs(dx)<20&&Math.abs(dy)<20)return; // ignore taps
+          if(Math.abs(dx)>Math.abs(dy)){move(dx>0?'right':'left');}
+          else{move(dy>0?'down':'up');}
+        },{passive:true});
+
+        // Reset button
+        if(!area.querySelector('#g2048-reset')){
+          const rb=document.createElement('button');
+          rb.id='g2048-reset'; rb.className='btn btn-tonal';
+          rb.textContent='↺ بازی جدید'; rb.style.cssText='margin-top:10px';
+          rb.onclick=()=>{area.innerHTML='';mg2048(area);};
+          area.appendChild(rb);
+        }
       }
 
       // ══════════════════════════════════════════════════════════
@@ -13914,9 +13671,16 @@
         if(statusEl) statusEl.textContent='در حال دریافت داده…';
         compassDraw();
       }
+      var _compassRaw = 0;
       function compassHandler(e) {
         let deg = e.webkitCompassHeading || (e.absolute ? (360 - (e.alpha||0)) : (e.alpha||0));
-        _compassHeading = (deg + 360) % 360;
+        deg = (deg + 360) % 360;
+        // Low-pass filter: smooth rapid jumps
+        let diff = deg - _compassRaw;
+        if (diff > 180) diff -= 360;
+        if (diff < -180) diff += 360;
+        _compassRaw = (_compassRaw + diff * 0.12 + 360) % 360;
+        _compassHeading = _compassRaw;
         const headEl = document.getElementById('compass-heading');
         const dirEl  = document.getElementById('compass-direction');
         const statusEl = document.getElementById('compass-status');
@@ -13928,44 +13692,82 @@
         const c = document.getElementById('compass-canvas');
         if (!c || !_compassActive) return;
         const ctx = c.getContext('2d');
-        const W = c.width, H = c.height, cx = W/2, cy = H/2, r = W/2-10;
-        const isDark = document.documentElement.getAttribute('data-theme')==='dark';
+        const W=c.width, H=c.height, cx=W/2, cy=H/2, r=W/2-8;
+        const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+        // Resolve real colors (canvas can't use CSS vars)
+        const clrBg     = isDark?'#1a2228':'#f3f9f9';
+        const clrPrimary= isDark?'#4dd0e1':'#006874';
+        const clrError  = isDark?'#ef9a9a':'#c62828';
+        const clrSurf   = isDark?'#263238':'#ffffff';
+        const clrOn     = isDark?'#e0f2f1':'#003738';
+        const clrOutline= isDark?'rgba(255,255,255,0.12)':'rgba(0,0,0,0.10)';
+
         ctx.clearRect(0,0,W,H);
-        // Background
+
+        // Outer bezel gradient
+        const grd=ctx.createRadialGradient(cx,cy-r*0.25,r*0.05,cx,cy,r);
+        grd.addColorStop(0,clrSurf); grd.addColorStop(1,clrBg);
         ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2);
-        ctx.fillStyle=isDark?'#1b2527':'#f0f4f4'; ctx.fill();
-        ctx.strokeStyle='var(--m3-outline-variant)'; ctx.lineWidth=2; ctx.stroke();
+        ctx.fillStyle=grd; ctx.fill();
+        ctx.strokeStyle=clrOutline; ctx.lineWidth=2; ctx.stroke();
+
+        // --- ROTATING DIAL ---
+        ctx.save();
+        ctx.translate(cx,cy);
+        ctx.rotate(-_compassHeading * Math.PI/180);
+
         // Tick marks
-        for (let i=0;i<360;i+=10) {
+        for(let i=0;i<360;i+=5){
           const rad=(i-90)*Math.PI/180;
-          const len=i%90===0?14:i%30===0?10:6;
+          const isMaj=i%90===0, isMid=i%45===0, is30=i%30===0;
+          const len=isMaj?16:isMid?11:is30?8:5;
+          const lw=isMaj?2.5:isMid?1.5:0.8;
           ctx.beginPath();
-          ctx.moveTo(cx+Math.cos(rad)*(r-len),cy+Math.sin(rad)*(r-len));
-          ctx.lineTo(cx+Math.cos(rad)*r,cy+Math.sin(rad)*r);
-          ctx.strokeStyle=i%90===0?'var(--m3-on-surface)':'var(--m3-outline-variant)'; ctx.lineWidth=i%90===0?2:1; ctx.stroke();
+          ctx.moveTo(Math.cos(rad)*(r-len), Math.sin(rad)*(r-len));
+          ctx.lineTo(Math.cos(rad)*(r-1),   Math.sin(rad)*(r-1));
+          ctx.strokeStyle= i===0 ? clrError : (isMaj ? clrPrimary : clrOutline);
+          ctx.lineWidth=lw; ctx.stroke();
         }
-        // Cardinal labels
-        ['N','E','S','W'].forEach((lbl,i) => {
-          const rad=(i*90-90)*Math.PI/180;
-          ctx.fillStyle='var(--m3-on-surface)'; ctx.font='bold 14px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
-          ctx.fillText(lbl, cx+Math.cos(rad)*(r-26), cy+Math.sin(rad)*(r-26));
+
+        // Cardinal labels (rotate back to stay upright)
+        [['N',0,clrError,18],['E',90,clrOn,13],['S',180,clrOn,13],['W',270,clrOn,13]].forEach(([lbl,deg,col,sz])=>{
+          const rad=(deg-90)*Math.PI/180;
+          const px=Math.cos(rad)*(r-27), py=Math.sin(rad)*(r-27);
+          ctx.save();
+          ctx.translate(px,py);
+          ctx.rotate(deg*Math.PI/180); // counter-rotate for readability
+          ctx.fillStyle=col; ctx.font=`bold ${sz}px sans-serif`;
+          ctx.textAlign='center'; ctx.textBaseline='middle';
+          ctx.fillText(lbl,0,0);
+          ctx.restore();
         });
-        // Needle
-        const needleRad=(_compassHeading-90)*Math.PI/180;
+
+        ctx.restore(); // end rotating dial
+
+        // --- FIXED NEEDLE (always points up = user's North) ---
+        const nH=r*0.52, nT=r*0.28;
         ctx.save(); ctx.translate(cx,cy);
-        ctx.beginPath();
-        ctx.moveTo(0,0);
-        ctx.lineTo(Math.cos(needleRad)*(r-40), Math.sin(needleRad)*(r-40));
-        ctx.strokeStyle='var(--m3-primary)'; ctx.lineWidth=4; ctx.lineCap='round'; ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(0,0);
-        ctx.lineTo(-Math.cos(needleRad)*(r-60), -Math.sin(needleRad)*(r-60));
-        ctx.strokeStyle='var(--m3-error)'; ctx.lineWidth=3; ctx.stroke();
+
+        // North tip (red)
+        ctx.beginPath(); ctx.moveTo(-5,8); ctx.lineTo(0,-nH); ctx.lineTo(5,8); ctx.closePath();
+        ctx.fillStyle=clrError; ctx.fill();
+        // South tip (primary teal)
+        ctx.beginPath(); ctx.moveTo(-4,-8); ctx.lineTo(0,nT); ctx.lineTo(4,-8); ctx.closePath();
+        ctx.fillStyle=clrPrimary; ctx.fill();
+        // Center cap
+        ctx.beginPath(); ctx.arc(0,0,8,0,Math.PI*2);
+        ctx.fillStyle=clrOn; ctx.fill();
+        ctx.beginPath(); ctx.arc(0,0,5,0,Math.PI*2);
+        ctx.fillStyle=clrSurf; ctx.fill();
+
         ctx.restore();
-        // Center dot
-        ctx.beginPath(); ctx.arc(cx,cy,6,0,Math.PI*2);
-        ctx.fillStyle='var(--m3-on-surface)'; ctx.fill();
-        if (_compassActive) _compassRAF = requestAnimationFrame(compassDraw);
+
+        // Top indicator mark
+        ctx.fillStyle=clrError; ctx.font='bold 10px sans-serif';
+        ctx.textAlign='center'; ctx.textBaseline='top';
+        ctx.fillText('▲', cx, cy-nH-10);
+
+        if(_compassActive) _compassRAF=requestAnimationFrame(compassDraw);
       }
       function compassStop() {
         _compassActive = false;
@@ -14597,6 +14399,250 @@
         let off=44;
         for(let i=0;i<len;i++){for(let ch=0;ch<nCh;ch++){const s=Math.max(-1,Math.min(1,buf.getChannelData(ch)[i]));view.setInt16(off,s<0?s*0x8000:s*0x7FFF,true);off+=2;}}
         return ab;
+      }
+
+      // ══════════════════════════════════════════════════════════════
+      // DIWAN (POETRY TOOL)
+      // ══════════════════════════════════════════════════════════════
+
+      const POETS_CONFIG = {
+        ferdowsi: { folder: 'ferdowsi' },
+        forugh: { folder: 'forugh' },
+        hafez: { folder: 'hafez' },
+        jami: { folder: 'jami' },
+        khayyam: { folder: 'khayyam' },
+        nizami: { folder: 'nizami' },
+        rumi: { folder: 'rumi' },
+        saadi: { folder: 'saadi' },
+        sanai: { folder: 'sanai' },
+        shahriar: { folder: 'shahriar' },
+        'sohrab-sepehri': { folder: 'sohrab-sepehri' },
+        vahshi: { folder: 'vahshi' }
+      };
+
+      let POETS = {}; // Dynamically loaded poet structures will be stored here
+
+      // Load poet structure (name, categories, files) from JSON when a poet is selected for the first time
+      async function loadPoetStructure(poetId) {
+        const folder = POETS_CONFIG[poetId].folder;
+        const response = await fetch(`poems/${folder}/structure.json`);
+        const data = await response.json();
+        POETS[poetId] = {
+          name: data.name,
+          folder: folder,
+          hasBio: true,
+          categories: {}
+        };
+        
+        data.categories.forEach(cat => {
+          POETS[poetId].categories[cat.id] = {
+            name: cat.name,
+            files: cat.files
+          };
+        });
+        
+        return POETS[poetId];
+      }
+
+
+      let currentPoet = null;
+      let currentCategory = null;
+      let allPoems = [];
+
+      async function selectPoet(poetId) {
+        // Load poet structure if not already loaded
+        if (!POETS[poetId]) {
+          await loadPoetStructure(poetId);
+        }
+        
+        currentPoet = POETS[poetId];
+        document.getElementById('diwan-poet-select').style.display = 'none';
+        document.getElementById('diwan-category-select').style.display = 'block';
+        
+        const categoriesDiv = document.getElementById('diwan-categories');
+        categoriesDiv.innerHTML = '';
+        
+        // Add biography button if available
+        if (currentPoet.hasBio) {
+          const bioBtn = document.createElement('button');
+          bioBtn.className = 'btn btn-primary';
+          bioBtn.textContent = '📖 بیوگرافی';
+          bioBtn.onclick = () => showBiography();
+          categoriesDiv.appendChild(bioBtn);
+        }
+        
+        for (const [catId, catData] of Object.entries(currentPoet.categories)) {
+          const btn = document.createElement('button');
+          btn.className = 'btn btn-secondary';
+          btn.textContent = catData.name;
+          btn.onclick = () => selectCategory(catId);
+          categoriesDiv.appendChild(btn);
+        }
+      }
+
+      async function showBiography() {
+        document.getElementById('diwan-category-select').style.display = 'none';
+        document.getElementById('diwan-poem-detail').style.display = 'block';
+        
+        const contentDiv = document.getElementById('diwan-poem-content');
+        contentDiv.innerHTML = '<div style="text-align: center; padding: 20px;">در حال بارگذاری...</div>';
+        
+        try {
+          const response = await fetch(`poems/${currentPoet.folder}/bio.xhtml`);
+          const html = await response.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          const body = doc.querySelector('body');
+          
+          contentDiv.innerHTML = `
+            <div class="diwan-poem-header">
+              <h2>بیوگرافی ${currentPoet.name}</h2>
+            </div>
+            <div style="line-height: 1.8;">${body.innerHTML}</div>
+          `;
+        } catch (err) {
+          contentDiv.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--m3-error);">خطا در بارگذاری بیوگرافی</div>';
+        }
+      }
+
+      function backToPoemsList() {
+        document.getElementById('diwan-poem-detail').style.display = 'none';
+        
+        // Check if we're coming from biography or poems list
+        if (allPoems.length > 0) {
+          document.getElementById('diwan-poems-view').style.display = 'block';
+        } else {
+          document.getElementById('diwan-category-select').style.display = 'block';
+        }
+      }
+
+      async function selectCategory(categoryId) {
+        currentCategory = currentPoet.categories[categoryId];
+        allPoems = [];
+        
+        document.getElementById('diwan-category-select').style.display = 'none';
+        document.getElementById('diwan-poems-view').style.display = 'block';
+        document.getElementById('diwan-poems-list').innerHTML = '<div style="text-align: center; padding: 20px;">در حال بارگذاری...</div>';
+        
+        for (const file of currentCategory.files) {
+          try {
+            const response = await fetch(`poems/${currentPoet.folder}/${file}`);
+            const html = await response.text();
+            const poems = parsePoems(html);
+            allPoems.push(...poems);
+          } catch (err) {
+            console.error(`Error loading ${file}:`, err);
+          }
+        }
+        
+        displayPoems(allPoems);
+      }
+
+      function parsePoems(html) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const poems = [];
+        
+        const headers = doc.querySelectorAll('h2 a[id^="poem-"]');
+        
+        headers.forEach(header => {
+          const poemId = header.id;
+          const title = header.textContent.trim();
+          const verses = [];
+          
+          let nextEl = header.parentElement.nextElementSibling;
+          while (nextEl && nextEl.tagName === 'P') {
+            verses.push(nextEl.textContent.trim());
+            nextEl = nextEl.nextElementSibling;
+          }
+          
+          poems.push({ id: poemId, title, verses });
+        });
+        
+        return poems;
+      }
+
+      function displayPoems(poems) {
+        const listDiv = document.getElementById('diwan-poems-list');
+        
+        if (poems.length === 0) {
+          listDiv.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--m3-on-surface-variant);">شعری یافت نشد</div>';
+          return;
+        }
+        
+        listDiv.innerHTML = '';
+        
+        poems.forEach(poem => {
+          const item = document.createElement('div');
+          item.className = 'diwan-poem-item';
+          item.onclick = () => showPoem(poem);
+          
+          const preview = poem.verses.slice(0, 2).join(' *** ');
+          
+          item.innerHTML = `
+            <div class="diwan-poem-title">${poem.title}</div>
+            <div class="diwan-poem-preview">${preview}</div>
+          `;
+          
+          listDiv.appendChild(item);
+        });
+      }
+
+      function searchPoems() {
+        const query = document.getElementById('diwan-search').value.trim().toLowerCase();
+        
+        if (!query) {
+          displayPoems(allPoems);
+          return;
+        }
+        
+        const filtered = allPoems.filter(poem => {
+          return poem.title.toLowerCase().includes(query) ||
+                poem.verses.some(v => v.toLowerCase().includes(query));
+        });
+        
+        displayPoems(filtered);
+      }
+
+      function backToCategories() {
+        currentCategory = null;
+        allPoems = [];
+        document.getElementById('diwan-search').value = '';
+        document.getElementById('diwan-poems-view').style.display = 'none';
+        document.getElementById('diwan-category-select').style.display = 'block';
+      }
+
+      function showPoem(poem) {
+        document.getElementById('diwan-poems-view').style.display = 'none';
+        document.getElementById('diwan-poem-detail').style.display = 'block';
+        
+        const contentDiv = document.getElementById('diwan-poem-content');
+        
+        let beytsHTML = '';
+        for (let i = 0; i < poem.verses.length; i += 2) {
+          if (i + 1 < poem.verses.length) {
+            beytsHTML += `
+              <div class="diwan-beyt">
+                <div class="diwan-mesra">${poem.verses[i]}</div>
+                <div class="diwan-mesra">${poem.verses[i + 1]}</div>
+              </div>
+            `;
+          } else {
+            beytsHTML += `<div class="diwan-single-mesra">${poem.verses[i]}</div>`;
+          }
+        }
+        
+        contentDiv.innerHTML = `
+          <div class="diwan-poem-header">
+            <h2>${poem.title}</h2>
+          </div>
+          ${beytsHTML}
+        `;
+      }
+
+      function backToPoemsList() {
+        document.getElementById('diwan-poem-detail').style.display = 'none';
+        document.getElementById('diwan-poems-view').style.display = 'block';
       }
 
 

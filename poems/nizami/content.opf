@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package version="2.0" unique-identifier="BookId" xmlns="http://www.idpf.org/2007/opf">
+  <opf:metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <meta name="cover" content="img1" xmlns="" />
+    <dc:identifier id="BookId">urn:uuid:604807c7-5a41-4b4e-a7f4-4897420838f8</dc:identifier>
+    <dc:title>نظامی</dc:title>
+    <dc:language>fa</dc:language>
+    <dc:creator opf:role="aut">نظامی</dc:creator>
+  </opf:metadata>
+  <manifest>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
+    <item id="id1" href="fonts/irsans.ttf" media-type="application/x-font-ttf" />
+    <item id="stylesheet1" href="style.css" media-type="text/css" />
+    <item id="img1" href="images/cover.png" media-type="image/png" />
+    <item id="html1" href="titlepage.xhtml" media-type="application/xhtml+xml" />
+    <item id="html2" href="promo.xhtml" media-type="application/xhtml+xml" />
+    <item id="html3" href="bio.xhtml" media-type="application/xhtml+xml" />
+    <item id="html4" href="cat112.xhtml" media-type="application/xhtml+xml" />
+    <item id="html5" href="cat112sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html6" href="cat112sec2.xhtml" media-type="application/xhtml+xml" />
+    <item id="html7" href="cat112sec3.xhtml" media-type="application/xhtml+xml" />
+    <item id="html8" href="cat112sec4.xhtml" media-type="application/xhtml+xml" />
+    <item id="html9" href="cat112sec5.xhtml" media-type="application/xhtml+xml" />
+    <item id="html10" href="cat112sec6.xhtml" media-type="application/xhtml+xml" />
+    <item id="html11" href="cat112sec7.xhtml" media-type="application/xhtml+xml" />
+    <item id="html12" href="cat112sec8.xhtml" media-type="application/xhtml+xml" />
+    <item id="html13" href="cat112sec9.xhtml" media-type="application/xhtml+xml" />
+    <item id="html14" href="cat112sec10.xhtml" media-type="application/xhtml+xml" />
+    <item id="html15" href="cat112sec11.xhtml" media-type="application/xhtml+xml" />
+    <item id="html16" href="cat112sec12.xhtml" media-type="application/xhtml+xml" />
+    <item id="html17" href="cat113.xhtml" media-type="application/xhtml+xml" />
+    <item id="html18" href="cat113sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html19" href="cat113sec2.xhtml" media-type="application/xhtml+xml" />
+    <item id="html20" href="cat113sec3.xhtml" media-type="application/xhtml+xml" />
+    <item id="html21" href="cat113sec4.xhtml" media-type="application/xhtml+xml" />
+    <item id="html22" href="cat113sec5.xhtml" media-type="application/xhtml+xml" />
+    <item id="html23" href="cat113sec6.xhtml" media-type="application/xhtml+xml" />
+    <item id="html24" href="cat113sec7.xhtml" media-type="application/xhtml+xml" />
+    <item id="html25" href="cat114.xhtml" media-type="application/xhtml+xml" />
+    <item id="html26" href="cat114sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html27" href="cat114sec2.xhtml" media-type="application/xhtml+xml" />
+    <item id="html28" href="cat114sec3.xhtml" media-type="application/xhtml+xml" />
+    <item id="html29" href="cat114sec4.xhtml" media-type="application/xhtml+xml" />
+    <item id="html30" href="cat114sec5.xhtml" media-type="application/xhtml+xml" />
+    <item id="html31" href="cat114sec6.xhtml" media-type="application/xhtml+xml" />
+    <item id="html32" href="cat114sec7.xhtml" media-type="application/xhtml+xml" />
+    <item id="html33" href="cat114sec8.xhtml" media-type="application/xhtml+xml" />
+    <item id="html34" href="cat115.xhtml" media-type="application/xhtml+xml" />
+    <item id="html35" href="cat115sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html36" href="cat115sec2.xhtml" media-type="application/xhtml+xml" />
+    <item id="html37" href="cat115sec3.xhtml" media-type="application/xhtml+xml" />
+    <item id="html38" href="cat115sec4.xhtml" media-type="application/xhtml+xml" />
+    <item id="html39" href="cat115sec5.xhtml" media-type="application/xhtml+xml" />
+    <item id="html40" href="cat115sec6.xhtml" media-type="application/xhtml+xml" />
+    <item id="html41" href="cat115sec7.xhtml" media-type="application/xhtml+xml" />
+    <item id="html42" href="cat115sec8.xhtml" media-type="application/xhtml+xml" />
+    <item id="html43" href="cat115sec9.xhtml" media-type="application/xhtml+xml" />
+    <item id="html44" href="cat115sec10.xhtml" media-type="application/xhtml+xml" />
+    <item id="html45" href="cat115sec11.xhtml" media-type="application/xhtml+xml" />
+    <item id="html46" href="cat115sec12.xhtml" media-type="application/xhtml+xml" />
+    <item id="html47" href="cat115sec13.xhtml" media-type="application/xhtml+xml" />
+    <item id="html48" href="cat116.xhtml" media-type="application/xhtml+xml" />
+    <item id="html49" href="cat116sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html50" href="cat116sec2.xhtml" media-type="application/xhtml+xml" />
+    <item id="html51" href="cat116sec3.xhtml" media-type="application/xhtml+xml" />
+    <item id="html52" href="cat116sec4.xhtml" media-type="application/xhtml+xml" />
+    <item id="html53" href="cat116sec5.xhtml" media-type="application/xhtml+xml" />
+    <item id="html54" href="cat116sec6.xhtml" media-type="application/xhtml+xml" />
+    <item id="html55" href="cat116sec7.xhtml" media-type="application/xhtml+xml" />
+    <item id="html56" href="cat117.xhtml" media-type="application/xhtml+xml" />
+    <item id="html57" href="cat117sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html58" href="cat117sec2.xhtml" media-type="application/xhtml+xml" />
+    <item id="html59" href="cat117sec3.xhtml" media-type="application/xhtml+xml" />
+    <item id="html60" href="cat117sec4.xhtml" media-type="application/xhtml+xml" />
+    <item id="html61" href="cat117sec5.xhtml" media-type="application/xhtml+xml" />
+    <item id="html62" href="cat111.xhtml" media-type="application/xhtml+xml" />
+    <item id="html63" href="cat110.xhtml" media-type="application/xhtml+xml" />
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="html1" />
+    <itemref idref="html2" />
+    <itemref idref="html3" />
+    <itemref idref="html4" />
+    <itemref idref="html5" />
+    <itemref idref="html6" />
+    <itemref idref="html7" />
+    <itemref idref="html8" />
+    <itemref idref="html9" />
+    <itemref idref="html10" />
+    <itemref idref="html11" />
+    <itemref idref="html12" />
+    <itemref idref="html13" />
+    <itemref idref="html14" />
+    <itemref idref="html15" />
+    <itemref idref="html16" />
+    <itemref idref="html17" />
+    <itemref idref="html18" />
+    <itemref idref="html19" />
+    <itemref idref="html20" />
+    <itemref idref="html21" />
+    <itemref idref="html22" />
+    <itemref idref="html23" />
+    <itemref idref="html24" />
+    <itemref idref="html25" />
+    <itemref idref="html26" />
+    <itemref idref="html27" />
+    <itemref idref="html28" />
+    <itemref idref="html29" />
+    <itemref idref="html30" />
+    <itemref idref="html31" />
+    <itemref idref="html32" />
+    <itemref idref="html33" />
+    <itemref idref="html34" />
+    <itemref idref="html35" />
+    <itemref idref="html36" />
+    <itemref idref="html37" />
+    <itemref idref="html38" />
+    <itemref idref="html39" />
+    <itemref idref="html40" />
+    <itemref idref="html41" />
+    <itemref idref="html42" />
+    <itemref idref="html43" />
+    <itemref idref="html44" />
+    <itemref idref="html45" />
+    <itemref idref="html46" />
+    <itemref idref="html47" />
+    <itemref idref="html48" />
+    <itemref idref="html49" />
+    <itemref idref="html50" />
+    <itemref idref="html51" />
+    <itemref idref="html52" />
+    <itemref idref="html53" />
+    <itemref idref="html54" />
+    <itemref idref="html55" />
+    <itemref idref="html56" />
+    <itemref idref="html57" />
+    <itemref idref="html58" />
+    <itemref idref="html59" />
+    <itemref idref="html60" />
+    <itemref idref="html61" />
+    <itemref idref="html62" />
+    <itemref idref="html63" />
+  </spine>
+  <guide />
+</package>

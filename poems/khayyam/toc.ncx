@@ -1,0 +1,2040 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:f411e63f-67b5-4481-a97e-3bc9a2ce7b01" />
+    <meta name="dtb:depth" content="1" />
+    <meta name="dtb:totalPageCount" content="0" />
+    <meta name="dtb:maxPageNumber" content="0" />
+  </head>
+  <docTitle>
+    <text> خیام</text>
+  </docTitle>
+  <docAuthor>
+    <text>خیام</text>
+  </docAuthor>
+  <navMap>
+    <navPoint id="navid1" playOrder="1">
+      <navLabel>
+        <text>معرفی گنجور</text>
+      </navLabel>
+      <content src="promo.xhtml" />
+    </navPoint>
+    <navPoint id="navid2" playOrder="2">
+      <navLabel>
+        <text>دربارهٔ خیام</text>
+      </navLabel>
+      <content src="bio.xhtml" />
+    </navPoint>
+    <navPoint id="navid3" playOrder="3">
+      <navLabel>
+        <text>خیام</text>
+      </navLabel>
+      <content src="cat30.xhtml" />
+      <navPoint id="navid3x1" playOrder="4">
+        <navLabel>
+          <text>رباعیات</text>
+        </navLabel>
+        <content src="cat31.xhtml" />
+        <navPoint id="navid3x1x1" playOrder="5">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱ : برخیز و بیا بتا برای دل ما</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1119" />
+        </navPoint>
+        <navPoint id="navid3x1x2" playOrder="6">
+          <navLabel>
+            <text>رباعی شمارهٔ ۲ : چون عهده نمی‌شود کسی فردا را</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1120" />
+        </navPoint>
+        <navPoint id="navid3x1x3" playOrder="7">
+          <navLabel>
+            <text>رباعی شمارهٔ ۳ : قرآن که مهین کلام خوانند آن را</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1121" />
+        </navPoint>
+        <navPoint id="navid3x1x4" playOrder="8">
+          <navLabel>
+            <text>رباعی شمارهٔ ۴ : گر می نخوری طعنه مزن مستانرا</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1122" />
+        </navPoint>
+        <navPoint id="navid3x1x5" playOrder="9">
+          <navLabel>
+            <text>رباعی شمارهٔ ۵ : هر چند که رنگ و بوی زیباست مرا</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1123" />
+        </navPoint>
+        <navPoint id="navid3x1x6" playOrder="10">
+          <navLabel>
+            <text>رباعی شمارهٔ ۶ : ماییم و می و مطرب و این کنج خراب</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1124" />
+        </navPoint>
+        <navPoint id="navid3x1x7" playOrder="11">
+          <navLabel>
+            <text>رباعی شمارهٔ ۷ : آن قصر که جمشید در او جام گرفت</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1125" />
+        </navPoint>
+        <navPoint id="navid3x1x8" playOrder="12">
+          <navLabel>
+            <text>رباعی شمارهٔ ۸ : ابر آمد و باز بر سر سبزه گریست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1126" />
+        </navPoint>
+        <navPoint id="navid3x1x9" playOrder="13">
+          <navLabel>
+            <text>رباعی شمارهٔ ۹ : اکنون که گل سعادتت پربار است</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1127" />
+        </navPoint>
+        <navPoint id="navid3x1x10" playOrder="14">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۰ : امروز ترا دسترس فردا نیست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1128" />
+        </navPoint>
+        <navPoint id="navid3x1x11" playOrder="15">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۱ : ای آمده از عالم روحانی تفت</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1129" />
+        </navPoint>
+        <navPoint id="navid3x1x12" playOrder="16">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۲ : ای چرخ فلک خرابی از کینه تست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1130" />
+        </navPoint>
+        <navPoint id="navid3x1x13" playOrder="17">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۳ : ایدل چو زمانه می‌کند غمناکت</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1131" />
+        </navPoint>
+        <navPoint id="navid3x1x14" playOrder="18">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۴ : این بحر وجود آمده بیرون ز نهفت</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1132" />
+        </navPoint>
+        <navPoint id="navid3x1x15" playOrder="19">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۵ : این کوزه چو من عاشق زاری بوده است</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1133" />
+        </navPoint>
+        <navPoint id="navid3x1x16" playOrder="20">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۶ : این کوزه که آبخوارهٔ مزدوریست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1134" />
+        </navPoint>
+        <navPoint id="navid3x1x17" playOrder="21">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۷ : این کهنه رباط را که عالم نام است</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1135" />
+        </navPoint>
+        <navPoint id="navid3x1x18" playOrder="22">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۸ : این یک دو سه روز نوبت عمر گذشت</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1136" />
+        </navPoint>
+        <navPoint id="navid3x1x19" playOrder="23">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۹ : بر چهره گل نسیم نوروز خوش است</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1137" />
+        </navPoint>
+        <navPoint id="navid3x1x20" playOrder="24">
+          <navLabel>
+            <text>رباعی شمارهٔ ۲۰ : پیش از من و تو لیل و نهاری بوده است</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1138" />
+        </navPoint>
+        <navPoint id="navid3x1x21" playOrder="25">
+          <navLabel>
+            <text>رباعی شمارهٔ ۲۱ : تا چند زنم بروی دریاها خشت</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1139" />
+        </navPoint>
+        <navPoint id="navid3x1x22" playOrder="26">
+          <navLabel>
+            <text>رباعی شمارهٔ ۲۲ : ترکیب پیاله‌ای که درهم پیوست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1140" />
+        </navPoint>
+        <navPoint id="navid3x1x23" playOrder="27">
+          <navLabel>
+            <text>رباعی شمارهٔ ۲۳ : ترکیب طبایع چو به کام تو دمی است</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1141" />
+        </navPoint>
+        <navPoint id="navid3x1x24" playOrder="28">
+          <navLabel>
+            <text>رباعی شمارهٔ ۲۴ : چون ابر به نوروز رخ لاله بشست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1142" />
+        </navPoint>
+        <navPoint id="navid3x1x25" playOrder="29">
+          <navLabel>
+            <text>رباعی شمارهٔ ۲۵ : چون بلبل مست راه در بستان یافت</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1143" />
+        </navPoint>
+        <navPoint id="navid3x1x26" playOrder="30">
+          <navLabel>
+            <text>رباعی شمارهٔ ۲۶ : چون چرخ بکام یک خردمند نگشت</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1144" />
+        </navPoint>
+        <navPoint id="navid3x1x27" playOrder="31">
+          <navLabel>
+            <text>رباعی شمارهٔ ۲۷ : چون لاله به نوروز قدح گیر بدست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1145" />
+        </navPoint>
+        <navPoint id="navid3x1x28" playOrder="32">
+          <navLabel>
+            <text>رباعی شمارهٔ ۲۸ : چون نیست حقیقت و یقین اندر دست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1146" />
+        </navPoint>
+        <navPoint id="navid3x1x29" playOrder="33">
+          <navLabel>
+            <text>رباعی شمارهٔ ۲۹ : چون نیست ز هر چه هست جز باد بدست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1147" />
+        </navPoint>
+        <navPoint id="navid3x1x30" playOrder="34">
+          <navLabel>
+            <text>رباعی شمارهٔ ۳۰ : خاکی که به زیر پای هر نادانی است</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1148" />
+        </navPoint>
+        <navPoint id="navid3x1x31" playOrder="35">
+          <navLabel>
+            <text>رباعی شمارهٔ ۳۱ : دارنده چو ترکیب طبایع آراست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1149" />
+        </navPoint>
+        <navPoint id="navid3x1x32" playOrder="36">
+          <navLabel>
+            <text>رباعی شمارهٔ ۳۲ : در پرده اسرار کسی را ره نیست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1150" />
+        </navPoint>
+        <navPoint id="navid3x1x33" playOrder="37">
+          <navLabel>
+            <text>رباعی شمارهٔ ۳۳ : در خواب بدم مرا خردمندی گفت</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1151" />
+        </navPoint>
+        <navPoint id="navid3x1x34" playOrder="38">
+          <navLabel>
+            <text>رباعی شمارهٔ ۳۴ : در دایره‌ای که آمد و رفتن ماست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1152" />
+        </navPoint>
+        <navPoint id="navid3x1x35" playOrder="39">
+          <navLabel>
+            <text>رباعی شمارهٔ ۳۵ : در فصل بهار اگر بتی حور سرشت</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1153" />
+        </navPoint>
+        <navPoint id="navid3x1x36" playOrder="40">
+          <navLabel>
+            <text>رباعی شمارهٔ ۳۶ : دریاب که از روح جدا خواهی رفت</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1154" />
+        </navPoint>
+        <navPoint id="navid3x1x37" playOrder="41">
+          <navLabel>
+            <text>رباعی شمارهٔ ۳۷ : ساقی گل و سبزه بس طربناک شده‌ست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1155" />
+        </navPoint>
+        <navPoint id="navid3x1x38" playOrder="42">
+          <navLabel>
+            <text>رباعی شمارهٔ ۳۸ : عمریست مرا تیره و کاریست نه راست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1156" />
+        </navPoint>
+        <navPoint id="navid3x1x39" playOrder="43">
+          <navLabel>
+            <text>رباعی شمارهٔ ۳۹ : فصل گل و طرف جویبار و لب کشت</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1157" />
+        </navPoint>
+        <navPoint id="navid3x1x40" playOrder="44">
+          <navLabel>
+            <text>رباعی شمارهٔ ۴۰ : گر شاخ بقا ز بیخ بختت رست است</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1158" />
+        </navPoint>
+        <navPoint id="navid3x1x41" playOrder="45">
+          <navLabel>
+            <text>رباعی شمارهٔ ۴۱ : گویند کسان بهشت با حور خوش است</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1159" />
+        </navPoint>
+        <navPoint id="navid3x1x42" playOrder="46">
+          <navLabel>
+            <text>رباعی شمارهٔ ۴۲ : گویند مرا که دوزخی باشد مست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1160" />
+        </navPoint>
+        <navPoint id="navid3x1x43" playOrder="47">
+          <navLabel>
+            <text>رباعی شمارهٔ ۴۳ : من هیچ ندانم که مرا آنکه سرشت</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1161" />
+        </navPoint>
+        <navPoint id="navid3x1x44" playOrder="48">
+          <navLabel>
+            <text>رباعی شمارهٔ ۴۴ : مهتاب به نور دامن شب بشکافت</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1162" />
+        </navPoint>
+        <navPoint id="navid3x1x45" playOrder="49">
+          <navLabel>
+            <text>رباعی شمارهٔ ۴۵ : می خوردن و شاد بودن آیین منست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1163" />
+        </navPoint>
+        <navPoint id="navid3x1x46" playOrder="50">
+          <navLabel>
+            <text>رباعی شمارهٔ ۴۶ : می لعل مذابست و صراحی کان است</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1164" />
+        </navPoint>
+        <navPoint id="navid3x1x47" playOrder="51">
+          <navLabel>
+            <text>رباعی شمارهٔ ۴۷ : می نوش که عمر جاودانی اینست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1165" />
+        </navPoint>
+        <navPoint id="navid3x1x48" playOrder="52">
+          <navLabel>
+            <text>رباعی شمارهٔ ۴۸ : نیکی و بدی که در نهاد بشر است</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1166" />
+        </navPoint>
+        <navPoint id="navid3x1x49" playOrder="53">
+          <navLabel>
+            <text>رباعی شمارهٔ ۴۹ : در هر دشتی که لاله‌زاری بوده‌ست</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1167" />
+        </navPoint>
+        <navPoint id="navid3x1x50" playOrder="54">
+          <navLabel>
+            <text>رباعی شمارهٔ ۵۰ : هر ذره که در خاک زمینی بوده است</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1168" />
+        </navPoint>
+        <navPoint id="navid3x1x51" playOrder="55">
+          <navLabel>
+            <text>رباعی شمارهٔ ۵۱ : هر سبزه که برکنار جویی رسته است</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1169" />
+        </navPoint>
+        <navPoint id="navid3x1x52" playOrder="56">
+          <navLabel>
+            <text>رباعی شمارهٔ ۵۲ : یک جرعه می ز ملک کاووس به است</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1170" />
+        </navPoint>
+        <navPoint id="navid3x1x53" playOrder="57">
+          <navLabel>
+            <text>رباعی شمارهٔ ۵۳ : چون عمر به سر رسد چه شیرین و چه تلخ</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1171" />
+        </navPoint>
+        <navPoint id="navid3x1x54" playOrder="58">
+          <navLabel>
+            <text>رباعی شمارهٔ ۵۴ : آنانکه محیط فضل و آداب شدند</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1172" />
+        </navPoint>
+        <navPoint id="navid3x1x55" playOrder="59">
+          <navLabel>
+            <text>رباعی شمارهٔ ۵۵ : آن را که به صحرای علل تاخته‌اند</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1173" />
+        </navPoint>
+        <navPoint id="navid3x1x56" playOrder="60">
+          <navLabel>
+            <text>رباعی شمارهٔ ۵۶ : آنها که کهن شدند و اینها که نوند</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1174" />
+        </navPoint>
+        <navPoint id="navid3x1x57" playOrder="61">
+          <navLabel>
+            <text>رباعی شمارهٔ ۵۷ : آنکس که زمین و چرخ و افلاک نهاد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1175" />
+        </navPoint>
+        <navPoint id="navid3x1x58" playOrder="62">
+          <navLabel>
+            <text>رباعی شمارهٔ ۵۸ : آرند یکی و دیگری بربایند</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1176" />
+        </navPoint>
+        <navPoint id="navid3x1x59" playOrder="63">
+          <navLabel>
+            <text>رباعی شمارهٔ ۵۹ : اجرام که ساکنان این ایوانند</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1177" />
+        </navPoint>
+        <navPoint id="navid3x1x60" playOrder="64">
+          <navLabel>
+            <text>رباعی شمارهٔ ۶۰ : از آمدنم نبود گردون را سود</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1178" />
+        </navPoint>
+        <navPoint id="navid3x1x61" playOrder="65">
+          <navLabel>
+            <text>رباعی شمارهٔ ۶۱ : از رنج کشیدن آدمی حر گردد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1179" />
+        </navPoint>
+        <navPoint id="navid3x1x62" playOrder="66">
+          <navLabel>
+            <text>رباعی شمارهٔ ۶۲ : افسوس که سرمایه ز کف بیرون شد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1180" />
+        </navPoint>
+        <navPoint id="navid3x1x63" playOrder="67">
+          <navLabel>
+            <text>رباعی شمارهٔ ۶۳ : افسوس که نامه جوانی طی شد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1181" />
+        </navPoint>
+        <navPoint id="navid3x1x64" playOrder="68">
+          <navLabel>
+            <text>رباعی شمارهٔ ۶۴ : ای بس که نباشیم و جهان خواهد بود</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1182" />
+        </navPoint>
+        <navPoint id="navid3x1x65" playOrder="69">
+          <navLabel>
+            <text>رباعی شمارهٔ ۶۵ : این عقل که در ره سعادت پوید</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1183" />
+        </navPoint>
+        <navPoint id="navid3x1x66" playOrder="70">
+          <navLabel>
+            <text>رباعی شمارهٔ ۶۶ : این قافله عمر عجب میگذرد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1184" />
+        </navPoint>
+        <navPoint id="navid3x1x67" playOrder="71">
+          <navLabel>
+            <text>رباعی شمارهٔ ۶۷ : بر پشت من از زمانه تو میاید</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1185" />
+        </navPoint>
+        <navPoint id="navid3x1x68" playOrder="72">
+          <navLabel>
+            <text>رباعی شمارهٔ ۶۸ : بر چرخ فلک هیچ کسی چیر نشد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1186" />
+        </navPoint>
+        <navPoint id="navid3x1x69" playOrder="73">
+          <navLabel>
+            <text>رباعی شمارهٔ ۶۹ : بر چشم تو عالم ارچه می‌آرایند</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1187" />
+        </navPoint>
+        <navPoint id="navid3x1x70" playOrder="74">
+          <navLabel>
+            <text>رباعی شمارهٔ ۷۰ : بر من قلم قضا چو بی من رانند</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1188" />
+        </navPoint>
+        <navPoint id="navid3x1x71" playOrder="75">
+          <navLabel>
+            <text>رباعی شمارهٔ ۷۱ : تا چند اسیر رنگ و بو خواهی شد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1189" />
+        </navPoint>
+        <navPoint id="navid3x1x72" playOrder="76">
+          <navLabel>
+            <text>رباعی شمارهٔ ۷۲ : تا راه قلندری نپویی نشود</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1190" />
+        </navPoint>
+        <navPoint id="navid3x1x73" playOrder="77">
+          <navLabel>
+            <text>رباعی شمارهٔ ۷۳ : تا زهره و مه در آسمان گشت پدید</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1191" />
+        </navPoint>
+        <navPoint id="navid3x1x74" playOrder="78">
+          <navLabel>
+            <text>رباعی شمارهٔ ۷۴ : چون روزی و عمر بیش و کم نتوان کرد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1192" />
+        </navPoint>
+        <navPoint id="navid3x1x75" playOrder="79">
+          <navLabel>
+            <text>رباعی شمارهٔ ۷۵ : حیی که بقدرت سر و رو می‌سازد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1193" />
+        </navPoint>
+        <navPoint id="navid3x1x76" playOrder="80">
+          <navLabel>
+            <text>رباعی شمارهٔ ۷۶ : در دهر چو آواز گل تازه دهند</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1194" />
+        </navPoint>
+        <navPoint id="navid3x1x77" playOrder="81">
+          <navLabel>
+            <text>رباعی شمارهٔ ۷۷ : در دهر هر آن که نیم نانی دارد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1195" />
+        </navPoint>
+        <navPoint id="navid3x1x78" playOrder="82">
+          <navLabel>
+            <text>رباعی شمارهٔ ۷۸ : دهقان قضا بسی چو ما کشت و درود</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1196" />
+        </navPoint>
+        <navPoint id="navid3x1x79" playOrder="83">
+          <navLabel>
+            <text>رباعی شمارهٔ ۷۹ : روزی‌ست خوش و هوا نه گرم است و نه سرد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1197" />
+        </navPoint>
+        <navPoint id="navid3x1x80" playOrder="84">
+          <navLabel>
+            <text>رباعی شمارهٔ ۸۰ : زان پیش که بر سرت شبیخون آرند</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1198" />
+        </navPoint>
+        <navPoint id="navid3x1x81" playOrder="85">
+          <navLabel>
+            <text>رباعی شمارهٔ ۸۱ : عمرت تا کی به خودپرستی گذرد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1199" />
+        </navPoint>
+        <navPoint id="navid3x1x82" playOrder="86">
+          <navLabel>
+            <text>رباعی شمارهٔ ۸۲ : کس مشکل اسرار اجل را نگشاد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1200" />
+        </navPoint>
+        <navPoint id="navid3x1x83" playOrder="87">
+          <navLabel>
+            <text>رباعی شمارهٔ ۸۳ : کم کن طمع از جهان و می‌زی خرسند</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1201" />
+        </navPoint>
+        <navPoint id="navid3x1x84" playOrder="88">
+          <navLabel>
+            <text>رباعی شمارهٔ ۸۴ : گرچه غم و رنج من درازی دارد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1202" />
+        </navPoint>
+        <navPoint id="navid3x1x85" playOrder="89">
+          <navLabel>
+            <text>رباعی شمارهٔ ۸۵ : گردون ز زمین هیچ گلی برنارد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1203" />
+        </navPoint>
+        <navPoint id="navid3x1x86" playOrder="90">
+          <navLabel>
+            <text>رباعی شمارهٔ ۸۶ : گر یک نفست ز زندگانی گذرد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1204" />
+        </navPoint>
+        <navPoint id="navid3x1x87" playOrder="91">
+          <navLabel>
+            <text>رباعی شمارهٔ ۸۷ : گویند بهشت و حورعین خواهد بود</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1205" />
+        </navPoint>
+        <navPoint id="navid3x1x88" playOrder="92">
+          <navLabel>
+            <text>رباعی شمارهٔ ۸۸ : گویند بهشت و حور و کوثر باشد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1206" />
+        </navPoint>
+        <navPoint id="navid3x1x89" playOrder="93">
+          <navLabel>
+            <text>رباعی شمارهٔ ۸۹ : گویند هر آن کسان که با پرهیزند</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1207" />
+        </navPoint>
+        <navPoint id="navid3x1x90" playOrder="94">
+          <navLabel>
+            <text>رباعی شمارهٔ ۹۰ : می خور که ز دل کثرت و قلت ببرد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1208" />
+        </navPoint>
+        <navPoint id="navid3x1x91" playOrder="95">
+          <navLabel>
+            <text>رباعی شمارهٔ ۹۱ : هر راز که اندر دل دانا باشد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1209" />
+        </navPoint>
+        <navPoint id="navid3x1x92" playOrder="96">
+          <navLabel>
+            <text>رباعی شمارهٔ ۹۲ : هر صبح که روی لاله شبنم گیرد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1210" />
+        </navPoint>
+        <navPoint id="navid3x1x93" playOrder="97">
+          <navLabel>
+            <text>رباعی شمارهٔ ۹۳ : هرگز دل من ز علم محروم نشد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1211" />
+        </navPoint>
+        <navPoint id="navid3x1x94" playOrder="98">
+          <navLabel>
+            <text>رباعی شمارهٔ ۹۴ : هم دانه امید به خرمن ماند</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1212" />
+        </navPoint>
+        <navPoint id="navid3x1x95" playOrder="99">
+          <navLabel>
+            <text>رباعی شمارهٔ ۹۵ : یاران موافق همه از دست شدند</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1213" />
+        </navPoint>
+        <navPoint id="navid3x1x96" playOrder="100">
+          <navLabel>
+            <text>رباعی شمارهٔ ۹۶ : یک جام شراب صد دل و دین ارزد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1214" />
+        </navPoint>
+        <navPoint id="navid3x1x97" playOrder="101">
+          <navLabel>
+            <text>رباعی شمارهٔ ۹۷ : یک قطره آب بود با دریا شد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1215" />
+        </navPoint>
+        <navPoint id="navid3x1x98" playOrder="102">
+          <navLabel>
+            <text>رباعی شمارهٔ ۹۸ : یک نان به دو روز اگر بود حاصل مرد</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1216" />
+        </navPoint>
+        <navPoint id="navid3x1x99" playOrder="103">
+          <navLabel>
+            <text>رباعی شمارهٔ ۹۹ : آن لعل در آبگینه ساده بیار</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1217" />
+        </navPoint>
+        <navPoint id="navid3x1x100" playOrder="104">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۰۰ : از بودنی ایدوست چه داری تیمار</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1218" />
+        </navPoint>
+        <navPoint id="navid3x1x101" playOrder="105">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۰۱ : افلاک که جز غم نفزایند دگر</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1219" />
+        </navPoint>
+        <navPoint id="navid3x1x102" playOrder="106">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۰۲ : ای دل غم این جهان فرسوده مخور</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1220" />
+        </navPoint>
+        <navPoint id="navid3x1x103" playOrder="107">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۰۳ : ایدل همه اسباب جهان خواسته گیر</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1221" />
+        </navPoint>
+        <navPoint id="navid3x1x104" playOrder="108">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۰۴ : این اهل قبور خاک گشتند و غبار</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1222" />
+        </navPoint>
+        <navPoint id="navid3x1x105" playOrder="109">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۰۵ : خشت سر خم ز ملکت جم خوشتر</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1223" />
+        </navPoint>
+        <navPoint id="navid3x1x106" playOrder="110">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۰۶ : در دایره سپهر ناپیدا غور</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1224" />
+        </navPoint>
+        <navPoint id="navid3x1x107" playOrder="111">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۰۷ : دی کوزه‌گری بدیدم اندر بازار</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1225" />
+        </navPoint>
+        <navPoint id="navid3x1x108" playOrder="112">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۰۸ : ز آن می که حیات جاودانیست بخور</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1226" />
+        </navPoint>
+        <navPoint id="navid3x1x109" playOrder="113">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۰۹ : گر باده خوری تو با خردمندان خور</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1227" />
+        </navPoint>
+        <navPoint id="navid3x1x110" playOrder="114">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۱۰ : وقت سحر است خیز ای طرفه پسر</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1228" />
+        </navPoint>
+        <navPoint id="navid3x1x111" playOrder="115">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۱۱ : از جمله رفتگان این راه دراز</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1229" />
+        </navPoint>
+        <navPoint id="navid3x1x112" playOrder="116">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۱۲ : ای پیر خردمند پگه‌تر برخیز</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1230" />
+        </navPoint>
+        <navPoint id="navid3x1x113" playOrder="117">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۱۳ : وقت سحر است خیز ای مایه ناز</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1231" />
+        </navPoint>
+        <navPoint id="navid3x1x114" playOrder="118">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۱۴ : مرغی دیدم نشسته بر باره طوس</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1232" />
+        </navPoint>
+        <navPoint id="navid3x1x115" playOrder="119">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۱۵ : جامی است که عقل آفرین میزندش</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1233" />
+        </navPoint>
+        <navPoint id="navid3x1x116" playOrder="120">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۱۶ : خیام اگر ز باده مستی خوش باش</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1234" />
+        </navPoint>
+        <navPoint id="navid3x1x117" playOrder="121">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۱۷ : در کارگه کوزه‌گری رفتم دوش</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1235" />
+        </navPoint>
+        <navPoint id="navid3x1x118" playOrder="122">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۱۸ : ایام زمانه از کسی دارد ننگ</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1236" />
+        </navPoint>
+        <navPoint id="navid3x1x119" playOrder="123">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۱۹ : از جرم گل سیاه تا اوج زحل</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1237" />
+        </navPoint>
+        <navPoint id="navid3x1x120" playOrder="124">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۲۰ : با سرو قدی تازه‌تر از خرمن گل</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1238" />
+        </navPoint>
+        <navPoint id="navid3x1x121" playOrder="125">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۲۱ : ای دوست بیا تا غم فردا نخوریم</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1239" />
+        </navPoint>
+        <navPoint id="navid3x1x122" playOrder="126">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۲۲ : این چرخ فلک که ما در او حیرانیم</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1240" />
+        </navPoint>
+        <navPoint id="navid3x1x123" playOrder="127">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۲۳ : برخیز ز خواب تا شرابی بخوریم</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1241" />
+        </navPoint>
+        <navPoint id="navid3x1x124" playOrder="128">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۲۴ : برخیزم و عزم باده ناب کنم</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1242" />
+        </navPoint>
+        <navPoint id="navid3x1x125" playOrder="129">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۲۵ : بر مفرش خاک خفتگان می‌بینم</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1243" />
+        </navPoint>
+        <navPoint id="navid3x1x126" playOrder="130">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۲۶ : تا چند اسیر عقل هر روزه شویم</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1244" />
+        </navPoint>
+        <navPoint id="navid3x1x127" playOrder="131">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۲۷ : چون نیست مقام ما در این دهر مقیم</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1245" />
+        </navPoint>
+        <navPoint id="navid3x1x128" playOrder="132">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۲۸ : خورشید به گل نهفت می‌نتوانم</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1246" />
+        </navPoint>
+        <navPoint id="navid3x1x129" playOrder="133">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۲۹ : دشمن به غلط گفت که من فلسفیم</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1247" />
+        </navPoint>
+        <navPoint id="navid3x1x130" playOrder="134">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۳۰ : مائیم که اصل شادی و کان غمیم</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1248" />
+        </navPoint>
+        <navPoint id="navid3x1x131" playOrder="135">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۳۱ : من می نه ز بهر تنگدستی نخورم</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1249" />
+        </navPoint>
+        <navPoint id="navid3x1x132" playOrder="136">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۳۲ : من بی می ناب زیستن نتوانم</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1250" />
+        </navPoint>
+        <navPoint id="navid3x1x133" playOrder="137">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۳۳ : هر یک چندی یکی برآید که منم</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1251" />
+        </navPoint>
+        <navPoint id="navid3x1x134" playOrder="138">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۳۴ : یک چند به کودکی باستاد شدیم</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1252" />
+        </navPoint>
+        <navPoint id="navid3x1x135" playOrder="139">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۳۵ : یک روز ز بند عالم آزاد نیم</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1253" />
+        </navPoint>
+        <navPoint id="navid3x1x136" playOrder="140">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۳۶ : از دی که گذشت هیچ ازو یاد مکن</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1254" />
+        </navPoint>
+        <navPoint id="navid3x1x137" playOrder="141">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۳۷ : ای دیده اگر کور نئی گور ببین</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1255" />
+        </navPoint>
+        <navPoint id="navid3x1x138" playOrder="142">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۳۸ : برخیز و مخور غم جهان گذران</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1256" />
+        </navPoint>
+        <navPoint id="navid3x1x139" playOrder="143">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۳۹ : چون حاصل آدمی در این شورستان</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1257" />
+        </navPoint>
+        <navPoint id="navid3x1x140" playOrder="144">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۴۰ : رفتم که در این منزل بیداد بدن</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1258" />
+        </navPoint>
+        <navPoint id="navid3x1x141" playOrder="145">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۴۱ : رندی دیدم نشسته بر خنگ زمین</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1259" />
+        </navPoint>
+        <navPoint id="navid3x1x142" playOrder="146">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۴۲ : قانع به یک استخوان چو کرکس بودن</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1260" />
+        </navPoint>
+        <navPoint id="navid3x1x143" playOrder="147">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۴۳ : قومی متفکرند اندر ره دین</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1261" />
+        </navPoint>
+        <navPoint id="navid3x1x144" playOrder="148">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۴۴ : گاویست در آسمان و نامش پروین</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1262" />
+        </navPoint>
+        <navPoint id="navid3x1x145" playOrder="149">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۴۵ : گر بر فلکم دست بدی چون یزدان</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1263" />
+        </navPoint>
+        <navPoint id="navid3x1x146" playOrder="150">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۴۶ : مشنو سخن از زمانه ساز آمدگان</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1264" />
+        </navPoint>
+        <navPoint id="navid3x1x147" playOrder="151">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۴۷ : می خوردن و گرد نیکوان گردیدن</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1265" />
+        </navPoint>
+        <navPoint id="navid3x1x148" playOrder="152">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۴۸ : نتوان دل شاد را به غم فرسودن</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1266" />
+        </navPoint>
+        <navPoint id="navid3x1x149" playOrder="153">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۴۹ : آن قصر که با چرخ همیزد پهلو</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1267" />
+        </navPoint>
+        <navPoint id="navid3x1x150" playOrder="154">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۵۰ : از آمدن و رفتن ما سودی کو</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1268" />
+        </navPoint>
+        <navPoint id="navid3x1x151" playOrder="155">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۵۱ : از تن چو برفت جان پاک من و تو</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1269" />
+        </navPoint>
+        <navPoint id="navid3x1x152" playOrder="156">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۵۲ : می‌خور که فلک بهر هلاک من و تو</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1270" />
+        </navPoint>
+        <navPoint id="navid3x1x153" playOrder="157">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۵۳ : از هر چه بجر می است کوتاهی به</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1271" />
+        </navPoint>
+        <navPoint id="navid3x1x154" playOrder="158">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۵۴ : بنگر ز صبا دامن گل چاک شده</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1272" />
+        </navPoint>
+        <navPoint id="navid3x1x155" playOrder="159">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۵۵ : تا کی غم آن خورم که دارم یا نه</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1273" />
+        </navPoint>
+        <navPoint id="navid3x1x156" playOrder="160">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۵۶ : یک جرعه می کهن ز ملکی نو به</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1274" />
+        </navPoint>
+        <navPoint id="navid3x1x157" playOrder="161">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۵۷ : آن مایه ز دنیا که خوری یا پوشی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1275" />
+        </navPoint>
+        <navPoint id="navid3x1x158" playOrder="162">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۵۸ : از آمدن بهار و از رفتن دی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1276" />
+        </navPoint>
+        <navPoint id="navid3x1x159" playOrder="163">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۵۹ : از کوزه‌گری کوزه خریدم باری</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1277" />
+        </navPoint>
+        <navPoint id="navid3x1x160" playOrder="164">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۶۰ : ای آنکه نتیجهٔ چهار و هفتی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1278" />
+        </navPoint>
+        <navPoint id="navid3x1x161" playOrder="165">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۶۱ : ایدل تو به اسرار معما نرسی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1279" />
+        </navPoint>
+        <navPoint id="navid3x1x162" playOrder="166">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۶۲ : ای دوست حقیقت شنواز من سخنی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1280" />
+        </navPoint>
+        <navPoint id="navid3x1x163" playOrder="167">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۶۳ : ای کاش که جای آرمیدن بودی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1281" />
+        </navPoint>
+        <navPoint id="navid3x1x164" playOrder="168">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۶۴ : بر سنگ زدم دوش سبوی کاشی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1282" />
+        </navPoint>
+        <navPoint id="navid3x1x165" playOrder="169">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۶۵ : بر شاخ امید اگر بری یافتمی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1283" />
+        </navPoint>
+        <navPoint id="navid3x1x166" playOrder="170">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۶۶ : بر گیر پیاله و سبو ای دلجوی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1284" />
+        </navPoint>
+        <navPoint id="navid3x1x167" playOrder="171">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۶۷ : پیری دیدم به خانهٔ خماری</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1285" />
+        </navPoint>
+        <navPoint id="navid3x1x168" playOrder="172">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۶۸ : تا چند حدیث پنج و چار ای ساقی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1286" />
+        </navPoint>
+        <navPoint id="navid3x1x169" playOrder="173">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۶۹ : چندان که نگاه می‌کنم هر سویی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1287" />
+        </navPoint>
+        <navPoint id="navid3x1x170" playOrder="174">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۷۰ : خوش باش که پخته‌اند سودای تو دی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1288" />
+        </navPoint>
+        <navPoint id="navid3x1x171" playOrder="175">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۷۱ : در کارگه کوزه‌گری کردم رای</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1289" />
+        </navPoint>
+        <navPoint id="navid3x1x172" playOrder="176">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۷۲ : در گوش دلم گفت فلک پنهانی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1290" />
+        </navPoint>
+        <navPoint id="navid3x1x173" playOrder="177">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۷۳ : زان کوزهٔ می که نیست در وی ضرری</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1291" />
+        </navPoint>
+        <navPoint id="navid3x1x174" playOrder="178">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۷۴ : گر آمدنم بخود بدی نامدمی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1292" />
+        </navPoint>
+        <navPoint id="navid3x1x175" playOrder="179">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۷۵ : گر دست دهد ز مغز گندم نانی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1293" />
+        </navPoint>
+        <navPoint id="navid3x1x176" playOrder="180">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۷۶ : گر کار فلک به عدل سنجیده بدی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1294" />
+        </navPoint>
+        <navPoint id="navid3x1x177" playOrder="181">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۷۷ : هان کوزه‌گرا بپای اگر هشیاری</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1295" />
+        </navPoint>
+        <navPoint id="navid3x1x178" playOrder="182">
+          <navLabel>
+            <text>رباعی شمارهٔ ۱۷۸ : هنگام صبوح ای صنم فرخ پی</text>
+          </navLabel>
+          <content src="cat31sec1.xhtml#poem-1296" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navid3x2" playOrder="187">
+        <navLabel>
+          <text>ترانه‌های خیام (صادق هدایت)</text>
+        </navLabel>
+        <content src="cat1811.xhtml" />
+        <navPoint id="navid3x2x1" playOrder="188">
+          <navLabel>
+            <text>راز آفرینش  [ ۱۵-۱]</text>
+          </navLabel>
+          <content src="cat1812.xhtml" />
+          <navPoint id="navid3x2x1x1" playOrder="189">
+            <navLabel>
+              <text>رباعی ۱ : هرچند که رنگ و روی زیباست مرا،</text>
+            </navLabel>
+            <content src="cat1812sec1.xhtml#poem-50256" />
+          </navPoint>
+          <navPoint id="navid3x2x1x2" playOrder="190">
+            <navLabel>
+              <text>رباعی ۲ : آورد به اِضطرارم اوّل به وجود،</text>
+            </navLabel>
+            <content src="cat1812sec1.xhtml#poem-50257" />
+          </navPoint>
+          <navPoint id="navid3x2x1x3" playOrder="191">
+            <navLabel>
+              <text>رباعی ۳ : از آمدنم نبود گردون را سود،</text>
+            </navLabel>
+            <content src="cat1812sec1.xhtml#poem-50258" />
+          </navPoint>
+          <navPoint id="navid3x2x1x4" playOrder="192">
+            <navLabel>
+              <text>رباعی ۴ : ای دل تو به ادراکِ معمّا نرسی،</text>
+            </navLabel>
+            <content src="cat1812sec1.xhtml#poem-50259" />
+          </navPoint>
+          <navPoint id="navid3x2x1x5" playOrder="193">
+            <navLabel>
+              <text>رباعی ۵ : دل سِرّ‌‌ِ حیات اگر کَماهی دانست،</text>
+            </navLabel>
+            <content src="cat1812sec1.xhtml#poem-50260" />
+          </navPoint>
+          <navPoint id="navid3x2x1x6" playOrder="194">
+            <navLabel>
+              <text>رباعی ۶ : * تا چند زنم به روی دریاها خشت،</text>
+            </navLabel>
+            <content src="cat1812sec1.xhtml#poem-50261" />
+          </navPoint>
+          <navPoint id="navid3x2x1x7" playOrder="195">
+            <navLabel>
+              <text>رباعی ۷ : اسرار اَزَل را نه تو دانی و نه من،</text>
+            </navLabel>
+            <content src="cat1812sec1.xhtml#poem-50262" />
+          </navPoint>
+          <navPoint id="navid3x2x1x8" playOrder="196">
+            <navLabel>
+              <text>رباعی ۸ : این بحرِ وجود آمده بیرون ز نهفت،</text>
+            </navLabel>
+            <content src="cat1812sec1.xhtml#poem-50263" />
+          </navPoint>
+          <navPoint id="navid3x2x1x9" playOrder="197">
+            <navLabel>
+              <text>رباعی ۹ : اَجرام که ساکنان این ایوان‌اند،</text>
+            </navLabel>
+            <content src="cat1812sec1.xhtml#poem-50264" />
+          </navPoint>
+          <navPoint id="navid3x2x1x10" playOrder="198">
+            <navLabel>
+              <text>رباعی ۱۰ : دوری که در آمدن و رفتنِ ماست،</text>
+            </navLabel>
+            <content src="cat1812sec1.xhtml#poem-50265" />
+          </navPoint>
+          <navPoint id="navid3x2x1x11" playOrder="199">
+            <navLabel>
+              <text>رباعی ۱۱ : دارنده چو ترکیبِ طِبایع آراست،</text>
+            </navLabel>
+            <content src="cat1812sec1.xhtml#poem-50266" />
+          </navPoint>
+          <navPoint id="navid3x2x1x12" playOrder="200">
+            <navLabel>
+              <text>رباعی ۱۲ : آنان ‌که محیطِ فضل و آداب شدند،</text>
+            </navLabel>
+            <content src="cat1812sec1.xhtml#poem-50267" />
+          </navPoint>
+          <navPoint id="navid3x2x1x13" playOrder="201">
+            <navLabel>
+              <text>رباعی ۱۳ : * آنان‌ که ز پیش رفته‌اند ای ساقی،</text>
+            </navLabel>
+            <content src="cat1812sec1.xhtml#poem-50268" />
+          </navPoint>
+          <navPoint id="navid3x2x1x14" playOrder="202">
+            <navLabel>
+              <text>رباعی ۱۴ : * آن بیخبران که دُرّ‌ِ معنی سُفتند،</text>
+            </navLabel>
+            <content src="cat1812sec1.xhtml#poem-50269" />
+          </navPoint>
+          <navPoint id="navid3x2x1x15" playOrder="203">
+            <navLabel>
+              <text>رباعی ۱۵ : گاوی است بر آسمان قَرینِ پروین،</text>
+            </navLabel>
+            <content src="cat1812sec1.xhtml#poem-50270" />
+          </navPoint>
+        </navPoint>
+        <navPoint id="navid3x2x2" playOrder="392">
+          <navLabel>
+            <text>درد زندگی  [۲۵-۱۶]</text>
+          </navLabel>
+          <content src="cat1813.xhtml" />
+          <navPoint id="navid3x2x2x1" playOrder="393">
+            <navLabel>
+              <text>رباعی ۱۶ : امروز که نوبت جوانی من است،</text>
+            </navLabel>
+            <content src="cat1813sec1.xhtml#poem-50271" />
+          </navPoint>
+          <navPoint id="navid3x2x2x2" playOrder="394">
+            <navLabel>
+              <text>رباعی ۱۷ : گر آمدنم به من بُدی، نامَدَمی.</text>
+            </navLabel>
+            <content src="cat1813sec1.xhtml#poem-50272" />
+          </navPoint>
+          <navPoint id="navid3x2x2x3" playOrder="395">
+            <navLabel>
+              <text>رباعی ۱۸ : از آمدن و رفتنِ ما سودی کو؟</text>
+            </navLabel>
+            <content src="cat1813sec1.xhtml#poem-50273" />
+          </navPoint>
+          <navPoint id="navid3x2x2x4" playOrder="396">
+            <navLabel>
+              <text>رباعی ۱۹ : افسوس که بیفایده فرسوده شدیم،</text>
+            </navLabel>
+            <content src="cat1813sec1.xhtml#poem-50274" />
+          </navPoint>
+          <navPoint id="navid3x2x2x5" playOrder="397">
+            <navLabel>
+              <text>رباعی ۲۰ : * با یار چو آرمیده باشی همه عمر،</text>
+            </navLabel>
+            <content src="cat1813sec1.xhtml#poem-50275" />
+          </navPoint>
+          <navPoint id="navid3x2x2x6" playOrder="398">
+            <navLabel>
+              <text>رباعی ۲۱ : اکنون که ز خوشدلی به‌جز نام نمانْد،</text>
+            </navLabel>
+            <content src="cat1813sec1.xhtml#poem-50276" />
+          </navPoint>
+          <navPoint id="navid3x2x2x7" playOrder="399">
+            <navLabel>
+              <text>رباعی ۲۲ : ای‌کاش که جای آرمیدن بودی،</text>
+            </navLabel>
+            <content src="cat1813sec1.xhtml#poem-50277" />
+          </navPoint>
+          <navPoint id="navid3x2x2x8" playOrder="400">
+            <navLabel>
+              <text>رباعی ۲۳ : چون حاصلِ آدمی درین جایِ دودَر،</text>
+            </navLabel>
+            <content src="cat1813sec1.xhtml#poem-50278" />
+          </navPoint>
+          <navPoint id="navid3x2x2x9" playOrder="401">
+            <navLabel>
+              <text>رباعی ۲۴ : * آن‌کس که زمین و چرخِ اَفلاک نهاد،</text>
+            </navLabel>
+            <content src="cat1813sec1.xhtml#poem-50279" />
+          </navPoint>
+          <navPoint id="navid3x2x2x10" playOrder="402">
+            <navLabel>
+              <text>رباعی ۲۵ : گر بر فَلَکَم دست بُدی چون یزدان،</text>
+            </navLabel>
+            <content src="cat1813sec1.xhtml#poem-50280" />
+          </navPoint>
+        </navPoint>
+        <navPoint id="navid3x2x3" playOrder="795">
+          <navLabel>
+            <text>از ازل نوشته  [۳۴-۲۶]</text>
+          </navLabel>
+          <content src="cat1814.xhtml" />
+          <navPoint id="navid3x2x3x1" playOrder="796">
+            <navLabel>
+              <text>رباعی ۲۶ : بر لوحْ نشانِ بودنی‌ها بوده‌است،</text>
+            </navLabel>
+            <content src="cat1814sec1.xhtml#poem-50281" />
+          </navPoint>
+          <navPoint id="navid3x2x3x2" playOrder="797">
+            <navLabel>
+              <text>رباعی ۲۷ : چون روزی و عمر بیش‌وکم نتوان‌کرد،</text>
+            </navLabel>
+            <content src="cat1814sec1.xhtml#poem-50282" />
+          </navPoint>
+          <navPoint id="navid3x2x3x3" playOrder="798">
+            <navLabel>
+              <text>رباعی ۲۸ : افلاک که جز غم نفزایند دگر؛</text>
+            </navLabel>
+            <content src="cat1814sec1.xhtml#poem-50283" />
+          </navPoint>
+          <navPoint id="navid3x2x3x4" playOrder="799">
+            <navLabel>
+              <text>رباعی ۲۹ : ای آن‌که نتیجهٔ چهار و هفتی،</text>
+            </navLabel>
+            <content src="cat1814sec1.xhtml#poem-50284" />
+          </navPoint>
+          <navPoint id="navid3x2x3x5" playOrder="800">
+            <navLabel>
+              <text>رباعی ۳۰ : * تا خاکِ مرا به قالب آمیخته‌اند،</text>
+            </navLabel>
+            <content src="cat1814sec1.xhtml#poem-50285" />
+          </navPoint>
+          <navPoint id="navid3x2x3x6" playOrder="801">
+            <navLabel>
+              <text>رباعی ۳۱ : * تا کی ز چراغِ مسجد و دودِ کُنِشْت؟</text>
+            </navLabel>
+            <content src="cat1814sec1.xhtml#poem-50286" />
+          </navPoint>
+          <navPoint id="navid3x2x3x7" playOrder="802">
+            <navLabel>
+              <text>رباعی ۳۲ : * ای دل چو حقیقتِ جهان هست مَجاز،</text>
+            </navLabel>
+            <content src="cat1814sec1.xhtml#poem-50287" />
+          </navPoint>
+          <navPoint id="navid3x2x3x8" playOrder="803">
+            <navLabel>
+              <text>رباعی ۳۳ : در گوشِ دلم گفت فلک پنهانی:</text>
+            </navLabel>
+            <content src="cat1814sec1.xhtml#poem-50288" />
+          </navPoint>
+          <navPoint id="navid3x2x3x9" playOrder="804">
+            <navLabel>
+              <text>رباعی ۳۴ : نیکی و بدی که در نهادِ بشر است،</text>
+            </navLabel>
+            <content src="cat1814sec1.xhtml#poem-50289" />
+          </navPoint>
+        </navPoint>
+        <navPoint id="navid3x2x4" playOrder="1600">
+          <navLabel>
+            <text>گردش دوران  [۵۶-۳۵]</text>
+          </navLabel>
+          <content src="cat1815.xhtml" />
+          <navPoint id="navid3x2x4x1" playOrder="1601">
+            <navLabel>
+              <text>رباعی ۳۵ : افسوس که نامهٔ جوانی طی شد،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50290" />
+          </navPoint>
+          <navPoint id="navid3x2x4x2" playOrder="1602">
+            <navLabel>
+              <text>رباعی ۳۶ : افسوس که سرمایه ز کَف بیرون شد،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50291" />
+          </navPoint>
+          <navPoint id="navid3x2x4x3" playOrder="1603">
+            <navLabel>
+              <text>رباعی ۳۷ : یک‌چند به کودکی به استاد شدیم؛</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50292" />
+          </navPoint>
+          <navPoint id="navid3x2x4x4" playOrder="1604">
+            <navLabel>
+              <text>رباعی ۳۸ : یارانِ موافق همه از دست شدند،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50293" />
+          </navPoint>
+          <navPoint id="navid3x2x4x5" playOrder="1605">
+            <navLabel>
+              <text>رباعی ۳۹ : ای چرخِ فلک خرابی از کینهٔ توست،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50294" />
+          </navPoint>
+          <navPoint id="navid3x2x4x6" playOrder="1606">
+            <navLabel>
+              <text>رباعی ۴۰ : چون چرخ به کام یک خردمند نگشت،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50295" />
+          </navPoint>
+          <navPoint id="navid3x2x4x7" playOrder="1607">
+            <navLabel>
+              <text>رباعی ۴۱ : یک قطرهٔ آب بود و با دریا شد،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50296" />
+          </navPoint>
+          <navPoint id="navid3x2x4x8" playOrder="1608">
+            <navLabel>
+              <text>رباعی ۴۲ : * می‌پرسیدی که چیست این نقشِ مجاز،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50297" />
+          </navPoint>
+          <navPoint id="navid3x2x4x9" playOrder="1609">
+            <navLabel>
+              <text>رباعی ۴۳ : جامی است که عقل آفرین می‌زندش،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50298" />
+          </navPoint>
+          <navPoint id="navid3x2x4x10" playOrder="1610">
+            <navLabel>
+              <text>رباعی ۴۴ : اجزای پیاله‌ای که درهم پیوست،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50299" />
+          </navPoint>
+          <navPoint id="navid3x2x4x11" playOrder="1611">
+            <navLabel>
+              <text>رباعی ۴۵ : عالَم اگر ازبهرِ تو می‌آرایند،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50300" />
+          </navPoint>
+          <navPoint id="navid3x2x4x12" playOrder="1612">
+            <navLabel>
+              <text>رباعی ۴۶ : از جملهٔ رفتگانِ این راهِ دراز،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50301" />
+          </navPoint>
+          <navPoint id="navid3x2x4x13" playOrder="1613">
+            <navLabel>
+              <text>رباعی ۴۷ : می خور که به زیرِ گِل بسی خواهی خفت،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50302" />
+          </navPoint>
+          <navPoint id="navid3x2x4x14" playOrder="1614">
+            <navLabel>
+              <text>رباعی ۴۸ : * پیری دیدم به خانهٔ خَمّاری،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50303" />
+          </navPoint>
+          <navPoint id="navid3x2x4x15" playOrder="1615">
+            <navLabel>
+              <text>رباعی ۴۹ : بسیار بگشتیم به گِرْدِ در و دشت،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50304" />
+          </navPoint>
+          <navPoint id="navid3x2x4x16" playOrder="1616">
+            <navLabel>
+              <text>رباعی ۵۰ : ما لُعْبَتِگانیم و فلک لُعبَت‌باز،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50305" />
+          </navPoint>
+          <navPoint id="navid3x2x4x17" playOrder="1617">
+            <navLabel>
+              <text>رباعی ۵۱ : ای بس که نباشیم و جهان خواهد‌بود،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50306" />
+          </navPoint>
+          <navPoint id="navid3x2x4x18" playOrder="1618">
+            <navLabel>
+              <text>رباعی ۵۲ : بر مَفْرشِ خاک خفتگان می‌بینم،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50307" />
+          </navPoint>
+          <navPoint id="navid3x2x4x19" playOrder="1619">
+            <navLabel>
+              <text>رباعی ۵۳ : این کهنه رباط را که عالم نام است</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50308" />
+          </navPoint>
+          <navPoint id="navid3x2x4x20" playOrder="1620">
+            <navLabel>
+              <text>رباعی ۵۴ : آن قصر که بهرام درو جام گرفت،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50309" />
+          </navPoint>
+          <navPoint id="navid3x2x4x21" playOrder="1621">
+            <navLabel>
+              <text>رباعی ۵۵ : مرغی دیدم نشسته بر بارهٔ توس،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50310" />
+          </navPoint>
+          <navPoint id="navid3x2x4x22" playOrder="1622">
+            <navLabel>
+              <text>رباعی ۵۶ : آن قصر که بر چرخ همی‌زد پهلو،</text>
+            </navLabel>
+            <content src="cat1815sec1.xhtml#poem-50311" />
+          </navPoint>
+        </navPoint>
+        <navPoint id="navid3x2x5" playOrder="3223">
+          <navLabel>
+            <text>ذرات گردنده   [۷۳-۵۷]</text>
+          </navLabel>
+          <content src="cat1816.xhtml" />
+          <navPoint id="navid3x2x5x1" playOrder="3224">
+            <navLabel>
+              <text>رباعی ۵۷ : از تن چو برفت جان پاک من و تو،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50312" />
+          </navPoint>
+          <navPoint id="navid3x2x5x2" playOrder="3225">
+            <navLabel>
+              <text>رباعی ۵۸ : * هر ذره که بر روی زمینی بوده‌است،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50313" />
+          </navPoint>
+          <navPoint id="navid3x2x5x3" playOrder="3226">
+            <navLabel>
+              <text>رباعی ۵۹ : ای پیرِ خردمند پِگَهْ‌تر برخیز،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50314" />
+          </navPoint>
+          <navPoint id="navid3x2x5x4" playOrder="3227">
+            <navLabel>
+              <text>رباعی ۶۰ : بنگر ز صبا دامن گل چاک شده،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50315" />
+          </navPoint>
+          <navPoint id="navid3x2x5x5" playOrder="3228">
+            <navLabel>
+              <text>رباعی ۶۱ : ابر آمد و زار بر سرِ سبزه گریست،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50316" />
+          </navPoint>
+          <navPoint id="navid3x2x5x6" playOrder="3229">
+            <navLabel>
+              <text>رباعی ۶۲ : چون ابر به نوروز رخِ لاله بشست،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50317" />
+          </navPoint>
+          <navPoint id="navid3x2x5x7" playOrder="3230">
+            <navLabel>
+              <text>رباعی ۶۳ : هر سبزه که بر کنار جویی رُسته‌است،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50318" />
+          </navPoint>
+          <navPoint id="navid3x2x5x8" playOrder="3231">
+            <navLabel>
+              <text>رباعی ۶۴ : می خور که فلک بهر هلاک من و تو،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50319" />
+          </navPoint>
+          <navPoint id="navid3x2x5x9" playOrder="3232">
+            <navLabel>
+              <text>رباعی ۶۵ : دیدم به سرِ عمارتی مردی فرد،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50320" />
+          </navPoint>
+          <navPoint id="navid3x2x5x10" playOrder="3233">
+            <navLabel>
+              <text>رباعی ۶۶ : بردار پیاله و سبو ای دل‌جو،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50321" />
+          </navPoint>
+          <navPoint id="navid3x2x5x11" playOrder="3234">
+            <navLabel>
+              <text>رباعی ۶۷ : بر سنگ زدم دوش سبوی کاشی،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50322" />
+          </navPoint>
+          <navPoint id="navid3x2x5x12" playOrder="3235">
+            <navLabel>
+              <text>رباعی ۶۸ : زان کوزهٔ میْ که نیست در وی ضرری،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50323" />
+          </navPoint>
+          <navPoint id="navid3x2x5x13" playOrder="3236">
+            <navLabel>
+              <text>رباعی ۶۹ : * بر کوزه‌گری پریر کردم گذری،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50324" />
+          </navPoint>
+          <navPoint id="navid3x2x5x14" playOrder="3237">
+            <navLabel>
+              <text>رباعی ۷۰ : * هان کوزه‌گرا بپای اگر هشیاری،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50325" />
+          </navPoint>
+          <navPoint id="navid3x2x5x15" playOrder="3238">
+            <navLabel>
+              <text>رباعی ۷۱ : در کارگه کوزه‌گری کردم رای،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50326" />
+          </navPoint>
+          <navPoint id="navid3x2x5x16" playOrder="3239">
+            <navLabel>
+              <text>رباعی ۷۲ : این کوزه چو من عاشق زاری بوده‌است،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50327" />
+          </navPoint>
+          <navPoint id="navid3x2x5x17" playOrder="3240">
+            <navLabel>
+              <text>رباعی ۷۳ : در کارگهِ کوزه‌گری بودم دوش،</text>
+            </navLabel>
+            <content src="cat1816sec1.xhtml#poem-50328" />
+          </navPoint>
+        </navPoint>
+        <navPoint id="navid3x2x6" playOrder="6464">
+          <navLabel>
+            <text>هرچه باداباد  [۱۰۰-۷۴]</text>
+          </navLabel>
+          <content src="cat1817.xhtml" />
+          <navPoint id="navid3x2x6x1" playOrder="6465">
+            <navLabel>
+              <text>رباعی ۷۴ : گر من ز می مُغانه مستم، هستم،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50329" />
+          </navPoint>
+          <navPoint id="navid3x2x6x2" playOrder="6466">
+            <navLabel>
+              <text>رباعی ۷۵ : می خوردن و شاد بودن آیین من است،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50330" />
+          </navPoint>
+          <navPoint id="navid3x2x6x3" playOrder="6467">
+            <navLabel>
+              <text>رباعی ۷۶ : من بی می ناب زیستن نتوانم،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50331" />
+          </navPoint>
+          <navPoint id="navid3x2x6x4" playOrder="6468">
+            <navLabel>
+              <text>رباعی ۷۷ : امشب می جامِ یک‌مَنی خواهم‌کرد،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50332" />
+          </navPoint>
+          <navPoint id="navid3x2x6x5" playOrder="6469">
+            <navLabel>
+              <text>رباعی ۷۸ : * چون مُرده شوم، خاکِ مرا گُم سازید،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50333" />
+          </navPoint>
+          <navPoint id="navid3x2x6x6" playOrder="6470">
+            <navLabel>
+              <text>رباعی ۷۹ : * چون درگذرم به باده شویید مرا،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50334" />
+          </navPoint>
+          <navPoint id="navid3x2x6x7" playOrder="6471">
+            <navLabel>
+              <text>رباعی ۸۰ : * چندان بخورم شراب، کاین بوی شراب</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50335" />
+          </navPoint>
+          <navPoint id="navid3x2x6x8" playOrder="6472">
+            <navLabel>
+              <text>رباعی ۸۱ : روزی که نهالِ عمر من کنده ‌شود،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50336" />
+          </navPoint>
+          <navPoint id="navid3x2x6x9" playOrder="6473">
+            <navLabel>
+              <text>رباعی ۸۲ : * در پای اجل چو من سرافکنده شوم،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50337" />
+          </navPoint>
+          <navPoint id="navid3x2x6x10" playOrder="6474">
+            <navLabel>
+              <text>رباعی ۸۳ : * یاران به موافقت چو دیدار کنید،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50338" />
+          </navPoint>
+          <navPoint id="navid3x2x6x11" playOrder="6475">
+            <navLabel>
+              <text>رباعی ۸۴ : * آنان‌که اسیر عقل و تمییز شدند،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50339" />
+          </navPoint>
+          <navPoint id="navid3x2x6x12" playOrder="6476">
+            <navLabel>
+              <text>رباعی ۸۵ : * ای صاحب فتوی، ز تو پرکارتریم،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50340" />
+          </navPoint>
+          <navPoint id="navid3x2x6x13" playOrder="6477">
+            <navLabel>
+              <text>رباعی ۸۶ : شیخی به زنی فاحشه گفتا: مستی.</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50341" />
+          </navPoint>
+          <navPoint id="navid3x2x6x14" playOrder="6478">
+            <navLabel>
+              <text>رباعی ۸۷ : * گویند که دوزخی بُوَد عاشق و مست،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50342" />
+          </navPoint>
+          <navPoint id="navid3x2x6x15" playOrder="6479">
+            <navLabel>
+              <text>رباعی ۸۸ : گویند: بهشت و حورعین خواهد‌بود،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50343" />
+          </navPoint>
+          <navPoint id="navid3x2x6x16" playOrder="6480">
+            <navLabel>
+              <text>رباعی ۸۹ : * گویند: بهشت و حور و کوثر باشد،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50344" />
+          </navPoint>
+          <navPoint id="navid3x2x6x17" playOrder="6481">
+            <navLabel>
+              <text>رباعی ۹۰ : * گویند بهشتِ عَدْن با حور خوش است،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50345" />
+          </navPoint>
+          <navPoint id="navid3x2x6x18" playOrder="6482">
+            <navLabel>
+              <text>رباعی ۹۱ : کس خُلْد و جَحیم را ندیده‌است ای دل،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50346" />
+          </navPoint>
+          <navPoint id="navid3x2x6x19" playOrder="6483">
+            <navLabel>
+              <text>رباعی ۹۲ : * من هیچ ندانم که مرا آن‌که سرشت،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50347" />
+          </navPoint>
+          <navPoint id="navid3x2x6x20" playOrder="6484">
+            <navLabel>
+              <text>رباعی ۹۳ : چون نبست مقام ما درین دهر مُقیم،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50348" />
+          </navPoint>
+          <navPoint id="navid3x2x6x21" playOrder="6485">
+            <navLabel>
+              <text>رباعی ۹۴ : چون آمدنم به من نَبُد روز نخست،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50349" />
+          </navPoint>
+          <navPoint id="navid3x2x6x22" playOrder="6486">
+            <navLabel>
+              <text>رباعی ۹۵ : چون عمر به سر رسد، چه بغداد چه بلخ،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50350" />
+          </navPoint>
+          <navPoint id="navid3x2x6x23" playOrder="6487">
+            <navLabel>
+              <text>رباعی ۹۶ : * جُز راهِ قَلَندرانِ میخانه مپوی،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50351" />
+          </navPoint>
+          <navPoint id="navid3x2x6x24" playOrder="6488">
+            <navLabel>
+              <text>رباعی ۹۷ : * ساقی غمِ من بلند‌آوازه شده‌است،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50352" />
+          </navPoint>
+          <navPoint id="navid3x2x6x25" playOrder="6489">
+            <navLabel>
+              <text>رباعی ۹۸ : * تُنْگی میِ لَعْل خواهم و دیوانی،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50353" />
+          </navPoint>
+          <navPoint id="navid3x2x6x26" playOrder="6490">
+            <navLabel>
+              <text>رباعی ۹۹ : * من ظاهرِ نیستی و هستی دانم،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50354" />
+          </navPoint>
+          <navPoint id="navid3x2x6x27" playOrder="6491">
+            <navLabel>
+              <text>رباعی ۱۰۰ : از من رَمَقی به سعی ساقی مانده‌است،</text>
+            </navLabel>
+            <content src="cat1817sec1.xhtml#poem-50355" />
+          </navPoint>
+        </navPoint>
+        <navPoint id="navid3x2x7" playOrder="12956">
+          <navLabel>
+            <text>هیچ است  [۱۰۷-۱۰۱]</text>
+          </navLabel>
+          <content src="cat1818.xhtml" />
+          <navPoint id="navid3x2x7x1" playOrder="12957">
+            <navLabel>
+              <text>رباعی ۱۰۱ : ای بیخبران شکلِ مُجَسَّم هیچ است،</text>
+            </navLabel>
+            <content src="cat1818sec1.xhtml#poem-50356" />
+          </navPoint>
+          <navPoint id="navid3x2x7x2" playOrder="12958">
+            <navLabel>
+              <text>رباعی ۱۰۲ : دنیا دیدی و هرچه دیدی هیچ است،</text>
+            </navLabel>
+            <content src="cat1818sec1.xhtml#poem-50357" />
+          </navPoint>
+          <navPoint id="navid3x2x7x3" playOrder="12959">
+            <navLabel>
+              <text>رباعی ۱۰۳ : دنیا به مراد رانده گیر، آخِر چه؟</text>
+            </navLabel>
+            <content src="cat1818sec1.xhtml#poem-50358" />
+          </navPoint>
+          <navPoint id="navid3x2x7x4" playOrder="12960">
+            <navLabel>
+              <text>رباعی ۱۰۴ : * رندی دیدم نشسته بر خِنْگِ زمین،</text>
+            </navLabel>
+            <content src="cat1818sec1.xhtml#poem-50359" />
+          </navPoint>
+          <navPoint id="navid3x2x7x5" playOrder="12961">
+            <navLabel>
+              <text>رباعی ۱۰۵ : این چرخِ فلک که ما در او حیرانیم،</text>
+            </navLabel>
+            <content src="cat1818sec1.xhtml#poem-50360" />
+          </navPoint>
+          <navPoint id="navid3x2x7x6" playOrder="12962">
+            <navLabel>
+              <text>رباعی ۱۰۶ : چون نیست زِ هرچه هست جُز باد به دست،</text>
+            </navLabel>
+            <content src="cat1818sec1.xhtml#poem-50361" />
+          </navPoint>
+          <navPoint id="navid3x2x7x7" playOrder="12963">
+            <navLabel>
+              <text>رباعی ۱۰۷ : بنگر ز جهان چه طَرْف بربستم؟ هیچ،</text>
+            </navLabel>
+            <content src="cat1818sec1.xhtml#poem-50362" />
+          </navPoint>
+        </navPoint>
+        <navPoint id="navid3x2x8" playOrder="25920">
+          <navLabel>
+            <text>دم را دریابیم   [۱۴۳-۱۰۸]</text>
+          </navLabel>
+          <content src="cat1819.xhtml" />
+          <navPoint id="navid3x2x8x1" playOrder="25921">
+            <navLabel>
+              <text>رباعی ۱۰۸ : از منزلِ کفر تا به دین، یک نفس است،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50363" />
+          </navPoint>
+          <navPoint id="navid3x2x8x2" playOrder="25922">
+            <navLabel>
+              <text>رباعی ۱۰۹ : شادی بطلب که حاصلِ عمر دمی است،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50364" />
+          </navPoint>
+          <navPoint id="navid3x2x8x3" playOrder="25923">
+            <navLabel>
+              <text>رباعی ۱۱۰ : تا زُهره و مَهْ در آسمان گشته پدید،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50365" />
+          </navPoint>
+          <navPoint id="navid3x2x8x4" playOrder="25924">
+            <navLabel>
+              <text>رباعی ۱۱۱ : تا زُهره و مَهْ در آسمان گشته پدید،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50366" />
+          </navPoint>
+          <navPoint id="navid3x2x8x5" playOrder="25925">
+            <navLabel>
+              <text>رباعی ۱۱۲ : چون عهده نمی‌شود کسی فردا را،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50367" />
+          </navPoint>
+          <navPoint id="navid3x2x8x6" playOrder="25926">
+            <navLabel>
+              <text>رباعی ۱۱۳ : این قافلهٔ عمر عجب می‌گذرد!</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50368" />
+          </navPoint>
+          <navPoint id="navid3x2x8x7" playOrder="25927">
+            <navLabel>
+              <text>رباعی ۱۱۴ : هنگام سپیده‌دم خروس سحری،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50369" />
+          </navPoint>
+          <navPoint id="navid3x2x8x8" playOrder="25928">
+            <navLabel>
+              <text>رباعی ۱۱۵ : وقت سحر است، خیز ای مایهٔ ناز،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50370" />
+          </navPoint>
+          <navPoint id="navid3x2x8x9" playOrder="25929">
+            <navLabel>
+              <text>رباعی ۱۱۶ : هنگام صبوح ای صنمِ فرخْ‌پی</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50371" />
+          </navPoint>
+          <navPoint id="navid3x2x8x10" playOrder="25930">
+            <navLabel>
+              <text>رباعی ۱۱۷ : صبح است، دمی بر می گلرنگ زنیم،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50372" />
+          </navPoint>
+          <navPoint id="navid3x2x8x11" playOrder="25931">
+            <navLabel>
+              <text>رباعی ۱۱۸ : روزی است خوش و هوا نه گرم است و نه سرد،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50373" />
+          </navPoint>
+          <navPoint id="navid3x2x8x12" playOrder="25932">
+            <navLabel>
+              <text>رباعی ۱۱۹ : فصلِ گُل و طَرْفِ جویْبار و لبِ کِشْت،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50374" />
+          </navPoint>
+          <navPoint id="navid3x2x8x13" playOrder="25933">
+            <navLabel>
+              <text>رباعی ۱۲۰ : بر چهرهٔ گُل نسیمِ نوروز خوش است،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50375" />
+          </navPoint>
+          <navPoint id="navid3x2x8x14" playOrder="25934">
+            <navLabel>
+              <text>رباعی ۱۲۱ : ساقی، گل و سبزه بس طربناک شده‌است،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50376" />
+          </navPoint>
+          <navPoint id="navid3x2x8x15" playOrder="25935">
+            <navLabel>
+              <text>رباعی ۱۲۲ : چون لاله به نوروز قدح گیر به دست،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50377" />
+          </navPoint>
+          <navPoint id="navid3x2x8x16" playOrder="25936">
+            <navLabel>
+              <text>رباعی ۱۲۳ : * هر گه که بنفشه جامه در رنگ زند،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50378" />
+          </navPoint>
+          <navPoint id="navid3x2x8x17" playOrder="25937">
+            <navLabel>
+              <text>رباعی ۱۲۴ : برخیز و مخور غمِ جهانِ گُذران،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50379" />
+          </navPoint>
+          <navPoint id="navid3x2x8x18" playOrder="25938">
+            <navLabel>
+              <text>رباعی ۱۲۵ : در دایرهِٔ سپهرِ ناپیدا غور،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50380" />
+          </navPoint>
+          <navPoint id="navid3x2x8x19" playOrder="25939">
+            <navLabel>
+              <text>رباعی ۱۲۶ : از درسِ علوم جمله بگریزی بِهْ،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50381" />
+          </navPoint>
+          <navPoint id="navid3x2x8x20" playOrder="25940">
+            <navLabel>
+              <text>رباعی ۱۲۷ : ایّامِ زمانه از کسی دارد ننگ،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50382" />
+          </navPoint>
+          <navPoint id="navid3x2x8x21" playOrder="25941">
+            <navLabel>
+              <text>رباعی ۱۲۸ : * از آمدنِ بهار و از رفتنِ دی،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50383" />
+          </navPoint>
+          <navPoint id="navid3x2x8x22" playOrder="25942">
+            <navLabel>
+              <text>رباعی ۱۲۹ : زان پیش که نامِ تو ز عالَم برود</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50384" />
+          </navPoint>
+          <navPoint id="navid3x2x8x23" playOrder="25943">
+            <navLabel>
+              <text>رباعی ۱۳۰ : * ای دوست بیا تا غمِ فردا نخوریم،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50385" />
+          </navPoint>
+          <navPoint id="navid3x2x8x24" playOrder="25944">
+            <navLabel>
+              <text>رباعی ۱۳۱ : * تَن زن چو به زیرِ فَلَکِ بی‌باکی،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50386" />
+          </navPoint>
+          <navPoint id="navid3x2x8x25" playOrder="25945">
+            <navLabel>
+              <text>رباعی ۱۳۲ : * می بر کفِ من نِهْ که دلم تاب است،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50387" />
+          </navPoint>
+          <navPoint id="navid3x2x8x26" playOrder="25946">
+            <navLabel>
+              <text>رباعی ۱۳۳ : می نوش که عمرِ جاودانی این است،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50388" />
+          </navPoint>
+          <navPoint id="navid3x2x8x27" playOrder="25947">
+            <navLabel>
+              <text>رباعی ۱۳۴ : با باده نشین، که مُلْکِ محمود این است،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50389" />
+          </navPoint>
+          <navPoint id="navid3x2x8x28" playOrder="25948">
+            <navLabel>
+              <text>رباعی ۱۳۵ : امروز تو را دسترس فردا نیست،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50390" />
+          </navPoint>
+          <navPoint id="navid3x2x8x29" playOrder="25949">
+            <navLabel>
+              <text>رباعی ۱۳۶ : * دوْرانِ جهان بی می و ساقی هیچ است،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50391" />
+          </navPoint>
+          <navPoint id="navid3x2x8x30" playOrder="25950">
+            <navLabel>
+              <text>رباعی ۱۳۷ : تا کی غمِ آن خورم که دارم یا نه؛</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50392" />
+          </navPoint>
+          <navPoint id="navid3x2x8x31" playOrder="25951">
+            <navLabel>
+              <text>رباعی ۱۳۸ : تا دست به اتفاق بر هم نزنیم،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50393" />
+          </navPoint>
+          <navPoint id="navid3x2x8x32" playOrder="25952">
+            <navLabel>
+              <text>رباعی ۱۳۹ : لب بر لب کوزه بردم از غایت آز،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50394" />
+          </navPoint>
+          <navPoint id="navid3x2x8x33" playOrder="25953">
+            <navLabel>
+              <text>رباعی ۱۴۰ : خیام، اگر ز باده مستی، خوش باش؛</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50395" />
+          </navPoint>
+          <navPoint id="navid3x2x8x34" playOrder="25954">
+            <navLabel>
+              <text>رباعی ۱۴۱ : فردا علم نفاق طی خواهم‌کرد،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50396" />
+          </navPoint>
+          <navPoint id="navid3x2x8x35" playOrder="25955">
+            <navLabel>
+              <text>رباعی ۱۴۲ : گردون نِگَری ز قدّ‌ِ فرسودهٔ ماست،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50397" />
+          </navPoint>
+          <navPoint id="navid3x2x8x36" playOrder="25956">
+            <navLabel>
+              <text>رباعی ۱۴۳ : عمرت تا کی به خود‌پرستی گذرد،</text>
+            </navLabel>
+            <content src="cat1819sec1.xhtml#poem-50398" />
+          </navPoint>
+        </navPoint>
+        <navPoint id="navid3x2x9" playOrder="51877">
+          <navLabel>
+            <text>مقدمه : شاید کمتر کتابی در دنیا مانند مجموعهٔ ترانه‌های خی ...</text>
+          </navLabel>
+          <content src="cat1811sec1.xhtml#poem-50252" />
+        </navPoint>
+        <navPoint id="navid3x2x10" playOrder="51878">
+          <navLabel>
+            <text>خیام فیلسوف : فلسفهٔ خیام هیچ وقت تازگی خود را از دست نخواهد داد ...</text>
+          </navLabel>
+          <content src="cat1811sec1.xhtml#poem-50254" />
+        </navPoint>
+        <navPoint id="navid3x2x11" playOrder="51879">
+          <navLabel>
+            <text>خیام شاعر : آن‌چه که اجمالاً اشاره شد نشان می‌دهد که نفوذ فکر، ...</text>
+          </navLabel>
+          <content src="cat1811sec1.xhtml#poem-50255" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+  </navMap>
+</ncx>

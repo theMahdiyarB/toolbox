@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package version="2.0" unique-identifier="BookId" xmlns="http://www.idpf.org/2007/opf">
+  <opf:metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <meta name="cover" content="img1" xmlns="" />
+    <dc:identifier id="BookId">urn:uuid:408de73e-974c-42f6-88a8-5fd75139fc52</dc:identifier>
+    <dc:title>شهریار</dc:title>
+    <dc:language>fa</dc:language>
+    <dc:creator opf:role="aut">شهریار</dc:creator>
+  </opf:metadata>
+  <manifest>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
+    <item id="id1" href="fonts/irsans.ttf" media-type="application/x-font-ttf" />
+    <item id="stylesheet1" href="style.css" media-type="text/css" />
+    <item id="img1" href="images/cover.png" media-type="image/png" />
+    <item id="html1" href="titlepage.xhtml" media-type="application/xhtml+xml" />
+    <item id="html2" href="promo.xhtml" media-type="application/xhtml+xml" />
+    <item id="html3" href="bio.xhtml" media-type="application/xhtml+xml" />
+    <item id="html4" href="cat373.xhtml" media-type="application/xhtml+xml" />
+    <item id="html5" href="cat373sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html6" href="cat373sec2.xhtml" media-type="application/xhtml+xml" />
+    <item id="html7" href="cat373sec3.xhtml" media-type="application/xhtml+xml" />
+    <item id="html8" href="cat373sec4.xhtml" media-type="application/xhtml+xml" />
+    <item id="html9" href="cat1735.xhtml" media-type="application/xhtml+xml" />
+    <item id="html10" href="cat1735sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html11" href="cat1735sec2.xhtml" media-type="application/xhtml+xml" />
+    <item id="html12" href="cat372.xhtml" media-type="application/xhtml+xml" />
+    <item id="html13" href="cat372sec1.xhtml" media-type="application/xhtml+xml" />
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="html1" />
+    <itemref idref="html2" />
+    <itemref idref="html3" />
+    <itemref idref="html4" />
+    <itemref idref="html5" />
+    <itemref idref="html6" />
+    <itemref idref="html7" />
+    <itemref idref="html8" />
+    <itemref idref="html9" />
+    <itemref idref="html10" />
+    <itemref idref="html11" />
+    <itemref idref="html12" />
+    <itemref idref="html13" />
+  </spine>
+  <guide />
+</package>
