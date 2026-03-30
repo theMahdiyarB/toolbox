@@ -6,7 +6,7 @@
 //    - External/opaque requests: Network-only (skip)
 // ============================================================
 
-const CACHE_VERSION = 'toolbox-v2.7';
+const CACHE_VERSION = 'toolbox-v2.8';
 const CACHE_SHELL   = CACHE_VERSION + '-shell';   // HTML, CSS, JS, fonts
 const CACHE_ASSETS  = CACHE_VERSION + '-assets';  // images, maps, large files
 
@@ -21,6 +21,7 @@ const SHELL_URLS = [
   '/favicon.png',
   '/icon-512.png',
   '/Vazirmatn-VF.ttf',
+  // Third-party libraries — cache shell to ensure offline functionality of tools that depend on them
   '/lib/qrcode.js',
   '/lib/jsQR.js',
   '/lib/qr-code-styling.js',
@@ -29,6 +30,19 @@ const SHELL_URLS = [
   '/lib/pdf.worker.mjs',
   '/lib/function-plot.js',
   '/lib/math.js',
+  // Poem structures (small JSON files) — cache shell to ensure offline navigation
+  '/poems/fersowsi/structure.json',
+  '/poems/forugh/structure.json',
+  '/poems/hafez/structure.json',
+  '/poems/jami/structure.json',
+  '/poems/khayyam/structure.json',
+  '/poems/nizami/structure.json',
+  '/poems/rumi/structure.json',
+  '/poems/saadi/structure.json',
+  '/poems/sanai/structure.json',
+  '/poems/shahriar/structure.json',
+  '/poems/sohrab-sepehri/structure.json',
+  '/poems/vahsi/structure.json',
 ];
 
 // ── Install: cache app shell ──────────────────────────────

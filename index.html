@@ -15,7 +15,14 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="main.css" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
-    <script src="https://tapi.bale.ai/miniapp.js?3"></script>
+    <script>
+      // Only load Bale SDK if running in Bale miniapp
+      if (/(bale\.ai|tapi\.bale\.ai)/i.test(window.location.hostname)) {
+        const script = document.createElement('script');
+        script.src = 'https://tapi.bale.ai/miniapp.js?3';
+        document.head.appendChild(script);
+      }
+    </script>
     <script src="lib/math.js"></script>
     <script src="lib/function-plot.js"></script>
     <script src="lib/qrcode.js"></script>
@@ -7183,7 +7190,7 @@
                 <button class="btn btn-filled" onclick="selectPoet('ferdowsi')" data-poet="ferdowsi">فردوسی</button>
                 <button class="btn btn-filled" onclick="selectPoet('hafez')" data-poet="hafez">حافظ</button>
                 <button class="btn btn-filled" onclick="selectPoet('saadi')" data-poet="saadi">سعدی</button>
-                <button class="btn btn-filled" onclick="selectPoet('rumi')" data-poet="rumi">مولانا</button>
+                <button class="btn btn-filled" onclick="selectPoet('rumi')" data-poet="rumi">مولوی</button>
                 <button class="btn btn-filled" onclick="selectPoet('sanai')" data-poet="sanai">سنایی</button>
                 <button class="btn btn-filled" onclick="selectPoet('jami')" data-poet="jami">جامی</button>
                 <button class="btn btn-filled" onclick="selectPoet('khayyam')" data-poet="khayyam">خیام</button>
@@ -7223,6 +7230,7 @@
             <button class="btn btn-text" onclick="backToPoemsList()" style="margin-bottom: 12px;">← بازگشت به لیست</button>
             <div id="diwan-poem-content"></div>
           </div>
+          <div class="tool-desc">دیوان اشعار شاعرهای معروف ایرانی - استخراج‌شده از سایت گنجور</div>
         </div>
 
 
@@ -7230,7 +7238,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 2.7 - ۱۴۰۵/۰۱/۱۰
+          ℹ️ نسخه 2.8 - ۱۴۰۵/۰۱/۱۰
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -7324,7 +7332,8 @@
         decmatrix:'ماتریس تصمیم‌گیری',
         watermark:'واترمارک تصویر',
         seotools:'مولد متا تگ SEO',
-        audiotools:'ابزار صوتی'
+        audiotools:'ابزار صوتی',
+        diwan:'دیوان شعر'
       };
 
       function _applyTool(id, pushState) {
@@ -7380,7 +7389,6 @@
         if (id === 'emotcn') emotcnRender();
         if (id === 'calculus' && typeof calcSetTab === 'function') calcSetTab('deriv');
         if (typeof recentAdd === 'function') recentAdd(id);
-        // New tool inits
         if (id === 'minigames' && typeof mgSetGame === 'function') { _mgCurrent=''; mgSetGame('ttt'); }
         if (id === 'compass' && typeof compassInit === 'function') compassInit();
         if (id === 'goldenratio' && typeof calcGolden === 'function') calcGolden();
@@ -7391,6 +7399,7 @@
         if (id === 'langscores' && typeof ls2SetTab === 'function') ls2SetTab('ielts');
         if (id === 'htaccess' && typeof buildHtaccess === 'function') buildHtaccess();
         if (id === 'decmatrix' && typeof dmInit === 'function') dmInit();
+        if (id === 'diwan') { document.getElementById('diwan-poet-select').style.display = 'block'; }
         if (id === 'seotools' && typeof buildSEO === 'function') buildSEO();
         if (id === 'audiotools' && typeof atSetTab === 'function') atSetTab('gen');
         if (id === 'imgpalette') { /* loaded on demand */ }
@@ -7557,7 +7566,6 @@
         setTimeout(() => { el.style.background = orig; el.style.color = ''; }, 900);
       }
 
-      // ══════════════════════════════════════════════════════
       // ══════════════════════════════════════════════════════
       //  CALCULATOR
       // ══════════════════════════════════════════════════════
@@ -14428,26 +14436,111 @@
         const response = await fetch(`poems/${folder}/structure.json`);
         const data = await response.json();
         POETS[poetId] = {
-          name: data.name,
+          name: data.name || data.id,
           folder: folder,
           hasBio: true,
           categories: {}
         };
         
-        data.categories.forEach(cat => {
-          POETS[poetId].categories[cat.id] = {
-            name: cat.name,
-            files: cat.files
-          };
-        });
+        // Recursively flatten categories and extract files
+        function flattenCategories(items, parentPath = '') {
+          items.forEach(cat => {
+            const catId = `${parentPath}${cat.label.toLowerCase().replace(/\s+/g, '-')}`;
+            let files = [];
+            let hasSubcategories = false;
+            
+            // Check if this is a leaf node with poems or a branch with subcategories
+            if (cat.children && Array.isArray(cat.children)) {
+              const firstChild = cat.children[0];
+              
+              if (firstChild.src && firstChild.src.includes('#poem-')) {
+                // These are direct poems - extract files
+                const fileSet = new Set();
+                cat.children.forEach(child => {
+                  const fileName = child.src.split('#')[0];
+                  if (fileName) fileSet.add(fileName);
+                });
+                files = Array.from(fileSet);
+              } else {
+                // These are subcategories or need recursion
+                hasSubcategories = true;
+                flattenCategories(cat.children, catId + '_');
+              }
+            }
+            
+            // Always create an entry for this category
+            POETS[poetId].categories[catId] = {
+              name: cat.label,
+              files: files,
+              parentPath: parentPath,
+              hasSubcategories: hasSubcategories
+            };
+          });
+        }
+        
+        flattenCategories(data.categories);
         
         return POETS[poetId];
       }
 
 
       let currentPoet = null;
+      let currentPoetId = null;
       let currentCategory = null;
+      let currentCategoryId = null;
       let allPoems = [];
+
+      // Helper: Build breadcrumb HTML from category path
+      function buildBreadcrumbHTML(poetId, categoryId = null) {
+        const poet = POETS[poetId];
+        if (!poet) return '';
+        
+        let html = `<div class="breadcrumb">`;
+        
+        if (!categoryId) {
+          // Just poet + back to poets
+          html += `
+            <div class="breadcrumb__item">
+              <span class="breadcrumb__link" onclick="backToPoets()">شاعران</span>
+              <span class="breadcrumb__separator">/</span>
+            </div>
+            <div class="breadcrumb__item">
+              <span class="breadcrumb__text">${poet.name}</span>
+            </div>
+          `;
+        } else {
+          // Reversed: شاعران / مولوی / categories
+          const pathParts = categoryId.split('_').map((part, idx, arr) => {
+            const fullId = arr.slice(0, idx + 1).join('_');
+            return { label: poet.categories[fullId]?.name || part, id: fullId };
+          });
+          
+          // Start with back to poets
+          html += `
+            <div class="breadcrumb__item">
+              <span class="breadcrumb__link" onclick="backToPoets()">شاعران</span>
+              <span class="breadcrumb__separator">/</span>
+            </div>
+            <div class="breadcrumb__item">
+              <span class="breadcrumb__link" onclick="selectPoet('${poetId}')">${poet.name}</span>
+              <span class="breadcrumb__separator">/</span>
+            </div>
+          `;
+          
+          // Display category path (not reversed)
+          pathParts.forEach((part, idx) => {
+            html += `
+              <div class="breadcrumb__item">
+                <span class="breadcrumb__text">${part.label}</span>
+                ${idx < pathParts.length - 1 ? '<span class="breadcrumb__separator">/</span>' : ''}
+              </div>
+            `;
+          });
+        }
+        
+        html += `</div>`;
+        return html;
+      }
 
       async function selectPoet(poetId) {
         // Load poet structure if not already loaded
@@ -14456,13 +14549,29 @@
         }
         
         currentPoet = POETS[poetId];
+        currentPoetId = poetId;
+        currentCategory = null;
         document.getElementById('diwan-poet-select').style.display = 'none';
         document.getElementById('diwan-category-select').style.display = 'block';
         
+        const divanCategorySelect = document.getElementById('diwan-category-select');
         const categoriesDiv = document.getElementById('diwan-categories');
+        
+        // Update or create breadcrumb at the top of the section (inside field-col, after back button)
+        let breadcrumbArea = divanCategorySelect.querySelector('.breadcrumb');
+        if (!breadcrumbArea) {
+          breadcrumbArea = document.createElement('div');
+          breadcrumbArea.style.marginBottom = '16px';
+          // Insert after the back button (which is the first child of field-col)
+          const fieldCol = divanCategorySelect.querySelector('.field-col');
+          const backBtn = divanCategorySelect.querySelector('.btn-text');
+          backBtn.parentNode.insertBefore(breadcrumbArea, backBtn.nextSibling);
+        }
+        breadcrumbArea.innerHTML = buildBreadcrumbHTML(poetId);
+        
+        // Clear categories and add biography button first
         categoriesDiv.innerHTML = '';
         
-        // Add biography button if available
         if (currentPoet.hasBio) {
           const bioBtn = document.createElement('button');
           bioBtn.className = 'btn btn-primary';
@@ -14471,11 +14580,23 @@
           categoriesDiv.appendChild(bioBtn);
         }
         
-        for (const [catId, catData] of Object.entries(currentPoet.categories)) {
+        // Get direct categories (those without underscore parent path or with empty parentPath)
+        const directCategories = Object.entries(currentPoet.categories)
+          .filter(([catId, catData]) => !catData.parentPath || catData.parentPath === '')
+          .sort((a, b) => a[1].name.localeCompare(b[1].name, 'fa'));
+        
+        if (directCategories.length === 0) {
+          const noPoems = document.createElement('div');
+          noPoems.textContent = 'شعری یافت نشد';
+          categoriesDiv.appendChild(noPoems);
+          return;
+        }
+        
+        for (const [catId, catData] of directCategories) {
           const btn = document.createElement('button');
           btn.className = 'btn btn-secondary';
           btn.textContent = catData.name;
-          btn.onclick = () => selectCategory(catId);
+          btn.onclick = () => selectCategory(poetId, catId);
           categoriesDiv.appendChild(btn);
         }
       }
@@ -14505,6 +14626,14 @@
         }
       }
 
+      function backToPoets() {
+        document.getElementById('diwan-category-select').style.display = 'none';
+        document.getElementById('diwan-poet-select').style.display = 'block';
+        currentPoet = null;
+        currentCategory = null;
+        allPoems = [];
+      }
+
       function backToPoemsList() {
         document.getElementById('diwan-poem-detail').style.display = 'none';
         
@@ -14516,17 +14645,88 @@
         }
       }
 
-      async function selectCategory(categoryId) {
-        currentCategory = currentPoet.categories[categoryId];
+      async function selectCategory(poetId, categoryId) {
+        const poet = POETS[poetId];
+        const category = poet.categories[categoryId];
+        currentCategory = category;
+        currentPoet = poet;
+        currentPoetId = poetId;
+        currentCategoryId = categoryId;
         allPoems = [];
         
+        // If this category has subcategories but no files, show the subcategories instead
+        if (category.hasSubcategories && (!category.files || category.files.length === 0)) {
+          // Show subcategories
+          document.getElementById('diwan-category-select').style.display = 'block';
+          const divanCategorySelect = document.getElementById('diwan-category-select');
+          const categoriesDiv = document.getElementById('diwan-categories');
+          
+          // Update breadcrumb at the top
+          let breadcrumbArea = divanCategorySelect.querySelector('.breadcrumb');
+          if (!breadcrumbArea) {
+            breadcrumbArea = document.createElement('div');
+            breadcrumbArea.style.marginBottom = '16px';
+            const backBtn = divanCategorySelect.querySelector('.btn-text');
+            backBtn.parentNode.insertBefore(breadcrumbArea, backBtn.nextSibling);
+          }
+          breadcrumbArea.innerHTML = buildBreadcrumbHTML(poetId, categoryId);
+          
+          // Clear and rebuild categories list
+          categoriesDiv.innerHTML = '';
+          
+          // Get subcategories
+          const subcategoryPrefix = categoryId + '_';
+          const subcategories = Object.entries(poet.categories)
+            .filter(([catId, catData]) => catId.startsWith(subcategoryPrefix) && catData.parentPath === subcategoryPrefix)
+            .sort((a, b) => a[1].name.localeCompare(b[1].name, 'fa'));
+          
+          if (subcategories.length === 0) {
+            const noPoems = document.createElement('div');
+            noPoems.textContent = 'شعری یافت نشد';
+            categoriesDiv.appendChild(noPoems);
+            return;
+          }
+          
+          for (const [catId, catData] of subcategories) {
+            const btn = document.createElement('button');
+            btn.className = 'btn btn-secondary';
+            btn.textContent = catData.name;
+            btn.onclick = () => selectCategory(poetId, catId);
+            categoriesDiv.appendChild(btn);
+          }
+          
+          return;
+        }
+        
+        // Load poems for this category
         document.getElementById('diwan-category-select').style.display = 'none';
         document.getElementById('diwan-poems-view').style.display = 'block';
+        
+        // Update breadcrumb in poems view
+        const poemsViewDiv = document.getElementById('diwan-poems-view');
+        let breadcrumbArea = poemsViewDiv.querySelector('.breadcrumb');
+        if (!breadcrumbArea) {
+          breadcrumbArea = document.createElement('div');
+          breadcrumbArea.style.marginBottom = '16px';
+          // Insert after the back button
+          const backBtn = poemsViewDiv.querySelector('.btn-text');
+          backBtn.parentNode.insertBefore(breadcrumbArea, backBtn.nextSibling);
+        }
+        breadcrumbArea.innerHTML = buildBreadcrumbHTML(poetId, categoryId);
+        
         document.getElementById('diwan-poems-list').innerHTML = '<div style="text-align: center; padding: 20px;">در حال بارگذاری...</div>';
         
-        for (const file of currentCategory.files) {
+        // Ensure files is an array
+        const files = category.files || [];
+        
+        if (files.length === 0) {
+          displayPoems([]);
+          return;
+        }
+        
+        for (const file of files) {
           try {
-            const response = await fetch(`poems/${currentPoet.folder}/${file}`);
+            const response = await fetch(`poems/${poet.folder}/${file}`);
             const html = await response.text();
             const poems = parsePoems(html);
             allPoems.push(...poems);
@@ -14543,20 +14743,37 @@
         const doc = parser.parseFromString(html, 'text/html');
         const poems = [];
         
-        const headers = doc.querySelectorAll('h2 a[id^="poem-"]');
+        // Look for poem headers - could be h2/h3 with id or a[id]
+        const headers = doc.querySelectorAll('[id^="poem-"]');
         
         headers.forEach(header => {
           const poemId = header.id;
-          const title = header.textContent.trim();
+          
+          // Try to get title from the element or its content
+          let titleEl = header;
+          if (header.tagName === 'A') {
+            titleEl = header.parentElement; // Get parent if it's an anchor
+          }
+          const title = titleEl.textContent.trim();
+          
           const verses = [];
           
-          let nextEl = header.parentElement.nextElementSibling;
-          while (nextEl && nextEl.tagName === 'P') {
-            verses.push(nextEl.textContent.trim());
+          // Collect following P elements as verses
+          let nextEl = titleEl.nextElementSibling;
+          while (nextEl) {
+            if (nextEl.tagName === 'P') {
+              const text = nextEl.textContent.trim();
+              if (text) verses.push(text);
+            } else if (/^H[1-6]$/.test(nextEl.tagName) || nextEl.id) {
+              // Stop if we hit another header or a new section
+              break;
+            }
             nextEl = nextEl.nextElementSibling;
           }
           
-          poems.push({ id: poemId, title, verses });
+          if (title || verses.length > 0) {
+            poems.push({ id: poemId, title, verses });
+          }
         });
         
         return poems;
@@ -14638,11 +14855,6 @@
           </div>
           ${beytsHTML}
         `;
-      }
-
-      function backToPoemsList() {
-        document.getElementById('diwan-poem-detail').style.display = 'none';
-        document.getElementById('diwan-poems-view').style.display = 'block';
       }
 
 

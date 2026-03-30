@@ -1719,6 +1719,56 @@ select.field__input {
   color: var(--m3-primary);
 }
 
+/* ════════════════════════════════════════════════════════════
+   BREADCRUMB NAVIGATION (Material 3 Expressive)
+   ════════════════════════════════════════════════════════════ */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--m3-spacing-8);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--m3-on-surface-variant);
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+.breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--m3-spacing-4);
+}
+
+.breadcrumb__link {
+  cursor: pointer;
+  color: var(--m3-primary);
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--m3-duration-fast) var(--m3-ease-standard);
+  padding: var(--m3-spacing-4) var(--m3-spacing-8);
+  border-radius: var(--m3-shape-sm);
+  margin: 0 calc(var(--m3-spacing-4) * -1);
+}
+
+.breadcrumb__link:hover {
+  background-color: color-mix(in srgb, var(--m3-primary) 10%, transparent);
+  color: var(--m3-primary);
+}
+
+.breadcrumb__link:active {
+  background-color: color-mix(in srgb, var(--m3-primary) 20%, transparent);
+}
+
+.breadcrumb__separator {
+  color: var(--m3-outline-variant);
+  font-weight: 400;
+}
+
+.breadcrumb__text {
+  color: var(--m3-on-surface);
+  font-weight: 600;
+}
+
 /* ── Backward-compat shims ────────────────────────────────
    The old .text-input / .text-area / .select-input classes
    still exist so un-migrated tools degrade gracefully.
