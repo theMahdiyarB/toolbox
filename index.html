@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,6 +38,7 @@
       window._pdfjsReady = true;
       window.dispatchEvent(new Event('pdfjsready'));
     </script>
+
     <style>
       .page-wrapper {
         margin-inline-end: 0 !important;
@@ -576,14 +578,11 @@
       }
       /* Focus: 2dp primary — compensate padding so no layout shift */
       .field__container:focus-within {
-        border-width: 2px;
         border-color: var(--m3-primary);
-        padding: 0 14px;
+        outline: 1px solid var(--m3-primary);
+        outline-offset: -1px;
       }
-      .field--textarea .field__container:focus-within {
-        padding-top: 7px;
-        padding-bottom: 7px;
-      }
+      .field--textarea .field__container:focus-within { /* outline handles focus */ }
 
       /* ── .field__input ── */
       .field__input {
@@ -617,13 +616,14 @@
       select.field__input {
         appearance: none;
         -webkit-appearance: none;
-        padding-inline-end: 24px;
+        padding-inline-end: 28px;
         cursor: pointer;
-        /* color-scheme tells the browser which OS-native theme to use
-           for the dropdown popup — set to 'light' by default,
-           toggled to 'dark' by JS on theme switch               */
         color-scheme: light;
         background-color: transparent;
+        width: 100%; min-width: 0; flex: 1;
+      }
+      .field__container:has(select.field__input) {
+        background-color: var(--m3-surface-container);
       }
       /* Dark theme: select native popup gets dark OS rendering */
       [data-theme="dark"] select.field__input,
@@ -645,9 +645,10 @@
         color: #dce4e6;
       }
       .select-input {
-        appearance: none;
-        -webkit-appearance: none;
+        -webkit-appearance: auto;
+        appearance: auto;
         color-scheme: light;
+        background-color: var(--m3-surface-container);
       }
       [data-theme="dark"] .select-input {
         color-scheme: dark;
@@ -788,9 +789,9 @@
         border-color: var(--m3-error);
       }
       .field--error .field__container:focus-within {
-        border-width: 2px;
         border-color: var(--m3-error);
-        padding: 0 14px;
+        outline: 1px solid var(--m3-error);
+        outline-offset: -1px;
       }
       .field--error .field__label,
       .field--error .field__input:focus ~ .field__label,
@@ -813,9 +814,8 @@
         background: color-mix(in srgb, var(--m3-on-surface) 4%, transparent);
       }
       .field--readonly .field__container:focus-within {
-        border-width: 1px;
         border-color: var(--m3-outline-variant);
-        padding: 0 15px;
+        outline: none;
       }
       .field--readonly .field__input { color: var(--m3-on-surface-variant); cursor: default; }
 
@@ -859,7 +859,7 @@
         padding: 14px 15px;
         border-radius: 16px;
         border: 1px solid var(--m3-outline);
-        background: transparent;
+        background: var(--m3-surface-container);
         color: var(--m3-on-surface);
         font: inherit;
         font-size: 1rem;
@@ -872,9 +872,9 @@
         border-color: var(--m3-on-surface);
       }
       .text-input:focus, .text-area:focus, .select-input:focus {
-        border-width: 2px;
         border-color: var(--m3-primary);
-        padding: 13px 14px;
+        outline: 1.5px solid var(--m3-primary);
+        outline-offset: -1px;
       }
       .text-area { resize: vertical; min-height: 90px; }
       .text-input--large  { font-size: 1.9rem; text-align: left; direction: ltr; unicode-bidi: embed; }
@@ -1652,6 +1652,23 @@
       #diwan-poem-content .breadcrumb {
         margin-bottom: 24px;
       }
+
+      /* ── Prose display ── */
+      .diwan-prose-wrap { font-size:15.5px; line-height:2.1; color:var(--m3-on-surface); direction:rtl; }
+      .diwan-prose-para { margin:0 0 1.1em 0; text-indent:1.5em; text-align:justify; }
+      .diwan-prose-para:first-child { text-indent:0; }
+      /* ── Free / modern verse ── */
+      .diwan-free-wrap { display:flex; flex-direction:column; align-items:flex-end; gap:2px; padding:6px 0; }
+      .diwan-free-line { font-size:16px; line-height:1.9; color:var(--m3-on-surface); text-align:right; }
+      /* ── Poem body ── */
+      .diwan-poem-body { margin-top:4px; }
+      /* ── Poem actions bar ── */
+      .diwan-poem-actions { margin-top:20px; padding-top:14px; border-top:1px solid var(--m3-outline-variant); display:flex; gap:8px; flex-wrap:wrap; }
+      /* ── Type badges ── */
+      .diwan-poem-type-badge { display:inline-block; margin-top:6px; font-size:11px; font-weight:600; color:var(--m3-primary); background:color-mix(in srgb,var(--m3-primary) 12%,transparent); padding:2px 10px; border-radius:20px; border:1px solid color-mix(in srgb,var(--m3-primary) 30%,transparent); }
+      .diwan-type-mini { font-size:10px; font-weight:600; color:var(--m3-on-surface-variant); background:var(--m3-surface-container-high); padding:1px 7px; border-radius:10px; white-space:nowrap; flex-shrink:0; }
+      /* ── Category buttons ── */
+      #diwan-categories .btn { white-space:normal; text-align:center; min-width:90px; max-width:200px; line-height:1.4; height:auto; padding:8px 14px; }
 
       @media (max-width: 600px) {
         .diwan-beyt {
@@ -7143,10 +7160,13 @@
               </div>
             </div>
             
-            <!-- Hafez Divination (Faal Hafez) -->
-            <div style="margin-top: 32px; padding: 20px; background: var(--m3-primary-container); border-radius: 12px; text-align: center;">
-              <div style="font-size: 14px; color: var(--m3-on-primary-container); margin-bottom: 12px;">💫 فال حافظ</div>
-              <button class="btn btn-tonal" onclick="showHafezFaal()" style="width: 100%;">یک غزل تصادفی</button>
+            <!-- Hafez Faal - M3 card -->
+            <div style="margin-top:24px;padding:20px 20px 16px;background:var(--m3-secondary-container,var(--m3-primary-container));border-radius:20px;text-align:center;border:1px solid color-mix(in srgb,var(--m3-primary) 20%,transparent)">
+              <div style="font-size:28px;margin-bottom:6px">📿</div>
+              <div style="font-size:17px;font-weight:700;color:var(--m3-on-secondary-container,var(--m3-on-primary-container));margin-bottom:4px">فال حافظ</div>
+              <div style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:14px;line-height:1.5">ای حافظ شیرازی! تو محرم هر رازی! تو را به خدا و به شاخ نباتت قسم می دهم که هر چه صلاح و مصلحت می بینی برایم آشکار و آرزوی مرا براورده سازی.</div>
+              <button class="btn btn-filled" onclick="showHafezFaal()" style="width:100%;font-size:15px;padding:12px;border-radius:12px">✅ فالی بگیر</button>
+              <div style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:14px;line-height:1.5">فال گرفتن از دیوانِ حافظ معمولاً در مناسبت‌هایی مانند عید نوروز، چهارشنبه‌سوری، شب چله، سیزده‌به‌در، چهارشنبهٔ آخرِ ماهِ صفر و سیزدهِ صفر انجام می‌شود. هنگامی که شخص نیتِ مشخصی دارد، مانند هنگامِ فراقِ یار یا انتظارِ آمدنِ شخصی یا پیش‌آمدنِ مشکلی برای عزیزی یا چیرگیِ اندوهی بر وجودِ فردی، فال زدن رایج است.</div>
             </div>
           </div>
 
@@ -7155,7 +7175,7 @@
             <div class="field-col">
               <button class="btn btn-text" onclick="backToPoets()" style="margin-bottom: 12px;">← بازگشت به انتخاب شاعر</button>
               <label class="field-label">دسته‌بندی اشعار</label>
-              <div id="diwan-categories" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px;"></div>
+              <div id="diwan-categories" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
             </div>
           </div>
 
@@ -7182,18 +7202,28 @@
         </div>
 
 
-      </div><!-- /tool-container -->
+      <!-- ── Search empty state ── -->
+      <div id="search-empty" role="status" aria-live="polite">
+          <div class="search-empty__icon">🔍</div>
+          <p class="search-empty__title">نتیجه‌ای یافت نشد</p>
+          <p class="search-empty__sub">عبارت دیگری امتحان کنید</p>
+          <button class="search-empty__btn" id="emptyClearBtn">پاک کردن</button>
+      </div>
+
+    </div><!-- /tool-container -->
+
+
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 2.8 - ۱۴۰۵/۰۱/۱۰
+          ℹ️ نسخه 2.9 - ۱۴۰۵/۰۱/۱۱
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
         </span>
       </div>
     </footer>
-    </div><!-- /page-wrapper -->
+  </div><!-- /page-wrapper -->
 
     <button class="theme-fab" onclick="toggleTheme()" title="تغییر پوسته"
       style="display: var(--_bale-fab-display, flex)">
@@ -7334,7 +7364,14 @@
         if (id === 'emojis') emoRender();
         if (id === 'pomodoro' && typeof pomodoroInit==='function') pomodoroInit();
         if (id === 'chart') chartRender();
-        if (id === 'emotcn') emotcnRender();
+        if (id === 'emotcn') {
+          loadEmoticons().then(() => {
+            const q=(document.getElementById('etcn-search')||{}).value||'';
+            const cat=(document.getElementById('etcn-cat')||{}).value||'';
+            if (!q && !cat) { _etcnCurrentData=EMOTCN_DATA.length>0?EMOTCN_DATA:[]; emotcnRender(_etcnCurrentData); }
+            else emotcnSearch();
+          });
+        }
         if (id === 'calculus' && typeof calcSetTab === 'function') calcSetTab('deriv');
         if (typeof recentAdd === 'function') recentAdd(id);
         if (id === 'minigames' && typeof mgSetGame === 'function') { _mgCurrent=''; mgSetGame('ttt'); }
@@ -9080,6 +9117,8 @@
         const input=document.getElementById('siteSearch');
         const clearBtn=document.getElementById('searchClear');
         const countEl=document.getElementById('searchCount');
+        const emptyEl=document.getElementById('search-empty');
+        const emptyClear=document.getElementById('emptyClearBtn');
         if(!input)return;
         const cards=Array.from(document.querySelectorAll('.link-card')).map(card=>({el:card,section:card.closest('.section'),textLow:card.textContent.toLowerCase()}));
         function getSections(){return new Map([...new Set(cards.map(c=>c.section).filter(Boolean))].map(s=>[s,0]));}
@@ -9108,7 +9147,7 @@
           if (_favsSec)     _favsSec.style.display     = _searching ? 'none' : '';
           if (_heroContent) _heroContent.style.display = _searching ? 'none' : '';
           if (_heroIcon)    _heroIcon.style.display    = _searching ? 'none' : '';
-          if(!terms.length){cards.forEach(({el,section})=>{clearHL(el);el.classList.remove('search-hidden');if(section)section.classList.remove('search-hidden');});if(clearBtn)clearBtn.hidden=true;if(countEl){countEl.hidden=true;countEl.textContent='';}return;}
+          if(!terms.length){cards.forEach(({el,section})=>{clearHL(el);el.classList.remove('search-hidden');if(section)section.classList.remove('search-hidden');});if(clearBtn)clearBtn.hidden=true;if(countEl){countEl.hidden=true;countEl.textContent='';}if(emptyEl)emptyEl.classList.remove('visible');return;}
           if(clearBtn)clearBtn.hidden=false;
           let vis=0;
           cards.forEach(({el,section,textLow})=>{
@@ -9119,12 +9158,14 @@
           });
           secCounts.forEach((cnt,sec)=>sec.classList.toggle('search-hidden',cnt===0));
           if(countEl){countEl.hidden=false;countEl.textContent=vis===0?'ابزاری پیدا نشد':`${vis} ابزار پیدا شد`;}
+          if(emptyEl)emptyEl.classList.toggle('visible',vis===0);
           const _badge=document.getElementById('search-count-badge');
           if(_badge){_badge.style.display=vis>0?'inline':'none';_badge.textContent=vis+' ابزار';}
         }
         let debT;
         input.addEventListener('input',()=>{clearTimeout(debT);debT=setTimeout(()=>runSearch(input.value),200);});
         if(clearBtn)clearBtn.addEventListener('click',()=>{input.value='';runSearch('');input.focus();});
+        if(emptyClear)emptyClear.addEventListener('click',()=>{input.value='';runSearch('');input.focus();});
         document.addEventListener('keydown',e=>{
           if(e.key==='/') {
             const calcOpen=document.getElementById('calc')?.classList.contains('active');
@@ -12046,7 +12087,13 @@
           if (w) w.style.display = t===tab ? '' : 'none';
           if (b) b.className = 'btn '+(t===tab?'btn-filled':'btn-tonal');
         });
-        if (tab==='graph') { calcGraphInit(); _cgDrawPlot(); }
+        if (tab==='graph') {
+          _cgFnCount = 0;
+          var fnList = document.getElementById('calc-fn-list');
+          if (fnList) fnList.innerHTML = '';
+          calcGraphInit();
+          setTimeout(function(){ _cgDrawPlot(); }, 80);
+        }
         if (tab==='deriv') calcDerivUpdate();
       }
       function _calcNorm(expr) {
@@ -12215,7 +12262,7 @@
       function calcZoom(f){calcFPZoom(f<1?1.3:0.77);}
       function calcZoomReset(){calcFPReset();}
       function calcPlot(){_cgDrawPlot();}
-      function _cgGetFns(){var fns=[];for(var i=0;i<5;i++){var el=document.getElementById('calc-gfn-'+i);if(el&&el.value.trim())fns.push({expr:el.value.trim(),color:CURVE_COLORS[i%CURVE_COLORS.length]});}return fns;}
+      function _cgGetFns(){var fns=[];var list=document.getElementById('calc-fn-list');if(!list)return fns;list.querySelectorAll('input[type="text"]').forEach(function(el,i){if(el&&el.value.trim()){var idx=parseInt((el.id||'').replace('calc-gfn-',''));if(isNaN(idx))idx=i;fns.push({expr:el.value.trim(),color:CURVE_COLORS[idx%CURVE_COLORS.length]});}});return fns;}
       function _fpNorm(e){return e.replace(/X/g,'x').replace(/π/g,'pi').replace(/pi/gi,'pi').replace(/([0-9])\s*([a-zA-Z\(])/g,'$1*$2').replace(/ln\s*\(/g,'log(').replace(/e(?![a-zA-Z0-9_])/g,'e');}
       function _cgDrawPlot(){
         var fns=_cgGetFns();
@@ -14393,41 +14440,36 @@
         };
         
         // Recursively flatten categories and extract files
+        // Deduplication: filter wrapper entries with label === parent label
         function flattenCategories(items, parentPath = '') {
+          if (!items || !Array.isArray(items)) return;
           items.forEach(cat => {
-            const catId = `${parentPath}${cat.label.toLowerCase().replace(/\s+/g, '-')}`;
-            let files = [];
-            let hasSubcategories = false;
-            
-            // Check if this is a leaf node with poems or a branch with subcategories
+            if (!cat || !cat.label) return;
+            const safeLabel = cat.label.replace(/[\s\u200c\u200d]+/g,'-').replace(/[^\w\u0600-\u06FF-]/g,'').toLowerCase().substring(0,60);
+            const catId = parentPath+(safeLabel||'item');
+            let files=[], hasSubcategories=false;
             if (cat.src && cat.src.includes('#poem-')) {
-              // Direct poem entry (no children array)
               files = [cat.src.split('#')[0]];
-            } else if (cat.children && Array.isArray(cat.children)) {
-              const firstChild = cat.children[0];
-              
-              if (firstChild.src && firstChild.src.includes('#poem-')) {
-                // These are direct poems - extract files
-                const fileSet = new Set();
-                cat.children.forEach(child => {
-                  const fileName = child.src.split('#')[0];
-                  if (fileName) fileSet.add(fileName);
-                });
-                files = Array.from(fileSet);
+            } else if (cat.children && Array.isArray(cat.children) && cat.children.length>0) {
+              const allPoems = cat.children.every(c=>c.src&&c.src.includes('#poem-'));
+              if (allPoems) {
+                const fs=new Set();
+                cat.children.forEach(c=>{const f=(c.src||'').split('#')[0];if(f)fs.add(f);});
+                files=Array.from(fs);
               } else {
-                // These are subcategories or need recursion
-                hasSubcategories = true;
-                flattenCategories(cat.children, catId + '_');
+                const realChildren=cat.children.filter(c=>c.label&&c.label!==cat.label);
+                if(realChildren.length>0){hasSubcategories=true;flattenCategories(realChildren,catId+'_');}
+                else{
+                  const fs=new Set();
+                  cat.children.forEach(c=>{if(c.src)fs.add(c.src.split('#')[0]);if(c.children)c.children.forEach(gc=>{if(gc.src)fs.add(gc.src.split('#')[0]);});});
+                  files=Array.from(fs).filter(Boolean);
+                }
               }
             }
-            
-            // Always create an entry for this category
-            POETS[poetId].categories[catId] = {
-              name: cat.label,
-              files: files,
-              parentPath: parentPath,
-              hasSubcategories: hasSubcategories
-            };
+            if(POETS[poetId].categories[catId]){
+              files=[...new Set([...(POETS[poetId].categories[catId].files||[]),...files])];
+            }
+            POETS[poetId].categories[catId]={name:cat.label,files,parentPath,hasSubcategories};
           });
         }
         
@@ -14444,27 +14486,24 @@
       let allPoems = [];
       let isFaalMode = false;
 
-      // Helper: Smart sorting that handles Persian numbers (۰-۹) and Roman letters
+      // Helper: Smart sorting - Persian ordinals, digits, Roman
+      const _FA_ORD = {'اول':1,'یکم':1,'دوم':2,'سوم':3,'چهارم':4,'پنجم':5,'ششم':6,'هفتم':7,'هشتم':8,'نهم':9,'دهم':10,'یازدهم':11,'دوازدهم':12,'سیزدهم':13,'چهاردهم':14,'پانزدهم':15};
+      const _ROM_NUM = {'i':1,'ii':2,'iii':3,'iv':4,'v':5,'vi':6,'vii':7,'viii':8,'ix':9,'x':10,'xi':11,'xii':12,'xiii':13,'xiv':14,'xv':15};
+      function _extractOrderKey(s) {
+        if (!s) return null;
+        for (const [w,n] of Object.entries(_FA_ORD)) { if (s.includes(w)) return n; }
+        const fa=s.match(/[۰-۹]+/); if(fa) return parseInt(fa[0].replace(/[۰-۹]/g,d=>'0123456789'.charAt('۰۱۲۳۴۵۶۷۸۹'.indexOf(d))));
+        const en=s.match(/[0-9]+/); if(en) return parseInt(en[0]);
+        const rm=s.toLowerCase().match(/\b(i{1,3}|iv|vi{0,3}|ix|xi{1,2}|xii|xiii|xiv|xv)\b/);
+        if(rm) return _ROM_NUM[rm[1]]||null;
+        return null;
+      }
       function smartSort(items, keyFn) {
-        return items.sort((a, b) => {
-          const aVal = keyFn(a);
-          const bVal = keyFn(b);
-          
-          // Extract leading numbers (Persian or English)
-          const aNumMatch = aVal.match(/^\D*([\d۰-۹]+)/);
-          const bNumMatch = bVal.match(/^\D*([\d۰-۹]+)/);
-          
-          if (aNumMatch && bNumMatch) {
-            // Convert Persian digits to English for numeric comparison
-            const aPersianNum = aNumMatch[1].replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
-            const bPersianNum = bNumMatch[1].replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
-            const aNum = parseInt(aPersianNum);
-            const bNum = parseInt(bPersianNum);
-            if (aNum !== bNum) return aNum - bNum;
-          }
-          
-          // Fall back to lexicographic sorting in Persian
-          return aVal.localeCompare(bVal, 'fa');
+        return items.slice().sort((a,b)=>{
+          const av=keyFn(a),bv=keyFn(b);
+          const ak=_extractOrderKey(av),bk=_extractOrderKey(bv);
+          if(ak!==null&&bk!==null&&ak!==bk) return ak-bk;
+          return av.localeCompare(bv,'fa',{numeric:true});
         });
       }
 
@@ -14786,14 +14825,23 @@
 
       function detectPoemType(categoryName) {
         if (!categoryName) return 'unknown';
-        categoryName = categoryName.toLowerCase();
-        
-        if (categoryName.includes('غزل') || categoryName.includes('ghazal')) return 'ghazal';
-        if (categoryName.includes('مثنوی') || categoryName.includes('masnavi')) return 'masnavi';
-        if (categoryName.includes('نثر') || categoryName.includes('prose')) return 'prose';
-        if (categoryName.includes('یکمصراع') || categoryName.includes('hemistich')) return 'hemistich';
-        
+        const cl = categoryName.toLowerCase();
+        if (cl.includes('فیه') || cl.includes('prose') || cl.includes('نثر')) return 'prose';
+        if (cl.includes('حکایت') || cl.includes('مقدمه') || cl.includes('دیباچه') || cl.includes('خطبه')) return 'prose';
+        if (cl.includes('گلستان') && !cl.includes('شعر')) return 'prose';
+        if (cl.includes('شعر نو') || cl.includes('شعرنو') || cl.includes('سپید') || cl.includes('نیمایی')) return 'free';
+        if (cl.includes('غزل') || cl.includes('ghazal')) return 'ghazal';
+        if (cl.includes('مثنوی') || cl.includes('masnavi')) return 'masnavi';
+        if (cl.includes('قصیده')) return 'qasida';
+        if (cl.includes('رباعی') || cl.includes('دوبیتی')) return 'rubaei';
+        if (cl.includes('مصراع') || cl.includes('hemistich')) return 'hemistich';
+        if (cl.includes('ترجیع') || cl.includes('ترکیب') || cl.includes('قطعه')) return 'ghazal';
         return 'unknown';
+      }
+      function detectPoemTypeFromContent(verses) {
+        if (!verses || !verses.length) return 'unknown';
+        const avg = verses.reduce((s,v)=>s+v.length,0)/verses.length;
+        return avg > 100 ? 'prose' : 'unknown';
       }
 
       function parsePoems(html, categoryName = '') {
@@ -14825,21 +14873,20 @@
             if (nextEl.tagName === 'P') {
               const text = nextEl.textContent.trim();
               if (text) verses.push(text);
-            } else if (/^H[1-6]$/.test(nextEl.tagName) || nextEl.id) {
-              // Stop if we hit another header or a new section
+            } else if (nextEl.tagName === 'BLOCKQUOTE' || nextEl.tagName === 'DIV') {
+              const ps = nextEl.querySelectorAll('p');
+              if (ps.length > 0) { ps.forEach(p => { const t=p.textContent.trim(); if(t)verses.push(t); }); }
+              else { const t=nextEl.textContent.trim(); if(t)verses.push(t); }
+            } else if (/^H[1-3]$/.test(nextEl.tagName) || (nextEl.id && nextEl.id.startsWith('poem-'))) {
               break;
             }
             nextEl = nextEl.nextElementSibling;
           }
           
           if (title || verses.length > 0) {
-            poems.push({ 
-              id: poemId, 
-              title, 
-              verses,
-              type: poemType,
-              verseCount: verses.length 
-            });
+            let finalType = poemType;
+            if (finalType === 'unknown' && verses.length > 0) finalType = detectPoemTypeFromContent(verses);
+            poems.push({ id: poemId, title, verses, type: finalType, verseCount: verses.length });
           }
         });
         
@@ -14848,36 +14895,34 @@
 
       function displayPoems(poems) {
         const listDiv = document.getElementById('diwan-poems-list');
-        
-        if (poems.length === 0) {
-          listDiv.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--m3-on-surface-variant);">شعری یافت نشد</div>';
+        if (!listDiv) return;
+        if (!poems || poems.length === 0) {
+          listDiv.innerHTML = '<div style="text-align:center;padding:20px;color:var(--m3-on-surface-variant);">شعری یافت نشد</div>';
           return;
         }
-        
-        listDiv.innerHTML = '';
-        
+        const TN = {ghazal:'غزل',masnavi:'مثنوی',prose:'نثر',free:'شعر آزاد',rubaei:'رباعی',qasida:'قصیده',hemistich:'مصراع'};
+        const frag = document.createDocumentFragment();
         poems.forEach(poem => {
           const item = document.createElement('div');
           item.className = 'diwan-poem-item';
           item.onclick = () => showPoem(poem);
-          
-          // Get first verse as preview (limited to first line only)
           let preview = '';
-          if (poem.verses.length > 0) {
-            // Take only the first line of the first verse
-            preview = poem.verses[0].split('\n')[0];
-            if (preview.length > 80) {
-              preview = preview.substring(0, 80) + '...';
-            }
+          if (poem.verses && poem.verses.length > 0) {
+            let raw = poem.verses[0].split('\n')[0].trim().replace(/^[\s\u200c\u200d\u060c\u061b:]+/, '');
+            if (raw.length > 58) raw = raw.substring(0,58).trimEnd() + '…';
+            preview = raw;
           }
-          
-          item.innerHTML = `
-            <div class="diwan-poem-title">${poem.title}</div>
-            <div class="diwan-poem-preview">${preview}</div>
-          `;
-          
-          listDiv.appendChild(item);
+          const tn = TN[poem.type]||'';
+          item.innerHTML =
+            '<div style="display:flex;align-items:center;gap:6px;min-width:0">'
+            + '<div class="diwan-poem-title" style="flex:1;min-width:0">' + (poem.title||'') + '</div>'
+            + (tn ? '<span class="diwan-type-mini">' + tn + '</span>' : '')
+            + '</div>'
+            + (preview ? '<div class="diwan-poem-preview">' + preview + '</div>' : '');
+          frag.appendChild(item);
         });
+        listDiv.innerHTML = '';
+        listDiv.appendChild(frag);
       }
 
       function searchPoems() {
@@ -14904,55 +14949,41 @@
         document.getElementById('diwan-category-select').style.display = 'block';
       }
 
+            function _escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+      function copyPoemText(){if(window._currentPoemText)copyToClipboard(window._currentPoemText);}
+
       function showPoem(poem) {
         document.getElementById('diwan-poems-view').style.display = 'none';
         document.getElementById('diwan-poem-detail').style.display = 'block';
-        
         const contentDiv = document.getElementById('diwan-poem-content');
-        let beytsHTML = '';
-        
-        // Different rendering for different poem types
-        if (poem.type === 'prose' || poem.verseCount === 1) {
-          // Prose or single verse: display as-is
-          beytsHTML = poem.verses
-            .map(v => `<div class="diwan-prose-line">${v}</div>`)
-            .join('');
-        } else {
-          // Ghazal/Masnavi: pair verses into beyts (couplets)
-          for (let i = 0; i < poem.verses.length; i += 2) {
-            if (i + 1 < poem.verses.length) {
-              beytsHTML += `
-                <div class="diwan-beyt">
-                  <div class="diwan-mesra diwan-mesra--right">${poem.verses[i]}</div>
-                  <div class="diwan-mesra diwan-mesra--left">${poem.verses[i + 1]}</div>
-                </div>
-              `;
-            } else {
-              // Odd verse at end
-              beytsHTML += `<div class="diwan-mesra-single">${poem.verses[i]}</div>`;
-            }
+        const TL={ghazal:'غزل',masnavi:'مثنوی',qasida:'قصیده',rubaei:'رباعی',prose:'نثر',hemistich:'مصراع',free:'شعر آزاد/نیمایی',unknown:''};
+        const typeLabel = TL[poem.type]||'';
+        const v = poem.verses || [];
+        function makeBeyts(){
+          let h='';
+          for(let i=0;i<v.length;i+=2){
+            if(i+1<v.length) h+='<div class="diwan-beyt"><div class="diwan-mesra diwan-mesra--right">'+_escHtml(v[i])+'</div>'
+              +'<div class="diwan-mesra diwan-mesra--left">'+_escHtml(v[i+1])+'</div></div>';
+            else h+='<div class="diwan-single-mesra">'+_escHtml(v[i])+'</div>';
           }
+          return h;
         }
-        
-        const typeLabel = {
-          ghazal: 'غزل',
-          masnavi: 'مثنوی',
-          prose: 'نثر',
-          hemistich: 'مصراع',
-          unknown: ''
-        }[poem.type] || '';
-        
-        // Build breadcrumb in poem detail view
-        let breadcrumbHTML = buildBreadcrumbHTML(currentPoetId, currentCategoryId);
-        
-        contentDiv.innerHTML = `
-          ${breadcrumbHTML}
-          <div class="diwan-poem-header">
-            <h2>${poem.title}</h2>
-            ${typeLabel ? `<div class="diwan-poem-type">${typeLabel}</div>` : ''}
-          </div>
-          ${beytsHTML}
-        `;
+        const avgLen = v.length ? v.reduce((s,x)=>s+x.length,0)/v.length : 0;
+        let bodyHTML='';
+        if (poem.type==='prose') {
+          bodyHTML='<div class="diwan-prose-wrap">'+v.map(p=>'<p class="diwan-prose-para">'+_escHtml(p)+'</p>').join('')+'</div>';
+        } else if (poem.type==='free') {
+          bodyHTML='<div class="diwan-free-wrap">'+v.map(l=>'<div class="diwan-free-line">'+_escHtml(l)+'</div>').join('')+'</div>';
+        } else if (poem.type==='unknown'&&(avgLen>100||v.length===1)) {
+          bodyHTML='<div class="diwan-prose-wrap">'+v.map(p=>'<p class="diwan-prose-para">'+_escHtml(p)+'</p>').join('')+'</div>';
+        } else { bodyHTML=makeBeyts(); }
+        const bc = typeof buildBreadcrumbHTML==='function' ? buildBreadcrumbHTML(currentPoetId, currentCategoryId) : '';
+        window._currentPoemText = poem.title+'\n\n'+v.join('\n');
+        contentDiv.innerHTML = bc
+          +'<div class="diwan-poem-header"><h2>'+_escHtml(poem.title)+'</h2>'
+          +(typeLabel?'<span class="diwan-poem-type-badge">'+typeLabel+'</span>':'')
+          +'</div><div class="diwan-poem-body">'+bodyHTML+'</div>'
+          +'<div class="diwan-poem-actions"><button class="btn btn-tonal" style="font-size:12px" onclick="copyPoemText()">📋 کپی متن</button></div>';
       }
 
 
