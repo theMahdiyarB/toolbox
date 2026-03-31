@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package version="2.0" unique-identifier="BookId" xmlns="http://www.idpf.org/2007/opf">
+  <opf:metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <meta name="cover" content="img1" xmlns="" />
+    <dc:identifier id="BookId">urn:uuid:e18f8ba1-0d16-4468-abc0-bd519eac2a29</dc:identifier>
+    <dc:title>ایرج میرزا</dc:title>
+    <dc:language>fa</dc:language>
+    <dc:creator opf:role="aut">ایرج میرزا</dc:creator>
+  </opf:metadata>
+  <manifest>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
+    <item id="id1" href="fonts/irsans.ttf" media-type="application/x-font-ttf" />
+    <item id="stylesheet1" href="style.css" media-type="text/css" />
+    <item id="img1" href="images/cover.png" media-type="image/png" />
+    <item id="html1" href="titlepage.xhtml" media-type="application/xhtml+xml" />
+    <item id="html2" href="promo.xhtml" media-type="application/xhtml+xml" />
+    <item id="html3" href="bio.xhtml" media-type="application/xhtml+xml" />
+    <item id="html4" href="cat2272.xhtml" media-type="application/xhtml+xml" />
+    <item id="html5" href="cat2272sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html6" href="cat2272sec2.xhtml" media-type="application/xhtml+xml" />
+    <item id="html7" href="cat2272sec3.xhtml" media-type="application/xhtml+xml" />
+    <item id="html8" href="cat2273.xhtml" media-type="application/xhtml+xml" />
+    <item id="html9" href="cat2273sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html10" href="cat2275.xhtml" media-type="application/xhtml+xml" />
+    <item id="html11" href="cat2275sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html12" href="cat2276.xhtml" media-type="application/xhtml+xml" />
+    <item id="html13" href="cat2276sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html14" href="cat2274.xhtml" media-type="application/xhtml+xml" />
+    <item id="html15" href="cat2274sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html16" href="cat2274sec2.xhtml" media-type="application/xhtml+xml" />
+    <item id="html17" href="cat2277.xhtml" media-type="application/xhtml+xml" />
+    <item id="html18" href="cat2277sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html19" href="cat2277sec2.xhtml" media-type="application/xhtml+xml" />
+    <item id="html20" href="cat2278.xhtml" media-type="application/xhtml+xml" />
+    <item id="html21" href="cat2278sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html22" href="cat2279.xhtml" media-type="application/xhtml+xml" />
+    <item id="html23" href="cat2279sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html24" href="cat2280.xhtml" media-type="application/xhtml+xml" />
+    <item id="html25" href="cat2280sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html26" href="cat2281.xhtml" media-type="application/xhtml+xml" />
+    <item id="html27" href="cat2281sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html28" href="cat2282.xhtml" media-type="application/xhtml+xml" />
+    <item id="html29" href="cat2282sec1.xhtml" media-type="application/xhtml+xml" />
+    <item id="html30" href="cat2271.xhtml" media-type="application/xhtml+xml" />
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="html1" />
+    <itemref idref="html2" />
+    <itemref idref="html3" />
+    <itemref idref="html4" />
+    <itemref idref="html5" />
+    <itemref idref="html6" />
+    <itemref idref="html7" />
+    <itemref idref="html8" />
+    <itemref idref="html9" />
+    <itemref idref="html10" />
+    <itemref idref="html11" />
+    <itemref idref="html12" />
+    <itemref idref="html13" />
+    <itemref idref="html14" />
+    <itemref idref="html15" />
+    <itemref idref="html16" />
+    <itemref idref="html17" />
+    <itemref idref="html18" />
+    <itemref idref="html19" />
+    <itemref idref="html20" />
+    <itemref idref="html21" />
+    <itemref idref="html22" />
+    <itemref idref="html23" />
+    <itemref idref="html24" />
+    <itemref idref="html25" />
+    <itemref idref="html26" />
+    <itemref idref="html27" />
+    <itemref idref="html28" />
+    <itemref idref="html29" />
+    <itemref idref="html30" />
+  </spine>
+  <guide />
+</package>

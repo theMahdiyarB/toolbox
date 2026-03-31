@@ -7129,6 +7129,7 @@
                 <button class="btn btn-filled" onclick="selectPoet('hafez')" data-poet="hafez">حافظ</button>
                 <button class="btn btn-filled" onclick="selectPoet('jami')" data-poet="jami">جامی</button>
                 <button class="btn btn-filled" onclick="selectPoet('vahshi')" data-poet="vahshi">وحشی بافقی</button>
+                <button class="btn btn-filled" onclick="selectPoet('iraj')" data-poet="iraj">ایرج میرزا</button>
                 <button class="btn btn-filled" onclick="selectPoet('nima')" data-poet="nima">نیما یوشیج</button>
                 <button class="btn btn-filled" onclick="selectPoet('shahriar')" data-poet="shahriar">شهریار</button>
                 <button class="btn btn-filled" onclick="selectPoet('shamlou')" data-poet="shamlou">احمد شاملو</button>
@@ -7194,7 +7195,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 2.11 - ۱۴۰۵/۰۱/۱۱
+          ℹ️ نسخه 2.12 - ۱۴۰۵/۰۱/۱۱
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -14226,7 +14227,8 @@
         vahshi: { folder: 'vahshi' },
         akhavan: { folder: 'akhavan' },
         nima: { folder: 'nima' },
-        shamlou: { folder: 'shamlou' }
+        shamlou: { folder: 'shamlou' },
+        iraj: { folder: 'iraj' }
       };
 
       let POETS = {}; // Dynamically loaded poet structures will be stored here
@@ -14636,6 +14638,8 @@
 
       // Poets whose work is primarily free/modern verse — never pair into hemistichs
       const FREE_VERSE_POETS = new Set(['forugh','sohrab-sepehri','shamlou','nima', 'akhavan']);
+      // poem IDs (from structure.json) that are classical despite being from a free-verse poet
+      const FREE_VERSE_EXCEPTIONS = new Set(['poem-505001','poem-505006','poem-505014', 'poem-505041', 'poem-505058', 'poem-505059', 'poem-505030', 'poem-505053']);
 
       function detectPoemType(categoryName, poetId) {
         if (!categoryName) return 'unknown';
@@ -14648,7 +14652,7 @@
         if (cl.includes('بوستان') && cl.includes('باب')) return 'mixed';
         if (cl.includes('باب') && (cl.includes('سیرت') || cl.includes('اخلاق') || cl.includes('قناعت') || cl.includes('خاموشی') || cl.includes('عشق')
         || cl.includes('پیری') || cl.includes('تربیت') || cl.includes('صحبت') || cl.includes('عافیت'))) return 'mixed';
-        if (cl.includes('شعر نو') || cl.includes('شعرنو') || cl.includes('سپید') || cl.includes('نیمایی') || cl.includes('آزاد') || cl.includes('نیما')) return 'free';
+        if (cl.includes('شعر نو') || cl.includes('شعرنو') || cl.includes('سپید') || cl.includes('نیمایی') || cl.includes('آزاد') || cl.includes('نیما') || cl.includes('نو')) return 'free';
         if (cl.includes('غزل') || cl.includes('ghazal')) return 'ghazal';
         if (cl.includes('مثنوی') || cl.includes('masnavi')) return 'masnavi';
         if (cl.includes('قصیده')) return 'qasida';
@@ -14732,7 +14736,8 @@
           } else {
             const verses = paragraphs.map(p => p.textContent.trim()).filter(Boolean);
             let finalType = poemType;
-            if (finalType === 'unknown' && verses.length > 0) finalType = detectPoemTypeFromContent(verses);
+            if (FREE_VERSE_EXCEPTIONS.has(poemId)) finalType = 'ghazal';
+            else if (finalType === 'unknown' && verses.length > 0) finalType = detectPoemTypeFromContent(verses);
             poems.push({ id:poemId, title, verses, type:finalType, verseCount:verses.length });
           }
         });

@@ -1,0 +1,1458 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:e18f8ba1-0d16-4468-abc0-bd519eac2a29" />
+    <meta name="dtb:depth" content="1" />
+    <meta name="dtb:totalPageCount" content="0" />
+    <meta name="dtb:maxPageNumber" content="0" />
+  </head>
+  <docTitle>
+    <text> ایرج میرزا</text>
+  </docTitle>
+  <docAuthor>
+    <text>ایرج میرزا</text>
+  </docAuthor>
+  <navMap>
+    <navPoint id="navid1" playOrder="1">
+      <navLabel>
+        <text>معرفی گنجور</text>
+      </navLabel>
+      <content src="promo.xhtml" />
+    </navPoint>
+    <navPoint id="navid2" playOrder="2">
+      <navLabel>
+        <text>دربارهٔ ایرج میرزا</text>
+      </navLabel>
+      <content src="bio.xhtml" />
+    </navPoint>
+    <navPoint id="navid3" playOrder="3">
+      <navLabel>
+        <text>ایرج میرزا</text>
+      </navLabel>
+      <content src="cat2271.xhtml" />
+      <navPoint id="navid3x1" playOrder="4">
+        <navLabel>
+          <text>قصیده‌ها</text>
+        </navLabel>
+        <content src="cat2272.xhtml" />
+        <navPoint id="navid3x1x1" playOrder="5">
+          <navLabel>
+            <text>شمارهٔ  ۱ - در ستایش نظام‌السلطنهٔ مافی و اسب خواستن از وی</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86365" />
+        </navPoint>
+        <navPoint id="navid3x1x2" playOrder="6">
+          <navLabel>
+            <text>شمارهٔ  ۲ - دیدار : دیدم اندر گردش بازار عبداللّه را</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86366" />
+        </navPoint>
+        <navPoint id="navid3x1x3" playOrder="7">
+          <navLabel>
+            <text>شمارهٔ  ۳ - در رثاء مرحومه دُرَّةُ المَعالی : ز درج دیده در آورده ام لَالی را</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86367" />
+        </navPoint>
+        <navPoint id="navid3x1x4" playOrder="8">
+          <navLabel>
+            <text>شمارهٔ  ۴ - در مدح امیرنظام گروسی در زمان حیات پدر گفته</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86368" />
+        </navPoint>
+        <navPoint id="navid3x1x5" playOrder="9">
+          <navLabel>
+            <text>شمارهٔ  ۵ - در طلبِ اسب از نظام السلطنه : چشمم سپید شد به رَهِ انتظارِ اسب</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86369" />
+        </navPoint>
+        <navPoint id="navid3x1x6" playOrder="10">
+          <navLabel>
+            <text>شمارهٔ  ۶ - حسب الامر جناب جلالت مآبِ اجلِّ اکرم آقایِ قائم مقام مَدّظِلُّه العالی محضِ فرح خاطرِ مبارک حضرت اجلّ روحی فِداه عرض شد</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86370" />
+        </navPoint>
+        <navPoint id="navid3x1x7" playOrder="11">
+          <navLabel>
+            <text>شمارهٔ  ۷ - در مدح اعتضادالسَّلطنه : مقبول باد طاعتِ شَهزاده اعتضاد</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86371" />
+        </navPoint>
+        <navPoint id="navid3x1x8" playOrder="12">
+          <navLabel>
+            <text>شمارهٔ  ۸ - در مدح نصرة الدوله عم زاده ناصرالدین شاه در تبریز گفته</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86372" />
+        </navPoint>
+        <navPoint id="navid3x1x9" playOrder="13">
+          <navLabel>
+            <text>شمارهٔ  ۹ - در هجو شیخ فصل اللّهِ نوری : حُجَّةُ‌الاسلام کتک می‌زند</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86373" />
+        </navPoint>
+        <navPoint id="navid3x1x10" playOrder="14">
+          <navLabel>
+            <text>شمارهٔ  ۱۰ - انتقاد از حجاب : نقاب دارد و دل را به جلوه آب کند</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86374" />
+        </navPoint>
+        <navPoint id="navid3x1x11" playOrder="15">
+          <navLabel>
+            <text>شمارهٔ  ۱۱ - شب جمعه خدمت حاج امین : رفیق اهل و سرا امن و باده نوشین بود</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86375" />
+        </navPoint>
+        <navPoint id="navid3x1x12" playOrder="16">
+          <navLabel>
+            <text>شمارهٔ  ۱۲ - شکوۀ دوستانه از ملک الشّعرایِ بهار : ملکا با تو دگر دوستیِ ما نشود</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86376" />
+        </navPoint>
+        <navPoint id="navid3x1x13" playOrder="17">
+          <navLabel>
+            <text>شمارهٔ  ۱۳ - در مدیحه و تبریک عروسی : برآمد بامدادان مِهرِ انور</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86377" />
+        </navPoint>
+        <navPoint id="navid3x1x14" playOrder="18">
+          <navLabel>
+            <text>شمارهٔ  ۱۴ - در تهینتِ فرزند یافتنِ نصرة الدّوله : ساقیِ سیم بر بده ساغر</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86378" />
+        </navPoint>
+        <navPoint id="navid3x1x15" playOrder="19">
+          <navLabel>
+            <text>شمارهٔ  ۱۵ - اندرز و نصیحت : فکر آن باش که سالِ دگر ای شوخ پسر</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86379" />
+        </navPoint>
+        <navPoint id="navid3x1x16" playOrder="20">
+          <navLabel>
+            <text>شمارهٔ  ۱۶ - در ورود مظفّرالدین میرزا ولّی عهد به تبریز و مدح امیر نظام</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86380" />
+        </navPoint>
+        <navPoint id="navid3x1x17" playOrder="21">
+          <navLabel>
+            <text>شمارهٔ  ۱۷ - خوشامد به شاه در مهمانیِ وزیر : تا شهنشاهِ جهان گردید مهمانِ وزیر</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86381" />
+        </navPoint>
+        <navPoint id="navid3x1x18" playOrder="22">
+          <navLabel>
+            <text>شمارهٔ  ۱۸ - مزاح با یکی از وزیران : بیضه‌ام رنجور شد از بیضه‌ات دور ای وزیر</text>
+          </navLabel>
+          <content src="cat2272sec1.xhtml#poem-86382" />
+        </navPoint>
+        <navPoint id="navid3x1x19" playOrder="23">
+          <navLabel>
+            <text>شمارهٔ  ۱۹ - مطایبه : پدرش گفته که با من ننشیند پسرش</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86383" />
+        </navPoint>
+        <navPoint id="navid3x1x20" playOrder="24">
+          <navLabel>
+            <text>شمارهٔ  ۲۰ - در مدح امیر نظام : هر که را با سرِ زلفِ سیه افتد کارش</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86384" />
+        </navPoint>
+        <navPoint id="navid3x1x21" playOrder="25">
+          <navLabel>
+            <text>شمارهٔ  ۲۱ - مزاح با ابوالحسن خان : ای بر کچلان دهر سرهنگ</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86385" />
+        </navPoint>
+        <navPoint id="navid3x1x22" playOrder="26">
+          <navLabel>
+            <text>شمارهٔ  ۲۲ - شکوه از مرگ پدر و مدح قائم مقام : زان همه امّیدها که بودم در دل</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86386" />
+        </navPoint>
+        <navPoint id="navid3x1x23" playOrder="27">
+          <navLabel>
+            <text>شمارهٔ  ۲۳ - در نعتِ نبّی خاتَم : نه عاقل است که دارد در این سرایِ رحیل</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86387" />
+        </navPoint>
+        <navPoint id="navid3x1x24" playOrder="28">
+          <navLabel>
+            <text>شمارهٔ  ۲۴ - در مدح امیر نظام : چونان شدم ضعیف که گر نه سخن کنم</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86388" />
+        </navPoint>
+        <navPoint id="navid3x1x25" playOrder="29">
+          <navLabel>
+            <text>شمارهٔ  ۲۵ - وسوسه : دیدم و گفتم نادیده‌اش انگار کنم</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86389" />
+        </navPoint>
+        <navPoint id="navid3x1x26" playOrder="30">
+          <navLabel>
+            <text>شمارهٔ  ۲۶ - امتحان خطّ و سخن : امیر کرد مرا امتحان به خطّ و سخن</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86390" />
+        </navPoint>
+        <navPoint id="navid3x1x27" playOrder="31">
+          <navLabel>
+            <text>شمارهٔ  ۲۷ - شکوه از چرخ و شکایت از مرگ پدر : شکوه بر چرخ برند از دشمن</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86391" />
+        </navPoint>
+        <navPoint id="navid3x1x28" playOrder="32">
+          <navLabel>
+            <text>شمارهٔ  ۲۸ - مدح ناصرالّدین شاه : مباش ایمن ز کَیدِ چرخِ ریمن</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86392" />
+        </navPoint>
+        <navPoint id="navid3x1x29" playOrder="33">
+          <navLabel>
+            <text>شمارهٔ  ۲۹ - در مدحِ امیرنظام : مُردم از حسرتِ آهورَوِشان و رَمِشان</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86393" />
+        </navPoint>
+        <navPoint id="navid3x1x30" playOrder="34">
+          <navLabel>
+            <text>شمارهٔ  ۳۰ - در مدحِ حضرتِ مولای متقیان : گفتم رهینِ مهرِ تو شد این دلِ حزین</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86394" />
+        </navPoint>
+        <navPoint id="navid3x1x31" playOrder="35">
+          <navLabel>
+            <text>شمارهٔ  ۳۱ - سیه‌چشمِ نامهربان : ای سیه‌چشم چه دیدی تو از این دیده گناه</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86395" />
+        </navPoint>
+        <navPoint id="navid3x1x32" playOrder="36">
+          <navLabel>
+            <text>شمارهٔ  ۳۲ - شکایت از دوری امیر نظام و مدح قائم مقام</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86396" />
+        </navPoint>
+        <navPoint id="navid3x1x33" playOrder="37">
+          <navLabel>
+            <text>شمارهٔ  ۳۳ - در مدح مولایِ متّقیان : خوش آن که او را در دل بود وِلایِ علی</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86397" />
+        </navPoint>
+        <navPoint id="navid3x1x34" playOrder="38">
+          <navLabel>
+            <text>شمارهٔ  ۳۴ - شکایت از دوریِ یار : چندی گُزیده یار ز من دوری</text>
+          </navLabel>
+          <content src="cat2272sec2.xhtml#poem-86398" />
+        </navPoint>
+        <navPoint id="navid3x1x35" playOrder="39">
+          <navLabel>
+            <text>شمارهٔ  ۳۵ - تسلیت به دوست پدرمرده : سخت است گرچه مرگِ پدر بر پسر همی</text>
+          </navLabel>
+          <content src="cat2272sec3.xhtml#poem-86399" />
+        </navPoint>
+        <navPoint id="navid3x1x36" playOrder="40">
+          <navLabel>
+            <text>شمارهٔ  ۳۶ - در مدح امیرنظام : جانا چه شود گر تو درِ مِهر گشایی</text>
+          </navLabel>
+          <content src="cat2272sec3.xhtml#poem-86400" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navid3x2" playOrder="45">
+        <navLabel>
+          <text>غزل‌ها</text>
+        </navLabel>
+        <content src="cat2273.xhtml" />
+        <navPoint id="navid3x2x1" playOrder="46">
+          <navLabel>
+            <text>شمارهٔ  ۱ : قمر آن نیست که عاشق بَرَد از یاد او را</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86402" />
+        </navPoint>
+        <navPoint id="navid3x2x2" playOrder="47">
+          <navLabel>
+            <text>شمارهٔ  ۲ : روزگار آسوده دارد، مردم آزاده را</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86403" />
+        </navPoint>
+        <navPoint id="navid3x2x3" playOrder="48">
+          <navLabel>
+            <text>شمارهٔ  ۳ : خرِ عیسی است که از هر هنری باخبر است</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86404" />
+        </navPoint>
+        <navPoint id="navid3x2x4" playOrder="49">
+          <navLabel>
+            <text>شمارهٔ  ۴ : خواهم که دهم جان به تو، میلِ دلم این‌ست</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86405" />
+        </navPoint>
+        <navPoint id="navid3x2x5" playOrder="50">
+          <navLabel>
+            <text>شمارهٔ  ۵ : طرب افسرده کند دل، چو ز حدّ در گذرد</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86406" />
+        </navPoint>
+        <navPoint id="navid3x2x6" playOrder="51">
+          <navLabel>
+            <text>شمارهٔ  ۶ : نشسته بودم و دیدم ز در بشیر آمد</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86407" />
+        </navPoint>
+        <navPoint id="navid3x2x7" playOrder="52">
+          <navLabel>
+            <text>شمارهٔ  ۷ : شکر خدا را که بخت هادیم آمد</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86408" />
+        </navPoint>
+        <navPoint id="navid3x2x8" playOrder="53">
+          <navLabel>
+            <text>شمارهٔ  ۸ : چون خورم می در سرم سودایِ یار آید پدید</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86409" />
+        </navPoint>
+        <navPoint id="navid3x2x9" playOrder="54">
+          <navLabel>
+            <text>شمارهٔ  ۹ : یاد کردند مرا باز به گلدانِ دگر</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86410" />
+        </navPoint>
+        <navPoint id="navid3x2x10" playOrder="55">
+          <navLabel>
+            <text>شمارهٔ  ۱۰ : به دست جام شراب و به گوش نغمۀ ساز</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86411" />
+        </navPoint>
+        <navPoint id="navid3x2x11" playOrder="56">
+          <navLabel>
+            <text>شمارهٔ  ۱۱ : تا بر سر است سایۀ شه زاده ایرجم</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86412" />
+        </navPoint>
+        <navPoint id="navid3x2x12" playOrder="57">
+          <navLabel>
+            <text>شمارهٔ  ۱۲ : پیرم و آرزویِ وصلِ جوانان دارم</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86413" />
+        </navPoint>
+        <navPoint id="navid3x2x13" playOrder="58">
+          <navLabel>
+            <text>شمارهٔ  ۱۳ : ز یاران آن قَدر بد دیده‌ام کز یار می‌ترسم</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86414" />
+        </navPoint>
+        <navPoint id="navid3x2x14" playOrder="59">
+          <navLabel>
+            <text>شمارهٔ  ۱۴ : ما خریدیم به جان عشق تو نی با زر و سیم</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86415" />
+        </navPoint>
+        <navPoint id="navid3x2x15" playOrder="60">
+          <navLabel>
+            <text>شمارهٔ  ۱۵ : آزرده ام از آن بُتِ بسیار ناز کن</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86416" />
+        </navPoint>
+        <navPoint id="navid3x2x16" playOrder="61">
+          <navLabel>
+            <text>شمارهٔ  ۱۶ : باز روز آمد به پایان شامِ دلگیر است و من</text>
+          </navLabel>
+          <content src="cat2273sec1.xhtml#poem-86417" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navid3x3" playOrder="107">
+        <navLabel>
+          <text>مثنوی‌ها</text>
+        </navLabel>
+        <content src="cat2274.xhtml" />
+        <navPoint id="navid3x3x1" playOrder="108">
+          <navLabel>
+            <text>عارف نامه</text>
+          </navLabel>
+          <content src="cat2275.xhtml" />
+          <navPoint id="navid3x3x1x1" playOrder="109">
+            <navLabel>
+              <text>بخش ۱ : شنیدم من که عارف جانم آمد</text>
+            </navLabel>
+            <content src="cat2275sec1.xhtml#poem-86420" />
+          </navPoint>
+          <navPoint id="navid3x3x1x2" playOrder="110">
+            <navLabel>
+              <text>بخش ۲ : نمی‌دانستم ای نامردِ کونی</text>
+            </navLabel>
+            <content src="cat2275sec1.xhtml#poem-86421" />
+          </navPoint>
+          <navPoint id="navid3x3x1x3" playOrder="111">
+            <navLabel>
+              <text>بخش ۳ : دلم زین عمرِ بی‌حاصل سرآمد</text>
+            </navLabel>
+            <content src="cat2275sec1.xhtml#poem-86422" />
+          </navPoint>
+          <navPoint id="navid3x3x1x4" playOrder="112">
+            <navLabel>
+              <text>بخش ۴ : بدینجا چون رسید اشعارِ خالص</text>
+            </navLabel>
+            <content src="cat2275sec1.xhtml#poem-86423" />
+          </navPoint>
+          <navPoint id="navid3x3x1x5" playOrder="113">
+            <navLabel>
+              <text>بخش ۵ : بیا گویم برایت داستانی</text>
+            </navLabel>
+            <content src="cat2275sec1.xhtml#poem-86424" />
+          </navPoint>
+          <navPoint id="navid3x3x1x6" playOrder="114">
+            <navLabel>
+              <text>بخش ۶ : حجابِ زن که نادان شد چنینست</text>
+            </navLabel>
+            <content src="cat2275sec1.xhtml#poem-86425" />
+          </navPoint>
+          <navPoint id="navid3x3x1x7" playOrder="115">
+            <navLabel>
+              <text>بخش ۷ : خدایا تا به کی ساکت نشینم</text>
+            </navLabel>
+            <content src="cat2275sec1.xhtml#poem-86426" />
+          </navPoint>
+          <navPoint id="navid3x3x1x8" playOrder="116">
+            <navLabel>
+              <text>بخش ۸ : خدایا کی شود این خلق خسته</text>
+            </navLabel>
+            <content src="cat2275sec1.xhtml#poem-86427" />
+          </navPoint>
+          <navPoint id="navid3x3x1x9" playOrder="117">
+            <navLabel>
+              <text>بخش ۹ : بیا عارف که دنیا حرف مُفتست</text>
+            </navLabel>
+            <content src="cat2275sec1.xhtml#poem-86428" />
+          </navPoint>
+          <navPoint id="navid3x3x1x10" playOrder="118">
+            <navLabel>
+              <text>بخش ۱۰ : تو عارف واقعا گوساله بودی</text>
+            </navLabel>
+            <content src="cat2275sec1.xhtml#poem-86429" />
+          </navPoint>
+          <navPoint id="navid3x3x1x11" playOrder="119">
+            <navLabel>
+              <text>بخش ۱۱ : بگو عارف به من ز احبابِ طهران</text>
+            </navLabel>
+            <content src="cat2275sec1.xhtml#poem-86430" />
+          </navPoint>
+        </navPoint>
+        <navPoint id="navid3x3x2" playOrder="228">
+          <navLabel>
+            <text>زهره و منوچهر</text>
+          </navLabel>
+          <content src="cat2276.xhtml" />
+          <navPoint id="navid3x3x2x1" playOrder="229">
+            <navLabel>
+              <text>بخش ۱ : صبح نتابیده هنوز آفتاب</text>
+            </navLabel>
+            <content src="cat2276sec1.xhtml#poem-86432" />
+          </navPoint>
+          <navPoint id="navid3x3x2x2" playOrder="230">
+            <navLabel>
+              <text>بخش ۲ : از طَرَفی نیز در آن صبح‌گاه</text>
+            </navLabel>
+            <content src="cat2276sec1.xhtml#poem-86433" />
+          </navPoint>
+          <navPoint id="navid3x3x2x3" playOrder="231">
+            <navLabel>
+              <text>بخش ۳ : سبزه نگر تازه به بار آمده</text>
+            </navLabel>
+            <content src="cat2276sec1.xhtml#poem-86434" />
+          </navPoint>
+          <navPoint id="navid3x3x2x4" playOrder="232">
+            <navLabel>
+              <text>بخش ۴ : بود به بند تو خداوند عشق</text>
+            </navLabel>
+            <content src="cat2276sec1.xhtml#poem-86435" />
+          </navPoint>
+        </navPoint>
+        <navPoint id="navid3x3x3" playOrder="461">
+          <navLabel>
+            <text>شمارهٔ  ۱ - انقلاب ادبی : ای خدا باز شبِ تار آمد</text>
+          </navLabel>
+          <content src="cat2274sec1.xhtml#poem-86436" />
+        </navPoint>
+        <navPoint id="navid3x3x4" playOrder="462">
+          <navLabel>
+            <text>شمارهٔ  ۲ - شاه و جام : پادشهی رفت به عزمِ شکار</text>
+          </navLabel>
+          <content src="cat2274sec1.xhtml#poem-86437" />
+        </navPoint>
+        <navPoint id="navid3x3x5" playOrder="463">
+          <navLabel>
+            <text>شمارهٔ  ۳ - مکاتبۀ منظوم : به یکی از دوستان مُتَشاعر مُتِذَوِّق خود که معهود  ...</text>
+          </navLabel>
+          <content src="cat2274sec1.xhtml#poem-86438" />
+        </navPoint>
+        <navPoint id="navid3x3x6" playOrder="464">
+          <navLabel>
+            <text>شمارهٔ  ۴ - نصیحت به فرزند : از مالِ جهان ز کهنه و نو</text>
+          </navLabel>
+          <content src="cat2274sec1.xhtml#poem-86439" />
+        </navPoint>
+        <navPoint id="navid3x3x7" playOrder="465">
+          <navLabel>
+            <text>شمارهٔ  ۵ - مکتوب منظوم : وَ عَلَیکَ السَّلام میرآخور</text>
+          </navLabel>
+          <content src="cat2274sec1.xhtml#poem-86440" />
+        </navPoint>
+        <navPoint id="navid3x3x8" playOrder="466">
+          <navLabel>
+            <text>شمارهٔ  ۶ - داستان دو موش : ای پسر لحظه ای تو گوش بده</text>
+          </navLabel>
+          <content src="cat2274sec1.xhtml#poem-86441" />
+        </navPoint>
+        <navPoint id="navid3x3x9" playOrder="467">
+          <navLabel>
+            <text>شمارهٔ  ۷ - خرس و صیّادان : یکی خِرس بودست در جنگلی</text>
+          </navLabel>
+          <content src="cat2274sec1.xhtml#poem-86442" />
+        </navPoint>
+        <navPoint id="navid3x3x10" playOrder="468">
+          <navLabel>
+            <text>شمارهٔ  ۸ - برای کتابِ آقای مخبر السَّلطنه گفته شد در خیالاتِ عالیِ طفل</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86443" />
+        </navPoint>
+        <navPoint id="navid3x3x11" playOrder="469">
+          <navLabel>
+            <text>شمارهٔ  ۹ - شیر و موش : بود شیری به بیشه‌ای خفته</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86444" />
+        </navPoint>
+        <navPoint id="navid3x3x12" playOrder="470">
+          <navLabel>
+            <text>شمارهٔ  ۱۰ - شاعر این بیت ها را گِرداگِردِ تصویرِ خویش نوشته است</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86445" />
+        </navPoint>
+        <navPoint id="navid3x3x13" playOrder="471">
+          <navLabel>
+            <text>شمارهٔ  ۱۱ - کار و کوشش سرمایۀ پیروزی است : برزگری کِشته خود را دِرود</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86446" />
+        </navPoint>
+        <navPoint id="navid3x3x14" playOrder="472">
+          <navLabel>
+            <text>شمارهٔ  ۱۲ - هدیۀ عاشق : عاشقی محنتِ بسیار کشید</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86447" />
+        </navPoint>
+        <navPoint id="navid3x3x15" playOrder="473">
+          <navLabel>
+            <text>شمارهٔ  ۱۳ - انتقاد : باز برتافت به عالَم خورشید</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86448" />
+        </navPoint>
+        <navPoint id="navid3x3x16" playOrder="474">
+          <navLabel>
+            <text>شمارهٔ  ۱۴ - جواب به خرده‌گیر : شنیدم یاوه‌گویی هرزه‌پویی</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86449" />
+        </navPoint>
+        <navPoint id="navid3x3x17" playOrder="475">
+          <navLabel>
+            <text>شمارهٔ  ۱۵ - مزاح با یکی از وزیران : وزیرا از مبارک بیضه ات دور</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86450" />
+        </navPoint>
+        <navPoint id="navid3x3x18" playOrder="476">
+          <navLabel>
+            <text>شمارهٔ  ۱۶ - بر سنگ مزار : ای نکویان که در این دنیایید</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86451" />
+        </navPoint>
+        <navPoint id="navid3x3x19" playOrder="477">
+          <navLabel>
+            <text>شمارهٔ  ۱۷ - شکوۀ شاگرد : چنین می گفت شاگردی به مَکتَب</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86452" />
+        </navPoint>
+        <navPoint id="navid3x3x20" playOrder="478">
+          <navLabel>
+            <text>شمارهٔ  ۱۸ - کلاغ و روباه : کلاغی به شاخی شده جای گیر</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86453" />
+        </navPoint>
+        <navPoint id="navid3x3x21" playOrder="479">
+          <navLabel>
+            <text>شمارهٔ  ۱۹ - شوقِ درس خواندن : حمد بر کردگارِ یکتا باد</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86454" />
+        </navPoint>
+        <navPoint id="navid3x3x22" playOrder="480">
+          <navLabel>
+            <text>شمارهٔ  ۲۰ - نوروزِ کودکان : عید نوروز و اوّل سال است</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86455" />
+        </navPoint>
+        <navPoint id="navid3x3x23" playOrder="481">
+          <navLabel>
+            <text>شمارهٔ  ۲۱ - انتقاد از مستشاران : نبینی خیر از دنیا عَلایی</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86456" />
+        </navPoint>
+        <navPoint id="navid3x3x24" playOrder="482">
+          <navLabel>
+            <text>شمارهٔ  ۲۲ - پسرِ بی هنر : داشت عباس قلی خان پسری</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86457" />
+        </navPoint>
+        <navPoint id="navid3x3x25" playOrder="483">
+          <navLabel>
+            <text>شمارهٔ  ۲۳ - در هجوِ اعتمادالتجارِ اصفهانی : ای بی‌خرد اعتمادِ تُجّار</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86458" />
+        </navPoint>
+        <navPoint id="navid3x3x26" playOrder="484">
+          <navLabel>
+            <text>شمارهٔ  ۲۴ - ستایشِ صنیع الدّوله : طبیعت گر شَگَرفی ها نَماید</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86459" />
+        </navPoint>
+        <navPoint id="navid3x3x27" playOrder="485">
+          <navLabel>
+            <text>شمارهٔ  ۲۵ - خر و عَزب : شد گذار عزبی از در باغ</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86460" />
+        </navPoint>
+        <navPoint id="navid3x3x28" playOrder="486">
+          <navLabel>
+            <text>شمارهٔ  ۲۶ - نکته : طبع من این نکته چه پاکیزه گفت</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86461" />
+        </navPoint>
+        <navPoint id="navid3x3x29" playOrder="487">
+          <navLabel>
+            <text>شمارهٔ  ۲۷ - قبلۀ آمال : حاجیان رَخت چو از مکه برند</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86462" />
+        </navPoint>
+        <navPoint id="navid3x3x30" playOrder="488">
+          <navLabel>
+            <text>شمارهٔ  ۲۸ - طوطی : مرا هست یک طوطی اندر قفس</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86463" />
+        </navPoint>
+        <navPoint id="navid3x3x31" playOrder="489">
+          <navLabel>
+            <text>شمارهٔ  ۲۹ - آرزویِ خرِّ دُم بریده : بوده است خری که دُم نبودَش</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86464" />
+        </navPoint>
+        <navPoint id="navid3x3x32" playOrder="490">
+          <navLabel>
+            <text>شمارهٔ  ۳۰ - دو قوچِ جنگی : چه خواهند از جان هم این دو قوچ</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86465" />
+        </navPoint>
+        <navPoint id="navid3x3x33" playOrder="491">
+          <navLabel>
+            <text>شمارهٔ  ۳۱ - گفتگو با جوانِ فرنگی مَآب : گفتم به جوانکی مُفَرَّنگ</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86466" />
+        </navPoint>
+        <navPoint id="navid3x3x34" playOrder="492">
+          <navLabel>
+            <text>شمارهٔ  ۳۲ - سوءِ ظَنّ : نمی‌دانم چرا حَتم است و واجب</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86467" />
+        </navPoint>
+        <navPoint id="navid3x3x35" playOrder="493">
+          <navLabel>
+            <text>شمارهٔ  ۳۳ - غَلَبه بر خَشم : پیش تر زان کِت غَضَب گردد عیان</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86468" />
+        </navPoint>
+        <navPoint id="navid3x3x36" playOrder="494">
+          <navLabel>
+            <text>شمارهٔ  ۳۴ - دزدانِ نادان : دو نفر دزد خری دزدیدند</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86469" />
+        </navPoint>
+        <navPoint id="navid3x3x37" playOrder="495">
+          <navLabel>
+            <text>شمارهٔ  ۳۵ - طبیعی گویی : هرچه گویی تو طبیعی می‌گوی</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86470" />
+        </navPoint>
+        <navPoint id="navid3x3x38" playOrder="496">
+          <navLabel>
+            <text>شمارهٔ  ۳۶ - حُرمتِ ربا : گفت روزی به جعفرِ صادق</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86471" />
+        </navPoint>
+        <navPoint id="navid3x3x39" playOrder="497">
+          <navLabel>
+            <text>شمارهٔ  ۳۷ - سَجعِ مُهرِ شُتُر : گاه بارَم خار باشد گاه دُر</text>
+          </navLabel>
+          <content src="cat2274sec2.xhtml#poem-86472" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navid3x4" playOrder="605">
+        <navLabel>
+          <text>قطعه‌ها</text>
+        </navLabel>
+        <content src="cat2277.xhtml" />
+        <navPoint id="navid3x4x1" playOrder="606">
+          <navLabel>
+            <text>شمارهٔ  ۱ - مادّه تاریخ وفات جعفرقلی میرزا عَمِّ شاعر  ۱۳۰۷ هق</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86474" />
+        </navPoint>
+        <navPoint id="navid3x4x2" playOrder="607">
+          <navLabel>
+            <text>شمارهٔ  ۲ - در هجو نصرت الدوله : شاه زاده ضیافَتی کردی</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86475" />
+        </navPoint>
+        <navPoint id="navid3x4x3" playOrder="608">
+          <navLabel>
+            <text>شمارهٔ  ۳ - شراب : ابلیس شبی رفت به بالین جوانی</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86476" />
+        </navPoint>
+        <navPoint id="navid3x4x4" playOrder="609">
+          <navLabel>
+            <text>شمارهٔ  ۴ - کارگر و کارفرما : شنیدم کارفرمایی نظر کرد</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86477" />
+        </navPoint>
+        <navPoint id="navid3x4x5" playOrder="610">
+          <navLabel>
+            <text>شمارهٔ  ۵ - دربارۀ رفتن مستوفی الممالک و آمدنِ صَمصامُ السلطنه</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86478" />
+        </navPoint>
+        <navPoint id="navid3x4x6" playOrder="611">
+          <navLabel>
+            <text>شمارهٔ  ۶ - برای تصویری که به مرحوم عبدالحسینِ بیات داده سُروده است</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86479" />
+        </navPoint>
+        <navPoint id="navid3x4x7" playOrder="612">
+          <navLabel>
+            <text>شمارهٔ  ۷ - مرثیه : رسمَست هرکه داغ ِ جوان دید، دوستان</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86480" />
+        </navPoint>
+        <navPoint id="navid3x4x8" playOrder="613">
+          <navLabel>
+            <text>شمارهٔ  ۸ - کودک دورۀ طلایی : بچه هایِ زمانه رند شدند</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86481" />
+        </navPoint>
+        <navPoint id="navid3x4x9" playOrder="614">
+          <navLabel>
+            <text>شمارهٔ  ۹ - مرثیه : سرگشته بانوان وَسَطِ آتشِ خِیام</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86482" />
+        </navPoint>
+        <navPoint id="navid3x4x10" playOrder="615">
+          <navLabel>
+            <text>شمارهٔ  ۱۰ - مادر : گویند مرا چو زاد مادر</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86483" />
+        </navPoint>
+        <navPoint id="navid3x4x11" playOrder="616">
+          <navLabel>
+            <text>شمارهٔ  ۱۱ - جاه و جلال علی (ع) : اندر خبر بُوَد که نبی شاهِ حق پرست</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86484" />
+        </navPoint>
+        <navPoint id="navid3x4x12" playOrder="617">
+          <navLabel>
+            <text>شمارهٔ  ۱۲ - تقاضای وجهِ قبض : وزیرِخمسه اگر وجهِ قبضِ من ندهد</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86485" />
+        </navPoint>
+        <navPoint id="navid3x4x13" playOrder="618">
+          <navLabel>
+            <text>شمارهٔ  ۱۳ - به سر کلنل محمد تقی خان پسیان : به احترام به این سر نظر کنید ای خلق</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86486" />
+        </navPoint>
+        <navPoint id="navid3x4x14" playOrder="619">
+          <navLabel>
+            <text>شمارهٔ  ۱۴ - احمد لایَنصَرِف : فکرِ شاهِ فَطِنی باید کرد</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86487" />
+        </navPoint>
+        <navPoint id="navid3x4x15" playOrder="620">
+          <navLabel>
+            <text>شمارهٔ  ۱۵ - علّت بی تابی نوزاد : دانی که چرا طفل به هَنگامِ تَوَلّد</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86488" />
+        </navPoint>
+        <navPoint id="navid3x4x16" playOrder="621">
+          <navLabel>
+            <text>شمارهٔ  ۱۶ - دزد نگرفته : هر کس ز خزانه بُرد چیزی</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86489" />
+        </navPoint>
+        <navPoint id="navid3x4x17" playOrder="622">
+          <navLabel>
+            <text>شمارهٔ  ۱۷ - افکار خنده آور : ای هم سفر عزیز من مَجد</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86490" />
+        </navPoint>
+        <navPoint id="navid3x4x18" playOrder="623">
+          <navLabel>
+            <text>شمارهٔ  ۱۸ - کوه نور : دیده ام من رُبعِ مَسکون را، برادر جان من!</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86491" />
+        </navPoint>
+        <navPoint id="navid3x4x19" playOrder="624">
+          <navLabel>
+            <text>شمارهٔ  ۱۹ - تقاضا : ای مِهین صدر فلک مرتبه در دورۀ تو</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86492" />
+        </navPoint>
+        <navPoint id="navid3x4x20" playOrder="625">
+          <navLabel>
+            <text>شمارهٔ  ۲۰ - مطایبه با مرحوم عبدالحسین آگاهی : نکویان را بباید آرزو داشت</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86493" />
+        </navPoint>
+        <navPoint id="navid3x4x21" playOrder="626">
+          <navLabel>
+            <text>شمارهٔ  ۲۱ - تاریخ فوت : این جهان پیش راد مردِ حکیم</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86494" />
+        </navPoint>
+        <navPoint id="navid3x4x22" playOrder="627">
+          <navLabel>
+            <text>شمارهٔ  ۲۲ - ماده تاریخ مهمانی شاه در باغ امیرنظام  (۱۳۰۷ هق)</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86495" />
+        </navPoint>
+        <navPoint id="navid3x4x23" playOrder="628">
+          <navLabel>
+            <text>شمارهٔ  ۲۳ - حق استاد : گفت استاد مبر درس از یاد</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86496" />
+        </navPoint>
+        <navPoint id="navid3x4x24" playOrder="629">
+          <navLabel>
+            <text>شمارهٔ  ۲۴ - وفات شاه معزول : اگر شاه معزول رفت از جهان</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86497" />
+        </navPoint>
+        <navPoint id="navid3x4x25" playOrder="630">
+          <navLabel>
+            <text>شمارهٔ  ۲۵ - ماکیان و شیر : در بُن یک بیشه ماکیانی هر روز</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86498" />
+        </navPoint>
+        <navPoint id="navid3x4x26" playOrder="631">
+          <navLabel>
+            <text>شمارهٔ  ۲۶ - بقای انسب : قصّه شنیدم که بوالعَلا به همه عمر</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86499" />
+        </navPoint>
+        <navPoint id="navid3x4x27" playOrder="632">
+          <navLabel>
+            <text>شمارهٔ  ۲۷ - دوزخ : به قدر فهم تو کردند وصف دوزخ را</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86500" />
+        </navPoint>
+        <navPoint id="navid3x4x28" playOrder="633">
+          <navLabel>
+            <text>شمارهٔ  ۲۸ : اسم گل پیش لبش بردن خطا باشد لب او</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86501" />
+        </navPoint>
+        <navPoint id="navid3x4x29" playOrder="634">
+          <navLabel>
+            <text>شمارهٔ  ۲۹ - جواب به حامی عارف : میم سپاسی کجاست تا که نگوید</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86502" />
+        </navPoint>
+        <navPoint id="navid3x4x30" playOrder="635">
+          <navLabel>
+            <text>شمارهٔ  ۳۰ - جنده بازی : هر کس که نمود جنده بازی</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86503" />
+        </navPoint>
+        <navPoint id="navid3x4x31" playOrder="636">
+          <navLabel>
+            <text>شمارهٔ  ۳۱ - درباره خلع احمد شاه و جانشینی پهلوی : خوب دانَد حسابِ خویش جهان</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86504" />
+        </navPoint>
+        <navPoint id="navid3x4x32" playOrder="637">
+          <navLabel>
+            <text>شمارهٔ  ۳۲ - وفات محمد علی شاه  (۱۳۴۳ هق) : مخور غصّۀ بیش و کم در جهان</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86505" />
+        </navPoint>
+        <navPoint id="navid3x4x33" playOrder="638">
+          <navLabel>
+            <text>شمارهٔ  ۳۳ - جذبۀ شیرازیان : حضرت شوریده اوستاد سخن‌سنج</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86506" />
+        </navPoint>
+        <navPoint id="navid3x4x34" playOrder="639">
+          <navLabel>
+            <text>شمارهٔ  ۳۴ - مهر مادر : رنج کشد مادر از جفای پسر لیک</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86507" />
+        </navPoint>
+        <navPoint id="navid3x4x35" playOrder="640">
+          <navLabel>
+            <text>شمارهٔ  ۳۵ : ای راد خدیوِ عدل‌پرور بنگر</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86508" />
+        </navPoint>
+        <navPoint id="navid3x4x36" playOrder="641">
+          <navLabel>
+            <text>شمارهٔ  ۳۶ - تصویر زن : بر سردر کاروان سرایی</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86509" />
+        </navPoint>
+        <navPoint id="navid3x4x37" playOrder="642">
+          <navLabel>
+            <text>شمارهٔ  ۳۷ - جواب وحید : ستوده طبع وحیدا رسید نامۀ تو</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86510" />
+        </navPoint>
+        <navPoint id="navid3x4x38" playOrder="643">
+          <navLabel>
+            <text>شمارهٔ  ۳۸ - بهشت و دوزخ : رسول دید که جمعی گسسته افسارند</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86511" />
+        </navPoint>
+        <navPoint id="navid3x4x39" playOrder="644">
+          <navLabel>
+            <text>شمارهٔ  ۳۹ - اشک شیخ : نَعوذُ بِاللَّه از آن قطره‌های دیدهٔ شیخ</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86512" />
+        </navPoint>
+        <navPoint id="navid3x4x40" playOrder="645">
+          <navLabel>
+            <text>شمارهٔ  ۴۰ - هجو اسب : فرمانروای شرق که عمرش دراز باد</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86513" />
+        </navPoint>
+        <navPoint id="navid3x4x41" playOrder="646">
+          <navLabel>
+            <text>شمارهٔ  ۴۱ - پیام به شیرازیان : استاد کُلّ فی الکُلّ شوریده است در شعر</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86514" />
+        </navPoint>
+        <navPoint id="navid3x4x42" playOrder="647">
+          <navLabel>
+            <text>شمارهٔ  ۴۲ - انتقاد از سازندگان آرامگاه فردوسی : یک وجب ساخته آخر نشود قبرِ حکیم</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86515" />
+        </navPoint>
+        <navPoint id="navid3x4x43" playOrder="648">
+          <navLabel>
+            <text>شمارهٔ  ۴۳ - کار و بار : ندانم از چه به هر جا که لفظ کار آید</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86516" />
+        </navPoint>
+        <navPoint id="navid3x4x44" playOrder="649">
+          <navLabel>
+            <text>شمارهٔ  ۴۴ - در رثای کلنل محمد تقی خان پسیان : دلم به حال تو ای دوست‌دار ایران سوخت</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86517" />
+        </navPoint>
+        <navPoint id="navid3x4x45" playOrder="650">
+          <navLabel>
+            <text>شمارهٔ  ۴۵ - رَم : یارب این عادت چه می‌باشد که اهل ملک ما</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86518" />
+        </navPoint>
+        <navPoint id="navid3x4x46" playOrder="651">
+          <navLabel>
+            <text>شمارهٔ  ۴۶ - وزیران دیدنی : وُزرا از چه دیده می‌نشوند</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86519" />
+        </navPoint>
+        <navPoint id="navid3x4x47" playOrder="652">
+          <navLabel>
+            <text>شمارهٔ  ۴۷ - تاریخ وفات عزیز علیا (۱۳۰۶ هق) : سود و زیان جهان دیده و سنجیده ایم</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86520" />
+        </navPoint>
+        <navPoint id="navid3x4x48" playOrder="653">
+          <navLabel>
+            <text>شمارهٔ  ۴۸ - قطعه : قبض آقای کمال السلطنه است</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86521" />
+        </navPoint>
+        <navPoint id="navid3x4x49" playOrder="654">
+          <navLabel>
+            <text>شمارهٔ  ۴۹ - علت بی‌تابی نوزاد : هیچ می‌دانی تو هر طفلی که آید در جهان</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86522" />
+        </navPoint>
+        <navPoint id="navid3x4x50" playOrder="655">
+          <navLabel>
+            <text>شمارهٔ  ۵۰ - جواب تبریک شوریده : گفت شوریده به من تهینت عید ز فارس</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86523" />
+        </navPoint>
+        <navPoint id="navid3x4x51" playOrder="656">
+          <navLabel>
+            <text>شمارهٔ  ۵۱ - فقیه : نشسته بود فقیهی به صدر مجلس درس</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86524" />
+        </navPoint>
+        <navPoint id="navid3x4x52" playOrder="657">
+          <navLabel>
+            <text>شمارهٔ  ۵۲ - هجو حاکم : این حاکم بی عُرضه به ما اهل خراسان</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86525" />
+        </navPoint>
+        <navPoint id="navid3x4x53" playOrder="658">
+          <navLabel>
+            <text>شمارهٔ  ۵۳ - قطعه : نصرت السلطنه دیوان عدالت را میر</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86526" />
+        </navPoint>
+        <navPoint id="navid3x4x54" playOrder="659">
+          <navLabel>
+            <text>شمارهٔ  ۵۴ - مهر مادر : باز چون جوجه ماکیان بیند</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86527" />
+        </navPoint>
+        <navPoint id="navid3x4x55" playOrder="660">
+          <navLabel>
+            <text>شمارهٔ  ۵۵ - جهاد اکبر : شب در بساط احرار از التفات سردار</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86528" />
+        </navPoint>
+        <navPoint id="navid3x4x56" playOrder="661">
+          <navLabel>
+            <text>شمارهٔ  ۵۶ - وفا : وفا در گل رخان عطر است در گل</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86529" />
+        </navPoint>
+        <navPoint id="navid3x4x57" playOrder="662">
+          <navLabel>
+            <text>شمارهٔ  ۵۷ - بامداد : صبحدم کاین مرغ گیهان آشیان</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86530" />
+        </navPoint>
+        <navPoint id="navid3x4x58" playOrder="663">
+          <navLabel>
+            <text>شمارهٔ  ۵۸ - مادر : پسر، رو قدر مادر دان که دایم</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86531" />
+        </navPoint>
+        <navPoint id="navid3x4x59" playOrder="664">
+          <navLabel>
+            <text>شمارهٔ  ۵۹ - مزاح با یکی از دوستان : چند تو را گفتم ای کمال مخور کیر</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86532" />
+        </navPoint>
+        <navPoint id="navid3x4x60" playOrder="665">
+          <navLabel>
+            <text>شمارهٔ  ۶۰ - در پشت کتابی که برای سردار عبدالعزیز خان جنرال قنسول افغان مقیم مشهد فرستاده نوشته است</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86533" />
+        </navPoint>
+        <navPoint id="navid3x4x61" playOrder="666">
+          <navLabel>
+            <text>شمارهٔ  ۶۱ - قطعه : گویند ماکیان را باید گرفت و کشت</text>
+          </navLabel>
+          <content src="cat2277sec1.xhtml#poem-86534" />
+        </navPoint>
+        <navPoint id="navid3x4x62" playOrder="667">
+          <navLabel>
+            <text>شمارهٔ  ۶۲ - درویش : کیست آن بیشعور درویشی</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86535" />
+        </navPoint>
+        <navPoint id="navid3x4x63" playOrder="668">
+          <navLabel>
+            <text>شمارهٔ  ۶۳ - انتقاد از قمه‌زنی : بشنو که لطیفۀ قشنگی است</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86536" />
+        </navPoint>
+        <navPoint id="navid3x4x64" playOrder="669">
+          <navLabel>
+            <text>شمارهٔ  ۶۴ - گریز از نادان : دادم به مسیوهال خراسان را</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86537" />
+        </navPoint>
+        <navPoint id="navid3x4x65" playOrder="670">
+          <navLabel>
+            <text>شمارهٔ  ۶۵ - قلب مادر : داد معشوقه به عاشق پیغام</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86538" />
+        </navPoint>
+        <navPoint id="navid3x4x66" playOrder="671">
+          <navLabel>
+            <text>شمارهٔ  ۶۶ - سازش روس و انگلیس : گویند که انگلیس با روس</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86539" />
+        </navPoint>
+        <navPoint id="navid3x4x67" playOrder="672">
+          <navLabel>
+            <text>شمارهٔ  ۶۷ - تاریخ بنای ادارهٔ لشکر شرق  (۱۳۴۱ هق) : حسین آقا امیر لشکر آن بر دو رضا چاکر</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86540" />
+        </navPoint>
+        <navPoint id="navid3x4x68" playOrder="673">
+          <navLabel>
+            <text>شمارهٔ  ۶۸ - بچه ژاندارم : پیوسته به جنگی تو به ما ای بچه ژاندارم</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86541" />
+        </navPoint>
+        <navPoint id="navid3x4x69" playOrder="674">
+          <navLabel>
+            <text>شمارهٔ  ۶۹ - ای خایه : ای خایه به دست تو اسیرم</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86542" />
+        </navPoint>
+        <navPoint id="navid3x4x70" playOrder="675">
+          <navLabel>
+            <text>شمارهٔ  ۷۰ : بر سر سفرۀ سپهسالار</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86543" />
+        </navPoint>
+        <navPoint id="navid3x4x71" playOrder="676">
+          <navLabel>
+            <text>شمارهٔ  ۷۱ - پیام به نظام الدوله : ناظم الدوله روز جمعۀ ما</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86544" />
+        </navPoint>
+        <navPoint id="navid3x4x72" playOrder="677">
+          <navLabel>
+            <text>شمارهٔ  ۷۲ - وطن دوستی : ما که اطفال این دبستانیم</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86545" />
+        </navPoint>
+        <navPoint id="navid3x4x73" playOrder="678">
+          <navLabel>
+            <text>شمارهٔ  ۷۳ - حکایت خلعت : مستوفی کل قصۀ چل طوطی شد</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86546" />
+        </navPoint>
+        <navPoint id="navid3x4x74" playOrder="679">
+          <navLabel>
+            <text>شمارهٔ  ۷۴ - رسوا : گویی که تو رُسوایی من با تو نیامیزم</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86547" />
+        </navPoint>
+        <navPoint id="navid3x4x75" playOrder="680">
+          <navLabel>
+            <text>شمارهٔ  ۷۵ - مزاح با مقبل دیوان : قنبل الدوله مقبل دیوان</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86548" />
+        </navPoint>
+        <navPoint id="navid3x4x76" playOrder="681">
+          <navLabel>
+            <text>شمارهٔ  ۷۶ - یادآوری : خسروا! گرچه فراموشی در طبع تو نیست</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86549" />
+        </navPoint>
+        <navPoint id="navid3x4x77" playOrder="682">
+          <navLabel>
+            <text>شمارهٔ  ۷۷ - حیله : دیشب دو نفر از رفقا آمده بودند</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86550" />
+        </navPoint>
+        <navPoint id="navid3x4x78" playOrder="683">
+          <navLabel>
+            <text>شمارهٔ  ۷۸ - دو هدیه : آمد مرا دو هدیه چو دو قرص مهر و ماه</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86551" />
+        </navPoint>
+        <navPoint id="navid3x4x79" playOrder="684">
+          <navLabel>
+            <text>شمارهٔ  ۷۹ - سفر اصفهان : ای مهین خواجه در وزارت تو</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86552" />
+        </navPoint>
+        <navPoint id="navid3x4x80" playOrder="685">
+          <navLabel>
+            <text>شمارهٔ  ۸۰ - آب حیات : آب حیات است پدرسوخته</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86553" />
+        </navPoint>
+        <navPoint id="navid3x4x81" playOrder="686">
+          <navLabel>
+            <text>شمارهٔ  ۸۱ - انتقاد از قمه‌زنان : زن‌قحبه چه می‌کُشی خودت را</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86554" />
+        </navPoint>
+        <navPoint id="navid3x4x82" playOrder="687">
+          <navLabel>
+            <text>شمارهٔ  ۸۲ - شهر کثیف : جز گه و گند و کثافت چیزی</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86555" />
+        </navPoint>
+        <navPoint id="navid3x4x83" playOrder="688">
+          <navLabel>
+            <text>شمارهٔ  ۸۳ - قربان کمال السلطنه : روز قتل ابن ملجم لعنت الله علیه</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86556" />
+        </navPoint>
+        <navPoint id="navid3x4x84" playOrder="689">
+          <navLabel>
+            <text>شمارهٔ  ۸۴ - بلدیه : پر شد در و دیوار بَلَد از گل و از لای</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86557" />
+        </navPoint>
+        <navPoint id="navid3x4x85" playOrder="690">
+          <navLabel>
+            <text>شمارهٔ  ۸۵ - مزاح با وثوق الدوله : ای وثوق الدوله آمد فصل دی</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86558" />
+        </navPoint>
+        <navPoint id="navid3x4x86" playOrder="691">
+          <navLabel>
+            <text>شمارهٔ  ۸۶ - ماده تاریخ وفات میرزا عارف  (۱۳۰۷ هق) : میرزا عارف که زیر بار فضل</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86559" />
+        </navPoint>
+        <navPoint id="navid3x4x87" playOrder="692">
+          <navLabel>
+            <text>شمارهٔ  ۸۷ - خیر مقدم و گله : وه چه خوب آمدی صفا کردی</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86560" />
+        </navPoint>
+        <navPoint id="navid3x4x88" playOrder="693">
+          <navLabel>
+            <text>شمارهٔ  ۸۸ - تقاضا گله از مُعز الملک : ای معزالملک ای اندر سخا ضرب المثل</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86561" />
+        </navPoint>
+        <navPoint id="navid3x4x89" playOrder="694">
+          <navLabel>
+            <text>شمارهٔ  ۸۹ - غمزه‌های خانم : با غمزاتی که تو خانم کنی</text>
+          </navLabel>
+          <content src="cat2277sec2.xhtml#poem-86562" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navid3x5" playOrder="1300">
+        <navLabel>
+          <text>رباعی‌ها</text>
+        </navLabel>
+        <content src="cat2278.xhtml" />
+        <navPoint id="navid3x5x1" playOrder="1301">
+          <navLabel>
+            <text>شمارهٔ ۱ تا ۳ : از شاعر به ملک التجار در طلب عهد وفای - ایرج:</text>
+          </navLabel>
+          <content src="cat2278sec1.xhtml#poem-86564" />
+        </navPoint>
+        <navPoint id="navid3x5x2" playOrder="1302">
+          <navLabel>
+            <text>شمارۀ ۴ : هر وقت که دیدی غَضَبت رو آورد</text>
+          </navLabel>
+          <content src="cat2278sec1.xhtml#poem-86565" />
+        </navPoint>
+        <navPoint id="navid3x5x3" playOrder="1303">
+          <navLabel>
+            <text>شمارۀ ۵ : اکنون که هوای ری به سر دارم و بس</text>
+          </navLabel>
+          <content src="cat2278sec1.xhtml#poem-86566" />
+        </navPoint>
+        <navPoint id="navid3x5x4" playOrder="1304">
+          <navLabel>
+            <text>شمارۀ ۶ : دیدیم بسی چون تو درین عمر قلیل</text>
+          </navLabel>
+          <content src="cat2278sec1.xhtml#poem-86567" />
+        </navPoint>
+        <navPoint id="navid3x5x5" playOrder="1305">
+          <navLabel>
+            <text>شمارۀ ۷ : ای دوست به ذات حق تعالی سوگند</text>
+          </navLabel>
+          <content src="cat2278sec1.xhtml#poem-86568" />
+        </navPoint>
+        <navPoint id="navid3x5x6" playOrder="1306">
+          <navLabel>
+            <text>شمارۀ ۸ : دیروز چه گُل‌های جهان افروزی</text>
+          </navLabel>
+          <content src="cat2278sec1.xhtml#poem-86569" />
+        </navPoint>
+        <navPoint id="navid3x5x7" playOrder="1307">
+          <navLabel>
+            <text>شمارۀ ۹ : آمد به چمن برف شگرف خنکی</text>
+          </navLabel>
+          <content src="cat2278sec1.xhtml#poem-86570" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navid3x6" playOrder="2608">
+        <navLabel>
+          <text>مربّع ترکیب</text>
+        </navLabel>
+        <content src="cat2279.xhtml" />
+        <navPoint id="navid3x6x1" playOrder="2609">
+          <navLabel>
+            <text>شمارهٔ  ۱ - در انتقاد از اوضاع کشور : داش غلم مرگ تو حظ کردم از اشعار تو من</text>
+          </navLabel>
+          <content src="cat2279sec1.xhtml#poem-86572" />
+        </navPoint>
+        <navPoint id="navid3x6x2" playOrder="2610">
+          <navLabel>
+            <text>شمارهٔ  ۲ : قوام السلطنه به پیشکار داخلی خود میرزا قاسم خان گو ...</text>
+          </navLabel>
+          <content src="cat2279sec1.xhtml#poem-86573" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navid3x7" playOrder="5219">
+        <navLabel>
+          <text>قالب‌های نو</text>
+        </navLabel>
+        <content src="cat2280.xhtml" />
+        <navPoint id="navid3x7x1" playOrder="5220">
+          <navLabel>
+            <text>شمارهٔ  ۱ - در رثاء درة المعالی : شد فصل بهار و گُل صلا داد</text>
+          </navLabel>
+          <content src="cat2280sec1.xhtml#poem-86575" />
+        </navPoint>
+        <navPoint id="navid3x7x2" playOrder="5221">
+          <navLabel>
+            <text>شمارهٔ  ۲ - بامداد : صبح دم کاین طایر چرخ آشیان</text>
+          </navLabel>
+          <content src="cat2280sec1.xhtml#poem-86576" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navid3x8" playOrder="10441">
+        <navLabel>
+          <text>ابیات پراکنده</text>
+        </navLabel>
+        <content src="cat2281.xhtml" />
+        <navPoint id="navid3x8x1" playOrder="10442">
+          <navLabel>
+            <text>شمارهٔ  ۱ : اَمرَدی رفت تا نماز کند</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86578" />
+        </navPoint>
+        <navPoint id="navid3x8x2" playOrder="10443">
+          <navLabel>
+            <text>شمارهٔ  ۲ : کو خدا کیست خدا چیست خدا</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86579" />
+        </navPoint>
+        <navPoint id="navid3x8x3" playOrder="10444">
+          <navLabel>
+            <text>شمارهٔ  ۳ : دست حافظ به در از جامۀ خواب</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86580" />
+        </navPoint>
+        <navPoint id="navid3x8x4" playOrder="10445">
+          <navLabel>
+            <text>شمارهٔ  ۴ : افسارش از بریشم و پالان ز مخملست</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86581" />
+        </navPoint>
+        <navPoint id="navid3x8x5" playOrder="10446">
+          <navLabel>
+            <text>شمارهٔ  ۵ : حضرت اقدس والا ایرج</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86582" />
+        </navPoint>
+        <navPoint id="navid3x8x6" playOrder="10447">
+          <navLabel>
+            <text>شمارهٔ  ۶ : این عکس که بر عکس خودم زیبا شد</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86583" />
+        </navPoint>
+        <navPoint id="navid3x8x7" playOrder="10448">
+          <navLabel>
+            <text>شمارهٔ  ۷ : نیست جهان جز همین که با تو بگویم</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86584" />
+        </navPoint>
+        <navPoint id="navid3x8x8" playOrder="10449">
+          <navLabel>
+            <text>شمارهٔ  ۸ : این هلال ابرو دو سال بعد ماهی می‌شود</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86585" />
+        </navPoint>
+        <navPoint id="navid3x8x9" playOrder="10450">
+          <navLabel>
+            <text>شمارهٔ  ۹ : تا خدا تَرکِ خدایی گوید</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86586" />
+        </navPoint>
+        <navPoint id="navid3x8x10" playOrder="10451">
+          <navLabel>
+            <text>شمارهٔ  ۱۰ : خواهد اینک ز جناب تو بار</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86587" />
+        </navPoint>
+        <navPoint id="navid3x8x11" playOrder="10452">
+          <navLabel>
+            <text>شمارهٔ  ۱۱ : آنکو به روز مهتری از دوستان گردد بری</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86588" />
+        </navPoint>
+        <navPoint id="navid3x8x12" playOrder="10453">
+          <navLabel>
+            <text>شمارهٔ  ۱۲ : بر دشمنان شمردم عیب نهانی خویش</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86589" />
+        </navPoint>
+        <navPoint id="navid3x8x13" playOrder="10454">
+          <navLabel>
+            <text>شمارهٔ  ۱۳ : دست در حلقهٔ موی تو کنم</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86590" />
+        </navPoint>
+        <navPoint id="navid3x8x14" playOrder="10455">
+          <navLabel>
+            <text>شمارهٔ  ۱۴ : شب عید عُمَر به قول زنان</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86591" />
+        </navPoint>
+        <navPoint id="navid3x8x15" playOrder="10456">
+          <navLabel>
+            <text>شمارهٔ  ۱۵ : طبعم نشاط کرد به انشاد این غزل</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86592" />
+        </navPoint>
+        <navPoint id="navid3x8x16" playOrder="10457">
+          <navLabel>
+            <text>شمارهٔ  ۱۶ : ای به درگاه تو نیاز همه</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86593" />
+        </navPoint>
+        <navPoint id="navid3x8x17" playOrder="10458">
+          <navLabel>
+            <text>شمارهٔ  ۱۷ : به انگشتان پا از زیر کرسی</text>
+          </navLabel>
+          <content src="cat2281sec1.xhtml#poem-86594" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navid3x9" playOrder="20900">
+        <navLabel>
+          <text>اشعار دیگر</text>
+        </navLabel>
+        <content src="cat2282.xhtml" />
+        <navPoint id="navid3x9x1" playOrder="20901">
+          <navLabel>
+            <text>شمارهٔ  ۱ - من گرفتم تو نگیر : زن گرفتم شدم ای دوست به دام زن اسیر</text>
+          </navLabel>
+          <content src="cat2282sec1.xhtml#poem-86596" />
+        </navPoint>
+        <navPoint id="navid3x9x2" playOrder="20902">
+          <navLabel>
+            <text>شمارهٔ  ۲ - چه عجب؟ : وه چه خوب آمدی، صفا کردی</text>
+          </navLabel>
+          <content src="cat2282sec1.xhtml#poem-86597" />
+        </navPoint>
+        <navPoint id="navid3x9x3" playOrder="20903">
+          <navLabel>
+            <text>شمارهٔ  ۳ - کار و بار : ندانم از چه به هرجا که لفظ کار آید</text>
+          </navLabel>
+          <content src="cat2282sec1.xhtml#poem-86598" />
+        </navPoint>
+        <navPoint id="navid3x9x4" playOrder="20904">
+          <navLabel>
+            <text>شمارهٔ  ۴ - عاقبت ضعیفی : قصه شنیدم که بوالعلا به همه عمر</text>
+          </navLabel>
+          <content src="cat2282sec1.xhtml#poem-86599" />
+        </navPoint>
+        <navPoint id="navid3x9x5" playOrder="20905">
+          <navLabel>
+            <text>شمارهٔ  ۵ - خنده : باغ خندان ز گل خندان است</text>
+          </navLabel>
+          <content src="cat2282sec1.xhtml#poem-86600" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+  </navMap>
+</ncx>
