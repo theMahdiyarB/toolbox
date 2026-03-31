@@ -2660,13 +2660,12 @@ input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; a
     transition: box-shadow 0.2s, background 0s;
 }
 
-/* Ensure sticky works on mobile by removing overflow constraints */
+/* Mobile: ensure sticky positioning and scrolling context */
 @media (max-width: 768px) {
-  /* Force sticky positioning on mobile */
   .section-heading {
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 10 !important;
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
 }
 .section-heading.is-stuck {
