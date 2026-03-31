@@ -1664,7 +1664,7 @@
       .diwan-prose-para { margin:0 0 1.1em 0; text-indent:1.5em; text-align:justify; }
       .diwan-prose-para:first-child { text-indent:0; }
       /* ── Free / modern verse ── */
-      .diwan-free-wrap { display:flex; flex-direction:column; align-items:flex-end; gap:2px; padding:6px 0; }
+      .diwan-free-wrap { display:flex; flex-direction:column; align-items:flex-start; gap:2px; padding:6px 0; }
       .diwan-free-line { font-size:16px; line-height:1.9; color:var(--m3-on-surface); text-align:right; }
       /* ── Poem body ── */
       .diwan-poem-body { margin-top:4px; }
@@ -1676,6 +1676,16 @@
       /* ── Category buttons ── */
       #diwan-categories .btn { white-space:normal; text-align:center; min-width:90px; max-width:200px; line-height:1.4; height:auto; padding:8px 14px; }
 
+      /* ── Mixed prose+verse (Golestan-style) ── */
+      .diwan-mixed-wrap { font-size:15.5px; line-height:2.1; color:var(--m3-on-surface); direction:rtl; }
+      .diwan-mixed-prose { margin:0 0 1em 0; text-indent:1.5em; text-align:justify; }
+      .diwan-mixed-prose:first-child { text-indent:0; }
+      .diwan-mixed-verse-block { margin:1em 0 1em 0; padding:0.5em 0; border-right:3px solid color-mix(in srgb,var(--m3-primary) 40%,transparent); padding-right:14px; }
+      .diwan-mixed-beyt { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:8px; line-height:2; }
+      .diwan-mixed-beyt .m-right { text-align:right; }
+      .diwan-mixed-beyt .m-left { text-align:left; }
+      .diwan-mixed-single { text-align:center; margin-bottom:8px; line-height:2; font-style:italic; }
+
       @media (max-width: 600px) {
         .diwan-beyt {
           grid-template-columns: 1fr;
@@ -1685,6 +1695,14 @@
         .diwan-mesra:first-child,
         .diwan-mesra:last-child {
           text-align: center;
+        }
+
+        .diwan-mixed-beyt {
+          grid-template-columns:1fr; gap:2px;
+        }
+
+        .diwan-mixed-beyt .m-right,.diwan-mixed-beyt .m-left {
+          text-align:right;
         }
       }
 
@@ -2308,7 +2326,7 @@
 
             <!-- ══ فایل ══ -->
             <div class="section" id="sec-file">
-              <div class="section__title">📁 فایل — آفلاین کامل</div>
+              <div class="section__title">📁 فایل — کاملاً آفلاین</div>
               <div class="tool-grid">
                 <div class="link-card" onclick="haptic(this);showTool('imgcompress')"><button class="fav-btn" data-tool="imgcompress" onclick="event.stopPropagation();toggleFav('imgcompress',this)">☆</button><span class="link-card__icon">🗜️</span><span class="link-card__name">فشرده‌سازی تصویر</span><span class="link-card__desc">پردازش کامل در مرورگر</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('pdfcompress')"><button class="fav-btn" data-tool="pdfcompress" onclick="event.stopPropagation();toggleFav('pdfcompress',this)">☆</button><span class="link-card__icon">📄</span><span class="link-card__name">فشرده‌سازی PDF</span><span class="link-card__desc">کاهش حجم تصاویر PDF</span></div>
@@ -5238,8 +5256,6 @@
           <div class="tool-desc">تبدیل عدد به نوشتار فارسی و انگلیسی. برای چک، قرارداد و اسناد رسمی مفید است.</div>
         </div>
 
-        <!-- ══ TEXT ANALYZER ══ -->
-<!-- ══ TEXT ANALYZER ══ -->
         <!-- ══ COLOR BLINDNESS ══ -->
         <div id="colorblind" class="tool-card">
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
@@ -5364,55 +5380,6 @@
           </div>
           <div id="dc-result" style="margin-top:12px"></div>
           <button class="btn btn-tonal" onclick="dcToday()" style="margin-top:8px">📅 امروز</button>
-        </div>
-
-        <!-- ══ PRAYER TIMES ══ -->
-        <div id="prayer" class="tool-card">
-          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
-          <div class="tool-title">🕌 اوقات شرعی</div>
-          <div class="tool-desc">محاسبه اوقات شرعی بر اساس روش تهران (IPPI) — کاملاً آفلاین. موقعیت مکانی دستگاه شما استفاده می‌شود یا می‌توانید مختصات را دستی وارد کنید.</div>
-          <div class="field-row">
-            <div class="field-col">
-              <label class="field-label">عرض جغرافیایی</label>
-              <input type="number" id="pt-lat" class="text-input" placeholder="مثلاً 35.6892" step="0.0001" value="35.6892">
-            </div>
-            <div class="field-col">
-              <label class="field-label">طول جغرافیایی</label>
-              <input type="number" id="pt-lng" class="text-input" placeholder="مثلاً 51.3890" step="0.0001" value="51.3890">
-            </div>
-            <div class="field-col">
-              <label class="field-label">تاریخ</label>
-              <input type="date" id="pt-date" class="text-input">
-            </div>
-          </div>
-          <div class="btn-row">
-            <button class="btn btn-filled" onclick="calcPrayer()">محاسبه</button>
-            <button class="btn btn-tonal" onclick="ptGetLocation()">📍 موقعیت من</button>
-          </div>
-          <div id="pt-city" style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:8px"></div>
-          <div id="pt-result"></div>
-        </div>
-
-        <!-- ══ QIBLA FINDER ══ -->
-        <div id="qibla" class="tool-card">
-          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
-          <div class="tool-title">🧭 قبله‌نما</div>
-          <div class="tool-desc">محاسبه جهت قبله (کعبه مشرفه) از هر نقطه‌ای روی زمین — آفلاین کامل.</div>
-          <div class="field-row">
-            <div class="field-col">
-              <label class="field-label">عرض جغرافیایی</label>
-              <input type="number" id="qb-lat" class="text-input" placeholder="مثلاً 35.6892" step="0.0001" value="35.6892">
-            </div>
-            <div class="field-col">
-              <label class="field-label">طول جغرافیایی</label>
-              <input type="number" id="qb-lng" class="text-input" placeholder="مثلاً 51.3890" step="0.0001" value="51.3890">
-            </div>
-          </div>
-          <div class="btn-row">
-            <button class="btn btn-filled" onclick="calcQibla()">محاسبه قبله</button>
-            <button class="btn btn-tonal" onclick="qbGetLocation()">📍 موقعیت من</button>
-          </div>
-          <div id="qb-result" style="margin-top:14px;text-align:center"></div>
         </div>
 
         <!-- ══ EMERGENCY NUMBERS ══ -->
@@ -7175,9 +7142,9 @@
             <div style="margin-top:24px;padding:20px 20px 16px;background:var(--m3-secondary-container,var(--m3-primary-container));border-radius:20px;text-align:center;border:1px solid color-mix(in srgb,var(--m3-primary) 20%,transparent)">
               <div style="font-size:28px;margin-bottom:6px">📿</div>
               <div style="font-size:17px;font-weight:700;color:var(--m3-on-secondary-container,var(--m3-on-primary-container));margin-bottom:4px">فال حافظ</div>
-              <div style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:14px;line-height:1.5">ای حافظ شیرازی! تو محرم هر رازی! تو را به خدا و به شاخ نباتت قسم می دهم که هر چه صلاح و مصلحت می بینی برایم آشکار و آرزوی مرا براورده سازی.</div>
+              <div style="font-size:15px;color:var(--m3-on-surface-variant);margin-bottom:14px;line-height:1.5">ای حافظ شیرازی! تو محرم هر رازی! تو را به خدا و به شاخ نباتت قسم می‌دهم که هر چه صلاح و مصلحت می‌بینی برایم آشکار و آرزوی مرا براورده سازی.</div>
               <button class="btn btn-filled" onclick="showHafezFaal()" style="width:100%;font-size:15px;padding:12px;border-radius:12px">✅ فالی بگیر</button>
-              <div style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:14px;line-height:1.5">فال گرفتن از دیوانِ حافظ معمولاً در مناسبت‌هایی مانند عید نوروز، چهارشنبه‌سوری، شب چله، سیزده‌به‌در، چهارشنبهٔ آخرِ ماهِ صفر و سیزدهِ صفر انجام می‌شود. هنگامی که شخص نیتِ مشخصی دارد، مانند هنگامِ فراقِ یار یا انتظارِ آمدنِ شخصی یا پیش‌آمدنِ مشکلی برای عزیزی یا چیرگیِ اندوهی بر وجودِ فردی، فال زدن رایج است.</div>
+              <div style="font-size:15px;color:var(--m3-on-surface-variant);margin-top:14px;line-height:1.5">فال گرفتن از دیوانِ حافظ معمولاً در مناسبت‌هایی مانند عید نوروز، چهارشنبه‌سوری، شب چله، سیزده‌به‌در، چهارشنبهٔ آخرِ ماهِ صفر و سیزدهِ صفر انجام می‌شود. هنگامی که شخص نیتِ مشخصی دارد، مانند هنگامِ فراقِ یار یا انتظارِ آمدنِ شخصی یا پیش‌آمدنِ مشکلی برای عزیزی یا چیرگیِ اندوهی بر وجودِ فردی، فال زدن رایج است.</div>
             </div>
           </div>
 
@@ -7227,7 +7194,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 2.10 - ۱۴۰۵/۰۱/۱۱
+          ℹ️ نسخه 2.11 - ۱۴۰۵/۰۱/۱۱
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -9776,7 +9743,7 @@
           return[y,m+1,n+1];
         }
 
-        // Jalali ↔ JD wrappers (used by prayer/qibla/age)
+        // Jalali ↔ JD wrappers (used by age)
         window.jalaliToJD = function(jy,jm,jd){
           var g=window.j2g(jy,jm,jd);
           return window.gregorianToJD(g[0],g[1],g[2]);
@@ -9945,149 +9912,6 @@
               <button class="btn btn-tonal" style="font-size:12px" onclick="copyToClipboard('${fmtHijri(hy2,hm2,hd2)}')">📋 کپی قمری</button>
             </div>`;
         } catch(e) { document.getElementById('dc-result').innerHTML = `<div style="color:var(--m3-error);padding:8px">خطا: تاریخ معتبر نیست</div>`; }
-      }
-
-      // ══════════════════════════════════════════════════════
-      //  PRAYER TIMES (Tehran / IPPI method — offline)
-      // ══════════════════════════════════════════════════════
-      function ptGetLocation() {
-        if (!navigator.geolocation) { alert('مرورگر شما موقعیت‌یابی را پشتیبانی نمی‌کند.'); return; }
-        navigator.geolocation.getCurrentPosition(pos => {
-          document.getElementById('pt-lat').value = pos.coords.latitude.toFixed(4);
-          document.getElementById('pt-lng').value = pos.coords.longitude.toFixed(4);
-          calcPrayer();
-        }, () => alert('دسترسی به موقعیت مکانی رد شد.'));
-      }
-      function calcPrayer() {
-        const lat = parseFloat(document.getElementById('pt-lat').value);
-        const lng = parseFloat(document.getElementById('pt-lng').value);
-        const dateVal = document.getElementById('pt-date').value;
-        if (isNaN(lat) || isNaN(lng)) return;
-        const date = dateVal ? new Date(dateVal) : new Date();
-        const times = getPrayerTimes(date, lat, lng);
-        const jd = gregorianToJD(date.getFullYear(), date.getMonth()+1, date.getDate());
-        const [jy, jm, jdv] = jdToJalali(jd);
-        document.getElementById('pt-city').textContent = `تاریخ: ${fmtJalali(jy,jm,jdv)} — مختصات: ${lat.toFixed(4)}°N ${lng.toFixed(4)}°E`;
-        const rows = [
-          ['🌅 اذان صبح (فجر)', times.fajr],
-          ['🌄 طلوع آفتاب', times.sunrise],
-          ['🕛 ظهر (زوال)', times.dhuhr],
-          ['🌇 اذان عصر', times.asr],
-          ['🌆 غروب آفتاب', times.sunset],
-          ['🌙 اذان مغرب', times.maghrib],
-          ['🌃 اذان عشاء', times.isha],
-          ['🌌 نیمه شب شرعی', times.midnight],
-        ];
-        document.getElementById('pt-result').innerHTML = `<div class="data-list">${rows.map(([k,v])=>`<div class="data-row"><span class="data-row__key">${k}</span><span class="data-row__val" style="font-weight:700;font-size:1.1rem;font-family:'Courier New',monospace">${v}</span></div>`).join('')}</div>`;
-      }
-      function getPrayerTimes(date, lat, lng) {
-        const rad = Math.PI/180, deg = 180/Math.PI;
-        const jdate = gregorianToJD(date.getFullYear(), date.getMonth()+1, date.getDate()) - lng/360;
-        const T = (jdate - 2451545) / 36525;
-        // Solar coordinates
-        const L0 = (280.46646 + 36000.76983*T) % 360;
-        const M  = (357.52911 + 35999.05029*T - 0.0001537*T*T) * rad;
-        const C  = (1.914602 - 0.004817*T - 0.000014*T*T)*Math.sin(M)
-                 + (0.019993 - 0.000101*T)*Math.sin(2*M)
-                 + 0.000289*Math.sin(3*M);
-        const sun_lon = (L0 + C) * rad;
-        const omega = (125.04 - 1934.136*T) * rad;
-        const lambda = sun_lon - 0.00569*rad - 0.00478*rad*Math.sin(omega);
-        const eps0 = (23 + 26/60 + 21.448/3600) - (46.8150/3600)*T - (0.00059/3600)*T*T + (0.001813/3600)*T*T*T;
-        const eps = (eps0 + 0.00256*Math.cos(omega)) * rad;
-        const RA = Math.atan2(Math.cos(eps)*Math.sin(lambda), Math.cos(lambda)) * deg / 15;
-        const decl = Math.asin(Math.sin(eps)*Math.sin(lambda));
-        // Equation of time
-        const e0 = eps/2, y = Math.tan(e0)*Math.tan(e0);
-        const L0r = L0*rad;
-        const Mr = M;
-        const eq_time = (y*Math.sin(2*L0r) - 2*0.016708634*Math.sin(Mr) + 4*0.016708634*y*Math.sin(Mr)*Math.cos(2*L0r) - 0.5*y*y*Math.sin(4*L0r) - 1.25*0.016708634*0.016708634*Math.sin(2*Mr)) * 4 * deg;
-        const noon = 12 - lng/15 - eq_time/60;
-        function hourAngle(alt) {
-          const cos_ha = (Math.sin(alt*rad) - Math.sin(lat*rad)*Math.sin(decl)) / (Math.cos(lat*rad)*Math.cos(decl));
-          if (cos_ha < -1) return 0; if (cos_ha > 1) return 0;
-          return Math.acos(cos_ha) * deg / 15;
-        }
-        // Tehran method: Fajr 17.7°, Isha 14°, Midnight = midpoint
-        const fajr_ha   = hourAngle(-17.7);
-        const sunrise_ha= hourAngle(-0.8333);
-        const isha_ha   = hourAngle(-14);
-        // Asr: Hanafi (shadow = 2x + original); Shafi (shadow = 1x + original)
-        const asr_angle = deg * Math.atan(1 / (1 + Math.tan(Math.abs(lat*rad - decl))));
-        const asr_ha = hourAngle(asr_angle);
-        const sunset_time = noon + sunrise_ha;
-        const midnight_time = sunset_time + (noon - fajr_ha + 24 - sunset_time) / 2;
-        function fmt(h) {
-          h = ((h % 24) + 24) % 24;
-          const hh = Math.floor(h), mm = Math.round((h-hh)*60);
-          if (mm===60) return `${String(hh+1).padStart(2,'0')}:00`;
-          return `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
-        }
-        return {
-          fajr:    fmt(noon - fajr_ha),
-          sunrise: fmt(noon - sunrise_ha),
-          dhuhr:   fmt(noon),
-          asr:     fmt(noon + asr_ha),
-          sunset:  fmt(sunset_time),
-          maghrib: fmt(sunset_time + 0.05),
-          isha:    fmt(noon + isha_ha),
-          midnight:fmt(midnight_time),
-        };
-      }
-
-      // ══════════════════════════════════════════════════════
-      //  QIBLA FINDER
-      // ══════════════════════════════════════════════════════
-      const KAABA_LAT = 21.4225, KAABA_LNG = 39.8262;
-      function qbGetLocation() {
-        if (!navigator.geolocation) { alert('مرورگر شما موقعیت‌یابی را پشتیبانی نمی‌کند.'); return; }
-        navigator.geolocation.getCurrentPosition(pos => {
-          document.getElementById('qb-lat').value = pos.coords.latitude.toFixed(4);
-          document.getElementById('qb-lng').value = pos.coords.longitude.toFixed(4);
-          calcQibla();
-        }, () => alert('دسترسی رد شد.'));
-      }
-      function calcQibla() {
-        const lat = parseFloat(document.getElementById('qb-lat').value);
-        const lng = parseFloat(document.getElementById('qb-lng').value);
-        if (isNaN(lat) || isNaN(lng)) return;
-        const rad = Math.PI/180;
-        const dLng = (KAABA_LNG - lng) * rad;
-        const lat1 = lat * rad, lat2 = KAABA_LAT * rad;
-        const y = Math.sin(dLng) * Math.cos(lat2);
-        const x = Math.cos(lat1)*Math.sin(lat2) - Math.sin(lat1)*Math.cos(lat2)*Math.cos(dLng);
-        let bearing = Math.atan2(y, x) * 180 / Math.PI;
-        bearing = ((bearing % 360) + 360) % 360;
-        // Great-circle distance
-        const dlat = (KAABA_LAT - lat)*rad, dlng2 = dLng;
-        const a = Math.sin(dlat/2)**2 + Math.cos(lat1)*Math.cos(lat2)*Math.sin(dlng2/2)**2;
-        const dist = Math.round(6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
-        const compass = ['شمال','شمال‌شرق','شرق','جنوب‌شرق','جنوب','جنوب‌غرب','غرب','شمال‌غرب'];
-        const dir = compass[Math.round(bearing/45) % 8];
-        const svg = `<svg viewBox="0 0 200 200" style="width:180px;height:180px">
-          <circle cx="100" cy="100" r="90" fill="none" stroke="var(--m3-outline-variant)" stroke-width="2"/>
-          <circle cx="100" cy="100" r="5" fill="var(--m3-on-surface)"/>
-          <text x="100" y="18" text-anchor="middle" font-size="14" fill="var(--m3-on-surface)">N</text>
-          <text x="185" y="104" text-anchor="middle" font-size="14" fill="var(--m3-on-surface)">E</text>
-          <text x="100" y="196" text-anchor="middle" font-size="14" fill="var(--m3-on-surface)">S</text>
-          <text x="14" y="104" text-anchor="middle" font-size="14" fill="var(--m3-on-surface)">W</text>
-          <line x1="100" y1="100"
-            x2="${100 + 80*Math.sin(bearing*Math.PI/180)}"
-            y2="${100 - 80*Math.cos(bearing*Math.PI/180)}"
-            stroke="var(--m3-primary)" stroke-width="4" stroke-linecap="round"/>
-          <polygon points="${100 + 80*Math.sin(bearing*Math.PI/180)},${100 - 80*Math.cos(bearing*Math.PI/180)}
-            ${100 + 10*Math.sin((bearing-150)*Math.PI/180)},${100 - 10*Math.cos((bearing-150)*Math.PI/180)}
-            ${100 + 10*Math.sin((bearing+150)*Math.PI/180)},${100 - 10*Math.cos((bearing+150)*Math.PI/180)}"
-            fill="var(--m3-primary)"/>
-          <text x="100" y="118" text-anchor="middle" font-size="12" fill="var(--m3-on-surface-variant)">🕋</text>
-        </svg>`;
-        document.getElementById('qb-result').innerHTML = `
-          ${svg}
-          <div class="data-list" style="margin-top:16px;text-align:right">
-            <div class="data-row"><span class="data-row__key">🧭 زاویه قبله از شمال</span><span class="data-row__val" style="font-weight:700;color:var(--m3-primary)">${bearing.toFixed(2)}°</span></div>
-            <div class="data-row"><span class="data-row__key">🗺️ جهت</span><span class="data-row__val" style="font-weight:700">${dir}</span></div>
-            <div class="data-row"><span class="data-row__key">📏 فاصله تا کعبه</span><span class="data-row__val">${dist.toLocaleString()} کیلومتر</span></div>
-          </div>`;
       }
 
       // ══════════════════════════════════════════════════════
@@ -13321,9 +13145,9 @@
           <div style="display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:12px">
             <button class="btn btn-tonal" style="width:52px;height:44px;font-size:1.3rem" onclick="snakeDir(0,-1)">↑</button>
             <div style="display:flex;gap:4px">
-              <button class="btn btn-tonal" style="width:52px;height:44px;font-size:1.3rem" onclick="snakeDir(-1,0)">←</button>
-              <button class="btn btn-tonal" style="width:52px;height:44px;font-size:1.3rem" onclick="snakeDir(0,1)">↓</button>
               <button class="btn btn-tonal" style="width:52px;height:44px;font-size:1.3rem" onclick="snakeDir(1,0)">→</button>
+              <button class="btn btn-tonal" style="width:52px;height:44px;font-size:1.3rem" onclick="snakeDir(0,1)">↓</button>
+              <button class="btn btn-tonal" style="width:52px;height:44px;font-size:1.3rem" onclick="snakeDir(-1,0)">←</button>
             </div>
           </div>
           <div style="font-size:11px;color:var(--m3-on-surface-variant);margin-top:8px;text-align:center">
@@ -14467,7 +14291,14 @@
       let isFaalMode = false;
 
       // Helper: Smart sorting - Persian ordinals, digits, Roman
-      const _FA_ORD = {'اول':1,'یکم':1,'دوم':2,'سوم':3,'چهارم':4,'پنجم':5,'ششم':6,'هفتم':7,'هشتم':8,'نهم':9,'دهم':10,'یازدهم':11,'دوازدهم':12,'سیزدهم':13,'چهاردهم':14,'پانزدهم':15};
+      const _FA_ORD = {
+        'مقدمه':0, 'اول':1,'یکم':1,'دوم':2,'سوم':3,'چهارم':4,'پنجم':5,'ششم':6,'هفتم':7,'هشتم':8,'نهم':9,'دهم':10,
+        'یازدهم':11,'دوازدهم':12,'سیزدهم':13,'چهاردهم':14,'پانزدهم':15,
+        // Arabic numbers
+        'مقدّمه':0, 'الاول':1,'الاوّل':1,'الأول':1,'الثاني':2,'الثّاني':2,'الثانی':2,'الثالث':3,'الثّالث':3,
+        'الرابع':4,'الرّابع':4,'الخامس':5,'الخامسه':5,'السادس':6,'السّادس':6,
+        'السابع':7,'السّابع':7,'الثامن':8,'الثّامن':8,'التاسع':9,'التّاسع':9,'العاشر':10,'العاشره':10
+      };
       const _ROM_NUM = {'i':1,'ii':2,'iii':3,'iv':4,'v':5,'vi':6,'vii':7,'viii':8,'ix':9,'x':10,'xi':11,'xii':12,'xiii':13,'xiv':14,'xv':15};
       function _extractOrderKey(s) {
         if (!s) return null;
@@ -14636,7 +14467,7 @@
           for (const file of categoryData.files) {
             const response = await fetch(`poems/hafez/${file}`);
             const html = await response.text();
-            const poems = parsePoems(html, categoryData.name);
+            const poems = parsePoems(html, categoryData.name, 'hafez');
             allPoems.push(...poems);
           }
           
@@ -14793,7 +14624,7 @@
           try {
             const response = await fetch(`poems/${poet.folder}/${file}`);
             const html = await response.text();
-            const poems = parsePoems(html, category.name);
+            const poems = parsePoems(html, currentCategory?.name || category.name, currentPoetId);
             allPoems.push(...poems);
           } catch (err) {
             console.error(`Error loading ${file}:`, err);
@@ -14803,13 +14634,21 @@
         displayPoems(allPoems);
       }
 
-      function detectPoemType(categoryName) {
+      // Poets whose work is primarily free/modern verse — never pair into hemistichs
+      const FREE_VERSE_POETS = new Set(['forugh','sohrab-sepehri','shamlou','nima', 'akhavan']);
+
+      function detectPoemType(categoryName, poetId) {
         if (!categoryName) return 'unknown';
+        // Free-verse poets: all their work is free verse
+        if (poetId && FREE_VERSE_POETS.has(poetId)) return 'free';
         const cl = categoryName.toLowerCase();
         if (cl.includes('فیه') || cl.includes('prose') || cl.includes('نثر')) return 'prose';
-        if (cl.includes('حکایت') || cl.includes('مقدمه') || cl.includes('دیباچه') || cl.includes('خطبه')) return 'prose';
-        if (cl.includes('گلستان') && !cl.includes('شعر')) return 'prose';
-        if (cl.includes('شعر نو') || cl.includes('شعرنو') || cl.includes('سپید') || cl.includes('نیمایی')) return 'free';
+        if (cl.includes('حکایت') || cl.includes('مقدمه') || cl.includes('دیباچه') || cl.includes('خطبه') || cl.includes('بخش')) return 'mixed';
+        if (cl.includes('گلستان') && !cl.includes('شعر')) return 'mixed';
+        if (cl.includes('بوستان') && cl.includes('باب')) return 'mixed';
+        if (cl.includes('باب') && (cl.includes('سیرت') || cl.includes('اخلاق') || cl.includes('قناعت') || cl.includes('خاموشی') || cl.includes('عشق')
+        || cl.includes('پیری') || cl.includes('تربیت') || cl.includes('صحبت') || cl.includes('عافیت'))) return 'mixed';
+        if (cl.includes('شعر نو') || cl.includes('شعرنو') || cl.includes('سپید') || cl.includes('نیمایی') || cl.includes('آزاد') || cl.includes('نیما')) return 'free';
         if (cl.includes('غزل') || cl.includes('ghazal')) return 'ghazal';
         if (cl.includes('مثنوی') || cl.includes('masnavi')) return 'masnavi';
         if (cl.includes('قصیده')) return 'qasida';
@@ -14818,55 +14657,83 @@
         if (cl.includes('ترجیع') || cl.includes('ترکیب') || cl.includes('قطعه')) return 'ghazal';
         return 'unknown';
       }
+
       function detectPoemTypeFromContent(verses) {
         if (!verses || !verses.length) return 'unknown';
         const avg = verses.reduce((s,v)=>s+v.length,0)/verses.length;
         return avg > 100 ? 'prose' : 'unknown';
       }
 
-      function parsePoems(html, categoryName = '') {
+      function parsePoems(html, categoryName, poetId) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
         const poems = [];
         
-        // Detect poem type from category name
-        const poemType = detectPoemType(categoryName);
+        const poemType = detectPoemType(categoryName, poetId);
         
-        // Look for poem headers - could be h2/h3 with id or a[id]
+        // Verse-line heuristic: short <p> = verse, long <p> = prose
+        const VERSE_MAX_LEN = 75;
+        
+        function buildSegments(paragraphs) {
+          const segs = [];
+          let cur = null;
+          for (const p of paragraphs) {
+            const text = p.textContent.trim();
+            if (!text) continue;
+            const kind = text.length <= VERSE_MAX_LEN ? 'verse' : 'prose';
+            if (!cur || cur.kind !== kind) {
+              cur = { kind, lines: [] };
+              segs.push(cur);
+            }
+            cur.lines.push(text);
+          }
+          return segs;
+        }
+
         const headers = doc.querySelectorAll('[id^="poem-"]');
         
         headers.forEach(header => {
           const poemId = header.id;
-          
-          // Try to get title from the element or its content
           let titleEl = header;
-          if (header.tagName === 'A') {
-            titleEl = header.parentElement; // Get parent if it's an anchor
-          }
+          if (header.tagName === 'A') titleEl = header.parentElement;
           const title = titleEl.textContent.trim();
           
-          const verses = [];
-          
-          // Collect following P elements as verses
+          const paragraphs = [];
           let nextEl = titleEl.nextElementSibling;
           while (nextEl) {
+            if (/^H[1-3]$/.test(nextEl.tagName) || (nextEl.id && nextEl.id.startsWith('poem-'))) break;
+            if (nextEl.querySelector && nextEl.querySelector('[id^="poem-"]')) break;
             if (nextEl.tagName === 'P') {
               const text = nextEl.textContent.trim();
-              if (text) verses.push(text);
+              if (text) paragraphs.push(nextEl);
             } else if (nextEl.tagName === 'BLOCKQUOTE' || nextEl.tagName === 'DIV') {
               const ps = nextEl.querySelectorAll('p');
-              if (ps.length > 0) { ps.forEach(p => { const t=p.textContent.trim(); if(t)verses.push(t); }); }
-              else { const t=nextEl.textContent.trim(); if(t)verses.push(t); }
-            } else if (/^H[1-3]$/.test(nextEl.tagName) || (nextEl.id && nextEl.id.startsWith('poem-'))) {
-              break;
+              if (ps.length > 0) ps.forEach(p => { if (p.textContent.trim()) paragraphs.push(p); });
+              else {
+                const synth = doc.createElement('p');
+                synth.textContent = nextEl.textContent.trim();
+                if (synth.textContent) paragraphs.push(synth);
+              }
             }
             nextEl = nextEl.nextElementSibling;
           }
           
-          if (title || verses.length > 0) {
+          if (paragraphs.length === 0 && !title) return;
+
+          if (poemType === 'mixed') {
+            const segments = buildSegments(paragraphs);
+            const allText = paragraphs.map(p => p.textContent.trim()).filter(Boolean);
+            const hasProse = segments.some(s => s.kind === 'prose');
+            const hasVerse = segments.some(s => s.kind === 'verse');
+            let finalType = poemType;
+            if (!hasProse && hasVerse) finalType = 'ghazal';
+            if (hasProse && !hasVerse) finalType = 'prose';
+            poems.push({ id:poemId, title, verses:allText, segments, type:finalType, verseCount:allText.length });
+          } else {
+            const verses = paragraphs.map(p => p.textContent.trim()).filter(Boolean);
             let finalType = poemType;
             if (finalType === 'unknown' && verses.length > 0) finalType = detectPoemTypeFromContent(verses);
-            poems.push({ id: poemId, title, verses, type: finalType, verseCount: verses.length });
+            poems.push({ id:poemId, title, verses, type:finalType, verseCount:verses.length });
           }
         });
         
@@ -14936,34 +14803,69 @@
         document.getElementById('diwan-poems-view').style.display = 'none';
         document.getElementById('diwan-poem-detail').style.display = 'block';
         const contentDiv = document.getElementById('diwan-poem-content');
-        const TL={ghazal:'غزل',masnavi:'مثنوی',qasida:'قصیده',rubaei:'رباعی',prose:'نثر',hemistich:'مصراع',free:'شعر آزاد/نیمایی',unknown:''};
-        const typeLabel = TL[poem.type]||'';
+        const TL = {ghazal:'غزل',masnavi:'مثنوی',qasida:'قصیده',rubaei:'رباعی',prose:'نثر',hemistich:'مصراع',free:'شعر آزاد / نیمایی',mixed:'نثر و شعر',unknown:''};
+        const typeLabel = TL[poem.type] || '';
         const v = poem.verses || [];
-        function makeBeyts(){
-          let h='';
-          for(let i=0;i<v.length;i+=2){
-            if(i+1<v.length) h+='<div class="diwan-beyt"><div class="diwan-mesra diwan-mesra--right">'+_escHtml(v[i])+'</div>'
-              +'<div class="diwan-mesra diwan-mesra--left">'+_escHtml(v[i+1])+'</div></div>';
-            else h+='<div class="diwan-single-mesra">'+_escHtml(v[i])+'</div>';
+
+        function escH(s) { return _escHtml(s); }
+
+        function makeClassicalBeyts(lines) {
+          let h = '';
+          for (let i = 0; i < lines.length; i += 2) {
+            if (i + 1 < lines.length) {
+              h += '<div class="diwan-beyt"><div class="diwan-mesra diwan-mesra--right">' + escH(lines[i]) + '</div>'
+                + '<div class="diwan-mesra diwan-mesra--left">' + escH(lines[i+1]) + '</div></div>';
+            } else {
+              h += '<div class="diwan-single-mesra">' + escH(lines[i]) + '</div>';
+            }
           }
           return h;
         }
-        const avgLen = v.length ? v.reduce((s,x)=>s+x.length,0)/v.length : 0;
-        let bodyHTML='';
-        if (poem.type==='prose') {
-          bodyHTML='<div class="diwan-prose-wrap">'+v.map(p=>'<p class="diwan-prose-para">'+_escHtml(p)+'</p>').join('')+'</div>';
-        } else if (poem.type==='free') {
-          bodyHTML='<div class="diwan-free-wrap">'+v.map(l=>'<div class="diwan-free-line">'+_escHtml(l)+'</div>').join('')+'</div>';
-        } else if (poem.type==='unknown'&&(avgLen>100||v.length===1)) {
-          bodyHTML='<div class="diwan-prose-wrap">'+v.map(p=>'<p class="diwan-prose-para">'+_escHtml(p)+'</p>').join('')+'</div>';
-        } else { bodyHTML=makeBeyts(); }
-        const bc = typeof buildBreadcrumbHTML==='function' ? buildBreadcrumbHTML(currentPoetId, currentCategoryId) : '';
-        window._currentPoemText = poem.title+'\n\n'+v.join('\n');
+
+        function makeMixedBeyts(lines) {
+          let h = '<div class="diwan-mixed-verse-block">';
+          for (let i = 0; i < lines.length; i += 2) {
+            if (i + 1 < lines.length) {
+              h += '<div class="diwan-mixed-beyt"><div class="m-right">' + escH(lines[i]) + '</div>'
+                + '<div class="m-left">' + escH(lines[i+1]) + '</div></div>';
+            } else {
+              h += '<div class="diwan-mixed-single">' + escH(lines[i]) + '</div>';
+            }
+          }
+          h += '</div>';
+          return h;
+        }
+
+        const avgLen = v.length ? v.reduce((s,x) => s + x.length, 0) / v.length : 0;
+        let bodyHTML = '';
+
+        if (poem.type === 'mixed' && poem.segments && poem.segments.length > 0) {
+          bodyHTML = '<div class="diwan-mixed-wrap">';
+          for (const seg of poem.segments) {
+            if (seg.kind === 'prose') {
+              bodyHTML += seg.lines.map(l => '<p class="diwan-mixed-prose">' + escH(l) + '</p>').join('');
+            } else {
+              bodyHTML += makeMixedBeyts(seg.lines);
+            }
+          }
+          bodyHTML += '</div>';
+        } else if (poem.type === 'prose') {
+          bodyHTML = '<div class="diwan-prose-wrap">' + v.map(p => '<p class="diwan-prose-para">' + escH(p) + '</p>').join('') + '</div>';
+        } else if (poem.type === 'free') {
+          bodyHTML = '<div class="diwan-free-wrap">' + v.map(l => '<div class="diwan-free-line">' + escH(l) + '</div>').join('') + '</div>';
+        } else if (poem.type === 'unknown' && (avgLen > 100 || v.length === 1)) {
+          bodyHTML = '<div class="diwan-prose-wrap">' + v.map(p => '<p class="diwan-prose-para">' + escH(p) + '</p>').join('') + '</div>';
+        } else {
+          bodyHTML = makeClassicalBeyts(v);
+        }
+
+        const bc = typeof buildBreadcrumbHTML === 'function' ? buildBreadcrumbHTML(currentPoetId, currentCategoryId) : '';
+        window._currentPoemText = poem.title + '\n\n' + v.join('\n');
         contentDiv.innerHTML = bc
-          +'<div class="diwan-poem-header"><h2>'+_escHtml(poem.title)+'</h2>'
-          +(typeLabel?'<span class="diwan-poem-type-badge">'+typeLabel+'</span>':'')
-          +'</div><div class="diwan-poem-body">'+bodyHTML+'</div>'
-          +'<div class="diwan-poem-actions"><button class="btn btn-tonal" style="font-size:12px" onclick="copyPoemText()">📋 کپی متن</button></div>';
+          + '<div class="diwan-poem-header"><h2>' + escH(poem.title) + '</h2>'
+          + (typeLabel ? '<span class="diwan-poem-type-badge">' + typeLabel + '</span>' : '')
+          + '</div><div class="diwan-poem-body">' + bodyHTML + '</div>'
+          + '<div class="diwan-poem-actions"><button class="btn btn-tonal" style="font-size:12px" onclick="copyPoemText()">📋 کپی متن</button></div>';
       }
 
     </script>
