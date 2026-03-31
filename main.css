@@ -291,8 +291,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section { 
-  padding: var(--m3-spacing-32) 0;
-  overflow: visible;
+  padding: var(--m3-spacing-32) 0; 
 }
 
 /* --- Info Card Components --- */
@@ -505,9 +504,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Shared Theme Toggle Styles (Rail & FAB) */
 .theme-toggle-rail,
-.theme-toggle-fab {
+.theme-toggle-fab,
+.theme-fab {
   position: fixed; 
-  bottom: calc(var(--bottom-nav-height) + var(--m3-spacing-16)); 
+  bottom: 22px;
   inset-inline-start: var(--m3-spacing-16);
   width: 52px; 
   height: 52px; 
@@ -527,7 +527,26 @@ h1, h2, h3, h4, h5, h6 {
               transform var(--m3-duration-fast) var(--m3-ease-standard);
 }
 
-/* Desktop: Position FAB away from nav-rail and show it */
+.theme-toggle-fab {
+  position: fixed; 
+  bottom: calc(var(--bottom-nav-height) + var(--m3-spacing-16)); 
+  inset-inline-start: var(--m3-spacing-16);
+  display: none; 
+  z-index: 1100; 
+}
+
+.theme-toggle-rail:hover,
+.theme-toggle-fab:hover { 
+  background-color: color-mix(in srgb, var(--m3-on-tertiary-container) 8%, var(--m3-tertiary-container));
+  transform: translateY(-2px); 
+  box-shadow: var(--m3-elevation-3); 
+}
+.theme-toggle-rail:active,
+.theme-toggle-fab:active {
+  transform: translateY(0);
+  box-shadow: var(--m3-elevation-1);
+}
+
 @media (min-width: 1025px) {
   .theme-toggle-rail,
   .theme-toggle-fab {
@@ -535,16 +554,31 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 22px;
     inset-inline-start: calc(var(--nav-rail-width) + var(--m3-spacing-16));
   }
+  .theme-fab {
+    display: flex;
+    bottom: 22px;
+    inset-inline-start: var(--m3-spacing-16);
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-fab {
+    display: flex;
+    bottom: 18px;
+    inset-inline-start: 14px;
+  }
 }
 
 .theme-toggle-rail:hover,
-.theme-toggle-fab:hover { 
+.theme-toggle-fab:hover,
+.theme-fab:hover { 
   background-color: color-mix(in srgb, var(--m3-on-primary-container) 8%, var(--m3-primary-container));
   transform: scale(1.08); 
   box-shadow: var(--m3-elevation-4); 
 }
 .theme-toggle-rail:active,
-.theme-toggle-fab:active {
+.theme-toggle-fab:active,
+.theme-fab:active {
   transform: scale(1);
   box-shadow: var(--m3-elevation-2);
 }
@@ -1186,9 +1220,9 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: var(--bottom-nav-height);
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip; /* clip ≠ hidden: doesn't create a scroll container, so position:sticky still works */
   }
-  body { overflow-x: hidden; }
+  body { overflow-x: clip; }
 
   /* Hero Section Scaling */
   .hero-section { 
@@ -1220,10 +1254,6 @@ h1, h2, h3, h4, h5, h6 {
   .big-num { font-size: 3.2rem; }
   .calc-btn { padding: 16px; font-size: 1.2rem; }
   
-  /* Reduce padding on mobile to fix gap before footer */
-  .main-content { padding-bottom: 16px; }
-  .section { padding: var(--m3-spacing-16) 0; }
-
   /* Footer */
   .footer-inner { 
     flex-direction: column; 
@@ -2025,7 +2055,7 @@ body.is-searching .section-heading {
   align-items: center; 
   justify-content: center;
   box-shadow: var(--m3-elevation-2);
-  z-index: 1100;
+  z-index: 50;
   opacity: 0;
   pointer-events: none;
   transform: translateY(16px) scale(0.85);
@@ -2053,16 +2083,8 @@ body.is-searching .section-heading {
   transform: translateY(0) scale(1);
 }
 
-/* Desktop: Position back-to-top away from nav-rail and adjust vertical spacing */
-@media (min-width: 1025px) {
-  #back-to-top {
-    inset-inline-end: calc(var(--nav-rail-width) + var(--m3-spacing-16));
-    bottom: var(--m3-spacing-24);
-  }
-}
-
-/* Tablet: Adjust vertical spacing only */
-@media (min-width: 769px) and (max-width: 1024px) {
+/* Ensure it sits above the mobile bottom nav */
+@media (min-width: 769px) {
   #back-to-top {
     bottom: var(--m3-spacing-24);
   }
@@ -2659,15 +2681,6 @@ input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; a
     padding-bottom: 14px;
     transition: box-shadow 0.2s, background 0s;
 }
-
-/* Mobile: ensure sticky positioning and scrolling context */
-@media (max-width: 768px) {
-  .section-heading {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-}
 .section-heading.is-stuck {
     box-shadow: 0 2px 10px color-mix(in srgb, var(--m3-shadow, #000) 10%, transparent),
                 0 1px 0 var(--m3-outline-variant);
@@ -2703,6 +2716,35 @@ body.is-searching .section-result-badge { display: inline-flex; }
     100% { background-color: inherit; }
 }
 .copy-flash { animation: copyFlash 0.5s ease-out; }
+
+/* ════════════════════════════════════════════════════════════
+   BACK TO TOP BUTTON
+   ════════════════════════════════════════════════════════════ */
+#back-to-top {
+    position: fixed;
+    bottom: 24px;
+    inset-inline-end: var(--m3-spacing-24);
+    width: 44px; height: 44px;
+    border-radius: var(--m3-shape-lg); /* Expressive Squircle shape */
+    background: var(--m3-primary-container);
+    color: var(--m3-on-primary-container);
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 3px 14px color-mix(in srgb, var(--m3-shadow,#000) 18%, transparent);
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px) scale(0.85);
+    transition: opacity 0.22s, transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+#back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+#back-to-top:hover { filter: brightness(1.07); }
 
 /* ════════════════════════════════════════════════════════════
    SEARCH EMPTY STATE
@@ -2750,9 +2792,10 @@ body.is-searching .section-result-badge { display: inline-flex; }
         padding-bottom: var(--bottom-nav-height);
         width: 100%;
         max-width: 100%;
-        overflow-x: hidden;
+        overflow-x: clip; /* clip doesn't create a scroll container; sticky works */
     }
-    body { overflow-x: hidden; }
+    body { overflow-x: clip; }
+    .main-content { padding-bottom: 0; } /* page-wrapper padding-bottom already handles bottom-nav clearance */
     .hero-section { padding: 40px 16px; min-height: 240px; }
     .hero-title { font-size: 1.6rem; }
     .hero-icon-wrap { width: 72px; height: 72px; }
@@ -2770,16 +2813,6 @@ body.is-searching .section-result-badge { display: inline-flex; }
    ════════════════════════════════════════════════════════════ */
 @media (max-width: 480px) {
     .dl-grid { grid-template-columns: 1fr; }
-}
-  transition:
-    top       var(--m3-duration-normal) var(--m3-ease-emphasized),
-    transform var(--m3-duration-normal) var(--m3-ease-emphasized),
-    font-size var(--m3-duration-normal) var(--m3-ease-emphasized),
-    color     var(--m3-duration-fast)   var(--m3-ease-standard),
-    background var(--m3-duration-fast)  var(--m3-ease-standard),
-    padding   var(--m3-duration-fast)   var(--m3-ease-standard);
-  /* Ensure label sits on top of the border line */
-  z-index: 1;
 }
 
 /* When the field has a leading icon, push label to the right */

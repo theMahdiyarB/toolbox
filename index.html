@@ -1399,28 +1399,7 @@
       #copy-toast.copy-toast--visible {
         opacity: 1;
       }
-      .theme-fab {
-        position: fixed;
-        bottom: 22px;
-        right: 22px;
-        width: 52px;
-        height: 52px;
-        border-radius: var(--m3-shape-lg);
-        background: var(--m3-primary-container);
-        color: var(--m3-on-primary-container);
-        border: none;
-        font-size: 1.4rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: var(--m3-elevation-3);
-        z-index: 200;
-        transition: transform 0.2s;
-      }
-      .theme-fab:hover {
-        transform: scale(1.08);
-      }
+
 
       /* --- Back to Top Button (M3E Secondary FAB) --- */
       #back-to-top {
@@ -1469,10 +1448,7 @@
           grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
           gap: 8px;
         }
-        .theme-fab {
-          bottom: 18px;
-          right: 14px;
-        }
+
         .iran-cta {
           flex-wrap: wrap;
           gap: 10px;
@@ -14652,7 +14628,7 @@
         if (cl.includes('بوستان') && cl.includes('باب')) return 'mixed';
         if (cl.includes('باب') && (cl.includes('سیرت') || cl.includes('اخلاق') || cl.includes('قناعت') || cl.includes('خاموشی') || cl.includes('عشق')
         || cl.includes('پیری') || cl.includes('تربیت') || cl.includes('صحبت') || cl.includes('عافیت'))) return 'mixed';
-        if (cl.includes('شعر نو') || cl.includes('شعرنو') || cl.includes('سپید') || cl.includes('نیمایی') || cl.includes('آزاد') || cl.includes('نیما') || cl.includes('نو')) return 'free';
+        if (cl.includes('شعر نو') || cl.includes('شعرنو') || cl.includes('سپید') || cl.includes('نیمایی') || cl.includes('آزاد') || cl.includes('نیما') || cl.includes('قالب‌های نو')) return 'free';
         if (cl.includes('غزل') || cl.includes('ghazal')) return 'ghazal';
         if (cl.includes('مثنوی') || cl.includes('masnavi')) return 'masnavi';
         if (cl.includes('قصیده')) return 'qasida';

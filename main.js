@@ -162,11 +162,17 @@
   }
 
   function bindBackToTop() {
-    const btn = doc.getElementById('back-to-top');
-    if (!btn) return;
-    window.addEventListener('scroll', () =>
-        btn.classList.toggle('visible', window.scrollY > 300), { passive: true });
-    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      const btn = doc.getElementById('back-to-top');
+      if (!btn) return;
+
+      function onScroll() {
+          const scrolled = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+          btn.classList.toggle('visible', scrolled > 300);
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      document.addEventListener('scroll', onScroll, { passive: true });
+      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
 
   function flashCard(el) {
