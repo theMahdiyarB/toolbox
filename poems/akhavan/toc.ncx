@@ -1,0 +1,762 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:058ff575-ef84-4231-b4ae-a572909f3c4b" />
+    <meta name="dtb:depth" content="1" />
+    <meta name="dtb:totalPageCount" content="0" />
+    <meta name="dtb:maxPageNumber" content="0" />
+  </head>
+  <docTitle>
+    <text> مهدی اخوان ثالث</text>
+  </docTitle>
+  <docAuthor>
+    <text>مهدی اخوان ثالث</text>
+  </docAuthor>
+  <navMap>
+    <navPoint id="navid1" playOrder="1">
+      <navLabel>
+        <text>معرفی گنجور</text>
+      </navLabel>
+      <content src="promo.xhtml" />
+    </navPoint>
+    <navPoint id="navid2" playOrder="2">
+      <navLabel>
+        <text>دربارهٔ مهدی اخوان ثالث</text>
+      </navLabel>
+      <content src="bio.xhtml" />
+    </navPoint>
+    <navPoint id="navid3" playOrder="3">
+      <navLabel>
+        <text>مهدی اخوان ثالث</text>
+      </navLabel>
+      <content src="cat5250.xhtml" />
+      <navPoint id="navid3x1" playOrder="4">
+        <navLabel>
+          <text>زمستان</text>
+        </navLabel>
+        <content src="cat5251.xhtml" />
+        <navPoint id="navid3x1x1" playOrder="5">
+          <navLabel>
+            <text>یاد : هرگز فراموشم نخواهد گشت، هرگز</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505076" />
+        </navPoint>
+        <navPoint id="navid3x1x2" playOrder="6">
+          <navLabel>
+            <text>نغمهٔ همدرد : آینهٔ خورشید از آن اوج بلند</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505077" />
+        </navPoint>
+        <navPoint id="navid3x1x3" playOrder="7">
+          <navLabel>
+            <text>ارمغان فرشته : با نوازش‌های لحن مرغکی بیدار دل</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505078" />
+        </navPoint>
+        <navPoint id="navid3x1x4" playOrder="8">
+          <navLabel>
+            <text>خفته : آمد به سوی شهر از آن دور دورها</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505079" />
+        </navPoint>
+        <navPoint id="navid3x1x5" playOrder="9">
+          <navLabel>
+            <text>بی سنگر : در هوای گرفتهٔ پاییز</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505080" />
+        </navPoint>
+        <navPoint id="navid3x1x6" playOrder="10">
+          <navLabel>
+            <text>شعر : چون پرنده‌ای که سحر</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505081" />
+        </navPoint>
+        <navPoint id="navid3x1x7" playOrder="11">
+          <navLabel>
+            <text>سترون : سیاهی از درون کاهدود پشت دریاها</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505082" />
+        </navPoint>
+        <navPoint id="navid3x1x8" playOrder="12">
+          <navLabel>
+            <text>در میکده : در میکده‌ام، چون من بسی اینجا هست</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505083" />
+        </navPoint>
+        <navPoint id="navid3x1x9" playOrder="13">
+          <navLabel>
+            <text>هر کجا دلم بخواهد : چون میهمانان به سفرهٔ پر ناز و نعمتی</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505084" />
+        </navPoint>
+        <navPoint id="navid3x1x10" playOrder="14">
+          <navLabel>
+            <text>نظاره : ۱</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505085" />
+        </navPoint>
+        <navPoint id="navid3x1x11" playOrder="15">
+          <navLabel>
+            <text>به مهتابی که به گورستان می تابید : ۱</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505086" />
+        </navPoint>
+        <navPoint id="navid3x1x12" playOrder="16">
+          <navLabel>
+            <text>سه شب : نخستین</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505087" />
+        </navPoint>
+        <navPoint id="navid3x1x13" playOrder="17">
+          <navLabel>
+            <text>سگها و گرگها : ۱</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505088" />
+        </navPoint>
+        <navPoint id="navid3x1x14" playOrder="18">
+          <navLabel>
+            <text>فراموش : با شما هستم من، ای ... شما</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505089" />
+        </navPoint>
+        <navPoint id="navid3x1x15" playOrder="19">
+          <navLabel>
+            <text>فریاد : خانه‌ام آتش گرفته ست، آتشی جانسوز</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505090" />
+        </navPoint>
+        <navPoint id="navid3x1x16" playOrder="20">
+          <navLabel>
+            <text>مشعل خاموش : لب‌ها پریده رنگ و زبان خشک و چاک چاک</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505091" />
+        </navPoint>
+        <navPoint id="navid3x1x17" playOrder="21">
+          <navLabel>
+            <text>اندوه : نه چراغ چشم گرگی پیر</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505092" />
+        </navPoint>
+        <navPoint id="navid3x1x18" playOrder="22">
+          <navLabel>
+            <text>قصه ای از شب : شب است</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505093" />
+        </navPoint>
+        <navPoint id="navid3x1x19" playOrder="23">
+          <navLabel>
+            <text>مرداب : عمر من دیگر چون مردابی ست</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505094" />
+        </navPoint>
+        <navPoint id="navid3x1x20" playOrder="24">
+          <navLabel>
+            <text>برای دخترکم لاله و آقای مینا : با دست‌های کوچک خوش</text>
+          </navLabel>
+          <content src="cat5251sec1.xhtml#poem-505095" />
+        </navPoint>
+        <navPoint id="navid3x1x21" playOrder="25">
+          <navLabel>
+            <text>زمستان : سلامت را نمی‌خواهند پاسخ گفت،</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505096" />
+        </navPoint>
+        <navPoint id="navid3x1x22" playOrder="26">
+          <navLabel>
+            <text>گزارش : خدایا! پر از کینه شد سینه‌ام</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505097" />
+        </navPoint>
+        <navPoint id="navid3x1x23" playOrder="27">
+          <navLabel>
+            <text>جرقه : به چشمان سیاه و روی شاداب و صفای دل</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505098" />
+        </navPoint>
+        <navPoint id="navid3x1x24" playOrder="28">
+          <navLabel>
+            <text>لحظه : همه گویند که: تو عاشق اویی</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505099" />
+        </navPoint>
+        <navPoint id="navid3x1x25" playOrder="29">
+          <navLabel>
+            <text>روشنی : ای شده چون سنگ سیاهی صبور</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505100" />
+        </navPoint>
+        <navPoint id="navid3x1x26" playOrder="30">
+          <navLabel>
+            <text>گرگ هار : گرگ هاری شده‌ام</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505101" />
+        </navPoint>
+        <navPoint id="navid3x1x27" playOrder="31">
+          <navLabel>
+            <text>بیمار : بیمارم، مادر جان</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505102" />
+        </navPoint>
+        <navPoint id="navid3x1x28" playOrder="32">
+          <navLabel>
+            <text>فسانه : گویا دگر فسانه به پایان رسیده بود</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505103" />
+        </navPoint>
+        <navPoint id="navid3x1x29" playOrder="33">
+          <navLabel>
+            <text>داوری : هر که آمد بار خود را بست و رفت</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505104" />
+        </navPoint>
+        <navPoint id="navid3x1x30" playOrder="34">
+          <navLabel>
+            <text>آب و آتش : آب و آتش نسبتی دارند جاویدان</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505105" />
+        </navPoint>
+        <navPoint id="navid3x1x31" playOrder="35">
+          <navLabel>
+            <text>پاسخ : چه می‌کنی؟ چه می‌کنی؟</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505106" />
+        </navPoint>
+        <navPoint id="navid3x1x32" playOrder="36">
+          <navLabel>
+            <text>سرود پناهنده : نجوا کنان به زمزمه سرگرم</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505107" />
+        </navPoint>
+        <navPoint id="navid3x1x33" playOrder="37">
+          <navLabel>
+            <text>لحظه ی دیدار : لحظهٔ دیدار نزدیک است</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505108" />
+        </navPoint>
+        <navPoint id="navid3x1x34" playOrder="38">
+          <navLabel>
+            <text>پرنده ای در دوزخ : نگفتندش چو بیرون می‌کشاند از زادگاهش سر</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505109" />
+        </navPoint>
+        <navPoint id="navid3x1x35" playOrder="39">
+          <navLabel>
+            <text>پند : بخز در لاکتی حیوان! که سرما</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505110" />
+        </navPoint>
+        <navPoint id="navid3x1x36" playOrder="40">
+          <navLabel>
+            <text>آواز کَرَک : « بده ... بدبد ... چه امیدی؟ چه ایمانی؟»</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505111" />
+        </navPoint>
+        <navPoint id="navid3x1x37" playOrder="41">
+          <navLabel>
+            <text>چاووشی : بسان رهنوردانی که در افسانه‌ها گویند</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505112" />
+        </navPoint>
+        <navPoint id="navid3x1x38" playOrder="42">
+          <navLabel>
+            <text>هستان : گفت و گو از پاک و ناپاک است</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505113" />
+        </navPoint>
+        <navPoint id="navid3x1x39" playOrder="43">
+          <navLabel>
+            <text>باغ من : آسمانش را گرفته تنگ در آغوش</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505114" />
+        </navPoint>
+        <navPoint id="navid3x1x40" playOrder="44">
+          <navLabel>
+            <text>شکار (یک منظومه) : ۱</text>
+          </navLabel>
+          <content src="cat5251sec2.xhtml#poem-505115" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navid3x2" playOrder="49">
+        <navLabel>
+          <text>آخر شاهنامه</text>
+        </navLabel>
+        <content src="cat5252.xhtml" />
+        <navPoint id="navid3x2x1" playOrder="50">
+          <navLabel>
+            <text>کاوه یا اسکندر؟ : موج‌ها خوابیده‌اند، آرام و رام</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505000" />
+        </navPoint>
+        <navPoint id="navid3x2x2" playOrder="51">
+          <navLabel>
+            <text>غزل ۱ : باده‌ای هست و پناهی و شبی شسته و پاک</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505001" />
+        </navPoint>
+        <navPoint id="navid3x2x3" playOrder="52">
+          <navLabel>
+            <text>چون سبوی تشنه... : از تهی سرشار</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505002" />
+        </navPoint>
+        <navPoint id="navid3x2x4" playOrder="53">
+          <navLabel>
+            <text>میراث : پوستینی کهنه دارم من</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505003" />
+        </navPoint>
+        <navPoint id="navid3x2x5" playOrder="54">
+          <navLabel>
+            <text>گل : همان رنگ و همان روی</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505004" />
+        </navPoint>
+        <navPoint id="navid3x2x6" playOrder="55">
+          <navLabel>
+            <text>مرداب : این نه آب است کآتش را کند خاموش</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505005" />
+        </navPoint>
+        <navPoint id="navid3x2x7" playOrder="56">
+          <navLabel>
+            <text>غزل ۲ : تا کند سرشار شهدی خوش هزاران بیشهٔ کندوی یادش را</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505006" />
+        </navPoint>
+        <navPoint id="navid3x2x8" playOrder="57">
+          <navLabel>
+            <text>خزانی : پاییز جان! چه شوم، چه وحشتناک</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505007" />
+        </navPoint>
+        <navPoint id="navid3x2x9" playOrder="58">
+          <navLabel>
+            <text>دریچه ها : ما چون دو دریچه، رو به روی هم</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505008" />
+        </navPoint>
+        <navPoint id="navid3x2x10" playOrder="59">
+          <navLabel>
+            <text>گله : شب خامش است و خفته در انبان تنگ روی</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505009" />
+        </navPoint>
+        <navPoint id="navid3x2x11" playOrder="60">
+          <navLabel>
+            <text>بازگشت زاغان : در آستان غروب</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505010" />
+        </navPoint>
+        <navPoint id="navid3x2x12" playOrder="61">
+          <navLabel>
+            <text>ناژو : دور از گزند و تیررس رعد و برق و باد</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505011" />
+        </navPoint>
+        <navPoint id="navid3x2x13" playOrder="62">
+          <navLabel>
+            <text>دریغ : بی شکوه و غریب و رهگذرند</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505012" />
+        </navPoint>
+        <navPoint id="navid3x2x14" playOrder="63">
+          <navLabel>
+            <text>طلوع : پنجره باز است</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505013" />
+        </navPoint>
+        <navPoint id="navid3x2x15" playOrder="64">
+          <navLabel>
+            <text>غزل ۳ : ای تکیه گاه و پناه</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505014" />
+        </navPoint>
+        <navPoint id="navid3x2x16" playOrder="65">
+          <navLabel>
+            <text>بی دل : آری، تو آنکه دل طلبد آنی</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505015" />
+        </navPoint>
+        <navPoint id="navid3x2x17" playOrder="66">
+          <navLabel>
+            <text>آخر شاهنامه : این شکسته چنگ بی قانون</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505016" />
+        </navPoint>
+        <navPoint id="navid3x2x18" playOrder="67">
+          <navLabel>
+            <text>قولی در ابوعطا : کرشمهٔ درآمد</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505017" />
+        </navPoint>
+        <navPoint id="navid3x2x19" playOrder="68">
+          <navLabel>
+            <text>چه آرزوها : درآمد</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505018" />
+        </navPoint>
+        <navPoint id="navid3x2x20" playOrder="69">
+          <navLabel>
+            <text>وداع : سکوت صدای گام‌هایم را باز پس می‌دهد</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505019" />
+        </navPoint>
+        <navPoint id="navid3x2x21" playOrder="70">
+          <navLabel>
+            <text>پیامی از آن سوی پایان : اینجا که ماییم سرزمین سرد سکوت است</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505020" />
+        </navPoint>
+        <navPoint id="navid3x2x22" playOrder="71">
+          <navLabel>
+            <text>با همین دل و چشم‌هایم، همیشه : با همین چشم، همین دل</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505021" />
+        </navPoint>
+        <navPoint id="navid3x2x23" playOrder="72">
+          <navLabel>
+            <text>پیغام : چون درختی در صمیم سرد و بی ابر زمستانی</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505022" />
+        </navPoint>
+        <navPoint id="navid3x2x24" playOrder="73">
+          <navLabel>
+            <text>برف : پاسی از شب رفته بود و برف می‌بارید</text>
+          </navLabel>
+          <content src="cat5252sec1.xhtml#poem-505023" />
+        </navPoint>
+        <navPoint id="navid3x2x25" playOrder="74">
+          <navLabel>
+            <text>قصیده : ۱</text>
+          </navLabel>
+          <content src="cat5252sec2.xhtml#poem-505024" />
+        </navPoint>
+        <navPoint id="navid3x2x26" playOrder="75">
+          <navLabel>
+            <text>سر کوه بلند : سر کوه بلند آمد سحر باد</text>
+          </navLabel>
+          <content src="cat5252sec2.xhtml#poem-505025" />
+        </navPoint>
+        <navPoint id="navid3x2x27" playOrder="76">
+          <navLabel>
+            <text>مرثیه : خشمگین و مست و دیوانه ست</text>
+          </navLabel>
+          <content src="cat5252sec2.xhtml#poem-505026" />
+        </navPoint>
+        <navPoint id="navid3x2x28" playOrder="77">
+          <navLabel>
+            <text>گفت و گو : ... باری، حکایتی ست</text>
+          </navLabel>
+          <content src="cat5252sec2.xhtml#poem-505027" />
+        </navPoint>
+        <navPoint id="navid3x2x29" playOrder="78">
+          <navLabel>
+            <text>ساعت بزرگ : یادمان نمانده کز چه روزگار</text>
+          </navLabel>
+          <content src="cat5252sec2.xhtml#poem-505028" />
+        </navPoint>
+        <navPoint id="navid3x2x30" playOrder="79">
+          <navLabel>
+            <text>جراحت : دیگر اکنون دیری و دوری ست</text>
+          </navLabel>
+          <content src="cat5252sec2.xhtml#poem-505029" />
+        </navPoint>
+        <navPoint id="navid3x2x31" playOrder="80">
+          <navLabel>
+            <text>رباعی : گر زری و گر سیم زراندودی، باش</text>
+          </navLabel>
+          <content src="cat5252sec2.xhtml#poem-505030" />
+        </navPoint>
+        <navPoint id="navid3x2x32" playOrder="81">
+          <navLabel>
+            <text>خفتگان : خفتگان نقش قالی، دوش با من خلوتی کردند</text>
+          </navLabel>
+          <content src="cat5252sec2.xhtml#poem-505031" />
+        </navPoint>
+        <navPoint id="navid3x2x33" playOrder="82">
+          <navLabel>
+            <text>قاصدک : قاصدک! هان، چه خبر آوردی؟</text>
+          </navLabel>
+          <content src="cat5252sec2.xhtml#poem-505032" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navid3x3" playOrder="132">
+        <navLabel>
+          <text>از این اوستا</text>
+        </navLabel>
+        <content src="cat5253.xhtml" />
+        <navPoint id="navid3x3x1" playOrder="133">
+          <navLabel>
+            <text>منزلی در دوردست : منزلی در دوردستی هست بی شک هر مسافر را</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505033" />
+        </navPoint>
+        <navPoint id="navid3x3x2" playOrder="134">
+          <navLabel>
+            <text>کتیبه : فتاده تخته سنگ آن سوی تر، انگار کوهی بود</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505034" />
+        </navPoint>
+        <navPoint id="navid3x3x3" playOrder="135">
+          <navLabel>
+            <text>قصه شهر سنگستان : دو تا کفتر</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505035" />
+        </navPoint>
+        <navPoint id="navid3x3x4" playOrder="136">
+          <navLabel>
+            <text>مرد و مرکب : گفت راوی: راه از این دو روند آسود</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505036" />
+        </navPoint>
+        <navPoint id="navid3x3x5" playOrder="137">
+          <navLabel>
+            <text>آنگاه پس از تندر : نمی‌دانی چه شب‌هایی سحر کردم</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505037" />
+        </navPoint>
+        <navPoint id="navid3x3x6" playOrder="138">
+          <navLabel>
+            <text>روی جاده ی نمناک : اگرچه حالیا دیریست کان بی کاروان کولی</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505038" />
+        </navPoint>
+        <navPoint id="navid3x3x7" playOrder="139">
+          <navLabel>
+            <text>آواز چگور : وقتی که شب هنگام گامی چند دور از من</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505039" />
+        </navPoint>
+        <navPoint id="navid3x3x8" playOrder="140">
+          <navLabel>
+            <text>پرستار : شب از شب‌های پاییزی ست</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505040" />
+        </navPoint>
+        <navPoint id="navid3x3x9" playOrder="141">
+          <navLabel>
+            <text>غزل ۴ : ون پردهٔ حریر بلندی</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505041" />
+        </navPoint>
+        <navPoint id="navid3x3x10" playOrder="142">
+          <navLabel>
+            <text>در آن لحظه : در آن لحظه که من از پنجره بیرون نگاه کردم</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505042" />
+        </navPoint>
+        <navPoint id="navid3x3x11" playOrder="143">
+          <navLabel>
+            <text>حالت : آفاق پوشیده از فر بیخویشی است و نوازش</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505043" />
+        </navPoint>
+        <navPoint id="navid3x3x12" playOrder="144">
+          <navLabel>
+            <text>در این شبگیر : کدامین جام و پیغام صبوحی مستتان کرده ست؟ ای مرغان</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505044" />
+        </navPoint>
+        <navPoint id="navid3x3x13" playOrder="145">
+          <navLabel>
+            <text>و نه هیچ : نه زورقی و نه سیلی، نه سایهٔ ابری</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505045" />
+        </navPoint>
+        <navPoint id="navid3x3x14" playOrder="146">
+          <navLabel>
+            <text>سبز : با تو دیشب تا کجا رفتم</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505046" />
+        </navPoint>
+        <navPoint id="navid3x3x15" playOrder="147">
+          <navLabel>
+            <text>صبح : چو مرغی زیر باران راه گم کرده</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505047" />
+        </navPoint>
+        <navPoint id="navid3x3x16" playOrder="148">
+          <navLabel>
+            <text>نماز : باغ بود و دره چشم انداز پر مهتاب</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505048" />
+        </navPoint>
+        <navPoint id="navid3x3x17" playOrder="149">
+          <navLabel>
+            <text>و ندانستن : شست باران بهاران هر چه هر جا بود</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505049" />
+        </navPoint>
+        <navPoint id="navid3x3x18" playOrder="150">
+          <navLabel>
+            <text>هنگام : هنگام رسیده بود، ما در این</text>
+          </navLabel>
+          <content src="cat5253sec1.xhtml#poem-505050" />
+        </navPoint>
+        <navPoint id="navid3x3x19" playOrder="151">
+          <navLabel>
+            <text>نوحه : نعش این شهید عزیز</text>
+          </navLabel>
+          <content src="cat5253sec2.xhtml#poem-505051" />
+        </navPoint>
+        <navPoint id="navid3x3x20" playOrder="152">
+          <navLabel>
+            <text>راستی، ای وای، آیا : دگر ره شب آمد تا جهانی سیا کند</text>
+          </navLabel>
+          <content src="cat5253sec2.xhtml#poem-505052" />
+        </navPoint>
+        <navPoint id="navid3x3x21" playOrder="153">
+          <navLabel>
+            <text>رباعی : خشکید و کویر لوت شد دریامان</text>
+          </navLabel>
+          <content src="cat5253sec2.xhtml#poem-505053" />
+        </navPoint>
+        <navPoint id="navid3x3x22" playOrder="154">
+          <navLabel>
+            <text>پیوندها و باغها : لحظه‌ای خاموش ماند، آنگاه</text>
+          </navLabel>
+          <content src="cat5253sec2.xhtml#poem-505054" />
+        </navPoint>
+        <navPoint id="navid3x3x23" playOrder="155">
+          <navLabel>
+            <text>زندگی : بر زمین افتاده پخشیده ست</text>
+          </navLabel>
+          <content src="cat5253sec2.xhtml#poem-505055" />
+        </navPoint>
+        <navPoint id="navid3x3x24" playOrder="156">
+          <navLabel>
+            <text>ناگه غروب کدامین ستاره؟ : با آنکه شب شهر را دیرگاهی ست</text>
+          </navLabel>
+          <content src="cat5253sec2.xhtml#poem-505056" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navid3x4" playOrder="289">
+        <navLabel>
+          <text>در حیاط کوچک پاییز، در زندان</text>
+        </navLabel>
+        <content src="cat5254.xhtml" />
+        <navPoint id="navid3x4x1" playOrder="290">
+          <navLabel>
+            <text>من این پاییز در زندان : درین زندان، برای خود هوای دیگری دارم</text>
+          </navLabel>
+          <content src="cat5254sec1.xhtml#poem-505057" />
+        </navPoint>
+        <navPoint id="navid3x4x2" playOrder="291">
+          <navLabel>
+            <text>غزل ۵ : درین شب‌های مهتابی،</text>
+          </navLabel>
+          <content src="cat5254sec1.xhtml#poem-505058" />
+        </navPoint>
+        <navPoint id="navid3x4x3" playOrder="292">
+          <navLabel>
+            <text>غزل ۶ : امشب دلم آرزوی تو دارد</text>
+          </navLabel>
+          <content src="cat5254sec1.xhtml#poem-505059" />
+        </navPoint>
+        <navPoint id="navid3x4x4" playOrder="293">
+          <navLabel>
+            <text>درین همسایه ۱ : شب، امشب نیز</text>
+          </navLabel>
+          <content src="cat5254sec1.xhtml#poem-505060" />
+        </navPoint>
+        <navPoint id="navid3x4x5" playOrder="294">
+          <navLabel>
+            <text>درین همسایه ۲ : درین همسایه مرغی هست، گویا مرغ حق نامش</text>
+          </navLabel>
+          <content src="cat5254sec1.xhtml#poem-505061" />
+        </navPoint>
+        <navPoint id="navid3x4x6" playOrder="295">
+          <navLabel>
+            <text>مرغ تصویر : دو چندان جور، جان چندان کشید از عمر ِ دلگیرم</text>
+          </navLabel>
+          <content src="cat5254sec1.xhtml#poem-505062" />
+        </navPoint>
+        <navPoint id="navid3x4x7" playOrder="296">
+          <navLabel>
+            <text>آن پنجره : امشب چو ز شب اغلبی سر آید</text>
+          </navLabel>
+          <content src="cat5254sec1.xhtml#poem-505063" />
+        </navPoint>
+        <navPoint id="navid3x4x8" playOrder="297">
+          <navLabel>
+            <text>آن بالا : داشتم با ناهار</text>
+          </navLabel>
+          <content src="cat5254sec1.xhtml#poem-505064" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navid3x5" playOrder="587">
+        <navLabel>
+          <text>دوزخ اما سرد</text>
+        </navLabel>
+        <content src="cat5255.xhtml" />
+        <navPoint id="navid3x5x1" playOrder="588">
+          <navLabel>
+            <text>شهاب‌ها و شب : ز ظلمت ِ رمیده خبر می‌دهد سحر</text>
+          </navLabel>
+          <content src="cat5255sec1.xhtml#poem-505065" />
+        </navPoint>
+        <navPoint id="navid3x5x2" playOrder="589">
+          <navLabel>
+            <text>ییلاقی : شور ِ شباهنگان،</text>
+          </navLabel>
+          <content src="cat5255sec1.xhtml#poem-505066" />
+        </navPoint>
+        <navPoint id="navid3x5x3" playOrder="590">
+          <navLabel>
+            <text>آنک! ببین ... : اوصاف ِ این همیشه همان، تا که بوده‌ام</text>
+          </navLabel>
+          <content src="cat5255sec1.xhtml#poem-505067" />
+        </navPoint>
+        <navPoint id="navid3x5x4" playOrder="591">
+          <navLabel>
+            <text>به دیدارم بیا هر شب : به دیدارم بیا هر شب، در این تنهایی ِ تنها و تاریک  ...</text>
+          </navLabel>
+          <content src="cat5255sec1.xhtml#poem-505068" />
+        </navPoint>
+        <navPoint id="navid3x5x5" playOrder="592">
+          <navLabel>
+            <text>روز و شب : روز آفاق ِ عاج خواند سرودی</text>
+          </navLabel>
+          <content src="cat5255sec1.xhtml#poem-505069" />
+        </navPoint>
+        <navPoint id="navid3x5x6" playOrder="593">
+          <navLabel>
+            <text>دریغا : بخندد بُت، چو قربانی پسین آب</text>
+          </navLabel>
+          <content src="cat5255sec1.xhtml#poem-505070" />
+        </navPoint>
+        <navPoint id="navid3x5x7" playOrder="594">
+          <navLabel>
+            <text>شمعدان : چون شمعم و سرنوشت ِ روشن، خطرم</text>
+          </navLabel>
+          <content src="cat5255sec1.xhtml#poem-505071" />
+        </navPoint>
+        <navPoint id="navid3x5x8" playOrder="595">
+          <navLabel>
+            <text>این است که... : چون روشن روشنان فرو میرد</text>
+          </navLabel>
+          <content src="cat5255sec1.xhtml#poem-505072" />
+        </navPoint>
+        <navPoint id="navid3x5x9" playOrder="596">
+          <navLabel>
+            <text>آوار عید : بس که همپایش غم و ادبار می‌آید فرود</text>
+          </navLabel>
+          <content src="cat5255sec1.xhtml#poem-505073" />
+        </navPoint>
+        <navPoint id="navid3x5x10" playOrder="597">
+          <navLabel>
+            <text>پارینه : چون سبویی ست پر از خون، دل بی کینهٔ من</text>
+          </navLabel>
+          <content src="cat5255sec1.xhtml#poem-505074" />
+        </navPoint>
+        <navPoint id="navid3x5x11" playOrder="598">
+          <navLabel>
+            <text>مردُم! ای مردُم : مردم! ای مردم</text>
+          </navLabel>
+          <content src="cat5255sec1.xhtml#poem-505075" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+  </navMap>
+</ncx>

@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:c2f4b473-0eba-4c64-8f47-bf35956376d6" />
+    <meta name="dtb:depth" content="1" />
+    <meta name="dtb:totalPageCount" content="0" />
+    <meta name="dtb:maxPageNumber" content="0" />
+  </head>
+  <docTitle>
+    <text> نیما یوشیج ( آوای آزاد )</text>
+  </docTitle>
+  <docAuthor>
+    <text>نیما یوشیج ( آوای آزاد )</text>
+  </docAuthor>
+  <navMap>
+    <navPoint id="navid1" playOrder="1">
+      <navLabel>
+        <text>معرفی گنجور</text>
+      </navLabel>
+      <content src="promo.xhtml" />
+    </navPoint>
+    <navPoint id="navid2" playOrder="2">
+      <navLabel>
+        <text>دربارهٔ نیما یوشیج ( آوای آزاد )</text>
+      </navLabel>
+      <content src="bio.xhtml" />
+    </navPoint>
+    <navPoint id="navid3" playOrder="3">
+      <navLabel>
+        <text>نیما یوشیج ( آوای آزاد )</text>
+      </navLabel>
+      <content src="cat5001.xhtml" />
+      <navPoint id="navid3x1" playOrder="4">
+        <navLabel>
+          <text>مجموعه اشعار</text>
+        </navLabel>
+        <content src="cat5002.xhtml" />
+        <navPoint id="navid3x1x1" playOrder="5">
+          <navLabel>
+            <text>از : قصه ی رنگ پریده ، خون سرد : من ندانم با که گویم شرح درد</text>
+          </navLabel>
+          <content src="cat5002sec1.xhtml#poem-500000" />
+        </navPoint>
+        <navPoint id="navid3x1x2" playOrder="6">
+          <navLabel>
+            <text>ای شب : هان ای شب شوم وحشت انگیز</text>
+          </navLabel>
+          <content src="cat5002sec1.xhtml#poem-500001" />
+        </navPoint>
+        <navPoint id="navid3x1x3" playOrder="7">
+          <navLabel>
+            <text>منت دونان :  زدن یا مژه بر مویی گره ها</text>
+          </navLabel>
+          <content src="cat5002sec1.xhtml#poem-500002" />
+        </navPoint>
+        <navPoint id="navid3x1x4" playOrder="8">
+          <navLabel>
+            <text>افسانه : افسانه : در شب تیره ، دیوانه ای کاو</text>
+          </navLabel>
+          <content src="cat5002sec1.xhtml#poem-500003" />
+        </navPoint>
+        <navPoint id="navid3x1x5" playOrder="9">
+          <navLabel>
+            <text>شیر : شب آمد مرا وقت غریدن است</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500004" />
+        </navPoint>
+        <navPoint id="navid3x1x6" playOrder="10">
+          <navLabel>
+            <text>چشمه ی کوچک : گشت یکی چشمه ز سنگی جدا</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500005" />
+        </navPoint>
+        <navPoint id="navid3x1x7" playOrder="11">
+          <navLabel>
+            <text>یادگار : در دامن این مخوف جنگل</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500006" />
+        </navPoint>
+        <navPoint id="navid3x1x8" playOrder="12">
+          <navLabel>
+            <text>انگاسی : سوی شهر آمد آن زن انگاس</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500007" />
+        </navPoint>
+        <navPoint id="navid3x1x9" playOrder="13">
+          <navLabel>
+            <text>بز ملاحسن : بز ملا حسن مسئله گو</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500008" />
+        </navPoint>
+        <navPoint id="navid3x1x10" playOrder="14">
+          <navLabel>
+            <text>گل نازدار : سود گرت هست گرانی مکن</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500009" />
+        </navPoint>
+        <navPoint id="navid3x1x11" playOrder="15">
+          <navLabel>
+            <text>مفسده ی گل : صبح چو انوار سرافکنده زد</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500010" />
+        </navPoint>
+        <navPoint id="navid3x1x12" playOrder="16">
+          <navLabel>
+            <text>گل زودرس : آن گل زودرس چو چشم گشود</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500011" />
+        </navPoint>
+        <navPoint id="navid3x1x13" playOrder="17">
+          <navLabel>
+            <text>بهار : بچه‌ها بهار</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500012" />
+        </navPoint>
+        <navPoint id="navid3x1x14" playOrder="18">
+          <navLabel>
+            <text>می خندد : سحر هنگام، کاین مرغ طلایی</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500013" />
+        </navPoint>
+        <navPoint id="navid3x1x15" playOrder="19">
+          <navLabel>
+            <text>آی آدم ها : آی آدم ها که بر ساحل نشسته شاد و خندانید!</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500014" />
+        </navPoint>
+        <navPoint id="navid3x1x16" playOrder="20">
+          <navLabel>
+            <text>یاد : یادم از روزی سیه می آید و جای نموری</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500015" />
+        </navPoint>
+        <navPoint id="navid3x1x17" playOrder="21">
+          <navLabel>
+            <text>کار شب پا : ماه می‌تابد، رود است آرام،</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500016" />
+        </navPoint>
+        <navPoint id="navid3x1x18" playOrder="22">
+          <navLabel>
+            <text>آقا توکا : به روی در، به روی پنجره ها</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500017" />
+        </navPoint>
+        <navPoint id="navid3x1x19" playOrder="23">
+          <navLabel>
+            <text>آنکه می گرید : آنکه می گردد با گردش شب</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500018" />
+        </navPoint>
+        <navPoint id="navid3x1x20" playOrder="24">
+          <navLabel>
+            <text>مهتاب : می تراود مهتاب</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500019" />
+        </navPoint>
+        <navPoint id="navid3x1x21" playOrder="25">
+          <navLabel>
+            <text>در شب تیره : در شب تیره چو گوری که کند شیطانی</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500020" />
+        </navPoint>
+        <navPoint id="navid3x1x22" playOrder="26">
+          <navLabel>
+            <text>ماخ اولا : ماخ اولا پیکره رود بلند.</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500021" />
+        </navPoint>
+        <navPoint id="navid3x1x23" playOrder="27">
+          <navLabel>
+            <text>جاده خاموش است : جاده خاموش ست، هر گوشه ای شب، هست در جنگل.</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500022" />
+        </navPoint>
+        <navPoint id="navid3x1x24" playOrder="28">
+          <navLabel>
+            <text>باد می گردد : باد می گردد و در باز و چراغ ست خموش</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500023" />
+        </navPoint>
+        <navPoint id="navid3x1x25" playOrder="29">
+          <navLabel>
+            <text>هاد : طوفان زده ست هیات دریا</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500024" />
+        </navPoint>
+        <navPoint id="navid3x1x26" playOrder="30">
+          <navLabel>
+            <text>در بسته ام : در بسته ام شب است</text>
+          </navLabel>
+          <content src="cat5002sec2.xhtml#poem-500025" />
+        </navPoint>
+        <navPoint id="navid3x1x27" playOrder="31">
+          <navLabel>
+            <text>چراغ : پیت پیت ... چراغ را</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500026" />
+        </navPoint>
+        <navPoint id="navid3x1x28" playOrder="32">
+          <navLabel>
+            <text>تا صبح دمان : تا صبح دمان، در این شب گرم</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500027" />
+        </navPoint>
+        <navPoint id="navid3x1x29" playOrder="33">
+          <navLabel>
+            <text>هنوز از شب... : هنوز از شب دمی باقی است، می خواند در او شبگیر</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500028" />
+        </navPoint>
+        <navPoint id="navid3x1x30" playOrder="34">
+          <navLabel>
+            <text>مرغ شباویز : به شب آویخته مرغ شباویز</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500029" />
+        </navPoint>
+        <navPoint id="navid3x1x31" playOrder="35">
+          <navLabel>
+            <text>شب است : شب است،</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500030" />
+        </navPoint>
+        <navPoint id="navid3x1x32" playOrder="36">
+          <navLabel>
+            <text>مرغ آمین : مرغ آمین درد آلودی است کاواره بمانده</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500031" />
+        </navPoint>
+        <navPoint id="navid3x1x33" playOrder="37">
+          <navLabel>
+            <text>حکایت : بـا جـاهــلـی  و  فــلـســفــی افـتـاد  خـلافــی</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500032" />
+        </navPoint>
+        <navPoint id="navid3x1x34" playOrder="38">
+          <navLabel>
+            <text>قایق : من چهره ام گرفته</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500033" />
+        </navPoint>
+        <navPoint id="navid3x1x35" playOrder="39">
+          <navLabel>
+            <text>آهنگر : در درون تنگنا، با کوره اش، آهنگر فرتوت</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500034" />
+        </navPoint>
+        <navPoint id="navid3x1x36" playOrder="40">
+          <navLabel>
+            <text>در نخستین ساعت شب : در نخستین ساعت شب، در اطاق چوبیش تنها، زن چینی</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500035" />
+        </navPoint>
+        <navPoint id="navid3x1x37" playOrder="41">
+          <navLabel>
+            <text>خونریزی : پا گرفته است زمانی است مدید</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500036" />
+        </navPoint>
+        <navPoint id="navid3x1x38" playOrder="42">
+          <navLabel>
+            <text>داروگ : خشک آمد کشتگاه من</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500037" />
+        </navPoint>
+        <navPoint id="navid3x1x39" playOrder="43">
+          <navLabel>
+            <text>خانه‌ام ابریست ... : خانه ام ابری ست</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500038" />
+        </navPoint>
+        <navPoint id="navid3x1x40" playOrder="44">
+          <navLabel>
+            <text>ری را : « ری را»...صدا می آید امشب</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500039" />
+        </navPoint>
+        <navPoint id="navid3x1x41" playOrder="45">
+          <navLabel>
+            <text>همه شب : همه شب زن هرجایی</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500040" />
+        </navPoint>
+        <navPoint id="navid3x1x42" playOrder="46">
+          <navLabel>
+            <text>در کنار رودخانه : در کنار رودخانه می پلکد سنگ پشت پیر.</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500041" />
+        </navPoint>
+        <navPoint id="navid3x1x43" playOrder="47">
+          <navLabel>
+            <text>دل فولادم : ول کنید اسب مرا</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500042" />
+        </navPoint>
+        <navPoint id="navid3x1x44" playOrder="48">
+          <navLabel>
+            <text>روی بندرگاه : آسمان یکریز می بارد</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500043" />
+        </navPoint>
+        <navPoint id="navid3x1x45" playOrder="49">
+          <navLabel>
+            <text>شب پره ی ساحل نزدیک : چوک و چوک!... گم کرده راهش در شب تاریک</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500044" />
+        </navPoint>
+        <navPoint id="navid3x1x46" playOrder="50">
+          <navLabel>
+            <text>هست شب : هست شب یک شبِ دم کرده و خاک</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500045" />
+        </navPoint>
+        <navPoint id="navid3x1x47" playOrder="51">
+          <navLabel>
+            <text>فرق است : بودم به کارگاه جوانی</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500046" />
+        </navPoint>
+        <navPoint id="navid3x1x48" playOrder="52">
+          <navLabel>
+            <text>برف : زردها بی خود قرمز نشده اند</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500047" />
+        </navPoint>
+        <navPoint id="navid3x1x49" playOrder="53">
+          <navLabel>
+            <text>سیولیشه : تی تیک تی تیک</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500048" />
+        </navPoint>
+        <navPoint id="navid3x1x50" playOrder="54">
+          <navLabel>
+            <text>در پیش کومه ام : در پیش کومه ام</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500049" />
+        </navPoint>
+        <navPoint id="navid3x1x51" playOrder="55">
+          <navLabel>
+            <text>کک کی : دیری ست نعره می کشد از بیشه ی خموش</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500050" />
+        </navPoint>
+        <navPoint id="navid3x1x52" playOrder="56">
+          <navLabel>
+            <text>بر سر قایقش : بر سر قایقش اندیشه کنان  قایق بان</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500051" />
+        </navPoint>
+        <navPoint id="navid3x1x53" playOrder="57">
+          <navLabel>
+            <text>پاسها از شب گذشته است : پاسها از شب گذشته است.</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500052" />
+        </navPoint>
+        <navPoint id="navid3x1x54" playOrder="58">
+          <navLabel>
+            <text>ترا من چشم در راهم : ترا من چشم در راهم شباهنگام</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500053" />
+        </navPoint>
+        <navPoint id="navid3x1x55" playOrder="59">
+          <navLabel>
+            <text>شب همه شب : شب همه شب شکسته خواب به چشمم</text>
+          </navLabel>
+          <content src="cat5002sec3.xhtml#poem-500054" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+  </navMap>
+</ncx>

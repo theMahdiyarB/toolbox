@@ -7,6 +7,7 @@
     <title>منابع و خدمات داخلی ایران</title>
     <meta name="description" content="مجموعه جامع لینک‌ها، ابزارها و خدمات قابل دسترسی در شرایط محدودیت اینترنت — همه در یک جا">
     <meta name="theme-color" content="#006874">
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="main.css">
     <script src="main.js" defer></script>
     <style>
@@ -25,7 +26,7 @@
 <!-- ════ NAV RAIL ════ -->
 <nav class="nav-rail" aria-label="ناوبری اصلی">
     <div class="rail-header">
-        <a href="/" aria-label="صفحه اصلی">
+        <a href="/iran" aria-label="صفحه اصلی">
             <span class="rail-item-icon">🇮🇷</span>
             <span class="rail-item-label">منابع ایران</span>
         </a>
@@ -3165,7 +3166,7 @@
 })();
 
 /* ════════════════════════════════════════════════════════════
-   STICKY HEADING SENTINEL  (B)
+   STICKY HEADING SENTINEL
 ════════════════════════════════════════════════════════════ */
 (function () {
     const obs = new IntersectionObserver(
@@ -3177,65 +3178,7 @@
 })();
 
 /* ════════════════════════════════════════════════════════════
-   COPY ON CLICK — toast (D) + card flash
-════════════════════════════════════════════════════════════ */
-(function () {
-    function showToast(msg) {
-        if (typeof showCopyFeedback === 'function') { showCopyFeedback(msg); return; }
-        let t = document.getElementById('copy-toast');
-        if (!t) {
-            t = document.createElement('div'); t.id = 'copy-toast';
-            t.style.cssText = 'position:fixed;bottom:80px;inset-inline-end:24px;padding:10px 20px;border-radius:999px;background:var(--m3-inverse-surface);color:var(--m3-inverse-on-surface);font-size:14px;font-family:inherit;box-shadow:0 4px 12px rgba(0,0,0,.2);opacity:0;transform:translateY(8px);transition:opacity .2s,transform .2s;pointer-events:none;z-index:9999;';
-            document.body.appendChild(t);
-        }
-        t.textContent = msg || 'کپی شد ✓';
-        t.style.opacity = '1'; t.style.transform = 'translateY(0)';
-        clearTimeout(t._t);
-        t._t = setTimeout(() => { t.style.opacity='0'; t.style.transform='translateY(8px)'; }, 2200);
-    }
-
-    function flashCard(el) {
-        const card = el.closest('.link-card,.info-card,.table-row,.step-item');
-        if (!card) return;
-        card.classList.remove('copy-flash'); void card.offsetWidth;
-        card.classList.add('copy-flash');
-        card.addEventListener('animationend', () => card.classList.remove('copy-flash'), { once: true });
-    }
-
-    function doCopy(text, el) {
-        if (typeof copyToClipboard === 'function') { copyToClipboard(text); flashCard(el); return; }
-        navigator.clipboard.writeText(text)
-            .then(() => { showToast('کپی شد ✓'); flashCard(el); })
-            .catch(() => {
-                const ta = Object.assign(document.createElement('textarea'),
-                    { value: text, style: 'position:fixed;opacity:0' });
-                document.body.appendChild(ta); ta.select();
-                document.execCommand('copy'); document.body.removeChild(ta);
-                showToast('کپی شد ✓'); flashCard(el);
-            });
-    }
-
-    document.querySelectorAll('.step-code,.table-row__link,.link-card__url').forEach(el => {
-        el.setAttribute('title', 'کلیک کنید تا کپی شود');
-        el.setAttribute('role', 'button'); el.setAttribute('tabindex', '0');
-        el.addEventListener('click',   e => { e.preventDefault(); e.stopPropagation(); doCopy(el.textContent.trim(), el); });
-        el.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); doCopy(el.textContent.trim(), el); } });
-    });
-})();
-
-/* ════════════════════════════════════════════════════════════
-   BACK TO TOP  (A)
-════════════════════════════════════════════════════════════ */
-(function () {
-    const btn = document.getElementById('back-to-top');
-    if (!btn) return;
-    window.addEventListener('scroll', () =>
-        btn.classList.toggle('visible', window.scrollY > 300), { passive: true });
-    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-})();
-
-/* ════════════════════════════════════════════════════════════
-   SEARCH  (all bugs fixed + C, F)
+   SEARCH
 ════════════════════════════════════════════════════════════ */
 (function () {
     'use strict';
@@ -3246,14 +3189,14 @@
     const emptyClear = document.getElementById('emptyClearBtn');
     if (!input) return;
 
-    // Bug 1 fix — include table-card (Chabokan)
+    // Include table-card (Chabokan)
     const cards = Array.from(
         document.querySelectorAll('.link-card, .info-card, .table-card')
     ).map(card => ({
         el:       card,
         section:  card.closest('.section'),
         textLow:  card.textContent.toLowerCase(),
-        // Bug 2 fix — child link-cards of info-card groups
+        // Child link-cards of info-card groups
         children: card.classList.contains('info-card')
             ? Array.from(card.querySelectorAll('.link-card'))
             : [],
@@ -3298,7 +3241,7 @@
         let shown = 0;
         const active = terms.length > 0;
 
-        // C — badge class on body
+        // Badge class on body
         document.body.classList.toggle('is-searching', active);
 
         // Track which child link-cards were force-shown by their parent info-card
@@ -3325,7 +3268,7 @@
             }
         });
 
-        // Sections: show/hide + badge (C)
+        // Sections: show/hide + badge
         secCounts.forEach((count, section) => {
             section.classList.toggle('search-hidden', active && count === 0);
             const badge = section.querySelector('.section-result-badge');

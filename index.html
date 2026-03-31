@@ -16,6 +16,7 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="main.css" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+    <script src="main.js"></script>
     <script>
       // Only load Bale SDK if running in Bale miniapp
       if (/(bale\.ai|tapi\.bale\.ai)/i.test(window.location.hostname)) {
@@ -1404,7 +1405,7 @@
         right: 22px;
         width: 52px;
         height: 52px;
-        border-radius: 50%;
+        border-radius: var(--m3-shape-lg);
         background: var(--m3-primary-container);
         color: var(--m3-on-primary-container);
         border: none;
@@ -1419,6 +1420,11 @@
       }
       .theme-fab:hover {
         transform: scale(1.08);
+      }
+
+      /* --- Back to Top Button (M3E Secondary FAB) --- */
+      #back-to-top {
+        bottom: 22px;
       }
 
       /* LAPS */
@@ -7148,16 +7154,19 @@
               <label class="field-label">انتخاب شاعر</label>
               <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px;">
                 <button class="btn btn-filled" onclick="selectPoet('ferdowsi')" data-poet="ferdowsi">فردوسی</button>
-                <button class="btn btn-filled" onclick="selectPoet('hafez')" data-poet="hafez">حافظ</button>
-                <button class="btn btn-filled" onclick="selectPoet('saadi')" data-poet="saadi">سعدی</button>
-                <button class="btn btn-filled" onclick="selectPoet('rumi')" data-poet="rumi">مولوی</button>
-                <button class="btn btn-filled" onclick="selectPoet('sanai')" data-poet="sanai">سنایی</button>
-                <button class="btn btn-filled" onclick="selectPoet('jami')" data-poet="jami">جامی</button>
                 <button class="btn btn-filled" onclick="selectPoet('khayyam')" data-poet="khayyam">خیام</button>
-                <button class="btn btn-filled" onclick="selectPoet('nizami')" data-poet="nizami">نطامی</button>
-                <button class="btn btn-filled" onclick="selectPoet('shahriar')" data-poet="shahriar">شهریار</button>
-                <button class="btn btn-filled" onclick="selectPoet('sohrab-sepehri')" data-poet="sohrab-sepehri">سهراب سپهری</button>
+                <button class="btn btn-filled" onclick="selectPoet('sanai')" data-poet="sanai">سنایی</button>
+                <button class="btn btn-filled" onclick="selectPoet('nizami')" data-poet="nizami">نظامی</button>
+                <button class="btn btn-filled" onclick="selectPoet('rumi')" data-poet="rumi">مولوی</button>
+                <button class="btn btn-filled" onclick="selectPoet('saadi')" data-poet="saadi">سعدی</button>
+                <button class="btn btn-filled" onclick="selectPoet('hafez')" data-poet="hafez">حافظ</button>
+                <button class="btn btn-filled" onclick="selectPoet('jami')" data-poet="jami">جامی</button>
                 <button class="btn btn-filled" onclick="selectPoet('vahshi')" data-poet="vahshi">وحشی بافقی</button>
+                <button class="btn btn-filled" onclick="selectPoet('nima')" data-poet="nima">نیما یوشیج</button>
+                <button class="btn btn-filled" onclick="selectPoet('shahriar')" data-poet="shahriar">شهریار</button>
+                <button class="btn btn-filled" onclick="selectPoet('shamlou')" data-poet="shamlou">احمد شاملو</button>
+                <button class="btn btn-filled" onclick="selectPoet('akhavan')" data-poet="akhavan">مهدی اخوان ثالث</button>
+                <button class="btn btn-filled" onclick="selectPoet('sohrab-sepehri')" data-poet="sohrab-sepehri">سهراب سپهری</button>
                 <button class="btn btn-filled" onclick="selectPoet('forugh')" data-poet="forugh">فروغ فرخزاد</button>
               </div>
             </div>
@@ -7231,6 +7240,10 @@
       style="display: var(--_bale-fab-display, flex)">
       🌙
     </button>
+    
+    <!-- ── Back to top ── -->
+    <button id="back-to-top" aria-label="بازگشت به بالا">↑</button>
+
     <div id="copy-toast">کپی شد!</div>
 
     <!-- PWA Install Popup -->
@@ -7436,46 +7449,6 @@
 
       function openDrawer()  { document.getElementById('side-drawer').classList.add('open'); document.getElementById('drawer-overlay').classList.add('open'); document.body.style.overflow='hidden'; }
       function closeDrawer() { document.getElementById('side-drawer').classList.remove('open'); document.getElementById('drawer-overlay').classList.remove('open'); document.body.style.overflow=''; }
-
-      // ══════════════════════════════════════════════════════
-      //  THEME
-      // ══════════════════════════════════════════════════════
-      function toggleTheme() {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-        localStorage.setItem('theme', isDark ? 'light' : 'dark');
-        document.querySelector('.theme-fab').textContent = isDark ? '🌙' : '☀️';
-      }
-      (function() {
-        function applyTheme(t) {
-          document.documentElement.setAttribute('data-theme', t);
-          const fab = document.querySelector('.theme-fab');
-          if (fab) fab.textContent = t === 'dark' ? '☀️' : '🌙';
-        }
-        const sys = window.matchMedia('(prefers-color-scheme:dark)');
-
-        // Priority: Bale colorScheme > localStorage > system preference
-        var baleScheme = (typeof Bale !== 'undefined' && Bale.WebApp)
-          ? Bale.WebApp.colorScheme   // 'dark' | 'light'
-          : null;
-
-        var saved = localStorage.getItem('theme');
-        applyTheme(baleScheme || saved || (sys.matches ? 'dark' : 'light'));
-
-        document.addEventListener('DOMContentLoaded', () => {
-          var baleSchemeNow = (typeof Bale !== 'undefined' && Bale.WebApp)
-            ? Bale.WebApp.colorScheme : null;
-          applyTheme(baleSchemeNow || localStorage.getItem('theme') || (sys.matches ? 'dark' : 'light'));
-        });
-
-        // Only follow system preference when not in Bale and no manual override
-        sys.addEventListener('change', e => {
-          var inBale = typeof Bale !== 'undefined' && Bale.WebApp;
-          if (!inBale && !localStorage.getItem('theme')) {
-            applyTheme(e.matches ? 'dark' : 'light');
-          }
-        });
-      })();
 
       // ══════════════════════════════════════════════════════
       //  UX #3: Last-used state persistence per tool (sessionStorage)
@@ -9135,11 +9108,12 @@
         function runSearch(raw){
           const terms=raw.toLowerCase().trim().split(/\s+/).filter(Boolean);
           const secCounts=getSections();
-          // Hide feature cards, iran-cta card and recent/favs strips during search, but NOT the hero (contains search bar)
+          // Hide feature cards, iran-cta card, share section and recent/favs strips during search, but NOT the hero (contains search bar)
           const _featureCards = document.querySelector('.feature-cards');
           const _iranCta   = document.querySelector('.iran-cta');
           const _recentSec = document.getElementById('sec-recent');
           const _favsSec   = document.getElementById('sec-favs');
+          const _shareSec  = document.getElementById('sec-share');
           const _heroContent = document.querySelector('.hero-subtitle');
           const _heroIcon  = document.querySelector('.hero-emoji');
           const _searching = terms.length > 0;
@@ -9147,6 +9121,7 @@
           if (_iranCta)     _iranCta.style.display     = _searching ? 'none' : '';
           if (_recentSec)   _recentSec.style.display   = _searching ? 'none' : '';
           if (_favsSec)     _favsSec.style.display     = _searching ? 'none' : '';
+          if (_shareSec)    _shareSec.style.display    = _searching ? 'none' : '';
           if (_heroContent) _heroContent.style.display = _searching ? 'none' : '';
           if (_heroIcon)    _heroIcon.style.display    = _searching ? 'none' : '';
           if(!terms.length){cards.forEach(({el,section})=>{clearHL(el);el.classList.remove('search-hidden');if(section)section.classList.remove('search-hidden');});if(clearBtn)clearBtn.hidden=true;if(countEl){countEl.hidden=true;countEl.textContent='';}if(emptyEl)emptyEl.classList.remove('visible');return;}
@@ -14424,7 +14399,10 @@
         sanai: { folder: 'sanai' },
         shahriar: { folder: 'shahriar' },
         'sohrab-sepehri': { folder: 'sohrab-sepehri' },
-        vahshi: { folder: 'vahshi' }
+        vahshi: { folder: 'vahshi' },
+        akhavan: { folder: 'akhavan' },
+        nima: { folder: 'nima' },
+        shamlou: { folder: 'shamlou' }
       };
 
       let POETS = {}; // Dynamically loaded poet structures will be stored here
@@ -14987,7 +14965,6 @@
           +'</div><div class="diwan-poem-body">'+bodyHTML+'</div>'
           +'<div class="diwan-poem-actions"><button class="btn btn-tonal" style="font-size:12px" onclick="copyPoemText()">📋 کپی متن</button></div>';
       }
-
 
     </script>
 

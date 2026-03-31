@@ -96,9 +96,17 @@
       ? '\u062A\u063A\u06CC\u06CC\u0631 \u0628\u0647 \u062D\u0627\u0644\u062A \u0631\u0648\u0634\u0646'   // تغییر به حالت روشن
       : '\u062A\u063A\u06CC\u06CC\u0631 \u0628\u0647 \u062D\u0627\u0644\u062A \u062A\u0627\u0631\u06CC\u06A9'; // تغییر به حالت تاریک
 
+    // Update by ID (iran.html buttons)
     ['themeToggleRail', 'themeToggleFab'].forEach(function(id) {
       const btn = doc.getElementById(id);
       if (!btn) return;
+      btn.textContent = icon;
+      btn.setAttribute('aria-label', ariaLabel);
+      btn.setAttribute('aria-pressed', String(isDark));
+    });
+
+    // Update by class (index.html theme-fab button)
+    doc.querySelectorAll('.theme-fab').forEach(function(btn) {
       btn.textContent = icon;
       btn.setAttribute('aria-label', ariaLabel);
       btn.setAttribute('aria-pressed', String(isDark));
@@ -118,13 +126,26 @@
   }
 
   function initTheme() {
+    const getBaleScheme = () => (typeof Bale !== 'undefined' && Bale.WebApp) ? Bale.WebApp.colorScheme : null;
     const stored = getStoredTheme();
-    const mq     = window.matchMedia ? window.matchMedia(THEME_MQ) : null;
-    applyTheme(stored || (mq && mq.matches ? 'dark' : 'light'), !stored);
+    const mq = window.matchMedia ? window.matchMedia(THEME_MQ) : null;
+    
+    // Priority: Bale colorScheme > localStorage > system preference
+    applyTheme(getBaleScheme() || stored || (mq && mq.matches ? 'dark' : 'light'), !stored);
+
+    // Re-check Bale scheme on DOMContentLoaded
+    if (doc.readyState === 'loading') {
+      doc.addEventListener('DOMContentLoaded', () => {
+        applyTheme(getBaleScheme() || stored || (mq && mq.matches ? 'dark' : 'light'), !stored);
+      }, { once: true });
+    }
 
     if (!mq) return;
     const onChange = function(e) {
-      if (!getStoredTheme()) applyTheme(e.matches ? 'dark' : 'light', true);
+      const baleScheme = getBaleScheme();
+      if (!baleScheme && !getStoredTheme()) {
+        applyTheme(e.matches ? 'dark' : 'light', true);
+      }
     };
     if (typeof mq.addEventListener === 'function') {
       mq.addEventListener('change', onChange);
@@ -140,10 +161,53 @@
     });
   }
 
+  function bindBackToTop() {
+    const btn = doc.getElementById('back-to-top');
+    if (!btn) return;
+    window.addEventListener('scroll', () =>
+        btn.classList.toggle('visible', window.scrollY > 300), { passive: true });
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
+
+  function flashCard(el) {
+    const card = el.closest('.link-card,.info-card,.table-row,.step-item');
+    if (!card) return;
+    card.classList.remove('copy-flash');
+    void card.offsetWidth;
+    card.classList.add('copy-flash');
+    card.addEventListener('animationend', () => card.classList.remove('copy-flash'), { once: true });
+  }
+
+  function copySmart(text, el) {
+    copyToClipboard(text);
+    if (el) flashCard(el);
+  }
+
+  function bindCopyHandlers(selector) {
+    doc.querySelectorAll(selector).forEach(el => {
+      el.setAttribute('title', 'کلیک کنید تا کپی شود');
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      el.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        copySmart(el.textContent.trim(), el);
+      });
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          copySmart(el.textContent.trim(), el);
+        }
+      });
+    });
+  }
+
   // ── Init ─────────────────────────────────────────────────
   function init() {
     initTheme();
     bindThemeToggles();
+    bindBackToTop();
+    bindCopyHandlers('.step-code,.table-row__link,.link-card__url');
   }
 
   if (doc.readyState === 'loading') {
