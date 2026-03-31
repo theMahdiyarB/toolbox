@@ -6,7 +6,7 @@
 //    - External/opaque requests: Network-only (skip)
 // ============================================================
 
-const CACHE_VERSION = 'toolbox-v2.9';
+const CACHE_VERSION = 'toolbox-v2.10';
 const CACHE_SHELL   = CACHE_VERSION + '-shell';   // HTML, CSS, JS, fonts
 const CACHE_ASSETS  = CACHE_VERSION + '-assets';  // images, maps, large files
 
