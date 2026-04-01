@@ -673,8 +673,8 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex; 
   align-items: center; 
   justify-content: center;
-  width: 96px; 
-  height: 96px; 
+  width: 250px; 
+  height: 250px; 
   background-color: var(--m3-surface-container-high);
   border-radius: var(--m3-shape-xl); /* Squircle */
   margin-bottom: var(--m3-spacing-24); 
@@ -1231,7 +1231,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   .hero-title     { font-size: 2rem; }
   .hero-subtitle  { font-size: 1rem; }
-  .hero-icon-wrap { width: 80px; height: 80px; border-radius: var(--m3-shape-lg); }
+  .hero-icon-wrap { width: 250px; height: 250px; border-radius: var(--m3-shape-lg); }
   .hero-emoji     { font-size: 2.5rem; }
 
   /* Grid Adjustments */
@@ -2566,8 +2566,8 @@ body.is-searching .section-heading {
     to   { opacity: 1; transform: translateY(0); }
 }
 .hero-icon-wrap {
-    width: 88px; height: 88px;
-    border-radius: 50%;
+    width: 250px; height: 250px;
+    border-radius: 20%;
     background: color-mix(in srgb, var(--m3-primary) 14%, var(--m3-surface));
     border: 2px solid color-mix(in srgb, var(--m3-primary) 22%, transparent);
     display: flex; align-items: center; justify-content: center;
@@ -2798,7 +2798,7 @@ body.is-searching .section-result-badge { display: inline-flex; }
     .main-content { padding-bottom: 0; } /* page-wrapper padding-bottom already handles bottom-nav clearance */
     .hero-section { padding: 40px 16px; min-height: 240px; }
     .hero-title { font-size: 1.6rem; }
-    .hero-icon-wrap { width: 72px; height: 72px; }
+    .hero-icon-wrap { width: 150px; height: 150px; }
     .hero-emoji { font-size: 36px; }
     .cards-grid { grid-template-columns: 1fr; }
     .cards-grid--narrow { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
