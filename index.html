@@ -2378,48 +2378,30 @@
             readonly
             style="direction:ltr;text-align:left;unicode-bidi:embed"
           />
-          <div class="calc-grid" style="margin-top: 8px">
-            <button class="calc-btn" onclick="calcIn('C', this)">C</button>
+          <div class="calc-grid" style="margin-top: 8px; direction: ltr">
+            <button class="calc-btn calc-btn--op" onclick="calcIn('/', this)">÷</button>
             <button class="calc-btn" onclick="calcIn('(', this)">(</button>
-            <button class="calc-btn" onclick="calcIn(')')">)</button>
-            <button class="calc-btn calc-btn--op" onclick="calcIn('/', this)">
-              ÷
-            </button>
+            <button class="calc-btn" onclick="calcIn(')', this)">)</button>
+            <button class="calc-btn" onclick="calcIn('C', this)">C</button>
+            <button class="calc-btn calc-btn--op" onclick="calcIn('*', this)">×</button>
             <button class="calc-btn" onclick="calcIn('7', this)">7</button>
             <button class="calc-btn" onclick="calcIn('8', this)">8</button>
             <button class="calc-btn" onclick="calcIn('9', this)">9</button>
-            <button class="calc-btn calc-btn--op" onclick="calcIn('*', this)">
-              ×
-            </button>
+            <button class="calc-btn calc-btn--op" onclick="calcIn('-', this)">−</button>
             <button class="calc-btn" onclick="calcIn('4', this)">4</button>
             <button class="calc-btn" onclick="calcIn('5', this)">5</button>
             <button class="calc-btn" onclick="calcIn('6', this)">6</button>
-            <button class="calc-btn calc-btn--op" onclick="calcIn('-', this)">
-              −
-            </button>
+            <button class="calc-btn calc-btn--op" onclick="calcIn('+', this)">+</button>
             <button class="calc-btn" onclick="calcIn('1', this)">1</button>
             <button class="calc-btn" onclick="calcIn('2', this)">2</button>
             <button class="calc-btn" onclick="calcIn('3', this)">3</button>
-            <button class="calc-btn calc-btn--op" onclick="calcIn('+', this)">
-              +
-            </button>
-            <button
-              class="calc-btn"
-              onclick="calcIn('0', this)"
-              style="grid-column: span 2"
-            >
-              0
-            </button>
+            <button class="calc-btn" onclick="calcIn('⌫', this)">⌫</button>
+            <button class="calc-btn" onclick="calcIn('0', this)" style="grid-column: span 2">0</button>
             <button class="calc-btn" onclick="calcIn('.', this)">.</button>
-            <button class="calc-btn calc-btn--prim" onclick="calcIn('=', this)">
-              =
-            </button>
+            <button class="calc-btn calc-btn--prim" onclick="calcIn('=', this)">=</button>
           </div>
           <div class="btn-row" style="margin-top: 10px">
-            <button class="btn btn-tonal" onclick="calcIn('⌫', this)">⌫ پاک</button>
-            <button class="btn btn-tonal" onclick="copyVal('calc-disp')">
-              📋 کپی
-            </button>
+            <button class="btn btn-tonal" onclick="copyVal('calc-disp')">📋 کپی</button>
           </div>
 
           <div class="tool-desc">ماشین‌حساب پایه — عبارات کامل مثل <code>2*(3+4)</code> را پشتیبانی می‌کند. کیبورد نیز کار می‌کند: اعداد، <code>+ - * /</code>، <code>Enter</code> برای مساوی، <code>Backspace</code> برای پاک کردن.</div>
@@ -2429,96 +2411,87 @@
         <div id="sci" class="tool-card">
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
           <div class="tool-title">🔬 ماشین‌حساب علمی</div>
-          <input
-            type="text"
-            id="sci-disp"
-            class="text-input text-input--large text-input--ro mono"
-            readonly
-            placeholder="0"
-            style="direction:ltr;text-align:left;unicode-bidi:embed"
-          />
-          <div
-            class="calc-grid"
-            style="margin-top: 8px; grid-template-columns: repeat(5, 1fr)"
-          >
-            <button class="calc-btn calc-btn--op" onclick="sciIn('sin(', this)">
-              sin
-            </button>
-            <button class="calc-btn calc-btn--op" onclick="sciIn('cos(', this)">
-              cos
-            </button>
-            <button class="calc-btn calc-btn--op" onclick="sciIn('tan(', this)">
-              tan
-            </button>
-            <button class="calc-btn calc-btn--op" onclick="sciIn('log(', this)">
-              log
-            </button>
-            <button class="calc-btn calc-btn--op" onclick="sciIn('sqrt(', this)">
-              √
-            </button>
-            <button class="calc-btn calc-btn--op" onclick="sciIn('Math.PI', this)">
-              π
-            </button>
-            <button class="calc-btn calc-btn--op" onclick="sciIn('Math.E', this)">
-              e
-            </button>
-            <button class="calc-btn calc-btn--op" onclick="sciIn('**', this)">
-              xʸ
-            </button>
-            <button class="calc-btn calc-btn--op" onclick="sciIn('(', this)">
-              (
-            </button>
-            <button class="calc-btn calc-btn--op" onclick="sciIn(')')">
-              )
-            </button>
-            <button class="calc-btn" onclick="sciIn('7', this)">7</button>
-            <button class="calc-btn" onclick="sciIn('8', this)">8</button>
-            <button class="calc-btn" onclick="sciIn('9', this)">9</button>
-            <button class="calc-btn calc-btn--op" onclick="sciIn('/', this)">
-              ÷
-            </button>
-            <button class="calc-btn calc-btn--op" onclick="sciIn('*', this)">
-              ×
-            </button>
-            <button class="calc-btn" onclick="sciIn('4', this)">4</button>
-            <button class="calc-btn" onclick="sciIn('5', this)">5</button>
-            <button class="calc-btn" onclick="sciIn('6', this)">6</button>
-            <button class="calc-btn calc-btn--op" onclick="sciIn('-', this)">
-              −
-            </button>
-            <button class="calc-btn calc-btn--op" onclick="sciIn('+', this)">
-              +
-            </button>
-            <button class="calc-btn" onclick="sciIn('1', this)">1</button>
-            <button class="calc-btn" onclick="sciIn('2', this)">2</button>
-            <button class="calc-btn" onclick="sciIn('3', this)">3</button>
-            <button class="calc-btn" onclick="sciIn('.', this)">.</button>
-            <button class="calc-btn" onclick="sciIn('0', this)">0</button>
-            <button class="calc-btn calc-btn--op" onclick="sciIn('ln(', this)">ln</button>
-            <button class="calc-btn calc-btn--op" onclick="sciIn('frac', this)" title="تبدیل اعشار به کسر">⅟ کسر</button>
-            <button
-              class="calc-btn"
-              style="grid-column: span 2"
-              onclick="sciIn('C', this)"
-            >
-              C
-            </button>
-            <button class="calc-btn" onclick="sciIn('⌫', this)">⌫</button>
-            <button
-              class="calc-btn calc-btn--prim"
-              style="grid-column: span 2"
-              onclick="sciIn('=', this)"
-            >
-              =
-            </button>
+
+          <!-- Mode & Memory row -->
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;flex-wrap:wrap;gap:4px">
+            <div style="display:flex;gap:4px">
+              <button class="calc-btn calc-btn--op" id="sci-deg-btn" onclick="sciToggleDeg()" style="font-size:11px;padding:4px 8px;min-height:32px">DEG</button>
+              <button class="calc-btn calc-btn--op" id="sci-fe-btn"  onclick="sciToggleFE()"  style="font-size:11px;padding:4px 8px;min-height:32px">F-E</button>
+              <button class="calc-btn calc-btn--op" id="sci-2nd-btn" onclick="sciToggle2nd()" style="font-size:11px;padding:4px 8px;min-height:32px">2ⁿᵈ</button>
+            </div>
+            <div style="display:flex;gap:4px">
+              <button class="calc-btn calc-btn--op" onclick="sciMem('MC')" style="font-size:11px;padding:4px 8px;min-height:32px">MC</button>
+              <button class="calc-btn calc-btn--op" onclick="sciMem('MR')" style="font-size:11px;padding:4px 8px;min-height:32px">MR</button>
+              <button class="calc-btn calc-btn--op" onclick="sciMem('M+')" style="font-size:11px;padding:4px 8px;min-height:32px">M+</button>
+              <button class="calc-btn calc-btn--op" onclick="sciMem('M-')" style="font-size:11px;padding:4px 8px;min-height:32px">M−</button>
+              <button class="calc-btn calc-btn--op" onclick="sciMem('MS')" style="font-size:11px;padding:4px 8px;min-height:32px">MS</button>
+              <button class="calc-btn calc-btn--op" onclick="sciMem('MV')" style="font-size:11px;padding:4px 8px;min-height:32px" id="sci-mv-btn">M▾</button>
+            </div>
           </div>
 
-                    <div id="sci-frac-wrap" style="display:none;margin-top:8px;padding:10px 14px;background:var(--m3-surface-container);border-radius:10px;text-align:center">
+          <!-- Display -->
+          <input type="text" id="sci-disp" class="text-input text-input--large text-input--ro mono"
+            readonly placeholder="0"
+            style="direction:ltr;text-align:left;unicode-bidi:embed;font-size:1.4rem"/>
+          <div id="sci-history" style="min-height:18px;font-size:11px;color:var(--m3-on-surface-variant);direction:ltr;text-align:left;padding:2px 4px;font-family:'Courier New',monospace"></div>
+
+          <!-- Main grid — 5 columns, direction:ltr so 1 is at left, = at right -->
+          <div class="calc-grid" style="margin-top:6px;grid-template-columns:repeat(5,1fr);direction:ltr">
+            <!-- Row 0: trig (merged from trig row, now 5 buttons) -->
+            <button class="calc-btn calc-btn--op" id="sci-sin-btn" onclick="sciTrig('sin')">sin</button>
+            <button class="calc-btn calc-btn--op" id="sci-cos-btn" onclick="sciTrig('cos')">cos</button>
+            <button class="calc-btn calc-btn--op" id="sci-tan-btn" onclick="sciTrig('tan')">tan</button>
+            <button class="calc-btn calc-btn--op" id="sci-hyp-btn" onclick="sciToggleHyp()" style="font-size:11px">Hyp</button>
+            <button class="calc-btn calc-btn--op" onclick="sciIn('(')" id="sci-open-paren">(</button>
+            <!-- Row 1: 2ⁿᵈ-sensitive buttons -->
+            <button class="calc-btn calc-btn--op" id="sci-btn-pow2" onclick="sciSpecial('pow2')">x²</button>
+            <button class="calc-btn calc-btn--op" id="sci-btn-inv"  onclick="sciSpecial('inv')">¹⁄ₓ</button>
+            <button class="calc-btn calc-btn--op" id="sci-btn-abs"  onclick="sciIn('abs(')">|x|</button>
+            <button class="calc-btn calc-btn--op" id="sci-btn-exp"  onclick="sciSpecial('exp')">exp</button>
+            <button class="calc-btn calc-btn--op" onclick="sciIn(')')" id="sci-close-paren">)</button>
+            <!-- Row 2 -->
+            <button class="calc-btn calc-btn--op" id="sci-btn-sqrt" onclick="sciSpecial('sqrt')">²√x</button>
+            <button class="calc-btn calc-btn--op" onclick="sciIn('floor(')">⌊x⌋</button>
+            <button class="calc-btn calc-btn--op" onclick="sciIn('ceil(')">⌈x⌉</button>
+            <button class="calc-btn calc-btn--op" onclick="sciSpecial('fact')">n!</button>
+            <button class="calc-btn calc-btn--op" onclick="sciIn('%')">mod</button>
+            <!-- Row 3: xʸ × 7 8 9 -->
+            <button class="calc-btn calc-btn--op" id="sci-btn-pow"  onclick="sciSpecial('pow')">xʸ</button>
+            <button class="calc-btn calc-btn--op" onclick="sciIn('*')">×</button>
+            <button class="calc-btn" onclick="sciIn('7')">7</button>
+            <button class="calc-btn" onclick="sciIn('8')">8</button>
+            <button class="calc-btn" onclick="sciIn('9')">9</button>
+            <!-- Row 4: 10ˣ − 4 5 6 -->
+            <button class="calc-btn calc-btn--op" id="sci-btn-10x"  onclick="sciSpecial('10x')">10ˣ</button>
+            <button class="calc-btn calc-btn--op" onclick="sciIn('-')">−</button>
+            <button class="calc-btn" onclick="sciIn('4')">4</button>
+            <button class="calc-btn" onclick="sciIn('5')">5</button>
+            <button class="calc-btn" onclick="sciIn('6')">6</button>
+            <!-- Row 5: log + 1 2 3 -->
+            <button class="calc-btn calc-btn--op" id="sci-btn-log"  onclick="sciSpecial('log')">log</button>
+            <button class="calc-btn calc-btn--op" onclick="sciIn('+')">+</button>
+            <button class="calc-btn" onclick="sciIn('1')">1</button>
+            <button class="calc-btn" onclick="sciIn('2')">2</button>
+            <button class="calc-btn" onclick="sciIn('3')">3</button>
+            <!-- Row 6: ln π/e +/− . 0 -->
+            <button class="calc-btn calc-btn--op" id="sci-btn-ln"   onclick="sciSpecial('ln')">ln</button>
+            <button class="calc-btn calc-btn--op" onclick="sciSpecial('piE')">π/e</button>
+            <button class="calc-btn calc-btn--op" onclick="sciIn('+/-')">+/−</button>
+            <button class="calc-btn" onclick="sciIn('.')">.</button>
+            <button class="calc-btn" onclick="sciIn('0')">0</button>
+            <!-- Row 7: C ⌫ ⅟کسر = -->
+            <button class="calc-btn" style="grid-column:span 2" onclick="sciIn('C')">C</button>
+            <button class="calc-btn" onclick="sciIn('⌫')">⌫</button>
+            <button class="calc-btn calc-btn--op" onclick="sciIn('frac')" title="اعشار → کسر">⅟ کسر</button>
+            <button class="calc-btn calc-btn--prim" onclick="sciIn('=')">=</button>
+          </div>
+
+          <div id="sci-frac-wrap" style="display:none;margin-top:8px;padding:10px 14px;background:var(--m3-surface-container);border-radius:10px;text-align:center">
             <span style="font-size:12px;color:var(--m3-on-surface-variant)">کسری معادل: </span>
             <strong id="sci-frac" style="font-size:1.2rem;color:var(--m3-primary);font-family:'Courier New',monospace"></strong>
             <button class="btn btn-tonal" onclick="copyToClipboard(document.getElementById('sci-frac').textContent)" style="font-size:12px;margin-right:8px">📋</button>
           </div>
-          <div class="tool-desc">ماشین‌حساب علمی — sin، cos، tan، log، ریشه دوم و توان را محاسبه می‌کند. ثابت‌های پی و e در دسترس هستند. بخش پایین صفحه امکان تبدیل اعداد اعشاری به کسری و بالعکس را می‌دهد.</div>
+          <div class="tool-desc">ماشین‌حساب علمی کامل — sin/cos/tan، معکوس‌های مثلثاتی، هایپربولیک، ریشه، توان، فاکتوریل، لگاریتم، e، π، حافظه (MC/MR/M+/M−/MS) و تبدیل اعشار به کسر.</div>
         </div>
 
         <!-- ══ BMI ══ -->
@@ -2764,16 +2737,28 @@
         <!-- ══ STOPWATCH ══ -->
         <div id="stopwatch" class="tool-card">
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
-          <div class="tool-title">⏱️ کرونومتر</div>
-          <div class="big-num" id="sw-time">00:00:00</div>
-          <div class="btn-row" style="justify-content: center">
-            <button class="btn btn-filled" id="sw-btn" onclick="toggleSW()">
+          <div class="tool-title" style="font-size:1.1rem">⏱️ کرونومتر</div>
+
+          <!-- Big time display -->
+          <div style="text-align:center;padding:24px 0 8px">
+            <div id="sw-time" style="font-size:4.5rem;font-weight:300;font-variant-numeric:tabular-nums;letter-spacing:-2px;color:var(--m3-on-surface);line-height:1">00:00<span style="font-size:2.8rem;color:var(--m3-on-surface-variant)">.00</span></div>
+          </div>
+
+          <!-- Lap cards row (horizontal scroll) -->
+          <div style="position:relative;margin-bottom:12px">
+            <div id="lap-list" style="display:none;overflow-x:auto;white-space:nowrap;padding:4px 0 8px;scrollbar-width:thin"></div>
+          </div>
+
+          <!-- Buttons -->
+          <div style="display:flex;gap:12px;justify-content:center;align-items:center;padding:8px 0">
+            <button class="btn btn-tonal" onclick="lapSW()" style="border-radius:50px;min-width:100px;font-size:1rem;padding:14px 20px">🏁 لپ</button>
+            <button id="sw-btn" onclick="toggleSW()"
+              style="border-radius:50px;min-width:140px;font-size:1.1rem;padding:16px 28px;background:var(--m3-primary);color:var(--m3-on-primary);border:none;cursor:pointer;font-family:inherit;font-weight:600;transition:background .2s,transform .1s;box-shadow:0 2px 8px rgba(0,0,0,.2)"
+              onmousedown="this.style.transform='scale(.97)'" onmouseup="this.style.transform=''" ontouchstart="this.style.transform='scale(.97)'" ontouchend="this.style.transform=''">
               ▶ شروع
             </button>
-            <button class="btn btn-tonal" onclick="lapSW()">🏁 لپ</button>
-            <button class="btn btn-tonal" onclick="resetSW()">↺ ریست</button>
+            <button class="btn btn-tonal" onclick="resetSW()" style="border-radius:50px;min-width:100px;font-size:1rem;padding:14px 20px">↺ ریست</button>
           </div>
-          <div class="lap-list" id="lap-list" style="display: none"></div>
 
           <div class="tool-desc">زمان را با دقت صدم ثانیه اندازه‌گیری می‌کند. دکمه لپ برای ثبت زمان هر مرحله بدون متوقف شدن کرونومتر استفاده می‌شود.</div>
         </div>
@@ -2781,69 +2766,68 @@
         <!-- ══ TIMER ══ -->
         <div id="timer" class="tool-card">
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
-          <div class="tool-title">⏳ تایمر شمارش معکوس</div>
-          <div
-            class="field-row"
-            style="justify-content: center; gap: 8px; margin-bottom: 14px"
-          >
-            <div style="text-align: center">
-              <label class="field-label">ساعت</label
-              ><input
-                type="number"
-                id="tmr-h"
-                class="text-input text-input--center"
-                min="0"
-                max="23"
-                value="0"
-                style="width: 70px"
-              />
-            </div>
-            <div style="text-align: center">
-              <label class="field-label">دقیقه</label
-              ><input
-                type="number"
-                id="tmr-m"
-                class="text-input text-input--center"
-                min="0"
-                max="59"
-                value="5"
-                style="width: 70px"
-              />
-            </div>
-            <div style="text-align: center">
-              <label class="field-label">ثانیه</label
-              ><input
-                type="number"
-                id="tmr-s"
-                class="text-input text-input--center"
-                min="0"
-                max="59"
-                value="0"
-                style="width: 70px"
-              />
-            </div>
-          </div>
-          <div class="big-num" id="tmr-display">00:05:00</div>
-          <div class="btn-row" style="justify-content: center">
-            <button class="btn btn-filled" onclick="timerStart()">
-              ▶ شروع
-            </button>
-            <button class="btn btn-tonal" onclick="timerPause()">⏸ مکث</button>
-            <button class="btn btn-tonal" onclick="timerReset()">↺ ریست</button>
-          </div>
-          <div
-            id="tmr-done"
-            style="
-              display: none;
-              text-align: center;
-              margin-top: 14px;
-              font-size: 1.5rem;
-            "
-          >
-            🔔 وقت تمام شد!
+          <div class="tool-title" style="font-size:1.1rem">⏳ تایمر</div>
+
+          <!-- Timer name input -->
+          <input type="text" id="tmr-label" class="text-input" placeholder="نام تایمر (اختیاری)" style="margin-bottom:10px;font-size:13px">
+
+          <!-- Quick presets -->
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+            <button class="btn btn-tonal" onclick="tmrPreset(60)"   style="font-size:12px;padding:6px 12px;border-radius:50px">۱ دقیقه</button>
+            <button class="btn btn-tonal" onclick="tmrPreset(300)"  style="font-size:12px;padding:6px 12px;border-radius:50px">۵ دقیقه</button>
+            <button class="btn btn-tonal" onclick="tmrPreset(600)"  style="font-size:12px;padding:6px 12px;border-radius:50px">۱۰ دقیقه</button>
+            <button class="btn btn-tonal" onclick="tmrPreset(1500)" style="font-size:12px;padding:6px 12px;border-radius:50px">۲۵ دقیقه</button>
           </div>
 
-          <div class="tool-desc">ساعت، دقیقه و ثانیه دلخواه تنظیم کنید. پس از رسیدن به صفر پیام اعلان نمایش داده می‌شود. مکث و ریست نیز موجود است.</div>
+          <!-- Ring display -->
+          <div style="display:flex;justify-content:center;margin:8px 0 16px">
+            <div style="position:relative;width:260px;height:260px">
+              <svg viewBox="0 0 260 260" width="260" height="260" style="position:absolute;top:0;left:0;transform:rotate(-90deg)">
+                <circle cx="130" cy="130" r="114" fill="none" stroke="var(--m3-surface-container-high)" stroke-width="12"/>
+                <circle id="tmr-ring" cx="130" cy="130" r="114" fill="none"
+                  stroke="var(--m3-primary)" stroke-width="12"
+                  stroke-linecap="round"
+                  stroke-dasharray="716.28" stroke-dashoffset="0"
+                  style="transition:stroke-dashoffset 1s linear,stroke .3s"/>
+              </svg>
+              <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                <div id="tmr-display" style="font-size:3rem;font-weight:300;font-variant-numeric:tabular-nums;letter-spacing:-1px;line-height:1;direction:ltr;text-align:center;width:100%">00:05:00</div>
+                <button onclick="timerReset()" style="background:none;border:none;cursor:pointer;margin-top:8px;color:var(--m3-on-surface-variant);font-size:1.1rem;opacity:.7" title="ریست">↺</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Time inputs (hidden when running) -->
+          <div id="tmr-inputs" style="display:flex;justify-content:center;gap:8px;margin-bottom:16px">
+            <div style="text-align:center">
+              <div style="font-size:11px;color:var(--m3-on-surface-variant);margin-bottom:4px">ساعت</div>
+              <input type="number" id="tmr-h" class="text-input text-input--center" min="0" max="23" value="0" style="width:64px;font-size:1.1rem" oninput="tmrInputChange()"/>
+            </div>
+            <div style="font-size:2rem;padding-top:18px;color:var(--m3-on-surface-variant)">:</div>
+            <div style="text-align:center">
+              <div style="font-size:11px;color:var(--m3-on-surface-variant);margin-bottom:4px">دقیقه</div>
+              <input type="number" id="tmr-m" class="text-input text-input--center" min="0" max="59" value="5" style="width:64px;font-size:1.1rem" oninput="tmrInputChange()"/>
+            </div>
+            <div style="font-size:2rem;padding-top:18px;color:var(--m3-on-surface-variant)">:</div>
+            <div style="text-align:center">
+              <div style="font-size:11px;color:var(--m3-on-surface-variant);margin-bottom:4px">ثانیه</div>
+              <input type="number" id="tmr-s" class="text-input text-input--center" min="0" max="59" value="0" style="width:64px;font-size:1.1rem" oninput="tmrInputChange()"/>
+            </div>
+          </div>
+
+          <!-- Action buttons -->
+          <div style="display:flex;gap:10px;justify-content:center">
+            <button class="btn btn-tonal" onclick="timerAddMin()" style="border-radius:50px;min-width:90px;padding:14px 18px">+۱:۰۰</button>
+            <button id="tmr-play-btn" onclick="timerToggle()"
+              style="border-radius:50px;min-width:130px;font-size:1.05rem;padding:16px 24px;background:var(--m3-primary);color:var(--m3-on-primary);border:none;cursor:pointer;font-family:inherit;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,.2);transition:background .2s">
+              ▶ شروع
+            </button>
+          </div>
+
+          <div id="tmr-done" style="display:none;text-align:center;margin-top:16px;font-size:1.4rem;animation:_tmrPulse 1s ease infinite alternate">🔔 وقت تمام شد!</div>
+          <style>@keyframes _tmrPulse{from{opacity:1}to{opacity:.4}}</style>
+
+          <div class="tool-desc">تایمر شمارش معکوس با نمایش حلقه‌ای. پیش‌تنظیم‌های سریع یا زمان دلخواه وارد کنید.</div>
         </div>
 
         <!-- ══ UNIT CONVERTER ══ -->
@@ -2910,7 +2894,7 @@
           </div>
           <div id="age-miladi-wrap">
             <label class="field-label">تاریخ تولد (میلادی)</label>
-            <input type="date" id="age-dob" class="text-input" />
+            <input type="date" id="age-dob" class="text-input" value="1990-01-01" style="direction:ltr;text-align:left">
           </div>
           <div id="age-shamsi-wrap" style="display:none">
             <label class="field-label">تاریخ تولد (خورشیدی)</label>
@@ -5106,29 +5090,43 @@
         <!-- ══ WORLD CLOCK / TIMEZONE ══ -->
         <div id="timezone" class="tool-card">
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
-          <div class="tool-title">🌐 ساعت جهانی</div>
-          <div class="field-row" style="align-items:flex-end">
-            <div class="field-col">
-              <label class="field-label">تاریخ و ساعت</label>
-              <input type="datetime-local" id="tz-src" class="text-input" oninput="runTZ()">
-            </div>
-            <div class="field-col">
-              <label class="field-label">منطقه مبدا</label>
-              <select id="tz-from" class="select-input" onchange="runTZ()"></select>
-            </div>
-            <button class="btn btn-filled" onclick="tzNow()" style="flex-shrink:0;margin-bottom:1px">⏱ اکنون</button>
-          </div>
-          <div id="tz-jalali-now" style="font-size:13px;color:var(--m3-primary);padding:6px 0;font-weight:600"></div>
 
-          <!-- Zone Manager -->
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+          <!-- Big local clock -->
+          <div style="text-align:center;padding:16px 0 4px">
+            <div id="tz-local-clock" style="font-size:3.8rem;font-weight:300;font-variant-numeric:tabular-nums;letter-spacing:-2px;line-height:1">--:--:--</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;padding:0 4px">
+              <div id="tz-local-date" style="font-size:14px;color:var(--m3-on-surface-variant)"></div>
+              <div id="tz-jalali-now" style="font-size:13px;color:var(--m3-primary);font-weight:600"></div>
+            </div>
+          </div>
+
+          <!-- Converter row -->
+          <details style="margin:10px 0">
+            <summary style="cursor:pointer;font-size:13px;color:var(--m3-primary);font-weight:600;padding:6px 0">🔄 تبدیل زمان</summary>
+            <div style="padding:8px 0">
+              <div class="field-row" style="align-items:flex-end">
+                <div class="field-col">
+                  <label class="field-label">تاریخ و ساعت</label>
+                  <input type="datetime-local" id="tz-src" class="text-input" oninput="runTZ()">
+                </div>
+                <div class="field-col">
+                  <label class="field-label">منطقه مبدا</label>
+                  <select id="tz-from" class="select-input" onchange="runTZ()"></select>
+                </div>
+                <button class="btn btn-filled" onclick="tzNow()" style="flex-shrink:0;margin-bottom:1px">⏱ اکنون</button>
+              </div>
+            </div>
+          </details>
+
+          <!-- Zone cards grid -->
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">
             <select id="tz-add-select" class="select-input" style="flex:1;min-width:180px"></select>
-            <button class="btn btn-tonal" onclick="tzAddZone()" style="flex-shrink:0">+ افزودن منطقه</button>
+            <button class="btn btn-tonal" onclick="tzAddZone()" style="flex-shrink:0">+ افزودن</button>
             <button class="btn btn-tonal" onclick="tzReset()" style="flex-shrink:0;font-size:12px">↺ پیش‌فرض</button>
           </div>
 
-          <div id="tz-grid" style="display:grid;gap:8px;margin-top:4px"></div>
-          <div class="tool-desc">منطقه‌های زمانی مورد علاقه را اضافه یا حذف کنید. دکمه × کنار هر منطقه آن را حذف می‌کند.</div>
+          <div id="tz-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px"></div>
+          <div class="tool-desc">ساعت جهانی — مناطق زمانی مورد علاقه را اضافه یا حذف کنید.</div>
         </div>
 
         <!-- ══ COUNTER ══ -->
@@ -5899,7 +5897,8 @@
           </details>
           <div class="btn-row" style="margin-bottom:10px;flex-wrap:wrap">
             <button class="btn btn-filled"  id="calc-tab-deriv"   onclick="calcSetTab('deriv')">مشتق</button>
-            <button class="btn btn-tonal"   id="calc-tab-integ"   onclick="calcSetTab('integ')">انتگرال عددی</button>
+            <button class="btn btn-tonal"   id="calc-tab-integ"   onclick="calcSetTab('integ')">انتگرال معین</button>
+            <button class="btn btn-tonal"   id="calc-tab-indef"   onclick="calcSetTab('indef')">انتگرال نامعین</button>
             <button class="btn btn-tonal"   id="calc-tab-limit"   onclick="calcSetTab('limit')">حد</button>
             <button class="btn btn-tonal"   id="calc-tab-graph"   onclick="calcSetTab('graph')">نمودار</button>
           </div>
@@ -5915,7 +5914,7 @@
             <div style="font-size:12px;color:var(--m3-on-surface-variant);margin-top:8px">مشتق نمادین با math.js — خط مماس روی نمودار به‌صورت زنده نمایش داده می‌شود</div>
           </div>
 
-          <!-- INTEGRAL -->
+          <!-- INTEGRAL (definite) -->
           <div id="calc-integ-wrap" style="display:none">
             <label class="field-label">تابع f(x)</label>
             <input type="text" id="calc-ifn" class="text-input" placeholder="مثال: sin(x)  یا  exp(-x^2)  یا  sqrt(x)" style="direction:ltr;font-family:'Courier New',monospace">
@@ -5923,10 +5922,18 @@
               <div class="field-col"><label class="field-label">از a</label><input type="number" id="calc-ia" class="text-input" value="0" step="any"></div>
               <div class="field-col"><label class="field-label">تا b</label><input type="number" id="calc-ib" class="text-input" value="3.14159" step="any"></div>
             </div>
-            <button class="btn btn-filled" onclick="calcIntegrate()" style="margin-top:8px">محاسبه انتگرال</button>
+            <button class="btn btn-filled" onclick="calcIntegrate()" style="margin-top:8px">محاسبه انتگرال معین</button>
             <div id="calc-integ-res" style="margin-top:10px"></div>
             <div id="calc-integ-plot" style="margin-top:10px;border-radius:12px;overflow:hidden;background:var(--m3-surface-container)"></div>
             <div style="font-size:12px;color:var(--m3-on-surface-variant);margin-top:8px">انتگرال عددی با روش سیمپسون (n=1000) — ناحیه زیر نمودار رنگ‌آمیزی می‌شود</div>
+          </div>
+
+          <!-- INDEFINITE INTEGRAL -->
+          <div id="calc-indef-wrap" style="display:none">
+            <label class="field-label">تابع f(x)</label>
+            <input type="text" id="calc-indef-fn" class="text-input" placeholder="مثال: x^2  یا  sin(x)  یا  e^x  یا  1/x" style="direction:ltr;font-family:'Courier New',monospace" oninput="calcIndefinite()">
+            <div id="calc-indef-res" style="margin-top:10px"></div>
+            <div style="font-size:12px;color:var(--m3-on-surface-variant);margin-top:8px">پادمشتق نمادین با math.js — نتیجه بدون ثابت انتگرال C</div>
           </div>
 
           <!-- LIMIT -->
@@ -5934,7 +5941,7 @@
             <label class="field-label">تابع f(x)</label>
             <input type="text" id="calc-lfn" class="text-input" placeholder="مثال: sin(x)/x  یا  (x^2-1)/(x-1)" style="direction:ltr;font-family:'Courier New',monospace">
             <label class="field-label" style="margin-top:8px">حد وقتی x نزدیک می‌شود به</label>
-            <input type="number" id="calc-lx" class="text-input" value="0" step="any">
+            <input type="text" id="calc-lx" class="text-input" value="0" placeholder="عدد، inf، -inf، pi" style="direction:ltr;font-family:'Courier New',monospace">
             <button class="btn btn-filled" onclick="calcLimit()" style="margin-top:8px">محاسبه حد</button>
             <div id="calc-limit-res" style="margin-top:10px"></div>
           </div>
@@ -7213,7 +7220,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 2.15 - ۱۴۰۵/۰۱/۱۴
+          ℹ️ نسخه 2.17 - ۱۴۰۵/۰۱/۱۵
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -7350,7 +7357,7 @@
         if (id === 'device') loadDevice();
         if (id === 'notes') notesRender();
         if (id === 'asciitbl') buildASCII();
-        if (id === 'timezone') initTZ();
+        if (id === 'timezone') { initTZ(); _tzStartLive(); } else { _tzStopLive(); }
         if (id === 'dateconv') dcConvert();
         if (id === 'citycodes') ccSearch();
         if (id === 'trafficfines') tfSearch();
@@ -7556,7 +7563,8 @@
         else if (e.key==='*')                    { e.preventDefault(); fn('*'); }
         else if (e.key==='/')                    { e.preventDefault(); fn('/'); }
         else if (e.key==='.'||e.key===',')       { e.preventDefault(); fn('.'); }
-        else if (e.key==='('||e.key===')')       { e.preventDefault(); fn(e.key); }
+        else if (e.key==='(')                    { e.preventDefault(); fn('('); }
+        else if (e.key===')')                    { e.preventDefault(); fn(')'); }
         else if (e.key==='^')                    { e.preventDefault(); fn('**'); }
         else if (e.key==='Enter'||e.key==='=')   { e.preventDefault(); fn('='); }
         else if (e.key==='Backspace')            { e.preventDefault(); fn('⌫'); }
@@ -7567,40 +7575,226 @@
       //  SCIENTIFIC CALC
       // ══════════════════════════════════════════════════════
       let _sciExpr = '';
-      function sciIn(v, el) {
-        if (el) haptic(el);
+      let _sciDeg = true;      // true = DEG mode, false = RAD
+      let _sciFE  = false;     // F-E notation toggle
+      let _sci2nd = false;     // 2nd function active
+      let _sciHyp = false;     // Hyp active
+      let _sciMem = 0;         // memory register
+      let _sciLastResult = null;
+
+      function _sciAngle(rad) { return _sciDeg ? rad * (180 / Math.PI) : rad; }
+      function _sciToRad(deg) { return _sciDeg ? deg * (Math.PI / 180) : deg; }
+
+      function sciToggleDeg() {
+        _sciDeg = !_sciDeg;
+        const b = document.getElementById('sci-deg-btn');
+        if (b) b.textContent = _sciDeg ? 'DEG' : 'RAD';
+      }
+      function sciToggleFE() {
+        _sciFE = !_sciFE;
+        const b = document.getElementById('sci-fe-btn');
+        if (b) b.style.fontWeight = _sciFE ? '700' : '';
+        // Reformat current display if there's a result
+        if (_sciLastResult !== null) _sciShowResult(_sciLastResult);
+      }
+      function sciToggle2nd() {
+        _sci2nd = !_sci2nd;
+        _sciHyp = false; // reset hyp when toggling 2nd
+        _sciUpdateFnLabels();
+      }
+      function sciToggleHyp() {
+        _sciHyp = !_sciHyp;
+        _sciUpdateFnLabels();
+      }
+      function _sciUpdateFnLabels() {
+        const labels = {
+          'sci-sin-btn': _sciHyp ? (_sci2nd ? 'sinh⁻¹' : 'sinh') : (_sci2nd ? 'sin⁻¹' : 'sin'),
+          'sci-cos-btn': _sciHyp ? (_sci2nd ? 'cosh⁻¹' : 'cosh') : (_sci2nd ? 'cos⁻¹' : 'cos'),
+          'sci-tan-btn': _sciHyp ? (_sci2nd ? 'tanh⁻¹' : 'tanh') : (_sci2nd ? 'tan⁻¹' : 'tan'),
+          'sci-hyp-btn': _sciHyp ? 'Hyp ✓' : 'Hyp',
+          'sci-btn-pow2': _sci2nd ? 'x³'  : 'x²',
+          'sci-btn-inv':  _sci2nd ? 'x!'  : '¹⁄ₓ',
+          'sci-btn-sqrt': _sci2nd ? '³√x' : '²√x',
+          'sci-btn-exp':  _sci2nd ? 'eˣ'  : 'exp',
+          'sci-btn-pow':  _sci2nd ? 'yˣ'  : 'xʸ',
+          'sci-btn-10x':  _sci2nd ? '2ˣ'  : '10ˣ',
+          'sci-btn-log':  _sci2nd ? 'log₂': 'log',
+          'sci-btn-ln':   _sci2nd ? 'logₓ': 'ln',
+          'sci-2nd-btn':  _sci2nd ? '2ⁿᵈ ✓' : '2ⁿᵈ',
+        };
+        Object.entries(labels).forEach(([id, txt]) => {
+          const b = document.getElementById(id);
+          if (b) { b.textContent = txt; b.style.color = (id === 'sci-2nd-btn' && _sci2nd) || (id === 'sci-hyp-btn' && _sciHyp) ? 'var(--m3-primary)' : ''; }
+        });
+      }
+
+      function sciTrig(fn) {
+        // Build the function call based on 2nd/Hyp state
+        let call;
+        if (_sciHyp && _sci2nd) {
+          call = {'sin':'acosh','cos':'acosh','tan':'atanh'}[fn] || ('a'+fn+'h');
+          call = fn === 'sin' ? 'asinh' : fn === 'cos' ? 'acosh' : 'atanh';
+          // These return radians; we need deg wrapper if DEG mode... but inverse hyp always returns natural units
+          _sciExpr += call + '('; _sciUpdateDisp(); _sci2nd=false; _sciHyp=false; _sciUpdateFnLabels(); return;
+        }
+        if (_sciHyp) {
+          call = fn + 'h'; // sinh, cosh, tanh
+          // hyp functions take real argument, no degree conversion needed
+          _sciExpr += call + '('; _sciUpdateDisp(); _sciHyp=false; _sciUpdateFnLabels(); return;
+        }
+        if (_sci2nd) {
+          // Inverse trig: asin/acos/atan — result is in radians, convert if DEG mode
+          call = 'a' + fn;
+          _sciExpr += ((_sciDeg ? 'deg2rad_inv(' : '') + call + '(').replace('deg2rad_inv(', ''); 
+          // We'll handle deg conversion at eval time via scope
+          _sciExpr += 'a' + fn + '('; _sciUpdateDisp(); _sci2nd=false; _sciUpdateFnLabels(); return;
+        }
+        // Normal trig: convert to radians if DEG mode
+        if (_sciDeg) {
+          _sciExpr += fn + '_deg('; 
+        } else {
+          _sciExpr += fn + '(';
+        }
+        _sciUpdateDisp(); return;
+      }
+
+      function sciMem(op) {
+        const cur = _sciLastResult !== null ? _sciLastResult : parseFloat(_sciExpr) || 0;
+        if (op === 'MC') { _sciMem = 0; }
+        else if (op === 'MR') { _sciExpr = String(_sciMem); _sciUpdateDisp(); }
+        else if (op === 'M+') { _sciMem += cur; }
+        else if (op === 'M-') { _sciMem -= cur; }
+        else if (op === 'MS') { _sciMem = cur; }
+        else if (op === 'MV') {
+          const btn = document.getElementById('sci-mv-btn');
+          if (btn) { const old = btn.textContent; btn.textContent = _sciMem; setTimeout(() => btn.textContent = 'M▾', 1500); }
+        }
+      }
+
+      function sciSpecial(op) {
         const d = document.getElementById('sci-disp');
-        if (v === 'C')  { _sciExpr=''; d.value=''; document.getElementById('sci-frac-wrap').style.display='none'; return; }
-        if (v === '⌫') { _sciExpr=_sciExpr.slice(0,-1); d.value=_sciExpr||''; return; }
-        if (v === 'frac') {
-          const n = parseFloat(_sciExpr);
-          if (!isNaN(n)) {
-            document.getElementById('sci-frac').textContent = decToFrac(n);
-            document.getElementById('sci-frac-wrap').style.display='block';
+        // Operations that act on current result
+        const cur = _sciLastResult !== null ? _sciLastResult : (parseFloat(_sciExpr) || null);
+        if (op === 'pow2') { _sciExpr += _sci2nd ? '^3' : '^2'; _sci2nd=false; _sciUpdateFnLabels(); _sciUpdateDisp(); return; }
+        if (op === 'inv')  { if (_sci2nd) { op = 'fact'; } else { _sciExpr = '('+_sciExpr+')^(-1)'; _sciUpdateDisp(); return; } }
+        if (op === 'fact') {
+          if (cur !== null && Number.isInteger(cur) && cur >= 0 && cur <= 170) {
+            let f = 1; for (let i = 2; i <= cur; i++) f *= i;
+            _sciShowResult(f); _sciLastResult = f; return;
           }
+          _sciExpr += '!'; _sciUpdateDisp(); return;
+        }
+        if (op === 'sqrt') { _sciExpr += _sci2nd ? 'cbrt(' : 'sqrt('; _sci2nd=false; _sciUpdateFnLabels(); _sciUpdateDisp(); return; }
+        if (op === 'exp')  { _sciExpr += _sci2nd ? 'exp('  : 'exp('; _sci2nd=false; _sciUpdateFnLabels(); _sciUpdateDisp(); return; }
+        if (op === 'pow')  { _sciExpr += '^'; _sciUpdateDisp(); return; }
+        if (op === '10x')  {
+          if (_sci2nd) { _sciExpr += '2^'; } else { _sciExpr += '10^'; }
+          _sci2nd=false; _sciUpdateFnLabels(); _sciUpdateDisp(); return;
+        }
+        if (op === 'log')  {
+          if (_sci2nd) { _sciExpr += 'log2('; } else { _sciExpr += 'log10('; }
+          _sci2nd=false; _sciUpdateFnLabels(); _sciUpdateDisp(); return;
+        }
+        if (op === 'ln')   {
+          if (_sci2nd) { _sciExpr += 'log('; } else { _sciExpr += 'log('; } // math.js log() = ln
+          _sci2nd=false; _sciUpdateFnLabels(); _sciUpdateDisp(); return;
+        }
+        if (op === 'piE') { _sciExpr += _sci2nd ? 'e' : 'pi'; _sci2nd=false; _sciUpdateFnLabels(); _sciUpdateDisp(); return; }
+      }
+
+      function _sciUpdateDisp() {
+        const d = document.getElementById('sci-disp');
+        if (d) d.value = _sciExpr || '';
+        _sciLastResult = null;
+      }
+
+      function _sciShowResult(r) {
+        const d = document.getElementById('sci-disp');
+        const h = document.getElementById('sci-history');
+        if (h) h.textContent = _sciExpr + ' =';
+        let disp;
+        if (!isFinite(r)) { disp = r > 0 ? '+∞' : r < 0 ? '−∞' : 'خطا'; }
+        else if (_sciFE) { disp = r.toExponential(6); }
+        else { disp = +parseFloat(r.toPrecision(12)) + ''; }
+        if (d) d.value = disp;
+        _sciExpr = String(r);
+        _sciLastResult = r;
+        document.getElementById('sci-frac-wrap').style.display = 'none';
+      }
+
+      function sciIn(v) {
+        const d = document.getElementById('sci-disp');
+        if (!d) return;
+
+        if (v === 'C') {
+          _sciExpr = ''; _sciLastResult = null;
+          d.value = ''; 
+          const h = document.getElementById('sci-history'); if (h) h.textContent = '';
+          document.getElementById('sci-frac-wrap').style.display = 'none';
+          return;
+        }
+        if (v === '⌫') {
+          _sciExpr = _sciExpr.slice(0, -1); _sciLastResult = null;
+          d.value = _sciExpr || ''; return;
+        }
+        if (v === 'frac') {
+          const cur = _sciLastResult !== null ? _sciLastResult : parseFloat(_sciExpr);
+          if (!isNaN(cur)) {
+            document.getElementById('sci-frac').textContent = decToFrac(cur);
+            document.getElementById('sci-frac-wrap').style.display = 'block';
+          }
+          return;
+        }
+        if (v === '+/-') {
+          if (_sciLastResult !== null) { _sciExpr = String(-_sciLastResult); _sciLastResult = null; d.value = _sciExpr; }
+          else if (_sciExpr) { _sciExpr = _sciExpr.startsWith('-') ? _sciExpr.slice(1) : '-' + _sciExpr; d.value = _sciExpr; }
           return;
         }
         if (v === '=') {
+          if (!_sciExpr.trim()) return;
           try {
-            const clean = _sciExpr
-              .replace(/\b0+(\d)/g,'$1')
-              .replace(/sin\(/g,'Math.sin(').replace(/cos\(/g,'Math.cos(')
-              .replace(/tan\(/g,'Math.tan(').replace(/log\(/g,'Math.log10(')
-              .replace(/ln\(/g,'Math.log(').replace(/sqrt\(/g,'Math.sqrt(')
-              .replace(/abs\(/g,'Math.abs(').replace(/π/g,'Math.PI')
-              .replace(/℮/g,'Math.E');
-            const r = Function('"use strict";return (' + clean + ')')();
-            if (!isFinite(r)) throw new Error('infinity');
-            d.value = +parseFloat(r.toFixed(10));
-            _sciExpr = String(r);
-            document.getElementById('sci-frac-wrap').style.display='none';
-          } catch(e) {
+            if (typeof math === 'undefined') throw new Error('math.js بارگذاری نشده');
+            // Normalise expression for math.js
+            let expr = _sciExpr
+              .replace(/π/g, 'pi').replace(/℮/g, 'e')
+              // Trig with degree wrappers
+              .replace(/sin_deg\(/g, 'sin(')
+              .replace(/cos_deg\(/g, 'cos(')
+              .replace(/tan_deg\(/g, 'tan(')
+              // Implicit multiplication: 2π → 2*pi etc.
+              .replace(/([0-9)])\s*(pi|e\b)/g, '$1*$2')
+              .replace(/([0-9])\s*([a-zA-Z(])/g, '$1*$2');
+
+            // Build scope with DEG-adjusted trig
+            const scope = {
+              pi: Math.PI, e: Math.E,
+              sin: _sciDeg ? (x => Math.sin(x * Math.PI / 180)) : Math.sin,
+              cos: _sciDeg ? (x => Math.cos(x * Math.PI / 180)) : Math.cos,
+              tan: _sciDeg ? (x => Math.tan(x * Math.PI / 180)) : Math.tan,
+              asin: _sciDeg ? (x => Math.asin(x) * 180 / Math.PI) : Math.asin,
+              acos: _sciDeg ? (x => Math.acos(x) * 180 / Math.PI) : Math.acos,
+              atan: _sciDeg ? (x => Math.atan(x) * 180 / Math.PI) : Math.atan,
+              sinh: Math.sinh, cosh: Math.cosh, tanh: Math.tanh,
+              asinh: Math.asinh, acosh: Math.acosh, atanh: Math.atanh,
+              sqrt: Math.sqrt, cbrt: Math.cbrt, abs: Math.abs,
+              log: Math.log, log2: Math.log2, log10: Math.log10,
+              exp: Math.exp, floor: Math.floor, ceil: Math.ceil,
+              round: Math.round,
+            };
+            const r = math.evaluate(expr, scope);
+            const rNum = typeof r === 'object' && r.toNumber ? r.toNumber() : +r;
+            _sciShowResult(rNum);
+          } catch(err) {
+            const h = document.getElementById('sci-history'); if (h) h.textContent = _sciExpr;
             d.value = '⚠ خطا';
-            setTimeout(() => { d.value = _sciExpr; }, 1400);
+            setTimeout(() => { d.value = _sciExpr; if (d) d.style.color=''; }, 1400);
           }
           return;
         }
-        _sciExpr += v; d.value = _sciExpr;
+        // If there's a completed result and user types a digit/dot, start fresh
+        if (_sciLastResult !== null && /^[0-9.]$/.test(v)) { _sciExpr = ''; _sciLastResult = null; }
+        _sciExpr += v;
+        _sciUpdateDisp();
       }
       // Convert decimal to fraction using continued fractions
       function decToFrac(x) {
@@ -7676,46 +7870,178 @@
       // ══════════════════════════════════════════════════════
       //  STOPWATCH
       // ══════════════════════════════════════════════════════
-      let _swInt, _swRun=false, _swMs=0, _lapN=0;
+      //  STOPWATCH
+      // ══════════════════════════════════════════════════════
+      let _swInt, _swRun=false, _swMs=0, _lapN=0, _lapLastMs=0;
+      function _swFmt(ms) {
+        const h   = Math.floor(ms/3600000);
+        const m   = Math.floor((ms%3600000)/60000);
+        const s   = Math.floor((ms%60000)/1000);
+        const cs  = Math.floor((ms%1000)/10);
+        const hms = (h?String(h).padStart(2,'0')+':':'')+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+        return {hms, cs: String(cs).padStart(2,'0')};
+      }
+      function _swUpdateDisplay() {
+        const el = document.getElementById('sw-time');
+        if (!el) return;
+        const {hms, cs} = _swFmt(_swMs);
+        el.innerHTML = hms + '<span style="font-size:2.8rem;color:var(--m3-on-surface-variant)">.' + cs + '</span>';
+      }
       function toggleSW() {
-        const b=document.getElementById('sw-btn');
-        if (_swRun) { clearInterval(_swInt); b.textContent='▶ شروع'; b.className='btn btn-filled'; }
-        else { _swInt=setInterval(()=>{ _swMs+=10; document.getElementById('sw-time').textContent=new Date(_swMs).toISOString().substr(11,8); },10); b.textContent='⏸ مکث'; b.className='btn btn-tonal'; }
-        _swRun=!_swRun;
+        const b = document.getElementById('sw-btn');
+        if (_swRun) {
+          clearInterval(_swInt);
+          b.textContent = '▶ ادامه';
+          b.style.background = 'var(--m3-primary-container)';
+          b.style.color = 'var(--m3-on-primary-container)';
+        } else {
+          _swInt = setInterval(() => { _swMs += 10; _swUpdateDisplay(); }, 10);
+          b.textContent = '⏸ مکث';
+          b.style.background = 'var(--m3-tertiary, #7d5260)';
+          b.style.color = 'var(--m3-on-tertiary, #fff)';
+        }
+        _swRun = !_swRun;
       }
       function lapSW() {
-        if (!_swRun&&!_swMs) return;
-        const ll=document.getElementById('lap-list');
-        ll.style.display='block';
+        if (!_swRun && !_swMs) return;
+        const ll = document.getElementById('lap-list');
+        ll.style.display = 'block';
         _lapN++;
-        const d=document.createElement('div'); d.className='lap-item';
-        d.innerHTML=`<span>لپ ${_lapN}</span><span>${new Date(_swMs).toISOString().substr(11,8)}</span>`;
-        ll.prepend(d);
+        const lapTime = _swMs - _lapLastMs;
+        _lapLastMs = _swMs;
+        const {hms: total} = _swFmt(_swMs);
+        const {hms: split} = _swFmt(lapTime);
+        const card = document.createElement('div');
+        card.style.cssText = 'display:inline-block;vertical-align:top;min-width:120px;background:var(--m3-surface-container);border:1px solid var(--m3-outline-variant);border-radius:14px;padding:10px 14px;margin-left:8px;flex-shrink:0';
+        card.innerHTML = `<div style="font-size:11px;color:var(--m3-on-surface-variant);margin-bottom:4px">لپ ${_lapN}</div>`
+          + `<div style="font-size:1rem;font-weight:700;font-variant-numeric:tabular-nums;direction:ltr">${split}</div>`
+          + `<div style="font-size:11px;color:var(--m3-on-surface-variant);direction:ltr;margin-top:2px">${total}</div>`;
+        ll.prepend(card);
       }
       function resetSW() {
-        _swRun=false; clearInterval(_swInt); _swMs=0; _lapN=0;
-        document.getElementById('sw-time').textContent='00:00:00';
-        document.getElementById('sw-btn').textContent='▶ شروع';
-        document.getElementById('sw-btn').className='btn btn-filled';
-        const ll=document.getElementById('lap-list'); ll.innerHTML=''; ll.style.display='none';
+        _swRun = false; clearInterval(_swInt); _swMs = 0; _lapN = 0; _lapLastMs = 0;
+        _swUpdateDisplay();
+        const b = document.getElementById('sw-btn');
+        b.textContent = '▶ شروع';
+        b.style.background = 'var(--m3-primary)';
+        b.style.color = 'var(--m3-on-primary)';
+        const ll = document.getElementById('lap-list'); ll.innerHTML = ''; ll.style.display = 'none';
       }
 
       // ══════════════════════════════════════════════════════
-      //  COUNTDOWN TIMER
+      //  COUNTDOWN TIMER — ring display
       // ══════════════════════════════════════════════════════
-      let _tmrInt=null, _tmrRem=0, _tmrRun=false;
+      let _tmrInt=null, _tmrRem=0, _tmrTotal=0, _tmrRun=false;
+      const TMR_CIRC = 2 * Math.PI * 114; // circumference for r=114
+
       function timerSec() { return (parseInt(document.getElementById('tmr-h').value)||0)*3600+(parseInt(document.getElementById('tmr-m').value)||0)*60+(parseInt(document.getElementById('tmr-s').value)||0); }
-      function timerDisp(s) { document.getElementById('tmr-display').textContent=String(Math.floor(s/3600)).padStart(2,'0')+':'+String(Math.floor((s%3600)/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); }
-      function timerStart() {
-        if (_tmrRun) return;
-        if (!_tmrRem) _tmrRem=timerSec();
-        if (!_tmrRem) return;
-        document.getElementById('tmr-done').style.display='none';
-        _tmrRun=true;
-        _tmrInt=setInterval(()=>{ _tmrRem--; timerDisp(_tmrRem); if(_tmrRem<=0){clearInterval(_tmrInt);_tmrRun=false;document.getElementById('tmr-done').style.display='block';try{new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAA').play();}catch(e){}} },1000);
+
+      function timerDisp(s) {
+        const el = document.getElementById('tmr-display');
+        if (el) el.textContent = String(Math.floor(s/3600)).padStart(2,'0')+':'+String(Math.floor((s%3600)/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+        // Update ring
+        const ring = document.getElementById('tmr-ring');
+        if (ring && _tmrTotal > 0) {
+          const frac = s / _tmrTotal;
+          const offset = TMR_CIRC * (1 - frac);
+          ring.style.strokeDashoffset = offset;
+          // Colour: green when > 50%, yellow when 10-50%, red when < 10%
+          ring.style.stroke = frac > 0.5 ? 'var(--m3-primary)' : frac > 0.1 ? '#f0a500' : 'var(--m3-error, #b3261e)';
+        }
       }
-      function timerPause() { clearInterval(_tmrInt); _tmrRun=false; }
-      function timerReset() { clearInterval(_tmrInt); _tmrRun=false; _tmrRem=0; document.getElementById('tmr-done').style.display='none'; timerDisp(timerSec()); }
+
+      function tmrInputChange() {
+        if (!_tmrRun && !_tmrRem) {
+          _tmrTotal = timerSec();
+          timerDisp(_tmrTotal);
+          const ring = document.getElementById('tmr-ring');
+          if (ring) { ring.style.strokeDashoffset = 0; ring.style.stroke = 'var(--m3-primary)'; }
+        }
+      }
+
+      function tmrPreset(secs) {
+        if (_tmrRun) timerToggle(); // pause first
+        _tmrRem = 0; _tmrRun = false; clearInterval(_tmrInt);
+        document.getElementById('tmr-h').value = Math.floor(secs/3600);
+        document.getElementById('tmr-m').value = Math.floor((secs%3600)/60);
+        document.getElementById('tmr-s').value = secs%60;
+        _tmrTotal = secs;
+        timerDisp(secs);
+        document.getElementById('tmr-done').style.display = 'none';
+        const ring = document.getElementById('tmr-ring');
+        if (ring) { ring.style.strokeDashoffset = 0; ring.style.stroke = 'var(--m3-primary)'; ring.style.transition = 'none'; }
+        const pb = document.getElementById('tmr-play-btn');
+        if (pb) { pb.textContent = '▶ شروع'; pb.style.background = 'var(--m3-primary)'; }
+      }
+
+      function timerAddMin() {
+        _tmrRem = Math.max(0, (_tmrRem || timerSec())) + 60;
+        _tmrTotal = Math.max(_tmrTotal, _tmrRem);
+        timerDisp(_tmrRem);
+      }
+
+      function timerToggle() {
+        if (_tmrRun) {
+          // Pause
+          clearInterval(_tmrInt); _tmrRun = false;
+          const pb = document.getElementById('tmr-play-btn');
+          if (pb) { pb.textContent = '▶ ادامه'; pb.style.background = 'var(--m3-primary-container, #b2ebf2)'; pb.style.color = 'var(--m3-on-primary-container)'; }
+        } else {
+          // Start / Resume
+          if (!_tmrRem) { _tmrRem = timerSec(); _tmrTotal = _tmrRem; }
+          if (!_tmrRem) return;
+          document.getElementById('tmr-done').style.display = 'none';
+          const ring = document.getElementById('tmr-ring');
+          if (ring) ring.style.transition = 'stroke-dashoffset 1s linear, stroke .3s';
+          _tmrRun = true;
+          const pb = document.getElementById('tmr-play-btn');
+          if (pb) { pb.textContent = '⏸ مکث'; pb.style.background = 'var(--m3-tertiary, #7d5260)'; pb.style.color = '#fff'; }
+          _tmrInt = setInterval(() => {
+            _tmrRem--;
+            timerDisp(_tmrRem);
+            if (_tmrRem <= 0) {
+              clearInterval(_tmrInt); _tmrRun = false;
+              document.getElementById('tmr-done').style.display = 'block';
+              const pb2 = document.getElementById('tmr-play-btn');
+              if (pb2) { pb2.textContent = '▶ شروع'; pb2.style.background = 'var(--m3-primary)'; pb2.style.color = 'var(--m3-on-primary)'; }
+              if (navigator.vibrate) navigator.vibrate([300,100,300,100,300]);
+              _tmrBeep();
+              try { new Notification('تایمر', {body: (document.getElementById('tmr-label').value||'وقت تمام شد!')}); } catch(_){}
+            }
+          }, 1000);
+        }
+      }
+
+      function _tmrBeep() {
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          [0, 0.32, 0.64].forEach(function(t) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.frequency.value = 880;
+            osc.type = 'sine';
+            gain.gain.setValueAtTime(0.5, ctx.currentTime + t);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + 0.28);
+            osc.start(ctx.currentTime + t);
+            osc.stop(ctx.currentTime + t + 0.28);
+          });
+        } catch(e) {}
+      }
+
+      // Keep old names working (pomodoro / other callers)
+      function timerStart() { if (!_tmrRun) timerToggle(); }
+      function timerPause() { if (_tmrRun) timerToggle(); }
+      function timerReset() {
+        clearInterval(_tmrInt); _tmrRun = false; _tmrRem = 0;
+        document.getElementById('tmr-done').style.display = 'none';
+        const ring = document.getElementById('tmr-ring');
+        if (ring) { ring.style.transition = 'none'; ring.style.strokeDashoffset = 0; ring.style.stroke = 'var(--m3-primary)'; }
+        _tmrTotal = timerSec();
+        timerDisp(_tmrTotal);
+        const pb = document.getElementById('tmr-play-btn');
+        if (pb) { pb.textContent = '▶ شروع'; pb.style.background = 'var(--m3-primary)'; pb.style.color = 'var(--m3-on-primary)'; }
+      }
 
       // ══════════════════════════════════════════════════════
       //  UNIT CONVERTER
@@ -7773,26 +8099,7 @@
       //  AGE CALCULATOR
       // ══════════════════════════════════════════════════════
       const FA_DAYS = ['یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه','شنبه'];
-      function calcAge() {
-        const dob=new Date(document.getElementById('age-dob').value);
-        if(isNaN(dob)) return;
-        const now=new Date();
-        let y=now.getFullYear()-dob.getFullYear(), m=now.getMonth()-dob.getMonth(), d=now.getDate()-dob.getDate();
-        if(d<0){m--;d+=new Date(now.getFullYear(),now.getMonth(),0).getDate();}
-        if(m<0){y--;m+=12;}
-        const totalDays=Math.floor((now-dob)/86400000);
-        document.getElementById('age-y').textContent=y;
-        document.getElementById('age-m').textContent=m;
-        document.getElementById('age-d').textContent=d;
-        document.getElementById('age-td').textContent=totalDays.toLocaleString();
-        document.getElementById('age-th').textContent=(totalDays*24).toLocaleString();
-        document.getElementById('age-wd').textContent=FA_DAYS[dob.getDay()];
-        const nextBday=new Date(now.getFullYear(),dob.getMonth(),dob.getDate());
-        if(nextBday<=now) nextBday.setFullYear(now.getFullYear()+1);
-        const daysLeft=Math.ceil((nextBday-now)/86400000);
-        document.getElementById('age-next').textContent=`${daysLeft} روز دیگر`;
-        document.getElementById('age-res').style.display='block';
-      }
+      // calcAge is defined later with full Jalali/Miladi support
 
       // ══════════════════════════════════════════════════════
       //  LOAN CALCULATOR
@@ -9420,39 +9727,7 @@
         document.getElementById('tz-src').value = now.toISOString().slice(0,16);
         runTZ();
       }
-      function runTZ() {
-        const srcVal = document.getElementById('tz-src').value;
-        const fromTZ = document.getElementById('tz-from').value;
-        if (!srcVal || !fromTZ) return;
-        const srcDate = new Date(srcVal);
-        // Show Jalali date for current time
-        const jel = document.getElementById('tz-jalali-now');
-        if (jel) {
-          try {
-            const j = toJalali(srcDate.getFullYear(), srcDate.getMonth()+1, srcDate.getDate());
-            jel.textContent = `📅 ${j[0]}/${String(j[1]).padStart(2,'0')}/${String(j[2]).padStart(2,'0')} خورشیدی`;
-          } catch(e) { jel.textContent=''; }
-        }
-        const grid = document.getElementById('tz-grid');
-        grid.innerHTML = TZ_ZONES.map(z => {
-          let timeStr;
-          try {
-            timeStr = srcDate.toLocaleString('fa-IR', {timeZone: z.tz, hour:'2-digit', minute:'2-digit', weekday:'short', day:'numeric', month:'short'});
-          } catch(e) { timeStr = '—'; }
-          const isSrc = z.tz === fromTZ;
-          return `<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 14px;background:${isSrc?'color-mix(in srgb,var(--m3-primary) 10%,transparent)':'var(--m3-surface-container)'};border-radius:10px;border:1px solid ${isSrc?'var(--m3-primary)':'var(--m3-outline-variant)'};gap:10px">
-            <span style="font-weight:600">${z.flag} ${z.name}</span>
-            <span style="font-family:'Courier New',monospace;font-size:13px;color:var(--m3-on-surface-variant)">${timeStr}</span>
-          </div>`;
-        }).join('');
-      }
-      function tzNow() {
-        const now = new Date();
-        const pad = n => String(n).padStart(2,'0');
-        const local = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`;
-        document.getElementById('tz-src').value = local;
-        runTZ();
-      }
+      // runTZ and tzNow are defined later in the timezone section
 
       // ══════════════════════════════════════════════════════
       //  COUNTER
@@ -9817,7 +10092,12 @@
       function calcAge() {
         let dob;
         if (_ageCal === 'miladi') {
-          dob = new Date(document.getElementById('age-dob').value);
+          const dobEl = document.getElementById('age-dob');
+          if (!dobEl || !dobEl.value) return;
+          const parts = dobEl.value.split('-');
+          const gy = parseInt(parts[0]), gm = parseInt(parts[1]), gd = parseInt(parts[2]);
+          if (!gy || !gm || !gd || isNaN(gy)) return;
+          dob = new Date(gy, gm-1, gd);
         } else {
           const jy = parseInt(document.getElementById('age-jy').value);
           const jm = parseInt(document.getElementById('age-jm').value);
@@ -10159,7 +10439,10 @@
         notesRender();
         loadDevice();
         // Age tool: set default date ~25 years ago (miladi mode)
-        document.getElementById('age-dob').value = new Date(new Date().setFullYear(new Date().getFullYear()-25)).toISOString().split('T')[0];
+        const _ageDefault = new Date(new Date().setFullYear(new Date().getFullYear()-25));
+        const _agePad = n => String(n).padStart(2,'0');
+        const _ageDobEl = document.getElementById('age-dob');
+        if (_ageDobEl) _ageDobEl.value = _ageDefault.getFullYear()+'-'+_agePad(_ageDefault.getMonth()+1)+'-'+_agePad(_ageDefault.getDate());
         // Set default Jalali age inputs to ~25 years ago
         const [jy25,jm25,jd25] = todayJalali();
         document.getElementById('age-jy').value = jy25 - 25;
@@ -10595,64 +10878,90 @@
         var plotCon=document.getElementById('ls-eq-plot');
         if(!res)return; raw=raw.trim(); if(!raw){res.innerHTML='';if(plotCon)plotCon.innerHTML='';return;}
         if(typeof math==='undefined'){res.innerHTML='<div style="color:var(--m3-error);padding:8px">math.js بارگذاری نشده</div>';return;}
-        function _norm(s){return s.replace(/X/g,'x').replace(/π/g,'pi').replace(/([0-9])\s*([a-zA-Z(])/g,'$1*$2').replace(/\bln\s*\(/g,'log(').replace(/\bLn\s*\(/g,'log(');}
+        function _norm(s){return s.replace(/X/g,'x').replace(/π/g,'pi').replace(/\barcsin\s*\(/g,'asin(').replace(/\barccos\s*\(/g,'acos(').replace(/\barctan\s*\(/g,'atan(').replace(/\bln\s*\(/g,'log(').replace(/\bLn\s*\(/g,'log(').replace(/([0-9])\s*([a-zA-Z(])/g,'$1*$2');}
+        var _lsScope={x:1,e:Math.E,pi:Math.PI};
         var eqIdx=raw.indexOf('=');
         if(eqIdx<0){res.innerHTML='<div style="color:var(--m3-error);padding:8px;font-size:13px">باید علامت = داشته باشد. مثال: x^2+3x=10</div>';return;}
         var lhs=_norm(raw.slice(0,eqIdx)),rhs=_norm(raw.slice(eqIdx+1));
         var exprStr='('+lhs+')-('+rhs+')';
-        try{math.evaluate(exprStr,{x:1});}
+        try{math.evaluate(exprStr,_lsScope);}
         catch(err){res.innerHTML='<div style="color:var(--m3-error);padding:8px;font-size:13px">⚠️ خطای فرمول: '+err.message+'</div>';return;}
-        function evalF(xv){try{return +math.evaluate(exprStr,{x:xv});}catch(_){return NaN;}}
+        function evalF(xv){try{return +math.evaluate(exprStr,{x:xv,e:Math.E,pi:Math.PI});}catch(_){return NaN;}}
         var steps=[],html='';
         var isPolynomial=false,polyCoeffs=null,polyDeg=0;
         try{var rat=math.rationalize(exprStr,{},true);if(rat.coefficients&&rat.denominator&&rat.denominator.toString()==='1'){polyCoeffs=rat.coefficients;polyDeg=polyCoeffs.length-1;isPolynomial=true;}}catch(_){}
         if(isPolynomial&&polyDeg===1){
+          // math.js rationalize: coefficients[0]=constant, coefficients[1]=linear coeff
           var a=polyCoeffs[1],b2=polyCoeffs[0];
           steps.push('معادله خطی: <code>ax+b=0</code>');steps.push('a='+_lsFmt(a)+'، b='+_lsFmt(b2));
           if(Math.abs(a)<1e-10){html=_lsResultHtml([],steps,Math.abs(b2)<1e-10?'بی‌نهایت جواب':'بدون جواب');}
           else{var xSol=-b2/a;steps.push('x=−b/a='+_lsFmt(xSol));html=_lsResultHtml([{v:xSol,n:'x'}],steps);}
         }else if(isPolynomial&&polyDeg===2){
-          var c0=polyCoeffs[0],c1=polyCoeffs[1],c2=polyCoeffs[2];
+          // coefficients[0]=c, coefficients[1]=b, coefficients[2]=a  for ax²+bx+c
+          var cA=polyCoeffs[2],cB=polyCoeffs[1],cC=polyCoeffs[0];
           steps.push('معادله درجه دوم: <code>ax²+bx+c=0</code>');
-          steps.push('a='+_lsFmt(c2)+'، b='+_lsFmt(c1)+'، c='+_lsFmt(c0));
-          var disc=c1*c1-4*c2*c0;steps.push('Δ=b²−4ac='+_lsFmt(disc));
-          if(disc<-1e-9){var re=-c1/(2*c2),im=Math.sqrt(-disc)/(2*c2);steps.push('x₁='+_lsFmt(re)+'+'+_lsFmt(im)+'i');steps.push('x₂='+_lsFmt(re)+'−'+_lsFmt(im)+'i');html=_lsResultHtml([],steps,'جواب حقیقی ندارد');}
-          else if(Math.abs(disc)<=1e-9){var x12=-c1/(2*c2);steps.push('x='+_lsFmt(x12));html=_lsResultHtml([{v:x12,n:'x'}],steps);}
-          else{var sqD=Math.sqrt(disc),x1=(-c1+sqD)/(2*c2),x2=(-c1-sqD)/(2*c2);steps.push('x₁='+_lsFmt(x1)+'، x₂='+_lsFmt(x2));html=_lsResultHtml([{v:x1,n:'x₁'},{v:x2,n:'x₂'}],steps);}
+          steps.push('a='+_lsFmt(cA)+'، b='+_lsFmt(cB)+'، c='+_lsFmt(cC));
+          var disc=cB*cB-4*cA*cC;steps.push('Δ=b²−4ac='+_lsFmt(disc));
+          if(disc<-1e-9){var re=-cB/(2*cA),im=Math.sqrt(-disc)/(2*cA);steps.push('جواب مختلط: '+_lsFmt(re)+'±'+_lsFmt(im)+'i');html=_lsResultHtml([],steps,'جواب حقیقی ندارد');}
+          else if(Math.abs(disc)<=1e-9){var x12=-cB/(2*cA);steps.push('x='+_lsFmt(x12));html=_lsResultHtml([{v:x12,n:'x'}],steps);}
+          else{var sqD=Math.sqrt(disc),x1=(-cB+sqD)/(2*cA),x2=(-cB-sqD)/(2*cA);steps.push('x₁='+_lsFmt(x1)+'، x₂='+_lsFmt(x2));html=_lsResultHtml([{v:x1,n:'x₁'},{v:x2,n:'x₂'}],steps);}
         }else{
           var tag=isPolynomial?('درجه '+polyDeg):'غیرخطی/ترافرازنده';
           steps.push('معادله '+tag+' — bisection+Newton–Raphson با مشتق نمادین');
+          // Detect trig equation → restrict search to [-2π, 2π]
+          var isTrig=/\b(sin|cos|tan|asin|acos|atan|sinh|cosh|tanh)\s*\(/.test(exprStr);
+          var lo=-200,hi=200,nSteps=4000;
+          if(isTrig){lo=-2*Math.PI;hi=2*Math.PI;nSteps=2000;steps.push('معادله مثلثاتی — بازه جستجو [−2π, 2π]');}
           var derivStr=null;
           try{var dN=math.derivative(exprStr,'x');try{dN=math.simplify(dN);}catch(_){}derivStr=dN.toString();steps.push("f'(x)="+derivStr+' <small>(نمادین)</small>');}catch(_){steps.push('مشتق نمادین ناموفق — تفاضل مرکزی');}
-          function evalDeriv(xv){if(derivStr){try{return +math.evaluate(derivStr,{x:xv});}catch(_){}}return(evalF(xv+1e-7)-evalF(xv-1e-7))/2e-7;}
-          var roots=_lsNumericRoots(evalF,evalDeriv,-200,200,4000);
-          if(roots.length===0){steps.push('در بازه [−200,200] جوابی یافت نشد.');html=_lsResultHtml([],steps,'جوابی یافت نشد');}
-          else{roots.forEach(function(r,i){steps.push('x'+(roots.length>1?(i+1):'')+'≈'+_lsFmt(r)+'  [f(x)='+_lsFmt(evalF(r))+']');});html=_lsResultHtml(roots.map(function(r,i){return{v:r,n:'x'+(roots.length>1?(i+1):'')};}).filter(Boolean),steps);}
+          function evalDeriv(xv){if(derivStr){try{return +math.evaluate(derivStr,{x:xv,e:Math.E,pi:Math.PI});}catch(_){}}return(evalF(xv+1e-7)-evalF(xv-1e-7))/2e-7;}
+          var roots=_lsNumericRoots(evalF,evalDeriv,lo,hi,nSteps);
+          if(roots.length===0){steps.push('در بازه جستجو جوابی یافت نشد.');html=_lsResultHtml([],steps,'جوابی یافت نشد');}
+          else{
+            roots.forEach(function(r,i){steps.push('x'+(roots.length>1?(i+1):'')+'≈'+_lsFmt(r)+'  [f(x)='+_lsFmt(evalF(r))+']');});
+            html=_lsResultHtml(roots.map(function(r,i){
+              // Format trig solutions in terms of π
+              var label=isTrig?_fmtPi(r):_lsFmt(r);
+              return{v:r,n:'x'+(roots.length>1?(i+1):''),label:label};
+            }).filter(Boolean),steps,null,isTrig);
+          }
         }
         if(html)res.innerHTML=html;
         if(plotCon&&typeof functionPlot!=='undefined'){
           try{
-            functionPlot({target:plotCon,width:Math.max(280,(plotCon.offsetWidth||340)),height:220,grid:true,
-              xAxis:{domain:[-10,10]},tip:{xLine:true,yLine:true},
-              data:[
-                {fn:function(scope){var y=evalF(scope.x);return isFinite(y)?y:NaN;},color:'#2196f3',graphType:'polyline'},
-                {fn:function(){return 0;},color:'rgba(0,0,0,0.25)',graphType:'polyline'}
-              ]});
+            (function(){
+              var _dom=[-10,10],_N=600,_step=(_dom[1]-_dom[0])/_N;
+              var _pts=[],_prev=null;
+              for(var _i=0;_i<=_N;_i++){
+                var _x=_dom[0]+_i*_step,_y=evalF(_x);
+                if(!isFinite(_y)){_prev=null;_pts.push(null);continue;}
+                if(_prev!==null){var _j=Math.abs(_y-_prev),_dx=Math.abs(_x-(_dom[0]+(_i-1)*_step));if(_dx>0&&_j/_dx>1e4&&_j>1){_prev=_y;_pts.push(null);continue;}}
+                _prev=_y;_pts.push([_x,_y]);
+              }
+              var _data=[],_seg=[];
+              for(var _k=0;_k<_pts.length;_k++){if(_pts[_k]===null){if(_seg.length>1)_data.push({points:_seg.slice(),fnType:'points',graphType:'polyline',color:'#2196f3'});_seg=[];}else{_seg.push(_pts[_k]);}}
+              if(_seg.length>1)_data.push({points:_seg,fnType:'points',graphType:'polyline',color:'#2196f3'});
+              _data.push({points:[[-10,0],[10,0]],fnType:'points',graphType:'polyline',color:'rgba(0,0,0,0.25)'});
+              functionPlot({target:plotCon,width:Math.max(280,(plotCon.offsetWidth||340)),height:220,grid:true,
+                xAxis:{domain:_dom},tip:{xLine:true,yLine:true},data:_data});
+            })();
           }catch(pe){plotCon.innerHTML='';}
         }
       }
 
       function _lsFmt(v){if(!isFinite(v))return'∞';if(Math.abs(v)<1e-9)return'0';return parseFloat(v.toPrecision(8))+'';}
 
-      function _lsResultHtml(roots,steps,noSolMsg){
+      function _lsResultHtml(roots,steps,noSolMsg,isTrig){
         var stH='<details style="margin-bottom:10px"><summary style="cursor:pointer;font-size:13px;color:var(--m3-primary);font-weight:600;padding:4px 0">📋 مراحل حل</summary>'
           +'<div style="background:var(--m3-surface-container);border-radius:8px;padding:10px 12px;margin-top:6px">'
           +steps.map(function(s,i){return'<div style="padding:4px 0;font-size:12.5px;direction:rtl;border-bottom:1px solid var(--m3-outline-variant)">'+(i+1)+'. '+s+'</div>';}).join('')
           +'</div></details>';
         if(noSolMsg)return stH+'<div style="color:var(--m3-error);padding:8px 0;font-weight:600">'+noSolMsg+'</div>';
         return stH+'<div class="data-list">'+roots.map(function(r){
+          var display = r.label || _lsFmt(r.v);
+          var numeric = (r.label && r.label !== _lsFmt(r.v)) ? ' <small style="color:var(--m3-on-surface-variant)">(≈'+_lsFmt(r.v)+')</small>' : '';
           return'<div class="data-row"><span class="data-row__key">'+r.n+'</span>'
-            +'<span class="data-row__val" style="font-weight:700;color:var(--m3-primary);direction:ltr;font-family:monospace">'+_lsFmt(r.v)+'</span></div>';
+            +'<span class="data-row__val" style="font-weight:700;color:var(--m3-primary);direction:ltr;font-family:monospace">'+display+numeric+'</span></div>';
         }).join('')+'</div>';
       }
 
@@ -10687,7 +10996,7 @@
             steps.push('دستگاه ۲ مجهولی');steps.push(_lsFmt(a1)+'x+'+_lsFmt(b1)+'y='+_lsFmt(c1));steps.push(_lsFmt(a2)+'x+'+_lsFmt(b2)+'y='+_lsFmt(c2));
             var sol;
             if(typeof math!=='undefined'){
-              try{var lr=math.lusolve([[a1,b1],[a2,b2]],[c1,c2]);sol=[+lr[0],+lr[1]];steps.push('حل با LU decomposition (math.js)');}
+              try{var lr=math.lusolve([[a1,b1],[a2,b2]],[c1,c2]);sol=[+lr[0][0],+lr[1][0]];steps.push('حل با LU decomposition (math.js)');}
               catch(luErr){steps.push('D=0 → منفرد');res.innerHTML=_lsResultHtml([],steps,'دستگاه منفرد یا وابسته');return;}
             }else{var Dc=a1*b2-a2*b1;if(Math.abs(Dc)<1e-10){res.innerHTML='<div style="color:var(--m3-error);padding:8px">D=0</div>';return;}sol=[(c1*b2-c2*b1)/Dc,(a1*c2-a2*c1)/Dc];}
             steps.push('x='+_lsFmt(sol[0])+'، y='+_lsFmt(sol[1]));
@@ -10703,7 +11012,7 @@
             if(typeof math!=='undefined'){
               try{
                 var A3=[[a1b,b1b,c1b],[a2b,b2b,c2b],[a3,b3,c3]];
-                var lu3=math.lusolve(A3,[d1,d2,d3]);sol3=[+lu3[0],+lu3[1],+lu3[2]];
+                var lu3=math.lusolve(A3,[d1,d2,d3]);sol3=[+lu3[0][0],+lu3[1][0],+lu3[2][0]];
                 steps.push('حل با LU decomposition (math.js)');
                 try{steps.push('دترمینان='+_lsFmt(math.det(A3)));}catch(_){}
               }catch(luErr){res.innerHTML=_lsResultHtml([],steps,'دستگاه منفرد (D=0)');return;}
@@ -11867,7 +12176,7 @@
       //  CALCULUS — Derivative, Integral, Limit, Graph
       // ══════════════════════════════════════════════════════
       function calcSetTab(tab) {
-        ['deriv','integ','limit','graph'].forEach(function(t) {
+        ['deriv','integ','indef','limit','graph'].forEach(function(t) {
           var w = document.getElementById('calc-'+t+'-wrap');
           var b = document.getElementById('calc-tab-'+t);
           if (w) w.style.display = t===tab ? '' : 'none';
@@ -11881,20 +12190,35 @@
           setTimeout(function(){ _cgDrawPlot(); }, 80);
         }
         if (tab==='deriv') calcDerivUpdate();
+        if (tab==='indef') calcIndefinite();
       }
       // ── Normalise for math.js: ^ stays as ^, implicit mul 2x→2*x ─
       function _calcNorm(expr) {
         return expr
           .replace(/X/g,'x').replace(/π/g,'pi').replace(/\bPI\b/g,'pi')
+          // e must NOT be replaced globally — only standalone 'e' (Euler's number)
+          // We pass e in scope instead; just normalise arcXX forms:
+          .replace(/\barcsin\s*\(/g,'asin(').replace(/\barccos\s*\(/g,'acos(').replace(/\barctan\s*\(/g,'atan(')
+          .replace(/\bln\s*\(/g,'log(').replace(/\bLn\s*\(/g,'log(')
+          // x^(1/3) → cbrt(x) handled at eval time via scope
           .replace(/([0-9])\s*([a-zA-Z(])/g,'$1*$2')
-          .replace(/\bln\s*\(/g,'log(').replace(/\bLn\s*\(/g,'log(');
+          .replace(/\)\s*([a-zA-Z(])/g,')*$1');
       }
-      // ── Safe eval via math.js ──────────────────────────────────
+      // ── Safe eval via math.js with full scope (e, pi, inverse trig) ──
       function _calcEval(expr, x) {
         try {
-          if (typeof math !== 'undefined')
-            return +math.evaluate(_calcNorm(expr), {x: x});
-          return NaN;
+          if (typeof math === 'undefined') return NaN;
+          const scope = {
+            x: x,
+            pi: Math.PI, e: Math.E,
+            // cbrt that handles negative reals
+            cbrt: v => Math.sign(v) * Math.pow(Math.abs(v), 1/3),
+            // asin/acos/atan already in math.js but ensure they work
+          };
+          const norm = _calcNorm(expr);
+          const result = math.evaluate(norm, scope);
+          const n = typeof result === 'object' && result.toNumber ? result.toNumber() : +result;
+          return n;
         } catch(_) { return NaN; }
       }
       var _calcDerivPlotInst = null;
@@ -11941,23 +12265,25 @@
             try {
               var dW=Math.max(280,(pCon.offsetWidth||340));
               var fnClosure=fn, dClosure=derivStr;
-              var datumList=[{
-                fn: function(scope){var y=_calcEval(fnClosure,scope.x);return isFinite(y)?y:NaN;},
-                color:'#2196f3', graphType:'polyline'
-              }];
-              if (derivStr) {
-                datumList.push({
-                  fn: function(scope){var y=_calcEval(fnClosure,scope.x);return isFinite(y)?y:NaN;},
-                  color:'#2196f3', graphType:'polyline',
-                  derivative:{
-                    fn: function(scope){var v=_calcEval(dClosure,scope.x);return isFinite(v)?v:NaN;},
-                    updateOnMouseMove:true
-                  }
-                });
-                datumList.push({points:[[xv,_calcEval(fn,xv)]],fnType:'points',graphType:'scatter',color:'#e91e63'});
-              }
+              var _dom2=[xv-4,xv+4],_N2=600,_st2=(_dom2[1]-_dom2[0])/_N2;
+              var _datumList=[];
+              // Sample f(x)
+              (function(){
+                var _pts=[],_prev=null;
+                for(var _i=0;_i<=_N2;_i++){
+                  var _x=_dom2[0]+_i*_st2,_y=_calcEval(fnClosure,_x);
+                  if(!isFinite(_y)){_prev=null;_pts.push(null);continue;}
+                  if(_prev!==null){var _jmp=Math.abs(_y-_prev),_dx=_st2;if(_dx>0&&_jmp/_dx>1e4&&_jmp>1){_prev=_y;_pts.push(null);continue;}}
+                  _prev=_y;_pts.push([_x,_y]);
+                }
+                var _seg=[];
+                for(var _k=0;_k<_pts.length;_k++){if(_pts[_k]===null){if(_seg.length>1)_datumList.push({points:_seg.slice(),fnType:'points',graphType:'polyline',color:'#2196f3'});_seg=[];}else{_seg.push(_pts[_k]);}}
+                if(_seg.length>1)_datumList.push({points:_seg,fnType:'points',graphType:'polyline',color:'#2196f3'});
+              })();
+              // Tangent point
+              _datumList.push({points:[[xv,_calcEval(fn,xv)]],fnType:'points',graphType:'scatter',color:'#e91e63'});
               _calcDerivPlotInst=functionPlot({target:pCon,width:dW,height:240,grid:true,
-                xAxis:{domain:[xv-4,xv+4]},tip:{xLine:true,yLine:true},data:datumList});
+                xAxis:{domain:_dom2},tip:{xLine:true,yLine:true},data:_datumList});
             } catch(pe){pCon.innerHTML='<div style="padding:10px;font-size:12px;color:var(--m3-error)">نمودار: '+pe.message+'</div>';}
           }
         } catch(e){res.innerHTML='<div style="color:var(--m3-error);padding:8px;font-size:13px">خطا: '+e.message+'</div>';}
@@ -11986,19 +12312,110 @@
             try {
               var dW=Math.max(280,(pCon.offsetWidth||340)), pad=(b-a)*0.4;
               var fnC=fn, aC=a, bC=b;
-              functionPlot({target:pCon,width:dW,height:240,grid:true,
-                xAxis:{domain:[a-pad,b+pad]},tip:{xLine:true,yLine:true},
-                data:[
-                  {fn:function(scope){var y=_calcEval(fnC,scope.x);return isFinite(y)?y:NaN;},
-                   range:[aC,bC],closed:true,color:'#4caf50',graphType:'polyline'},
-                  {fn:function(scope){var y=_calcEval(fnC,scope.x);return isFinite(y)?y:NaN;},
-                   color:'#2196f3',graphType:'polyline'}
-                ]});
+              (function(){
+                var _domI=[a-pad,b+pad],_NI=600,_stI=(_domI[1]-_domI[0])/_NI;
+                var _ptsI=[],_prevI=null;
+                for(var _i=0;_i<=_NI;_i++){
+                  var _x=_domI[0]+_i*_stI,_y=_calcEval(fnC,_x);
+                  if(!isFinite(_y)){_prevI=null;_ptsI.push(null);continue;}
+                  if(_prevI!==null){var _jmp=Math.abs(_y-_prevI),_dx=_stI;if(_dx>0&&_jmp/_dx>1e4&&_jmp>1){_prevI=_y;_ptsI.push(null);continue;}}
+                  _prevI=_y;_ptsI.push([_x,_y]);
+                }
+                var _dataI=[],_segI=[];
+                for(var _k=0;_k<_ptsI.length;_k++){if(_ptsI[_k]===null){if(_segI.length>1)_dataI.push({points:_segI.slice(),fnType:'points',graphType:'polyline',color:'#2196f3'});_segI=[];}else{_segI.push(_ptsI[_k]);}}
+                if(_segI.length>1)_dataI.push({points:_segI,fnType:'points',graphType:'polyline',color:'#2196f3'});
+                // Shaded region: sample only within [a,b]
+                var _ptsS=[],_prevS=null,_NS=300,_stS=(bC-aC)/_NS;
+                for(var _i=0;_i<=_NS;_i++){var _x=aC+_i*_stS,_y=_calcEval(fnC,_x);_prevS=_y;if(isFinite(_y))_ptsS.push([_x,_y]);}
+                if(_ptsS.length>1)_dataI.push({points:_ptsS,fnType:'points',graphType:'polyline',color:'#4caf50',closed:true});
+                functionPlot({target:pCon,width:dW,height:240,grid:true,
+                  xAxis:{domain:_domI},tip:{xLine:true,yLine:true},data:_dataI});
+              })();
             } catch(pe){pCon.innerHTML='<div style="padding:10px;font-size:12px;color:var(--m3-error)">نمودار: '+pe.message+'</div>';}
           }
         } catch(e){res.innerHTML='<div style="color:var(--m3-error);padding:8px;font-size:13px">خطا: '+e.message+'</div>';}
       }
+      function calcIndefinite() {
+        var fn  = ((document.getElementById('calc-indef-fn')||{}).value||'').trim();
+        var res = document.getElementById('calc-indef-res');
+        if (!res) return;
+        if (!fn) { res.innerHTML = ''; return; }
+        if (typeof math === 'undefined') {
+          res.innerHTML = '<div style="color:var(--m3-error);padding:8px">math.js بارگذاری نشده</div>';
+          return;
+        }
+        try {
+          var norm = _calcNorm(fn);
+          // Known antiderivatives table
+          var table = [
+            [/^x$/, 'x^2/2'],
+            [/^(\d+(?:\.\d+)?)$/, function(m){ return m[1]+'*x'; }],
+            [/^x\^2$/, 'x^3/3'],
+            [/^x\^3$/, 'x^4/4'],
+            [/^x\^(\d+(?:\.\d+)?)$/, function(m){ var n=parseFloat(m[1]); return 'x^'+(n+1)+'/'+(n+1); }],
+            [/^(\d+(?:\.\d+)?)\*x$/, function(m){ return m[1]+'*x^2/2'; }],
+            [/^sin\(x\)$/, '-cos(x)'],
+            [/^cos\(x\)$/, 'sin(x)'],
+            [/^tan\(x\)$/, '-log(cos(x))'],
+            [/^exp\(x\)$/, 'exp(x)'],
+            [/^e\^x$/, 'exp(x)'],
+            [/^log\(x\)$/, 'x*log(x)-x'],
+            [/^log\(abs\(x\)\)$/, 'x*log(abs(x))-x'],
+            [/^1\/x$/, 'log(abs(x))'],
+            [/^sqrt\(x\)$/, '(2/3)*x^(3/2)'],
+            [/^1\/sqrt\(x\)$/, '2*sqrt(x)'],
+            [/^1\/\(x\^2\)$/, '-1/x'],
+            [/^asin\(x\)$/, 'x*asin(x)+sqrt(1-x^2)'],
+            [/^acos\(x\)$/, 'x*acos(x)-sqrt(1-x^2)'],
+            [/^atan\(x\)$/, 'x*atan(x)-(1/2)*log(1+x^2)'],
+            [/^sinh\(x\)$/, 'cosh(x)'],
+            [/^cosh\(x\)$/, 'sinh(x)'],
+          ];
+          var antiderivStr = null;
+          for (var i = 0; i < table.length; i++) {
+            var m = norm.match(table[i][0]);
+            if (m) {
+              antiderivStr = typeof table[i][1] === 'function' ? table[i][1](m) : table[i][1];
+              break;
+            }
+          }
+          if (!antiderivStr) {
+            // Try symbolic derivative of a guess via math.js (limited CAS)
+            res.innerHTML = '<div style="background:var(--m3-surface-container);border-radius:10px;padding:12px 14px">'
+              + '<div style="font-weight:600;margin-bottom:6px;direction:ltr;font-family:monospace">&#x222B; ' + fn + ' dx</div>'
+              + '<div style="color:var(--m3-on-surface-variant);font-size:13px;margin-bottom:10px">پادمشتق نمادین برای این ترکیب به صورت خودکار در دسترس نیست. از تب «انتگرال معین» برای مقدار عددی استفاده کنید.</div>'
+              + '<div style="font-size:12px;direction:ltr;background:var(--m3-surface-container-highest);border-radius:8px;padding:10px;line-height:2">'
+              + '<strong>جدول سریع:</strong><br>'
+              + '&#x222B; x&#x207F; dx = x&#x207F;&#x207A;&#xB9;/(n+1) + C &nbsp;|&nbsp; &#x222B; sin(x) dx = &minus;cos(x) + C<br>'
+              + '&#x222B; cos(x) dx = sin(x) + C &nbsp;|&nbsp; &#x222B; e&#x02E3; dx = e&#x02E3; + C<br>'
+              + '&#x222B; 1/x dx = ln|x| + C &nbsp;|&nbsp; &#x222B; ln(x) dx = x&middot;ln(x)&minus;x + C</div></div>';
+            return;
+          }
+          // Verify by differentiating the antiderivative
+          var verifyOk = false;
+          try {
+            var dNode = math.derivative(_calcNorm(antiderivStr), 'x');
+            try { dNode = math.simplify(dNode); } catch(_) {}
+            var dStr = dNode.toString();
+            var d1 = _calcEval(dStr, 1), f1 = _calcEval(fn, 1);
+            var d2 = _calcEval(dStr, 2), f2 = _calcEval(fn, 2);
+            verifyOk = isFinite(d1) && isFinite(f1) && Math.abs(d1 - f1) < 1e-5
+                    && isFinite(d2) && isFinite(f2) && Math.abs(d2 - f2) < 1e-5;
+          } catch(_) {}
+          res.innerHTML = '<div class="data-list">'
+            + '<div class="data-row"><span class="data-row__key" style="direction:ltr;font-family:monospace">f(x)</span>'
+            + '<span class="data-row__val" style="direction:ltr;font-family:monospace">' + fn + '</span></div>'
+            + '<div class="data-row"><span class="data-row__key" style="direction:ltr;font-family:monospace">F(x) = &#x222B;f dx</span>'
+            + '<span class="data-row__val" style="font-weight:700;color:var(--m3-primary);direction:ltr;font-family:monospace">'
+            + antiderivStr + ' + C'
+            + (verifyOk ? ' <small style="color:#4caf50">&#x2713; تأیید شد</small>' : '') + '</span></div></div>';
+        } catch(e) {
+          res.innerHTML = '<div style="color:var(--m3-error);padding:8px;font-size:13px">خطا: ' + e.message + '</div>';
+        }
+      }
+
       function calcLimit() {
+
         var fn    = (document.getElementById('calc-lfn')||{}).value||'';
         var x0raw = ((document.getElementById('calc-lx')||{}).value||'0').trim();
         var res   = document.getElementById('calc-limit-res');
@@ -12007,32 +12424,85 @@
         if (x0l==='inf'||x0l==='+inf'||x0l==='∞'||x0l==='+∞'||x0l==='infinity') x0=Infinity;
         else if (x0l==='-inf'||x0l==='-∞'||x0l==='-infinity') x0=-Infinity;
         else x0=parseFloat(x0raw);
-        if (isNaN(x0)){res.innerHTML='<div style="color:var(--m3-error);padding:8px">مقدار x نامعتبر — برای بی‌نهایت: Inf یا -Inf</div>';return;}
+        if (isNaN(x0)){res.innerHTML='<div style="color:var(--m3-error);padding:8px">مقدار x نامعتبر — برای بی‌نهایت: inf یا -inf</div>';return;}
+
+        // Check for 1^inf indeterminate form
+        function _isOneToInf() {
+          if (!isFinite(x0)) {
+            var fv=_calcEval(fn, x0>0?1e6:-1e6);
+            return Math.abs(fv-1)<1e-9;
+          }
+          var fv=_calcEval(fn, x0);
+          return Math.abs(fv-1)<1e-9;
+        }
+
         var steps=[],left,right,limitVal,converges;
         try {
           steps.push('f(x) = '+fn);
           steps.push('x → '+(isFinite(x0)?x0:(x0>0?'+∞':'−∞')));
+
+          // Helper: format a value as ±∞ or number
+          var fmtV=function(v){
+            if (v===undefined||v===null) return '؟';
+            if (!isFinite(v)&&v>0) return '+∞';
+            if (!isFinite(v)&&v<0) return '−∞';
+            if (isNaN(v)) return 'تعریف نشده';
+            return +v.toFixed(8)+'';
+          };
+
           if (!isFinite(x0)) {
             var sg=x0>0?1:-1;
-            var v1=_calcEval(fn,sg*1e4),v2=_calcEval(fn,sg*1e7),v3=_calcEval(fn,sg*1e10);
-            limitVal=v3;
-            converges=isFinite(v1)&&isFinite(v2)&&isFinite(v3)
-              &&(Math.abs(v2-v1)<1e-6||Math.abs(v3-v2)<Math.abs(v2-v1)*0.1+1e-9);
-            steps.push('f('+(sg>0?'+':'−')+'10⁴) = '+(isFinite(v1)?+v1.toFixed(6):'∞'));
-            steps.push('f('+(sg>0?'+':'−')+'10⁷) = '+(isFinite(v2)?+v2.toFixed(6):'∞'));
-            steps.push('f('+(sg>0?'+':'−')+'10¹⁰) = '+(isFinite(v3)?+v3.toFixed(6):'∞'));
+            var v1=_calcEval(fn,sg*1e4), v2=_calcEval(fn,sg*1e7), v3=_calcEval(fn,sg*1e12);
+            // Detect true infinity: values grow without bound
+            if (!isFinite(v3)) {
+              limitVal = v3;
+              converges = true;
+            } else if (Math.abs(v3) > 1e10) {
+              limitVal = v3 > 0 ? Infinity : -Infinity;
+              converges = true;
+            } else {
+              limitVal = v3;
+              converges = isFinite(v1)&&isFinite(v2)&&isFinite(v3)
+                &&(Math.abs(v2-v1)<1e-4||Math.abs(v3-v2)<Math.abs(v2-v1)*0.1+1e-7);
+            }
+            steps.push('f('+(sg>0?'+':'−')+'10⁴) = '+fmtV(v1));
+            steps.push('f('+(sg>0?'+':'−')+'10⁷) = '+fmtV(v2));
+            steps.push('f('+(sg>0?'+':'−')+'10¹²) = '+fmtV(v3));
           } else {
-            var eps=1e-6;
+            // Use very tight epsilon
+            var eps=1e-9;
             left=_calcEval(fn,x0-eps); right=_calcEval(fn,x0+eps);
-            var lc=_calcEval(fn,x0-1e-10), rc=_calcEval(fn,x0+1e-10);
-            converges=Math.abs(left-right)<1e-4&&isFinite(left)&&isFinite(right)
-              &&Math.abs(lc-rc)<1e-4&&isFinite(lc)&&isFinite(rc);
-            limitVal=(left+right)/2;
-            steps.push('حد چپ  f('+x0+'−ε) = '+(isFinite(left)?+left.toFixed(8):'∞'));
-            steps.push('حد راست f('+x0+'+ε) = '+(isFinite(right)?+right.toFixed(8):'∞'));
+            var lc=_calcEval(fn,x0-1e-11), rc=_calcEval(fn,x0+1e-11);
+
+            // Detect one-sided infinity
+            var leftInf  = !isFinite(left)  && isFinite(_calcEval(fn,x0-1e-4));
+            var rightInf = !isFinite(right) && isFinite(_calcEval(fn,x0+1e-4));
+
+            if (!isFinite(left) && !isFinite(right)) {
+              // Both sides diverge — check sign
+              if (Math.sign(left)===Math.sign(right)) { limitVal=left; converges=true; }
+              else { converges=false; }
+            } else if (!isFinite(left)||!isFinite(right)) {
+              converges = false;
+            } else {
+              converges = Math.abs(left-right) < 1e-5 && Math.abs(lc-rc) < 1e-5;
+              limitVal = (left+right)/2;
+              // Detect divergence to infinity (value very large)
+              if (Math.abs(limitVal) > 1e8) { limitVal = limitVal > 0 ? Infinity : -Infinity; converges = true; }
+            }
+
+            steps.push('ε = 1e-9');
+            steps.push('حد چپ  f(x₀−ε) = '+fmtV(left));
+            steps.push('حد راست f(x₀+ε) = '+fmtV(right));
             steps.push(converges?'حد دوطرفه برابر ✓':'حد دوطرفه نامساوی ✗');
           }
-          var fmtV=function(v){return !isFinite(v)&&v>0?'+∞':!isFinite(v)&&v<0?'−∞':isNaN(v)?'تعریف نشده':(+v.toFixed(8))+'';};
+
+          // 1^∞ indeterminate check
+          if (converges && isFinite(limitVal) && Math.abs(limitVal-1)<1e-6) {
+            // Could be a genuine 1^∞ form — note it
+            steps.push('نکته: احتمال شکل نامعین ۱^∞ — بررسی تحلیلی لازم است');
+          }
+
           var x0lbl=!isFinite(x0)?(x0>0?'+∞':'−∞'):x0raw;
           var sh='<details style="margin-bottom:8px"><summary style="cursor:pointer;font-size:13px;color:var(--m3-primary);font-weight:600">📋 مراحل</summary>'
             +'<div style="background:var(--m3-surface-container);border-radius:8px;padding:10px;margin-top:6px;direction:ltr">'
@@ -12041,7 +12511,8 @@
             +(isFinite(x0)?'<div class="data-row"><span class="data-row__key">حد از چپ</span><span class="data-row__val" style="direction:ltr">'+fmtV(left)+'</span></div>'
               +'<div class="data-row"><span class="data-row__key">حد از راست</span><span class="data-row__val" style="direction:ltr">'+fmtV(right)+'</span></div>':'')
             +'<div class="data-row"><span class="data-row__key">lim f(x) → '+x0lbl+'</span>'
-            +'<span class="data-row__val" style="font-weight:700;color:'+(converges?'var(--m3-primary)':'var(--m3-error)')+';direction:ltr">'+(converges?fmtV(limitVal):'وجود ندارد')+'</span></div></div>';
+            +'<span class="data-row__val" style="font-weight:700;color:'+(converges?'var(--m3-primary)':'var(--m3-error)')+';direction:ltr">'
+            +(converges?fmtV(limitVal):'وجود ندارد')+'</span></div></div>';
         } catch(e){res.innerHTML='<div style="color:var(--m3-error);padding:8px;font-size:13px">خطا: '+e.message+'</div>';}
       }
 
@@ -12108,27 +12579,33 @@
           var sp=document.getElementById('calc-special-pts');if(sp)sp.innerHTML='';
           return;
         }
-        // Use JS function callbacks — math.js evaluates, avoids all string-parser bugs
-        var data=fns.map(function(f){
-          var expr=f.expr, derivExpr=null;
-          if(typeof math!=='undefined'){
-            try{
-              var dNode=math.derivative(_calcNorm(expr),'x');
-              try{dNode=math.simplify(dNode);}catch(_){}
-              derivExpr=dNode.toString();
-            }catch(_){}
+        // Sample points via _calcEval (math.js) and pass as fnType:'points' polylines.
+        // This avoids function-plot's own parser entirely, so exp(x), e^x, arcsin etc. all work.
+        var data=[];
+        fns.forEach(function(f){
+          var expr=f.expr;
+          var N=600;
+          var step=(_cgXb-_cgXa)/N;
+          var pts=[];
+          var prevY=null,prevX=null;
+          for(var i=0;i<=N;i++){
+            var xv=_cgXa+i*step;
+            var yv=_calcEval(expr,xv);
+            if(!isFinite(yv)){prevY=null;prevX=null;pts.push(null);continue;}
+            if(prevX!==null&&prevY!==null){
+              var jump=Math.abs(yv-prevY),dx=Math.abs(xv-prevX);
+              if(dx>0&&jump/dx>1e4&&jump>1){prevY=yv;prevX=xv;pts.push(null);continue;}
+            }
+            prevY=yv;prevX=xv;
+            pts.push([xv,yv]);
           }
-          var datum={
-            fn:(function(e){return function(scope){var y=_calcEval(e,scope.x);return isFinite(y)?y:NaN;};})(expr),
-            color:f.color, graphType:'polyline'
-          };
-          if(derivExpr){
-            datum.derivative={
-              fn:(function(d){return function(scope){var v=_calcEval(d,scope.x);return isFinite(v)?v:NaN;};})(derivExpr),
-              updateOnMouseMove:true
-            };
+          // Split at nulls into separate polyline segments
+          var seg=[];
+          for(var j=0;j<pts.length;j++){
+            if(pts[j]===null){if(seg.length>1)data.push({points:seg.slice(),fnType:'points',graphType:'polyline',color:f.color});seg=[];}
+            else{seg.push(pts[j]);}
           }
-          return datum;
+          if(seg.length>1)data.push({points:seg,fnType:'points',graphType:'polyline',color:f.color});
         });
         try{
           if(typeof functionPlot==='undefined')throw new Error('function-plot.js بارگذاری نشده');
@@ -12136,7 +12613,9 @@
             height:300,grid:true,xAxis:{domain:[_cgXa,_cgXb]},data:data,tip:{xLine:true,yLine:true}});
           _cgFpInstance.on('all:zoom',function(){
             try{var d=_cgFpInstance.meta.xScale.domain();_cgXa=d[0];_cgXb=d[1];
-              if(xaEl)xaEl.value=+_cgXa.toPrecision(5);if(xbEl)xbEl.value=+_cgXb.toPrecision(5);}catch(e2){}
+              if(xaEl)xaEl.value=+_cgXa.toPrecision(5);if(xbEl)xbEl.value=+_cgXb.toPrecision(5);
+              // Redraw with new domain so sample points stay dense
+              setTimeout(_cgDrawPlot,50);}catch(e2){}
           });
           _cgShowSpecialPts(fns);
         }catch(err){container.innerHTML='<div style="padding:14px;color:var(--m3-error);font-size:13px">خطا: '+err.message+'</div>';}
@@ -12229,12 +12708,15 @@
           if (ev.data.ok) {
             EMOTCN_DATA = ev.data.items;
             _emotcnLoaded = true;
-            console.log('Emoticons loaded via worker:', EMOTCN_DATA.length);
             // Re-trigger whatever filter/search was pending
             const cat = document.getElementById('etcn-cat');
             const q   = document.getElementById('etcn-search');
-            if (cat && !cat.value.startsWith('kj_')) {
-              _emotcnApplyFilter(q ? q.value : '', cat ? cat.value : '');
+            const catVal = cat ? cat.value : '';
+            const qVal   = q   ? q.value.trim() : '';
+            // Only re-render if the current category actually needs JSON
+            // (built-in categories are already shown, skip re-render unless it was a kj_ spinner)
+            if (catVal.startsWith('kj_') || (catVal && !_EMOTCN_BUILTIN[catVal])) {
+              _emotcnApplyFilter(qVal, catVal);
             }
           } else {
             console.error('Worker failed:', ev.data.error);
@@ -12272,13 +12754,123 @@
         }
       }
 
+      // Built-in small dataset for the named categories (western/kaomoji/animals/etc.)
+      // These are shown instantly without loading the 62k JSON
+      const _EMOTCN_BUILTIN = {
+        western: [
+          {e:':-)',n:'happy smile western',c:'western'},{e:':)',n:'smile happy',c:'western'},{e:':-D',n:'big grin laugh',c:'western'},{e:':D',n:'grin laugh',c:'western'},
+          {e:';-)',n:'wink',c:'western'},{e:';)',n:'wink',c:'western'},{e:':-P',n:'tongue playful',c:'western'},{e:':P',n:'tongue',c:'western'},
+          {e:':-(',n:'sad unhappy frown',c:'western'},{e:':(',n:'sad frown',c:'western'},{e:":'(",n:'crying sad tear',c:'western'},{e:':-|',n:'neutral expressionless',c:'western'},
+          {e:':-/',n:'skeptical confused',c:'western'},{e:':-O',n:'surprised shocked',c:'western'},{e:':O',n:'surprised',c:'western'},
+          {e:'B-)',n:'cool sunglasses',c:'western'},{e:':-*',n:'kiss',c:'western'},{e:':*',n:'kiss',c:'western'},
+          {e:'O:-)',n:'angel innocent',c:'western'},{e:'>:-)',n:'evil devil',c:'western'},{e:':-X',n:'sealed lips quiet',c:'western'},
+          {e:':-#',n:'braces mouth',c:'western'},{e:'8-)',n:'glasses cool',c:'western'},{e:'<3',n:'heart love',c:'western'},
+          {e:'</3',n:'broken heart sad',c:'western'},{e:'XD',n:'laughing hard',c:'western'},{e:'xD',n:'laughing',c:'western'},
+          {e:'>_<',n:'frustrated annoyed',c:'western'},{e:'^_^',n:'happy pleased',c:'western'},{e:'^.^',n:'happy cute',c:'western'},
+          {e:'-_-',n:'unamused tired',c:'western'},{e:'o_O',n:'confused surprised',c:'western'},{e:'O_o',n:'confused',c:'western'},
+          {e:'._.',n:'nervous awkward',c:'western'},{e:'o_o',n:'stare blank',c:'western'},{e:'=_=',n:'sleepy tired',c:'western'},
+          {e:':3',n:'cute cat',c:'western'},{e:'>.<',n:'frustrated',c:'western'},{e:':>',n:'smug',c:'western'},
+          {e:'(Y)',n:'thumbs up like',c:'western'},{e:'(N)',n:'thumbs down dislike',c:'western'}
+        ],
+        kaomoji: [
+          {e:'(^_^)',n:'happy smile kaomoji',c:'kaomoji'},{e:'(＾▽＾)',n:'happy big smile',c:'kaomoji'},{e:'(*^▽^*)',n:'happy excited',c:'kaomoji'},
+          {e:'(≧◡≦)',n:'happy cute',c:'kaomoji'},{e:'(◕‿◕)',n:'cute happy',c:'kaomoji'},{e:'(✿◠‿◠)',n:'flower cute happy',c:'kaomoji'},
+          {e:'(｡◕‿◕｡)',n:'cute adorable',c:'kaomoji'},{e:'(^ω^)',n:'happy cute omega',c:'kaomoji'},{e:'(＾ω＾)',n:'happy omega wide',c:'kaomoji'},
+          {e:'(´▽`)',n:'happy relieved',c:'kaomoji'},{e:'(⌒‿⌒)',n:'happy content',c:'kaomoji'},{e:'(o^▽^o)',n:'overjoyed',c:'kaomoji'},
+          {e:'(ง •̀_•́)ง',n:'determined fight',c:'kaomoji'},{e:'(╯°□°）╯︵ ┻━┻',n:'flip table angry',c:'kaomoji'},
+          {e:'┬─┬ノ( º _ ºノ)',n:'put table back calm',c:'kaomoji'},{e:'¯\\_(ツ)_/¯',n:'shrug dunno',c:'kaomoji'},
+          {e:'(T_T)',n:'crying sad',c:'kaomoji'},{e:'(;_;)',n:'crying sad tears',c:'kaomoji'},{e:'(TдT)',n:'crying upset',c:'kaomoji'},
+          {e:'(>_<)',n:'frustrated annoyed',c:'kaomoji'},{e:'(・_・)',n:'confused thinking',c:'kaomoji'},{e:'(°ロ°)',n:'shocked surprised',c:'kaomoji'},
+          {e:'(⊙_⊙)',n:'staring wide eyes',c:'kaomoji'},{e:'(￣▽￣)',n:'smug satisfied',c:'kaomoji'},{e:'(◣_◢)',n:'evil menacing',c:'kaomoji'},
+          {e:'(´-ω-`)',n:'tired sad',c:'kaomoji'},{e:'(－‸ლ)',n:'facepalm',c:'kaomoji'},{e:'(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧',n:'excited sparkle',c:'kaomoji'},
+          {e:'(づ｡◕‿‿◕｡)づ',n:'hug arms outstretched',c:'kaomoji'},{e:'(ʘ‿ʘ)',n:'pleased smug',c:'kaomoji'}
+        ],
+        animals: [
+          {e:'(=^･ω･^=)',n:'cat happy purr',c:'animals'},{e:'(=^･ｪ･^=)',n:'cat cute',c:'animals'},{e:'(^･o･^)ﾉ"',n:'cat greeting',c:'animals'},
+          {e:'ฅ^•ﻌ•^ฅ',n:'cat paws cute',c:'animals'},{e:'≽^•⩊•^≼',n:'cat paws small',c:'animals'},{e:'(ΦωΦ)',n:'cat omega',c:'animals'},
+          {e:'(U ᵕ U❁)',n:'bunny rabbit cute',c:'animals'},{e:'(/)_(\\)',n:'bunny ears',c:'animals'},{e:'ʕ•ᴥ•ʔ',n:'bear cute koala',c:'animals'},
+          {e:'ʕ •́؈•̀ ʔ',n:'bear sad',c:'animals'},{e:'ʕっ•ᴥ•ʔっ',n:'bear hug',c:'animals'},{e:'ʕ￫ᴥ￩ʔ',n:'bear looking',c:'animals'},
+          {e:'(◕‿◕✿)',n:'dog puppy flower',c:'animals'},{e:'(ᵔᴥᵔ)',n:'dog happy',c:'animals'},{e:'V●ᴥ●V',n:'dog woof',c:'animals'},
+          {e:'(>^_^)>',n:'penguin waddling',c:'animals'},{e:'<(^.^<)',n:'penguin kirby',c:'animals'},{e:'<(^_^)>',n:'penguin kirby dance',c:'animals'},
+          {e:'/╲/\\╭( ͡° ͡° ͜ʖ ͡° ͡°)╮/\\╱\\',n:'spider creepy',c:'animals'},{e:'(°□°）( ͡° ͜ʖ ͡°)',n:'bird',c:'animals'},
+          {e:'v(=∩_∩=)フ',n:'rabbit wave',c:'animals'},{e:'(=①ω①=)',n:'cat circle eyes',c:'animals'}
+        ],
+        actions: [
+          {e:'\\o/',n:'cheer hooray',c:'actions'},{e:'\\m/',n:'rock horns',c:'actions'},{e:'(ง •̀_•́)ง',n:'fight determined',c:'actions'},
+          {e:'(ᕗ ͠° ਊ ͠° )ᕗ',n:'fight flex',c:'actions'},{e:'ᕙ(⇀‸↼‶)ᕗ',n:'flex strong',c:'actions'},{e:'(っ＾▿＾)っ',n:'hug open arms',c:'actions'},
+          {e:'(づ￣ ³￣)づ',n:'hug',c:'actions'},{e:'(っ◕‿◕)っ',n:'hug cute',c:'actions'},{e:'(¬‿¬)',n:'smug sneaky',c:'actions'},
+          {e:'(｀∀´)Ψ',n:'evil laugh sinister',c:'actions'},{e:'凸(｀△´＋)',n:'rage middle finger',c:'actions'},
+          {e:'(－_－) zzZ',n:'sleeping tired',c:'actions'},{e:'(＿ ＿*) Z z z',n:'sleeping zzz',c:'actions'},
+          {e:'(҂◡_◡) ᕤ',n:'tough cool',c:'actions'},{e:"(ﾉ>ω<)ﾉ :｡･:*:･ﾟ'★,｡･:*:･ﾟ'☆",n:'throwing confetti celebrate',c:'actions'},
+          {e:'(⊃｡•́‿•̀｡)⊃',n:'reaching out grab',c:'actions'},{e:'(/◔ ◡ ◔)/',n:'raise hands',c:'actions'},
+          {e:'(¬_¬)',n:'suspicious side eye',c:'actions'},{e:'(눈_눈)',n:'glare stare suspicious',c:'actions'},
+          {e:'(*￣3￣)╭',n:'smug point',c:'actions'},{e:'_(._.)_',n:'bow apologize',c:'actions'},
+          {e:'m(_ _)m',n:'bow deep respect',c:'actions'},{e:'(╯°□°）╯︵ ┻━┻',n:'flip table rage',c:'actions'}
+        ],
+        love: [
+          {e:'(♡°▽°♡)',n:'love heart eyes',c:'love'},{e:'(◍•ᴗ•◍)❤',n:'love cute',c:'love'},{e:'(ﾉ´ з`)ノ♪',n:'love music singing',c:'love'},
+          {e:'(/^▽^)/',n:'love happy cheer',c:'love'},{e:'(♥ω♥*)',n:'love heart',c:'love'},{e:'(*˘︶˘*).｡.:*♡',n:'love dreamy',c:'love'},
+          {e:'(ˆ ³ˆ)♥',n:'kiss love',c:'love'},{e:'♡( ◡‿◡ )',n:'heart happy love',c:'love'},{e:'(｡♥‿♥｡)',n:'love struck',c:'love'},
+          {e:'(灬♡‿♡灬)',n:'love deep passionate',c:'love'},{e:'(─‿‿─)♡',n:'love content',c:'love'},{e:'(っ˘ω˘ς )',n:'love dreamy hug',c:'love'},
+          {e:'(✿ ♥‿♥)',n:'flower love',c:'love'},{e:'♡ᵕ̈♡',n:'heart eyes simple',c:'love'},{e:'(˘ε˘)',n:'kiss pout',c:'love'},
+          {e:'(*´з`)ﾞ',n:'kiss cute',c:'love'},{e:'(ﾉ*˘◡˘ﾉ)♡',n:'love shy happy',c:'love'},{e:'❤(ˆ‿ˆ԰)',n:'heart love smile',c:'love'},
+          {e:'(⁄ ⁄>⁄ ▽ ⁄<⁄ ⁄)',n:'blush embarrassed love',c:'love'},{e:'(●´∀｀●)',n:'happy love crush',c:'love'}
+        ],
+        sad: [
+          {e:'(T_T)',n:'crying sad tears',c:'sad'},{e:'(;_;)',n:'crying sad',c:'sad'},{e:'(TдT)',n:'crying upset distressed',c:'sad'},
+          {e:'(っ˘̩╭╮˘̩)っ',n:'sad lonely',c:'sad'},{e:'(ó_ò)',n:'sad upset',c:'sad'},{e:'(。•́︿•̀。)',n:'sad worried',c:'sad'},
+          {e:'(´;ω;`)',n:'sad teary',c:'sad'},{e:'(ಥ_ಥ)',n:'crying distressed',c:'sad'},{e:'(╥_╥)',n:'crying sad',c:'sad'},
+          {e:'(个_个)',n:'sad frustrated',c:'sad'},{e:'ε(´סּ︵סּ`)з',n:'sad upset pout',c:'sad'},{e:'(っ- ‸ – ς)',n:'sad dejected',c:'sad'},
+          {e:'(/_;)',n:'crying sad shy',c:'sad'},{e:'(ToT)',n:'crying upset',c:'sad'},{e:'(Ｔ▽Ｔ)',n:'laughing crying tears',c:'sad'},
+          {e:'(◞‸◟；)',n:'sad worried anxious',c:'sad'},{e:'(ᗒᗩᗕ)',n:'scared panicked',c:'sad'},{e:'(×_×)',n:'dead exhausted',c:'sad'},
+          {e:'(+_+)',n:'confused lost',c:'sad'},{e:'(﹏)',n:'sad simple',c:'sad'}
+        ],
+        magic: [
+          {e:'(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧',n:'sparkle magic excited',c:'magic'},{e:'*:･ﾟ✧*:･ﾟ✧',n:'sparkle twinkle',c:'magic'},
+          {e:'✧*｡٩(ˊᗜˋ*)و✧*｡',n:'sparkle happy magic',c:'magic'},{e:'(っ◔◡◔)っ ♥',n:'magic love cute',c:'magic'},
+          {e:'(づ♡_♡)づ',n:'magic love send',c:'magic'},{e:'(灬º‿º灬)♡',n:'magical love',c:'magic'},
+          {e:'⊂(♡⌂♡)⊃',n:'magic house heart',c:'magic'},{e:'(☞ﾟ∀ﾟ)☞',n:'point finger fun',c:'magic'},
+          {e:'☆*:.｡.o(≧▽≦)o.｡.:*☆',n:'sparkle star excited',c:'magic'},{e:'(*＾▽＾)／★*☆♪',n:'celebrate star music',c:'magic'},
+          {e:'꒰ ˘ ꒳˘ ꒱✩',n:'dreamy stars cute',c:'magic'},{e:'(人*´∀｀)｡*ﾟ+☆',n:'wish star happy',c:'magic'},
+          {e:'(๑˘³˘๑)♡',n:'kiss stars love',c:'magic'},{e:'✿◠‿◠✿',n:'flower happy cute',c:'magic'},
+          {e:'(。・ω・。)ﾉ♡',n:'wave heart love',c:'magic'},{e:'*~(￣▽￣)~*',n:'sparkling happy',c:'magic'},
+          {e:'(,,>ヮ<,,)彡☆',n:'excited throw star',c:'magic'},{e:'✧(˃̶ ॣ⌣ ॣ˂̶✧)',n:'sparkle happy',c:'magic'},
+          {e:'(=^_^=)ﾉ彡★',n:'cat celebrate star',c:'magic'},{e:'(ﾉ´ヮ`)ﾉ*: ･ﾟ',n:'excited sprinkle',c:'magic'}
+        ]
+      };
+
       function _emotcnApplyFilter(q, cat) {
         let pool;
         if (cat && cat.startsWith('kj_')) {
-          // kj_ categories come from kaomoji dict, handled separately
-          pool = [];
+          // kj_ categories: filter EMOTCN_DATA by matching tag keyword in n field
+          // e.g. kj_smiling → look for 'smiling' in tags
+          const tagKey = cat.slice(3); // e.g. 'smiling', 'heart', 'table_flip'
+          if (!_emotcnLoaded) {
+            // Data not yet loaded — show spinner and trigger load, re-filter after
+            const g = document.getElementById('etcn-grid');
+            if (g) g.innerHTML = _etcnSpinner;
+            _emotcnStartWorker();
+            return;
+          }
+          pool = EMOTCN_DATA.filter(item => {
+            const n = item.n.toLowerCase();
+            // Match tag keywords: table_flip → 'table flip' or 'table_flip'
+            return n.includes(tagKey) || n.includes(tagKey.replace(/_/g,' '));
+          });
+        } else if (cat && _EMOTCN_BUILTIN[cat]) {
+          // Built-in named categories — use hardcoded data, no JSON needed
+          pool = _EMOTCN_BUILTIN[cat];
+        } else if (cat) {
+          // Fallback: try filtering loaded JSON by c field
+          pool = _emotcnLoaded ? EMOTCN_DATA.filter(e => e.c === cat) : [];
         } else {
-          pool = EMOTCN_DATA.filter(e => !cat || e.c === cat);
+          // No category: merge built-in + loaded JSON (show built-in first if JSON not ready)
+          if (_emotcnLoaded) {
+            pool = EMOTCN_DATA;
+          } else {
+            // Flatten all built-in categories
+            pool = Object.values(_EMOTCN_BUILTIN).flat();
+          }
         }
         if (q) pool = pool.filter(e => e.n.toLowerCase().includes(q.toLowerCase()) || e.e.includes(q));
         _etcnCurrentData = pool;
@@ -12352,21 +12944,16 @@
         const q   = document.getElementById('etcn-search').value.trim();
         const cat = document.getElementById('etcn-cat').value;
 
-        // kj_ categories: load from KAOMOJI_DICT_DATA if available, else fallback
-        if (cat && cat.startsWith('kj_')) {
-          const tagKey = cat.slice(3).replace(/_/g,' ');
-          const altKey = tagKey.replace(/ /g,'_');
-          const pool = (window.KAOMOJI_DICT_DATA || [])
-            .filter(item => item.new_tags && item.new_tags.some(t => t===tagKey || t===altKey))
-            .map(item => ({e: item.kaomoji || item.e, n: (item.new_tags||[]).join(' '), c: cat}));
-          _etcnCurrentData = q ? pool.filter(e => e.n.toLowerCase().includes(q.toLowerCase())) : pool;
-          _etcnPage = 0;
-          _etcnRenderPage(true);
+        // Built-in categories work without loading JSON — show immediately
+        if (!cat || (cat && _EMOTCN_BUILTIN[cat])) {
+          _emotcnApplyFilter(q, cat);
+          // Also kick off background load so kj_ categories will work later
+          if (!_emotcnLoaded) _emotcnStartWorker();
           return;
         }
 
+        // kj_ categories and raw JSON categories need the full JSON loaded
         if (!_emotcnLoaded) {
-          // Show spinner and start loading
           const g = document.getElementById('etcn-grid');
           if (g) g.innerHTML = _etcnSpinner;
           _emotcnStartWorker();
@@ -13072,32 +13659,94 @@
         if (srcEl) srcEl.value = local;
         runTZ();
       }
-      function runTZ() {
-        const srcVal = (document.getElementById('tz-src')||{}).value;
-        const fromTZ = (document.getElementById('tz-from')||{}).value || 'Asia/Tehran';
-        if (!srcVal) return;
-        const srcDate = new Date(srcVal);
-        if (isNaN(srcDate)) return;
+
+      // Live clock tick for the world clock tool
+      let _tzLiveInt = null;
+      function _tzStartLive() {
+        if (_tzLiveInt) return;
+        _tzLiveInt = setInterval(_tzLiveTick, 1000);
+        _tzLiveTick();
+      }
+      function _tzStopLive() { clearInterval(_tzLiveInt); _tzLiveInt = null; }
+      function _tzLiveTick() {
+        const now = new Date();
+        const pad = n => String(n).padStart(2,'0');
+        const clk = document.getElementById('tz-local-clock');
+        if (clk) clk.textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+        const dateEl = document.getElementById('tz-local-date');
+        if (dateEl) {
+          const days = ['یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه','شنبه'];
+          const months = ['ژانویه','فوریه','مارس','آوریل','مه','ژوئن','ژوئیه','اوت','سپتامبر','اکتبر','نوامبر','دسامبر'];
+          dateEl.textContent = `${days[now.getDay()]}، ${now.getDate()} ${months[now.getMonth()]}`;
+        }
         const jel = document.getElementById('tz-jalali-now');
         if (jel) {
           try {
-            const j = toJalali(srcDate.getFullYear(), srcDate.getMonth()+1, srcDate.getDate());
-            jel.textContent = `📅 ${j[0]}/${String(j[1]).padStart(2,'0')}/${String(j[2]).padStart(2,'0')} خورشیدی`;
+            const j = toJalali(now.getFullYear(), now.getMonth()+1, now.getDate());
+            jel.textContent = `${j[0]}/${String(j[1]).padStart(2,'0')}/${String(j[2]).padStart(2,'0')}`;
           } catch(e) { jel.textContent=''; }
         }
+        // Update all zone cards' time
+        const selected = tzLoadSelected();
+        selected.forEach((tz, idx) => {
+          const timeEl = document.getElementById('tz-card-time-' + idx);
+          if (timeEl) {
+            try {
+              timeEl.textContent = now.toLocaleTimeString('en-US', {timeZone: tz, hour:'2-digit', minute:'2-digit', hour12: false});
+            } catch(e) {}
+          }
+        });
+      }
+
+      function runTZ() {
+        const srcVal = (document.getElementById('tz-src')||{}).value;
+        const fromTZ = (document.getElementById('tz-from')||{}).value || 'Asia/Tehran';
+
+        // Update Jalali from srcVal if available
+        if (srcVal) {
+          const srcDate = new Date(srcVal);
+          if (!isNaN(srcDate)) {
+            const jel = document.getElementById('tz-jalali-now');
+            if (jel) {
+              try {
+                const j = toJalali(srcDate.getFullYear(), srcDate.getMonth()+1, srcDate.getDate());
+                jel.textContent = `${j[0]}/${String(j[1]).padStart(2,'0')}/${String(j[2]).padStart(2,'0')}`;
+              } catch(e) { jel.textContent=''; }
+            }
+          }
+        }
+
         const selected = tzLoadSelected();
         const grid = document.getElementById('tz-grid');
         if (!grid) return;
-        grid.innerHTML = selected.map(tz => {
+        const now = new Date();
+        const refDate = srcVal ? new Date(srcVal) : now;
+
+        grid.innerHTML = selected.map((tz, idx) => {
           const zInfo = TZ_ALL_ZONES.find(z => z.tz===tz) || {name:tz, flag:'🌐'};
-          let timeStr;
-          try { timeStr = srcDate.toLocaleString('fa-IR', {timeZone:tz, hour:'2-digit', minute:'2-digit', weekday:'short', day:'numeric', month:'short'}); }
-          catch(e) { timeStr='—'; }
-          const isSrc = tz === fromTZ;
-          return `<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 14px;background:${isSrc?'color-mix(in srgb,var(--m3-primary) 10%,transparent)':'var(--m3-surface-container)'};border-radius:10px;border:1px solid ${isSrc?'var(--m3-primary)':'var(--m3-outline-variant)'};gap:10px">
-            <span style="font-weight:600">${zInfo.flag} ${zInfo.name}</span>
-            <span style="font-family:'Courier New',monospace;font-size:13px;color:var(--m3-on-surface-variant)">${timeStr}</span>
-            <button onclick="tzRemoveZone('${tz}')" style="background:none;border:none;cursor:pointer;color:var(--m3-on-surface-variant);font-size:1rem;padding:0 4px;line-height:1;opacity:0.6" title="حذف">×</button>
+          let timeStr = '--:--';
+          let offsetStr = '';
+          try {
+            timeStr = refDate.toLocaleTimeString('en-US', {timeZone: tz, hour:'2-digit', minute:'2-digit', hour12: false});
+            // Compute offset vs local
+            const localOff = -refDate.getTimezoneOffset();
+            const tzOff = (function() {
+              const d = new Date(refDate);
+              const utc = new Date(d.toLocaleString('en-US', {timeZone: 'UTC'}));
+              const local2 = new Date(d.toLocaleString('en-US', {timeZone: tz}));
+              return Math.round((local2 - utc) / 60000);
+            })();
+            const diff = tzOff - localOff;
+            if (diff !== 0) offsetStr = (diff > 0 ? '+' : '') + (diff/60).toFixed(1).replace('.0','') + 'h';
+          } catch(e) {}
+
+          return `<div style="background:var(--m3-surface-container);border-radius:16px;padding:16px;position:relative;overflow:hidden">
+            <button onclick="tzRemoveZone('${tz}')" style="position:absolute;top:8px;left:8px;background:none;border:none;cursor:pointer;color:var(--m3-on-surface-variant);font-size:.9rem;opacity:0.5;line-height:1;padding:2px 4px" title="حذف">×</button>
+            <div style="font-size:13px;font-weight:600;margin-bottom:6px">${zInfo.flag} ${zInfo.name}</div>
+            <div style="display:flex;align-items:baseline;gap:8px">
+              <div id="tz-card-time-${idx}" style="font-size:2.2rem;font-weight:300;font-variant-numeric:tabular-nums;letter-spacing:-1px;direction:ltr">${timeStr}</div>
+              ${offsetStr ? `<div style="font-size:11px;color:var(--m3-on-surface-variant)">${offsetStr}</div>` : ''}
+            </div>
           </div>`;
         }).join('');
       }
