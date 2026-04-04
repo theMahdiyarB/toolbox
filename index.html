@@ -12535,8 +12535,8 @@
         var steps=[],limitVal,converges;
         var fmtV=function(v){
           if (v===undefined||v===null||isNaN(v)) return 'تعریف نشده';
-          if (v===Infinity||v>1e15) return '+∞';
-          if (v===-Infinity||v<-1e15) return '−∞';
+          if (v===Infinity||v>1e12) return '∞ بی‌نهایت';
+          if (v===-Infinity||v<-1e12) return '−∞ بی‌نهایت';
           return +parseFloat(v.toPrecision(10))+'';
         };
         // Sample f near x0, return the limit value or ±Infinity
@@ -12551,7 +12551,7 @@
           }
           var last=samples[samples.length-1];
           // Growing without bound → infinity
-          if (Math.abs(last)>1e12) return {val:last>0?Infinity:-Infinity,inf:true};
+          if (Math.abs(last)>=1e11) return {val:last>0?Infinity:-Infinity,inf:true};
           // Check convergence: last two samples close
           var prev=samples[samples.length-2];
           if (Math.abs(last-prev)<Math.max(1e-6,Math.abs(last)*1e-5)) return {val:last,inf:false};
@@ -12587,16 +12587,16 @@
             steps.push('حد از چپ (x→x₀⁻): '+fmtV(left));
             steps.push('حد از راست (x→x₀⁺): '+fmtV(right));
             // Both infinite with same sign → limit is ±∞
-            if ((left===Infinity||left>1e12)&&(right===Infinity||right>1e12)) {
+            if ((left===Infinity||left>=1e11)&&(right===Infinity||right>=1e11)) {
               limitVal=Infinity; converges=true;
-            } else if ((left===-Infinity||left<-1e12)&&(right===-Infinity||right<-1e12)) {
+            } else if ((left===-Infinity||left<=-1e11)&&(right===-Infinity||right<=-1e11)) {
               limitVal=-Infinity; converges=true;
             } else if (!isFinite(left)||!isFinite(right)||isNaN(left)||isNaN(right)) {
               converges=false; limitVal=NaN;
             } else {
               converges=Math.abs(left-right)<Math.max(1e-5,Math.abs(left)*1e-4);
               limitVal=(left+right)/2;
-              if (Math.abs(limitVal)>1e12) {limitVal=limitVal>0?Infinity:-Infinity; converges=true;}
+              if (Math.abs(limitVal)>=1e11) {limitVal=limitVal>0?Infinity:-Infinity; converges=true;}
             }
             steps.push(converges?'حد دوطرفه برابر ✓':'حد دوطرفه نامساوی ✗');
           }
