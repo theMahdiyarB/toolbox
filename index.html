@@ -12441,15 +12441,22 @@
             [/^x\^([0-9.]+)$/, function(m){var n=parseFloat(m[1]);var d=n+1;return 'x^('+d+')/'+d;}, function(m){var n=parseFloat(m[1]);return 'xⁿ⁺¹/(n+1), n='+(n)+'+1='+(n+1);}],
             [/^([0-9.]+)$/, function(m){return m[1]+'*x';}, function(m){return m[1]+'x';}],
             [/^([0-9.]+)\*x$/, function(m){return m[1]+'*x^2/2';}, function(m){return m[1]+'x²/2';}],
+            [/^([0-9.]+)\*x\^([0-9.]+)$/, function(m){var c=parseFloat(m[1]);var n=parseFloat(m[2]);var d=n+1;return (c/d)+'*x^('+d+')';}, function(m){var c=parseFloat(m[1]);var n=parseFloat(m[2]);return c+'xⁿ⁺¹/(n+1), n='+(n);}],
             [/^1\/x$/, 'log(x)', 'ln|x|'],
             [/^1\/x\^2$/, '-1/x', '-1/x'],
+            [/^1\/\(([0-9.]+)\*x\^2\)$/, function(m){var a=parseFloat(m[1]);return '-1/('+a+'*x)';}, function(m){var a=parseFloat(m[1]);return '-1/('+a+'x)';}],
+            [/^1\/\(x\^2\+([0-9.]+)\)$/, function(m){var a=parseFloat(m[1]);var sqrta=Math.sqrt(a);return 'atan(x/'+sqrta+')/'+sqrta;}, function(m){var a=parseFloat(m[1]);var sqrta=Math.sqrt(a).toFixed(2);return 'arctan(x/√'+a+')/(√'+a+')';}],
+            [/^1\/\(([0-9.]+)\+x\^2\)$/, function(m){var a=parseFloat(m[1]);var sqrta=Math.sqrt(a);return 'atan(x/'+sqrta+')/'+sqrta;}, function(m){var a=parseFloat(m[1]);var sqrta=Math.sqrt(a).toFixed(2);return 'arctan(x/√'+a+')/(√'+a+')';}],
             [/^sin\(x\)$/, '-cos(x)', '-cos(x)'],
             [/^cos\(x\)$/, 'sin(x)', 'sin(x)'],
             [/^tan\(x\)$/, '-log(cos(x))', '-ln|cos(x)|'],
+            [/^([0-9.]+)\*sin\(x\)$/, function(m){var c=parseFloat(m[1]);return '-'+c+'*cos(x)';}, function(m){var c=parseFloat(m[1]);return '-'+c+'cos(x)';}],
+            [/^([0-9.]+)\*cos\(x\)$/, function(m){var c=parseFloat(m[1]);return c+'*sin(x)';}, function(m){var c=parseFloat(m[1]);return c+'sin(x)';}],
             [/^1\/cos\(x\)\^2$/, 'tan(x)', 'tan(x)'],
             [/^1\/sin\(x\)\^2$/, '-1/tan(x)', '-cot(x)'],
             [/^e\^x$/, 'e^x', 'eˣ'],
             [/^exp\(x\)$/, 'exp(x)', 'eˣ'],
+            [/^([0-9.]+)\*e\^x$/, function(m){var c=parseFloat(m[1]);return c+'*e^x';}, function(m){var c=parseFloat(m[1]);return c+'eˣ';}],
             [/^e\^\(([^)]+)\)$/, function(m){return 'e^('+m[1]+')/( '+m[1].replace(/\*/g,'')+')';}],
             [/^log\(x\)$/, 'x*log(x)-x', 'x·ln(x)−x'],
             [/^log10\(x\)$/, 'x*log10(x)-x/log(10)', 'x·log₁₀(x)−x/ln10'],
@@ -12755,7 +12762,9 @@
             if(!isFinite(yv)){prevY=null;prevX=null;pts.push(null);continue;}
             if(prevX!==null&&prevY!==null){
               var jump=Math.abs(yv-prevY),dx=Math.abs(xv-prevX);
-              if(dx>0&&jump/dx>1e4&&jump>1){prevY=yv;prevX=xv;pts.push(null);continue;}
+              // Detect discontinuity: either large absolute jump, or steep relative jump (for step/floor functions)
+              var relJump=dx>0?jump/dx:Infinity;
+              if((jump>0.5)||(dx>0&&relJump>200)){prevY=yv;prevX=xv;pts.push(null);continue;}
             }
             prevY=yv;prevX=xv;
             pts.push([xv,yv]);
