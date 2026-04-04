@@ -1867,6 +1867,9 @@
         <div class="drawer-item" onclick="showTool('hash')" data-tool="hash">
           <span class="drawer-item__icon">🔏</span>هش رمزنگاری
         </div>
+        <div class="drawer-item" onclick="showTool('crypto')" data-tool="crypto">
+          <span class="drawer-item__icon">🔐</span>رمزنگاری متن
+        </div>
         <div class="drawer-item" onclick="showTool('jwt')" data-tool="jwt">
           <span class="drawer-item__icon">🔑</span>JWT Parser
         </div>
@@ -1974,6 +1977,9 @@
         </div>
         <div class="drawer-item" onclick="showTool('csvjson')" data-tool="csvjson">
           <span class="drawer-item__icon">↔️</span>CSV ↔ JSON
+        </div>
+        <div class="drawer-item" onclick="showTool('filesplit')" data-tool="filesplit">
+          <span class="drawer-item__icon">🗂</span>تقسیم و مرج فایل
         </div>
 
         <span class="drawer-section-label">🛠️ ایران و سیستم</span>
@@ -2241,6 +2247,7 @@
                 <div class="link-card" onclick="haptic(this);showTool('xml')"><button class="fav-btn" data-tool="xml" onclick="event.stopPropagation();toggleFav('xml',this)">☆</button><span class="link-card__icon">🏷️</span><span class="link-card__name">فرمت‌دهی XML</span><span class="link-card__desc">تورفتگی خودکار</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('htmlesc')"><button class="fav-btn" data-tool="htmlesc" onclick="event.stopPropagation();toggleFav('htmlesc',this)">☆</button><span class="link-card__icon">🔤</span><span class="link-card__name">HTML Escaper</span><span class="link-card__desc">Escape و Unescape</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('hash')"><button class="fav-btn" data-tool="hash" onclick="event.stopPropagation();toggleFav('hash',this)">☆</button><span class="link-card__icon">🔏</span><span class="link-card__name">هش رمزنگاری</span><span class="link-card__desc">SHA-1/256/512 و MD5</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('crypto')"><button class="fav-btn" data-tool="crypto" onclick="event.stopPropagation();toggleFav('crypto',this)">☆</button><span class="link-card__icon">🔐</span><span class="link-card__name">رمزنگاری متن</span><span class="link-card__desc">AES-256-GCM و فارسی</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('jwt')"><button class="fav-btn" data-tool="jwt" onclick="event.stopPropagation();toggleFav('jwt',this)">☆</button><span class="link-card__icon">🔑</span><span class="link-card__name">JWT Parser</span><span class="link-card__desc">رمزگشایی توکن</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('pxrem')"><button class="fav-btn" data-tool="pxrem" onclick="event.stopPropagation();toggleFav('pxrem',this)">☆</button><span class="link-card__icon">📐</span><span class="link-card__name">PX ↔ REM</span><span class="link-card__desc">تبدیل واحد CSS</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('regex')"><button class="fav-btn" data-tool="regex" onclick="event.stopPropagation();toggleFav('regex',this)">☆</button><span class="link-card__icon">🔍</span><span class="link-card__name">تست Regex</span><span class="link-card__desc">هایلایت زنده تطابق‌ها</span></div>
@@ -2303,6 +2310,7 @@
                 <div class="link-card" onclick="haptic(this);showTool('pdfcompress')"><button class="fav-btn" data-tool="pdfcompress" onclick="event.stopPropagation();toggleFav('pdfcompress',this)">☆</button><span class="link-card__icon">📄</span><span class="link-card__name">فشرده‌سازی PDF</span><span class="link-card__desc">کاهش حجم تصاویر PDF</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('img2b64')"><button class="fav-btn" data-tool="img2b64" onclick="event.stopPropagation();toggleFav('img2b64',this)">☆</button><span class="link-card__icon">🔄</span><span class="link-card__name">تصویر → Base64</span><span class="link-card__desc">برای CSS و HTML</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('csvjson')"><button class="fav-btn" data-tool="csvjson" onclick="event.stopPropagation();toggleFav('csvjson',this)">☆</button><span class="link-card__icon">↔️</span><span class="link-card__name">CSV ↔ JSON</span><span class="link-card__desc">تبدیل دوطرفه</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('filesplit')"><button class="fav-btn" data-tool="filesplit" onclick="event.stopPropagation();toggleFav('filesplit',this)">☆</button><span class="link-card__icon">🗂</span><span class="link-card__name">تقسیم و مرج فایل</span><span class="link-card__desc">فایل‌های بزرگ + رمز</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('watermark')"><button class="fav-btn" data-tool="watermark" onclick="event.stopPropagation();toggleFav('watermark',this)">☆</button><span class="link-card__icon">💧</span><span class="link-card__name">واترمارک تصویر</span><span class="link-card__desc">افزودن لوگو یا متن به تصویر</span></div>
               </div>
             </div>
@@ -3470,6 +3478,71 @@
           </div>
 
           <div class="tool-desc">از MD5، SHA-1، SHA-256 و SHA-512 پشتیبانی می‌کند. هش یک تابع یک‌طرفه است۹ بازیابی متن اصلی از هش ممکن نیست. SHA-256 توصیه می‌شود.</div>
+        </div>
+
+        <!-- ══ CRYPTO ══ -->
+        <div id="crypto" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">🔐 رمزنگاری و رمزگشایی متن</div>
+          
+          <div class="field-row">
+            <div class="field-col">
+              <label class="field-label">الگوریتم رمزنگاری</label>
+              <select id="crypto-algo" class="select-input" onchange="cryptoUpdateUI()">
+                <option value="aes-256-gcm" selected>AES-256-GCM (پیشنهادی)</option>
+                <option value="aes-256-cbc">AES-256-CBC</option>
+              </select>
+            </div>
+          </div>
+
+          <label class="field-label">متن اصلی</label>
+          <textarea id="crypto-text" class="text-area" placeholder="متن را اینجا وارد کنید…" style="min-height:100px"></textarea>
+
+          <label class="field-label" style="margin-top:12px">کلید رمزنگاری / رمزگشایی</label>
+          <div style="position:relative">
+            <input type="password" id="crypto-key" class="text-input" placeholder="کلید را وارد کنید…" style="padding-right:44px">
+            <button class="btn btn-tonal" style="position:absolute;left:4px;top:50%;transform:translateY(-50%);width:36px;height:36px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:1rem;line-height:1" onclick="cryptoToggleKeyView()" title="نمایش/پنهان کردن کلید">👁</button>
+          </div>
+
+          <label class="field-label" style="margin-top:12px">فرمت</label>
+          <div class="btn-row" style="margin-bottom:8px">
+            <button class="btn btn-filled" id="crypto-fmt-hex" onclick="cryptoSetFormat('hex')" style="flex:1;font-size:12px">۱۶# HEX</button>
+            <button class="btn btn-tonal" id="crypto-fmt-fa" onclick="cryptoSetFormat('fa')" style="flex:1;font-size:12px">فارسی</button>
+            <button class="btn btn-tonal" id="crypto-fmt-en" onclick="cryptoSetFormat('en')" style="flex:1;font-size:12px">English</button>
+          </div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;font-size:13.5px;font-weight:500">
+              <input type="checkbox" id="crypto-emoji" checked onchange="cryptoUpdateUI()">
+              <span>افزودن ایموجی‌ها ✨</span>
+            </label>
+          </div>
+
+          <div class="btn-row" style="margin-top:12px;gap:8px">
+            <button class="btn btn-filled" onclick="cryptoEncrypt()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px">
+              <span>رمزنگاری</span>
+              <span style="font-size:1.2rem">↓</span>
+            </button>
+            <button class="btn btn-tonal" onclick="cryptoDecrypt()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px">
+              <span>رمزگشایی</span>
+              <span style="font-size:1.2rem">↑</span>
+            </button>
+            <button class="btn btn-tonal" onclick="cryptoClear()" style="width:auto;min-width:80px">پاک کردن</button>
+          </div>
+
+          <label class="field-label" style="margin-top:14px">متن رمزی شده</label>
+          <textarea id="crypto-output" class="text-area" placeholder="برای رمزگشایی: رمز را اینجا بچسبانید | برای نمایش نتیجه رمزنگاری" style="min-height:100px;direction:ltr;text-align:left;resize:vertical"></textarea>
+
+          <div class="btn-row" style="margin-top:8px">
+            <button class="btn btn-tonal" onclick="copyVal('crypto-output')" style="flex:1">📋 کپی رمز</button>
+            <button class="btn btn-tonal" onclick="cryptoCopyToKey()" style="flex:1">→ به کلید</button>
+          </div>
+
+          <div id="crypto-error" style="display:none;margin-top:10px;padding:10px;background:var(--m3-error-container);color:var(--m3-on-error-container);border-radius:10px;font-size:13px"></div>
+
+          <div class="tool-desc">
+            رمزنگاری AES-256 در مرورگر — قابل رمزنگاری به‌صورت raw hex، کلمات فارسی، یا انگلیسی. فرمت human-readable برای ارسال اطلاعات حساس.
+          </div>
         </div>
 
         <!-- ══ JWT ══ -->
@@ -4987,6 +5060,125 @@
           ></textarea>
 
           <div class="tool-desc">CSV را به آرایه JSON (ردیف اول به‌عنوان کلید) یا برعکس تبدیل می‌کند.</div>
+        </div>
+
+        <!-- ══ File Splitter & Merger ══ -->
+        <div id="filesplit" class="tool-card">
+          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
+          <div class="tool-title">🗂 تقسیم و مرج فایل</div>
+          
+          <div class="btn-row">
+            <button class="btn btn-filled" id="filesplit-tab-split" onclick="filesplitSetTab('split')" style="flex:1">تقسیم فایل</button>
+            <button class="btn btn-tonal" id="filesplit-tab-merge" onclick="filesplitSetTab('merge')" style="flex:1">مرج فایل‌ها</button>
+          </div>
+
+          <!-- SPLIT TAB -->
+          <div id="filesplit-split-wrap">
+            <label class="field-label" style="margin-top:12px">فایل ورودی</label>
+            <div
+              class="upload-zone"
+              id="filesplit-upload"
+              onclick="document.getElementById('filesplit-file').click()"
+              ondragover="filesplitDrag(event, true)"
+              ondragleave="filesplitDrag(event, false)"
+              ondrop="filesplitDrop(event)"
+            >
+              <input
+                type="file"
+                id="filesplit-file"
+                onchange="filesplitHandleFileSelect()"
+              />
+              <div class="upload-zone__icon">📁</div>
+              <div class="upload-zone__text">کلیک یا Drag & Drop فایل</div>
+              <div class="upload-zone__limit" id="filesplit-file-info"></div>
+            </div>
+
+            <div class="field-row" style="margin-top:12px">
+              <div class="field-col">
+                <label class="field-label">حجم هر قسمت</label>
+                <div style="display:flex;gap:8px">
+                  <input type="number" id="filesplit-size" class="text-input" value="5" min="1" placeholder="عدد">
+                  <select id="filesplit-unit" class="select-input" style="max-width:300px">
+                    <option value="KB">کیلوبایت (KB)</option>
+                    <option value="MB">مگابایت (MB)</option>
+                    <option value="GB">گیگابایت (GB)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;font-size:13.5px;font-weight:500">
+                <input type="checkbox" id="filesplit-password" onchange="filesplitUpdateUI()">
+                <span>حفاظت با رمز</span>
+              </label>
+            </div>
+
+            <div id="filesplit-pwd-input" style="display:none;margin-top:8px">
+              <label class="field-label">رمز عبور</label>
+              <div style="display:flex;gap:8px;align-items:stretch">
+                <input type="password" id="filesplit-pwd" class="text-input" placeholder="رمز را وارد کنید…" style="flex:1">
+                <button class="btn btn-tonal" onclick="filesplitTogglePasswordVisibility('filesplit-pwd')" style="min-width:44px;padding:0;font-size:16px" title="نمایش/پنهان">👁️</button>
+              </div>
+            </div>
+
+            <button class="btn btn-filled" onclick="filesplitSplitFile()" style="width:100%;margin-top:12px">✂️ تقسیم</button>
+            <div id="filesplit-split-progress" style="display:none;margin-top:12px;">
+              <div style="background:var(--m3-surface-container);border-radius:4px;overflow:hidden;height:6px;margin-bottom:6px">
+                <div id="filesplit-split-bar" style="height:100%;background:var(--m3-primary);width:0%;transition:width.3s"></div>
+              </div>
+              <div id="filesplit-split-status" style="font-size:12px;color:var(--m3-on-surface-variant);text-align:center"></div>
+            </div>
+          </div>
+
+          <!-- MERGE TAB -->
+          <div id="filesplit-merge-wrap" style="display:none">
+            <label class="field-label" style="margin-top:12px">فایل‌های تقسیم شده</label>
+            <div
+              class="upload-zone"
+              id="filesplit-merge-upload"
+              onclick="document.getElementById('filesplit-merge-files').click()"
+              ondragover="filesplitMergeDrag(event, true)"
+              ondragleave="filesplitMergeDrag(event, false)"
+              ondrop="filesplitMergeDrop(event)"
+            >
+              <input
+                type="file"
+                id="filesplit-merge-files"
+                multiple
+                onchange="filesplitHandleMergeSelect()"
+              />
+              <div class="upload-zone__icon">📋</div>
+              <div class="upload-zone__text">کلیک یا Drag & Drop قسمت‌ها</div>
+              <div class="upload-zone__limit" id="filesplit-merge-info"></div>
+            </div>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;font-size:13.5px;font-weight:500">
+                <input type="checkbox" id="filesplit-merge-password" onchange="filesplitUpdateMergeUI()">
+                <span>فایل‌ها با رمز حفاظت شده‌اند</span>
+              </label>
+            </div>
+
+            <div id="filesplit-pwd-merge-input" style="display:none;margin-top:8px">
+              <label class="field-label">رمز عبور</label>
+              <div style="display:flex;gap:8px;align-items:stretch">
+                <input type="password" id="filesplit-pwd-merge" class="text-input" placeholder="رمز را وارد کنید…" style="flex:1">
+                <button class="btn btn-tonal" onclick="filesplitTogglePasswordVisibility('filesplit-pwd-merge')" style="min-width:44px;padding:0;font-size:16px" title="نمایش/پنهان">👁️</button>
+              </div>
+            </div>
+
+            <button class="btn btn-filled" onclick="filesplitMergeFiles()" style="width:100%;margin-top:12px">🔗 مرج</button>
+            <div id="filesplit-merge-progress" style="display:none;margin-top:12px;">
+              <div style="background:var(--m3-surface-container);border-radius:4px;overflow:hidden;height:6px;margin-bottom:6px">
+                <div id="filesplit-merge-bar" style="height:100%;background:var(--m3-primary);width:0%;transition:width.3s"></div>
+              </div>
+              <div id="filesplit-merge-status" style="font-size:12px;color:var(--m3-on-surface-variant);text-align:center"></div>
+            </div>
+          </div>
+
+          <div id="filesplit-error" style="display:none;margin-top:12px;padding:10px;background:var(--m3-error-container);color:var(--m3-on-error-container);border-radius:6px;font-size:13px"></div>
+          <div class="tool-desc">فایل‌های بزرگ را به قسمت‌های کوچک‌تر تقسیم کنید (برای آپلود یا انتقال)، یا دوباره مرج کنید. از رمز عبور برای حفاظت اختیاری استفاده کنید.</div>
         </div>
 
         <!-- ══ DEVICE INFO ══ -->
@@ -7226,7 +7418,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 2.19 - ۱۴۰۵/۰۱/۱۵
+          ℹ️ نسخه 3.0 - ۱۴۰۵/۰۱/۱۵
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -7287,7 +7479,7 @@
         whitespace:'حذف فاصله', oneline:'تک‌خطی کردن', lorem:'لورم ایپسوم',
         markdown:'پیش‌نمایش Markdown', diff:'مقایسه دو متن', slugify:'ساخت Slug',
         json:'فرمت‌دهی JSON', xml:'فرمت‌دهی XML', htmlesc:'HTML Escaper',
-        hash:'هش رمزنگاری', jwt:'JWT Parser', pxrem:'PX ↔ REM',
+        hash:'هش رمزنگاری', crypto:'رمزنگاری متن', jwt:'JWT Parser', pxrem:'PX ↔ REM',
         regex:'تست Regex', cron:'تجزیه Cron', urlparse:'تجزیه URL', numbase:'تبدیل مبنا',
         pass:'مولد رمز عبور', uuid:'UUID / ULID', randnum:'عدد تصادفی',
         randip:'IP تصادفی', randcolor:'رنگ تصادفی', fake:'داده ساختگی',
@@ -7325,7 +7517,8 @@
         watermark:'واترمارک تصویر',
         seotools:'مولد متا تگ SEO',
         audiotools:'ابزار صوتی',
-        diwan:'دیوان شعر'
+        diwan:'دیوان شعر',
+        filesplit:'تقسیم و مرج فایل'
       };
 
       function _applyTool(id, pushState) {
@@ -7525,6 +7718,21 @@
         el.style.background = 'var(--m3-primary)';
         el.style.color = 'var(--m3-on-primary)';
         setTimeout(() => { el.style.background = orig; el.style.color = ''; }, 900);
+      }
+
+      // ══════════════════════════════════════════════════════
+      //  HAPTIC FEEDBACK - Add visual/tactile response to clicks
+      // ══════════════════════════════════════════════════════
+      function haptic(el) {
+        if (!el || !el.classList) return;
+        // Add haptic pulse animation class
+        el.classList.add('haptic-pulse');
+        // Remove class after animation completes (300ms)
+        setTimeout(() => { el.classList.remove('haptic-pulse'); }, 300);
+        // Try to trigger device haptic if available
+        if (navigator.vibrate) {
+          try { navigator.vibrate(10); } catch(e) { }
+        }
       }
 
       // ══════════════════════════════════════════════════════
@@ -8467,6 +8675,375 @@
       }
 
       // ══════════════════════════════════════════════════════
+      //  CRYPTO - AES Encryption/Decryption
+      // ══════════════════════════════════════════════════════
+      // Persian word list (256 common Persian words - safe and everyday)
+      const CRYPTO_PERSIAN_WORDS = [
+        // Nature – sky, weather, land, water (100)
+        'آب', 'آتش', 'آسمان', 'آبشار', 'ابر', 'باد', 'باران', 'بهار', 'پاییز', 'تابستان',
+        'زمستان', 'زمین', 'خاک', 'خورشید', 'دریا', 'دریاچه', 'درخت', 'رود', 'رودخانه', 'سنگ',
+        'شب', 'ستاره', 'صخره', 'طوفان', 'غروب', 'قطره', 'ماه', 'مه', 'موج', 'نور',
+        'هوا', 'یخ', 'برف', 'برق', 'رعد', 'کوه', 'جنگل', 'صحرا', 'دشت', 'جزیره',
+        'غار', 'مرداب', 'ساحل', 'شن', 'خزان', 'علف', 'ریشه', 'شاخه', 'برگ', 'میوه',
+        'تخم', 'بذر', 'خار', 'گیاه', 'خاکستر', 'پرتو', 'تاریکی', 'روشنایی', 'گرما', 'سرما',
+        'رطوبت', 'نسیم', 'گردباد', 'رنگین‌کمان', 'سپیده‌دم', 'شامگاه', 'افق', 'فلک', 'اختر', 'سیاره',
+        'کهکشان', 'هلال', 'بدر', 'شهاب', 'مرتع', 'مرغزار', 'تپه', 'دره', 'گردنه', 'دامنه',
+        'قله', 'وادی', 'کویر', 'گِل', 'ماسه', 'لجن', 'خزه', 'سرخس', 'دود', 'آتشفشان',
+        'چشمه', 'آبگیر', 'استخر', 'تالاب', 'گودال', 'پرتگاه', 'شکاف', 'شبنم', 'ژاله', 'قندیل',
+
+        // Animals (80)
+        'آهو', 'اسب', 'ببر', 'پرنده', 'خرگوش', 'خرس', 'روباه', 'زاغ', 'سگ', 'شیر',
+        'طاووس', 'عقاب', 'فیل', 'گرگ', 'گاو', 'کبوتر', 'مار', 'مرغ', 'نهنگ', 'هدهد',
+        'گربه', 'ماهی', 'خرچنگ', 'اردک', 'قو', 'زنبور', 'پروانه', 'مورچه', 'شغال', 'بوف',
+        'دلفین', 'فک', 'پلنگ', 'بزکوهی', 'گوزن', 'جوجه', 'گنجشک', 'کلاغ', 'لک‌لک', 'فاخته',
+        'درنا', 'خروس', 'مرغابی', 'سیمرغ', 'ققنوس', 'کرگدن', 'شتر', 'گوریل', 'میمون', 'فلامینگو',
+        'پنگوئن', 'لاکپشت', 'مگس', 'سنجاب', 'راسو', 'موش', 'خفاش', 'خارپشت', 'کرم', 'ملخ',
+        'سوسک', 'مارمولک', 'قورباغه', 'وزغ', 'کجدم', 'عنکبوت', 'اژدها', 'گراز', 'کفتار', 'یوزپلنگ',
+        'کوسه', 'هشت‌پا', 'حلزون', 'جغد', 'کانگورو', 'طوطی', 'فنچ', 'بلدرچین', 'کبک', 'مارماهی',
+
+        // Objects (100)
+        'آینه', 'پارچه', 'تاج', 'جام', 'دفتر', 'کتاب', 'چراغ', 'قلم', 'نقشه', 'خنجر',
+        'شمع', 'طناب', 'سکه', 'جواهر', 'انگشتر', 'گردنبند', 'دستبند', 'تسبیح', 'عینک', 'پل',
+        'خانه', 'در', 'پنجره', 'دیوار', 'سقف', 'ستون', 'تخت', 'میز', 'صندلی', 'بشقاب',
+        'کوزه', 'لامپ', 'ساعت', 'قفل', 'کلید', 'قفس', 'زنجیر', 'آجر', 'آهن', 'مس',
+        'نقره', 'طلا', 'الماس', 'مروارید', 'یاقوت', 'زمرد', 'فیروزه', 'لعل', 'شمشیر', 'سپر',
+        'کمان', 'تیر', 'نیزه', 'زره', 'پرچم', 'فانوس', 'مشعل', 'لوح', 'طومار', 'برج',
+        'دروازه', 'مناره', 'گنبد', 'گاری', 'کشتی', 'قایق', 'چادر', 'سفره', 'دیگ', 'ظرف',
+        'نعلبکی', 'فنجان', 'پیاله', 'تنگ', 'مشک', 'خم', 'قفسه', 'صندوق', 'کیف', 'چتر',
+        'عصا', 'نردبان', 'ماشین', 'چرخ', 'محور', 'لولا', 'میخ', 'پیچ', 'چکش', 'اره',
+        'انبردست', 'قیچی', 'سوزن', 'نخ', 'قرقره', 'طبل', 'تار', 'رباب', 'نی', 'دف',
+
+        // Food and plants (60)
+        'نان', 'برنج', 'آش', 'پلو', 'ماست', 'پنیر', 'کره', 'خامه', 'دوغ', 'عسل',
+        'شکر', 'نمک', 'زعفران', 'دارچین', 'زنجبیل', 'فلفل', 'هل', 'رازیانه', 'گشنیز', 'نعنا',
+        'ریحان', 'سیر', 'پیاز', 'زیره', 'گلاب', 'سرکه', 'روغن', 'انار', 'انگور', 'هلو',
+        'آلو', 'گلابی', 'سیب', 'بادام', 'گردو', 'پسته', 'فندق', 'کشمش', 'خرما', 'انجیر',
+        'توت', 'آلبالو', 'زردآلو', 'گیلاس', 'نارنگی', 'پرتقال', 'لیمو', 'خربزه', 'هندوانه', 'خیار',
+        'گوجه', 'بادمجان', 'کدو', 'لوبیا', 'عدس', 'نخود', 'ذرت', 'گندم', 'جو', 'ارزن',
+
+        // People and relations (60)
+        'پدر', 'مادر', 'برادر', 'خواهر', 'پسر', 'دختر', 'پدربزرگ', 'مادربزرگ', 'عمو', 'عمه',
+        'دایی', 'خاله', 'شوهر', 'همسر', 'دوست', 'همسایه', 'استاد', 'شاگرد', 'پزشک', 'معلم',
+        'شاعر', 'نویسنده', 'هنرمند', 'موسیقیدان', 'کشاورز', 'بازرگان', 'ملوان', 'سرباز', 'شاه', 'وزیر',
+        'قاضی', 'پیامبر', 'درویش', 'عارف', 'فیلسوف', 'دانشمند', 'مخترع', 'قهرمان', 'جنگجو', 'حاکم',
+        'فرمانده', 'سپاهی', 'نگهبان', 'چوپان', 'بازیگر', 'نقاش', 'معمار', 'مهندس', 'راهنما', 'صیاد',
+        'شکارچی', 'خباز', 'آشپز', 'بافنده', 'خیاط', 'کفاش', 'آهنگر', 'نجار', 'بنا', 'پناهنده',
+
+        // Abstract concepts (100)
+        'آرامش', 'امید', 'باور', 'بخت', 'پیروزی', 'خرد', 'دانش', 'راز', 'رویا', 'زندگی',
+        'عشق', 'خوشبختی', 'غم', 'شادی', 'آزادی', 'صلح', 'عدل', 'وفا', 'فداکاری', 'آرزو',
+        'انتظار', 'خاطره', 'حکمت', 'تجربه', 'علم', 'هنر', 'شعر', 'موسیقی', 'رقص', 'قصه',
+        'افسانه', 'اسطوره', 'جشن', 'یادگار', 'ارزش', 'اعتماد', 'احترام', 'مهربانی', 'دوستی', 'محبت',
+        'حقیقت', 'راستی', 'امانت', 'شجاعت', 'قدرت', 'استقامت', 'صبر', 'سخاوت', 'کرامت', 'افتخار',
+        'غرور', 'پشیمانی', 'توبه', 'بخشش', 'رحمت', 'عطوفت', 'لطف', 'وقار', 'شرافت', 'جوانمردی',
+        'همت', 'دلاوری', 'جسارت', 'شهامت', 'ایمان', 'اعتقاد', 'یقین', 'گمان', 'شک', 'تردید',
+        'تصمیم', 'اراده', 'آگاهی', 'بیداری', 'روشنگری', 'تعادل', 'هماهنگی', 'آهنگ', 'ریتم', 'نظم',
+        'قانون', 'عدالت', 'انصاف', 'دفاع', 'حفاظت', 'ایثار', 'نجات', 'رهایی', 'مساوات', 'برابری',
+        'وحدت', 'اتحاد', 'همبستگی', 'همکاری', 'همدردی', 'همدلی', 'همراهی', 'شگفتی', 'حیرت', 'هیجان',
+
+        // Places (80)
+        'باغ', 'بازار', 'بیشه', 'پارک', 'جاده', 'خیابان', 'روستا', 'شهر', 'قلعه', 'کوچه',
+        'مزرعه', 'معبد', 'میدان', 'نهر', 'قصر', 'کاخ', 'آتشکده', 'مدرسه', 'دانشگاه', 'بیمارستان',
+        'مسجد', 'آرامگاه', 'مقبره', 'بندر', 'کشتزار', 'باغستان', 'تاکستان', 'بوستان', 'گلستان', 'گندمزار',
+        'نخلستان', 'شالیزار', 'چراگاه', 'حیاط', 'بام', 'ایوان', 'تالار', 'سالن', 'اتاق', 'راهرو',
+        'پله', 'انبار', 'زیرزمین', 'خوابگاه', 'دهکده', 'ناحیه', 'ایالت', 'استان', 'شهرستان', 'کارخانه',
+        'کارگاه', 'آزمایشگاه', 'کتابخانه', 'موزه', 'تئاتر', 'سینما', 'استادیوم', 'گالری', 'نمایشگاه', 'اداره',
+        'بانک', 'پاساژ', 'آپارتمان', 'ویلا', 'کلبه', 'اردوگاه', 'پناهگاه', 'قرارگاه', 'سنگر', 'معدن',
+        'چاه', 'بندرگاه', 'فرودگاه', 'ایستگاه', 'ترمینال', 'نمازخانه', 'رستوران', 'مهمانخانه', 'کاروانسرا', 'حمام',
+
+        // Colours and qualities (60)
+        'سفید', 'سیاه', 'سرخ', 'سبز', 'آبی', 'زرد', 'نارنجی', 'بنفش', 'صورتی', 'خاکستری',
+        'طلایی', 'نقره‌ای', 'آجری', 'عنابی', 'لاجوردی', 'فیروزه‌ای', 'زمردی', 'ارغوانی', 'گلی', 'شرابی',
+        'نیلی', 'کبود', 'سپید', 'تیره', 'روشن', 'درخشان', 'مات', 'شفاف', 'دراز', 'کوتاه',
+        'بلند', 'پهن', 'باریک', 'کوچک', 'بزرگ', 'سنگین', 'سبک', 'نرم', 'سخت', 'تند',
+        'کند', 'قوی', 'ضعیف', 'نو', 'کهنه', 'تازه', 'پیر', 'جوان', 'زیبا', 'قشنگ',
+        'دلکش', 'جادویی', 'اسرارآمیز', 'شگفت‌انگیز', 'ناشناخته', 'رازآلود', 'خاموش', 'پرسروصدا', 'آرام', 'گرم',
+
+        // Time (50)
+        'سحر', 'صبح', 'ظهر', 'عصر', 'شام', 'نیمه‌شب', 'طلوع', 'بامداد', 'نیمروز', 'فجر',
+        'گرگ‌ومیش', 'لحظه', 'دقیقه', 'برهه', 'روز', 'هفته', 'سال', 'قرن', 'ابدیت', 'دیروز',
+        'امروز', 'فردا', 'گذشته', 'آینده', 'آغاز', 'پایان', 'میانه', 'مسیر', 'راه', 'گام',
+        'حرکت', 'سکون', 'سرعت', 'شتاب', 'توقف', 'بازگشت', 'پرواز', 'فرود', 'صعود', 'نزول',
+        'چرخش', 'گردش', 'تغییر', 'ثبات', 'تحول', 'تکامل', 'پیشرفت', 'توسعه', 'رشد', 'شکوفایی',
+
+        // Flowers and plants (50)
+        'ارغوان', 'اقاقیا', 'بنفشه', 'پونه', 'چنار', 'داوودی', 'شقایق', 'سوسن', 'صنوبر', 'گلایول',
+        'لاله', 'نسترن', 'نیلوفر', 'همیشه‌بهار', 'یاسمن', 'یاس', 'بید', 'کاج', 'سرو', 'خیزران',
+        'ختمی', 'پیچک', 'رزماری', 'آویشن', 'مریم‌گلی', 'نرگس', 'زنبق', 'آفتاب‌گردان', 'بابونه', 'گزنه',
+        'ریواس', 'کنجد', 'زرشک', 'عناب', 'شیرین‌بیان', 'تمشک', 'شاه‌توت', 'پونه‌کوهی', 'اسطوخودوس', 'رازک',
+        'شاهدانه', 'کاکتوس', 'نیشکر', 'بامبو', 'ساگ', 'عشقه', 'قارچ', 'جلبک', 'خاکشیر', 'گیاه‌دارویی',
+
+        // Emotions and states (50)
+        'دلتنگی', 'لذت', 'درد', 'رنج', 'نگرانی', 'سرگردانی', 'گیجی', 'وحشت', 'دهشت', 'بهجت',
+        'سرور', 'مسرت', 'برانگیختگی', 'هراس', 'بیم', 'طمع', 'حرص', 'بخل', 'آز', 'عاطفه',
+        'احساس', 'حس', 'دیدار', 'حضور', 'لبخند', 'اشک', 'گریه', 'خنده', 'فریاد', 'سکوت',
+        'نجوا', 'ناله', 'آه', 'رؤیا', 'خیال', 'تصور', 'تصویر', 'نقش', 'طرح', 'داستان',
+        'روایت', 'حکایت', 'سرگذشت', 'شرح', 'تفسیر', 'بیان', 'گفتار', 'نوشتار', 'سرود', 'ترانه',
+
+        // Miscellaneous (50)
+        'گنج', 'دفینه', 'خزانه', 'میراث', 'ارث', 'سرمایه', 'ثروت', 'دارایی', 'درآمد', 'سود',
+        'بهره', 'زیان', 'خسارت', 'بدهی', 'قرض', 'وام', 'اجاره', 'خرید', 'فروش', 'تجارت',
+        'مبادله', 'صنعت', 'فناوری', 'اختراع', 'نوآوری', 'کشف', 'پژوهش', 'آزمایش', 'نتیجه', 'ارزیابی',
+        'تحلیل', 'بررسی', 'مطالعه', 'آموزش', 'یادگیری', 'کمال', 'دقت', 'هوشمندی', 'خردمندی', 'دانایی',
+        'عدد', 'رقم', 'شماره', 'کد', 'رمز', 'نشانه', 'علامت', 'نماد', 'حرف', 'کلمه',
+
+        // Body and senses (40)
+        'سر', 'چشم', 'گوش', 'بینی', 'دهان', 'لب', 'دندان', 'زبان', 'گردن', 'شانه',
+        'بازو', 'مچ', 'دست', 'انگشت', 'سینه', 'پشت', 'شکم', 'کمر', 'زانو', 'پا',
+        'موی', 'ریش', 'پیشانی', 'گونه', 'چانه', 'پوست', 'خون', 'استخوان', 'مغز', 'قلب',
+        'دل', 'روح', 'جان', 'روان', 'نفس', 'نبض', 'عرق', 'پوزخند', 'زمزمه', 'قهقهه',
+
+        // Sky and cosmos (40)
+        'مه‌آلود', 'ابری', 'بارانی', 'آفتابی', 'طوفانی', 'تگرگ', 'هاله', 'شفق', 'اورا', 'فضا',
+        'اتمسفر', 'ستاره‌دنباله‌دار', 'سحابی', 'سیاه‌چاله', 'ابرنواختر', 'منظومه', 'مدار', 'تندر', 'آذرخش', 'گرداب',
+        'زلزله', 'سیلاب', 'شکوفه', 'نهال', 'ساقه', 'تنه', 'شیره', 'صمغ', 'عطر', 'بو',
+        'رنگ', 'طعم', 'مزه', 'لمس', 'صدا', 'سایه', 'انعکاس', 'بازتاب', 'پژواک', 'طنین',
+
+        // Knowledge and discovery (50)
+        'خلاقیت', 'نظریه', 'فرضیه', 'برنامه', 'هدف', 'رویکرد', 'روش', 'فرآیند', 'نتیجه‌گیری', 'جمع‌بندی',
+        'سنجش', 'اندازه‌گیری', 'آزمون', 'آمار', 'واقعیت', 'منطق', 'استدلال', 'برهان', 'دلیل', 'شاهد',
+        'مدرک', 'سند', 'گواه', 'اثبات', 'رد', 'قبول', 'انکار', 'تأیید', 'تکذیب', 'تصحیح',
+        'ویرایش', 'ترجمه', 'تأویل', 'توصیف', 'توضیح', 'معنی', 'مفهوم', 'ایده', 'نوشته', 'جداسازی',
+        'پیام', 'نامه', 'خبر', 'گزارش', 'داده', 'اطلاع', 'اعلام', 'فراخوان', 'اطلاعیه', 'اعلامیه',
+
+        // Miscellaneous extras (40)
+        'رشته‌کوه', 'آرمان', 'مرام', 'مسلک', 'کیش', 'آیین', 'نگرش', 'دیدگاه', 'چشم‌انداز', 'کرانه',
+        'جاذبه', 'نیرو', 'انرژی', 'ماده', 'مکان', 'زمان', 'ذره', 'اتم', 'مولکول', 'پیوند',
+        'واکنش', 'ترکیب', 'انحلال', 'تبخیر', 'تقطیر', 'تبلور', 'اکسیداسیون', 'احیا', 'کاتالیزور', 'آنزیم',
+        'ژن', 'کروموزوم', 'سلول', 'بافت', 'اندام', 'موجود', 'نوع', 'جنس', 'خانواده', 'تبار',
+      ];
+      
+      // English word list (256 common English words)
+      const CRYPTO_ENGLISH_WORDS = [
+        'about','above','absent','absorb','academy','account','accuracy','achieve','action','active',
+        'actor','actual','adapt','add','adjust','admit','adopt','adult','advance','advice','advise',
+        'affair','afford','afraid','afternoon','again','against','agency','agenda','agent','agree','agreement'
+        ,'ahead','alarm','album','alert','alike','alive','all','allege','allow','almost','alone','along',
+        'already','also','alter','always','amateur','amaze','ambassador','ambiguous','ambition','ambulance'
+        ,'amend','america','american','among','amount','amuse','ancient','and','angel','angle','angry','animal'
+        ,'anniversary','announce','annoy','annual','another','answer','antenna','any','anybody','anyhow','anyone'
+        ,'anything','anyway','anywhere','apart','apology','appeal','appear','appetite','applaud','apple',
+        'appliance','apply','appoint','appraise','appreciate','approach','appropriate','approval','approve',
+        'april','arbitrary','arbitrate','arcade','arch','architect','arctic','ardent','ardor','arduous',
+        'are','area','arena','argue','argument','arise','arithmetic','army','arrange','arrangement','arrest',
+        'arrival','arrive','arrow','arsenal','art','artery','article','artificial','artist','as','ascend',
+        'ascent','ash','ashamed','aside','ask','aspect','aspersion','aspiration','aspire','assailant','assassin'
+        ,'assault','assay','assemble','assembly','assent','assert','assess','asset','assign','assimilation',
+        'assist','assistant','assume','assurance','assure','astern','astonish','astonishment','astound','astray',
+        'astride','astrologer','astrology','astronomer','astronomy','astute','asylum','at','ate','atheist',
+        'athlete','atlantic','atlas','atmosphere','atom','atone','atop','atrocity','attach','attack','attain',
+        'attainment','attempt','attend','attendance','attendant','attention','attentive','attest','attic',
+        'attire','attitude','attorney','attract','attraction','attractive','attribute','aubade','auburn',
+        'auction','audacious','audacity','audible','audience','audit','auditor','auditorium','august','aul',
+        'auspice','auspicious','austere','australia','australian','austria','austrian','authentic','author',
+        'authoritative','authority','authorization','authorize','autobiography','autocracy','autocrat','autograph',
+        'automat','automatic','automation','automobile','autonomous','autonomy','autopsy','autumn','auxiliary',
+        'avail','available','avalanche','avarice','avaricious','avast','avatar','ave','avenue','average','averse',
+        'aversion','avert','aviary','aviation','aviator','avid','avidly','avionics','avocation','avoid','avoidance',
+        'avouch','avow','avowal','avowed','avuncular','await','awake','awaken','awakening','award','aware','awareness',
+        'away','awe','aweigh','awesome','awful','awhile','awkward','awl','awn','awning','awoke','awoken','awol',
+        'awry','ax','axe','axial','axiom','axiomatic','axis','axle','axman','axmen','axon','aye','ayer','azalea'
+        ,'azimuth','azo','azote','azure'];
+
+      // Comprehensive emoji palette (64 emojis organized by theme)
+      const CRYPTO_EMOJIS= [
+        // Celestial & sky
+        '🌙', '⭐', '🌟', '💫', '✨', '🌠', '🌌', '🌅',
+        '🌄', '🌃', '🌇', '🌆', '🌉', '🌁', '🔮', '☀️',
+        // Nature & plants
+        '🌊', '🌸', '🌺', '🌻', '🌹', '🍀', '🌿', '🌲',
+        '🌳', '🌴', '🍁', '🍂', '🍄', '🌾', '🌼', '🌷',
+        // Elements & weather
+        '🏔', '🌋', '🏕', '🎋', '🔥', '❄️', '⛈️', '🌈',
+        '🌪️', '⛅', '🌦️', '🌧️', '💧', '⚡', '🌬️', '🌫️',
+        // Animals & mythical
+        '🦁', '🐯', '🦊', '🐺', '🦅', '🐬', '🦢', '🦄',
+        '🐲', '🦚', '🦜', '🦩', '🕊️', '🐉', '🏞️', '🌏',
+      ];
+      const EMOJI_CHUNK_SIZE=5;
+
+      function cryptoSelectEmoji(byteValue){
+        return CRYPTO_EMOJIS[byteValue%CRYPTO_EMOJIS.length];
+      }
+
+      function cryptoSetFormat(format){
+        // Update button states
+        ['hex','fa','en'].forEach(f=>{
+          const btn=document.getElementById('crypto-fmt-'+f);
+          if(btn) btn.className='btn '+(f===format?'btn-filled':'btn-tonal');
+        });
+        // Store format in data attribute for later use
+        document.getElementById('crypto-output').dataset.format=format;
+        document.getElementById('crypto-text').dataset.encFormat=format;
+      }
+
+      // Initialize format
+      document.addEventListener('DOMContentLoaded',()=>{
+        if(!document.getElementById('crypto-fmt-hex')) return; // Not loaded
+        cryptoSetFormat('hex');
+      });
+
+      function cryptoToggleKeyView(){
+        const keyEl=document.getElementById('crypto-key');
+        const isPassword=keyEl.type==='password';
+        keyEl.type=isPassword?'text':'password';
+      }
+
+      async function cryptoDeriveKey(password){
+        const enc=new TextEncoder();
+        const keyMaterial=await crypto.subtle.importKey('raw',enc.encode(password),'PBKDF2',false,['deriveBits']);
+        const salt=new Uint8Array(16); // All zeros salt for deterministic output
+        const derivedBits=await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt:salt,iterations:100000},keyMaterial,256);
+        return derivedBits;
+      }
+
+      async function cryptoEncrypt(){
+        try{
+          const txt=document.getElementById('crypto-text').value;
+          const pwd=document.getElementById('crypto-key').value;
+          const algo=document.getElementById('crypto-algo').value;
+          const format=document.getElementById('crypto-text').dataset.encFormat||'hex';
+          const useEmoji=document.getElementById('crypto-emoji').checked;
+          const errEl=document.getElementById('crypto-error');
+
+          if(!txt||!pwd){errEl.textContent='متن و کلید را وارد کنید';errEl.style.display='block';return;}
+          errEl.style.display='none';
+
+          const keyBits=await cryptoDeriveKey(pwd);
+          const algoName=algo==='aes-256-gcm'?'AES-GCM':'AES-CBC';
+          const key=await crypto.subtle.importKey('raw',keyBits,algoName,false,['encrypt']);
+          const iv=crypto.getRandomValues(new Uint8Array(16));
+          const enc=new TextEncoder();
+          const data=enc.encode(txt);
+          
+          let encrypted;
+          if(algo==='aes-256-gcm'){
+            encrypted=await crypto.subtle.encrypt({name:'AES-GCM',iv:iv},key,data);
+          }else{
+            encrypted=await crypto.subtle.encrypt({name:'AES-CBC',iv:iv},key,data);
+          }
+
+          const combined=new Uint8Array(1+iv.length+encrypted.byteLength);
+          combined[0]=algo==='aes-256-gcm'?1:0;
+          combined.set(iv,1);
+          combined.set(new Uint8Array(encrypted),1+iv.length);
+
+          if(format==='hex'){
+            // Raw hex format
+            const hex=Array.from(combined).map(b=>b.toString(16).padStart(2,'0')).join('');
+            document.getElementById('crypto-output').value=hex;
+          }else{
+            // Human-readable format: each byte → word + optional emojis (chunk-based)
+            const words=format==='fa'?CRYPTO_PERSIAN_WORDS:CRYPTO_ENGLISH_WORDS;
+            const parts=[];
+            let chunkSum=0;
+            for(let i=0;i<combined.length;i++){
+              const byteIdx=combined[i]%words.length;
+              const word=words[byteIdx];
+              chunkSum+=combined[i];
+              parts.push(word);
+              if(useEmoji){
+                const isChunkEnd=(i+1)%EMOJI_CHUNK_SIZE===0;
+                const isLast=i===combined.length-1;
+                if(isChunkEnd||isLast){
+                  parts.push(cryptoSelectEmoji(chunkSum));
+                  chunkSum=0;
+                }
+              }
+            }
+            document.getElementById('crypto-output').value=parts.join(' ');
+          }
+        }catch(e){
+          document.getElementById('crypto-error').textContent='خطا: '+e.message;
+          document.getElementById('crypto-error').style.display='block';
+        }
+      }
+
+      async function cryptoDecrypt(){
+        try{
+          const encTxt=document.getElementById('crypto-output').value;
+          const pwd=document.getElementById('crypto-key').value;
+          const errEl=document.getElementById('crypto-error');
+
+          if(!encTxt||!pwd){errEl.textContent='متن و کلید را وارد کنید';errEl.style.display='block';return;}
+          errEl.style.display='none';
+
+          let combined;
+          const words=CRYPTO_PERSIAN_WORDS;
+          
+          // Try to parse human-readable format first
+          if(encTxt.match(/[آ-ی]/)){
+            // Persian human-readable format: split by whitespace and strip ALL emojis
+            const stripEmojis=encTxt.replace(/[\p{Emoji}]/gu,'');
+            const rawParts=stripEmojis.split(/[\s‌]+/).filter(p=>p.length>0);
+            combined=new Uint8Array(rawParts.length);
+            for(let i=0;i<rawParts.length;i++){
+              const word=rawParts[i].trim();
+              const wordIdx=words.indexOf(word);
+              if(wordIdx===-1){throw new Error('کلمه نامعتبر: '+word);}
+              combined[i]=wordIdx;
+            }
+          }else if(encTxt.match(/[a-z]/i)){
+            // English human-readable format: strip ALL emojis
+            const stripEmojis=encTxt.replace(/[\p{Emoji}]/gu,'');
+            const rawParts=stripEmojis.split(/[\s‌]+/).filter(p=>p.length>0);
+            combined=new Uint8Array(rawParts.length);
+            for(let i=0;i<rawParts.length;i++){
+              const word=rawParts[i].trim().toLowerCase();
+              const wordIdx=CRYPTO_ENGLISH_WORDS.indexOf(word);
+              if(wordIdx===-1){throw new Error('نامعتبر: '+word);}
+              combined[i]=wordIdx;
+            }
+          }else{
+            // Hex format
+            const hex=encTxt.replace(/\s/g,'');
+            if(hex.length%2!==0){throw new Error('متن رمز نامعتبر');}
+            combined=new Uint8Array(hex.length/2);
+            for(let i=0;i<hex.length;i+=2){
+              combined[i/2]=parseInt(hex.substr(i,2),16);
+            }
+          }
+
+          if(combined.length<18){throw new Error('متن رمز خیلی کوتاه');}
+
+          const algoId=combined[0];
+          const algo=algoId===1?'AES-GCM':'AES-CBC';
+          const iv=combined.slice(1,17);
+          const encrypted=combined.slice(17);
+
+          const keyBits=await cryptoDeriveKey(pwd);
+          const algoName=algo==='AES-GCM'?'AES-GCM':'AES-CBC';
+          const key=await crypto.subtle.importKey('raw',keyBits,algoName,false,['decrypt']);
+
+          let decrypted;
+          if(algo==='AES-GCM'){
+            decrypted=await crypto.subtle.decrypt({name:'AES-GCM',iv:iv},key,encrypted);
+          }else{
+            decrypted=await crypto.subtle.decrypt({name:'AES-CBC',iv:iv},key,encrypted);
+          }
+
+          const dec=new TextDecoder();
+          document.getElementById('crypto-text').value=dec.decode(decrypted);
+        }catch(e){
+          document.getElementById('crypto-error').textContent='خطا در رمزگشایی: '+e.message;
+          document.getElementById('crypto-error').style.display='block';
+        }
+      }
+
+      function cryptoClear(){
+        document.getElementById('crypto-text').value='';
+        document.getElementById('crypto-output').value='';
+        document.getElementById('crypto-key').value='';
+        document.getElementById('crypto-error').style.display='none';
+      }
+
+      function cryptoCopyToKey(){
+        const output=document.getElementById('crypto-output').value;
+        if(!output){alert('متن رمز خالی است');return;}
+        document.getElementById('crypto-key').value=output;
+      }
+
+      // ══════════════════════════════════════════════════════
       //  JWT
       // ══════════════════════════════════════════════════════
       function parseJWT(){
@@ -9246,6 +9823,220 @@
           const csv=[keys.join(','),...arr.map(row=>keys.map(k=>esc(row[k]??'')).join(','))].join('\n');
           document.getElementById('cj-out').value=csv;
         }catch(e){document.getElementById('cj-out').value='خطا: '+e.message;}
+      }
+
+      // ══════════════════════════════════════════════════════
+      //  filesplit - File Splitter & Merger
+      // ══════════════════════════════════════════════════════
+      let _filesplitFile=null;
+      let _filesplitMergeFiles=[];
+
+      function filesplitSetTab(tab){
+        ['split','merge'].forEach(t=>{
+          document.getElementById('filesplit-'+t+'-wrap').style.display=t===tab?'':'none';
+          document.getElementById('filesplit-tab-'+t).className='btn '+(t===tab?'btn-filled':'btn-tonal');
+        });
+      }
+
+      function filesplitDrag(e,on){e.preventDefault();document.getElementById('filesplit-upload').classList.toggle('drag-over',on);}
+      function filesplitMergeDrag(e,on){e.preventDefault();document.getElementById('filesplit-merge-upload').classList.toggle('drag-over',on);}
+
+      function filesplitDrop(e){
+        e.preventDefault();
+        filesplitDrag(e,false);
+        const f=e.dataTransfer.files[0];
+        if(f){
+          const inp=document.getElementById('filesplit-file');
+          const dt=new DataTransfer();
+          dt.items.add(f);
+          inp.files=dt.files;
+          filesplitHandleFileSelect();
+        }
+      }
+
+      function filesplitMergeDrop(e){
+        e.preventDefault();
+        filesplitMergeDrag(e,false);
+        const files=e.dataTransfer.files;
+        if(files.length>0){
+          const inp=document.getElementById('filesplit-merge-files');
+          const dt=new DataTransfer();
+          for(let i=0;i<files.length;i++)dt.items.add(files[i]);
+          inp.files=dt.files;
+          filesplitHandleMergeSelect();
+        }
+      }
+
+      function filesplitHandleFileSelect(){
+        const inp=document.getElementById('filesplit-file');
+        _filesplitFile=inp.files[0];
+        if(_filesplitFile){
+          const size=((_filesplitFile.size/1024/1024).toFixed(2))+' MB';
+          document.getElementById('filesplit-file-info').textContent=`✓ ${_filesplitFile.name} (${size})`;
+          document.getElementById('filesplit-error').style.display='none';
+        }
+      }
+
+      function filesplitHandleMergeSelect(){
+        const inp=document.getElementById('filesplit-merge-files');
+        _filesplitMergeFiles=Array.from(inp.files);
+        if(_filesplitMergeFiles.length>0){
+          document.getElementById('filesplit-merge-info').textContent=`✓ ${_filesplitMergeFiles.length} فایل انتخاب شد`;
+          document.getElementById('filesplit-error').style.display='none';
+        }
+      }
+
+      function filesplitUpdateUI(){
+        const usePwd=document.getElementById('filesplit-password').checked;
+        document.getElementById('filesplit-pwd-input').style.display=usePwd?'block':'none';
+      }
+
+      function filesplitUpdateMergeUI(){
+        const usePwd=document.getElementById('filesplit-merge-password').checked;
+        document.getElementById('filesplit-pwd-merge-input').style.display=usePwd?'block':'none';
+      }
+
+      function filesplitTogglePasswordVisibility(fieldId){
+        const field=document.getElementById(fieldId);
+        if(field.type==='password'){
+          field.type='text';
+        }else{
+          field.type='password';
+        }
+      }
+
+      async function filesplitSplitFile(){
+        if(!_filesplitFile){
+          document.getElementById('filesplit-error').textContent='هیچ فایلی انتخاب نشده است';
+          document.getElementById('filesplit-error').style.display='block';
+          return;
+        }
+
+        const sizeNum=parseFloat(document.getElementById('filesplit-size').value);
+        const unit=document.getElementById('filesplit-unit').value;
+        const sizeBytes=sizeNum*({KB:1024,MB:1024*1024,GB:1024*1024*1024}[unit]||1024*1024);
+        const usePwd=document.getElementById('filesplit-password').checked;
+        const pwd=usePwd?document.getElementById('filesplit-pwd').value:'';
+
+        if(sizeBytes<=0){
+          document.getElementById('filesplit-error').textContent='حجم نامعتبر';
+          document.getElementById('filesplit-error').style.display='block';
+          return;
+        }
+
+        const prog=document.getElementById('filesplit-split-progress');
+        const bar=document.getElementById('filesplit-split-bar');
+        const status=document.getElementById('filesplit-split-status');
+        prog.style.display='block';
+
+        try{
+          const buffer=await _filesplitFile.arrayBuffer();
+          const bytes=new Uint8Array(buffer);
+          const totalChunks=Math.ceil(bytes.length/sizeBytes);
+          
+          for(let i=0;i<totalChunks;i++){
+            const start=i*sizeBytes;
+            const end=Math.min(start+sizeBytes,bytes.length);
+            let chunkData=bytes.slice(start,end);
+
+            if(usePwd&&pwd){
+              chunkData=await filesplitEncryptChunk(chunkData,pwd,i);
+            }
+
+            const chunkBlob=new Blob([chunkData],{type:'application/octet-stream'});
+            const link=document.createElement('a');
+            link.href=URL.createObjectURL(chunkBlob);
+            link.download=`${_filesplitFile.name}.part${String(i+1).padStart(3,'0')}of${String(totalChunks).padStart(3,'0')}`;
+            link.click();
+            URL.revokeObjectURL(link.href);
+
+            bar.style.width=((i+1)/totalChunks*100)+'%';
+            status.textContent=`${i+1} / ${totalChunks}`;
+          }
+
+          status.textContent='✓ تقسیم کامل شد';
+          document.getElementById('filesplit-error').style.display='none';
+        }catch(e){
+          document.getElementById('filesplit-error').textContent='خطا: '+e.message;
+          document.getElementById('filesplit-error').style.display='block';
+          prog.style.display='none';
+        }
+      }
+
+      async function filesplitMergeFiles(){
+        if(_filesplitMergeFiles.length===0){
+          document.getElementById('filesplit-error').textContent='هیچ فایلی انتخاب نشده است';
+          document.getElementById('filesplit-error').style.display='block';
+          return;
+        }
+
+        const usePwd=document.getElementById('filesplit-merge-password').checked;
+        const pwd=usePwd?document.getElementById('filesplit-pwd-merge').value:'';
+        const prog=document.getElementById('filesplit-merge-progress');
+        const bar=document.getElementById('filesplit-merge-bar');
+        const status=document.getElementById('filesplit-merge-status');
+        prog.style.display='block';
+
+        try{
+          const chunks=[];
+          for(let i=0;i<_filesplitMergeFiles.length;i++){
+            let buffer=await _filesplitMergeFiles[i].arrayBuffer();
+            if(pwd){
+              buffer=await filesplitDecryptChunk(new Uint8Array(buffer),pwd,i);
+            }
+            chunks.push(new Uint8Array(buffer));
+            bar.style.width=((i+1)/_filesplitMergeFiles.length*100)+'%';
+            status.textContent=`${i+1} / ${_filesplitMergeFiles.length}`;
+          }
+
+          const totalSize=chunks.reduce((a,c)=>a+c.length,0);
+          const merged=new Uint8Array(totalSize);
+          let offset=0;
+          chunks.forEach(chunk=>{merged.set(chunk,offset);offset+=chunk.length;});
+
+          const origName=_filesplitMergeFiles[0].name.split('.part')[0];
+          const blob=new Blob([merged],{type:'application/octet-stream'});
+          const link=document.createElement('a');
+          link.href=URL.createObjectURL(blob);
+          link.download=origName;
+          link.click();
+          URL.revokeObjectURL(link.href);
+
+          status.textContent='✓ مرج کامل شد';
+          document.getElementById('filesplit-error').style.display='none';
+        }catch(e){
+          document.getElementById('filesplit-error').textContent='خطا: '+e.message;
+          document.getElementById('filesplit-error').style.display='block';
+          prog.style.display='none';
+        }
+      }
+
+      async function filesplitEncryptChunk(data,pwd,chunkIdx){
+        const enc=new TextEncoder();
+        const keyMaterial=await crypto.subtle.importKey('raw',enc.encode(pwd),'PBKDF2',false,['deriveBits']);
+        const salt=new Uint8Array(16);salt[0]=chunkIdx;
+        const derivedBits=await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt:salt,iterations:100000},keyMaterial,256);
+        const key=await crypto.subtle.importKey('raw',derivedBits,'AES-GCM',false,['encrypt']);
+        const iv=crypto.getRandomValues(new Uint8Array(16));
+        const encrypted=await crypto.subtle.encrypt({name:'AES-GCM',iv:iv},key,data);
+        const result=new Uint8Array(1+iv.length+encrypted.byteLength);
+        result[0]=1;
+        result.set(iv,1);
+        result.set(new Uint8Array(encrypted),1+iv.length);
+        return result;
+      }
+
+      async function filesplitDecryptChunk(data,pwd,chunkIdx){
+        if(data[0]!==1){return data;}
+        const iv=data.slice(1,17);
+        const encrypted=data.slice(17);
+        const enc=new TextEncoder();
+        const keyMaterial=await crypto.subtle.importKey('raw',enc.encode(pwd),'PBKDF2',false,['deriveBits']);
+        const salt=new Uint8Array(16);salt[0]=chunkIdx;
+        const derivedBits=await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt:salt,iterations:100000},keyMaterial,256);
+        const key=await crypto.subtle.importKey('raw',derivedBits,'AES-GCM',false,['decrypt']);
+        const decrypted=await crypto.subtle.decrypt({name:'AES-GCM',iv:iv},key,encrypted);
+        return new Uint8Array(decrypted);
       }
 
       // ══════════════════════════════════════════════════════
@@ -12284,7 +13075,7 @@
       // Uses math.evaluate which handles: nthRoot, cbrt, arbitrary roots,
       // all trig/inverse trig, log with base, complex, units, etc.
       const _mathScope = {
-        cbrt: (v) => math.cbrt(typeof v==='number'?math.complex(v):v),
+        cbrt: (v) => { var n=typeof v==='object'&&v.re!==undefined?v.re:+v; return Math.sign(n)*Math.pow(Math.abs(n),1/3); },
         nthRoot: (v,n) => math.nthRoot(v,n),
       };
       function _calcEval(expr, x) {
@@ -12669,45 +13460,152 @@
           .replace(/\bln\s*\(/g,'log(').replace(/\be\b(?![a-zA-Z0-9_])/g,'e');
       }
 
-      // Compute special points (roots, maxima, minima) for the given functions
+      // Compute special points (roots, maxima, minima, intersections) for the given functions
       function _cgComputeSpecialPts(fns){
-        if(!fns||!fns.length)return[];
-        var all=[];
-        fns.forEach(function(f){
-          var expr=f.expr,N=800,h=(_cgXb-_cgXa)/N,prev=null;
+        if(!fns||!fns.length){console.log('_cgComputeSpecialPts: no functions');return[];}
+        console.log('_cgComputeSpecialPts called with',fns.length,'functions');
+        var xa=-10,xb=10;
+        var roots=[],extrema=[],intersections=[];
+        
+        // ─────────────────────────────────────────────────────
+        // STEP 1: Find extrema (maxima and minima) for each function
+        // ─────────────────────────────────────────────────────
+        fns.forEach(function(f,fIdx){
+          console.log('Processing function',fIdx,'expr=',f.expr);
+          var expr=f.expr,N=2000,h=(xb-xa)/N,prev=null;
+          var extremaCount=0;
           for(var i=0;i<=N;i++){
-            var xv=_cgXa+h*i,yv,d1;
+            var xv=xa+h*i,yv,d1;
             yv=_calcEval(expr,xv);
             if(!isFinite(yv)){prev=null;continue;}
             d1=(_calcEval(expr,xv+1e-5)-_calcEval(expr,xv-1e-5))/2e-5;
-            if(prev){
-              // Root: sign change (uses bisection refinement)
-              if(prev.y*yv<0){
-                var a2=prev.x,b2=xv;
-                for(var bi=0;bi<80;bi++){var mid=(a2+b2)/2,fm=_calcEval(expr,mid);if(!isFinite(fm)||Math.abs(b2-a2)<1e-12)break;if(prev.y*fm<=0)b2=mid;else a2=mid;}
-                var rx=(a2+b2)/2;
-                if(Math.abs(_calcEval(expr,rx))<1e-5)
-                  all.push({x:rx,y:0,type:'root',color:f.color,expr:expr});
+            if(prev&&isFinite(d1)&&isFinite(prev.d1)&&prev.d1*d1<=0&&Math.abs(prev.d1)<1e6&&Math.abs(d1)<1e6&&(Math.abs(prev.d1)>1e-8||Math.abs(d1)>1e-8)){
+              // Derivative sign change = extremum
+              var ea=prev.x,eb=xv;
+              for(var ei=0;ei<60;ei++){
+                var em=(ea+eb)/2;
+                var dm=(_calcEval(expr,em+1e-7)-_calcEval(expr,em-1e-7))/2e-7;
+                if(!isFinite(dm)||Math.abs(eb-ea)<1e-10)break;
+                if(prev.d1*dm<=0)eb=em;else ea=em;
               }
-              // Near-zero (touches axis)
-              if(Math.abs(yv)<1e-6&&Math.abs(prev.y)>1e-4)
-                all.push({x:xv,y:0,type:'root',color:f.color,expr:expr});
-              // Extremum: derivative sign change (max or min)
-              if(isFinite(d1)&&isFinite(prev.d1)&&prev.d1*d1<0&&Math.abs(prev.d1)<1e6&&Math.abs(d1)<1e6){
-                var ex=(prev.x+xv)/2,ey=_calcEval(expr,ex);
-                if(isFinite(ey)){
-                  var type=d1<prev.d1?'max':'min';
-                  all.push({x:ex,y:ey,type:type,color:f.color,expr:expr});
+              var ex=(ea+eb)/2,ey=_calcEval(expr,ex);
+              // Snap extremely small x-values to zero (numerical precision cleanup)
+              if(Math.abs(ex)<1e-8)ex=0;
+              // Snap to nearby integers if very close
+              var nearInt=Math.round(ex);
+              if(Math.abs(ex-nearInt)<1e-6)ex=nearInt;
+              if(isFinite(ey)){
+                var type=d1<prev.d1?'max':'min';
+                // Check if already have very similar extremum
+                if(!extrema.some(function(e){return Math.abs(e.x-ex)<0.01&&e.type===type;})){
+                  extrema.push({x:ex,y:ey,type:type,color:f.color,expr:expr});
+                  extremaCount++;
                 }
               }
             }
             prev={x:xv,y:yv,d1:d1};
           }
+          console.log('  Found',extremaCount,'extrema');
         });
-        // Deduplicate points that are very close and of the same type
+        console.log('Total extrema:',extrema.length);
+        
+        // ─────────────────────────────────────────────────────
+        // STEP 2: Find roots (zero crossings) for each function
+        // ─────────────────────────────────────────────────────
+        fns.forEach(function(f,fIdx){
+          var expr=f.expr,N=2000,h=(xb-xa)/N,prev=null;
+          var rootCount=0;
+          for(var i=0;i<=N;i++){
+            var xv=xa+h*i,yv;
+            yv=_calcEval(expr,xv);
+            if(!isFinite(yv)){prev=null;continue;}
+            if(prev&&prev.y*yv<0){
+              // Sign change = root
+              var a2=prev.x,b2=xv;
+              for(var bi=0;bi<80;bi++){
+                var mid=(a2+b2)/2,fm=_calcEval(expr,mid);
+                if(!isFinite(fm)||Math.abs(b2-a2)<1e-12)break;
+                if(prev.y*fm<=0)b2=mid;else a2=mid;
+              }
+              var rx=(a2+b2)/2;
+              // Snap extremely small x-values to zero (numerical precision cleanup)
+              if(Math.abs(rx)<1e-8)rx=0;
+              // Snap to nearby integers if very close
+              var nearInt=Math.round(rx);
+              if(Math.abs(rx-nearInt)<1e-6)rx=nearInt;
+              if(Math.abs(_calcEval(expr,rx))<1e-5){
+                // Check if already have very similar root
+                if(!roots.some(function(r){return Math.abs(r.x-rx)<0.01;})){
+                  roots.push({x:rx,y:0,type:'root',color:f.color,expr:expr});
+                  rootCount++;
+                }
+              }
+            }
+            prev={x:xv,y:yv};
+          }
+          console.log('  Fn',fIdx,'found',rootCount,'roots');
+        });
+        console.log('Total roots:',roots.length);
+        
+        // ─────────────────────────────────────────────────────
+        // STEP 3: Find intersections between pairs of functions
+        // ─────────────────────────────────────────────────────
+        var intCount=0;
+        for(var fi=0;fi<fns.length;fi++){
+          for(var fj=fi+1;fj<fns.length;fj++){
+            var f1=fns[fi],f2=fns[fj];
+            var expr1=f1.expr,expr2=f2.expr;
+            var N=2000,h=(xb-xa)/N,prev=null;
+            for(var i=0;i<=N;i++){
+              var xv=xa+h*i;
+              var y1=_calcEval(expr1,xv),y2=_calcEval(expr2,xv);
+              if(!isFinite(y1)||!isFinite(y2)){prev=null;continue;}
+              if(prev){
+                var d1=prev.y1-prev.y2,d2=y1-y2;
+                if(d1*d2<0){
+                  // Sign change in difference = intersection
+                  var a2=prev.x,b2=xv;
+                  for(var bi=0;bi<80;bi++){
+                    var mid=(a2+b2)/2;
+                    var fm1=_calcEval(expr1,mid),fm2=_calcEval(expr2,mid);
+                    if(!isFinite(fm1)||!isFinite(fm2)||Math.abs(b2-a2)<1e-12)break;
+                    var dm1=fm1-fm2;
+                    if(d1*dm1<=0)b2=mid;else a2=mid;
+                  }
+                  var ix=(a2+b2)/2,iy1=_calcEval(expr1,ix);
+                  // Snap extremely small x-values to zero (numerical precision cleanup)
+                  if(Math.abs(ix)<1e-8)ix=0;
+                  // Snap to nearby integers if very close
+                  var nearInt=Math.round(ix);
+                  if(Math.abs(ix-nearInt)<1e-6)ix=nearInt;
+                  if(isFinite(iy1)){
+                    var iy2=_calcEval(expr2,ix);
+                    if(Math.abs(iy1-iy2)<1e-4){
+                      // Check if already have very similar intersection
+                      if(!intersections.some(function(it){return Math.abs(it.x-ix)<0.01;})){
+                        intersections.push({x:ix,y:iy1,type:'intersection',color:'#FFD700',expr:expr1+' ∩ '+expr2});
+                        intCount++;
+                      }
+                    }
+                  }
+                }
+              }
+              prev={x:xv,y1:y1,y2:y2};
+            }
+          }
+        }
+        console.log('Total intersections:',intCount);
+        
+        // ─────────────────────────────────────────────────────
+        // STEP 4: Combine all and return
+        // ─────────────────────────────────────────────────────
+        var all=extrema.concat(roots).concat(intersections);
+        console.log('Total special points before dedup:',all.length);
+        // Final dedup: only remove points with identical type AND x-value within 0.005
         all=all.filter(function(p,i){
-          return!all.some(function(q,j){return j<i&&Math.abs(q.x-p.x)<0.05&&q.type===p.type;});
-        }).slice(0,15);
+          return!all.slice(0,i).some(function(q){return q.type===p.type&&Math.abs(q.x-p.x)<0.005;});
+        }).slice(0,50);
+        console.log('Total special points after dedup:',all.length, all);
         return all;
       }
 
@@ -12716,8 +13614,9 @@
         var spEl=document.getElementById('calc-special-pts');
         if(!spEl)return;
         if(!specialPts||!specialPts.length){spEl.innerHTML='';return;}
-        var icons={root:'⚫',max:'▲',min:'▼'};
-        var labels={root:'ریشه',max:'ماکزیمم',min:'مینیمم'};
+        var icons={root:'⚫',max:'▲',min:'▼',intersection:'✕'};
+        var labels={root:'ریشه',max:'ماکزیمم',min:'مینیمم',intersection:'تقاطع'};
+        window._cgSpecialPts=specialPts; // Store for use in _cgHighlightPt
         spEl.innerHTML='<div style="font-size:11px;font-weight:600;color:var(--m3-on-surface-variant);margin-bottom:6px">نقاط ویژه (کلیک = نمایش روی نمودار):</div>'
           +'<div style="display:flex;flex-wrap:wrap;gap:5px">'
           +specialPts.map(function(p,pi){
@@ -12780,7 +13679,12 @@
         // Compute special points BEFORE plotting so we can include them as scatter
         var specialPts=_cgComputeSpecialPts(fns);
         window._cgSpecialPts=specialPts;
-        // Add highlighted point if any
+        // Add ALL special points as scatter dots (root=circle, max=triangle, min=inverted triangle)
+        specialPts.forEach(function(p){
+          // Add point with slightly larger radius
+          data.push({points:[[p.x,p.y]],fnType:'points',graphType:'scatter',color:p.color});
+        });
+        // Add highlighted point if any (with red highlight)
         if(window._cgHighlightIdx>=0&&specialPts[window._cgHighlightIdx]){
           var hp=specialPts[window._cgHighlightIdx];
           data.push({points:[[hp.x,hp.y]],fnType:'points',graphType:'scatter',color:'#e91e63'});
@@ -12797,6 +13701,73 @@
               if(xaEl)xaEl.value=+_cgXa.toPrecision(5);if(xbEl)xbEl.value=+_cgXb.toPrecision(5);
               setTimeout(_cgDrawPlot,50);}catch(e2){}
           });
+          // Add mousemove handler for tangent line on hover (with debounce)
+          var tooltipEl=document.createElement('div');
+          tooltipEl.style.cssText='position:absolute;background:rgba(0,0,0,0.8);color:#fff;padding:4px 8px;border-radius:4px;font-size:11px;pointer-events:none;white-space:nowrap;z-index:1000;display:none';
+          container.parentElement.style.position='relative';
+          container.parentElement.appendChild(tooltipEl);
+          var _cgLastTangentUpdate=0,_cgTangentTimeout=null;
+          container.addEventListener('mousemove',function(e){
+            if(!_cgFpInstance||!_cgFpInstance.meta||!_cgFpInstance.meta.xScale)return;
+            try{
+              var rect=container.getBoundingClientRect();
+              var mx=e.clientX-rect.left,my=e.clientY-rect.top;
+              var xv=_cgFpInstance.meta.xScale.invert(mx);
+              if(isNaN(xv)||!isFinite(xv))return;
+              
+              // Always update tooltip (lightweight)
+              if(window._cgTangentPoint){
+                tooltipEl.innerHTML='x='+_fmtN(xv)+', y='+_fmtN(window._cgTangentPoint.y)+', m='+_fmtN(window._cgTangentPoint.slope);
+                tooltipEl.style.display='block';
+                tooltipEl.style.left=(e.clientX-rect.left+10)+'px';
+                tooltipEl.style.top=(e.clientY-rect.top-30)+'px';
+              }
+              
+              // Debounce tangent line redraw: max once per 150ms
+              if(_cgTangentTimeout)clearTimeout(_cgTangentTimeout);
+              _cgTangentTimeout=setTimeout(function(){
+                try{
+                  var tangentData=_cgDrawTangentLine(fns,xv);
+                  if(tangentData.length>0){
+                    // Update plot with tangent line overlay
+                    var newData=data.concat(tangentData);
+                    if(_cgFpInstance){
+                      _cgFpInstance.removeEventListener=function(){};
+                      try{_cgFpInstance.destroy();}catch(_){}
+                    }
+                    _cgFpInstance=functionPlot({target:container,width:Math.max(280,(container.offsetWidth||340)),
+                      height:300,grid:true,xAxis:{domain:[_cgXa,_cgXb]},data:newData,tip:{xLine:true,yLine:true}});
+                    _cgFpInstance.on('all:zoom',function(){
+                      try{var d=_cgFpInstance.meta.xScale.domain();_cgXa=d[0];_cgXb=d[1];
+                        if(xaEl)xaEl.value=+_cgXa.toPrecision(5);if(xbEl)xbEl.value=+_cgXb.toPrecision(5);
+                        setTimeout(_cgDrawPlot,50);}catch(e2){}
+                    });
+                  }
+                }catch(_){}
+              },150);
+            }catch(_){}
+          });
+          container.addEventListener('mouseleave',function(){
+            // Clear any pending tangent update
+            if(_cgTangentTimeout)clearTimeout(_cgTangentTimeout);
+            // Hide tooltip
+            tooltipEl.style.display='none';
+            window._cgTangentPoint=null;
+            // Redraw without tangent line when mouse leaves
+            try{
+              if(_cgFpInstance){
+                _cgFpInstance.removeEventListener=function(){};
+                try{_cgFpInstance.destroy();}catch(_){}
+              }
+              _cgFpInstance=functionPlot({target:container,width:Math.max(280,(container.offsetWidth||340)),
+                height:300,grid:true,xAxis:{domain:[_cgXa,_cgXb]},data:data,tip:{xLine:true,yLine:true}});
+              _cgFpInstance.on('all:zoom',function(){
+                try{var d=_cgFpInstance.meta.xScale.domain();_cgXa=d[0];_cgXb=d[1];
+                  if(xaEl)xaEl.value=+_cgXa.toPrecision(5);if(xbEl)xbEl.value=+_cgXb.toPrecision(5);
+                  setTimeout(_cgDrawPlot,50);}catch(e2){}
+                });
+            }catch(_){}
+          });
           _cgRenderSpecialPts(specialPts);
         }catch(err){container.innerHTML='<div style="padding:14px;color:var(--m3-error);font-size:13px">خطا: '+err.message+'</div>';}
       }
@@ -12806,10 +13777,11 @@
         if(!spEl){return;}
         if(!fns||!fns.length){spEl.innerHTML='';return;}
         var all=[];
+        var xa=-10,xb=10;
         fns.forEach(function(f){
-          var expr=f.expr,N=800,h=(_cgXb-_cgXa)/N,prev=null;
+          var expr=f.expr,N=2000,h=(xb-xa)/N,prev=null;
           for(var i=0;i<=N;i++){
-            var xv=_cgXa+h*i,yv,d1;
+            var xv=xa+h*i,yv,d1;
             yv=_calcEval(expr,xv);
             if(!isFinite(yv)){prev=null;continue;}
             d1=(_calcEval(expr,xv+1e-5)-_calcEval(expr,xv-1e-5))/2e-5;
@@ -12827,7 +13799,15 @@
                 all.push({x:xv,y:0,type:'root',color:f.color,expr:expr});
               // Extremum: derivative sign change
               if(isFinite(d1)&&isFinite(prev.d1)&&prev.d1*d1<0&&Math.abs(prev.d1)<1e6&&Math.abs(d1)<1e6){
-                var ex=(prev.x+xv)/2,ey=_calcEval(expr,ex);
+                var ea=prev.x,eb=xv;
+                for(var ei=0;ei<60;ei++){
+                  var em=(ea+eb)/2;
+                  var dm=(_calcEval(expr,em+1e-7)-_calcEval(expr,em-1e-7))/2e-7;
+                  if(!isFinite(dm))break;
+                  if(prev.d1*dm<=0)eb=em;else ea=em;
+                  if(Math.abs(eb-ea)<1e-10)break;
+                }
+                var ex=(ea+eb)/2,ey=_calcEval(expr,ex);
                 if(isFinite(ey)){
                   var type=d1<prev.d1?'max':'min';
                   all.push({x:ex,y:ey,type:type,color:f.color,expr:expr});
@@ -12862,34 +13842,44 @@
       function _cgHighlightPt(idx){
         var all=window._cgSpecialPts||[];
         var p=all[idx]; if(!p)return;
-        // Add a scatter point to the existing plot
-        var container=document.getElementById('calc-fp-container');
-        if(!container||!_cgFpInstance)return;
-        // Redraw with highlight point added
-        var fns=_cgGetFns();
-        // Rebuild data and add a highlight scatter
-        _cgDrawPlot(); // redraw base
-        // After redraw, add a second pass with the highlighted point as a large scatter
-        setTimeout(function(){
-          try{
-            var pts=[[p.x,p.y]];
-            if(typeof functionPlot!=='undefined'){
-              functionPlot({
-                target:container,
-                disableZoom:true,
-                width:Math.max(280,(container.offsetWidth||340)),
-                height:300,grid:true,
-                xAxis:{domain:[_cgXa,_cgXb]},
-                data:[{points:pts,fnType:'points',graphType:'scatter',color:'#e91e63'}],
-                tip:{xLine:true,yLine:true}
-              });
-            }
-          }catch(_){}
-        },50);
+        window._cgHighlightIdx=idx;
+        // Zoom/pan to the special point
+        var pad=2; // padding around point
+        var newXa=p.x-pad,newXb=p.x+pad;
+        // Make sure zoom shows the point clearly
+        if(newXb-newXa<0.5)newXb=newXa+0.5;
+        _cgXa=newXa; _cgXb=newXb;
+        var xaEl=document.getElementById('calc-gxa'),xbEl=document.getElementById('calc-gxb');
+        if(xaEl)xaEl.value=+_cgXa.toPrecision(5);
+        if(xbEl)xbEl.value=+_cgXb.toPrecision(5);
+        // Redraw with highlight at new zoom level
+        _cgDrawPlot();
+      }
+      
+      function _cgDrawTangentLine(fns,xv){
+        // Compute tangent line at point xv for all functions
+        var data=[];
+        fns.forEach(function(f){
+          // Compute derivative at xv
+          var expr=f.expr;
+          var fv=_calcEval(expr,xv);
+          var dv=(_calcEval(expr,xv+1e-7)-_calcEval(expr,xv-1e-7))/2e-7;
+          if(!isFinite(fv)||!isFinite(dv))return;
+          // Tangent line: y - fv = dv*(x - xv)
+          // Draw from xv-2 to xv+2
+          var x1=_cgXa,x2=_cgXb;
+          var y1=fv+dv*(x1-xv),y2=fv+dv*(x2-xv);
+          data.push({points:[[x1,y1],[x2,y2]],fnType:'points',graphType:'polyline',color:f.color,dasharray:'4,4'});
+          // Add tangent point with coordinates
+          data.push({points:[[xv,fv]],fnType:'points',graphType:'scatter',color:f.color});
+          // Store tangent info for tooltip
+          window._cgTangentPoint={x:xv,y:fv,slope:dv,color:f.color};
+        });
+        return data;
       }
       function _fmtN(v){if(v===0)return'0';if(Math.abs(v)>=1e5||(Math.abs(v)<0.001&&v!==0))return v.toExponential(2);return parseFloat(v.toPrecision(4))+'';}
       function _fmtPi(v){if(v===0)return'0';var r=v/Math.PI,fr=_nearFrac(r,8);if(fr){if(fr[0]===1&&fr[1]===1)return'π';if(fr[0]===-1&&fr[1]===1)return'−π';if(fr[1]===1)return fr[0]+'π';return fr[0]+'/'+fr[1]+'π';}return _fmtN(v);}
-      function _nearFrac(x,maxD){for(var d=1;d<=maxD;d++){var n=Math.round(x*d);if(Math.abs(x-n/d)<0.01)return[n,d];}return null;}
+      function _nearFrac(x,maxD){for(var d=1;d<=maxD;d++){var n=Math.round(x*d);if(Math.abs(x-n/d)<0.00001)return[n,d];}return null;}
 
 
       // ══════════════════════════════════════════════════════
@@ -14146,9 +15136,46 @@
       //  MINI GAMES
       // ══════════════════════════════════════════════════════════
       var _mgCurrent = '';
+      var _mgListeners = { touch: [], keyboard: null };
+      
+      function _mgCleanup() {
+        // Remove stored touch listeners from the area
+        const area = document.getElementById('mg-area');
+        if (area && _mgListeners.touch.length > 0) {
+          _mgListeners.touch.forEach(({type, handler, element}) => {
+            const el = element || area;
+            el.removeEventListener(type, handler, true);
+            el.removeEventListener(type, handler, false);
+          });
+          _mgListeners.touch = [];
+        }
+        // Remove keyboard listeners
+        if (_mgListeners.keyboard) {
+          document.removeEventListener('keydown', _mgListeners.keyboard);
+          _mgListeners.keyboard = null;
+        }
+        // Remove stored game-specific keyboard listeners
+        if (window._g2048kh) {
+          document.removeEventListener('keydown', window._g2048kh);
+          window._g2048kh = null;
+        }
+        if (window._snakeKH) {
+          document.removeEventListener('keydown', window._snakeKH);
+          window._snakeKH = null;
+        }
+        if (window._brkKH) {
+          document.removeEventListener('keydown', window._brkKH);
+          window._brkKH = null;
+        }
+      }
+      
       function mgSetGame(name) {
         if (name === _mgCurrent) return;
         _mgCurrent = name;
+        
+        // Clean up previous game listeners
+        _mgCleanup();
+        
         ['ttt','snake','dots','memory','2048','breakout','minesweeper'].forEach(g => {
           const b = document.getElementById('mg-tab-'+g);
           if (b) b.className = 'btn ' + (g===name?'btn-filled':'btn-tonal');
@@ -14318,27 +15345,32 @@
         };
 
         // Keyboard handler — scoped to minigames active
-        if(snakeKH)document.removeEventListener('keydown',snakeKH);
-        snakeKH=e=>{
+        if(window._snakeKH)document.removeEventListener('keydown',window._snakeKH);
+        window._snakeKH=e=>{
           if(!document.getElementById('minigames')?.classList.contains('active'))return;
           const map={'ArrowUp':{x:0,y:-1},'ArrowDown':{x:0,y:1},'ArrowLeft':{x:-1,y:0},'ArrowRight':{x:1,y:0},
                      'w':{x:0,y:-1},'s':{x:0,y:1},'a':{x:-1,y:0},'d':{x:1,y:0}};
           const nd=map[e.key];
           if(nd){e.preventDefault();if(running&&(nd.x!==(-dir.x)||nd.y!==(-dir.y)))nextDir=nd;}
         };
-        document.addEventListener('keydown',snakeKH);
+        document.addEventListener('keydown',window._snakeKH);
+        _mgListeners.keyboard = window._snakeKH;
 
         // Touch swipe on canvas
         const cv=document.getElementById('snake-c');
         if(cv){
-          cv.addEventListener('touchstart',e=>{snakeTX=e.touches[0].clientX;snakeTY=e.touches[0].clientY;e.preventDefault();},{passive:false});
-          cv.addEventListener('touchend',e=>{
+          const _snakeTouchStart=e=>{snakeTX=e.touches[0].clientX;snakeTY=e.touches[0].clientY;e.preventDefault();};
+          const _snakeTouchEnd=e=>{
             const dx=e.changedTouches[0].clientX-snakeTX, dy=e.changedTouches[0].clientY-snakeTY;
             if(Math.abs(dx)<12&&Math.abs(dy)<12)return;
             e.preventDefault();
             if(Math.abs(dx)>Math.abs(dy))window.snakeDir(dx>0?1:-1,0);
             else window.snakeDir(0,dy>0?1:-1);
-          },{passive:false});
+          };
+          cv.addEventListener('touchstart',_snakeTouchStart,{passive:false});
+          cv.addEventListener('touchend',_snakeTouchEnd,{passive:false});
+          _mgListeners.touch.push({type:'touchstart',handler:_snakeTouchStart});
+          _mgListeners.touch.push({type:'touchend',handler:_snakeTouchEnd});
         }
         draw();
       }
@@ -14691,10 +15723,15 @@
         const MAP={'ArrowLeft':'left','ArrowRight':'right','ArrowUp':'up','ArrowDown':'down'};
         window._g2048kh=e=>{if(!MAP[e.key])return;if(!document.getElementById('minigames')?.classList.contains('active'))return;e.preventDefault();move(MAP[e.key]);};
         document.addEventListener('keydown',window._g2048kh);
+        _mgListeners.keyboard = window._g2048kh;
 
         let tx=0,ty=0;
-        area.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
-        area.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)<20&&Math.abs(dy)<20)return;if(Math.abs(dx)>Math.abs(dy))move(dx>0?'right':'left');else move(dy>0?'down':'up');},{passive:true});
+        const _2048TouchStart=e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;};
+        const _2048TouchEnd=e=>{const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)<20&&Math.abs(dy)<20)return;if(Math.abs(dx)>Math.abs(dy))move(dx>0?'right':'left');else move(dy>0?'down':'up');};
+        area.addEventListener('touchstart',_2048TouchStart,{passive:true});
+        area.addEventListener('touchend',_2048TouchEnd,{passive:true});
+        _mgListeners.touch.push({type:'touchstart',handler:_2048TouchStart});
+        _mgListeners.touch.push({type:'touchend',handler:_2048TouchEnd});
       }
 
       // Breakout mini-game
@@ -14752,10 +15789,15 @@
         }
         window.brkToggle=()=>{running=!running;const btn=document.getElementById('brk-btn');if(running){interval=setInterval(step,16);if(btn)btn.textContent='⏸ مکث';}else{clearInterval(interval);if(btn)btn.textContent='▶ ادامه';}};
         window.brkReset=()=>{clearInterval(interval);running=false;won=false;over=false;score=0;lives=3;ball={x:CW/2,y:CH-80,vx:2.8,vy:-3.2};pad.x=CW/2-PADW/2;window._brkDir=0;initBricks();const el=document.getElementById('brk-sc');if(el)el.textContent='0';lv();const btn=document.getElementById('brk-btn');if(btn)btn.textContent='▶ شروع';draw();};
-        const brkKH=e=>{if(!document.getElementById('minigames')?.classList.contains('active'))return;if(e.key==='ArrowLeft')pad.x=Math.max(0,pad.x-14);if(e.key==='ArrowRight')pad.x=Math.min(CW-PADW,pad.x+14);};
-        document.addEventListener('keydown',brkKH);
-        cnv.addEventListener('mousemove',e=>{const r=cnv.getBoundingClientRect();pad.x=(e.clientX-r.left)-PADW/2;pad.x=Math.max(0,Math.min(CW-PADW,pad.x));});
-        cnv.addEventListener('touchmove',e=>{e.preventDefault();const r=cnv.getBoundingClientRect();pad.x=(e.touches[0].clientX-r.left)-PADW/2;pad.x=Math.max(0,Math.min(CW-PADW,pad.x));},{passive:false});
+        if(window._brkKH)document.removeEventListener('keydown',window._brkKH);
+        window._brkKH=e=>{if(!document.getElementById('minigames')?.classList.contains('active'))return;if(e.key==='ArrowLeft')pad.x=Math.max(0,pad.x-14);if(e.key==='ArrowRight')pad.x=Math.min(CW-PADW,pad.x+14);};
+        document.addEventListener('keydown',window._brkKH);
+        _mgListeners.keyboard = window._brkKH;
+        const _brkMouseMove=e=>{const r=cnv.getBoundingClientRect();pad.x=(e.clientX-r.left)-PADW/2;pad.x=Math.max(0,Math.min(CW-PADW,pad.x));};
+        const _brkTouchMove=e=>{e.preventDefault();const r=cnv.getBoundingClientRect();pad.x=(e.touches[0].clientX-r.left)-PADW/2;pad.x=Math.max(0,Math.min(CW-PADW,pad.x));};
+        cnv.addEventListener('mousemove',_brkMouseMove);
+        cnv.addEventListener('touchmove',_brkTouchMove,{passive:false});
+        _mgListeners.touch.push({type:'touchmove',handler:_brkTouchMove,element:cnv});
         draw();
       }
 
