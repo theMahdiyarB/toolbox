@@ -6,7 +6,7 @@
 //    - External/opaque requests: Network-only (skip)
 // ============================================================
 
-const CACHE_VERSION = 'toolbox-v3.0';
+const CACHE_VERSION = 'toolbox-v3.1';
 const CACHE_SHELL   = CACHE_VERSION + '-shell';   // HTML, CSS, JS, fonts
 const CACHE_ASSETS  = CACHE_VERSION + '-assets';  // images, maps, large files
 
@@ -46,16 +46,22 @@ const SHELL_URLS = [
 ];
 
 // ── Install: cache app shell ──────────────────────────────
+// Uses individual fetches instead of addAll() so one missing file
+// doesn't abort the entire install and leave the app broken offline.
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open(CACHE_SHELL)
-      .then(function(cache) {
-        // addAll fails install if any file fails — ensures a complete shell
-        return cache.addAll(SHELL_URLS);
-      })
-      .then(function() {
-        return self.skipWaiting();
-      })
+    caches.open(CACHE_SHELL).then(function(cache) {
+      var results = SHELL_URLS.map(function(url) {
+        return cache.add(url).catch(function(err) {
+          console.warn('[SW] Failed to cache:', url, err);
+          // Don't rethrow — allow install to succeed without this file
+        });
+      });
+      return Promise.all(results);
+    }).then(function() {
+      console.log('[SW] Install complete');
+      return self.skipWaiting();
+    })
   );
 });
  
