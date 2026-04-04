@@ -6434,27 +6434,6 @@
           <div class="tool-desc">محاسبه نسبت کنتراست WCAG 2.1. AA نیاز به ۴.۵:۱ برای متن معمولی و ۳:۱ برای متن بزرگ دارد. AAA نیاز به ۷:۱ دارد.</div>
         </div>
 
-        <!-- ══ WORD CLOUD ══ -->
-        <div id="wordcloud" class="tool-card">
-          <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
-          <div class="tool-title">☁️ ابر کلمات</div>
-          <div class="btn-row" style="margin-bottom:8px">
-            <button class="btn btn-filled"  id="wc-lang-fa" onclick="wcSetLang('fa')">فارسی</button>
-            <button class="btn btn-tonal"   id="wc-lang-en" onclick="wcSetLang('en')">English</button>
-          </div>
-          <textarea id="wc-input" class="text-area" rows="5" placeholder="متن خود را اینجا وارد کنید…&#10;کلمات تکراری بزرگ‌تر نمایش داده می‌شوند"></textarea>
-          <div class="field-row" style="flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px">
-            <div class="field-col"><label class="field-label">حداکثر کلمات</label><input type="number" id="wc-max" class="text-input" value="80" min="10" max="200"></div>
-            <div class="field-col"><label class="field-label">رنگ‌بندی</label><select id="wc-scheme" class="select-input"><option value="primary">اصلی</option><option value="rainbow">رنگارنگ</option><option value="mono">تک‌رنگ</option></select></div>
-          </div>
-          <button class="btn btn-filled" onclick="buildWordCloud()" style="width:100%">🎨 ساخت ابر کلمات</button>
-          <canvas id="wc-canvas" style="width:100%;border-radius:12px;margin-top:12px;display:none"></canvas>
-          <div class="btn-row" style="margin-top:8px">
-            <button class="btn btn-tonal" onclick="wcDownload()" id="wc-dl-btn" style="display:none">💾 دانلود PNG</button>
-          </div>
-          <div class="tool-desc">متن فارسی یا انگلیسی را وارد کنید — کلمات پرتکرار بزرگ‌تر نمایش داده می‌شوند.</div>
-        </div>
-
         <!-- ══ COMPASS ══ -->
         <div id="compass" class="tool-card">
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
@@ -6866,29 +6845,97 @@
         <div id="wordcloud" class="tool-card">
           <button class="tool-back-btn" onclick="showTool('home')">← بازگشت به خانه</button>
           <div class="tool-title">☁️ ابر کلمات</div>
-          <div class="btn-row" style="margin-bottom:8px">
+
+          <!-- Language toggle -->
+          <div class="btn-row" style="margin-bottom:10px">
             <button class="btn btn-filled" id="wc-lang-fa" onclick="wcSetLang('fa')">فارسی</button>
             <button class="btn btn-tonal"  id="wc-lang-en" onclick="wcSetLang('en')">English</button>
           </div>
-          <textarea id="wc-input" class="text-area" style="min-height:100px" placeholder="متن خود را وارد کنید…"></textarea>
-          <div class="field-row" style="align-items:center">
+
+          <!-- Text input -->
+          <textarea id="wc-input" class="text-area" style="min-height:120px;font-family:Vazirmatn,sans-serif" placeholder="متن خود را اینجا وارد کنید…&#10;کلمات پرتکرار بزرگ‌تر نمایش داده می‌شوند"></textarea>
+
+          <!-- Options row 1 -->
+          <div class="field-row" style="align-items:flex-end;flex-wrap:wrap;gap:8px;margin-top:4px">
             <div class="field-col">
-              <label class="field-label">حداکثر تعداد کلمات</label>
-              <input type="number" id="wc-max" class="text-input" value="80" min="10" max="200">
+              <label class="field-label">حداکثر کلمات</label>
+              <input type="number" id="wc-max" class="text-input" value="80" min="10" max="300">
             </div>
             <div class="field-col">
               <label class="field-label">رنگ‌بندی</label>
               <select id="wc-scheme" class="select-input">
                 <option value="primary">تم اصلی</option>
                 <option value="rainbow">رنگین‌کمان</option>
+                <option value="sunset">غروب</option>
+                <option value="ocean">اقیانوس</option>
+                <option value="forest">جنگل</option>
                 <option value="mono">تک‌رنگ</option>
               </select>
             </div>
+            <div class="field-col">
+              <label class="field-label">شکل</label>
+              <select id="wc-shape" class="select-input">
+                <option value="circle">دایره</option>
+                <option value="rect">مستطیل</option>
+                <option value="diamond">لوزی</option>
+              </select>
+            </div>
           </div>
-          <button class="btn btn-filled" onclick="buildWordCloud()">ساخت ابر کلمات</button>
-          <canvas id="wc-canvas" style="display:none;border-radius:12px;background:var(--m3-surface-container);margin-top:12px"></canvas>
-          <button class="btn btn-tonal" id="wc-dl-btn" onclick="wcDownload()" style="display:none;margin-top:8px">💾 دانلود PNG</button>
-          <div class="tool-desc">کلمات پرتکرار با اندازه بزرگ‌تر نمایش داده می‌شوند. کلمات ربطی فیلتر می‌شوند.</div>
+
+          <!-- Options row 2 -->
+          <div class="field-row" style="align-items:flex-end;flex-wrap:wrap;gap:8px;margin-top:4px">
+            <div class="field-col">
+              <label class="field-label">حداقل فراوانی</label>
+              <input type="number" id="wc-minfreq" class="text-input" value="1" min="1" max="20">
+            </div>
+            <div class="field-col">
+              <label class="field-label">چرخش کلمات</label>
+              <select id="wc-rotate" class="select-input">
+                <option value="0">بدون چرخش</option>
+                <option value="mixed">مخلوط (۰° و ۹۰°)</option>
+                <option value="random">تصادفی</option>
+              </select>
+            </div>
+            <div class="field-col" style="display:flex;align-items:center;gap:8px;padding-bottom:4px">
+              <label class="field-label" style="margin:0;white-space:nowrap">
+                <input type="checkbox" id="wc-stopwords" checked style="accent-color:var(--m3-primary)">
+                حذف کلمات ربطی
+              </label>
+            </div>
+          </div>
+
+          <button class="btn btn-filled" onclick="buildWordCloud()" style="width:100%;margin-top:6px">
+            🎨 ساخت ابر کلمات
+          </button>
+
+          <!-- Progress bar -->
+          <div id="wc-progress" style="display:none;margin-top:10px">
+            <div style="font-size:12px;color:var(--m3-on-surface-variant);text-align:center;margin-bottom:4px" id="wc-progress-txt">در حال پردازش…</div>
+            <div style="height:4px;border-radius:2px;background:var(--m3-surface-container-highest);overflow:hidden">
+              <div id="wc-progress-bar" style="height:100%;width:0%;background:var(--m3-primary);transition:width 0.2s;border-radius:2px"></div>
+            </div>
+          </div>
+
+          <!-- Canvas -->
+          <div style="position:relative;margin-top:12px">
+            <canvas id="wc-canvas" style="display:none;border-radius:12px;width:100%;background:var(--m3-surface-container)"></canvas>
+            <div id="wc-empty" style="display:none;padding:32px;text-align:center;color:var(--m3-on-surface-variant);font-size:14px;background:var(--m3-surface-container);border-radius:12px">
+              ⚠️ کلمه‌ای برای نمایش یافت نشد. متن بیشتری وارد کنید یا حداقل فراوانی را کاهش دهید.
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div id="wc-stats" style="display:none;font-size:11px;color:var(--m3-on-surface-variant);margin-top:6px;text-align:center"></div>
+
+          <!-- Actions -->
+          <div class="btn-row" style="margin-top:8px">
+            <button class="btn btn-tonal" id="wc-dl-btn" onclick="wcDownload()" style="display:none">💾 دانلود PNG</button>
+            <button class="btn btn-tonal" id="wc-copy-btn" onclick="wcCopyWords()" style="display:none">📋 کپی کلمات</button>
+          </div>
+
+          <div class="tool-desc">
+            کلمات پرتکرار با اندازه بزرگ‌تر نمایش داده می‌شوند. متن فارسی به‌طور کامل پشتیبانی می‌شود.
+          </div>
         </div>
 
         <!-- ══ COMPASS ══ -->
@@ -7418,7 +7465,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 3.0 - ۱۴۰۵/۰۱/۱۵
+          ℹ️ نسخه 3.1 - ۱۴۰۵/۰۱/۱۵
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -15921,75 +15968,380 @@
 
         render();
       }
+
       // ══════════════════════════════════════════════════════════
+      //  WORDCLOUD  — Persian-aware engine (wordcloud2.js-inspired)
+      // ══════════════════════════════════════════════════════════
+
       let _wcLang = 'fa';
+      let _wcLastWords = [];   // for "copy words" feature
+
       function wcSetLang(l) {
         _wcLang = l;
-        ['fa','en'].forEach(x => { const b=document.getElementById('wc-lang-'+x); if(b) b.className='btn '+(x===l?'btn-filled':'btn-tonal'); });
-      }
-      const WC_STOPWORDS_FA = new Set('و در از به که این را با است آن برای هم یا می شد شده شود بود بر تا هر آن‌ها خود ما شما هم‌چنین همچنین نیز دیگر'.split(' '));
-      const WC_STOPWORDS_EN = new Set('the a an and or in is are was were be been being have has had do does did will would could should may might shall can of at by for with about from this that these those it its'.split(' '));
-      function buildWordCloud() {
-        const text = document.getElementById('wc-input').value;
-        if (!text.trim()) return;
-        const maxW = parseInt(document.getElementById('wc-max').value) || 80;
-        const scheme = document.getElementById('wc-scheme').value;
-        const isDark = document.documentElement.getAttribute('data-theme')==='dark';
-        const stopwords = _wcLang==='fa' ? WC_STOPWORDS_FA : WC_STOPWORDS_EN;
-        const words = text.toLowerCase()
-          .replace(/[^؀-ۿݐ-ݿA-z0-9\s]/g,' ')
-          .split(/\s+/).filter(w => w.length>1 && !stopwords.has(w));
-        const freq = {};
-        words.forEach(w => { freq[w]=(freq[w]||0)+1; });
-        const sorted = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,maxW);
-        if (!sorted.length) return;
-        const maxFreq = sorted[0][1];
-        const c = document.getElementById('wc-canvas');
-        const dpr = window.devicePixelRatio||1;
-        const cssW = c.offsetWidth||600, cssH=360;
-        c.width=cssW*dpr; c.height=cssH*dpr;
-        c.style.height=cssH+'px'; c.style.display='block';
-        const ctx = c.getContext('2d');
-        ctx.scale(dpr,dpr);
-        const W=cssW, H=cssH;
-        ctx.fillStyle = isDark?'#1a2027':'#fafafa';
-        ctx.fillRect(0,0,W,H);
-        const palette = scheme==='rainbow'
-          ? (i) => `hsl(${(i*47+200)%360},65%,${isDark?65:40}%)`
-          : scheme==='mono'
-          ? () => isDark?'#e0e0e0':'#333'
-          : (i) => { const h=[210,340,120,30,270,180,60]; return `hsl(${h[i%h.length]},${isDark?60:55}%,${isDark?65:40}%)`; };
-        // Pixel-grid collision map
-        const GRID=4, gW=Math.ceil(W/GRID), gH=Math.ceil(H/GRID);
-        const occ=new Uint8Array(gW*gH);
-        function mark(x,y,w,h){const x0=Math.max(0,Math.floor(x/GRID)),y0=Math.max(0,Math.floor(y/GRID)),x1=Math.min(gW-1,Math.ceil((x+w)/GRID)),y1=Math.min(gH-1,Math.ceil((y+h)/GRID));for(let gy=y0;gy<=y1;gy++)for(let gx=x0;gx<=x1;gx++)occ[gy*gW+gx]=1;}
-        function free(x,y,w,h){const x0=Math.max(0,Math.floor(x/GRID)),y0=Math.max(0,Math.floor(y/GRID)),x1=Math.min(gW-1,Math.ceil((x+w)/GRID)),y1=Math.min(gH-1,Math.ceil((y+h)/GRID));for(let gy=y0;gy<=y1;gy++)for(let gx=x0;gx<=x1;gx++){if(occ[gy*gW+gx])return false;}return true;}
-        sorted.forEach(([word,count],i) => {
-          const sz=Math.round(11+(count/maxFreq)*Math.min(48,Math.max(18,W/12)));
-          ctx.font=`${sz}px Vazirmatn,Arial,sans-serif`;
-          ctx.fillStyle=palette(i);
-          const tw=ctx.measureText(word).width+4, th=sz+4;
-          let placed=false;
-          for(let startA=0;startA<Math.PI*2&&!placed;startA+=Math.PI/3){
-            for(let t=0;t<350&&!placed;t+=0.18){
-              const r=t*(W/130), angle=t*0.42+startA;
-              const tx=W/2+r*Math.cos(angle)-tw/2, ty=H/2+r*Math.sin(angle)*0.65-th/2;
-              if(tx<2||tx+tw>W-2||ty<2||ty+th>H-2)continue;
-              if(free(tx,ty,tw,th)){ctx.fillText(word,tx+2,ty+sz+2);mark(tx,ty,tw,th);placed=true;}
-            }
-            if(placed)break;
-          }
+        ['fa','en'].forEach(x => {
+          const b = document.getElementById('wc-lang-'+x);
+          if (b) b.className = 'btn ' + (x===l ? 'btn-filled' : 'btn-tonal');
         });
-        const dlBtn=document.getElementById('wc-dl-btn');
-        if(dlBtn)dlBtn.style.display='inline-flex';
       }
+
+      /* ── Persian text normalization ─────────────────────────── */
+      function wcNormalizePersian(text) {
+        return text
+          // Arabic/Persian letter normalization
+          .replace(/ك/g, 'ک')          // Arabic kaf → Persian kaf
+          .replace(/ي/g, 'ی')          // Arabic ya → Persian ya
+          .replace(/ى/g, 'ی')          // Alef maqsura → Persian ya
+          .replace(/[أإآ]/g, 'ا')       // Alef variants → Alef
+          .replace(/ة/g, 'ه')          // Ta marbuta → Ha
+          .replace(/ؤ/g, 'و')          // Waw with hamza → Waw
+          .replace(/ئ/g, 'ی')          // Ya with hamza → Ya
+          // Remove harakat (Arabic diacritics)
+          .replace(/[\u064B-\u065F\u0610-\u061A\u06D6-\u06DC\u06DF-\u06E4\u06E7\u06E8\u06EA-\u06ED]/g, '')
+          // Remove zero-width chars except ZWNJ
+          .replace(/[\u200B\u200C\u200D\uFEFF]/g, ' ')
+          // Arabic-Indic digits → Western
+          .replace(/[۰-۹]/g, d => String.fromCharCode(d.charCodeAt(0) - 0x6F0 + 48))
+          .replace(/[٠-٩]/g, d => String.fromCharCode(d.charCodeAt(0) - 0x660 + 48));
+      }
+
+      /* ── Comprehensive Persian stopwords ────────────────────── */
+      const WC_STOPWORDS_FA = new Set([
+        'و','در','از','به','که','این','را','با','است','آن','برای','هم','یا',
+        'می','شد','شده','شود','بود','بر','تا','هر','آن‌ها','آنها','خود','ما',
+        'شما','همچنین','نیز','دیگر','باید','اما','ولی','اگر','چون','زیرا',
+        'پس','چه','هیچ','بعد','قبل','زمان','وقت','وقتی','چنین','چنان',
+        'نه','بله','آره','خیر','بی','بدون','درباره','مورد','طور','نوع',
+        'همه','تمام','هنوز','دیگری','دارد','دارم','دارند','داریم','دارید',
+        'باشد','باشم','باشند','باشیم','باشید','بود','بودم','بودند','بودیم',
+        'بودید','شدم','شدند','شدیم','شدید','کرد','کردم','کردند','کردیم',
+        'کردید','کند','کنم','کنند','کنیم','کنید','گفت','گفتم','گفتند',
+        'گفتیم','گفتید','گفته','آمد','آمدم','آمدند','آمدیم','رفت','رفتم',
+        'رفتند','رفتیم','داد','دادم','دادند','دادیم','دادید','میکند',
+        'میکنم','میکنند','میکنیم','میکنید','میشود','میشوم','میشوند',
+        'میشویم','میشوید','میدهد','میدهم','میدهند','میدهیم','میدهید',
+        'میخواهد','میخواهم','میخواهند','میخواهیم','میخواهید','هستم',
+        'هستند','هستیم','هستید','هست','نیست','نیستم','نیستند','نیستیم',
+        'نیستید','آیا','چرا','کجا','کی','کدام','چگونه','چطور','چقدر',
+        'چند','چندین','چندتا','یک','دو','سه','چهار','پنج','شش','هفت',
+        'هشت','نه','ده','صد','هزار','میلیون','اول','دوم','سوم','آخر',
+        'اولین','آخرین','بیشتر','کمتر','بیش','کم','زیاد','خیلی','خوب',
+        'بد','جدید','قدیم','بزرگ','کوچک','مهم','مختلف','خاص','عام',
+        'واقع','واقعاً','فقط','تنها','البته','احتمالاً','شاید','حتی',
+        'مثل','مانند','مثلاً','مثل اینکه','به طور','طوری','جوری','جور',
+        'سپس','سرانجام','در نهایت','در واقع','در حال','در حالی','تر',
+        'ترین','هایی','هایم','هایت','هایش','هایمان','هایتان','هایشان',
+        'ام','ات','اش','مان','تان','شان','ی','ها','های','را','ای',
+        'او','وی','من','تو','ما','شما','آن','ایشان','ما',
+      ].map(w => w.trim()).filter(Boolean));
+
+      const WC_STOPWORDS_EN = new Set([
+        'the','a','an','and','or','in','is','are','was','were','be','been',
+        'being','have','has','had','do','does','did','will','would','could',
+        'should','may','might','shall','can','of','at','by','for','with',
+        'about','from','this','that','these','those','it','its','i','you',
+        'he','she','we','they','me','him','her','us','them','my','your',
+        'his','our','their','what','which','who','whom','when','where',
+        'why','how','all','each','every','both','few','more','most','other',
+        'some','such','no','not','only','same','so','than','too','very',
+        'just','but','if','then','as','up','out','on','off','over','under',
+        'again','further','once','here','there','to','into','through',
+        'during','before','after','above','below','between','own','any',
+        'also','back','now','even','still','well','way','take','come',
+        'know','think','go','get','see','look','want','give','use','find',
+        'tell','ask','seem','feel','try','leave','call','keep','let','begin',
+        'show','hear','play','run','move','live','believe','hold','bring',
+      ]);
+
+      /* ── Color palettes ─────────────────────────────────────── */
+      function wcGetPalette(scheme, isDark) {
+        const L = isDark ? 68 : 42;
+        const S = isDark ? 62 : 58;
+        const palettes = {
+          primary : [210,340,120,30,270,180,60],
+          rainbow : null,  // computed per index
+          sunset  : [10,25,40,55,340,355,5],
+          ocean   : [195,210,225,180,240,165,200],
+          forest  : [120,140,100,80,160,90,110],
+          mono    : null,
+        };
+        return (i) => {
+          if (scheme === 'mono') return isDark ? `hsl(220,15%,${L+10}%)` : `hsl(220,15%,${L-10}%)`;
+          if (scheme === 'rainbow') return `hsl(${(i * 43 + 170) % 360},${S}%,${L}%)`;
+          const hues = palettes[scheme] || palettes.primary;
+          return `hsl(${hues[i % hues.length]},${S}%,${L}%)`;
+        };
+      }
+
+      /* ── Shape mask: returns true if (x,y) is inside the shape ─ */
+      function wcInShape(shape, cx, cy, rx, ry, x, y) {
+        const dx = (x - cx) / rx, dy = (y - cy) / ry;
+        if (shape === 'circle')  return dx*dx + dy*dy <= 1;
+        if (shape === 'diamond') return Math.abs(dx) + Math.abs(dy) <= 1;
+        return true; // rect — always inside
+      }
+
+      /* ── Main engine ─────────────────────────────────────────── */
+      function buildWordCloud() {
+        const rawText = document.getElementById('wc-input').value;
+        if (!rawText.trim()) return;
+
+        const maxW      = Math.min(300, parseInt(document.getElementById('wc-max').value) || 80);
+        const scheme    = document.getElementById('wc-scheme').value;
+        const shape     = document.getElementById('wc-shape').value;
+        const rotMode   = document.getElementById('wc-rotate').value;
+        const minFreq   = parseInt(document.getElementById('wc-minfreq').value) || 1;
+        const useStop   = document.getElementById('wc-stopwords').checked;
+        const isDark    = document.documentElement.getAttribute('data-theme') === 'dark';
+
+        /* ── Tokenize & count ── */
+        const stopwords = useStop ? (_wcLang === 'fa' ? WC_STOPWORDS_FA : WC_STOPWORDS_EN) : new Set();
+        let text = _wcLang === 'fa' ? wcNormalizePersian(rawText) : rawText.toLowerCase();
+
+        // Strip punctuation, keeping Persian + Latin letters and digits
+        text = text.replace(/[^\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFFA-Za-z0-9\s]/g, ' ');
+
+        const tokens = text.split(/\s+/).filter(w => {
+          if (w.length < 2) return false;
+          if (stopwords.has(w)) return false;
+          if (_wcLang === 'fa' && /^[A-Za-z]+$/.test(w)) return false; // skip Latin when in FA mode
+          if (_wcLang === 'en' && /^[\u0600-\u06FF]/.test(w)) return false; // skip Arabic in EN mode
+          if (/^\d+$/.test(w)) return false; // pure numbers
+          return true;
+        });
+
+        const freq = {};
+        tokens.forEach(w => { freq[w] = (freq[w] || 0) + 1; });
+        const sorted = Object.entries(freq)
+          .filter(([,c]) => c >= minFreq)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, maxW);
+
+        _wcLastWords = sorted;
+
+        const canvas = document.getElementById('wc-canvas');
+        const emptyEl = document.getElementById('wc-empty');
+        const statsEl = document.getElementById('wc-stats');
+        const dlBtn   = document.getElementById('wc-dl-btn');
+        const cpBtn   = document.getElementById('wc-copy-btn');
+        const progEl  = document.getElementById('wc-progress');
+        const progBar = document.getElementById('wc-progress-bar');
+        const progTxt = document.getElementById('wc-progress-txt');
+
+        if (!sorted.length) {
+          canvas.style.display = 'none';
+          emptyEl.style.display = 'block';
+          if (dlBtn) dlBtn.style.display = 'none';
+          if (cpBtn) cpBtn.style.display = 'none';
+          return;
+        }
+        emptyEl.style.display = 'none';
+
+        /* ── Canvas setup ── */
+        const dpr  = Math.min(window.devicePixelRatio || 1, 2);
+        const cssW = Math.max(canvas.offsetWidth || canvas.parentElement.offsetWidth || 600, 320);
+        const cssH = Math.round(cssW * 0.56);  // 16:9-ish
+        canvas.width  = cssW * dpr;
+        canvas.height = cssH * dpr;
+        canvas.style.height = cssH + 'px';
+        canvas.style.display = 'block';
+
+        const ctx = canvas.getContext('2d');
+        ctx.scale(dpr, dpr);
+        const W = cssW, H = cssH;
+
+        // Background
+        const bg = isDark ? '#1a1f27' : '#f8f9fa';
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, W, H);
+
+        /* ── Board for collision detection (1 bit per pixel, 32px packed) ── */
+        // We use a simple boolean grid at reduced resolution (1/2 scale) for speed
+        const SCALE  = 2;  // grid is W/SCALE × H/SCALE
+        const gW = Math.ceil(W / SCALE);
+        const gH = Math.ceil(H / SCALE);
+        const board = new Uint8Array(gW * gH);  // 0 = free, 1 = occupied
+
+        function markBoard(bx, by, bw, bh) {
+          const x0 = Math.max(0, Math.floor(bx/SCALE));
+          const y0 = Math.max(0, Math.floor(by/SCALE));
+          const x1 = Math.min(gW-1, Math.ceil((bx+bw)/SCALE));
+          const y1 = Math.min(gH-1, Math.ceil((by+bh)/SCALE));
+          for (let gy = y0; gy <= y1; gy++)
+            for (let gx = x0; gx <= x1; gx++)
+              board[gy * gW + gx] = 1;
+        }
+
+        function checkBoard(bx, by, bw, bh) {
+          const pad = 2; // padding pixels
+          const x0 = Math.max(0, Math.floor((bx-pad)/SCALE));
+          const y0 = Math.max(0, Math.floor((by-pad)/SCALE));
+          const x1 = Math.min(gW-1, Math.ceil((bx+bw+pad)/SCALE));
+          const y1 = Math.min(gH-1, Math.ceil((by+bh+pad)/SCALE));
+          for (let gy = y0; gy <= y1; gy++)
+            for (let gx = x0; gx <= x1; gx++)
+              if (board[gy * gW + gx]) return true;
+          return false;
+        }
+
+        /* ── Font size ── */
+        const maxFreq = sorted[0][1];
+        const minFreqVal = sorted[sorted.length-1][1];
+        const MIN_SZ = Math.max(10, Math.round(W / 50));
+        const MAX_SZ = Math.min(Math.round(W / 6), 90);
+
+        function wordSize(count) {
+          if (maxFreq === minFreqVal) return Math.round((MIN_SZ + MAX_SZ) / 2);
+          const ratio = Math.log(count + 1) / Math.log(maxFreq + 1);
+          return Math.round(MIN_SZ + ratio * (MAX_SZ - MIN_SZ));
+        }
+
+        /* ── Rotation ── */
+        function wordAngle(i) {
+          if (rotMode === '0')      return 0;
+          if (rotMode === 'mixed')  return i % 3 === 2 ? Math.PI / 2 : 0;
+          // random: 0°, 90°, or -45°
+          const r = Math.random();
+          if (r < 0.5) return 0;
+          if (r < 0.8) return Math.PI / 2;
+          return -Math.PI / 4;
+        }
+
+        /* ── Archimedean spiral ── */
+        const aspect = W / H;
+        function spiral(t) {
+          const a = t * 0.15;
+          return [aspect * a * Math.cos(a), a * Math.sin(a)];
+        }
+
+        /* ── Shape center & radii ── */
+        const cx = W / 2, cy = H / 2;
+        const rx = W * 0.48, ry = H * 0.48;
+
+        /* ── Palette ── */
+        const palette = wcGetPalette(scheme, isDark);
+
+        /* ── Font ── */
+        const FONT_FA = 'Vazirmatn, "Noto Naskh Arabic", Arial, sans-serif';
+        const FONT_EN = '"Segoe UI", Arial, sans-serif';
+        const fontFace = _wcLang === 'fa' ? FONT_FA : FONT_EN;
+
+        /* ── Place words ── */
+        progEl.style.display = 'block';
+        let placedCount = 0;
+
+        function placeNext(idx) {
+          if (idx >= sorted.length) {
+            // Done
+            progEl.style.display = 'none';
+            if (dlBtn) dlBtn.style.display = 'inline-flex';
+            if (cpBtn) cpBtn.style.display = 'inline-flex';
+            if (statsEl) {
+              statsEl.textContent = `${placedCount} کلمه از ${sorted.length} نمایش داده شد`;
+              statsEl.style.display = 'block';
+            }
+            return;
+          }
+
+          const progress = Math.round(idx / sorted.length * 100);
+          progBar.style.width = progress + '%';
+          progTxt.textContent = `در حال چیدمان: ${idx+1} از ${sorted.length}`;
+
+          const [word, count] = sorted[idx];
+          const sz    = wordSize(count);
+          const angle = wordAngle(idx);
+          const color = palette(idx);
+          const bold  = sz >= (MIN_SZ + MAX_SZ) / 2 ? '700' : '500';
+
+          ctx.save();
+          ctx.font = `${bold} ${sz}px ${fontFace}`;
+          ctx.textAlign    = 'center';
+          ctx.textBaseline = 'middle';
+
+          const metrics = ctx.measureText(word);
+          let ww, wh;
+          if (angle === 0) {
+            ww = metrics.width + 4;
+            wh = sz * 1.2;
+          } else {
+            // Rotated: swap w/h
+            ww = sz * 1.2;
+            wh = metrics.width + 4;
+          }
+
+          // Try spiral starting from center
+          let placed = false;
+          const maxT = Math.sqrt(W*W + H*H) * 5;
+
+          for (let t = 0; t < maxT; t += 1.5) {
+            const [dx, dy] = spiral(t);
+            // Alternate sides
+            const dirs = [[1,1],[-1,1],[1,-1],[-1,-1]];
+            for (const [sx, sy] of dirs) {
+              const px = cx + sx * dx;
+              const py = cy + sy * dy;
+
+              // Must be inside chosen shape
+              if (!wcInShape(shape, cx, cy, rx, ry, px, py)) continue;
+
+              const bx = px - ww/2, by = py - wh/2;
+
+              // Canvas bounds
+              if (bx < 2 || by < 2 || bx + ww > W - 2 || by + wh > H - 2) continue;
+
+              // Board collision
+              if (checkBoard(bx, by, ww, wh)) continue;
+
+              // Draw!
+              ctx.save();
+              ctx.translate(px, py);
+              if (angle !== 0) ctx.rotate(angle);
+              ctx.fillStyle = color;
+              ctx.fillText(word, 0, 0);
+              ctx.restore();
+
+              markBoard(bx, by, ww, wh);
+              placedCount++;
+              placed = true;
+              break;
+            }
+            if (placed) break;
+          }
+
+          ctx.restore();
+
+          // Schedule next word async so UI doesn't freeze
+          setTimeout(() => placeNext(idx + 1), 0);
+        }
+
+        placeNext(0);
+      }
+
       function wcDownload() {
         const c = document.getElementById('wc-canvas');
-        if (!c) return;
+        if (!c || c.style.display === 'none') return;
         const a = document.createElement('a');
         a.download = 'wordcloud.png';
         a.href = c.toDataURL('image/png');
         a.click();
+      }
+
+      function wcCopyWords() {
+        if (!_wcLastWords.length) return;
+        const text = _wcLastWords.map(([w, c]) => `${w} (${c})`).join('\n');
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).catch(() => {});
+        }
+        const toast = document.getElementById('copy-toast');
+        if (toast) {
+          toast.textContent = '✅ کلمات کپی شد!';
+          toast.classList.add('copy-toast--visible');
+          toast.hidden = false;
+          clearTimeout(toast._t);
+          toast._t = setTimeout(() => {
+            toast.classList.remove('copy-toast--visible');
+            toast.hidden = true;
+          }, 2000);
+        }
       }
 
       // ══════════════════════════════════════════════════════════
