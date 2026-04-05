@@ -1,16 +1,18 @@
 // ============================================================
-//  Service Worker — جعبه‌ابزار آفلاین 
+//  Service Worker — جعبه‌ابزار آفلاین
 //  Strategies:
 //    - App shell (HTML/CSS/JS/fonts): Stale-While-Revalidate
 //    - Static assets (images, maps): Cache-First
 //    - External/opaque requests: Network-only (skip)
 // ============================================================
 
-const CACHE_VERSION = 'toolbox-v3.1';
-const CACHE_SHELL   = CACHE_VERSION + '-shell';   // HTML, CSS, JS, fonts
-const CACHE_ASSETS  = CACHE_VERSION + '-assets';  // images, maps, large files
+const CACHE_VERSION = 'toolbox-v3.2';
+const CACHE_SHELL   = CACHE_VERSION + '-shell';
+const CACHE_ASSETS  = CACHE_VERSION + '-assets';
 
-// App shell — precached on install
+// Pages that must be served as their own HTML (not redirected to index.html)
+const STANDALONE_PAGES = ['/iran', '/iran/', '/iran.html'];
+
 const SHELL_URLS = [
   '/',
   '/index.html',
@@ -21,7 +23,6 @@ const SHELL_URLS = [
   '/favicon.png',
   '/icon-512.png',
   '/Vazirmatn-VF.ttf',
-  // Third-party libraries — cache shell to ensure offline functionality of tools that depend on them
   '/lib/qrcode.js',
   '/lib/jsQR.js',
   '/lib/qr-code-styling.js',
@@ -30,7 +31,6 @@ const SHELL_URLS = [
   '/lib/pdf.worker.mjs',
   '/lib/function-plot.js',
   '/lib/math.js',
-  // Poem structures (small JSON files) — cache shell to ensure offline navigation
   '/poems/fersowsi/structure.json',
   '/poems/forugh/structure.json',
   '/poems/hafez/structure.json',
@@ -45,16 +45,13 @@ const SHELL_URLS = [
   '/poems/vahsi/structure.json',
 ];
 
-// ── Install: cache app shell ──────────────────────────────
-// Uses individual fetches instead of addAll() so one missing file
-// doesn't abort the entire install and leave the app broken offline.
+// ── Install: cache app shell (resilient — one missing file won't abort) ───────
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_SHELL).then(function(cache) {
       var results = SHELL_URLS.map(function(url) {
         return cache.add(url).catch(function(err) {
           console.warn('[SW] Failed to cache:', url, err);
-          // Don't rethrow — allow install to succeed without this file
         });
       });
       return Promise.all(results);
@@ -64,25 +61,20 @@ self.addEventListener('install', function(event) {
     })
   );
 });
- 
-// ── Activate: delete all old caches ──────────────────────
+
+// ── Activate: delete old caches ───────────────────────────────────────────────
 self.addEventListener('activate', function(event) {
   var KEEP = [CACHE_SHELL, CACHE_ASSETS];
   event.waitUntil(
     caches.keys()
       .then(function(names) {
         return Promise.all(
-          names
-            .filter(function(n) { return !KEEP.includes(n); })
-            .map(function(n)    { return caches.delete(n); })
+          names.filter(function(n) { return !KEEP.includes(n); })
+               .map(function(n)    { return caches.delete(n); })
         );
       })
-      .then(function() {
-        return self.clients.claim();
-      })
-      .then(function() {
-        return self.clients.matchAll({ type: 'window' });
-      })
+      .then(function() { return self.clients.claim(); })
+      .then(function() { return self.clients.matchAll({ type: 'window' }); })
       .then(function(clients) {
         clients.forEach(function(client) {
           client.postMessage({ type: 'SW_UPDATED', version: CACHE_VERSION });
@@ -90,45 +82,65 @@ self.addEventListener('activate', function(event) {
       })
   );
 });
- 
-// ── Fetch ─────────────────────────────────────────────────
+
+// ── Fetch ─────────────────────────────────────────────────────────────────────
 self.addEventListener('fetch', function(event) {
   if (event.request.method !== 'GET') return;
- 
+
   var url = new URL(event.request.url);
- 
+
   // Skip cross-origin (Bale SDK, CDN, external APIs)
   if (url.origin !== self.location.origin) return;
- 
+
   var path = url.pathname;
- 
+
   // Large on-demand files: Cache-First
   if (path.startsWith('/maps/') || path.endsWith('.pdf')) {
     event.respondWith(cacheFirst(event.request, CACHE_ASSETS));
     return;
   }
- 
-  // ── Navigation requests (opening PWA from home screen, typing URL) ──
-  // This is the critical path for offline PWA launch.
-  // Browser sends these as mode:'navigate' — intercept and serve from cache.
+
+  // ── Navigation requests ──────────────────────────────────────────────────────
   if (event.request.mode === 'navigate') {
+
+    // Standalone pages (/iran) must be served as themselves, not as index.html
+    if (STANDALONE_PAGES.includes(path)) {
+      event.respondWith(
+        caches.match('/iran.html', { cacheName: CACHE_SHELL })
+          .then(function(cached) {
+            if (cached) {
+              fetch(event.request)
+                .then(function(r) {
+                  if (r && r.ok) {
+                    caches.open(CACHE_SHELL).then(function(c) { c.put('/iran.html', r); });
+                  }
+                }).catch(function() {});
+              return cached;
+            }
+            return fetch(event.request).catch(function() {
+              return new Response(
+                '<h1 dir="rtl" style="font-family:sans-serif;text-align:center;padding:40px">برای اولین بار باید آنلاین باشید</h1>',
+                { status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+              );
+            });
+          })
+      );
+      return;
+    }
+
+    // All other navigations → SPA shell (index.html)
     event.respondWith(
       caches.match('/index.html', { cacheName: CACHE_SHELL })
         .then(function(cached) {
           if (cached) {
-            // Revalidate in background for next visit
             fetch(event.request)
               .then(function(response) {
                 if (response && response.ok) {
-                  caches.open(CACHE_SHELL).then(function(c) {
-                    c.put(event.request, response);
-                  });
+                  caches.open(CACHE_SHELL).then(function(c) { c.put(event.request, response); });
                 }
-              })
-              .catch(function() {});
+              }).catch(function() {});
             return cached;
           }
-          // Not in cache yet — try network
           return fetch(event.request).catch(function() {
             return new Response(
               '<h1 dir="rtl" style="font-family:sans-serif;text-align:center;padding:40px">برای اولین بار باید آنلاین باشید تا اپ کش شود</h1>',
@@ -139,32 +151,28 @@ self.addEventListener('fetch', function(event) {
     );
     return;
   }
- 
+
   // All other same-origin requests: Stale-While-Revalidate
   event.respondWith(staleWhileRevalidate(event.request, CACHE_SHELL));
 });
- 
-// ── Strategy: Cache-First ────────────────────────────────
+
+// ── Strategy: Cache-First ─────────────────────────────────────────────────────
 function cacheFirst(request, cacheName) {
   return caches.open(cacheName).then(function(cache) {
     return cache.match(request).then(function(cached) {
       if (cached) return cached;
       return fetch(request).then(function(response) {
-        if (response && response.ok) {
-          cache.put(request, response.clone());
-        }
+        if (response && response.ok) cache.put(request, response.clone());
         return response;
       }).catch(function() {
-        return new Response(
-          JSON.stringify({ error: 'offline', url: request.url }),
-          { status: 503, headers: { 'Content-Type': 'application/json' } }
-        );
+        return new Response(JSON.stringify({ error: 'offline', url: request.url }),
+          { status: 503, headers: { 'Content-Type': 'application/json' } });
       });
     });
   });
 }
- 
-// ── Strategy: Stale-While-Revalidate ─────────────────────
+
+// ── Strategy: Stale-While-Revalidate ─────────────────────────────────────────
 function staleWhileRevalidate(request, cacheName) {
   return caches.open(cacheName).then(function(cache) {
     return cache.match(request).then(function(cached) {
@@ -173,17 +181,13 @@ function staleWhileRevalidate(request, cacheName) {
           cache.put(request, response.clone());
         }
         return response;
-      }).catch(function() {
-        return null;
-      });
- 
+      }).catch(function() { return null; });
+
       if (cached) return cached;
       return fetchPromise.then(function(r) {
         if (r) return r;
         return caches.match('/index.html', { cacheName: CACHE_SHELL })
-          .then(function(c) {
-            return c || new Response('آفلاین', { status: 503 });
-          });
+          .then(function(c) { return c || new Response('آفلاین', { status: 503 }); });
       });
     });
   });

@@ -1688,15 +1688,35 @@
     </style>
     <script>
       // ── Bale MiniApp integration ──────────────────────────
-      var IS_BALE = !!(window.Bale && window.Bale.WebApp);
+      // IS_BALE must be hostname-based — SDK loads async so window.Bale isn't ready yet
+      var IS_BALE = /(bale\.ai|tapi\.bale\.ai)/i.test(window.location.hostname);
+
+      // Runs fn(WebApp) once SDK is available (polls every 30ms)
+      function _withBale(fn) {
+        if (window.Bale && window.Bale.WebApp) { fn(Bale.WebApp); return; }
+        if (!IS_BALE) return;
+        var _t = setInterval(function() {
+          if (window.Bale && window.Bale.WebApp) { clearInterval(_t); fn(Bale.WebApp); }
+        }, 30);
+      }
+
       if (IS_BALE) {
-        // Expand to full screen immediately
-        Bale.WebApp.expand();
-        // Tell Bale the app is ready as soon as the DOM is parsed
-        document.addEventListener('DOMContentLoaded', function() {
-          Bale.WebApp.ready();
+        _withBale(function(wa) {
+          wa.expand();
+          wa.ready();
+          // Sync dark/light with Bale app theme
+          if (wa.colorScheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            var fab = document.querySelector('.theme-fab');
+            if (fab) fab.textContent = '☀️';
+          }
+          // Prompt to add to home screen after 3s if not already pinned
+          setTimeout(function() {
+            wa.checkHomeScreenStatus(function(status) {
+              if (status === 'missed') wa.addToHomeScreen();
+            });
+          }, 3000);
         });
-        // Hide theme FAB and PWA install — Bale handles these natively
         document.documentElement.style.setProperty('--_bale-fab-display', 'none');
       }
       
@@ -1717,348 +1737,140 @@
         <button class="drawer-close" onclick="closeDrawer()">✕</button>
       </div>
       <div class="drawer-scroll">
-        <div
-          class="drawer-item active"
-          onclick="showTool('home')"
-          data-tool="home"
-        >
+        <div class="drawer-item active" onclick="showTool('home')" data-tool="home">
           <span class="drawer-item__icon">🏠</span>خانه
         </div>
 
         <span class="drawer-section-label">🧮 محاسبه و ریاضی</span>
-        <div class="drawer-item" onclick="showTool('calc')" data-tool="calc">
-          <span class="drawer-item__icon">🧮</span>ماشین‌حساب
-        </div>
-
-        <div class="drawer-item" onclick="showTool('calculus')" data-tool="calculus">
-          <span class="drawer-item__icon">∫</span>حسابان
-        </div>
-        <div class="drawer-item" onclick="showTool('linsolve')" data-tool="linsolve">
-          <span class="drawer-item__icon">📐</span>حل معادله
-        </div>
-        <div class="drawer-item" onclick="showTool('bmi')" data-tool="bmi">
-          <span class="drawer-item__icon">⚖️</span>شاخص BMI
-        </div>
-        <div class="drawer-item" onclick="showTool('avg')" data-tool="avg">
-          <span class="drawer-item__icon">📊</span>میانگین و آمار
-        </div>
-        <div class="drawer-item" onclick="showTool('pct')" data-tool="pct">
-          <span class="drawer-item__icon">%</span>محاسبه درصد
-        </div>
-        <div class="drawer-item" onclick="showTool('matrix')" data-tool="matrix">
-          <span class="drawer-item__icon">📐</span>ماتریس
-        </div>
-        <div class="drawer-item" onclick="showTool('multable')" data-tool="multable">
-          <span class="drawer-item__icon">✖️</span>جدول ضرب
-        </div>
-        <div class="drawer-item" onclick="showTool('loan')" data-tool="loan">
-          <span class="drawer-item__icon">🏦</span>محاسبه وام
-        </div>
-        <div class="drawer-item" onclick="showTool('deposit')" data-tool="deposit">
-          <span class="drawer-item__icon">💰</span>سود سپرده
-        </div>
-        <div class="drawer-item" onclick="showTool('rentcalc')" data-tool="rentcalc">
-          <span class="drawer-item__icon">🏠</span>رهن و اجاره
-        </div>
-        <div class="drawer-item" onclick="showTool('taxdisc')" data-tool="taxdisc">
-          <span class="drawer-item__icon">🏷️</span>مالیات و تخفیف
-        </div>
-        <div class="drawer-item" onclick="showTool('tip')" data-tool="tip">
-          <span class="drawer-item__icon">🧾</span>تقسیم صورت‌حساب
-        </div>
+        <div class="drawer-item" onclick="showTool('calc')" data-tool="calc"><span class="drawer-item__icon">🧮</span>ماشین‌حساب</div>
+        <div class="drawer-item" onclick="showTool('calculus')" data-tool="calculus"><span class="drawer-item__icon">∫</span>حسابان</div>
+        <div class="drawer-item" onclick="showTool('linsolve')" data-tool="linsolve"><span class="drawer-item__icon">📐</span>حل معادله</div>
+        <div class="drawer-item" onclick="showTool('bmi')" data-tool="bmi"><span class="drawer-item__icon">⚖️</span>شاخص BMI</div>
+        <div class="drawer-item" onclick="showTool('avg')" data-tool="avg"><span class="drawer-item__icon">📊</span>میانگین و آمار</div>
+        <div class="drawer-item" onclick="showTool('pct')" data-tool="pct"><span class="drawer-item__icon">%</span>محاسبه درصد</div>
+        <div class="drawer-item" onclick="showTool('matrix')" data-tool="matrix"><span class="drawer-item__icon">📐</span>ماتریس</div>
+        <div class="drawer-item" onclick="showTool('multable')" data-tool="multable"><span class="drawer-item__icon">✖️</span>جدول ضرب</div>
+        <div class="drawer-item" onclick="showTool('loan')" data-tool="loan"><span class="drawer-item__icon">🏦</span>محاسبه وام</div>
+        <div class="drawer-item" onclick="showTool('deposit')" data-tool="deposit"><span class="drawer-item__icon">💰</span>سود سپرده</div>
+        <div class="drawer-item" onclick="showTool('rentcalc')" data-tool="rentcalc"><span class="drawer-item__icon">🏠</span>رهن و اجاره</div>
+        <div class="drawer-item" onclick="showTool('taxdisc')" data-tool="taxdisc"><span class="drawer-item__icon">🏷️</span>مالیات و تخفیف</div>
+        <div class="drawer-item" onclick="showTool('tip')" data-tool="tip"><span class="drawer-item__icon">🧾</span>تقسیم صورت‌حساب</div>
 
         <span class="drawer-section-label">⏱️ زمان و تقویم</span>
-        <div class="drawer-item" onclick="showTool('stopwatch')" data-tool="stopwatch">
-          <span class="drawer-item__icon">⏱️</span>کرونومتر
-        </div>
-        <div class="drawer-item" onclick="showTool('timer')" data-tool="timer">
-          <span class="drawer-item__icon">⏳</span>تایمر
-        </div>
-        <div class="drawer-item" onclick="showTool('pomodoro')" data-tool="pomodoro">
-          <span class="drawer-item__icon">🍅</span>پومودورو
-        </div>
-        <div class="drawer-item" onclick="showTool('counter')" data-tool="counter">
-          <span class="drawer-item__icon">🔢</span>شمارنده
-        </div>
-        <div class="drawer-item" onclick="showTool('timezone')" data-tool="timezone">
-          <span class="drawer-item__icon">🌐</span>ساعت جهانی
-        </div>
-        <div class="drawer-item" onclick="showTool('jcal')" data-tool="jcal">
-          <span class="drawer-item__icon">📅</span>تقویم خورشیدی
-        </div>
-        <div class="drawer-item" onclick="showTool('dateconv')" data-tool="dateconv">
-          <span class="drawer-item__icon">🗓️</span>مبدل تاریخ
-        </div>
-        <div class="drawer-item" onclick="showTool('age')" data-tool="age">
-          <span class="drawer-item__icon">🎂</span>محاسبه سن
-        </div>
+        <div class="drawer-item" onclick="showTool('stopwatch')" data-tool="stopwatch"><span class="drawer-item__icon">⏱️</span>کرونومتر</div>
+        <div class="drawer-item" onclick="showTool('timer')" data-tool="timer"><span class="drawer-item__icon">⏳</span>تایمر</div>
+        <div class="drawer-item" onclick="showTool('pomodoro')" data-tool="pomodoro"><span class="drawer-item__icon">🍅</span>پومودورو</div>
+        <div class="drawer-item" onclick="showTool('counter')" data-tool="counter"><span class="drawer-item__icon">🔢</span>شمارنده</div>
+        <div class="drawer-item" onclick="showTool('timezone')" data-tool="timezone"><span class="drawer-item__icon">🌐</span>ساعت جهانی</div>
+        <div class="drawer-item" onclick="showTool('jcal')" data-tool="jcal"><span class="drawer-item__icon">📅</span>تقویم خورشیدی</div>
+        <div class="drawer-item" onclick="showTool('dateconv')" data-tool="dateconv"><span class="drawer-item__icon">🗓️</span>مبدل تاریخ</div>
+        <div class="drawer-item" onclick="showTool('age')" data-tool="age"><span class="drawer-item__icon">🎂</span>محاسبه سن</div>
 
         <span class="drawer-section-label">📐 علوم و مهندسی</span>
-        <div class="drawer-item" onclick="showTool('unitconv')" data-tool="unitconv">
-          <span class="drawer-item__icon">📏</span>تبدیل واحد
-        </div>
-        <div class="drawer-item" onclick="showTool('geometry')" data-tool="geometry">
-          <span class="drawer-item__icon">📐</span>هندسه
-        </div>
-        <div class="drawer-item" onclick="showTool('periodic')" data-tool="periodic">
-          <span class="drawer-item__icon">⚗️</span>جدول تناوبی
-        </div>
-        <div class="drawer-item" onclick="showTool('resistor')" data-tool="resistor">
-          <span class="drawer-item__icon">🔧</span>مقاومت رنگی
-        </div>
-        <div class="drawer-item" onclick="showTool('subnet')" data-tool="subnet">
-          <span class="drawer-item__icon">🌐</span>Subnet
-        </div>
+        <div class="drawer-item" onclick="showTool('unitconv')" data-tool="unitconv"><span class="drawer-item__icon">📏</span>تبدیل واحد</div>
+        <div class="drawer-item" onclick="showTool('geometry')" data-tool="geometry"><span class="drawer-item__icon">📐</span>هندسه</div>
+        <div class="drawer-item" onclick="showTool('periodic')" data-tool="periodic"><span class="drawer-item__icon">⚗️</span>جدول تناوبی</div>
+        <div class="drawer-item" onclick="showTool('resistor')" data-tool="resistor"><span class="drawer-item__icon">🔧</span>مقاومت رنگی</div>
+        <div class="drawer-item" onclick="showTool('subnet')" data-tool="subnet"><span class="drawer-item__icon">🌐</span>Subnet</div>
 
         <span class="drawer-section-label">✏️ متن و محتوا</span>
-        <div class="drawer-item" onclick="showTool('text')" data-tool="text">
-          <span class="drawer-item__icon">✏️</span>ابزار متن
-        </div>
-        <div class="drawer-item" onclick="showTool('charcount')" data-tool="charcount">
-          <span class="drawer-item__icon">📊</span>آنالیز متن
-        </div>
-        <div class="drawer-item" onclick="showTool('whitespace')" data-tool="whitespace">
-          <span class="drawer-item__icon">␣</span>حذف فاصله
-        </div>
-        <div class="drawer-item" onclick="showTool('oneline')" data-tool="oneline">
-          <span class="drawer-item__icon">↔️</span>تک‌خطی کردن
-        </div>
-        <div class="drawer-item" onclick="showTool('lorem')" data-tool="lorem">
-          <span class="drawer-item__icon">📄</span>لورم ایپسوم
-        </div>
-        <div class="drawer-item" onclick="showTool('markdown')" data-tool="markdown">
-          <span class="drawer-item__icon">🖊️</span>تبدیل Markdown
-        </div>
-        <div class="drawer-item" onclick="showTool('diff')" data-tool="diff">
-          <span class="drawer-item__icon">🔀</span>مقایسه دو متن
-        </div>
-        <div class="drawer-item" onclick="showTool('slugify')" data-tool="slugify">
-          <span class="drawer-item__icon">🔗</span>ساخت Slug
-        </div>
-        <div class="drawer-item" onclick="showTool('morse')" data-tool="morse">
-          <span class="drawer-item__icon">📡</span>کد مورس
-        </div>
-        <div class="drawer-item" onclick="showTool('roman')" data-tool="roman">
-          <span class="drawer-item__icon">Ⅰ</span>اعداد رومی
-        </div>
-        <div class="drawer-item" onclick="showTool('numconvert')" data-tool="numconvert">
-          <span class="drawer-item__icon">🔢</span>تبدیل اعداد
-        </div>
-        <div class="drawer-item" onclick="showTool('textfix')" data-tool="textfix">
-          <span class="drawer-item__icon">🔤</span>رفع خرابی متن
-        </div>
-        <div class="drawer-item" onclick="showTool('emojis')" data-tool="emojis">
-          <span class="drawer-item__icon">😀</span>ایموجی
-        </div>
-        <div class="drawer-item" onclick="showTool('emotcn')" data-tool="emotcn">
-          <span class="drawer-item__icon">:‑)</span>اِموتیکون (Kaomoji)
-        </div>
+        <div class="drawer-item" onclick="showTool('text')" data-tool="text"><span class="drawer-item__icon">✏️</span>ابزار متن</div>
+        <div class="drawer-item" onclick="showTool('charcount')" data-tool="charcount"><span class="drawer-item__icon">#️⃣</span>آنالیز متن</div>
+        <div class="drawer-item" onclick="showTool('whitespace')" data-tool="whitespace"><span class="drawer-item__icon">␣</span>حذف فاصله</div>
+        <div class="drawer-item" onclick="showTool('oneline')" data-tool="oneline"><span class="drawer-item__icon">↔️</span>تک‌خطی کردن</div>
+        <div class="drawer-item" onclick="showTool('lorem')" data-tool="lorem"><span class="drawer-item__icon">📄</span>لورم ایپسوم</div>
+        <div class="drawer-item" onclick="showTool('markdown')" data-tool="markdown"><span class="drawer-item__icon">🖊️</span>تبدیل Markdown</div>
+        <div class="drawer-item" onclick="showTool('diff')" data-tool="diff"><span class="drawer-item__icon">🔀</span>مقایسه دو متن</div>
+        <div class="drawer-item" onclick="showTool('slugify')" data-tool="slugify"><span class="drawer-item__icon">🔗</span>ساخت Slug</div>
+        <div class="drawer-item" onclick="showTool('morse')" data-tool="morse"><span class="drawer-item__icon">📡</span>کد مورس</div>
+        <div class="drawer-item" onclick="showTool('roman')" data-tool="roman"><span class="drawer-item__icon">Ⅰ</span>اعداد رومی</div>
+        <div class="drawer-item" onclick="showTool('numconvert')" data-tool="numconvert"><span class="drawer-item__icon">🔢</span>تبدیل اعداد</div>
+        <div class="drawer-item" onclick="showTool('textfix')" data-tool="textfix"><span class="drawer-item__icon">🔤</span>رفع خرابی متن</div>
+        <div class="drawer-item" onclick="showTool('notes')" data-tool="notes"><span class="drawer-item__icon">📝</span>یادداشت و چک‌لیست</div>
+        <div class="drawer-item" onclick="showTool('emojis')" data-tool="emojis"><span class="drawer-item__icon">😀</span>ایموجی</div>
+        <div class="drawer-item" onclick="showTool('emotcn')" data-tool="emotcn"><span class="drawer-item__icon">:‑)</span>اِموتیکون</div>
 
         <span class="drawer-section-label">💻 توسعه</span>
-        <div class="drawer-item" onclick="showTool('json')" data-tool="json">
-          <span class="drawer-item__icon">📋</span>فرمت‌دهی JSON
-        </div>
-        <div class="drawer-item" onclick="showTool('xml')" data-tool="xml">
-          <span class="drawer-item__icon">🏷️</span>فرمت‌دهی XML
-        </div>
-        <div class="drawer-item" onclick="showTool('htmlesc')" data-tool="htmlesc">
-          <span class="drawer-item__icon">🔤</span>HTML Escaper
-        </div>
-        <div class="drawer-item" onclick="showTool('hash')" data-tool="hash">
-          <span class="drawer-item__icon">🔏</span>هش رمزنگاری
-        </div>
-        <div class="drawer-item" onclick="showTool('crypto')" data-tool="crypto">
-          <span class="drawer-item__icon">🔐</span>رمزنگاری متن
-        </div>
-        <div class="drawer-item" onclick="showTool('jwt')" data-tool="jwt">
-          <span class="drawer-item__icon">🔑</span>JWT Parser
-        </div>
-        <div class="drawer-item" onclick="showTool('pxrem')" data-tool="pxrem">
-          <span class="drawer-item__icon">📐</span>PX ↔ REM
-        </div>
-        <div class="drawer-item" onclick="showTool('regex')" data-tool="regex">
-          <span class="drawer-item__icon">🔍</span>تست Regex
-        </div>
-        <div class="drawer-item" onclick="showTool('cron')" data-tool="cron">
-          <span class="drawer-item__icon">🕐</span>Cron Parser
-        </div>
-        <div class="drawer-item" onclick="showTool('urlparse')" data-tool="urlparse">
-          <span class="drawer-item__icon">🌐</span>تجزیه URL
-        </div>
-        <div class="drawer-item" onclick="showTool('numbase')" data-tool="numbase">
-          <span class="drawer-item__icon">🔣</span>تبدیل مبنا
-        </div>
-        <div class="drawer-item" onclick="showTool('asciitbl')" data-tool="asciitbl">
-          <span class="drawer-item__icon">🔤</span>جدول ASCII
-        </div>
-        <div class="drawer-item" onclick="showTool('enctools')" data-tool="enctools">
-          <span class="drawer-item__icon">🔡</span>ابزار کدگذاری
-        </div>
-        <div class="drawer-item" onclick="showTool('chart')" data-tool="chart">
-          <span class="drawer-item__icon">📊</span>نمودار داده
-        </div>
-        <div class="drawer-item" onclick="showTool('fakejson')" data-tool="fakejson">
-          <span class="drawer-item__icon">🗄️</span>مولد JSON
-        </div>
-        <div class="drawer-item" onclick="showTool('numwords')" data-tool="numwords">
-          <span class="drawer-item__icon">💬</span>عدد به حروف
-        </div>
+        <div class="drawer-item" onclick="showTool('json')" data-tool="json"><span class="drawer-item__icon">📋</span>فرمت‌دهی JSON</div>
+        <div class="drawer-item" onclick="showTool('xml')" data-tool="xml"><span class="drawer-item__icon">🏷️</span>فرمت‌دهی XML</div>
+        <div class="drawer-item" onclick="showTool('htmlesc')" data-tool="htmlesc"><span class="drawer-item__icon">🔤</span>HTML Escaper</div>
+        <div class="drawer-item" onclick="showTool('hash')" data-tool="hash"><span class="drawer-item__icon">🔏</span>هش رمزنگاری</div>
+        <div class="drawer-item" onclick="showTool('crypto')" data-tool="crypto"><span class="drawer-item__icon">🔐</span>رمزنگاری متن</div>
+        <div class="drawer-item" onclick="showTool('jwt')" data-tool="jwt"><span class="drawer-item__icon">🔑</span>JWT Parser</div>
+        <div class="drawer-item" onclick="showTool('pxrem')" data-tool="pxrem"><span class="drawer-item__icon">📐</span>PX ↔ REM</div>
+        <div class="drawer-item" onclick="showTool('regex')" data-tool="regex"><span class="drawer-item__icon">🔍</span>تست Regex</div>
+        <div class="drawer-item" onclick="showTool('cron')" data-tool="cron"><span class="drawer-item__icon">🕐</span>Cron Parser</div>
+        <div class="drawer-item" onclick="showTool('urlparse')" data-tool="urlparse"><span class="drawer-item__icon">🌐</span>تجزیه URL</div>
+        <div class="drawer-item" onclick="showTool('numbase')" data-tool="numbase"><span class="drawer-item__icon">🔣</span>تبدیل مبنا</div>
+        <div class="drawer-item" onclick="showTool('asciitbl')" data-tool="asciitbl"><span class="drawer-item__icon">🔤</span>جدول ASCII</div>
+        <div class="drawer-item" onclick="showTool('enctools')" data-tool="enctools"><span class="drawer-item__icon">🔡</span>ابزار کدگذاری</div>
+        <div class="drawer-item" onclick="showTool('chart')" data-tool="chart"><span class="drawer-item__icon">📊</span>نمودار داده</div>
+        <div class="drawer-item" onclick="showTool('fakejson')" data-tool="fakejson"><span class="drawer-item__icon">🗄️</span>مولد JSON آزمایشی</div>
+        <div class="drawer-item" onclick="showTool('numwords')" data-tool="numwords"><span class="drawer-item__icon">💬</span>عدد به حروف</div>
+        <div class="drawer-item" onclick="showTool('seotools')" data-tool="seotools"><span class="drawer-item__icon">🔍</span>متا تگ SEO</div>
+        <div class="drawer-item" onclick="showTool('htaccess')" data-tool="htaccess"><span class="drawer-item__icon">⚙️</span>مولد .htaccess</div>
+        <div class="drawer-item" onclick="showTool('keypair')" data-tool="keypair"><span class="drawer-item__icon">🔐</span>کلیدهای RSA/ECC</div>
 
         <span class="drawer-section-label">⚡ مولدها</span>
-        <div class="drawer-item" onclick="showTool('pass')" data-tool="pass">
-          <span class="drawer-item__icon">🔐</span>رمز عبور
-        </div>
-        <div class="drawer-item" onclick="showTool('uuid')" data-tool="uuid">
-          <span class="drawer-item__icon">🪪</span>UUID / ULID
-        </div>
-        <div class="drawer-item" onclick="showTool('randnum')" data-tool="randnum">
-          <span class="drawer-item__icon">🎲</span>عدد تصادفی
-        </div>
-        <div class="drawer-item" onclick="showTool('randip')" data-tool="randip">
-          <span class="drawer-item__icon">🌐</span>IP تصادفی
-        </div>
-        <div class="drawer-item" onclick="showTool('randcolor')" data-tool="randcolor">
-          <span class="drawer-item__icon">🎨</span>رنگ تصادفی
-        </div>
-        <div class="drawer-item" onclick="showTool('fake')" data-tool="fake">
-          <span class="drawer-item__icon">👤</span>داده ساختگی
-        </div>
-        <div class="drawer-item" onclick="showTool('credit')" data-tool="credit">
-          <span class="drawer-item__icon">💳</span>کارت اعتباری
-        </div>
-        <div class="drawer-item" onclick="showTool('avatar')" data-tool="avatar">
-          <span class="drawer-item__icon">🖼️</span>آواتار
-        </div>
-        <div class="drawer-item" onclick="showTool('placeholder')" data-tool="placeholder">
-          <span class="drawer-item__icon">🗃️</span>تصویر جایگزین
-        </div>
-        <div class="drawer-item" onclick="showTool('qr')" data-tool="qr">
-          <span class="drawer-item__icon">📱</span>کد QR
-        </div>
-        <div class="drawer-item" onclick="showTool('qrread')" data-tool="qrread">
-          <span class="drawer-item__icon">📷</span>خواندن QR
-        </div>
-        <div class="drawer-item" onclick="showTool('barcode')" data-tool="barcode">
-          <span class="drawer-item__icon">📊</span>بارکد
-        </div>
+        <div class="drawer-item" onclick="showTool('pass')" data-tool="pass"><span class="drawer-item__icon">🔐</span>رمز عبور</div>
+        <div class="drawer-item" onclick="showTool('uuid')" data-tool="uuid"><span class="drawer-item__icon">🪪</span>UUID / ULID</div>
+        <div class="drawer-item" onclick="showTool('randnum')" data-tool="randnum"><span class="drawer-item__icon">🎲</span>عدد تصادفی</div>
+        <div class="drawer-item" onclick="showTool('randip')" data-tool="randip"><span class="drawer-item__icon">🌐</span>IP تصادفی</div>
+        <div class="drawer-item" onclick="showTool('randcolor')" data-tool="randcolor"><span class="drawer-item__icon">🎨</span>رنگ تصادفی</div>
+        <div class="drawer-item" onclick="showTool('fake')" data-tool="fake"><span class="drawer-item__icon">👤</span>داده ساختگی</div>
+        <div class="drawer-item" onclick="showTool('credit')" data-tool="credit"><span class="drawer-item__icon">💳</span>کارت اعتباری</div>
+        <div class="drawer-item" onclick="showTool('avatar')" data-tool="avatar"><span class="drawer-item__icon">🖼️</span>آواتار</div>
+        <div class="drawer-item" onclick="showTool('placeholder')" data-tool="placeholder"><span class="drawer-item__icon">🗃️</span>تصویر جایگزین</div>
+        <div class="drawer-item" onclick="showTool('qr')" data-tool="qr"><span class="drawer-item__icon">📱</span>کد QR</div>
+        <div class="drawer-item" onclick="showTool('qrread')" data-tool="qrread"><span class="drawer-item__icon">📷</span>خواندن QR</div>
+        <div class="drawer-item" onclick="showTool('barcode')" data-tool="barcode"><span class="drawer-item__icon">📊</span>بارکد</div>
 
         <span class="drawer-section-label">🎨 طراحی و رنگ</span>
-        <div class="drawer-item" onclick="showTool('colorpicker')" data-tool="colorpicker">
-          <span class="drawer-item__icon">🖌️</span>تبدیل رنگ
-        </div>
-        <div class="drawer-item" onclick="showTool('wcag')" data-tool="wcag">
-          <span class="drawer-item__icon">♿</span>کنتراست WCAG
-        </div>
-        <div class="drawer-item" onclick="showTool('colorblind')" data-tool="colorblind">
-          <span class="drawer-item__icon">👁</span>شبیه‌ساز کوررنگی
-        </div>
-        <div class="drawer-item" onclick="showTool('gradient')" data-tool="gradient">
-          <span class="drawer-item__icon">🌈</span>گرادیان CSS
-        </div>
-        <div class="drawer-item" onclick="showTool('shadow')" data-tool="shadow">
-          <span class="drawer-item__icon">🌑</span>سایه CSS
-        </div>
-        <div class="drawer-item" onclick="showTool('borderrad')" data-tool="borderrad">
-          <span class="drawer-item__icon">⬛</span>گوشه‌گرد CSS
-        </div>
-        <div class="drawer-item" onclick="showTool('aspect')" data-tool="aspect">
-          <span class="drawer-item__icon">📐</span>نسبت ابعاد
-        </div>
+        <div class="drawer-item" onclick="showTool('colorpicker')" data-tool="colorpicker"><span class="drawer-item__icon">🖌️</span>تبدیل رنگ</div>
+        <div class="drawer-item" onclick="showTool('wcag')" data-tool="wcag"><span class="drawer-item__icon">♿</span>کنتراست WCAG</div>
+        <div class="drawer-item" onclick="showTool('colorblind')" data-tool="colorblind"><span class="drawer-item__icon">👁</span>شبیه‌ساز کوررنگی</div>
+        <div class="drawer-item" onclick="showTool('gradient')" data-tool="gradient"><span class="drawer-item__icon">🌈</span>گرادیان CSS</div>
+        <div class="drawer-item" onclick="showTool('shadow')" data-tool="shadow"><span class="drawer-item__icon">🌑</span>سایه CSS</div>
+        <div class="drawer-item" onclick="showTool('borderrad')" data-tool="borderrad"><span class="drawer-item__icon">⬛</span>گوشه‌گرد CSS</div>
+        <div class="drawer-item" onclick="showTool('aspect')" data-tool="aspect"><span class="drawer-item__icon">📐</span>نسبت ابعاد</div>
+        <div class="drawer-item" onclick="showTool('goldenratio')" data-tool="goldenratio"><span class="drawer-item__icon">φ</span>نسبت طلایی</div>
+        <div class="drawer-item" onclick="showTool('svgviewer')" data-tool="svgviewer"><span class="drawer-item__icon">🖼️</span>پیش‌نمایش SVG</div>
+        <div class="drawer-item" onclick="showTool('gridbuilder')" data-tool="gridbuilder"><span class="drawer-item__icon">⚏</span>Grid / Flexbox</div>
+        <div class="drawer-item" onclick="showTool('imgpalette')" data-tool="imgpalette"><span class="drawer-item__icon">🎨</span>پالت رنگ تعاملی</div>
 
         <span class="drawer-section-label">📁 فایل</span>
-        <div class="drawer-item" onclick="showTool('imgcompress')" data-tool="imgcompress">
-          <span class="drawer-item__icon">🗜️</span>فشرده‌سازی تصویر
-        </div>
-        <div class="drawer-item" onclick="showTool('pdfcompress')" data-tool="pdfcompress">
-          <span class="drawer-item__icon">📄</span>فشرده‌سازی PDF
-        </div>
-        <div class="drawer-item" onclick="showTool('img2b64')" data-tool="img2b64">
-          <span class="drawer-item__icon">🔄</span>تصویر → Base64
-        </div>
-        <div class="drawer-item" onclick="showTool('csvjson')" data-tool="csvjson">
-          <span class="drawer-item__icon">↔️</span>CSV ↔ JSON
-        </div>
-        <div class="drawer-item" onclick="showTool('filesplit')" data-tool="filesplit">
-          <span class="drawer-item__icon">🗂</span>تقسیم و مرج فایل
-        </div>
+        <div class="drawer-item" onclick="showTool('imgcompress')" data-tool="imgcompress"><span class="drawer-item__icon">🗜️</span>فشرده‌سازی تصویر</div>
+        <div class="drawer-item" onclick="showTool('pdfcompress')" data-tool="pdfcompress"><span class="drawer-item__icon">📄</span>فشرده‌سازی PDF</div>
+        <div class="drawer-item" onclick="showTool('img2b64')" data-tool="img2b64"><span class="drawer-item__icon">🔄</span>تصویر → Base64</div>
+        <div class="drawer-item" onclick="showTool('csvjson')" data-tool="csvjson"><span class="drawer-item__icon">↔️</span>CSV ↔ JSON</div>
+        <div class="drawer-item" onclick="showTool('filesplit')" data-tool="filesplit"><span class="drawer-item__icon">🗂</span>تقسیم و مرج فایل</div>
+        <div class="drawer-item" onclick="showTool('watermark')" data-tool="watermark"><span class="drawer-item__icon">💧</span>واترمارک تصویر</div>
 
         <span class="drawer-section-label">🛠️ ایران و سیستم</span>
-        <div class="drawer-item" onclick="showTool('emergency')" data-tool="emergency">
-          <span class="drawer-item__icon">🚨</span>شماره ضروری
-        </div>
-        <div class="drawer-item" onclick="showTool('citycodes')" data-tool="citycodes">
-          <span class="drawer-item__icon">📞</span>کد شهرها
-        </div>
-        <div class="drawer-item" onclick="showTool('trafficfines')" data-tool="trafficfines">
-          <span class="drawer-item__icon">🚗</span>جرایم رانندگی
-        </div>
-        <div class="drawer-item" onclick="showTool('metromap')" data-tool="metromap">
-          <span class="drawer-item__icon">🚇</span>نقشه مترو
-        </div>
-        <div class="drawer-item" onclick="showTool('device')" data-tool="device">
-          <span class="drawer-item__icon">💻</span>اطلاعات دستگاه
-        </div>
-        <div class="drawer-item" onclick="showTool('ua')" data-tool="ua">
-          <span class="drawer-item__icon">ℹ️</span>User Agent
-        </div>
-
-
+        <div class="drawer-item" onclick="showTool('emergency')" data-tool="emergency"><span class="drawer-item__icon">🚨</span>شماره ضروری</div>
+        <div class="drawer-item" onclick="showTool('citycodes')" data-tool="citycodes"><span class="drawer-item__icon">📞</span>کد شهرها</div>
+        <div class="drawer-item" onclick="showTool('trafficfines')" data-tool="trafficfines"><span class="drawer-item__icon">🚗</span>جرایم رانندگی</div>
+        <div class="drawer-item" onclick="showTool('metromap')" data-tool="metromap"><span class="drawer-item__icon">🚇</span>نقشه مترو</div>
+        <div class="drawer-item" onclick="showTool('device')" data-tool="device"><span class="drawer-item__icon">💻</span>اطلاعات دستگاه</div>
+        <div class="drawer-item" onclick="showTool('ua')" data-tool="ua"><span class="drawer-item__icon">ℹ️</span>User Agent</div>
 
         <span class="drawer-section-label">🎮 بازی و سرگرمی</span>
-        <div class="drawer-item" onclick="showTool('minigames')" data-tool="minigames">
-          <span class="drawer-item__icon">🕹️</span>بازی‌های کوچک
-        </div>
-        <div class="drawer-item" onclick="showTool('wordcloud')" data-tool="wordcloud">
-          <span class="drawer-item__icon">☁️</span>ابر کلمات
-        </div>
-        <div class="drawer-item" onclick="showTool('wordcloud')" data-tool="wordcloud">
-          <span class="drawer-item__icon">📖</span>دیوان شعر
-        </div>
-        <div class="drawer-item" onclick="showTool('compass')" data-tool="compass">
-          <span class="drawer-item__icon">🧭</span>قطب‌نما
-        </div>
-        <div class="drawer-item" onclick="showTool('goldenratio')" data-tool="goldenratio">
-          <span class="drawer-item__icon">φ</span>نسبت طلایی
-        </div>
-        <div class="drawer-item" onclick="showTool('svgviewer')" data-tool="svgviewer">
-          <span class="drawer-item__icon">🖼️</span>پیش‌نمایش SVG
-        </div>
-        <div class="drawer-item" onclick="showTool('gridbuilder')" data-tool="gridbuilder">
-          <span class="drawer-item__icon">⚏</span>Grid / Flexbox
-        </div>
-        <div class="drawer-item" onclick="showTool('bmc')" data-tool="bmc">
-          <span class="drawer-item__icon">🗂️</span>بوم کسب‌وکار
-        </div>
-        <div class="drawer-item" onclick="showTool('eisenhower')" data-tool="eisenhower">
-          <span class="drawer-item__icon">⬜</span>ماتریس آیزنهاور
-        </div>
-        <div class="drawer-item" onclick="showTool('citation')" data-tool="citation">
-          <span class="drawer-item__icon">📚</span>استناد دانشگاهی
-        </div>
-        <div class="drawer-item" onclick="showTool('langscores')" data-tool="langscores">
-          <span class="drawer-item__icon">🎓</span>محاسبه نمره
-        </div>
-        <div class="drawer-item" onclick="showTool('keypair')" data-tool="keypair">
-          <span class="drawer-item__icon">🔐</span>کلیدهای RSA
-        </div>
-        <div class="drawer-item" onclick="showTool('htaccess')" data-tool="htaccess">
-          <span class="drawer-item__icon">⚙️</span>مولد htaccess
-        </div>
-        <div class="drawer-item" onclick="showTool('decmatrix')" data-tool="decmatrix">
-          <span class="drawer-item__icon">📊</span>ماتریس تصمیم
-        </div>
-        <div class="drawer-item" onclick="showTool('watermark')" data-tool="watermark">
-          <span class="drawer-item__icon">💧</span>واترمارک تصویر
-        </div>
-        <div class="drawer-item" onclick="showTool('seotools')" data-tool="seotools">
-          <span class="drawer-item__icon">🔍</span>متا تگ SEO
-        </div>
-        <div class="drawer-item" onclick="showTool('audiotools')" data-tool="audiotools">
-          <span class="drawer-item__icon">🔊</span>ابزار صوتی
-        </div>
-        <div class="drawer-item" onclick="showTool('imgpalette')" data-tool="imgpalette">
-          <span class="drawer-item__icon">🎨</span>پالت رنگ تعاملی
-        </div>
+        <div class="drawer-item" onclick="showTool('minigames')" data-tool="minigames"><span class="drawer-item__icon">🕹️</span>بازی‌های کوچک</div>
+        <div class="drawer-item" onclick="showTool('wordcloud')" data-tool="wordcloud"><span class="drawer-item__icon">☁️</span>ابر کلمات</div>
+        <div class="drawer-item" onclick="showTool('diwan')" data-tool="diwan"><span class="drawer-item__icon">📖</span>دیوان شعر</div>
+
+        <span class="drawer-section-label">🧭 ابزارهای تخصصی</span>
+        <div class="drawer-item" onclick="showTool('compass')" data-tool="compass"><span class="drawer-item__icon">🧭</span>قطب‌نما</div>
+        <div class="drawer-item" onclick="showTool('bmc')" data-tool="bmc"><span class="drawer-item__icon">🗂️</span>بوم کسب‌وکار</div>
+        <div class="drawer-item" onclick="showTool('eisenhower')" data-tool="eisenhower"><span class="drawer-item__icon">⬜</span>ماتریس آیزنهاور</div>
+        <div class="drawer-item" onclick="showTool('decmatrix')" data-tool="decmatrix"><span class="drawer-item__icon">📊</span>ماتریس تصمیم</div>
+        <div class="drawer-item" onclick="showTool('citation')" data-tool="citation"><span class="drawer-item__icon">📚</span>استناد دانشگاهی</div>
+        <div class="drawer-item" onclick="showTool('langscores')" data-tool="langscores"><span class="drawer-item__icon">🎓</span>محاسبه نمره</div>
+        <div class="drawer-item" onclick="showTool('audiotools')" data-tool="audiotools"><span class="drawer-item__icon">🔊</span>ابزار صوتی</div>
+
+        <span class="drawer-section-label">📲 نصب</span>
+        <div class="drawer-item" onclick="showTool('share')" data-tool="share"><span class="drawer-item__icon">🔗</span>اشتراک‌گذاری</div>
+        <div class="drawer-item" onclick="showTool('pwa')" data-tool="pwa"><span class="drawer-item__icon">📲</span>نصب اپ</div>
       </div>
     </nav>
 
@@ -7465,7 +7277,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 3.1 - ۱۴۰۵/۰۱/۱۵
+          ℹ️ نسخه 3.2 - ۱۴۰۵/۰۱/۱۶
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -7568,6 +7380,9 @@
         filesplit:'تقسیم و مرج فایل'
       };
 
+      // Stable reference so offClick can deregister it (prevents handler stacking)
+      function _baleBackHandler() { showTool('home'); }
+
       function _applyTool(id, pushState) {
         document.querySelectorAll('.tool-card').forEach(el => el.classList.remove('active'));
         const home = document.getElementById('home');
@@ -7588,16 +7403,17 @@
           const hash = id === 'home' ? '' : '#' + id;
           history.pushState({tool: id}, title, hash || window.location.pathname);
         }
-        // Bale BackButton: show when inside a tool, hide on home
+        // Bale BackButton: show on tools, hide on home
         if (IS_BALE) {
-          if (id === 'home') {
-            Bale.WebApp.BackButton.hide();
-          } else {
-            Bale.WebApp.BackButton.show();
-            Bale.WebApp.BackButton.onClick(function() {
-              showTool('home');
-            });
-          }
+          _withBale(function(wa) {
+            if (id === 'home') {
+              wa.BackButton.hide();
+            } else {
+              wa.BackButton.offClick(_baleBackHandler);
+              wa.BackButton.onClick(_baleBackHandler);
+              wa.BackButton.show();
+            }
+          });
         }
         // Tool-specific inits
         if (id === 'device') loadDevice();
@@ -7677,12 +7493,22 @@
         _applyTool(id || 'home', false);
       });
 
-      // On page load, read hash — deferred so all vars/functions below are initialized
+      // On page load: read ?tool= param (Bale WebView strips # fragments) or hash
       document.addEventListener('DOMContentLoaded', function() {
+        // If loaded at /iran URL (SW served index.html instead), redirect properly
+        if (location.pathname === '/iran' || location.pathname === '/iran/') {
+          location.replace('/iran.html');
+          return;
+        }
+        const params = new URLSearchParams(location.search);
+        const toolParam = params.get('tool');
         const hash = location.hash ? location.hash.slice(1) : '';
-        if (hash && document.getElementById(hash)) {
-          _applyTool(hash, false);
-          history.replaceState({tool: hash}, TOOL_TITLES[hash] || hash, location.hash);
+        const target = (toolParam && document.getElementById(toolParam)) ? toolParam
+                     : (hash && document.getElementById(hash)) ? hash
+                     : '';
+        if (target) {
+          _applyTool(target, false);
+          if (!IS_BALE) history.replaceState({tool: target}, TOOL_TITLES[target] || target, '#' + target);
         } else {
           history.replaceState({tool: 'home'}, 'خانه', location.pathname);
         }
