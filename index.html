@@ -1704,13 +1704,21 @@
         _withBale(function(wa) {
           wa.expand();
           wa.ready();
+
           // Sync dark/light with Bale app theme
           if (wa.colorScheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
             var fab = document.querySelector('.theme-fab');
             if (fab) fab.textContent = '☀️';
           }
-          // Prompt to add to home screen after 3s if not already pinned
+
+          // Register back handler ONCE via onEvent (never use onClick per-navigation).
+          // This is the In-Memory Routing pattern the docs require.
+          wa.onEvent('backButtonPressed', function() {
+            showTool('home');
+          });
+
+          // Prompt add-to-homescreen after 3s if not already pinned
           setTimeout(function() {
             wa.checkHomeScreenStatus(function(status) {
               if (status === 'missed') wa.addToHomeScreen();
@@ -7277,7 +7285,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 3.2 - ۱۴۰۵/۰۱/۱۶
+          ℹ️ نسخه 3.3 - ۱۴۰۵/۰۱/۱۶
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -7380,9 +7388,6 @@
         filesplit:'تقسیم و مرج فایل'
       };
 
-      // Stable reference so offClick can deregister it (prevents handler stacking)
-      function _baleBackHandler() { showTool('home'); }
-
       function _applyTool(id, pushState) {
         document.querySelectorAll('.tool-card').forEach(el => el.classList.remove('active'));
         const home = document.getElementById('home');
@@ -7403,14 +7408,13 @@
           const hash = id === 'home' ? '' : '#' + id;
           history.pushState({tool: id}, title, hash || window.location.pathname);
         }
-        // Bale BackButton: show on tools, hide on home
+        // Bale BackButton: show on tools, hide on home.
+        // Handler is registered once via onEvent at startup — only toggle visibility here.
         if (IS_BALE) {
           _withBale(function(wa) {
             if (id === 'home') {
               wa.BackButton.hide();
             } else {
-              wa.BackButton.offClick(_baleBackHandler);
-              wa.BackButton.onClick(_baleBackHandler);
               wa.BackButton.show();
             }
           });
@@ -17770,6 +17774,45 @@
     } else {
       _applySelectColorScheme();
     }
+
+    // ══════════════════════════════════════════════════════════════
+    //  PWA EXTERNAL LINK INTERCEPTOR
+    //  Android standalone WebViews can't navigate to external URLs —
+    //  clicking target="_blank" links causes a black screen.
+    //  Intercept all external clicks and force window.open() so the
+    //  system browser handles them instead.
+    // ══════════════════════════════════════════════════════════════
+    (function pwaExternalLinks() {
+      var origin = window.location.origin;
+
+      function isPwa() {
+        return window.matchMedia('(display-mode: standalone)').matches ||
+               window.navigator.standalone === true;
+      }
+
+      // Also apply inside Bale WebView (IS_BALE), which has the same restriction
+      function shouldIntercept() {
+        return isPwa() || IS_BALE;
+      }
+
+      document.addEventListener('click', function(e) {
+        if (!shouldIntercept()) return;
+        var a = e.target.closest('a[href]');
+        if (!a) return;
+        var href = a.getAttribute('href');
+        if (!href) return;
+        // Only intercept fully external URLs (not relative, not same-origin, not anchors)
+        var isExternal = /^https?:\/\//i.test(href) && !href.startsWith(origin);
+        if (!isExternal) return;
+        e.preventDefault();
+        // In Bale, use the built-in browser for a better UX
+        if (IS_BALE && window.Bale && window.Bale.WebApp) {
+          Bale.WebApp.openLink(href, { try_instant_view: false });
+        } else {
+          window.open(href, '_blank', 'noopener,noreferrer');
+        }
+      }, true); // capture phase so it fires before any onclick handlers
+    })();
     </script>
   </body>
 </html>
