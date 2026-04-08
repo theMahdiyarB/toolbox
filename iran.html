@@ -11,12 +11,181 @@
     <link rel="stylesheet" href="main.css">
     <script src="main.js" defer></script>
     <style>
-      /* Iran-specific: Alternating section backgrounds */
+      /* ── Alternating section backgrounds ── */
       .section:nth-of-type(even) {
           background: var(--m3-surface-container-low, color-mix(in srgb, var(--m3-surface-container) 50%, var(--m3-surface)));
       }
       .section:nth-of-type(even) .section-heading {
           background: var(--m3-surface-container-low, color-mix(in srgb, var(--m3-surface-container) 50%, var(--m3-surface)));
+      }
+
+      /* ── FIX: info-card — no lift on hover ── */
+      .info-card { transition: box-shadow 0.2s ease !important; }
+      .info-card:hover { transform: none !important; box-shadow: var(--m3-elevation-1) !important; }
+
+      /* ── FIX: bottom nav — horizontally scrollable ── */
+      .bottom-navigation-bar {
+        overflow-x: auto; overflow-y: hidden;
+        justify-content: flex-start !important;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; padding: 0 4px; gap: 0;
+      }
+      .bottom-navigation-bar::-webkit-scrollbar { display: none; }
+      .bottom-nav-item {
+        scroll-snap-align: start; flex: 0 0 auto;
+        min-width: 64px; max-width: 88px; padding: 0 4px;
+      }
+
+      /* ── FIX 1: Remove the active indicator left-line — it looked bad ── */
+      .rail-item.active::before { display: none !important; }
+
+      /* ── FIX 2: Nav-rail scrollable — mask starts far enough from top
+                   so the first item is never obscured ── */
+      .nav-rail { overflow: hidden; }
+      .rail-items {
+        overflow-y: auto; overflow-x: hidden;
+        scrollbar-width: none; -ms-overflow-style: none;
+        gap: 4px; padding-bottom: 4px;
+        /* Fade only the very bottom edge; top stays fully opaque */
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          black 0%,
+          black calc(100% - 24px),
+          transparent 100%
+        );
+        mask-image: linear-gradient(
+          to bottom,
+          black 0%,
+          black calc(100% - 24px),
+          transparent 100%
+        );
+      }
+      .rail-items::-webkit-scrollbar { display: none; }
+
+      /* ── FIX 3a: TOOLBOX — FAB-style element pinned below the rail header,
+                   outside the scrollable .rail-items list ── */
+      .rail-toolbox-fab {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        text-decoration: none;
+        color: var(--m3-on-primary-container);
+        /* FAB pill shape */
+        background: var(--m3-primary-container);
+        border-radius: 20px;
+        padding: 10px 14px 8px;
+        width: calc(100% - 16px);
+        margin: 0 8px 10px;
+        box-shadow: 0 2px 8px color-mix(in srgb, var(--m3-primary) 28%, transparent);
+        transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+        flex-shrink: 0;
+      }
+      .rail-toolbox-fab:hover {
+        background: var(--m3-primary);
+        color: var(--m3-on-primary);
+        box-shadow: 0 4px 14px color-mix(in srgb, var(--m3-primary) 40%, transparent);
+        transform: translateY(-1px);
+      }
+      .rail-toolbox-fab__icon { font-size: 1.5rem; line-height: 1; }
+      .rail-toolbox-fab__label {
+        font-size: 0.68rem; font-weight: 800;
+        color: inherit; letter-spacing: 0.01em;
+      }
+
+      /* ── FIX 3b: Remove the old toolbox item styling from inside rail-items ── */
+      .rail-item--toolbox { display: none !important; }
+
+      /* ── FIX 4: Sticky section heading — full viewport width background
+                   The heading lives inside .container (max-width:760px, centered)
+                   so its background only covers that width. We use a pseudo-element
+                   that bleeds to the full viewport, matching the section background. ── */
+      .section-heading {
+        /* Create a new stacking context so ::before sits behind children */
+        isolation: isolate;
+      }
+      .section-heading::before {
+        content: '';
+        position: absolute;
+        /* Extend left/right beyond the container to cover full width */
+        inset-inline-start: -9999px;
+        inset-inline-end: -9999px;
+        top: 0;
+        bottom: 0;
+        /* Match the section's own background */
+        background: inherit;
+        z-index: -1;
+      }
+      /* Even sections need their own background on the pseudo-element */
+      .section:nth-of-type(even) .section-heading::before {
+        background: var(--m3-surface-container-low,
+          color-mix(in srgb, var(--m3-surface-container) 50%, var(--m3-surface)));
+      }
+      /* When stuck, extend the shadow to full width too */
+      .section-heading.is-stuck {
+        box-shadow: none; /* Remove the narrow shadow */
+      }
+      .section-heading.is-stuck::after {
+        content: '';
+        position: absolute;
+        inset-inline-start: -9999px;
+        inset-inline-end: -9999px;
+        bottom: 0;
+        height: 1px;
+        background: var(--m3-outline-variant);
+        z-index: -1;
+      }
+      /* Ensure the heading itself is relatively positioned for pseudo-elements */
+      .section-heading {
+        position: sticky;
+        top: 0;
+      }
+
+      /* ── Compact rail items on short screens ── */
+      @media (max-height: 700px) {
+        .rail-header { margin-bottom: 12px !important; }
+        .rail-item { padding: 2px 4px !important; }
+        .rail-item-icon { height: 28px !important; font-size: 1.2rem !important; }
+        .rail-item-label { font-size: 0.68rem !important; }
+        .rail-toolbox-fab { padding: 7px 12px 6px; margin-bottom: 6px; }
+        .rail-toolbox-fab__icon { font-size: 1.25rem; }
+      }
+      @media (max-height: 580px) {
+        .rail-header { margin-bottom: 6px !important; }
+        .rail-item-label { display: none !important; }
+        .rail-toolbox-fab__label { display: none; }
+        .rail-toolbox-fab { padding: 10px; border-radius: 50%; width: 48px; height: 48px;
+          margin: 0 auto 8px; justify-content: center; }
+      }
+
+      /* ── back-to-top: above mobile bottom nav ── */
+      @media (max-width: 768px) {
+        #back-to-top {
+          bottom: calc(var(--bottom-nav-height, 80px) + 12px) !important;
+          inset-inline-end: 14px !important;
+        }
+      }
+
+      /* ── Bottom nav scroll fade hint ── */
+      @media (max-width: 768px) {
+        .bottom-navigation-bar { position: fixed; }
+      }
+
+      /* ── SPECIAL: Toolbox item in bottom nav ── */
+      .bottom-nav-item--toolbox .bottom-nav-icon {
+        background: var(--m3-primary-container);
+        color: var(--m3-on-primary-container);
+        width: 52px; height: 28px; border-radius: 14px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.15rem; transition: background 0.2s, transform 0.15s;
+      }
+      .bottom-nav-item--toolbox .bottom-nav-label {
+        color: var(--m3-primary); font-weight: 800; font-size: 0.68rem;
+      }
+      .bottom-nav-item--toolbox:hover .bottom-nav-icon,
+      .bottom-nav-item--toolbox:active .bottom-nav-icon {
+        background: var(--m3-primary); color: var(--m3-on-primary); transform: scale(1.1);
       }
     </style>
 </head>
@@ -35,11 +204,11 @@
             <span class="rail-item-label">منابع ایران</span>
         </a>
     </div>
+    <a href="https://mahdiyar.info" class="rail-toolbox-fab" aria-label="جعبه‌ابزار" style="margin-bottom: var(--m3-spacing-48);">
+        <span class="rail-toolbox-fab__icon">🧰</span>
+        <span class="rail-toolbox-fab__label">جعبه‌ابزار</span>
+    </a>
     <div class="rail-items">
-        <a href="https://mahdiyar.info" class="rail-item" aria-label="جعبه‌ابزار">
-            <span class="rail-item-icon">🧰</span>
-            <span class="rail-item-label">جعبه‌ابزار</span>
-        </a>
         <a href="#tools" class="rail-item">
             <span class="rail-item-icon">🔧</span>
             <span class="rail-item-label">ابزار</span>
@@ -96,13 +265,29 @@
         <span class="bottom-nav-icon">💬</span>
         <span class="bottom-nav-label">پیام</span>
     </a>
+    <a href="#mirrors" class="bottom-nav-item">
+        <span class="bottom-nav-icon">🔄</span>
+        <span class="bottom-nav-label">میرور</span>
+    </a>
+    <a href="#upload" class="bottom-nav-item">
+        <span class="bottom-nav-icon">📤</span>
+        <span class="bottom-nav-label">آپلود</span>
+    </a>
     <a href="#software" class="bottom-nav-item">
         <span class="bottom-nav-icon">📦</span>
         <span class="bottom-nav-label">نرم‌افزار</span>
     </a>
+    <a href="#transport" class="bottom-nav-item">
+        <span class="bottom-nav-icon">🚕</span>
+        <span class="bottom-nav-label">حمل‌ونقل</span>
+    </a>
     <a href="#services" class="bottom-nav-item">
         <span class="bottom-nav-icon">🏛️</span>
         <span class="bottom-nav-label">خدمات</span>
+    </a>
+    <a href="#books" class="bottom-nav-item">
+        <span class="bottom-nav-icon">🎓</span>
+        <span class="bottom-nav-label">آموزش</span>
     </a>
 </nav>
 
@@ -179,10 +364,127 @@
                 <span class="info-card__emoji">🔍</span>
                 <div><div class="info-card__title">موتور جستجو</div></div>
             </div>
+            
+            <!-- Search Bar -->
+            <div class="hero-search-wrapper" style="width: 100% !important; max-width: 100% !important; margin-bottom: var(--m3-spacing-16); background-color: var(--m3-outline-variant); border-radius: var(--m3-shape-xl); padding: var(--m3-spacing-20);">
+                <div class="hero-search-bar" style="width: 100% !important; max-width: 100% !important;">
+                    <span class="search-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                    </span>
+                    <input 
+                        type="search" 
+                        id="search-query-tools" 
+                        class="search-input"
+                        placeholder="در سایت‌های داخلی جستجو کنید..." 
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-label="جستجو در موتور‌های جستجو"
+                    />
+                    <button 
+                        class="search-clear" 
+                        id="searchClear-tools" 
+                        aria-label="پاک کردن جستجو" 
+                        hidden
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: var(--m3-spacing-12); align-items: center;">
+                    <p>جستجو در:</p>
+                    <button 
+                        onclick="searchEngine('zarebin')" 
+                        class="btn btn-filled"
+                        style="flex-shrink: 1; min-width: 0; padding: 6px 12px;"
+                    >
+                       ذره‌بین 🔭
+                    </button>
+                    <button 
+                        onclick="searchEngine('bertina')" 
+                        class="btn btn-filled"
+                        style="flex-shrink: 1; min-width: 0; padding: 6px 12px;"
+                    >
+                       برتینا 🟡
+                    </button>
+                    <button 
+                        onclick="searchEngine('gerdoo')" 
+                        class="btn btn-filled"
+                        style="flex-shrink: 1; min-width: 0; padding: 6px 12px;"
+                    >
+                       گردو 🌰
+                    </button>
+                </div>
+            </div>
+
+            <script>
+                function searchEngine(engine) {
+                    const query = document.getElementById('search-query-tools').value.trim();
+                    if (!query) {
+                        alert('لطفاً متن جستجو را وارد کنید');
+                        return;
+                    }
+                    
+                    const encodedQuery = encodeURIComponent(query).replace(/%20/g, '+');
+                    
+                    if (engine === 'zarebin') {
+                        window.open(`https://zarebin.ir/search?q=${encodedQuery}`, '_blank');
+                    }
+                    
+                    if (engine === 'bertina') {
+                        window.open(`https://search.bertina.ir/search?q=${encodedQuery}`, '_blank');
+                    }
+                    
+                    if (engine === 'gerdoo') {
+                        window.open(`https://gerdoo.me/search/?query=${encodedQuery}`, '_blank');
+                    }
+                }
+                
+                // Handle search input and clear button visibility
+                document.addEventListener('DOMContentLoaded', function() {
+                    const searchInput = document.getElementById('search-query-tools');
+                    const searchClear = document.getElementById('searchClear-tools');
+                    
+                    if (searchInput && searchClear) {
+                        // Toggle clear button visibility
+                        searchInput.addEventListener('input', function() {
+                            if (searchInput.value.trim()) {
+                                searchClear.removeAttribute('hidden');
+                            } else {
+                                searchClear.setAttribute('hidden', '');
+                            }
+                        });
+                        
+                        // Clear input when X button is clicked
+                        searchClear.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            searchInput.value = '';
+                            searchClear.setAttribute('hidden', '');
+                            searchInput.focus();
+                        });
+                        
+                        // Allow Enter key to search in Zarebin by default
+                        searchInput.addEventListener('keypress', function(e) {
+                            if (e.key === 'Enter') {
+                                searchEngine('zarebin');
+                            }
+                        });
+                    }
+                });
+            </script>
+
             <div class="cards-grid">
                 <a href="https://zarebin.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🔭</div><div class="link-card__title">ذره‌بین</div></div>
                     <div class="link-card__url">zarebin.ir</div>
+                </a>
+                <a href="https://search.bertina.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🟡</div><div class="link-card__title">برتینا</div></div>
+                    <div class="link-card__url">search.bertina.ir</div>
                 </a>
                 <a href="https://gerdoo.me" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🌰</div><div class="link-card__title">گردو</div></div>
@@ -199,10 +501,6 @@
                 <a href="https://reymon.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🔗</div><div class="link-card__title">ریسمون</div></div>
                     <div class="link-card__url">reymon.ir</div>
-                </a>
-                <a href="https://search.bertina.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🟡</div><div class="link-card__title">برتینا</div></div>
-                    <div class="link-card__url">search.bertina.ir</div>
                 </a>
             </div>
         </div>
@@ -788,6 +1086,11 @@
                     <div class="link-card__url">hexdl.com</div>
                     <div class="link-card__desc">رایگان</div>
                 </a>
+                <a href="http://azfilm.theazizi.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🟨</div><div class="link-card__title">AzFilm</div></div>
+                    <div class="link-card__url">azfilm.theazizi.ir</div>
+                    <div class="link-card__desc">رایگان</div>
+                </a>
                 <a href="https://flzios.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🔎</div><div class="link-card__title">فیلم‌یاب</div></div>
                     <div class="link-card__url">flzios.ir</div>
@@ -933,9 +1236,18 @@
                     <div class="link-card__url">firstibox.com/music</div>
                     <div class="link-card__desc">آهنگ‌های خارجی</div>
                 </a>
+                <a href="https://radio.9craft.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📻</div><div class="link-card__title">رادیو ۹کرفت</div></div>
+                    <div class="link-card__url">radio.9craft.ir</div>
+                </a>
                 <a href="https://radiox.pro" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">📻</div><div class="link-card__title">Radio X</div></div>
                     <div class="link-card__url">radiox.pro</div>
+                </a>
+                <a href="https://toogoosh.com" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎧</div><div class="link-card__title">توگوش</div></div>
+                    <div class="link-card__url">toogoosh.com</div>
+                    <div class="link-card__desc">آهنگ‌های ایرانی و خارجی</div>
                 </a>
                 <a href="http://bmahmood.ir/Radio.html" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🎼</div><div class="link-card__title">رادیو آهنگ</div></div>
@@ -944,7 +1256,7 @@
                 <a href="https://beeptunes.com" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🎧</div><div class="link-card__title">بیپ‌تونز</div></div>
                     <div class="link-card__url">beeptunes.com</div>
-                    <div class="link-card__desc">استریم موسیقی فارسی</div>
+                    <div class="link-card__desc">استریم موسیقی مجاز فارسی</div>
                 </a>
                 <a href="https://www.vmusic.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🎶</div><div class="link-card__title">والا موزیک</div></div>
@@ -954,10 +1266,6 @@
                     <div class="link-card__top"><div class="link-card__emoji">❤️</div><div class="link-card__title">موزیکدل</div></div>
                     <div class="link-card__url">musicdel.ir</div>
                 </a>
-                <a href="https://radio.9craft.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">📻</div><div class="link-card__title">رادیو ۹کرفت</div></div>
-                    <div class="link-card__url">radio.9craft.ir</div>
-                </a>
                 <a href="https://avapedia.com" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🔊</div><div class="link-card__title">آوا پدیا</div></div>
                     <div class="link-card__url">avapedia.com</div>
@@ -965,6 +1273,10 @@
                 <a href="https://ir-music.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🎧</div><div class="link-card__title">آی آر موزیک</div></div>
                     <div class="link-card__url">ir-music.ir</div>
+                </a>
+                <a href="https://ir-music.ir/playlist" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🎧</div><div class="link-card__title">پلی‌لیست آی آر موزیک</div></div>
+                    <div class="link-card__url">ir-music.ir/playlist</div>
                 </a>
                 <a href="https://aparatmusic.com" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🎵</div><div class="link-card__title">آپارات موزیک</div></div>
@@ -1389,16 +1701,51 @@
                 <a href="https://matrix.bjork.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top">
                         <div class="link-card__emoji">🐴</div>
-                        <div class="link-card__title">bjork</div>
+                        <div class="link-card__title">Bjork</div>
                     </div>
                     <div class="link-card__url">bjork.ir</div>
                 </a>
                 <a href="https://matrix.anaiis.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top">
                         <div class="link-card__emoji">🏹</div>
-                        <div class="link-card__title">anaiis</div>
+                        <div class="link-card__title">Anaiis</div>
                     </div>
                     <div class="link-card__url">matrix.anaiis.ir</div>
+                </a>
+                <a href="https://rainbuwu.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top">
+                        <div class="link-card__emoji">🌈</div>
+                        <div class="link-card__title">Rainbuwu</div>
+                    </div>
+                    <div class="link-card__url">rainbuwu.ir</div>
+                </a>
+                <a href="https://chat4.fandak.lol" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top">
+                        <div class="link-card__emoji">🧨</div>
+                        <div class="link-card__title">فندک</div>
+                    </div>
+                    <div class="link-card__url">chat4.fandak.lol</div>
+                </a>
+                <a href="https://ramkho.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top">
+                        <div class="link-card__emoji">😇</div>
+                        <div class="link-card__title">Ramkho</div>
+                    </div>
+                    <div class="link-card__url">ramkho.ir</div>
+                </a>
+                <a href="https://binny.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top">
+                        <div class="link-card__emoji">👃</div>
+                        <div class="link-card__title">بینی</div>
+                    </div>
+                    <div class="link-card__url">binny.ir</div>
+                </a>
+                <a href="https://matrix.keshiii.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top">
+                        <div class="link-card__emoji">🧵</div>
+                        <div class="link-card__title">کِشی</div>
+                    </div>
+                    <div class="link-card__url">matrix.keshiii.ir</div>
                 </a>
             </div>
         </div>
@@ -1768,23 +2115,23 @@
                     <div class="link-card__url">mirrorino.com</div>
                 </a>
                 <a href="https://hamgit.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔢</div><div class="link-card__title">هم‌گیت</div></div>
+                    <div class="link-card__top"><div class="link-card__emoji">🔢</div><div class="link-card__title">گیت‌لب هم‌گیت</div></div>
                     <div class="link-card__url">hamgit.ir</div>
                 </a>
                 <a href="https://gitlab.aranserver.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔢</div><div class="link-card__title">آران‌سرور</div></div>
+                    <div class="link-card__top"><div class="link-card__emoji">🔢</div><div class="link-card__title">گیت‌لب آران‌سرور</div></div>
                     <div class="link-card__url">gitlab.aranserver.com</div>
                 </a>
                 <a href="https://git.libremobileos.com" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔢</div><div class="link-card__title">لیبرموبیل</div></div>
+                    <div class="link-card__top"><div class="link-card__emoji">🔢</div><div class="link-card__title">گیت‌لب لیبرموبیل</div></div>
                     <div class="link-card__url">git.libremobileos.com</div>
                 </a>
                 <a href="https://gitlab.chabokan.net" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔢</div><div class="link-card__title">چابکان</div></div>
+                    <div class="link-card__top"><div class="link-card__emoji">🔢</div><div class="link-card__title">گبت‌لب چابکان</div></div>
                     <div class="link-card__url">gitlab.chabokan.net</div>
                 </a>
                 <a href="https://git.arvancloud.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔢</div><div class="link-card__title">ابرآروان</div></div>
+                    <div class="link-card__top"><div class="link-card__emoji">🔢</div><div class="link-card__title">گیت‌لب ابرآروان</div></div>
                     <div class="link-card__url">git.arvancloud.ir</div>
                 </a>
                 <a href="https://gitea.bokhary.ir" class="link-card" target="_blank" rel="noopener noreferrer">
@@ -1841,9 +2188,9 @@
                     <div class="link-card__desc">۲ گیگ فصای رایگان - نیاز به ثبت‌نام</div>
                 </a>
                 <a href="https://drive.arvancloud.ir" class="link-card" target="_blank" rel="noopener noreferrer">
-                    <div class="link-card__top"><div class="link-card__emoji">🔺</div><div class="link-card__title">درایو آروان</div></div>
+                    <div class="link-card__top"><div class="link-card__emoji">🔺</div><div class="link-card__title">درایو ابرآروان</div></div>
                     <div class="link-card__url">drive.arvancloud.ir</div>
-                    <div class="link-card__desc">نیاز به ثبت‌نام</div>
+                    <div class="link-card__desc">طرح ازمایشی رایگان ۷ روزه با ۵ گیگ فضای رایگان - نیاز به ثبت‌نام</div>
                 </a>
                 <a href="https://liara.ir/products/object-storage" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">📦</div><div class="link-card__title">ذخیره‌سازی لیارا</div></div>
@@ -3286,7 +3633,7 @@
             <div class="footer-title">منابع و خدمات داخلی ایران</div>
             <div class="footer-subtitle">گردآوری‌شده برای دسترسی آسان‌تر در شرایط محدودیت اینترنت</div>
             <div class="footer-subtitle" style="margin-top:4px;font-size:0.75rem;opacity:0.6;">
-                ۱۴۰۵/۰۱/۱۶ — به‌روزرسانی مداوم
+                ۱۴۰۵/۰۱/۱۸ — به‌روزرسانی مداوم
             </div>
             <a href="https://mahdiyar.info"><div class="footer-subtitle">بازگشت به جعبه‌ابزار ←</div></a>
         </div>
@@ -3487,6 +3834,26 @@
     e.preventDefault();
     window.open(href, '_blank', 'noopener,noreferrer');
   }, true);
+})();
+
+
+// ── Bottom nav: scroll active item into view ──────────────────────────────────
+(function () {
+  window.addEventListener('scroll', function () {
+    var activeItem = document.querySelector('.bottom-nav-item.active');
+    if (activeItem) {
+      var bar = document.querySelector('.bottom-navigation-bar');
+      if (bar) {
+        var itemLeft = activeItem.offsetLeft;
+        var itemWidth = activeItem.offsetWidth;
+        var barWidth = bar.offsetWidth;
+        var scrollLeft = bar.scrollLeft;
+        if (itemLeft < scrollLeft || itemLeft + itemWidth > scrollLeft + barWidth) {
+          bar.scrollTo({ left: itemLeft - barWidth / 2 + itemWidth / 2, behavior: 'smooth' });
+        }
+      }
+    }
+  }, { passive: true });
 })();
 </script>
 
