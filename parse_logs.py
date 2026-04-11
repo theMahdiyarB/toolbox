@@ -16,10 +16,10 @@ Cron (every 5 minutes):
     */5 * * * * python3 /var/www/toolbox/parse_logs.py >> /var/log/parse_logs.log 2>&1
 """
 
+import gzip
 import json
 import os
 import shutil
-import re
 import sys
 import tempfile
 from collections import defaultdict
@@ -45,6 +45,41 @@ BOT_PATTERNS = [
     "curl", "wget", "python-requests", "go-http", "okhttp",
     "axios", "libwww", "java/", "ruby", "perl/",
 ]
+
+# ── LOG FILE ITERATOR (current + all rotated) ─────────────────────────────────
+
+def iter_log_lines(log_path: str):
+    """
+    Yield lines from all available log files in order:
+      - access.log        (current, plain text)
+      - access.log.1      (yesterday plain — before logrotate compresses it)
+      - access.log.1.gz   (yesterday gzipped — after compression)
+      - access.log.2.gz … access.log.N.gz  (older rotations)
+
+    Walks the full rotation sequence so stats always reflect complete
+    history regardless of where logrotate is in its cycle.
+    """
+    # Current live log
+    if os.path.exists(log_path):
+        with open(log_path, encoding="utf-8", errors="replace") as f:
+            yield from f
+
+    # Rotated files: .1 / .1.gz, .2.gz, .3.gz … up to logrotate's rotate 90
+    n = 1
+    while True:
+        plain = f"{log_path}.{n}"
+        gz    = f"{log_path}.{n}.gz"
+
+        if os.path.exists(plain):
+            with open(plain, encoding="utf-8", errors="replace") as f:
+                yield from f
+            n += 1
+        elif os.path.exists(gz):
+            with gzip.open(gz, "rt", encoding="utf-8", errors="replace") as f:
+                yield from f
+            n += 1
+        else:
+            break  # no more rotated files
 
 # ── HELPERS ───────────────────────────────────────────────────────────────────
 
@@ -79,13 +114,13 @@ def detect_browser(ua: str) -> str:
     if not ua:
         return "Unknown"
     u = ua.lower()
-    if "edg/" in u or "edge/" in u:   return "Edge"
-    if "opr/" in u or "opera" in u:   return "Opera"
-    if "samsungbrowser"          in u: return "Samsung"
-    if "ucbrowser"               in u: return "UC Browser"
-    if "firefox" in u or "fxios" in u: return "Firefox"
-    if "chrome"  in u or "crios" in u: return "Chrome"
-    if "safari"                  in u: return "Safari"
+    if "edg/" in u or "edge/" in u:     return "Edge"
+    if "opr/" in u or "opera" in u:     return "Opera"
+    if "samsungbrowser"          in u:   return "Samsung"
+    if "ucbrowser"               in u:   return "UC Browser"
+    if "firefox" in u or "fxios" in u:  return "Firefox"
+    if "chrome"  in u or "crios" in u:  return "Chrome"
+    if "safari"                  in u:   return "Safari"
     if "msie"    in u or "trident" in u: return "IE"
     return "Other"
 
@@ -105,39 +140,33 @@ def detect_os(ua: str) -> str:
     if not ua:
         return "Unknown"
     u = ua.lower()
-    if "windows nt" in u: return "Windows"
-    if "android"    in u: return "Android"
-    if "iphone"     in u: return "iOS"
-    if "ipad"       in u: return "iOS"
+    if "windows nt" in u:                    return "Windows"
+    if "android"    in u:                    return "Android"
+    if "iphone"     in u:                    return "iOS"
+    if "ipad"       in u:                    return "iOS"
     if "mac os x"   in u or "macintosh" in u: return "macOS"
-    if "linux"      in u: return "Linux"
-    if "cros"       in u: return "ChromeOS"
+    if "linux"      in u:                    return "Linux"
+    if "cros"       in u:                    return "ChromeOS"
     return "Other"
 
 
 def normalize_protocol(proto: str) -> str:
-    """Normalize Caddy proto string to clean label."""
     p = (proto or "").upper()
-    if p.startswith("HTTP/3") or p == "H3":  return "HTTP/3"
-    if p.startswith("HTTP/2") or p == "H2":  return "HTTP/2"
-    if p.startswith("HTTP/1.1"):             return "HTTP/1.1"
-    if p.startswith("HTTP/1"):               return "HTTP/1.0"
+    if p.startswith("HTTP/3") or p == "H3": return "HTTP/3"
+    if p.startswith("HTTP/2") or p == "H2": return "HTTP/2"
+    if p.startswith("HTTP/1.1"):            return "HTTP/1.1"
+    if p.startswith("HTTP/1"):              return "HTTP/1.0"
     return p or "Unknown"
 
 
 def extract_encoding(resp_headers: dict) -> str:
-    """Pull Content-Encoding from response headers."""
     enc = resp_headers.get("Content-Encoding") or resp_headers.get("content-encoding")
     if isinstance(enc, list):
         enc = enc[0] if enc else ""
     return (enc or "none").lower()
 
 
-def extract_referrer(req_headers: dict) -> str | None:
-    """
-    Extract a cleaned referrer domain from request headers.
-    Returns None for same-site or empty referrers.
-    """
+def extract_referrer(req_headers: dict):
     ref = req_headers.get("Referer") or req_headers.get("referer")
     if isinstance(ref, list):
         ref = ref[0] if ref else ""
@@ -145,13 +174,9 @@ def extract_referrer(req_headers: dict) -> str | None:
         return None
     try:
         parsed = urlparse(ref)
-        host = parsed.netloc.lower()
-        # Strip port
-        host = host.split(":")[0]
-        # Strip www.
+        host = parsed.netloc.lower().split(":")[0]
         if host.startswith("www."):
             host = host[4:]
-        # Ignore self-referrals (same domain)
         if host in ("mahdiyar.info", "localhost", "127.0.0.1", ""):
             return None
         return host
@@ -159,7 +184,7 @@ def extract_referrer(req_headers: dict) -> str | None:
         return None
 
 
-def parse_line(line: str) -> dict | None:
+def parse_line(line: str):
     line = line.strip()
     if not line or line[0] != "{":
         return None
@@ -170,7 +195,6 @@ def parse_line(line: str) -> dict | None:
 
 
 def extract_fields(entry: dict) -> dict:
-    """Extract all fields we care about from a Caddy JSON log entry."""
     req          = entry.get("request", {})
     req_headers  = req.get("headers", {})
     resp_headers = entry.get("resp_headers", {})
@@ -180,24 +204,13 @@ def extract_fields(entry: dict) -> dict:
     ts  = entry.get("ts")
     dt  = datetime.fromtimestamp(ts, tz=timezone.utc) if ts else datetime.now(tz=timezone.utc)
 
-    # TLS block: resumed = True means session was reused (cheaper)
-    tls     = entry.get("tls", {})
-    resumed = tls.get("resumed", False)
-
-    # HTTP protocol (e.g. "HTTP/3.0", "h3", "HTTP/2.0")
-    proto = req.get("proto", "")
-
-    # Response size in bytes
-    size = entry.get("size", 0) or 0
-
-    # Server-side duration in seconds → convert to ms
+    tls         = entry.get("tls", {})
+    resumed     = tls.get("resumed", False)
+    proto       = req.get("proto", "")
+    size        = entry.get("size", 0) or 0
     duration_ms = round((entry.get("duration", 0) or 0) * 1000)
-
-    # Encoding
-    encoding = extract_encoding(resp_headers)
-
-    # Referrer domain
-    referrer = extract_referrer(req_headers)
+    encoding    = extract_encoding(resp_headers)
+    referrer    = extract_referrer(req_headers)
 
     return {
         "ua":          ua,
@@ -215,85 +228,80 @@ def extract_fields(entry: dict) -> dict:
 # ── AGGREGATION ───────────────────────────────────────────────────────────────
 
 def process_log(log_path: str) -> dict:
-    page_views    = 0
-    by_day        = defaultdict(int)
-    by_month      = defaultdict(int)
-    browsers      = defaultdict(int)
-    devices       = defaultdict(int)
-    oses          = defaultdict(int)
-    pages         = defaultdict(int)
-    protocols     = defaultdict(int)
-    encodings     = defaultdict(int)
-    referrers     = defaultdict(int)
-    unique_ips    = set()
-    total_bytes   = 0
-    total_dur_ms  = 0
-    tls_resumed   = 0
-    tls_total     = 0
+    page_views   = 0
+    by_day       = defaultdict(int)
+    by_month     = defaultdict(int)
+    browsers     = defaultdict(int)
+    devices      = defaultdict(int)
+    oses         = defaultdict(int)
+    pages        = defaultdict(int)
+    protocols    = defaultdict(int)
+    encodings    = defaultdict(int)
+    referrers    = defaultdict(int)
+    unique_ips   = set()
+    total_bytes  = 0
+    total_dur_ms = 0
+    tls_resumed  = 0
+    tls_total    = 0
 
-    with open(log_path, encoding="utf-8", errors="replace") as fh:
-        for line in fh:
-            entry = parse_line(line)
-            if not entry:
-                continue
+    for line in iter_log_lines(log_path):
+        entry = parse_line(line)
+        if not entry:
+            continue
 
-            f = extract_fields(entry)
+        f = extract_fields(entry)
 
-            if is_bot(f["ua"]):          continue
-            if is_static(f["uri"]):      continue
-            if not is_tracked(f["uri"]): continue
-            if not (200 <= f["status"] < 400): continue
+        if is_bot(f["ua"]):                continue
+        if is_static(f["uri"]):            continue
+        if not is_tracked(f["uri"]):       continue
+        if not (200 <= f["status"] < 400): continue
 
-            day   = f["dt"].strftime("%Y-%m-%d")
-            month = f["dt"].strftime("%Y-%m")
-            page  = normalize_page(f["uri"])
+        day   = f["dt"].strftime("%Y-%m-%d")
+        month = f["dt"].strftime("%Y-%m")
+        page  = normalize_page(f["uri"])
 
-            page_views                        += 1
-            by_day[day]                       += 1
-            by_month[month]                   += 1
-            browsers[detect_browser(f["ua"])] += 1
-            devices[detect_device(f["ua"])]   += 1
-            oses[detect_os(f["ua"])]           += 1
-            pages[page]                       += 1
-            protocols[normalize_protocol(f["proto"])] += 1
-            total_bytes                       += f["size"]
-            total_dur_ms                      += f["duration_ms"]
+        page_views                                += 1
+        by_day[day]                               += 1
+        by_month[month]                           += 1
+        browsers[detect_browser(f["ua"])]         += 1
+        devices[detect_device(f["ua"])]           += 1
+        oses[detect_os(f["ua"])]                  += 1
+        pages[page]                               += 1
+        protocols[normalize_protocol(f["proto"])] += 1
+        total_bytes                               += f["size"]
+        total_dur_ms                              += f["duration_ms"]
 
-            # Encoding — skip "none" from aggregation (too dominant, uninformative)
-            if f["encoding"] and f["encoding"] != "none":
-                encodings[f["encoding"]] += 1
+        if f["encoding"] and f["encoding"] != "none":
+            encodings[f["encoding"]] += 1
 
-            # Referrer
-            if f["referrer"]:
-                referrers[f["referrer"]] += 1
+        if f["referrer"]:
+            referrers[f["referrer"]] += 1
 
-            # Unique IPs — from entry.request.remote_ip
-            ip = entry.get("request", {}).get("remote_ip", "")
-            if ip:
-                unique_ips.add(ip)
+        ip = entry.get("request", {}).get("remote_ip", "")
+        if ip:
+            unique_ips.add(ip)
 
-            # TLS stats (all requests, not just tracked ones — more representative)
-            tls_total += 1
-            if f["resumed"]:
-                tls_resumed += 1
+        tls_total += 1
+        if f["resumed"]:
+            tls_resumed += 1
 
     avg_dur_ms = round(total_dur_ms / page_views) if page_views else 0
     tls_pct    = round((tls_resumed / tls_total) * 100) if tls_total else 0
 
     return {
-        "page_views": page_views,
-        "by_day":     dict(by_day),
-        "by_month":   dict(by_month),
-        "browsers":   dict(browsers),
-        "devices":    dict(devices),
-        "oses":       dict(oses),
-        "pages":      dict(pages),
-        "protocols":  dict(protocols),
-        "encodings":  dict(encodings),
-        "referrers":  dict(referrers),
-        "unique_ips": len(unique_ips),
-        "total_bytes":   total_bytes,
-        "avg_dur_ms":    avg_dur_ms,
+        "page_views":      page_views,
+        "by_day":          dict(by_day),
+        "by_month":        dict(by_month),
+        "browsers":        dict(browsers),
+        "devices":         dict(devices),
+        "oses":            dict(oses),
+        "pages":           dict(pages),
+        "protocols":       dict(protocols),
+        "encodings":       dict(encodings),
+        "referrers":       dict(referrers),
+        "unique_ips":      len(unique_ips),
+        "total_bytes":     total_bytes,
+        "avg_dur_ms":      avg_dur_ms,
         "tls_resumed_pct": tls_pct,
     }
 
@@ -341,7 +349,6 @@ def main():
             "monthly": keep_last(c["by_month"], 12),
         },
 
-        # Extra enriched fields shown in the dashboard
         "extra": {
             "protocols":      c["protocols"],
             "encodings":      c["encodings"],
@@ -357,13 +364,12 @@ def main():
     out_path = Path(OUTPUT_FILE)
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
-    tmp_fd, tmp_path = tempfile.mkstemp(dir=out_path.parent, suffix='.tmp')
+    tmp_fd, tmp_path = tempfile.mkstemp(dir=out_path.parent, suffix=".tmp")
     try:
-        with os.fdopen(tmp_fd, 'w', encoding='utf-8') as f:
+        with os.fdopen(tmp_fd, "w", encoding="utf-8") as f:
             json.dump(stats, f, ensure_ascii=False, indent=2)
         os.replace(tmp_path, out_path)
-        # Fix ownership and permissions so Caddy can read the file
-        shutil.chown(out_path, user='caddy', group='caddy')
+        shutil.chown(out_path, user="caddy", group="caddy")
         os.chmod(out_path, 0o644)
     except Exception:
         os.unlink(tmp_path)
