@@ -6,7 +6,7 @@
 //    - External/opaque requests: Network-only (skip)
 // ============================================================
 
-const CACHE_VERSION = 'toolbox-v3.9';
+const CACHE_VERSION = 'toolbox-v3.10';
 const CACHE_SHELL   = CACHE_VERSION + '-shell';
 const CACHE_ASSETS  = CACHE_VERSION + '-assets';
 
@@ -17,32 +17,32 @@ const SHELL_URLS = [
   '/',
   '/index.html',
   '/iran.html',
-  '/main.css',
-  '/main.js',
-  '/manifest.json',
-  '/favicon.png',
-  '/icon-512.png',
-  '/Vazirmatn-VF.ttf',
-  '/lib/qrcode.js',
-  '/lib/jsQR.js',
-  '/lib/qr-code-styling.js',
-  '/lib/browser-image-compression.js',
-  '/lib/pdf.mjs',
-  '/lib/pdf.worker.mjs',
-  '/lib/function-plot.js',
-  '/lib/math.js',
-  '/poems/fersowsi/structure.json',
-  '/poems/forugh/structure.json',
-  '/poems/hafez/structure.json',
-  '/poems/jami/structure.json',
-  '/poems/khayyam/structure.json',
-  '/poems/nizami/structure.json',
-  '/poems/rumi/structure.json',
-  '/poems/saadi/structure.json',
-  '/poems/sanai/structure.json',
-  '/poems/shahriar/structure.json',
-  '/poems/sohrab-sepehri/structure.json',
-  '/poems/vahsi/structure.json',
+  '/static/main.css',
+  '/static/main.js',
+  '/static/manifest.json',
+  '/static/favicon.png',
+  '/static/icon-512.png',
+  '/static/Vazirmatn-VF.ttf',
+  '/static/lib/qrcode.js',
+  '/static/lib/jsQR.js',
+  '/static/lib/qr-code-styling.js',
+  '/static/lib/browser-image-compression.js',
+  '/static/lib/pdf.mjs',
+  '/static/lib/pdf.worker.mjs',
+  '/static/lib/function-plot.js',
+  '/static/lib/math.js',
+  '/static/poems/fersowsi/structure.json',
+  '/static/poems/forugh/structure.json',
+  '/static/poems/hafez/structure.json',
+  '/static/poems/jami/structure.json',
+  '/static/poems/khayyam/structure.json',
+  '/static/poems/nizami/structure.json',
+  '/static/poems/rumi/structure.json',
+  '/static/poems/saadi/structure.json',
+  '/static/poems/sanai/structure.json',
+  '/static/poems/shahriar/structure.json',
+  '/static/poems/sohrab-sepehri/structure.json',
+  '/static/poems/vahsi/structure.json',
 ];
 
 // ── Install: cache app shell (resilient — one missing file won't abort) ───────

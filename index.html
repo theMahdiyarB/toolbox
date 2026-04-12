@@ -11,12 +11,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="جعبه‌ابزار">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="favicon.png">
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="main.css" />
-    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
-    <script src="main.js"></script>
+    <link rel="icon" type="image/png" href="static/favicon.png">
+    <link rel="apple-touch-icon" href="static/favicon.png">
+    <link rel="manifest" href="static/manifest.json">
+    <link rel="stylesheet" href="static/main.css" />
+    <link rel="apple-touch-icon" sizes="512x512" href="static/icon-512.png">
+    <script src="static/main.js"></script>
     <script>
       // Only load Bale SDK if running in Bale miniapp
       if (/(bale\.ai|tapi\.bale\.ai)/i.test(window.location.hostname)) {
@@ -25,15 +25,15 @@
         document.head.appendChild(script);
       }
     </script>
-    <script src="lib/math.js"></script>
-    <script src="lib/function-plot.js"></script>
-    <script src="lib/qrcode.js"></script>
-    <script src="lib/jsQR.js"></script>
-    <script src="lib/qr-code-styling.js"></script>
-    <script src="lib/browser-image-compression.js"></script>
+    <script src="static/lib/math.js"></script>
+    <script src="static/lib/function-plot.js"></script>
+    <script src="static/lib/qrcode.js"></script>
+    <script src="static/lib/jsQR.js"></script>
+    <script src="static/lib/qr-code-styling.js"></script>
+    <script src="static/lib/browser-image-compression.js"></script>
     <!-- PDF.js: load as module and expose pdfjsLib globally for use in classic scripts -->
     <script type="module">
-      import * as pdfjsLib from './lib/pdf.mjs';
+      import * as pdfjsLib from './static/lib/pdf.mjs';
       pdfjsLib.GlobalWorkerOptions.workerSrc = './lib/pdf.worker.mjs';
       window.pdfjsLib = pdfjsLib;
       window._pdfjsReady = true;
@@ -2095,7 +2095,7 @@
             <div class="hero-bg-shape hero-bg-shape--2" aria-hidden="true"></div>
             <div class="hero-content">
               <div class="hero-icon-wrap">
-                <img src="favicon.png" alt="لوگو جعبه‌ابزار آفلاین" class="hero-icon" />
+                <img src="static/favicon.png" alt="لوگو جعبه‌ابزار آفلاین" class="hero-icon" />
               </div>
               <h1 class="headline-large hero-title">جعبه‌ابزار آفلاین</h1>
               <p class="body-large hero-subtitle">
@@ -7184,7 +7184,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 3.9 - ۱۴۰۵/۰۱/۲۲
+          ℹ️ نسخه 3.10 - ۱۴۰۵/۰۱/۲۳
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -9482,7 +9482,7 @@
           }
           const lib=window.pdfjsLib;
           if(!lib){
-            errEl.textContent='PDF.js بارگذاری نشد — مطمئن شوید فایل lib/pdf.mjs در پروژه وجود دارد و از طریق یک سرور (http/https) باز می‌کنید.';
+            errEl.textContent='PDF.js بارگذاری نشد — مطمئن شوید فایل static/lib/pdf.mjs در پروژه وجود دارد و از طریق یک سرور (http/https) باز می‌کنید.';
             infoEl.style.display='none';
             return;
           }
@@ -12023,7 +12023,7 @@
 
       var _jcalEventCache={},_jcalLoadingYears={};
       function _jcalParseJSON(yr,data){var map={};data.forEach(function(e){if(!e.events||!e.events.length)return;var p=e.date.split('-');if(p.length!==3)return;var m=parseInt(p[1],10),d=parseInt(p[2],10),k=m+'/'+d;if(!map[k])map[k]=[];e.events.forEach(function(ev){map[k].push({desc:ev.description,isHoliday:!!ev.is_holiday});});});_jcalEventCache[yr]=map;}
-      function _jcalLoadYear(yr,cb){if(_jcalEventCache[yr]){cb();return;}if(_jcalLoadingYears[yr]){var w=setInterval(function(){if(_jcalEventCache[yr]){clearInterval(w);cb();}},50);return;}_jcalLoadingYears[yr]=true;fetch('holidays/'+yr+'.json').then(function(r){return r.json();}).then(function(d){_jcalParseJSON(yr,d);cb();}).catch(function(){_jcalEventCache[yr]={};cb();});}
+      function _jcalLoadYear(yr,cb){if(_jcalEventCache[yr]){cb();return;}if(_jcalLoadingYears[yr]){var w=setInterval(function(){if(_jcalEventCache[yr]){clearInterval(w);cb();}},50);return;}_jcalLoadingYears[yr]=true;fetch('static/holidays/'+yr+'.json').then(function(r){return r.json();}).then(function(d){_jcalParseJSON(yr,d);cb();}).catch(function(){_jcalEventCache[yr]={};cb();});}
       function jcalGetEventsFromCache(jy,jm,jd){var evs=[],yd=_jcalEventCache[jy];if(yd){var k=jm+'/'+jd;if(yd[k])yd[k].forEach(function(ev){evs.push({desc:ev.desc,type:ev.isHoliday?'holiday':'event'});});}return evs;}
 
       function jcalRender(){
@@ -12278,7 +12278,7 @@
         const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const res = document.getElementById('qrr-result');
         if (typeof jsQR === 'undefined') {
-          if (!fromCamera) res.innerHTML = '<div style="padding:12px;color:var(--m3-on-surface-variant);font-size:13px">📦 برای فعال‌سازی خواندن QR، فایل <code>lib/jsqr.js</code> را از <a href="https://github.com/cozmo/jsQR" target="_blank" rel="noopener">github.com/cozmo/jsQR</a> دانلود کرده و در کنار index.html قرار دهید، سپس به head اضافه کنید: <code>&lt;script src="jsqr.js"&gt;&lt;/script&gt;</code></div>';
+          if (!fromCamera) res.innerHTML = '<div style="padding:12px;color:var(--m3-on-surface-variant);font-size:13px">📦 برای فعال‌سازی خواندن QR، فایل <code>static/lib/jsqr.js</code> را از <a href="https://github.com/cozmo/jsQR" target="_blank" rel="noopener">github.com/cozmo/jsQR</a> دانلود کرده و در کنار index.html قرار دهید، سپس به head اضافه کنید: <code>&lt;script src="jsqr.js"&gt;&lt;/script&gt;</code></div>';
           return;
         }
         const code = jsQR(data.data, data.width, data.height, {inversionAttempts:'dontInvert'});
@@ -13851,14 +13851,14 @@
           console.warn('Worker error, falling back to fetch:', err);
           _emotcnFallbackLoad();
         };
-        _emotcnWorker.postMessage(location.origin + (location.pathname.replace(/\/[^/]*$/, '/')) + 'lib/emoticon_dict.json');
+        _emotcnWorker.postMessage(location.origin + (location.pathname.replace(/\/[^/]*$/, '/')) + 'static/emoticon_dict.json');
       }
 
       // Fallback: fetch + parse on main thread (blocks briefly but works everywhere)
       async function _emotcnFallbackLoad() {
         if (_emotcnLoaded) return;
         try {
-          const res = await fetch('lib/emoticon_dict.json');
+          const res = await fetch('static/emoticon_dict.json');
           if (!res.ok) throw new Error('HTTP ' + res.status);
           const dict = await res.json();
           EMOTCN_DATA = Object.entries(dict).map(([em, data]) => ({
@@ -17494,7 +17494,7 @@
       // Load poet structure (name, categories, files) from JSON when a poet is selected for the first time
       async function loadPoetStructure(poetId) {
         const folder = POETS_CONFIG[poetId].folder;
-        const response = await fetch(`poems/${folder}/structure.json`);
+        const response = await fetch(`static/poems/${folder}/structure.json`);
         const data = await response.json();
         POETS[poetId] = {
           name: data.name || data.id,
