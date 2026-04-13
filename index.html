@@ -1401,6 +1401,8 @@
         bottom: 88px;
         left: 50%;
         transform: translateX(-50%);
+        width: max-content;
+        max-width: calc(100vw - 40px);
         background: var(--m3-on-surface);
         color: var(--m3-surface);
         padding: 9px 22px;
@@ -1412,6 +1414,7 @@
         pointer-events: none;
         transition: opacity 0.25s;
         white-space: nowrap;
+        will-change: opacity;
       }
       #copy-toast.copy-toast--visible {
         opacity: 1;
@@ -7184,7 +7187,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 3.10 - ۱۴۰۵/۰۱/۲۳
+          ℹ️ نسخه 3.11 - ۱۴۰۵/۰۱/۲۴
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -7229,7 +7232,7 @@
             document.body.appendChild(ta);ta.focus();ta.select();document.execCommand('copy');document.body.removeChild(ta);
           }
           var t=document.getElementById('copy-toast');
-          if(t){t.textContent='✅ کپی شد!';t.classList.add('copy-toast--visible');t.hidden=false;
+          if(t){t.classList.remove('copy-toast--visible');t.textContent='✅ کپی شد!';void t.offsetWidth;t.classList.add('copy-toast--visible');t.hidden=false;
             clearTimeout(t._t);t._t=setTimeout(()=>{t.classList.remove('copy-toast--visible');t.hidden=true;},2000);}
         };
       }
@@ -7304,6 +7307,11 @@
         if (backBtn) backBtn.style.display = (id === 'home') ? 'none' : 'flex';
         closeDrawer();
         window.scrollTo(0, 0);
+        // Re-seed --val on sliders in the newly visible card
+        if (id !== 'home') {
+          const card = document.getElementById(id);
+          if (card) card.querySelectorAll('input[type="range"]').forEach(_updateRangeVal);
+        }
         // Update URL hash (skip history manipulation inside Bale — use Memory Routing via BackButton)
         if (pushState && !IS_BALE) {
           const hash = id === 'home' ? '' : '#' + id;
@@ -7458,7 +7466,9 @@
       let _toastTimer;
       function showToast(msg) {
         const t = document.getElementById('copy-toast');
+        t.classList.remove('copy-toast--visible');
         t.textContent = msg || 'کپی شد!';
+        void t.offsetWidth; // force reflow so transform re-calculates with new width
         t.classList.add('copy-toast--visible');
         clearTimeout(_toastTimer);
         _toastTimer = setTimeout(() => t.classList.remove('copy-toast--visible'), 2000);
@@ -11348,6 +11358,24 @@
         // Trigger the range's oninput to fire existing handlers
         r.dispatchEvent(new Event('input', {bubbles:true}));
       }
+
+      // ── Set --val CSS custom property on every range input so the
+      //    M3 track gradient fill (linear-gradient to --val%) works.
+      //    Runs on input + initialises all sliders on DOMContentLoaded.
+      function _updateRangeVal(el) {
+        const min = parseFloat(el.min) !== undefined && el.min !== '' ? parseFloat(el.min) : 0;
+        const max = parseFloat(el.max) !== undefined && el.max !== '' ? parseFloat(el.max) : 100;
+        const val = parseFloat(el.value);
+        if (isNaN(val) || max === min) return;
+        const pct = Math.max(0, Math.min(100, ((val - min) / (max - min)) * 100));
+        el.style.setProperty('--val', pct.toFixed(2));
+      }
+      document.addEventListener('input', function(e) {
+        if (e.target && e.target.type === 'range') _updateRangeVal(e.target);
+      });
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('input[type="range"]').forEach(_updateRangeVal);
+      });
       function haptic(el) {
         if (navigator.vibrate) navigator.vibrate(8);
         if (el) {
@@ -16591,7 +16619,9 @@
         }
         const toast = document.getElementById('copy-toast');
         if (toast) {
+          toast.classList.remove('copy-toast--visible');
           toast.textContent = '✅ کلمات کپی شد!';
+          void toast.offsetWidth;
           toast.classList.add('copy-toast--visible');
           toast.hidden = false;
           clearTimeout(toast._t);
