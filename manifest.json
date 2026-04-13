@@ -1,13 +1,15 @@
 {
   "name": "جعبه‌ابزار آفلاین",
   "short_name": "جعبه‌ابزار",
-  "description": "بیش از ۶۰ ابزار کاربردی — کاملاً آفلاین",
-  "start_url": "./",
-  "scope": "./",
+  "description": "بیش از ۱۰۰ ابزار کاربردی؛ کاملاً آفلاین، بدون نیاز به اینترنت",
+  "id": "https://mahdiyar.info/",
+  "start_url": "https://mahdiyar.info/?source=pwa",
+  "scope": "https://mahdiyar.info/",
   "display": "standalone",
-  "orientation": "any",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "orientation": "portrait",
   "theme_color": "#006874",
-  "background_color": "#fafdfd",
+  "background_color": "#006874",
   "lang": "fa",
   "dir": "rtl",
   "icons": [
@@ -21,14 +23,75 @@
       "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "نمای موبایل جعبه‌ابزار"
+    },
+    {
+      "src": "screenshot-desktop.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "نمای دسکتاپ جعبه‌ابزار"
     }
   ],
   "categories": ["utilities", "productivity", "education"],
   "shortcuts": [
-    { "name": "ماشین‌حساب",    "url": "./#calc",      "description": "محاسبات پایه و عبارات" },
-    { "name": "تقویم خورشیدی", "url": "./#jcal",      "description": "تقویم با مناسبت‌ها" },
-    { "name": "کد QR",         "url": "./#qr",        "description": "ساخت کد QR" },
-    { "name": "شماره ضروری",   "url": "./#emergency", "description": "اورژانس، پلیس، آتش‌نشانی" }
-  ]
+    {
+      "name": "ماشین‌حساب",
+      "short_name": "حساب",
+      "url": "https://mahdiyar.info/?source=shortcut#calc",
+      "description": "محاسبات ریاضی",
+      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "تقویم خورشیدی",
+      "short_name": "تقویم",
+      "url": "https://mahdiyar.info/?source=shortcut#jcal",
+      "description": "تقویم با مناسبت‌ها",
+      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "کد QR",
+      "short_name": "QR",
+      "url": "https://mahdiyar.info/?source=shortcut#qr",
+      "description": "ساخت کد QR",
+      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "شماره ضروری",
+      "short_name": "اورژانس",
+      "url": "https://mahdiyar.info/?source=shortcut#emergency",
+      "description": "اورژانس، پلیس، آتش‌نشانی",
+      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
+    }
+  ],
+  "share_target": {
+    "action": "https://mahdiyar.info/",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "prefer_related_applications": false,
+  "handle_links": "preferred",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "edge_side_panel": { "preferred_width": 400 }
 }
