@@ -14,19 +14,19 @@
   "dir": "rtl",
   "icons": [
     {
-      "src": "favicon.png",
+      "src": "static/favicon.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icon-512.png",
+      "src": "static/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "icon-512.png",
+      "src": "static/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
@@ -34,14 +34,14 @@
   ],
   "screenshots": [
     {
-      "src": "screenshot-mobile.png",
+      "src": "static/screenshot-mobile.png",
       "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "نمای موبایل جعبه‌ابزار"
     },
     {
-      "src": "screenshot-desktop.png",
+      "src": "static/screenshot-desktop.png",
       "sizes": "1280x800",
       "type": "image/png",
       "form_factor": "wide",
@@ -55,28 +55,28 @@
       "short_name": "حساب",
       "url": "https://mahdiyar.info/?source=shortcut#calc",
       "description": "محاسبات ریاضی",
-      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
+      "icons": [{ "src": "static/favicon.png", "sizes": "192x192" }]
     },
     {
       "name": "تقویم خورشیدی",
       "short_name": "تقویم",
       "url": "https://mahdiyar.info/?source=shortcut#jcal",
       "description": "تقویم با مناسبت‌ها",
-      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
+      "icons": [{ "src": "static/favicon.png", "sizes": "192x192" }]
     },
     {
       "name": "کد QR",
       "short_name": "QR",
       "url": "https://mahdiyar.info/?source=shortcut#qr",
       "description": "ساخت کد QR",
-      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
+      "icons": [{ "src": "static/favicon.png", "sizes": "192x192" }]
     },
     {
       "name": "شماره ضروری",
       "short_name": "اورژانس",
       "url": "https://mahdiyar.info/?source=shortcut#emergency",
       "description": "اورژانس، پلیس، آتش‌نشانی",
-      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
+      "icons": [{ "src": "static/favicon.png", "sizes": "192x192" }]
     }
   ],
   "share_target": {
