@@ -7201,787 +7201,704 @@
         <!-- ══ آب‌وهوا ══ -->
         <div id="weather" class="tool-card">
           <div class="tool-title">🌤️ آب‌وهوای ایران</div>
-
-          <!-- Live status bar -->
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-            <span style="font-size:0.78rem;color:var(--m3-on-surface-variant)">منبع: سازمان هواشناسی کشور (ایمو)</span>
+            <span style="font-size:.78rem;color:var(--m3-on-surface-variant)">منبع: سازمان هواشناسی کشور</span>
             <div style="display:flex;align-items:center;gap:6px;background:var(--m3-surface-container);border:1px solid var(--m3-outline-variant);border-radius:99px;padding:4px 12px">
-              <span id="wth-dot" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--m3-primary);box-shadow:0 0 6px var(--m3-primary);transition:all .3s;animation:pulse2 2s infinite"></span>
-              <span id="wth-ts" style="font-size:0.72rem;color:var(--m3-on-surface-variant)">در حال بارگذاری…</span>
+              <span id="wth-dot" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--m3-primary);box-shadow:0 0 6px var(--m3-primary);animation:pulse2 2s infinite"></span>
+              <span id="wth-ts" style="font-size:.72rem;color:var(--m3-on-surface-variant)">در حال بارگذاری…</span>
             </div>
           </div>
-
-          <!-- Search bar -->
           <div style="position:relative;margin-bottom:12px">
-            <div class="field__container" id="wth-search-box" style="cursor:text" onclick="document.getElementById('wth-q').focus()">
-              <span style="color:var(--m3-on-surface-variant);flex-shrink:0">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-              </span>
-              <input type="text" id="wth-q" class="field__input" placeholder="جستجوی شهر یا استان…" autocomplete="off" spellcheck="false" />
-              <button id="wth-clr" onclick="wthClearQ(event)" style="display:none;background:none;border:none;color:var(--m3-on-surface-variant);cursor:pointer;padding:4px;border-radius:50%;line-height:1;font-size:1rem">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-              </button>
+            <div class="field__container" onclick="document.getElementById('wth-q').focus()">
+              <span style="color:var(--m3-on-surface-variant);flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span>
+              <input type="text" id="wth-q" class="field__input" placeholder="جستجوی شهر یا استان…" autocomplete="off" spellcheck="false"/>
+              <button id="wth-clr" onclick="wthClearQ(event)" style="display:none;background:none;border:none;color:var(--m3-on-surface-variant);cursor:pointer;padding:4px;border-radius:50%;line-height:1"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
             </div>
-            <!-- Backdrop -->
             <div id="wth-bd" onclick="wthCloseSug()" style="display:none;position:fixed;inset:0;z-index:149"></div>
-            <!-- Suggestions -->
             <div id="wth-sug" style="display:none;position:absolute;top:calc(100% + 4px);right:0;left:0;background:var(--m3-surface-container-high);border:1px solid var(--m3-outline-variant);border-radius:16px;z-index:200;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.2);max-height:320px;overflow-y:auto"></div>
           </div>
-
-          <!-- Cards area: pinned + recent -->
-          <div id="wth-pin-sec" style="display:none;margin-bottom:12px">
-            <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
-              <span style="font-size:.7rem;font-weight:700;color:var(--m3-primary);text-transform:uppercase;letter-spacing:.08em">📌 پین شده</span>
-              <span id="wth-pin-cnt" style="font-size:.7rem;color:var(--m3-on-surface-variant);background:var(--m3-surface-container-high);padding:1px 8px;border-radius:99px"></span>
+          <!-- Home view -->
+          <div id="wth-home-view">
+            <div id="wth-pin-sec" style="display:none;margin-bottom:16px">
+              <div class="wth-sec-hdr"><span class="wth-sec-hdr__ico">📌</span><span class="wth-sec-hdr__lbl">پین شده</span><span id="wth-pin-cnt" class="wth-sec-hdr__cnt"></span></div>
+              <div id="wth-pin-row" class="wth-card-grid"></div>
             </div>
-            <div id="wth-pin-row" style="display:flex;flex-direction:column;gap:8px"></div>
-          </div>
-
-          <div id="wth-rec-sec">
-            <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
-              <span style="font-size:.7rem;font-weight:700;color:var(--m3-on-surface-variant);text-transform:uppercase;letter-spacing:.08em">🕐 اخیر</span>
-              <span id="wth-rec-cnt" style="font-size:.7rem;color:var(--m3-on-surface-variant);background:var(--m3-surface-container-high);padding:1px 8px;border-radius:99px"></span>
+            <div id="wth-rec-sec">
+              <div class="wth-sec-hdr"><span class="wth-sec-hdr__ico">🕐</span><span class="wth-sec-hdr__lbl">اخیر</span><span id="wth-rec-cnt" class="wth-sec-hdr__cnt"></span></div>
+              <div id="wth-rec-grid" class="wth-card-grid"></div>
             </div>
-            <div id="wth-rec-grid"></div>
           </div>
-
-          <!-- Detail panel (slides in) -->
-          <div id="wth-det" style="display:none"></div>
-
-          <div class="tool-desc">
-           داده‌های هواشناسی از سایت سازمان هواشناسی کشور <code>irimo.ir</code> به‌صورت خودکار و هر ساعت به‌روز می‌شوند.
+          <!-- Detail view (replaces home) -->
+          <div id="wth-det-view" style="display:none"></div>
+          <!-- M3E Rich Tooltip -->
+          <div id="wth-tooltip" style="display:none;position:fixed;z-index:9999;max-width:260px;background:var(--m3-surface-container-high);border:1px solid var(--m3-outline-variant);border-radius:12px;padding:12px 14px;box-shadow:0 4px 16px rgba(0,0,0,.2);pointer-events:none">
+            <div id="wth-tt-title" style="font-size:.8rem;font-weight:700;color:var(--m3-on-surface);margin-bottom:4px"></div>
+            <div id="wth-tt-body" style="font-size:.75rem;color:var(--m3-on-surface-variant);line-height:1.6"></div>
+            <div id="wth-tt-note" style="display:none;font-size:.7rem;color:var(--m3-primary);margin-top:6px;padding-top:6px;border-top:1px solid var(--m3-outline-variant)"></div>
           </div>
+          <div class="tool-desc">داده‌ها از سازمان هواشناسی کشور <code>irimo.ir</code> هر ساعت استخراج می‌شوند.</div>
         </div>
 
         <!-- ══ ترجمه ══ -->
         <div id="translate" class="tool-card">
           <div class="tool-title">🌍 ترجمه متن</div>
-
-          <!-- Language selectors -->
-          <div class="field-row" style="margin-bottom:16px;align-items:flex-end;gap:10px">
-            <div class="field-col">
-              <label class="field-label">زبان مبدأ</label>
-              <div class="field__container" style="cursor:default;padding:0 8px">
-                <select id="tr-from" class="field__input" style="cursor:pointer">
-                  <option value="fa">🇮🇷 فارسی</option>
-                  <option value="en">🇬🇧 انگلیسی</option>
-                  <option value="ar">🇸🇦 عربی</option>
-                  <option value="fr">🇫🇷 فرانسوی</option>
-                  <option value="es">🇪🇸 اسپانیایی</option>
-                  <option value="de">🇩🇪 آلمانی</option>
-                  <option value="it">🇮🇹 ایتالیایی</option>
-                  <option value="pt">🇵🇹 پرتغالی</option>
-                  <option value="ru">🇷🇺 روسی</option>
-                  <option value="zh">🇨🇳 چینی</option>
-                  <option value="ja">🇯🇵 ژاپنی</option>
-                  <option value="ko">🇰🇷 کره‌ای</option>
+          <div class="tr-lang-row">
+            <div class="tr-lang-sel">
+              <label class="field-label" style="font-size:.7rem;margin-bottom:4px">زبان مبدأ</label>
+              <div class="field__container" style="padding:0 8px;height:48px">
+                <select id="tr-from" class="field__input" style="cursor:pointer" onchange="trUpdateDirs()">
+                  <option value="fa">🇮🇷 فارسی</option><option value="en">🇬🇧 انگلیسی</option>
+                  <option value="ar">🇸🇦 عربی</option><option value="fr">🇫🇷 فرانسوی</option>
+                  <option value="es">🇪🇸 اسپانیایی</option><option value="de">🇩🇪 آلمانی</option>
+                  <option value="it">🇮🇹 ایتالیایی</option><option value="pt">🇵🇹 پرتغالی</option>
+                  <option value="ru">🇷🇺 روسی</option><option value="zh">🇨🇳 چینی</option>
+                  <option value="ja">🇯🇵 ژاپنی</option><option value="ko">🇰🇷 کره‌ای</option>
                   <option value="tr">🇹🇷 ترکی</option>
                 </select>
               </div>
             </div>
-            <button onclick="trSwapLangs()" class="btn btn-tonal" style="flex-shrink:0;padding:0 12px;height:56px;margin-bottom:0" title="جابجایی زبان‌ها">⇄</button>
-            <div class="field-col">
-              <label class="field-label">زبان مقصد</label>
-              <div class="field__container" style="cursor:default;padding:0 8px">
-                <select id="tr-to" class="field__input" style="cursor:pointer">
-                  <option value="en">🇬🇧 انگلیسی</option>
-                  <option value="fa">🇮🇷 فارسی</option>
-                  <option value="ar">🇸🇦 عربی</option>
-                  <option value="fr">🇫🇷 فرانسوی</option>
-                  <option value="es">🇪🇸 اسپانیایی</option>
-                  <option value="de">🇩🇪 آلمانی</option>
-                  <option value="it">🇮🇹 ایتالیایی</option>
-                  <option value="pt">🇵🇹 پرتغالی</option>
-                  <option value="ru">🇷🇺 روسی</option>
-                  <option value="zh">🇨🇳 چینی</option>
-                  <option value="ja">🇯🇵 ژاپنی</option>
-                  <option value="ko">🇰🇷 کره‌ای</option>
+            <button onclick="trSwapLangs()" class="tr-swap-btn" title="جابجایی زبان‌ها">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"/></svg>
+            </button>
+            <div class="tr-lang-sel">
+              <label class="field-label" style="font-size:.7rem;margin-bottom:4px">زبان مقصد</label>
+              <div class="field__container" style="padding:0 8px;height:48px">
+                <select id="tr-to" class="field__input" style="cursor:pointer" onchange="trUpdateDirs()">
+                  <option value="en">🇬🇧 انگلیسی</option><option value="fa">🇮🇷 فارسی</option>
+                  <option value="ar">🇸🇦 عربی</option><option value="fr">🇫🇷 فرانسوی</option>
+                  <option value="es">🇪🇸 اسپانیایی</option><option value="de">🇩🇪 آلمانی</option>
+                  <option value="it">🇮🇹 ایتالیایی</option><option value="pt">🇵🇹 پرتغالی</option>
+                  <option value="ru">🇷🇺 روسی</option><option value="zh">🇨🇳 چینی</option>
+                  <option value="ja">🇯🇵 ژاپنی</option><option value="ko">🇰🇷 کره‌ای</option>
                   <option value="tr">🇹🇷 ترکی</option>
                 </select>
               </div>
             </div>
           </div>
-
-          <!-- Input — direction auto-detected from first char -->
-          <div class="field field--textarea">
-            <div class="field__container">
-              <textarea id="tr-input" class="field__input" rows="4"
-                placeholder="متن خود را اینجا بنویسید…"
-                style="resize:vertical;min-height:100px;direction:rtl"
-                oninput="trOnInput()"></textarea>
-            </div>
+          <div class="field field--textarea" style="margin-bottom:12px">
+            <div class="field__container"><textarea id="tr-input" class="field__input" rows="4" placeholder="متن خود را اینجا بنویسید…" style="resize:vertical;min-height:90px;direction:rtl" oninput="trOnInput()"></textarea></div>
           </div>
-
-          <!-- Translate button -->
           <div class="btn-row">
             <button class="btn btn-filled" onclick="doTranslate()" id="tr-btn">🌍 ترجمه</button>
             <button class="btn btn-tonal" onclick="trClear()" id="tr-clear-btn" style="display:none">پاک کردن</button>
           </div>
-
-          <!-- Output -->
           <div id="tr-output-wrap" style="display:none;margin-top:4px">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-              <span style="font-size:0.78rem;font-weight:700;color:var(--m3-on-surface-variant);text-transform:uppercase;letter-spacing:.06em">ترجمه</span>
+              <span style="font-size:.78rem;font-weight:700;color:var(--m3-on-surface-variant);text-transform:uppercase;letter-spacing:.06em">ترجمه</span>
               <button class="btn btn-tonal" onclick="copyToClipboard(document.getElementById('tr-output').textContent)" style="font-size:12px;padding:4px 10px;height:30px">📋 کپی</button>
             </div>
-            <div id="tr-output" style="background:var(--m3-surface-container);border-radius:16px;padding:16px;font-size:0.95rem;line-height:1.85;min-height:60px;color:var(--m3-on-surface);word-break:break-word"></div>
+            <div id="tr-output" style="background:var(--m3-surface-container);border-radius:16px;padding:16px;font-size:.95rem;line-height:1.85;min-height:60px;color:var(--m3-on-surface);word-break:break-word"></div>
           </div>
-
-          <div class="tool-desc">
-            ترجمه توسط وب‌سرویس Dastyar انجام می‌شود. نیاز به اتصال اینترنت دارد.
-          </div>
+          <div class="tool-desc">برای ترجمه توسط وب‌سرویس Dastyar استفاده می‌شود. نیاز به اتصال اینترنت دارد.</div>
         </div>
 
-        <!-- ══ قیمت ارز و طلا ══ -->
+        <!-- ══ قیمت ══ -->
         <div id="currency" class="tool-card">
-          <div class="tool-title">💹 بازار زندهٔ ارز، طلا و رمزارز</div>
-
-          <!-- Controls bar -->
+          <div class="tool-title">💹 بازار زنده — ارز، طلا و رمزارز</div>
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px">
-            <!-- Tabs -->
             <div style="display:flex;gap:6px;flex-wrap:wrap">
               <button class="btn btn-tonal cur-tab-btn active" id="cur-tab-all"    onclick="curSwitchTab('all',this)">همه</button>
               <button class="btn btn-tonal cur-tab-btn"        id="cur-tab-gold"   onclick="curSwitchTab('gold',this)">🥇 طلا</button>
               <button class="btn btn-tonal cur-tab-btn"        id="cur-tab-curr"   onclick="curSwitchTab('currency',this)">💵 ارز</button>
               <button class="btn btn-tonal cur-tab-btn"        id="cur-tab-crypto" onclick="curSwitchTab('crypto',this)">🪙 رمزارز</button>
             </div>
-            <!-- Status + M3E Switch -->
             <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-              <div id="cur-update-badge" style="font-size:0.72rem;color:var(--m3-on-surface-variant);background:var(--m3-surface-container);padding:4px 12px;border-radius:99px;border:1px solid var(--m3-outline-variant);display:flex;align-items:center;gap:6px">
+              <div id="cur-update-badge" style="font-size:.72rem;color:var(--m3-on-surface-variant);background:var(--m3-surface-container);padding:4px 12px;border-radius:99px;border:1px solid var(--m3-outline-variant);display:flex;align-items:center;gap:6px">
                 <span id="cur-dot" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--m3-primary);animation:pulse2 2s infinite"></span>
                 <span id="cur-badge-text">در حال بارگذاری...</span>
               </div>
-              <!-- M3E Switch: تومان / دلار -->
-              <div style="display:flex;align-items:center;gap:8px">
-                <span id="cur-lbl-toman" style="font-size:0.8rem;font-weight:600;color:var(--m3-primary)">تومان</span>
-                <button id="cur-mode-switch" role="switch" aria-checked="false"
-                  onclick="curToggleMode()"
-                  style="position:relative;width:52px;height:32px;border-radius:99px;border:2px solid var(--m3-outline);background:var(--m3-surface-container-highest);cursor:pointer;transition:background .2s,border-color .2s;padding:0;flex-shrink:0;outline:none"
-                  title="تغییر واحد ارز">
-                  <span id="cur-switch-thumb"
-                    style="position:absolute;top:2px;right:2px;width:24px;height:24px;border-radius:50%;background:var(--m3-outline);transition:transform .2s,background .2s,width .15s,height .15s"></span>
-                </button>
-                <span id="cur-lbl-dollar" style="font-size:0.8rem;font-weight:500;color:var(--m3-on-surface-variant)">دلار</span>
-              </div>
             </div>
           </div>
-
-          <!-- Content area -->
           <div id="cur-content"></div>
-
-          <div class="tool-desc">
-            داده‌های ارز و طلا از <strong>BrsAPI</strong> و رمزارزها از <strong>نوبیتکس</strong> دریافت می‌شود. هر ۶۰ ثانیه بروزرسانی می‌شود. نیاز به اتصال اینترنت دارد.
-          </div>
+          <div class="tool-desc">ارز و طلا از <strong>BrsAPI</strong> — رمزارز از <strong>نوبیتکس</strong> — هر ۶۰ ثانیه بروزرسانی</div>
         </div>
 
         <!-- ══ STYLES FOR ONLINE TOOLS ══ -->
         <style>
           @keyframes pulse2 { 0%,100%{opacity:1} 50%{opacity:.3} }
+          @keyframes wthSlideIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
 
-          /* ── Currency card grid: respect the tool-card max-width ── */
+          /* ─── Translate lang row ─── */
+          .tr-lang-row {
+            display: flex; align-items: flex-end; gap: 8px; margin-bottom: 14px; flex-wrap: nowrap;
+          }
+          .tr-lang-sel { flex: 1; min-width: 0; }
+          .tr-swap-btn {
+            flex-shrink: 0; width: 40px; height: 48px; border-radius: 12px;
+            background: var(--m3-surface-container-high); border: 1.5px solid var(--m3-outline-variant);
+            color: var(--m3-on-surface-variant); cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: background .15s, border-color .15s, color .15s; align-self: flex-end; margin-bottom: 0;
+          }
+          .tr-swap-btn:hover { background: var(--m3-primary-container); border-color: var(--m3-primary); color: var(--m3-primary); }
+
+          /* ─── Currency cards ─── */
           .cur-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 10px;
-            margin-bottom: 20px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+            gap: 10px; margin-bottom: 20px;
           }
           @media (max-width: 480px) { .cur-cards-grid { grid-template-columns: 1fr 1fr; gap: 8px; } }
-
           .cur-section-title {
-            font-size: 0.75rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: .08em;
-            padding: 10px 0 8px;
-            border-bottom: 2px solid var(--m3-primary-container);
-            margin-bottom: 12px;
-            display: flex; align-items: center; gap: 8px;
-            color: var(--m3-primary);
+            font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+            padding: 10px 0 8px; border-bottom: 2px solid var(--m3-primary-container);
+            margin-bottom: 12px; display: flex; align-items: center; gap: 8px; color: var(--m3-primary);
           }
-
-          /* ── Currency card ── */
           .cur-card {
-            background: var(--m3-surface-container);
-            border: 1.5px solid var(--m3-outline-variant);
-            border-radius: 16px;
-            padding: 14px;
-            transition: transform .15s, box-shadow .15s, border-color .15s;
-            overflow: hidden;
+            background: var(--m3-surface-container); border: 1.5px solid var(--m3-outline-variant);
+            border-radius: 16px; padding: 14px; transition: transform .15s, box-shadow .15s, border-color .15s; overflow: hidden;
           }
           .cur-card:hover { transform: translateY(-2px); box-shadow: var(--m3-elevation-2); border-color: var(--m3-primary); }
           .cur-card__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-          .cur-card__icon { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+          .cur-card__icon { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
           .cur-card__icon--gold   { background: color-mix(in srgb, #f59e0b 15%, transparent); }
-          .cur-card__icon--curr   { background: color-mix(in srgb, var(--m3-primary) 12%, transparent); }
-          .cur-card__icon--crypto { background: color-mix(in srgb, var(--m3-tertiary, #7d5260) 12%, transparent); }
-          .cur-card__badge { font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 6px; letter-spacing: .04em; }
-          .cur-card__badge--gold   { background: color-mix(in srgb, #f59e0b 15%, transparent); color: #b45309; }
-          .cur-card__badge--curr   { background: color-mix(in srgb, var(--m3-primary) 12%, transparent); color: var(--m3-primary); }
-          .cur-card__badge--crypto { background: color-mix(in srgb, var(--m3-tertiary,#7d5260) 12%, transparent); color: var(--m3-tertiary,#7d5260); }
-          [data-theme="dark"] .cur-card__badge--gold { color: #fbbf24; }
-          .cur-card__name { font-size: .88rem; font-weight: 700; color: var(--m3-on-surface); margin-bottom: 2px; }
-          .cur-card__sub  { font-size: .68rem; color: var(--m3-on-surface-variant); margin-bottom: 10px; direction: ltr; text-align: left; }
-
-          /* Price: always LTR number, unit separate */
-          .cur-card__price-row { display: flex; align-items: baseline; gap: 5px; margin-bottom: 8px; flex-wrap: wrap; }
-          .cur-card__price { font-size: 1.05rem; font-weight: 800; color: var(--m3-on-surface); letter-spacing: -.01em; direction: ltr; unicode-bidi: isolate; }
-          .cur-card__unit  { font-size: .72rem; color: var(--m3-on-surface-variant); font-weight: 600; }
+          .cur-card__icon--curr   { background: color-mix(in srgb, var(--m3-primary) 10%, transparent); }
+          .cur-card__icon--crypto { background: color-mix(in srgb, var(--m3-tertiary,#7d5260) 10%, transparent); }
+          .cur-card__badge { font-size: .63rem; font-weight: 700; padding: 2px 7px; border-radius: 6px; letter-spacing: .04em; }
+          .cur-card__badge--gold   { background: color-mix(in srgb,#f59e0b 15%,transparent); color:#b45309; }
+          .cur-card__badge--curr   { background: color-mix(in srgb,var(--m3-primary) 12%,transparent); color:var(--m3-primary); }
+          .cur-card__badge--crypto { background: color-mix(in srgb,var(--m3-tertiary,#7d5260) 12%,transparent); color:var(--m3-tertiary,#7d5260); }
+          [data-theme="dark"] .cur-card__badge--gold { color:#fbbf24; }
+          .cur-card__name { font-size: .86rem; font-weight: 700; color: var(--m3-on-surface); margin-bottom: 1px; }
+          .cur-card__sub  { font-size: .66rem; color: var(--m3-on-surface-variant); margin-bottom: 8px; }
+          /* Price: bidi-isolated, RTL wrapping fixed */
+          .cur-card__price-row { display: flex; align-items: baseline; gap: 4px; flex-direction: row-reverse; justify-content: flex-end; margin-bottom: 8px; flex-wrap: nowrap; }
+          .cur-card__unit  { font-size: .72rem; color: var(--m3-on-surface-variant); font-weight: 600; white-space: nowrap; }
+          .cur-card__price { font-size: 1rem; font-weight: 800; color: var(--m3-on-surface); direction: ltr; unicode-bidi: isolate; white-space: nowrap; }
           .cur-card__footer { display: flex; align-items: center; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--m3-outline-variant); }
-          .cur-change { display: flex; align-items: center; gap: 3px; font-size: .78rem; font-weight: 700; direction: ltr; unicode-bidi: isolate; }
+          .cur-change { display: flex; align-items: center; gap: 3px; font-size: .75rem; font-weight: 700; direction: ltr; unicode-bidi: isolate; }
           .cur-change--up      { color: #16a34a; }
-          .cur-change--down    { color: var(--m3-error, #b91c1c); }
+          .cur-change--down    { color: var(--m3-error,#b91c1c); }
           .cur-change--neutral { color: var(--m3-on-surface-variant); }
           [data-theme="dark"] .cur-change--up   { color: #4ade80; }
           [data-theme="dark"] .cur-change--down { color: #f87171; }
-          .cur-card__time { font-size: .65rem; color: var(--m3-on-surface-variant); direction: ltr; unicode-bidi: isolate; }
-
+          .cur-card__time { font-size: .63rem; color: var(--m3-on-surface-variant); direction: ltr; unicode-bidi: isolate; }
+          /* Crypto chart sparkline area */
+          .cur-chart-wrap { margin-top: 8px; }
+          .cur-chart-wrap canvas { width: 100% !important; height: 48px !important; }
           /* Skeleton */
           .cur-skeleton { background: var(--m3-surface-container); border: 1.5px solid var(--m3-outline-variant); border-radius: 16px; padding: 14px; }
-          .cur-sk-line { height: 12px; border-radius: 6px; background: linear-gradient(90deg, var(--m3-surface-container-high) 25%, var(--m3-outline-variant) 50%, var(--m3-surface-container-high) 75%); background-size: 200% 100%; animation: skShimmer 1.5s infinite; margin-bottom: 8px; }
+          .cur-sk-line { height: 12px; border-radius: 6px; background: linear-gradient(90deg,var(--m3-surface-container-high) 25%,var(--m3-outline-variant) 50%,var(--m3-surface-container-high) 75%); background-size:200% 100%; animation:skShimmer 1.5s infinite; margin-bottom:8px; }
           @keyframes skShimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+          .cur-tab-btn.active { background:var(--m3-secondary-container); color:var(--m3-on-secondary-container); }
 
-          /* Tab buttons */
-          .cur-tab-btn.active { background: var(--m3-secondary-container); color: var(--m3-on-secondary-container); }
+          /* ─── Weather ─── */
+          .wth-sec-hdr { display:flex;align-items:center;gap:6px;margin-bottom:8px; }
+          .wth-sec-hdr__ico { font-size:1rem; }
+          .wth-sec-hdr__lbl { font-size:.7rem;font-weight:700;color:var(--m3-on-surface-variant);text-transform:uppercase;letter-spacing:.08em;flex:1; }
+          .wth-sec-hdr__cnt { font-size:.7rem;color:var(--m3-on-surface-variant);background:var(--m3-surface-container-high);padding:1px 8px;border-radius:99px; }
+          .wth-card-grid { display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px; }
+          @media(max-width:360px) { .wth-card-grid { grid-template-columns:1fr; } }
 
-          /* M3E Switch active state */
-          #cur-mode-switch[aria-checked="true"] {
-            background: var(--m3-primary);
-            border-color: var(--m3-primary);
-          }
-          #cur-mode-switch[aria-checked="true"] #cur-switch-thumb {
-            transform: translateX(-20px);
-            background: var(--m3-on-primary);
-          }
-          #cur-mode-switch:focus-visible { outline: 3px solid var(--m3-primary); outline-offset: 2px; }
-
-          /* ── Weather card (M3 surface) ── */
           .wth-card {
-            background: var(--m3-surface-container);
-            border: 1.5px solid var(--m3-outline-variant);
-            border-radius: 18px;
-            padding: 14px 14px 14px 16px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            direction: rtl;
-            transition: transform .15s, box-shadow .15s, border-color .15s;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 8px;
-            animation: fadeIn .25s ease;
+            background:var(--m3-surface-container);border:1.5px solid var(--m3-outline-variant);
+            border-radius:16px;padding:12px;cursor:pointer;display:flex;flex-direction:column;gap:4px;
+            direction:rtl;transition:transform .15s,box-shadow .15s,border-color .15s;position:relative;
+            overflow:hidden;animation:wthSlideIn .25s ease both;
           }
-          .wth-card:hover { transform: translateY(-1px); box-shadow: var(--m3-elevation-2); border-color: var(--m3-primary); }
-          .wth-card.hot  { background: linear-gradient(135deg, color-mix(in srgb,#ef4444 8%,var(--m3-surface-container)), var(--m3-surface-container)); border-color: color-mix(in srgb,#ef4444 25%,var(--m3-outline-variant)); }
-          .wth-card.warm { background: linear-gradient(135deg, color-mix(in srgb,#f59e0b 8%,var(--m3-surface-container)), var(--m3-surface-container)); border-color: color-mix(in srgb,#f59e0b 25%,var(--m3-outline-variant)); }
-          .wth-card.mild { background: linear-gradient(135deg, color-mix(in srgb,#22c55e 8%,var(--m3-surface-container)), var(--m3-surface-container)); border-color: color-mix(in srgb,#22c55e 25%,var(--m3-outline-variant)); }
-          .wth-card.cold { background: linear-gradient(135deg, color-mix(in srgb,#60a5fa 8%,var(--m3-surface-container)), var(--m3-surface-container)); border-color: color-mix(in srgb,#60a5fa 25%,var(--m3-outline-variant)); }
-          .wth-card__emoji { font-size: 2.2rem; line-height: 1; flex-shrink: 0; }
-          .wth-card__temp { font-size: 1.5rem; font-weight: 800; direction: ltr; unicode-bidi: isolate; flex-shrink: 0; min-width: 60px; text-align: left; }
-          .wth-card__temp.hot  { color: #ef4444; }
-          .wth-card__temp.warm { color: #f59e0b; }
-          .wth-card__temp.mild { color: #22c55e; }
-          .wth-card__temp.cold { color: #60a5fa; }
-          .wth-card__info { flex: 1; min-width: 0; }
-          .wth-card__name { font-size: .9rem; font-weight: 700; color: var(--m3-on-surface); }
-          .wth-card__prov { font-size: .72rem; color: var(--m3-on-surface-variant); margin-top: 1px; }
-          .wth-card__cond { font-size: .72rem; color: var(--m3-on-surface-variant); margin-top: 2px; }
-          .wth-card__mm   { display: flex; flex-direction: column; gap: 3px; flex-shrink: 0; }
-          .wth-card__mm-chip { display: flex; align-items: center; gap: 3px; font-size: .7rem; color: var(--m3-on-surface-variant); }
-          .wth-card__mm-val  { font-weight: 700; color: var(--m3-on-surface); }
-          .wth-card__acts { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
-          .wth-act-btn { background: none; border: none; cursor: pointer; color: var(--m3-on-surface-variant); padding: 5px; border-radius: 50%; line-height: 1; transition: background .15s, color .15s; }
-          .wth-act-btn:hover { background: var(--m3-surface-container-high); color: var(--m3-primary); }
-          .wth-act-btn.pinned { color: var(--m3-primary); }
+          .wth-card:hover { transform:translateY(-2px);box-shadow:var(--m3-elevation-2);border-color:var(--m3-primary); }
+          .wth-card.hot  { background:linear-gradient(135deg,color-mix(in srgb,#ef4444 8%,var(--m3-surface-container)),var(--m3-surface-container));border-color:color-mix(in srgb,#ef4444 22%,var(--m3-outline-variant)); }
+          .wth-card.warm { background:linear-gradient(135deg,color-mix(in srgb,#f59e0b 8%,var(--m3-surface-container)),var(--m3-surface-container));border-color:color-mix(in srgb,#f59e0b 22%,var(--m3-outline-variant)); }
+          .wth-card.mild { background:linear-gradient(135deg,color-mix(in srgb,#22c55e 8%,var(--m3-surface-container)),var(--m3-surface-container));border-color:color-mix(in srgb,#22c55e 22%,var(--m3-outline-variant)); }
+          .wth-card.cold { background:linear-gradient(135deg,color-mix(in srgb,#60a5fa 8%,var(--m3-surface-container)),var(--m3-surface-container));border-color:color-mix(in srgb,#60a5fa 22%,var(--m3-outline-variant)); }
+          .wth-card__top { display:flex;align-items:center;gap:8px; }
+          .wth-card__emoji { font-size:1.8rem;line-height:1;flex-shrink:0; }
+          .wth-card__temp { font-size:1.3rem;font-weight:800;direction:ltr;unicode-bidi:isolate;flex-shrink:0; }
+          .wth-card__temp.hot{color:#ef4444}.wth-card__temp.warm{color:#f59e0b}.wth-card__temp.mild{color:#22c55e}.wth-card__temp.cold{color:#60a5fa}
+          .wth-card__info { flex:1;min-width:0; }
+          .wth-card__name { font-size:.85rem;font-weight:700;color:var(--m3-on-surface);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+          .wth-card__prov { font-size:.68rem;color:var(--m3-on-surface-variant); }
+          .wth-card__cond { font-size:.68rem;color:var(--m3-on-surface-variant);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+          .wth-card__mm   { display:flex;gap:8px;flex-wrap:wrap; }
+          .wth-card__mm-chip { display:flex;align-items:center;gap:2px;font-size:.68rem;color:var(--m3-on-surface-variant); }
+          .wth-card__mm-val  { font-weight:700;color:var(--m3-on-surface); }
+          .wth-card__acts { position:absolute;top:6px;left:6px;display:flex;gap:2px; }
+          .wth-act-btn { background:none;border:none;cursor:pointer;color:var(--m3-on-surface-variant);padding:4px;border-radius:50%;line-height:1;transition:background .15s,color .15s;font-size:.8rem; }
+          .wth-act-btn:hover { background:var(--m3-surface-container-high);color:var(--m3-primary); }
+          .wth-act-btn.pinned { color:var(--m3-primary); }
 
-          /* Detail panel */
-          .wth-det-panel {
-            background: var(--m3-surface-container-low);
-            border: 1px solid var(--m3-outline-variant);
-            border-radius: 20px;
-            padding: 20px;
-            margin-top: 8px;
-            animation: fadeIn .2s ease;
-          }
-          .wth-det-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
-          .wth-det-hero { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
-          .wth-det-emoji { font-size: 3rem; line-height: 1; flex-shrink: 0; }
-          .wth-det-main .wth-city { font-size: 1.2rem; font-weight: 700; color: var(--m3-on-surface); }
-          .wth-det-main .wth-prov { font-size: .8rem; color: var(--m3-on-surface-variant); margin-top: 2px; }
-          .wth-det-main .wth-temp { font-size: 2.6rem; font-weight: 800; direction: ltr; unicode-bidi: isolate; line-height: 1; margin: 6px 0 2px; }
-          .wth-det-main .wth-cond { font-size: .9rem; color: var(--m3-on-surface-variant); }
-          .wth-det-main .wth-temp.hot  { color: #ef4444; }
-          .wth-det-main .wth-temp.warm { color: #f59e0b; }
-          .wth-det-main .wth-temp.mild { color: #22c55e; }
-          .wth-det-main .wth-temp.cold { color: #60a5fa; }
-          .wth-chips { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 14px; }
-          .wth-chip { display: inline-flex; align-items: center; gap: 4px; background: var(--m3-surface-container-high); border: 1px solid var(--m3-outline-variant); border-radius: 99px; padding: 4px 11px; font-size: .76rem; font-weight: 600; }
-          .wth-metrics { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; margin-bottom: 14px; }
-          .wth-mbox { background: var(--m3-surface-container); border: 1px solid var(--m3-outline-variant); border-radius: 14px; padding: 11px; }
-          .wth-mbox-ico { font-size: 1.2rem; margin-bottom: 4px; }
-          .wth-mbox-lbl { font-size: .68rem; color: var(--m3-on-surface-variant); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 3px; }
-          .wth-mbox-val { font-size: .88rem; font-weight: 700; color: var(--m3-on-surface); direction: ltr; unicode-bidi: isolate; }
-          .wth-forecast { background: var(--m3-surface-container); border: 1.5px solid var(--m3-outline-variant); border-radius: 16px; padding: 14px; }
-          .wth-fc-title { font-size: .75rem; font-weight: 700; color: var(--m3-primary); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
-          .wth-fc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-          .wth-fc-card { background: var(--m3-surface-container-high); border-radius: 12px; padding: 10px; text-align: center; }
-          .wth-fc-per { font-size: .68rem; color: var(--m3-on-surface-variant); margin-bottom: 4px; font-weight: 600; }
-          .wth-fc-ico { font-size: 1.4rem; margin-bottom: 4px; }
-          .wth-fc-tmp { font-size: .82rem; font-weight: 700; direction: ltr; unicode-bidi: isolate; }
-          .wth-fc-tmp .mx { color: #ef4444; }
-          .wth-fc-tmp .mn { color: #60a5fa; }
-          .wth-fc-cnd { font-size: .65rem; color: var(--m3-on-surface-variant); margin-top: 3px; line-height: 1.4; }
-          .wth-empty { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 36px 16px; text-align: center; color: var(--m3-on-surface-variant); }
-          .wth-empty-ico { font-size: 2.5rem; opacity: .3; }
-
-          /* Suggestions */
-          #wth-sug .wth-si { display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer; direction: rtl; transition: background .1s; }
-          #wth-sug .wth-si:hover { background: var(--m3-surface-container-high); }
-          #wth-sug .wth-si-ico { font-size: 1.3rem; flex-shrink: 0; }
-          #wth-sug .wth-si-name { font-size: .88rem; font-weight: 600; color: var(--m3-on-surface); }
-          #wth-sug .wth-si-prov { font-size: .7rem; color: var(--m3-on-surface-variant); margin-top: 1px; }
-          #wth-sug .wth-si-temp { font-size: .9rem; font-weight: 700; direction: ltr; unicode-bidi: isolate; margin-right: auto; flex-shrink: 0; }
-          #wth-sug .wth-si-temp.hot  { color: #ef4444; }
-          #wth-sug .wth-si-temp.warm { color: #f59e0b; }
-          #wth-sug .wth-si-temp.mild { color: #22c55e; }
-          #wth-sug .wth-si-temp.cold { color: #60a5fa; }
+          /* Detail view */
+          .wth-det-panel { animation:wthSlideIn .2s ease; }
+          .wth-det-topbar { display:flex;align-items:center;gap:8px;margin-bottom:20px; }
+          .wth-det-hero { background:var(--m3-surface-container);border:1.5px solid var(--m3-outline-variant);border-radius:20px;padding:20px;margin-bottom:12px; }
+          .wth-det-hero-top { display:flex;align-items:flex-start;gap:14px;margin-bottom:12px; }
+          .wth-det-emoji { font-size:3.2rem;line-height:1;flex-shrink:0; }
+          .wth-det-info .wth-city { font-size:1.2rem;font-weight:700;color:var(--m3-on-surface); }
+          .wth-det-info .wth-prov { font-size:.8rem;color:var(--m3-on-surface-variant);margin-top:2px; }
+          .wth-det-info .wth-temp { font-size:2.8rem;font-weight:800;direction:ltr;unicode-bidi:isolate;line-height:1;margin:6px 0 2px; }
+          .wth-det-info .wth-cond { font-size:.9rem;color:var(--m3-on-surface-variant); }
+          .wth-det-info .wth-temp.hot{color:#ef4444}.wth-det-info .wth-temp.warm{color:#f59e0b}
+          .wth-det-info .wth-temp.mild{color:#22c55e}.wth-det-info .wth-temp.cold{color:#60a5fa}
+          .wth-chips { display:flex;gap:7px;flex-wrap:wrap;margin-top:8px; }
+          .wth-chip { display:inline-flex;align-items:center;gap:4px;background:var(--m3-surface-container-high);border:1px solid var(--m3-outline-variant);border-radius:99px;padding:4px 11px;font-size:.75rem;font-weight:600; }
+          .wth-metrics { display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:8px;margin-bottom:12px; }
+          .wth-mbox { background:var(--m3-surface-container);border:1px solid var(--m3-outline-variant);border-radius:14px;padding:11px;position:relative; }
+          .wth-mbox-top { display:flex;align-items:center;justify-content:space-between;margin-bottom:3px; }
+          .wth-mbox-ico { font-size:1.2rem; }
+          .wth-mbox-info-btn { background:none;border:1px solid var(--m3-outline-variant);width:18px;height:18px;border-radius:50%;font-size:.65rem;font-weight:700;color:var(--m3-on-surface-variant);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1; }
+          .wth-mbox-info-btn:hover { background:var(--m3-surface-container-high);border-color:var(--m3-primary);color:var(--m3-primary); }
+          .wth-mbox-lbl { font-size:.68rem;color:var(--m3-on-surface-variant);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px; }
+          .wth-mbox-val { font-size:.9rem;font-weight:700;color:var(--m3-on-surface);direction:ltr;unicode-bidi:isolate; }
+          .wth-forecast { background:var(--m3-surface-container);border:1.5px solid var(--m3-outline-variant);border-radius:16px;padding:14px; }
+          .wth-fc-title { font-size:.75rem;font-weight:700;color:var(--m3-primary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;display:flex;align-items:center;gap:6px; }
+          .wth-fc-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:8px; }
+          .wth-fc-card { background:var(--m3-surface-container-high);border-radius:12px;padding:10px;text-align:center; }
+          .wth-fc-per { font-size:.65rem;color:var(--m3-on-surface-variant);margin-bottom:4px;font-weight:600; }
+          .wth-fc-ico { font-size:1.4rem;margin-bottom:4px; }
+          .wth-fc-tmp { font-size:.82rem;font-weight:700;direction:ltr;unicode-bidi:isolate; }
+          .wth-fc-tmp .mx{color:#ef4444}.wth-fc-tmp .mn{color:#60a5fa}
+          .wth-fc-cnd { font-size:.63rem;color:var(--m3-on-surface-variant);margin-top:3px;line-height:1.4; }
+          .wth-empty { display:flex;flex-direction:column;align-items:center;gap:8px;padding:32px 16px;text-align:center;color:var(--m3-on-surface-variant); }
+          .wth-empty-ico { font-size:2.5rem;opacity:.3; }
+          #wth-sug .wth-si { display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;direction:rtl;transition:background .1s; }
+          #wth-sug .wth-si:hover { background:var(--m3-surface-container-high); }
+          #wth-sug .wth-si-ico { font-size:1.2rem;flex-shrink:0; }
+          #wth-sug .wth-si-name { font-size:.88rem;font-weight:600;color:var(--m3-on-surface); }
+          #wth-sug .wth-si-prov { font-size:.7rem;color:var(--m3-on-surface-variant); }
+          #wth-sug .wth-si-temp { font-size:.9rem;font-weight:700;direction:ltr;unicode-bidi:isolate;margin-right:auto;flex-shrink:0; }
+          #wth-sug .wth-si-temp.hot{color:#ef4444}#wth-sug .wth-si-temp.warm{color:#f59e0b}
+          #wth-sug .wth-si-temp.mild{color:#22c55e}#wth-sug .wth-si-temp.cold{color:#60a5fa}
         </style>
 
         <!-- ══ SCRIPTS FOR ONLINE TOOLS ══ -->
         <script>
-        // ═══════════════════════════════════════════════════
-        //  WEATHER TOOL — uses weather_data.json (irimo.ir)
-        // ═══════════════════════════════════════════════════
-        (function() {
-          const WTH_DATA = 'scripts/weather_data.json';
-          const WTH_RK   = 'irimo_rec_v4';
-          const WTH_PK   = 'irimo_pin_v4';
-          const MAXR = 10, MAXP = 2, MAXS = 9;
-
-          let wthAll = [], wthSmap = {}, wthCurrentDetId = null;
-
-          const wthGetR = () => { try { return JSON.parse(localStorage.getItem(WTH_RK))||[]; } catch{return[];} };
-          const wthGetP = () => { try { return JSON.parse(localStorage.getItem(WTH_PK))||[]; } catch{return[];} };
-          const wthSetR = v => localStorage.setItem(WTH_RK, JSON.stringify(v));
-          const wthSetP = v => localStorage.setItem(WTH_PK, JSON.stringify(v));
-
-          function wthTCls(t) {
-            if(t>=35) return 'hot'; if(t>=25) return 'warm'; if(t>=10) return 'mild'; return 'cold';
+        // ═══════════════════════════════
+        //  WEATHER TOOL
+        // ═══════════════════════════════
+        (function(){
+          const DATA='scripts/weather_data.json',RK='irimo_rec_v4',PK='irimo_pin_v4';
+          const MAXR=10,MAXP=2,MAXS=9;
+          let wAll=[],wMap={},wDetId=null,wInit=false;
+          const gR=()=>{try{return JSON.parse(localStorage.getItem(RK))||[]}catch{return[]}};
+          const gP=()=>{try{return JSON.parse(localStorage.getItem(PK))||[]}catch{return[]}};
+          const sR=v=>localStorage.setItem(RK,JSON.stringify(v));
+          const sP=v=>localStorage.setItem(PK,JSON.stringify(v));
+          const toPersian=n=>String(n).replace(/[0-9]/g,d=>['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'][d]);
+          function tCls(t){if(t>=35)return'hot';if(t>=25)return'warm';if(t>=10)return'mild';return'cold';}
+          function wEmoji(s){
+            if(!s)return'🌡️';
+            if(/مه|ضباب/.test(s))return'🌫️';if(/رعد|طوفان/.test(s))return'⛈️';
+            if(/برف/.test(s))return'❄️';if(/تگرگ/.test(s))return'🌨️';
+            if(/رگبار|باران\s*سنگین|باران\s*شدید/.test(s))return'🌧️';
+            if(/باران|نم\s*نم/.test(s))return'🌦️';
+            if(/نیمه\s*ابری|کمی\s*ابری|قسمتی\s*ابری/.test(s))return'⛅';
+            if(/ابری/.test(s))return'☁️';if(/گرد|غبار/.test(s))return'🌪️';
+            if(/باد/.test(s))return'💨';if(/آفتاب|صاف/.test(s))return'☀️';
+            return'🌡️';
           }
-          function wthEmoji(s) {
-            if(!s) return '🌡️';
-            if(/مه|ضباب/.test(s)) return '🌫️';
-            if(/رعد|طوفان/.test(s)) return '⛈️';
-            if(/برف/.test(s)) return '❄️';
-            if(/تگرگ/.test(s)) return '🌨️';
-            if(/رگبار|باران\s*سنگین|باران\s*شدید/.test(s)) return '🌧️';
-            if(/باران|نم\s*نم/.test(s)) return '🌦️';
-            if(/نیمه\s*ابری|کمی\s*ابری|قسمتی\s*ابری/.test(s)) return '⛅';
-            if(/ابری/.test(s)) return '☁️';
-            if(/گرد|غبار/.test(s)) return '🌪️';
-            if(/باد/.test(s)) return '💨';
-            if(/آفتاب|صاف/.test(s)) return '☀️';
-            return '🌡️';
+          const TT_DATA={
+            humidity:{title:'رطوبت نسبی',body:'درصد رطوبت هوا نسبت به حداکثر مقدار ممکن در همان دما.',note:'بالای ۷۰٪ هوا را سنگین و مرطوب می‌کند.'},
+            wind:{title:'سرعت و جهت باد',body:'سرعت باد برحسب km/h و جهت وزش آن.',note:'جهت نشان‌دهنده محلی است که باد از آنجا می‌وزد.'},
+            rainfall:{title:'بارندگی ۲۴ ساعت گذشته',body:'مجموع بارش از ساعت ۰۶ گرینویچ دیروز تا ساعت ۰۶ گرینویچ امروز.',note:'معادل ۰۹:۳۰ تا ۰۹:۳۰ به وقت ایران در تابستان.'},
+            visibility:{title:'دید افقی',body:'حداکثر فاصله‌ای که اجسام به‌وضوح قابل مشاهده‌اند.',note:'کمتر از ۱km: مه — ۱ تا ۴km: دید ضعیف — بیش از ۱۰km: دید کامل'},
+            temp_max:{title:'بیشینه دما',body:'بالاترین دمای ثبت‌شده از ساعت ۱۸:۳۰ دیروز تا ۱۸:۳۰ امروز به وقت ایران.'},
+            temp_min:{title:'کمینه دما',body:'پایین‌ترین دمای ثبت‌شده از ساعت ۰۶:۳۰ دیروز تا ۰۶:۳۰ امروز به وقت ایران.'},
+            forecast:{title:'پیش‌بینی آب‌وهوا',body:'پیش‌بینی ایمو برای ۷۲ ساعت آینده در بازه‌های ۲۴ ساعته.',note:'منبع: سازمان هواشناسی کشور'}
+          };
+          let ttTimer;
+          function showTT(e,key){
+            const d=TT_DATA[key];if(!d)return;
+            clearTimeout(ttTimer);
+            const el=document.getElementById('wth-tooltip');
+            document.getElementById('wth-tt-title').textContent=d.title;
+            document.getElementById('wth-tt-body').textContent=d.body;
+            const note=document.getElementById('wth-tt-note');
+            if(d.note){note.textContent=d.note;note.style.display='';}else{note.style.display='none';}
+            el.style.display='block';
+            requestAnimationFrame(()=>{
+              const rect=e.currentTarget.getBoundingClientRect();
+              const tw=el.offsetWidth,th=el.offsetHeight,gap=8;
+              let top=rect.top-th-gap;
+              let left=rect.left+rect.width/2-tw/2;
+              if(top<8)top=rect.bottom+gap;
+              left=Math.max(8,Math.min(left,window.innerWidth-tw-8));
+              el.style.top=top+'px';el.style.left=left+'px';
+            });
           }
+          function hideTT(){clearTimeout(ttTimer);ttTimer=setTimeout(()=>{document.getElementById('wth-tooltip').style.display='none';},120);}
+          window.wthShowTT=showTT; window.wthHideTT=hideTT;
 
-          // ── Boot: load weather_data.json ──
-          async function wthBoot() {
-            const dot  = document.getElementById('wth-dot');
-            const ts   = document.getElementById('wth-ts');
-            if(dot) { dot.style.background='var(--m3-tertiary,#7d5260)'; dot.style.boxShadow='0 0 6px var(--m3-tertiary,#7d5260)'; }
-            try {
-              const r = await fetch(WTH_DATA);
-              if(!r.ok) throw new Error('HTTP '+r.status);
-              const j = await r.json();
-              wthAll = j.stations.map(s => ({...s, _id: String(s.irimo_id ?? s.wmo_id ?? s.id ?? '?')}));
-              wthAll.forEach(s => { wthSmap[s._id] = s; });
-              if(dot) { dot.style.background='var(--m3-primary)'; dot.style.boxShadow='0 0 6px var(--m3-primary)'; }
-              try {
-                const d = new Date(j.generated_at);
-                if(ts) ts.textContent = d.toLocaleString('fa-IR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
-              } catch { if(ts) ts.textContent=''; }
-              wthRenderHome();
-            } catch(e) {
-              if(dot) { dot.style.background='var(--m3-error,#b91c1c)'; dot.style.boxShadow='none'; dot.style.animation='none'; }
-              if(ts) ts.textContent='خطا در بارگذاری';
-              const rg = document.getElementById('wth-rec-grid');
-              if(rg) rg.innerHTML = `<div class="wth-empty"><div class="wth-empty-ico">⚠️</div><div style="font-weight:700;color:var(--m3-on-surface)">فایل weather_data.json یافت نشد</div><div style="font-size:.8rem">irimo_scraper.py را اجرا کنید</div></div>`;
+          async function wBoot(){
+            const dot=document.getElementById('wth-dot'),ts=document.getElementById('wth-ts');
+            if(dot){dot.style.background='var(--m3-tertiary,#7d5260)';dot.style.animation='none';}
+            try{
+              const r=await fetch(DATA);if(!r.ok)throw new Error('HTTP '+r.status);
+              const j=await r.json();
+              wAll=j.stations.map(s=>({...s,_id:String(s.irimo_id??s.wmo_id??s.id??'?')}));
+              wAll.forEach(s=>{wMap[s._id]=s;});
+              if(dot){dot.style.background='var(--m3-primary)';dot.style.animation='pulse2 2s infinite';}
+              try{const d=new Date(j.generated_at);if(ts)ts.textContent=d.toLocaleString('fa-IR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});}catch{if(ts)ts.textContent='';}
+              wRenderHome();
+            }catch(e){
+              if(dot){dot.style.background='var(--m3-error,#b91c1c)';dot.style.animation='none';}
+              if(ts)ts.textContent='خطا';
+              const rg=document.getElementById('wth-rec-grid');
+              if(rg)rg.innerHTML='<div class="wth-empty"><div class="wth-empty-ico">⚠️</div><div style="font-weight:700;color:var(--m3-on-surface)">داده‌ای یافت نشد</div></div>';
             }
           }
 
-          // ── Render home: pinned + recent ──
-          function wthRenderHome() {
-            const pinned = wthGetP();
-            const recent = wthGetR().filter(id => !pinned.includes(id));
-
-            // Pinned section
-            const ps  = document.getElementById('wth-pin-sec');
-            const pr  = document.getElementById('wth-pin-row');
-            const pcnt = document.getElementById('wth-pin-cnt');
-            if(ps && pr) {
-              if(pinned.length) {
-                ps.style.display='';
-                if(pcnt) pcnt.textContent=`${pinned.length}/${MAXP}`;
+          function wRenderHome(){
+            const pinned=gP(),recent=gR().filter(id=>!pinned.includes(id));
+            const ps=document.getElementById('wth-pin-sec'),pr=document.getElementById('wth-pin-row');
+            const pcnt=document.getElementById('wth-pin-cnt');
+            if(ps&&pr){
+              if(pinned.length){
+                ps.style.display='';if(pcnt)pcnt.textContent=toPersian(pinned.length)+'/'+toPersian(MAXP);
                 pr.innerHTML='';
-                pinned.forEach((id,i) => { const s=wthSmap[id]; if(s) pr.appendChild(wthMkCard(s,true,i)); });
-              } else { ps.style.display='none'; }
+                pinned.slice(0,10).forEach((id,i)=>{const s=wMap[id];if(s)pr.appendChild(wMkCard(s,true,i));});
+              }else ps.style.display='none';
             }
-
-            // Recent section
-            const rg   = document.getElementById('wth-rec-grid');
-            const rcnt = document.getElementById('wth-rec-cnt');
-            if(rg) {
-              if(rcnt) rcnt.textContent = recent.length||'';
-              if(!recent.length) {
-                rg.innerHTML = `<div class="wth-empty"><div class="wth-empty-ico">🔍</div><div style="font-weight:700;color:var(--m3-on-surface)">هنوز جستجویی انجام نشده</div><div style="font-size:.8rem">نام یک شهر را جستجو کنید</div></div>`;
-              } else {
+            const rg=document.getElementById('wth-rec-grid'),rcnt=document.getElementById('wth-rec-cnt');
+            if(rg){
+              if(rcnt)rcnt.textContent=recent.length?toPersian(recent.length):'';
+              if(!recent.length){
+                rg.innerHTML='<div class="wth-empty"><div class="wth-empty-ico">🔍</div><div style="font-weight:700;color:var(--m3-on-surface)">هنوز جستجویی نشده</div><div style="font-size:.8rem">نام شهر را جستجو کنید</div></div>';
+              }else{
                 rg.innerHTML='';
-                recent.slice(0,MAXR).forEach((id,i) => { const s=wthSmap[id]; if(s) rg.appendChild(wthMkCard(s,false,i)); });
+                recent.slice(0,10).forEach((id,i)=>{const s=wMap[id];if(s)rg.appendChild(wMkCard(s,false,i));});
               }
             }
           }
 
-          // ── Card factory ──
-          function wthMkCard(s, isPinned, idx) {
-            const c    = s.current||{};
-            const hasT = typeof c.temp_c==='number';
-            const tc   = hasT?wthTCls(c.temp_c):'';
-            const temp = hasT?`${c.temp_c}°C`:'—';
-            const emoji= wthEmoji(c.condition);
-            const isPon= wthGetP().includes(s._id);
-
-            const div = document.createElement('div');
-            div.className = `wth-card ${tc}`;
-            div.style.animationDelay = `${idx*25}ms`;
-            div.onclick = e => { if(e.target.closest('.wth-act-btn')) return; wthOpenDet(s._id); };
-
-            const mmHtml = [
-              typeof c.temp_max_c==='number' ? `<div class="wth-card__mm-chip"><span>🔺</span><span class="wth-card__mm-val">${c.temp_max_c}°</span></div>` : '',
-              typeof c.temp_min_c==='number' ? `<div class="wth-card__mm-chip"><span>🔻</span><span class="wth-card__mm-val">${c.temp_min_c}°</span></div>` : '',
+          function wMkCard(s,isPinned,idx){
+            const c=s.current||{};
+            const hasT=typeof c.temp_c==='number';
+            const tc=hasT?tCls(c.temp_c):'';
+            const temp=hasT?toPersian(c.temp_c)+'°C':'—';
+            const emoji=wEmoji(c.condition);
+            const isPon=gP().includes(s._id);
+            const div=document.createElement('div');
+            div.className='wth-card '+tc;
+            div.style.animationDelay=(idx*30)+'ms';
+            div.onclick=e=>{if(e.target.closest('.wth-act-btn'))return;wOpenDet(s._id);};
+            const mmHtml=[
+              typeof c.temp_max_c==='number'?`<div class="wth-card__mm-chip"><span>🔺</span><span class="wth-card__mm-val">${toPersian(c.temp_max_c)}°</span></div>`:'',
+              typeof c.temp_min_c==='number'?`<div class="wth-card__mm-chip"><span>🔻</span><span class="wth-card__mm-val">${toPersian(c.temp_min_c)}°</span></div>`:'',
             ].join('');
-
-            div.innerHTML =
-              `<div class="wth-card__emoji">${emoji}</div>
-               <div class="wth-card__temp ${tc}">${temp}</div>
-               <div class="wth-card__info">
-                 <div class="wth-card__name">${s.name}</div>
-                 <div class="wth-card__prov">${s.province||'—'}</div>
-                 ${c.condition?`<div class="wth-card__cond">${c.condition}</div>`:''}
-               </div>
-               ${mmHtml?`<div class="wth-card__mm">${mmHtml}</div>`:''}
-               <div class="wth-card__acts">
-                 <button class="wth-act-btn ${isPon?'pinned':''}" title="${isPon?'برداشتن پین':'پین کردن'}"
-                   onclick="wthTogglePin(event,'${s._id}')">
-                   <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
-                 </button>
-                 <button class="wth-act-btn" title="حذف" onclick="wthRmCard(event,'${s._id}')">
-                   <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                 </button>
-               </div>`;
+            div.innerHTML=`
+              <div class="wth-card__acts">
+                <button class="wth-act-btn ${isPon?'pinned':''}" title="${isPon?'برداشتن پین':'پین'}" onclick="wThTogglePin(event,'${s._id}')">📌</button>
+                <button class="wth-act-btn" title="حذف" onclick="wThRmCard(event,'${s._id}')">✕</button>
+              </div>
+              <div class="wth-card__top">
+                <div class="wth-card__emoji">${emoji}</div>
+                <div class="wth-card__temp ${tc}">${temp}</div>
+                <div class="wth-card__info">
+                  <div class="wth-card__name">${s.name}</div>
+                  <div class="wth-card__prov">${s.province||'—'}</div>
+                  ${c.condition?`<div class="wth-card__cond">${c.condition}</div>`:''}
+                </div>
+              </div>
+              ${mmHtml?`<div class="wth-card__mm">${mmHtml}</div>`:''}`;
             return div;
           }
 
-          // ── Pin / Remove ──
-          window.wthTogglePin = function(e, id) {
+          window.wThTogglePin=function(e,id){
             e.stopPropagation();
-            const p=wthGetP(), r=wthGetR();
-            if(p.includes(id)) {
-              wthSetP(p.filter(x=>x!==id));
-              wthSetR([id,...r.filter(x=>x!==id)].slice(0,MAXR));
-            } else {
-              if(p.length>=MAXP) return;
-              wthSetP([...p,id]); wthSetR(r.filter(x=>x!==id));
-            }
-            wthRenderHome();
-            if(wthCurrentDetId===id) wthOpenDet(id);
+            const p=gP(),r=gR();
+            if(p.includes(id)){sP(p.filter(x=>x!==id));sR([id,...r.filter(x=>x!==id)].slice(0,MAXR));}
+            else{if(p.length>=MAXP)return;sP([...p,id]);sR(r.filter(x=>x!==id));}
+            wRenderHome();
+            if(wDetId===id){const dv=document.getElementById('wth-det-view');if(dv)dv.innerHTML=wBuildDet(wMap[id]);}
           };
-          window.wthRmCard = function(e, id) {
+          window.wThRmCard=function(e,id){
             e.stopPropagation();
-            wthSetP(wthGetP().filter(x=>x!==id));
-            wthSetR(wthGetR().filter(x=>x!==id));
-            wthRenderHome();
-            if(wthCurrentDetId===id) wthCloseDet();
+            sP(gP().filter(x=>x!==id));sR(gR().filter(x=>x!==id));
+            wRenderHome();
+            if(wDetId===id)wCloseDet();
           };
 
-          // ── Detail panel ──
-          window.wthOpenDet = function(id) {
-            const s=wthSmap[id]; if(!s) return;
-            wthCurrentDetId=id;
-            // Add to recent
-            if(!wthGetP().includes(id)) wthSetR([id,...wthGetR().filter(x=>x!==id)].slice(0,MAXR));
-            wthRenderHome();
-            const det=document.getElementById('wth-det');
-            if(!det) return;
-            det.innerHTML = wthBuildDet(s);
-            det.style.display='';
-            det.scrollIntoView({behavior:'smooth',block:'nearest'});
+          window.wOpenDet=function(id){
+            const s=wMap[id];if(!s)return;
+            wDetId=id;
+            if(!gP().includes(id))sR([id,...gR().filter(x=>x!==id)].slice(0,MAXR));
+            wRenderHome();
+            const hv=document.getElementById('wth-home-view');
+            const dv=document.getElementById('wth-det-view');
+            if(hv)hv.style.display='none';
+            if(dv){dv.style.display='';dv.innerHTML=wBuildDet(s);}
+            // hide search too
+            const q=document.getElementById('wth-search-box')?.parentElement;
           };
-          window.wthCloseDet = function() {
-            const det=document.getElementById('wth-det');
-            if(det) { det.style.display='none'; det.innerHTML=''; }
-            wthCurrentDetId=null;
+          window.wCloseDet=function(){
+            const hv=document.getElementById('wth-home-view');
+            const dv=document.getElementById('wth-det-view');
+            if(hv)hv.style.display='';
+            if(dv){dv.style.display='none';dv.innerHTML='';}
+            wDetId=null;
           };
 
-          function wthBuildDet(s) {
-            const c=s.current||{}, fc=s.forecast||[];
+          function wBuildDet(s){
+            const c=s.current||{},fc=s.forecast||[];
             const hasC=typeof c.temp_c==='number';
-            const tc=hasC?wthTCls(c.temp_c):'';
-            const emoji=wthEmoji(c.condition);
-            const isPon=wthGetP().includes(s._id);
-
+            const tc=hasC?tCls(c.temp_c):'';
+            const emoji=wEmoji(c.condition);
+            const isPon=gP().includes(s._id);
             const metrics=[
-              {ico:'💧',lbl:'رطوبت',val:typeof c.humidity_pct==='number'?`${c.humidity_pct}%`:null},
-              {ico:'💨',lbl:'باد',val:typeof c.wind_speed_kmh==='number'?`${c.wind_speed_kmh} km/h`:null},
-              {ico:'🌧️',lbl:'بارندگی',val:typeof c.rainfall_24h_mm==='number'?`${c.rainfall_24h_mm} mm`:null},
-              {ico:'👁️',lbl:'دید افقی',val:c.visibility&&c.visibility!=='-'&&c.visibility!==null?String(c.visibility):null},
+              {ico:'💧',lbl:'رطوبت',key:'humidity',val:typeof c.humidity_pct==='number'?toPersian(c.humidity_pct)+'%':null},
+              {ico:'💨',lbl:'باد',key:'wind',val:typeof c.wind_speed_kmh==='number'?toPersian(c.wind_speed_kmh)+' km/h'+(c.wind_direction?' — '+c.wind_direction:''):null},
+              {ico:'🌧️',lbl:'بارندگی',key:'rainfall',val:typeof c.rainfall_24h_mm==='number'?toPersian(c.rainfall_24h_mm)+' mm':null},
+              {ico:'👁️',lbl:'دید افقی',key:'visibility',val:c.visibility&&c.visibility!=='-'&&c.visibility!==null?String(c.visibility):null},
             ].filter(m=>m.val);
-
-            const metricsHtml=metrics.length?`<div class="wth-metrics">${metrics.map(m=>`
+            const mHtml=metrics.length?`<div class="wth-metrics">${metrics.map(m=>`
               <div class="wth-mbox">
-                <div class="wth-mbox-ico">${m.ico}</div>
+                <div class="wth-mbox-top">
+                  <div class="wth-mbox-ico">${m.ico}</div>
+                  <button class="wth-mbox-info-btn" onmouseenter="wthShowTT(event,'${m.key}')" onmouseleave="wthHideTT()" onclick="wthShowTT(event,'${m.key}')">i</button>
+                </div>
                 <div class="wth-mbox-lbl">${m.lbl}</div>
                 <div class="wth-mbox-val">${m.val}</div>
               </div>`).join('')}</div>`:'';
-
             const chipsHtml=(hasC&&(typeof c.temp_max_c==='number'||typeof c.temp_min_c==='number'||c.last_updated))?`
               <div class="wth-chips">
-                ${typeof c.temp_max_c==='number'?`<span class="wth-chip">🔺 ${c.temp_max_c}°C</span>`:''}
-                ${typeof c.temp_min_c==='number'?`<span class="wth-chip">🔻 ${c.temp_min_c}°C</span>`:''}
+                ${typeof c.temp_max_c==='number'?`<span class="wth-chip" style="cursor:default" onmouseenter="wthShowTT(event,'temp_max')" onmouseleave="wthHideTT()">🔺 بیشینه ${toPersian(c.temp_max_c)}°C</span>`:''}
+                ${typeof c.temp_min_c==='number'?`<span class="wth-chip" style="cursor:default" onmouseenter="wthShowTT(event,'temp_min')" onmouseleave="wthHideTT()">🔻 کمینه ${toPersian(c.temp_min_c)}°C</span>`:''}
                 ${c.last_updated?`<span class="wth-chip">🕐 ${c.last_updated}</span>`:''}
               </div>`:'';
-
+            const pLbl=p=>(p||'').replace(/24\s*ساعت\s*اول/,'۲۴ساعت اول').replace(/24\s*ساعت\s*دوم/,'۲۴ساعت دوم').replace(/24\s*ساعت\s*سوم/,'۲۴ساعت سوم');
             const fcHtml=fc.length?`<div class="wth-forecast">
-              <div class="wth-fc-title">📅 پیش‌بینی سه روز آینده</div>
+              <div class="wth-fc-title">📅 پیش‌بینی سه روز آینده
+                <button class="wth-mbox-info-btn" onmouseenter="wthShowTT(event,'forecast')" onmouseleave="wthHideTT()">i</button>
+              </div>
               <div class="wth-fc-grid">${fc.map(d=>`<div class="wth-fc-card">
-                <div class="wth-fc-per">${(d.period||d.period_name||'').replace(/24\s*ساعت\s*اول/,'۲۴ساعت اول').replace(/24\s*ساعت\s*دوم/,'۲۴ساعت دوم').replace(/24\s*ساعت\s*سوم/,'۲۴ساعت سوم')}</div>
-                <div class="wth-fc-ico">${wthEmoji(d.condition)}</div>
-                <div class="wth-fc-tmp"><span class="mx">${typeof d.temp_max_c==='number'?d.temp_max_c+'°':'—'}</span><span style="color:var(--m3-on-surface-variant)">/</span><span class="mn">${typeof d.temp_min_c==='number'?d.temp_min_c+'°':'—'}</span></div>
+                <div class="wth-fc-per">${pLbl(d.period||d.period_name||'')}</div>
+                <div class="wth-fc-ico">${wEmoji(d.condition)}</div>
+                <div class="wth-fc-tmp"><span class="mx">${typeof d.temp_max_c==='number'?toPersian(d.temp_max_c)+'°':'—'}</span><span style="color:var(--m3-on-surface-variant)"> / </span><span class="mn">${typeof d.temp_min_c==='number'?toPersian(d.temp_min_c)+'°':'—'}</span></div>
                 <div class="wth-fc-cnd">${d.condition||''}</div>
               </div>`).join('')}</div></div>`:'';
-
             return `<div class="wth-det-panel">
-              <div class="wth-det-bar">
-                <button class="btn btn-tonal" onclick="wthCloseDet()" style="height:36px;padding:0 12px;font-size:.8rem">
-                  ← بازگشت
+              <div class="wth-det-topbar">
+                <button class="btn btn-tonal" onclick="wCloseDet()" style="height:36px;padding:0 14px;font-size:.82rem;display:flex;align-items:center;gap:6px">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg> برگشت
                 </button>
-                <button class="btn btn-tonal ${isPon?'btn-filled':''}" onclick="wthTogglePin(event,'${s._id}')" style="height:36px;padding:0 12px;font-size:.8rem">
+                <button class="btn ${isPon?'btn-tonal':'btn-tonal'}" onclick="wThTogglePin(event,'${s._id}')" style="height:36px;padding:0 14px;font-size:.82rem;${isPon?'color:var(--m3-primary);font-weight:700':''}">
                   📌 ${isPon?'برداشتن پین':'پین کردن'}
                 </button>
               </div>
               <div class="wth-det-hero">
-                <div class="wth-det-emoji">${emoji}</div>
-                <div class="wth-det-main">
-                  <div class="wth-city">${s.name}</div>
-                  <div class="wth-prov">${s.province||''}</div>
-                  <div class="wth-temp ${tc}">${hasC?`${c.temp_c}°C`:'—'}</div>
-                  <div class="wth-cond">${c.condition||''}</div>
+                <div class="wth-det-hero-top">
+                  <div class="wth-det-emoji">${emoji}</div>
+                  <div class="wth-det-info">
+                    <div class="wth-city">${s.name}</div>
+                    <div class="wth-prov">${s.province||''}</div>
+                    <div class="wth-temp ${tc}">${hasC?toPersian(c.temp_c)+'°C':'—'}</div>
+                    <div class="wth-cond">${c.condition||''}</div>
+                  </div>
                 </div>
+                ${chipsHtml}
               </div>
-              ${chipsHtml}
-              ${metricsHtml}
+              ${mHtml}
               ${fcHtml}
             </div>`;
           }
 
-          // ── Search ──
-          window.wthClearQ = function(e) {
-            if(e) e.stopPropagation();
-            const q=document.getElementById('wth-q');
-            if(q){q.value='';q.focus();}
-            const clr=document.getElementById('wth-clr');
-            if(clr) clr.style.display='none';
+          window.wthClearQ=function(e){
+            if(e)e.stopPropagation();
+            const q=document.getElementById('wth-q');if(q){q.value='';q.focus();}
+            document.getElementById('wth-clr').style.display='none';
             wthCloseSug();
           };
-          window.wthCloseSug = function() {
-            const sug=document.getElementById('wth-sug');
-            const bd=document.getElementById('wth-bd');
-            if(sug) sug.style.display='none';
-            if(bd)  bd.style.display='none';
+          window.wthCloseSug=function(){
+            document.getElementById('wth-sug').style.display='none';
+            document.getElementById('wth-bd').style.display='none';
           };
-
-          function wthOnQ() {
+          function wOnQ(){
             const val=(document.getElementById('wth-q')||{}).value?.trim()||'';
-            const clr=document.getElementById('wth-clr');
-            if(clr) clr.style.display=val?'block':'none';
+            document.getElementById('wth-clr').style.display=val?'block':'none';
             if(!val){wthCloseSug();return;}
             const lo=val.toLowerCase();
-            const ms=wthAll.filter(s=>
-              s.name.includes(val)||s.name.toLowerCase().includes(lo)||
-              (s.province||'').includes(val)||(s.province||'').toLowerCase().includes(lo)
-            ).slice(0,MAXS);
-            wthRenderSug(ms,val);
-          }
-
-          function wthRenderSug(list,q) {
-            const el=document.getElementById('wth-sug');
-            const bd=document.getElementById('wth-bd');
-            if(!el) return;
-            if(bd) bd.style.display='block';
-            if(!list.length){
-              el.innerHTML=`<div style="padding:18px;text-align:center;color:var(--m3-on-surface-variant);font-size:.85rem">نتیجه‌ای برای «${q}» یافت نشد</div>`;
-              el.style.display='block'; return;
-            }
-            el.innerHTML='';
-            list.forEach(s=>{
-              const c=s.current||{};
-              const hasT=typeof c.temp_c==='number';
-              const tc=hasT?wthTCls(c.temp_c):'';
-              const item=document.createElement('div');
-              item.className='wth-si';
-              item.innerHTML=`
-                <span class="wth-si-ico">${wthEmoji(c.condition)}</span>
-                <div><div class="wth-si-name">${s.name}</div><div class="wth-si-prov">${s.province||'—'}</div></div>
-                ${hasT?`<span class="wth-si-temp ${tc}" dir="ltr">${c.temp_c}°C</span>`:''}`;
-              item.onclick=()=>{wthCloseSug();wthOpenDet(s._id);};
-              el.appendChild(item);
+            const ms=wAll.filter(s=>s.name.includes(val)||s.name.toLowerCase().includes(lo)||(s.province||'').includes(val)||(s.province||'').toLowerCase().includes(lo)).slice(0,MAXS);
+            const el=document.getElementById('wth-sug'),bd=document.getElementById('wth-bd');
+            if(!ms.length){el.innerHTML=`<div style="padding:16px;text-align:center;color:var(--m3-on-surface-variant);font-size:.85rem">نتیجه‌ای برای «${val}» یافت نشد</div>`;el.style.display='block';bd.style.display='block';return;}
+            el.innerHTML='';bd.style.display='block';
+            ms.forEach(s=>{
+              const c=s.current||{},hasT=typeof c.temp_c==='number',tc=hasT?tCls(c.temp_c):'';
+              const item=document.createElement('div');item.className='wth-si';
+              item.innerHTML=`<span class="wth-si-ico">${wEmoji(c.condition)}</span><div><div class="wth-si-name">${s.name}</div><div class="wth-si-prov">${s.province||'—'}</div></div>${hasT?`<span class="wth-si-temp ${tc}" dir="ltr">${toPersian(c.temp_c)}°C</span>`:''}`;
+              item.onclick=()=>{wthCloseSug();wOpenDet(s._id);};el.appendChild(item);
             });
             el.style.display='block';
           }
-
-          // ── Lazy init: wire up when weather card becomes active ──
-          let wthInitialized=false;
-          document.addEventListener('DOMContentLoaded', function() {
-            const card=document.getElementById('weather');
-            if(!card) return;
-            // Wire search input
-            function wthWireSearch() {
-              const q=document.getElementById('wth-q');
-              if(q && !q.dataset.wired) {
-                q.dataset.wired='1';
-                q.addEventListener('input', wthOnQ);
-                q.addEventListener('keydown', e=>{ if(e.key==='Escape') wthCloseSug(); });
-              }
-            }
-            const obs=new MutationObserver(function(mutations) {
-              mutations.forEach(function(m) {
-                if(m.attributeName==='class' && card.classList.contains('active') && !wthInitialized) {
-                  wthInitialized=true;
-                  wthBoot();
-                  wthWireSearch();
+          // Lazy init
+          document.addEventListener('DOMContentLoaded',function(){
+            const card=document.getElementById('weather');if(!card)return;
+            const obs=new MutationObserver(mutations=>{
+              mutations.forEach(m=>{
+                if(m.attributeName==='class'&&card.classList.contains('active')&&!wInit){
+                  wInit=true;wBoot();
+                  const q=document.getElementById('wth-q');
+                  if(q&&!q.dataset.wired){q.dataset.wired='1';q.addEventListener('input',wOnQ);q.addEventListener('keydown',e=>{if(e.key==='Escape')wthCloseSug();});}
                 }
               });
             });
             obs.observe(card,{attributes:true});
-            if(card.classList.contains('active')) {
-              wthInitialized=true;
-              wthBoot();
-              wthWireSearch();
-            }
+            if(card.classList.contains('active')){wInit=true;wBoot();setTimeout(()=>{const q=document.getElementById('wth-q');if(q&&!q.dataset.wired){q.dataset.wired='1';q.addEventListener('input',wOnQ);q.addEventListener('keydown',e=>{if(e.key==='Escape')wthCloseSug();})}},100);}
           });
         })();
 
-        // ═══════════════════════════════════════════════════
+        // ═══════════════════════════════
         //  TRANSLATE TOOL
-        // ═══════════════════════════════════════════════════
-        window.trSwapLangs = function() {
-          const from=document.getElementById('tr-from');
-          const to=document.getElementById('tr-to');
-          const tmp=from.value; from.value=to.value; to.value=tmp;
-          // Also flip input direction
-          const inp=document.getElementById('tr-input');
-          if(inp) {
-            const rtlLangs=['fa','ar','he'];
-            inp.style.direction=rtlLangs.includes(from.value)?'rtl':'ltr';
-          }
+        // ═══════════════════════════════
+        const RTL_LANGS=['fa','ar','he','ur'];
+        window.trSwapLangs=function(){
+          const f=document.getElementById('tr-from'),t=document.getElementById('tr-to');
+          const tmp=f.value;f.value=t.value;t.value=tmp;
+          trUpdateDirs();
         };
-        window.trOnInput = function() {
-          const v=document.getElementById('tr-input').value;
-          // Auto-detect direction from first meaningful character
+        window.trUpdateDirs=function(){
+          const from=document.getElementById('tr-from').value;
           const inp=document.getElementById('tr-input');
-          const firstChar=v.replace(/\s/g,'')[0];
-          if(firstChar) {
-            const code=firstChar.codePointAt(0);
-            // Arabic/Persian Unicode range: U+0600–U+06FF, U+0750–U+077F, U+FB50–U+FDFF, U+FE70–U+FEFF
-            const isRTL=(code>=0x0600&&code<=0x06FF)||(code>=0x0750&&code<=0x077F)||(code>=0xFB50&&code<=0xFDFF)||(code>=0xFE70&&code<=0xFEFF);
-            inp.style.direction=isRTL?'rtl':'ltr';
-          }
+          if(inp&&!inp.value.trim())inp.style.direction=RTL_LANGS.includes(from)?'rtl':'ltr';
+        };
+        window.trOnInput=function(){
+          const inp=document.getElementById('tr-input');
+          const v=inp.value;
+          const fc=v.replace(/\s/g,'')[0];
+          if(fc){const code=fc.codePointAt(0);const isRTL=(code>=0x0600&&code<=0x06FF)||(code>=0x0750&&code<=0x077F)||(code>=0xFB50&&code<=0xFDFF)||(code>=0xFE70&&code<=0xFEFF);inp.style.direction=isRTL?'rtl':'ltr';}
           document.getElementById('tr-clear-btn').style.display=v.trim()?'inline-flex':'none';
         };
-        window.trClear = function() {
-          document.getElementById('tr-input').value='';
-          document.getElementById('tr-input').style.direction='rtl';
+        window.trClear=function(){
+          const inp=document.getElementById('tr-input');inp.value='';
+          const from=document.getElementById('tr-from').value;
+          inp.style.direction=RTL_LANGS.includes(from)?'rtl':'ltr';
           document.getElementById('tr-output-wrap').style.display='none';
           document.getElementById('tr-clear-btn').style.display='none';
-          document.getElementById('tr-input').focus();
+          inp.focus();
         };
-        window.doTranslate = async function() {
+        window.doTranslate=async function(){
           const text=document.getElementById('tr-input').value.trim();
-          const from=document.getElementById('tr-from').value;
-          const to=document.getElementById('tr-to').value;
-          if(!text) return;
-          const btn=document.getElementById('tr-btn');
-          const out=document.getElementById('tr-output');
-          const wrap=document.getElementById('tr-output-wrap');
-          btn.disabled=true; btn.textContent='⏳ در حال ترجمه…';
-          wrap.style.display='block';
+          const from=document.getElementById('tr-from').value,to=document.getElementById('tr-to').value;
+          if(!text)return;
+          const btn=document.getElementById('tr-btn'),out=document.getElementById('tr-output'),wrap=document.getElementById('tr-output-wrap');
+          btn.disabled=true;btn.textContent='⏳ در حال ترجمه…';wrap.style.display='block';
           out.innerHTML='<span style="color:var(--m3-on-surface-variant);font-size:.85rem">در حال ترجمه…</span>';
-          try {
-            const res=await fetch('https://widgets.dastyar.io/api/translate',{
-              method:'POST',headers:{'Content-Type':'application/json'},
-              body:JSON.stringify({text,from,to})
-            });
-            if(!res.ok) throw new Error('HTTP '+res.status);
+          try{
+            const res=await fetch('https://widgets.dastyar.io/api/translate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,from,to})});
+            if(!res.ok)throw new Error('HTTP '+res.status);
             const data=await res.json();
             const translated=data.translatedText||data.translated_text||data.result||data.text||'';
-            if(!translated) throw new Error('پاسخ نامعتبر از سرور');
+            if(!translated)throw new Error('پاسخ نامعتبر');
             out.textContent=translated;
-            const rtlLangs=['fa','ar','he'];
-            out.style.direction=rtlLangs.includes(to)?'rtl':'ltr';
-            out.style.textAlign=rtlLangs.includes(to)?'right':'left';
-          } catch(e) {
-            out.innerHTML=`<span style="color:var(--m3-error,#b91c1c)">⚠️ خطا: ${e.message}</span>`;
-          } finally {
-            btn.disabled=false; btn.textContent='🌍 ترجمه';
-          }
+            out.style.direction=RTL_LANGS.includes(to)?'rtl':'ltr';
+            out.style.textAlign=RTL_LANGS.includes(to)?'right':'left';
+          }catch(e){out.innerHTML=`<span style="color:var(--m3-error,#b91c1c)">⚠️ خطا: ${e.message}</span>`;}
+          finally{btn.disabled=false;btn.textContent='🌍 ترجمه';}
         };
 
-        // ═══════════════════════════════════════════════════
+        // ═══════════════════════════════
         //  CURRENCY TOOL
-        // ═══════════════════════════════════════════════════
-        (function() {
-          const BRS_API   = 'https://brsapi.ir/Api/Market/Gold_Currency.php?key=FreeFusNYvmUj8BOKoqzaZSlwYnQONdS';
-          const NOBITEX_API = 'https://apiv2.nobitex.ir/market/stats';
-          const REFRESH_MS  = 60000;
-          const CRYPTO_COINS = ['BTC','ETH','USDT','SOL','DOGE','TON'];
-          const CRYPTO_META = {
-            BTC:{fa:'بیت‌کوین',icon:'₿'}, ETH:{fa:'اتریوم',icon:'Ξ'},
-            USDT:{fa:'تتر',icon:'₮'}, SOL:{fa:'سولانا',icon:'◎'},
-            DOGE:{fa:'دوج‌کوین',icon:'Ð'}, TON:{fa:'تون',icon:'💎'},
+        // ═══════════════════════════════
+        (function(){
+          const BRS='https://brsapi.ir/Api/Market/Gold_Currency.php?key=FreeFusNYvmUj8BOKoqzaZSlwYnQONdS';
+          const NB='https://apiv2.nobitex.ir/market/stats';
+          const REFRESH=60000;
+          // Crypto list and metadata
+          const CRYPTO=[
+            {s:'BTC',fa:'بیت‌کوین',clr:'#F7931A'},
+            {s:'ETH',fa:'اتریوم',clr:'#627EEA'},
+            {s:'USDT',fa:'تتر',clr:'#26A17B'},
+            {s:'XRP',fa:'ایکس‌آر‌پی',clr:'#00AAE4'},
+            {s:'BNB',fa:'بی‌ان‌بی',clr:'#F0B90B'},
+            {s:'SOL',fa:'سولانا',clr:'#9945FF'},
+            {s:'DOGE',fa:'دوج‌کوین',clr:'#C2A633'},
+            {s:'ADA',fa:'کاردانو',clr:'#0033AD'},
+            {s:'AVAX',fa:'آوالانچ',clr:'#E84142'},
+            {s:'TRX',fa:'ترون',clr:'#EF0027'},
+            {s:'SHIB',fa:'شیبا اینو',clr:'#FFA409'},
+            {s:'DOT',fa:'پولکادات',clr:'#E6007A'},
+            {s:'LTC',fa:'لایت‌کوین',clr:'#345D9D'},
+            {s:'LINK',fa:'چین‌لینک',clr:'#2A5ADA'},
+            {s:'ATOM',fa:'کازماس',clr:'#6F7390'},
+          ];
+
+          // SVG icons for currencies
+          const CURRENCY_SVG={
+            USD:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#1A6B3C"/><text x="17" y="22" text-anchor="middle" font-size="16" font-weight="700" fill="white" font-family="Georgia,serif">$</text></svg>`,
+            EUR:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#003399"/><text x="17" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="#FFCC00" font-family="Georgia,serif">€</text></svg>`,
+            GBP:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#C8102E"/><text x="17" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="white" font-family="Georgia,serif">£</text></svg>`,
+            AED:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#00732F"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="white" font-family="sans-serif">AED</text></svg>`,
+            JPY:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#BC002D"/><text x="17" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="white" font-family="Georgia,serif">¥</text></svg>`,
+            TRY:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#E30A17"/><text x="17" y="22" text-anchor="middle" font-size="14" font-weight="700" fill="white" font-family="Georgia,serif">₺</text></svg>`,
+            KWD:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#007A3D"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="white">KWD</text></svg>`,
+            AUD:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#00008B"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="gold">AUD</text></svg>`,
+            CAD:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#FF0000"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="white">CAD</text></svg>`,
+            CNY:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#DE2910"/><text x="17" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="#FFDE00" font-family="Georgia,serif">¥</text></svg>`,
+            SAR:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#006C35"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="white">SAR</text></svg>`,
+            CHF:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#FF0000"/><text x="17" y="22" text-anchor="middle" font-size="16" font-weight="700" fill="white">✛</text></svg>`,
+            INR:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#FF9933"/><text x="17" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="white" font-family="Georgia,serif">₹</text></svg>`,
+            PKR:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#01411C"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="white">PKR</text></svg>`,
+            IQD:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#000000"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="white">IQD</text></svg>`,
+            RUB:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#003580"/><text x="17" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="white" font-family="Georgia,serif">₽</text></svg>`,
+            AZN:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#0092BC"/><text x="17" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="white" font-family="Georgia,serif">₼</text></svg>`,
+            GEL:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#D4192C"/><text x="17" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="white" font-family="Georgia,serif">₾</text></svg>`,
+            SEK:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#006AA7"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="#FECC02">SEK</text></svg>`,
+            QAR:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#8B1A4A"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="white">QAR</text></svg>`,
+            OMR:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#DB161B"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="white">OMR</text></svg>`,
+            BHD:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#CE1126"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="white">BHD</text></svg>`,
+            AFN:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#000000"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="#D32B1E">AFN</text></svg>`,
+            MYR:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#CC0001"/><text x="17" y:"21" text-anchor="middle" font-size="9" font-weight="700" fill="white">MYR</text></svg>`,
+            THB:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#A51931"/><text x="17" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="white" font-family="Georgia,serif">฿</text></svg>`,
+            AMD:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#D90012"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="white">AMD</text></svg>`,
+            SYP:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#007A3D"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="white">SYP</text></svg>`,
+            USDT_IRT:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#26A17B"/><text x="17" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="white" font-family="Georgia,serif">₮</text></svg>`,
+          };
+          // Gold icon
+          const GOLD_SVG=`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#F59E0B"/><text x="17" y="22" text-anchor="middle" font-size="16" font-weight="700" fill="white">🥇</text></svg>`;
+
+          // Crypto SVG icons (inline)
+          const CRYPTO_SVG={
+            BTC:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#F7931A"/><text x="17" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="white" font-family="Georgia,serif">₿</text></svg>`,
+            ETH:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#627EEA"/><polygon points="17,6 10,17 17,21 24,17" fill="white" opacity=".9"/><polygon points="17,22 10,18 17,28 24,18" fill="white" opacity=".7"/></svg>`,
+            USDT:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#26A17B"/><text x="17" y="22" text-anchor="middle" font-size="13" font-weight="700" fill="white">₮</text></svg>`,
+            XRP:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#00AAE4"/><text x="17" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="white">✕</text></svg>`,
+            BNB:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#F0B90B"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="white">BNB</text></svg>`,
+            SOL:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#9945FF"/><line x1="10" y1="12" x2="24" y2="12" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="10" y1="17" x2="24" y2="17" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="10" y1="22" x2="24" y2="22" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+            DOGE:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#C2A633"/><text x="17" y="22" text-anchor="middle" font-size="14" font-weight="700" fill="white" font-family="Georgia,serif">Ð</text></svg>`,
+            ADA:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#0033AD"/><text x="17" y="21" text-anchor="middle" font-size="9" font-weight="700" fill="white">ADA</text></svg>`,
+            AVAX:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#E84142"/><polygon points="17,8 10,24 24,24" fill="white" opacity=".9"/><rect x="14" y="24" width="6" height="0" fill="white"/></svg>`,
+            TRX:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#EF0027"/><polygon points="17,8 26,22 8,22" fill="white" opacity=".85"/></svg>`,
+            SHIB:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#FFA409"/><text x="17" y="22" text-anchor="middle" font-size="18">🐕</text></svg>`,
+            DOT:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#E6007A"/><circle cx="17" cy="10" r="3.5" fill="white"/><circle cx="17" cy="24" r="3.5" fill="white"/><circle cx="10" cy="17" r="3.5" fill="white"/><circle cx="24" cy="17" r="3.5" fill="white"/></svg>`,
+            LTC:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#345D9D"/><text x="17" y="22" text-anchor="middle" font-size="14" font-weight="700" fill="white" font-family="Georgia,serif">Ł</text></svg>`,
+            LINK:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#2A5ADA"/><text x="17" y="21" text-anchor="middle" font-size="8" font-weight="700" fill="white">LINK</text></svg>`,
+            ATOM:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#6F7390"/><ellipse cx="17" cy="17" rx="9" ry="4" fill="none" stroke="white" stroke-width="1.5"/><circle cx="17" cy="17" r="2.5" fill="white"/></svg>`,
           };
 
-          let curState={mode:'toman',tab:'all',usdRate:null,brsData:null,cryptoData:null,loading:true,error:null};
-          let curTimer;
+          let curState={tab:'all',data:null,nbData:{},loading:true,error:null};
+          let curTimer,curInit=false;
 
-          // Format number — Persian digits for toman mode, English for dollar
-          function fNum(n, usePersian) {
-            if(n===null||n===undefined||isNaN(n)) return '—';
-            let str;
-            if(n>=1e9) str=(n/1e9).toFixed(2)+' میلیارد';
-            else if(n>=1e6) str=(n/1e6).toFixed(2)+' میلیون';
-            else if(n>=1e3) str=n.toLocaleString('en-US');
-            else str=String(n);
-            if(usePersian) str=str.replace(/0/g,'۰').replace(/1/g,'۱').replace(/2/g,'۲').replace(/3/g,'۳').replace(/4/g,'۴').replace(/5/g,'۵').replace(/6/g,'۶').replace(/7/g,'۷').replace(/8/g,'۸').replace(/9/g,'۹');
-            return str;
+          // Number formatting
+          function fNum(n,persian){
+            if(n===null||n===undefined||isNaN(n))return'—';
+            let s;
+            if(n>=1e9)s=(n/1e9).toFixed(2)+' میلیارد';
+            else if(n>=1e6)s=(n/1e6).toFixed(2)+' میلیون';
+            else if(n>=1e3)s=n.toLocaleString('en-US');
+            else s=String(parseFloat(n).toFixed(n<1?4:2));
+            if(persian)s=s.replace(/[0-9]/g,d=>['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'][d]);
+            return s;
           }
-          function fDollar(n) {
-            if(!n||isNaN(n)) return '—';
-            if(n>=1e6) return '$'+(n/1e6).toFixed(2)+'M';
-            if(n>=1e3) return '$'+n.toLocaleString('en-US',{maximumFractionDigits:2});
-            return '$'+n.toLocaleString('en-US',{maximumFractionDigits:6});
+          function fDollar(n){
+            if(!n||isNaN(n))return'—';
+            if(n>=1e6)return'$'+(n/1e6).toFixed(2)+'M';
+            if(n>=1e3)return'$'+n.toLocaleString('en-US',{maximumFractionDigits:2});
+            if(n>=1)return'$'+parseFloat(n).toFixed(4);
+            return'$'+parseFloat(n).toFixed(6);
           }
-          function chgCls(p){const v=parseFloat(p);if(isNaN(v)||v===0)return 'neutral';return v>0?'up':'down';}
-          function chgArrow(p){const v=parseFloat(p);if(isNaN(v)||v===0)return '•';return v>0?'▲':'▼';}
-          function toTime(u){if(!u)return '';return new Date(u*1000).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'});}
+          function chgCls(p){const v=parseFloat(p);if(isNaN(v)||v===0)return'neutral';return v>0?'up':'down';}
+          function chgArrow(p){const v=parseFloat(p);if(isNaN(v)||v===0)return'•';return v>0?'▲':'▼';}
+          function toTime(u){if(!u)return'';return new Date(u*1000).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'});}
 
-          function buildCard(iconClass, icon, badgeClass, badge, nameFa, nameEn, price, unit, pct, time) {
-            const cc=chgCls(pct), ca=chgArrow(pct);
+          // Build card HTML — price row: [unit] [number] in RTL, properly isolated
+          function buildCard(iconHtml,badgeClass,badge,nameFa,nameEn,priceHtml,unit,pct,time){
+            const cc=chgCls(pct),ca=chgArrow(pct);
             return `<div class="cur-card">
               <div class="cur-card__header">
-                <div class="cur-card__icon ${iconClass}">${icon}</div>
+                <div class="cur-card__icon">${iconHtml}</div>
                 <span class="cur-card__badge ${badgeClass}">${badge}</span>
               </div>
               <div class="cur-card__name">${nameFa}</div>
               <div class="cur-card__sub">${nameEn}</div>
               <div class="cur-card__price-row">
-                <span class="cur-card__price">${price}</span>
+                <span class="cur-card__price">${priceHtml}</span>
                 <span class="cur-card__unit">${unit}</span>
               </div>
               <div class="cur-card__footer">
@@ -7990,124 +7907,114 @@
               </div></div>`;
           }
 
-          function goldCard(item) {
+          function goldCard(item){
+            // Gold items from BRS have price in IRT (toman); they also carry XAUUSD in dollars
+            const isUSD=item.unit==='دلار';
+            let priceHtml,unit;
+            if(isUSD){priceHtml=fDollar(parseFloat(item.price));unit='USD';}
+            else{priceHtml=fNum(parseFloat(item.price),true);unit='تومان';}
             const pct=parseFloat(item.change_percent)||0;
-            const isToman=curState.mode==='toman';
-            let price,unit;
-            if(isToman){price=fNum(parseFloat(item.price),true);unit='تومان';}
-            else{const usd=curState.usdRate?parseFloat(item.price)/curState.usdRate:null;price=usd?fDollar(usd):'—';unit='USD';}
-            return buildCard('cur-card__icon--gold','🥇','cur-card__badge--gold','طلا',item.name,item.name_en||'',price,unit,pct,toTime(item.time_unix));
+            const svg=CURRENCY_SVG[item.symbol]||`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#F59E0B"/><text x="17" y="22" text-anchor="middle" font-size="18">🥇</text></svg>`;
+            return buildCard(svg,'cur-card__badge--gold','طلا',item.name,item.name_en||'',priceHtml,unit,pct,toTime(item.time_unix));
           }
 
-          function currencyCard(item) {
+          function currencyCard(item){
+            const isUSD=item.unit==='دلار';
+            let priceHtml,unit;
+            if(isUSD){priceHtml=fDollar(parseFloat(item.price));unit='USD';}
+            else{priceHtml=fNum(parseFloat(item.price),true);unit='تومان';}
             const pct=parseFloat(item.change_percent)||0;
-            const isToman=curState.mode==='toman';
-            let price,unit;
-            if(isToman){price=fNum(parseFloat(item.price),true);unit='تومان';}
-            else{price=item.symbol==='USD'?'$1':(curState.usdRate?fDollar(parseFloat(item.price)/curState.usdRate):'—');unit='USD';}
-            return buildCard('cur-card__icon--curr','💵','cur-card__badge--curr',item.symbol,item.name,item.name_en||'',price,unit,pct,toTime(item.time_unix));
+            const svg=CURRENCY_SVG[item.symbol]||CURRENCY_SVG[item.symbol+'_IRT']||`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="var(--m3-primary)"/><text x="17" y="21" text-anchor="middle" font-size="8" font-weight="700" fill="white">${item.symbol}</text></svg>`;
+            return buildCard(svg,'cur-card__badge--curr',item.symbol,item.name,item.name_en||'',priceHtml,unit,pct,toTime(item.time_unix));
           }
 
-          function cryptoCard(symbol,stats) {
-            const meta=CRYPTO_META[symbol]||{fa:symbol,icon:'🪙'};
-            const rlsKey=`${symbol}-RLS`.toLowerCase(), usdtKey=`${symbol}-USDT`.toLowerCase();
-            const statsRls=stats?.[rlsKey], statsUsdt=stats?.[usdtKey];
-            const priceDollar=statsUsdt?.latest?parseFloat(statsUsdt.latest):null;
-            const priceToman=statsRls?.latest?parseFloat(statsRls.latest)/10:(priceDollar&&curState.usdRate?priceDollar*curState.usdRate:null);
-            const pct=parseFloat(statsRls?.dayChange||statsUsdt?.dayChange||0);
-            const isToman=curState.mode==='toman';
-            const price=isToman?(priceToman?fNum(Math.round(priceToman),true):'—'):(priceDollar?fDollar(priceDollar):'—');
-            const unit=isToman?'تومان':'USD';
-            return buildCard('cur-card__icon--crypto',meta.icon,'cur-card__badge--crypto',symbol,meta.fa,`${symbol}/${isToman?'IRT':'USD'}`,price,unit,pct,'نوبیتکس');
+          function cryptoCard(meta,nbStats){
+            const sym=meta.s.toLowerCase();
+            const statsUsdt=nbStats['btc-usdt']?nbStats[sym+'-usdt']:null;
+            const statsIrt=nbStats[sym+'-rls']||nbStats[sym+'-irt'];
+            // Prefer USDT price (real dollar), fallback to IRT/exchange rate
+            let price='—',unit='USD';
+            if(statsUsdt&&statsUsdt.latest){price=fDollar(parseFloat(statsUsdt.latest));}
+            else if(statsIrt&&statsIrt.latest){
+              // show in toman
+              const p=parseFloat(statsIrt.latest)/10;
+              price=fNum(Math.round(p),true);unit='تومان';
+            }
+            const pct=parseFloat((statsUsdt||statsIrt||{}).dayChange||0);
+            const svg=CRYPTO_SVG[meta.s]||`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="${meta.clr||'#888'}"/><text x="17" y="21" text-anchor="middle" font-size="8" font-weight="700" fill="white">${meta.s}</text></svg>`;
+            return buildCard(svg,'cur-card__badge--crypto',meta.s,meta.fa,meta.s+'/USD',price,unit,pct,'نوبیتکس');
           }
 
-          function skeletons(n=6) {
-            return `<div class="cur-cards-grid">${Array.from({length:n},()=>`<div class="cur-skeleton"><div class="cur-sk-line" style="width:40%;height:28px;margin-bottom:10px"></div><div class="cur-sk-line" style="width:60%"></div><div class="cur-sk-line" style="width:45%"></div><div class="cur-sk-line" style="width:75%;height:20px;margin-top:10px"></div></div>`).join('')}</div>`;
+          function skeletons(n=6){
+            return`<div class="cur-cards-grid">${Array.from({length:n},()=>`<div class="cur-skeleton"><div class="cur-sk-line" style="width:40%;height:24px;margin-bottom:10px"></div><div class="cur-sk-line" style="width:60%"></div><div class="cur-sk-line" style="width:45%"></div><div class="cur-sk-line" style="width:70%;height:18px;margin-top:8px"></div></div>`).join('')}</div>`;
           }
 
-          function curRender() {
-            const el=document.getElementById('cur-content'); if(!el) return;
+          function curRender(){
+            const el=document.getElementById('cur-content');if(!el)return;
             if(curState.loading){el.innerHTML=skeletons();return;}
             if(curState.error){el.innerHTML=`<div style="background:color-mix(in srgb,var(--m3-error,#b91c1c) 8%,transparent);border:1px solid color-mix(in srgb,var(--m3-error,#b91c1c) 25%,transparent);border-radius:14px;padding:16px;color:var(--m3-error,#b91c1c);font-size:.85rem;text-align:center">⚠️ ${curState.error}</div>`;return;}
-            const brs=curState.brsData, stats=curState.cryptoData?.stats||{};
+            const brs=curState.data,nb=curState.nbData||{};
             let html='';
-            if(curState.tab==='all'||curState.tab==='gold')
+            if(curState.tab==='all'||curState.tab==='gold'){
               html+=`<div class="cur-section-title">🥇 طلا و سکه</div><div class="cur-cards-grid">${(brs.gold||[]).map(goldCard).join('')}</div>`;
-            if(curState.tab==='all'||curState.tab==='currency') {
-              const mainC=curState.tab==='all'?(brs.currency||[]).filter(c=>['USD','EUR','GBP','AED','TRY'].includes(c.symbol)):(brs.currency||[]);
-              html+=`<div class="cur-section-title">💵 ${curState.tab==='all'?'ارزهای منتخب':'ارزهای خارجی'}</div><div class="cur-cards-grid">${mainC.map(currencyCard).join('')}</div>`;
             }
-            if(curState.tab==='all'||curState.tab==='crypto')
-              html+=`<div class="cur-section-title">🪙 رمزارز</div><div class="cur-cards-grid">${CRYPTO_COINS.map(s=>cryptoCard(s,stats)).join('')}</div>`;
+            if(curState.tab==='all'||curState.tab==='currency'){
+              const list=brs.currency||[];
+              const mainSet=['USDT_IRT','USD','EUR','GBP','AED','TRY'];
+              const main=curState.tab==='all'?list.filter(c=>mainSet.some(s=>c.symbol===s||c.symbol===s.replace('_IRT',''))):list;
+              html+=`<div class="cur-section-title">💵 ${curState.tab==='all'?'ارزهای منتخب':'ارزهای خارجی'}</div><div class="cur-cards-grid">${main.map(currencyCard).join('')}</div>`;
+            }
+            if(curState.tab==='all'||curState.tab==='crypto'){
+              html+=`<div class="cur-section-title">🪙 رمزارز</div><div class="cur-cards-grid">${CRYPTO.map(m=>cryptoCard(m,nb)).join('')}</div>`;
+            }
             el.innerHTML=html||'<div style="text-align:center;padding:32px;color:var(--m3-on-surface-variant)">داده‌ای یافت نشد</div>';
           }
 
-          async function curFetchAll() {
-            if(!document.getElementById('cur-content')) return;
-            curState.loading=true; curState.error=null; curRender();
-            const dot=document.getElementById('cur-dot');
-            const badge=document.getElementById('cur-badge-text');
-            if(dot) { dot.style.background='var(--m3-tertiary,#7d5260)'; dot.style.animation='none'; }
-            try {
-              const [brsRes,nbtRes]=await Promise.all([
-                fetch(BRS_API).then(r=>r.json()),
-                fetch(`${NOBITEX_API}?srcCurrency=${CRYPTO_COINS.map(s=>s.toLowerCase()).join(',')}&dstCurrency=rls`).then(r=>r.json())
+          async function curFetch(){
+            if(!document.getElementById('cur-content'))return;
+            curState.loading=true;curState.error=null;curRender();
+            const dot=document.getElementById('cur-dot'),badge=document.getElementById('cur-badge-text');
+            if(dot){dot.style.background='var(--m3-tertiary,#7d5260)';dot.style.animation='none';}
+            try{
+              // Fetch BRS (gold+currency) and Nobitex (crypto USDT+IRT) in parallel
+              const cryptoSyms=CRYPTO.map(c=>c.s.toLowerCase()).join(',');
+              const [brsRes,nbUsdtRes,nbIrtRes]=await Promise.all([
+                fetch(BRS).then(r=>r.json()),
+                fetch(NB+'?srcCurrency='+cryptoSyms+'&dstCurrency=usdt').then(r=>r.json()).catch(()=>({stats:{}})),
+                fetch(NB+'?srcCurrency='+cryptoSyms+'&dstCurrency=rls').then(r=>r.json()).catch(()=>({stats:{}})),
               ]);
-              const usdItem=brsRes.currency?.find(c=>c.symbol==='USD');
-              curState.usdRate=usdItem?parseFloat(usdItem.price):null;
-              curState.brsData=brsRes; curState.cryptoData=nbtRes; curState.loading=false;
+              // Merge nobitex stats
+              const nb={...((nbUsdtRes||{}).stats||{}),...((nbIrtRes||{}).stats||{})};
+              curState.data=brsRes;curState.nbData=nb;curState.loading=false;
               const now=new Date();
-              if(badge) badge.textContent='آخرین بروزرسانی: '+now.toLocaleTimeString('fa-IR');
-              if(dot) { dot.style.background='var(--m3-primary)'; dot.style.animation='pulse2 2s infinite'; }
-            } catch(e) {
-              curState.loading=false; curState.error='خطا در دریافت داده‌ها. اتصال اینترنت را بررسی کنید.';
-              if(badge) badge.textContent='خطا در اتصال';
-              if(dot) { dot.style.background='var(--m3-error,#b91c1c)'; dot.style.animation='none'; }
+              if(badge)badge.textContent='آخرین بروزرسانی: '+now.toLocaleTimeString('fa-IR');
+              if(dot){dot.style.background='var(--m3-primary)';dot.style.animation='pulse2 2s infinite';}
+            }catch(e){
+              curState.loading=false;curState.error='خطا در دریافت. اتصال اینترنت را بررسی کنید.';
+              if(badge)badge.textContent='خطا';
+              if(dot){dot.style.background='var(--m3-error,#b91c1c)';dot.style.animation='none';}
             }
             curRender();
           }
 
-          window.curSwitchTab = function(tab,btn) {
+          window.curSwitchTab=function(tab,btn){
             curState.tab=tab;
             document.querySelectorAll('.cur-tab-btn').forEach(b=>b.classList.remove('active'));
-            btn.classList.add('active');
-            curRender();
+            btn.classList.add('active');curRender();
           };
 
-          // M3E Switch toggle — toman(off) / dollar(on)
-          window.curToggleMode = function() {
-            const sw=document.getElementById('cur-mode-switch');
-            const isDollar=sw.getAttribute('aria-checked')==='true';
-            const newMode=isDollar?'toman':'dollar';
-            curState.mode=newMode;
-            sw.setAttribute('aria-checked', newMode==='dollar'?'true':'false');
-            // Label styles
-            document.getElementById('cur-lbl-toman').style.fontWeight=newMode==='toman'?'700':'500';
-            document.getElementById('cur-lbl-toman').style.color=newMode==='toman'?'var(--m3-primary)':'var(--m3-on-surface-variant)';
-            document.getElementById('cur-lbl-dollar').style.fontWeight=newMode==='dollar'?'700':'500';
-            document.getElementById('cur-lbl-dollar').style.color=newMode==='dollar'?'var(--m3-primary)':'var(--m3-on-surface-variant)';
-            curRender();
-          };
-
-          // Lazy-init via MutationObserver
-          let curInitialized=false;
-          document.addEventListener('DOMContentLoaded', function() {
-            const card=document.getElementById('currency');
-            if(!card) return;
-            const obs=new MutationObserver(function(mutations) {
-              mutations.forEach(function(m) {
-                if(m.attributeName==='class' && card.classList.contains('active') && !curInitialized) {
-                  curInitialized=true;
-                  curFetchAll();
-                  curTimer=setInterval(function(){ if(document.getElementById('currency')?.classList.contains('active')) curFetchAll(); }, REFRESH_MS);
+          document.addEventListener('DOMContentLoaded',function(){
+            const card=document.getElementById('currency');if(!card)return;
+            const obs=new MutationObserver(mutations=>{
+              mutations.forEach(m=>{
+                if(m.attributeName==='class'&&card.classList.contains('active')&&!curInit){
+                  curInit=true;curFetch();
+                  curTimer=setInterval(()=>{if(document.getElementById('currency')?.classList.contains('active'))curFetch();},REFRESH);
                 }
               });
             });
             obs.observe(card,{attributes:true});
-            if(card.classList.contains('active')) {
-              curInitialized=true; curFetchAll();
-              curTimer=setInterval(function(){ if(document.getElementById('currency')?.classList.contains('active')) curFetchAll(); }, REFRESH_MS);
-            }
+            if(card.classList.contains('active')){curInit=true;curFetch();curTimer=setInterval(()=>{if(document.getElementById('currency')?.classList.contains('active'))curFetch();},REFRESH);}
           });
         })();
         </script>
@@ -8120,7 +8027,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 4.0 - ۱۴۰۵/۰۱/۲۴
+          ℹ️ نسخه 4.1 - ۱۴۰۵/۰۱/۲۴
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
