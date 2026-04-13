@@ -2073,6 +2073,11 @@
         <div class="drawer-item" onclick="showTool('langscores')" data-tool="langscores"><span class="drawer-item__icon">🎓</span>محاسبه نمره</div>
         <div class="drawer-item" onclick="showTool('audiotools')" data-tool="audiotools"><span class="drawer-item__icon">🔊</span>ابزار صوتی</div>
 
+        <span class="drawer-section-label">🌐 ابزار آنلاین</span>
+        <div class="drawer-item" onclick="showTool('weather')" data-tool="weather"><span class="drawer-item__icon">🌤️</span>آب‌وهوا</div>
+        <div class="drawer-item" onclick="showTool('translate')" data-tool="translate"><span class="drawer-item__icon">🌍</span>ترجمه</div>
+        <div class="drawer-item" onclick="showTool('currency')" data-tool="currency"><span class="drawer-item__icon">💹</span>قیمت</div>
+
         <span class="drawer-section-label">📲 نصب</span>
         <div class="drawer-item" onclick="showTool('share')" data-tool="share"><span class="drawer-item__icon">🔗</span>اشتراک‌گذاری</div>
         <div class="drawer-item" onclick="showTool('pwa')" data-tool="pwa"><span class="drawer-item__icon">📲</span>نصب اپ</div>
@@ -2372,6 +2377,16 @@
                 <div class="link-card" onclick="haptic(this);showTool('citation')"><button class="fav-btn" data-tool="citation" onclick="event.stopPropagation();toggleFav('citation',this)">☆</button><span class="link-card__icon">📚</span><span class="link-card__name">استناد دانشگاهی</span><span class="link-card__desc">APA، MLA، Chicago</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('langscores')"><button class="fav-btn" data-tool="langscores" onclick="event.stopPropagation();toggleFav('langscores',this)">☆</button><span class="link-card__icon">🎓</span><span class="link-card__name">محاسبه نمره</span><span class="link-card__desc">IELTS ↔ TOEFL، محاسبه Overall</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('audiotools')"><button class="fav-btn" data-tool="audiotools" onclick="event.stopPropagation();toggleFav('audiotools',this)">☆</button><span class="link-card__icon">🔊</span><span class="link-card__name">ابزار صوتی</span><span class="link-card__desc">تولید فرکانس و سانسور صدا</span></div>
+              </div>
+            </div>
+
+            <!-- ══ ابزار آنلاین ══ -->
+            <div class="section" id="sec-online">
+              <div class="section__title">🌐 ابزار آنلاین</div>
+              <div class="tool-grid">
+                <div class="link-card" onclick="haptic(this);showTool('weather')"><button class="fav-btn" data-tool="weather" onclick="event.stopPropagation();toggleFav('weather',this)">☆</button><span class="link-card__icon">🌤️</span><span class="link-card__name">آب‌وهوا</span><span class="link-card__desc">وضعیت آب‌وهوای شهرهای ایران</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('translate')"><button class="fav-btn" data-tool="translate" onclick="event.stopPropagation();toggleFav('translate',this)">☆</button><span class="link-card__icon">🌍</span><span class="link-card__name">ترجمه</span><span class="link-card__desc">ترجمه متن به ۱۳ زبان</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('currency')"><button class="fav-btn" data-tool="currency" onclick="event.stopPropagation();toggleFav('currency',this)">☆</button><span class="link-card__icon">💹</span><span class="link-card__name">قیمت</span><span class="link-card__desc">ارز، طلا و رمزارز زنده</span></div>
               </div>
             </div>
 
@@ -7181,13 +7196,931 @@
           <button class="search-empty__btn" id="emptyClearBtn">پاک کردن</button>
       </div>
 
-    </div><!-- /tool-container -->
+
+
+        <!-- ══ آب‌وهوا ══ -->
+        <div id="weather" class="tool-card">
+          <div class="tool-title">🌤️ آب‌وهوای ایران</div>
+
+          <!-- Live status bar -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+            <span style="font-size:0.78rem;color:var(--m3-on-surface-variant)">منبع: سازمان هواشناسی کشور (ایمو)</span>
+            <div style="display:flex;align-items:center;gap:6px;background:var(--m3-surface-container);border:1px solid var(--m3-outline-variant);border-radius:99px;padding:4px 12px">
+              <span id="wth-dot" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--m3-primary);box-shadow:0 0 6px var(--m3-primary);transition:all .3s;animation:pulse2 2s infinite"></span>
+              <span id="wth-ts" style="font-size:0.72rem;color:var(--m3-on-surface-variant)">در حال بارگذاری…</span>
+            </div>
+          </div>
+
+          <!-- Search bar -->
+          <div style="position:relative;margin-bottom:12px">
+            <div class="field__container" id="wth-search-box" style="cursor:text" onclick="document.getElementById('wth-q').focus()">
+              <span style="color:var(--m3-on-surface-variant);flex-shrink:0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+              </span>
+              <input type="text" id="wth-q" class="field__input" placeholder="جستجوی شهر یا استان…" autocomplete="off" spellcheck="false" />
+              <button id="wth-clr" onclick="wthClearQ(event)" style="display:none;background:none;border:none;color:var(--m3-on-surface-variant);cursor:pointer;padding:4px;border-radius:50%;line-height:1;font-size:1rem">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+              </button>
+            </div>
+            <!-- Backdrop -->
+            <div id="wth-bd" onclick="wthCloseSug()" style="display:none;position:fixed;inset:0;z-index:149"></div>
+            <!-- Suggestions -->
+            <div id="wth-sug" style="display:none;position:absolute;top:calc(100% + 4px);right:0;left:0;background:var(--m3-surface-container-high);border:1px solid var(--m3-outline-variant);border-radius:16px;z-index:200;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.2);max-height:320px;overflow-y:auto"></div>
+          </div>
+
+          <!-- Cards area: pinned + recent -->
+          <div id="wth-pin-sec" style="display:none;margin-bottom:12px">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+              <span style="font-size:.7rem;font-weight:700;color:var(--m3-primary);text-transform:uppercase;letter-spacing:.08em">📌 پین شده</span>
+              <span id="wth-pin-cnt" style="font-size:.7rem;color:var(--m3-on-surface-variant);background:var(--m3-surface-container-high);padding:1px 8px;border-radius:99px"></span>
+            </div>
+            <div id="wth-pin-row" style="display:flex;flex-direction:column;gap:8px"></div>
+          </div>
+
+          <div id="wth-rec-sec">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+              <span style="font-size:.7rem;font-weight:700;color:var(--m3-on-surface-variant);text-transform:uppercase;letter-spacing:.08em">🕐 اخیر</span>
+              <span id="wth-rec-cnt" style="font-size:.7rem;color:var(--m3-on-surface-variant);background:var(--m3-surface-container-high);padding:1px 8px;border-radius:99px"></span>
+            </div>
+            <div id="wth-rec-grid"></div>
+          </div>
+
+          <!-- Detail panel (slides in) -->
+          <div id="wth-det" style="display:none"></div>
+
+          <div class="tool-desc">
+           داده‌های هواشناسی از سایت سازمان هواشناسی کشور <code>irimo.ir</code> به‌صورت خودکار و هر ساعت به‌روز می‌شوند.
+          </div>
+        </div>
+
+        <!-- ══ ترجمه ══ -->
+        <div id="translate" class="tool-card">
+          <div class="tool-title">🌍 ترجمه متن</div>
+
+          <!-- Language selectors -->
+          <div class="field-row" style="margin-bottom:16px;align-items:flex-end;gap:10px">
+            <div class="field-col">
+              <label class="field-label">زبان مبدأ</label>
+              <div class="field__container" style="cursor:default;padding:0 8px">
+                <select id="tr-from" class="field__input" style="cursor:pointer">
+                  <option value="fa">🇮🇷 فارسی</option>
+                  <option value="en">🇬🇧 انگلیسی</option>
+                  <option value="ar">🇸🇦 عربی</option>
+                  <option value="fr">🇫🇷 فرانسوی</option>
+                  <option value="es">🇪🇸 اسپانیایی</option>
+                  <option value="de">🇩🇪 آلمانی</option>
+                  <option value="it">🇮🇹 ایتالیایی</option>
+                  <option value="pt">🇵🇹 پرتغالی</option>
+                  <option value="ru">🇷🇺 روسی</option>
+                  <option value="zh">🇨🇳 چینی</option>
+                  <option value="ja">🇯🇵 ژاپنی</option>
+                  <option value="ko">🇰🇷 کره‌ای</option>
+                  <option value="tr">🇹🇷 ترکی</option>
+                </select>
+              </div>
+            </div>
+            <button onclick="trSwapLangs()" class="btn btn-tonal" style="flex-shrink:0;padding:0 12px;height:56px;margin-bottom:0" title="جابجایی زبان‌ها">⇄</button>
+            <div class="field-col">
+              <label class="field-label">زبان مقصد</label>
+              <div class="field__container" style="cursor:default;padding:0 8px">
+                <select id="tr-to" class="field__input" style="cursor:pointer">
+                  <option value="en">🇬🇧 انگلیسی</option>
+                  <option value="fa">🇮🇷 فارسی</option>
+                  <option value="ar">🇸🇦 عربی</option>
+                  <option value="fr">🇫🇷 فرانسوی</option>
+                  <option value="es">🇪🇸 اسپانیایی</option>
+                  <option value="de">🇩🇪 آلمانی</option>
+                  <option value="it">🇮🇹 ایتالیایی</option>
+                  <option value="pt">🇵🇹 پرتغالی</option>
+                  <option value="ru">🇷🇺 روسی</option>
+                  <option value="zh">🇨🇳 چینی</option>
+                  <option value="ja">🇯🇵 ژاپنی</option>
+                  <option value="ko">🇰🇷 کره‌ای</option>
+                  <option value="tr">🇹🇷 ترکی</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Input — direction auto-detected from first char -->
+          <div class="field field--textarea">
+            <div class="field__container">
+              <textarea id="tr-input" class="field__input" rows="4"
+                placeholder="متن خود را اینجا بنویسید…"
+                style="resize:vertical;min-height:100px;direction:rtl"
+                oninput="trOnInput()"></textarea>
+            </div>
+          </div>
+
+          <!-- Translate button -->
+          <div class="btn-row">
+            <button class="btn btn-filled" onclick="doTranslate()" id="tr-btn">🌍 ترجمه</button>
+            <button class="btn btn-tonal" onclick="trClear()" id="tr-clear-btn" style="display:none">پاک کردن</button>
+          </div>
+
+          <!-- Output -->
+          <div id="tr-output-wrap" style="display:none;margin-top:4px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+              <span style="font-size:0.78rem;font-weight:700;color:var(--m3-on-surface-variant);text-transform:uppercase;letter-spacing:.06em">ترجمه</span>
+              <button class="btn btn-tonal" onclick="copyToClipboard(document.getElementById('tr-output').textContent)" style="font-size:12px;padding:4px 10px;height:30px">📋 کپی</button>
+            </div>
+            <div id="tr-output" style="background:var(--m3-surface-container);border-radius:16px;padding:16px;font-size:0.95rem;line-height:1.85;min-height:60px;color:var(--m3-on-surface);word-break:break-word"></div>
+          </div>
+
+          <div class="tool-desc">
+            ترجمه توسط وب‌سرویس Dastyar انجام می‌شود. نیاز به اتصال اینترنت دارد.
+          </div>
+        </div>
+
+        <!-- ══ قیمت ارز و طلا ══ -->
+        <div id="currency" class="tool-card">
+          <div class="tool-title">💹 بازار زندهٔ ارز، طلا و رمزارز</div>
+
+          <!-- Controls bar -->
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px">
+            <!-- Tabs -->
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <button class="btn btn-tonal cur-tab-btn active" id="cur-tab-all"    onclick="curSwitchTab('all',this)">همه</button>
+              <button class="btn btn-tonal cur-tab-btn"        id="cur-tab-gold"   onclick="curSwitchTab('gold',this)">🥇 طلا</button>
+              <button class="btn btn-tonal cur-tab-btn"        id="cur-tab-curr"   onclick="curSwitchTab('currency',this)">💵 ارز</button>
+              <button class="btn btn-tonal cur-tab-btn"        id="cur-tab-crypto" onclick="curSwitchTab('crypto',this)">🪙 رمزارز</button>
+            </div>
+            <!-- Status + M3E Switch -->
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <div id="cur-update-badge" style="font-size:0.72rem;color:var(--m3-on-surface-variant);background:var(--m3-surface-container);padding:4px 12px;border-radius:99px;border:1px solid var(--m3-outline-variant);display:flex;align-items:center;gap:6px">
+                <span id="cur-dot" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--m3-primary);animation:pulse2 2s infinite"></span>
+                <span id="cur-badge-text">در حال بارگذاری...</span>
+              </div>
+              <!-- M3E Switch: تومان / دلار -->
+              <div style="display:flex;align-items:center;gap:8px">
+                <span id="cur-lbl-toman" style="font-size:0.8rem;font-weight:600;color:var(--m3-primary)">تومان</span>
+                <button id="cur-mode-switch" role="switch" aria-checked="false"
+                  onclick="curToggleMode()"
+                  style="position:relative;width:52px;height:32px;border-radius:99px;border:2px solid var(--m3-outline);background:var(--m3-surface-container-highest);cursor:pointer;transition:background .2s,border-color .2s;padding:0;flex-shrink:0;outline:none"
+                  title="تغییر واحد ارز">
+                  <span id="cur-switch-thumb"
+                    style="position:absolute;top:2px;right:2px;width:24px;height:24px;border-radius:50%;background:var(--m3-outline);transition:transform .2s,background .2s,width .15s,height .15s"></span>
+                </button>
+                <span id="cur-lbl-dollar" style="font-size:0.8rem;font-weight:500;color:var(--m3-on-surface-variant)">دلار</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content area -->
+          <div id="cur-content"></div>
+
+          <div class="tool-desc">
+            داده‌های ارز و طلا از <strong>BrsAPI</strong> و رمزارزها از <strong>نوبیتکس</strong> دریافت می‌شود. هر ۶۰ ثانیه بروزرسانی می‌شود. نیاز به اتصال اینترنت دارد.
+          </div>
+        </div>
+
+        <!-- ══ STYLES FOR ONLINE TOOLS ══ -->
+        <style>
+          @keyframes pulse2 { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+          /* ── Currency card grid: respect the tool-card max-width ── */
+          .cur-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+          }
+          @media (max-width: 480px) { .cur-cards-grid { grid-template-columns: 1fr 1fr; gap: 8px; } }
+
+          .cur-section-title {
+            font-size: 0.75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: .08em;
+            padding: 10px 0 8px;
+            border-bottom: 2px solid var(--m3-primary-container);
+            margin-bottom: 12px;
+            display: flex; align-items: center; gap: 8px;
+            color: var(--m3-primary);
+          }
+
+          /* ── Currency card ── */
+          .cur-card {
+            background: var(--m3-surface-container);
+            border: 1.5px solid var(--m3-outline-variant);
+            border-radius: 16px;
+            padding: 14px;
+            transition: transform .15s, box-shadow .15s, border-color .15s;
+            overflow: hidden;
+          }
+          .cur-card:hover { transform: translateY(-2px); box-shadow: var(--m3-elevation-2); border-color: var(--m3-primary); }
+          .cur-card__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+          .cur-card__icon { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+          .cur-card__icon--gold   { background: color-mix(in srgb, #f59e0b 15%, transparent); }
+          .cur-card__icon--curr   { background: color-mix(in srgb, var(--m3-primary) 12%, transparent); }
+          .cur-card__icon--crypto { background: color-mix(in srgb, var(--m3-tertiary, #7d5260) 12%, transparent); }
+          .cur-card__badge { font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 6px; letter-spacing: .04em; }
+          .cur-card__badge--gold   { background: color-mix(in srgb, #f59e0b 15%, transparent); color: #b45309; }
+          .cur-card__badge--curr   { background: color-mix(in srgb, var(--m3-primary) 12%, transparent); color: var(--m3-primary); }
+          .cur-card__badge--crypto { background: color-mix(in srgb, var(--m3-tertiary,#7d5260) 12%, transparent); color: var(--m3-tertiary,#7d5260); }
+          [data-theme="dark"] .cur-card__badge--gold { color: #fbbf24; }
+          .cur-card__name { font-size: .88rem; font-weight: 700; color: var(--m3-on-surface); margin-bottom: 2px; }
+          .cur-card__sub  { font-size: .68rem; color: var(--m3-on-surface-variant); margin-bottom: 10px; direction: ltr; text-align: left; }
+
+          /* Price: always LTR number, unit separate */
+          .cur-card__price-row { display: flex; align-items: baseline; gap: 5px; margin-bottom: 8px; flex-wrap: wrap; }
+          .cur-card__price { font-size: 1.05rem; font-weight: 800; color: var(--m3-on-surface); letter-spacing: -.01em; direction: ltr; unicode-bidi: isolate; }
+          .cur-card__unit  { font-size: .72rem; color: var(--m3-on-surface-variant); font-weight: 600; }
+          .cur-card__footer { display: flex; align-items: center; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--m3-outline-variant); }
+          .cur-change { display: flex; align-items: center; gap: 3px; font-size: .78rem; font-weight: 700; direction: ltr; unicode-bidi: isolate; }
+          .cur-change--up      { color: #16a34a; }
+          .cur-change--down    { color: var(--m3-error, #b91c1c); }
+          .cur-change--neutral { color: var(--m3-on-surface-variant); }
+          [data-theme="dark"] .cur-change--up   { color: #4ade80; }
+          [data-theme="dark"] .cur-change--down { color: #f87171; }
+          .cur-card__time { font-size: .65rem; color: var(--m3-on-surface-variant); direction: ltr; unicode-bidi: isolate; }
+
+          /* Skeleton */
+          .cur-skeleton { background: var(--m3-surface-container); border: 1.5px solid var(--m3-outline-variant); border-radius: 16px; padding: 14px; }
+          .cur-sk-line { height: 12px; border-radius: 6px; background: linear-gradient(90deg, var(--m3-surface-container-high) 25%, var(--m3-outline-variant) 50%, var(--m3-surface-container-high) 75%); background-size: 200% 100%; animation: skShimmer 1.5s infinite; margin-bottom: 8px; }
+          @keyframes skShimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+          /* Tab buttons */
+          .cur-tab-btn.active { background: var(--m3-secondary-container); color: var(--m3-on-secondary-container); }
+
+          /* M3E Switch active state */
+          #cur-mode-switch[aria-checked="true"] {
+            background: var(--m3-primary);
+            border-color: var(--m3-primary);
+          }
+          #cur-mode-switch[aria-checked="true"] #cur-switch-thumb {
+            transform: translateX(-20px);
+            background: var(--m3-on-primary);
+          }
+          #cur-mode-switch:focus-visible { outline: 3px solid var(--m3-primary); outline-offset: 2px; }
+
+          /* ── Weather card (M3 surface) ── */
+          .wth-card {
+            background: var(--m3-surface-container);
+            border: 1.5px solid var(--m3-outline-variant);
+            border-radius: 18px;
+            padding: 14px 14px 14px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            direction: rtl;
+            transition: transform .15s, box-shadow .15s, border-color .15s;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 8px;
+            animation: fadeIn .25s ease;
+          }
+          .wth-card:hover { transform: translateY(-1px); box-shadow: var(--m3-elevation-2); border-color: var(--m3-primary); }
+          .wth-card.hot  { background: linear-gradient(135deg, color-mix(in srgb,#ef4444 8%,var(--m3-surface-container)), var(--m3-surface-container)); border-color: color-mix(in srgb,#ef4444 25%,var(--m3-outline-variant)); }
+          .wth-card.warm { background: linear-gradient(135deg, color-mix(in srgb,#f59e0b 8%,var(--m3-surface-container)), var(--m3-surface-container)); border-color: color-mix(in srgb,#f59e0b 25%,var(--m3-outline-variant)); }
+          .wth-card.mild { background: linear-gradient(135deg, color-mix(in srgb,#22c55e 8%,var(--m3-surface-container)), var(--m3-surface-container)); border-color: color-mix(in srgb,#22c55e 25%,var(--m3-outline-variant)); }
+          .wth-card.cold { background: linear-gradient(135deg, color-mix(in srgb,#60a5fa 8%,var(--m3-surface-container)), var(--m3-surface-container)); border-color: color-mix(in srgb,#60a5fa 25%,var(--m3-outline-variant)); }
+          .wth-card__emoji { font-size: 2.2rem; line-height: 1; flex-shrink: 0; }
+          .wth-card__temp { font-size: 1.5rem; font-weight: 800; direction: ltr; unicode-bidi: isolate; flex-shrink: 0; min-width: 60px; text-align: left; }
+          .wth-card__temp.hot  { color: #ef4444; }
+          .wth-card__temp.warm { color: #f59e0b; }
+          .wth-card__temp.mild { color: #22c55e; }
+          .wth-card__temp.cold { color: #60a5fa; }
+          .wth-card__info { flex: 1; min-width: 0; }
+          .wth-card__name { font-size: .9rem; font-weight: 700; color: var(--m3-on-surface); }
+          .wth-card__prov { font-size: .72rem; color: var(--m3-on-surface-variant); margin-top: 1px; }
+          .wth-card__cond { font-size: .72rem; color: var(--m3-on-surface-variant); margin-top: 2px; }
+          .wth-card__mm   { display: flex; flex-direction: column; gap: 3px; flex-shrink: 0; }
+          .wth-card__mm-chip { display: flex; align-items: center; gap: 3px; font-size: .7rem; color: var(--m3-on-surface-variant); }
+          .wth-card__mm-val  { font-weight: 700; color: var(--m3-on-surface); }
+          .wth-card__acts { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+          .wth-act-btn { background: none; border: none; cursor: pointer; color: var(--m3-on-surface-variant); padding: 5px; border-radius: 50%; line-height: 1; transition: background .15s, color .15s; }
+          .wth-act-btn:hover { background: var(--m3-surface-container-high); color: var(--m3-primary); }
+          .wth-act-btn.pinned { color: var(--m3-primary); }
+
+          /* Detail panel */
+          .wth-det-panel {
+            background: var(--m3-surface-container-low);
+            border: 1px solid var(--m3-outline-variant);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 8px;
+            animation: fadeIn .2s ease;
+          }
+          .wth-det-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+          .wth-det-hero { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
+          .wth-det-emoji { font-size: 3rem; line-height: 1; flex-shrink: 0; }
+          .wth-det-main .wth-city { font-size: 1.2rem; font-weight: 700; color: var(--m3-on-surface); }
+          .wth-det-main .wth-prov { font-size: .8rem; color: var(--m3-on-surface-variant); margin-top: 2px; }
+          .wth-det-main .wth-temp { font-size: 2.6rem; font-weight: 800; direction: ltr; unicode-bidi: isolate; line-height: 1; margin: 6px 0 2px; }
+          .wth-det-main .wth-cond { font-size: .9rem; color: var(--m3-on-surface-variant); }
+          .wth-det-main .wth-temp.hot  { color: #ef4444; }
+          .wth-det-main .wth-temp.warm { color: #f59e0b; }
+          .wth-det-main .wth-temp.mild { color: #22c55e; }
+          .wth-det-main .wth-temp.cold { color: #60a5fa; }
+          .wth-chips { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 14px; }
+          .wth-chip { display: inline-flex; align-items: center; gap: 4px; background: var(--m3-surface-container-high); border: 1px solid var(--m3-outline-variant); border-radius: 99px; padding: 4px 11px; font-size: .76rem; font-weight: 600; }
+          .wth-metrics { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; margin-bottom: 14px; }
+          .wth-mbox { background: var(--m3-surface-container); border: 1px solid var(--m3-outline-variant); border-radius: 14px; padding: 11px; }
+          .wth-mbox-ico { font-size: 1.2rem; margin-bottom: 4px; }
+          .wth-mbox-lbl { font-size: .68rem; color: var(--m3-on-surface-variant); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 3px; }
+          .wth-mbox-val { font-size: .88rem; font-weight: 700; color: var(--m3-on-surface); direction: ltr; unicode-bidi: isolate; }
+          .wth-forecast { background: var(--m3-surface-container); border: 1.5px solid var(--m3-outline-variant); border-radius: 16px; padding: 14px; }
+          .wth-fc-title { font-size: .75rem; font-weight: 700; color: var(--m3-primary); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
+          .wth-fc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+          .wth-fc-card { background: var(--m3-surface-container-high); border-radius: 12px; padding: 10px; text-align: center; }
+          .wth-fc-per { font-size: .68rem; color: var(--m3-on-surface-variant); margin-bottom: 4px; font-weight: 600; }
+          .wth-fc-ico { font-size: 1.4rem; margin-bottom: 4px; }
+          .wth-fc-tmp { font-size: .82rem; font-weight: 700; direction: ltr; unicode-bidi: isolate; }
+          .wth-fc-tmp .mx { color: #ef4444; }
+          .wth-fc-tmp .mn { color: #60a5fa; }
+          .wth-fc-cnd { font-size: .65rem; color: var(--m3-on-surface-variant); margin-top: 3px; line-height: 1.4; }
+          .wth-empty { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 36px 16px; text-align: center; color: var(--m3-on-surface-variant); }
+          .wth-empty-ico { font-size: 2.5rem; opacity: .3; }
+
+          /* Suggestions */
+          #wth-sug .wth-si { display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer; direction: rtl; transition: background .1s; }
+          #wth-sug .wth-si:hover { background: var(--m3-surface-container-high); }
+          #wth-sug .wth-si-ico { font-size: 1.3rem; flex-shrink: 0; }
+          #wth-sug .wth-si-name { font-size: .88rem; font-weight: 600; color: var(--m3-on-surface); }
+          #wth-sug .wth-si-prov { font-size: .7rem; color: var(--m3-on-surface-variant); margin-top: 1px; }
+          #wth-sug .wth-si-temp { font-size: .9rem; font-weight: 700; direction: ltr; unicode-bidi: isolate; margin-right: auto; flex-shrink: 0; }
+          #wth-sug .wth-si-temp.hot  { color: #ef4444; }
+          #wth-sug .wth-si-temp.warm { color: #f59e0b; }
+          #wth-sug .wth-si-temp.mild { color: #22c55e; }
+          #wth-sug .wth-si-temp.cold { color: #60a5fa; }
+        </style>
+
+        <!-- ══ SCRIPTS FOR ONLINE TOOLS ══ -->
+        <script>
+        // ═══════════════════════════════════════════════════
+        //  WEATHER TOOL — uses weather_data.json (irimo.ir)
+        // ═══════════════════════════════════════════════════
+        (function() {
+          const WTH_DATA = 'scripts/weather_data.json';
+          const WTH_RK   = 'irimo_rec_v4';
+          const WTH_PK   = 'irimo_pin_v4';
+          const MAXR = 10, MAXP = 2, MAXS = 9;
+
+          let wthAll = [], wthSmap = {}, wthCurrentDetId = null;
+
+          const wthGetR = () => { try { return JSON.parse(localStorage.getItem(WTH_RK))||[]; } catch{return[];} };
+          const wthGetP = () => { try { return JSON.parse(localStorage.getItem(WTH_PK))||[]; } catch{return[];} };
+          const wthSetR = v => localStorage.setItem(WTH_RK, JSON.stringify(v));
+          const wthSetP = v => localStorage.setItem(WTH_PK, JSON.stringify(v));
+
+          function wthTCls(t) {
+            if(t>=35) return 'hot'; if(t>=25) return 'warm'; if(t>=10) return 'mild'; return 'cold';
+          }
+          function wthEmoji(s) {
+            if(!s) return '🌡️';
+            if(/مه|ضباب/.test(s)) return '🌫️';
+            if(/رعد|طوفان/.test(s)) return '⛈️';
+            if(/برف/.test(s)) return '❄️';
+            if(/تگرگ/.test(s)) return '🌨️';
+            if(/رگبار|باران\s*سنگین|باران\s*شدید/.test(s)) return '🌧️';
+            if(/باران|نم\s*نم/.test(s)) return '🌦️';
+            if(/نیمه\s*ابری|کمی\s*ابری|قسمتی\s*ابری/.test(s)) return '⛅';
+            if(/ابری/.test(s)) return '☁️';
+            if(/گرد|غبار/.test(s)) return '🌪️';
+            if(/باد/.test(s)) return '💨';
+            if(/آفتاب|صاف/.test(s)) return '☀️';
+            return '🌡️';
+          }
+
+          // ── Boot: load weather_data.json ──
+          async function wthBoot() {
+            const dot  = document.getElementById('wth-dot');
+            const ts   = document.getElementById('wth-ts');
+            if(dot) { dot.style.background='var(--m3-tertiary,#7d5260)'; dot.style.boxShadow='0 0 6px var(--m3-tertiary,#7d5260)'; }
+            try {
+              const r = await fetch(WTH_DATA);
+              if(!r.ok) throw new Error('HTTP '+r.status);
+              const j = await r.json();
+              wthAll = j.stations.map(s => ({...s, _id: String(s.irimo_id ?? s.wmo_id ?? s.id ?? '?')}));
+              wthAll.forEach(s => { wthSmap[s._id] = s; });
+              if(dot) { dot.style.background='var(--m3-primary)'; dot.style.boxShadow='0 0 6px var(--m3-primary)'; }
+              try {
+                const d = new Date(j.generated_at);
+                if(ts) ts.textContent = d.toLocaleString('fa-IR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+              } catch { if(ts) ts.textContent=''; }
+              wthRenderHome();
+            } catch(e) {
+              if(dot) { dot.style.background='var(--m3-error,#b91c1c)'; dot.style.boxShadow='none'; dot.style.animation='none'; }
+              if(ts) ts.textContent='خطا در بارگذاری';
+              const rg = document.getElementById('wth-rec-grid');
+              if(rg) rg.innerHTML = `<div class="wth-empty"><div class="wth-empty-ico">⚠️</div><div style="font-weight:700;color:var(--m3-on-surface)">فایل weather_data.json یافت نشد</div><div style="font-size:.8rem">irimo_scraper.py را اجرا کنید</div></div>`;
+            }
+          }
+
+          // ── Render home: pinned + recent ──
+          function wthRenderHome() {
+            const pinned = wthGetP();
+            const recent = wthGetR().filter(id => !pinned.includes(id));
+
+            // Pinned section
+            const ps  = document.getElementById('wth-pin-sec');
+            const pr  = document.getElementById('wth-pin-row');
+            const pcnt = document.getElementById('wth-pin-cnt');
+            if(ps && pr) {
+              if(pinned.length) {
+                ps.style.display='';
+                if(pcnt) pcnt.textContent=`${pinned.length}/${MAXP}`;
+                pr.innerHTML='';
+                pinned.forEach((id,i) => { const s=wthSmap[id]; if(s) pr.appendChild(wthMkCard(s,true,i)); });
+              } else { ps.style.display='none'; }
+            }
+
+            // Recent section
+            const rg   = document.getElementById('wth-rec-grid');
+            const rcnt = document.getElementById('wth-rec-cnt');
+            if(rg) {
+              if(rcnt) rcnt.textContent = recent.length||'';
+              if(!recent.length) {
+                rg.innerHTML = `<div class="wth-empty"><div class="wth-empty-ico">🔍</div><div style="font-weight:700;color:var(--m3-on-surface)">هنوز جستجویی انجام نشده</div><div style="font-size:.8rem">نام یک شهر را جستجو کنید</div></div>`;
+              } else {
+                rg.innerHTML='';
+                recent.slice(0,MAXR).forEach((id,i) => { const s=wthSmap[id]; if(s) rg.appendChild(wthMkCard(s,false,i)); });
+              }
+            }
+          }
+
+          // ── Card factory ──
+          function wthMkCard(s, isPinned, idx) {
+            const c    = s.current||{};
+            const hasT = typeof c.temp_c==='number';
+            const tc   = hasT?wthTCls(c.temp_c):'';
+            const temp = hasT?`${c.temp_c}°C`:'—';
+            const emoji= wthEmoji(c.condition);
+            const isPon= wthGetP().includes(s._id);
+
+            const div = document.createElement('div');
+            div.className = `wth-card ${tc}`;
+            div.style.animationDelay = `${idx*25}ms`;
+            div.onclick = e => { if(e.target.closest('.wth-act-btn')) return; wthOpenDet(s._id); };
+
+            const mmHtml = [
+              typeof c.temp_max_c==='number' ? `<div class="wth-card__mm-chip"><span>🔺</span><span class="wth-card__mm-val">${c.temp_max_c}°</span></div>` : '',
+              typeof c.temp_min_c==='number' ? `<div class="wth-card__mm-chip"><span>🔻</span><span class="wth-card__mm-val">${c.temp_min_c}°</span></div>` : '',
+            ].join('');
+
+            div.innerHTML =
+              `<div class="wth-card__emoji">${emoji}</div>
+               <div class="wth-card__temp ${tc}">${temp}</div>
+               <div class="wth-card__info">
+                 <div class="wth-card__name">${s.name}</div>
+                 <div class="wth-card__prov">${s.province||'—'}</div>
+                 ${c.condition?`<div class="wth-card__cond">${c.condition}</div>`:''}
+               </div>
+               ${mmHtml?`<div class="wth-card__mm">${mmHtml}</div>`:''}
+               <div class="wth-card__acts">
+                 <button class="wth-act-btn ${isPon?'pinned':''}" title="${isPon?'برداشتن پین':'پین کردن'}"
+                   onclick="wthTogglePin(event,'${s._id}')">
+                   <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
+                 </button>
+                 <button class="wth-act-btn" title="حذف" onclick="wthRmCard(event,'${s._id}')">
+                   <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                 </button>
+               </div>`;
+            return div;
+          }
+
+          // ── Pin / Remove ──
+          window.wthTogglePin = function(e, id) {
+            e.stopPropagation();
+            const p=wthGetP(), r=wthGetR();
+            if(p.includes(id)) {
+              wthSetP(p.filter(x=>x!==id));
+              wthSetR([id,...r.filter(x=>x!==id)].slice(0,MAXR));
+            } else {
+              if(p.length>=MAXP) return;
+              wthSetP([...p,id]); wthSetR(r.filter(x=>x!==id));
+            }
+            wthRenderHome();
+            if(wthCurrentDetId===id) wthOpenDet(id);
+          };
+          window.wthRmCard = function(e, id) {
+            e.stopPropagation();
+            wthSetP(wthGetP().filter(x=>x!==id));
+            wthSetR(wthGetR().filter(x=>x!==id));
+            wthRenderHome();
+            if(wthCurrentDetId===id) wthCloseDet();
+          };
+
+          // ── Detail panel ──
+          window.wthOpenDet = function(id) {
+            const s=wthSmap[id]; if(!s) return;
+            wthCurrentDetId=id;
+            // Add to recent
+            if(!wthGetP().includes(id)) wthSetR([id,...wthGetR().filter(x=>x!==id)].slice(0,MAXR));
+            wthRenderHome();
+            const det=document.getElementById('wth-det');
+            if(!det) return;
+            det.innerHTML = wthBuildDet(s);
+            det.style.display='';
+            det.scrollIntoView({behavior:'smooth',block:'nearest'});
+          };
+          window.wthCloseDet = function() {
+            const det=document.getElementById('wth-det');
+            if(det) { det.style.display='none'; det.innerHTML=''; }
+            wthCurrentDetId=null;
+          };
+
+          function wthBuildDet(s) {
+            const c=s.current||{}, fc=s.forecast||[];
+            const hasC=typeof c.temp_c==='number';
+            const tc=hasC?wthTCls(c.temp_c):'';
+            const emoji=wthEmoji(c.condition);
+            const isPon=wthGetP().includes(s._id);
+
+            const metrics=[
+              {ico:'💧',lbl:'رطوبت',val:typeof c.humidity_pct==='number'?`${c.humidity_pct}%`:null},
+              {ico:'💨',lbl:'باد',val:typeof c.wind_speed_kmh==='number'?`${c.wind_speed_kmh} km/h`:null},
+              {ico:'🌧️',lbl:'بارندگی',val:typeof c.rainfall_24h_mm==='number'?`${c.rainfall_24h_mm} mm`:null},
+              {ico:'👁️',lbl:'دید افقی',val:c.visibility&&c.visibility!=='-'&&c.visibility!==null?String(c.visibility):null},
+            ].filter(m=>m.val);
+
+            const metricsHtml=metrics.length?`<div class="wth-metrics">${metrics.map(m=>`
+              <div class="wth-mbox">
+                <div class="wth-mbox-ico">${m.ico}</div>
+                <div class="wth-mbox-lbl">${m.lbl}</div>
+                <div class="wth-mbox-val">${m.val}</div>
+              </div>`).join('')}</div>`:'';
+
+            const chipsHtml=(hasC&&(typeof c.temp_max_c==='number'||typeof c.temp_min_c==='number'||c.last_updated))?`
+              <div class="wth-chips">
+                ${typeof c.temp_max_c==='number'?`<span class="wth-chip">🔺 ${c.temp_max_c}°C</span>`:''}
+                ${typeof c.temp_min_c==='number'?`<span class="wth-chip">🔻 ${c.temp_min_c}°C</span>`:''}
+                ${c.last_updated?`<span class="wth-chip">🕐 ${c.last_updated}</span>`:''}
+              </div>`:'';
+
+            const fcHtml=fc.length?`<div class="wth-forecast">
+              <div class="wth-fc-title">📅 پیش‌بینی سه روز آینده</div>
+              <div class="wth-fc-grid">${fc.map(d=>`<div class="wth-fc-card">
+                <div class="wth-fc-per">${(d.period||d.period_name||'').replace(/24\s*ساعت\s*اول/,'۲۴ساعت اول').replace(/24\s*ساعت\s*دوم/,'۲۴ساعت دوم').replace(/24\s*ساعت\s*سوم/,'۲۴ساعت سوم')}</div>
+                <div class="wth-fc-ico">${wthEmoji(d.condition)}</div>
+                <div class="wth-fc-tmp"><span class="mx">${typeof d.temp_max_c==='number'?d.temp_max_c+'°':'—'}</span><span style="color:var(--m3-on-surface-variant)">/</span><span class="mn">${typeof d.temp_min_c==='number'?d.temp_min_c+'°':'—'}</span></div>
+                <div class="wth-fc-cnd">${d.condition||''}</div>
+              </div>`).join('')}</div></div>`:'';
+
+            return `<div class="wth-det-panel">
+              <div class="wth-det-bar">
+                <button class="btn btn-tonal" onclick="wthCloseDet()" style="height:36px;padding:0 12px;font-size:.8rem">
+                  ← بازگشت
+                </button>
+                <button class="btn btn-tonal ${isPon?'btn-filled':''}" onclick="wthTogglePin(event,'${s._id}')" style="height:36px;padding:0 12px;font-size:.8rem">
+                  📌 ${isPon?'برداشتن پین':'پین کردن'}
+                </button>
+              </div>
+              <div class="wth-det-hero">
+                <div class="wth-det-emoji">${emoji}</div>
+                <div class="wth-det-main">
+                  <div class="wth-city">${s.name}</div>
+                  <div class="wth-prov">${s.province||''}</div>
+                  <div class="wth-temp ${tc}">${hasC?`${c.temp_c}°C`:'—'}</div>
+                  <div class="wth-cond">${c.condition||''}</div>
+                </div>
+              </div>
+              ${chipsHtml}
+              ${metricsHtml}
+              ${fcHtml}
+            </div>`;
+          }
+
+          // ── Search ──
+          window.wthClearQ = function(e) {
+            if(e) e.stopPropagation();
+            const q=document.getElementById('wth-q');
+            if(q){q.value='';q.focus();}
+            const clr=document.getElementById('wth-clr');
+            if(clr) clr.style.display='none';
+            wthCloseSug();
+          };
+          window.wthCloseSug = function() {
+            const sug=document.getElementById('wth-sug');
+            const bd=document.getElementById('wth-bd');
+            if(sug) sug.style.display='none';
+            if(bd)  bd.style.display='none';
+          };
+
+          function wthOnQ() {
+            const val=(document.getElementById('wth-q')||{}).value?.trim()||'';
+            const clr=document.getElementById('wth-clr');
+            if(clr) clr.style.display=val?'block':'none';
+            if(!val){wthCloseSug();return;}
+            const lo=val.toLowerCase();
+            const ms=wthAll.filter(s=>
+              s.name.includes(val)||s.name.toLowerCase().includes(lo)||
+              (s.province||'').includes(val)||(s.province||'').toLowerCase().includes(lo)
+            ).slice(0,MAXS);
+            wthRenderSug(ms,val);
+          }
+
+          function wthRenderSug(list,q) {
+            const el=document.getElementById('wth-sug');
+            const bd=document.getElementById('wth-bd');
+            if(!el) return;
+            if(bd) bd.style.display='block';
+            if(!list.length){
+              el.innerHTML=`<div style="padding:18px;text-align:center;color:var(--m3-on-surface-variant);font-size:.85rem">نتیجه‌ای برای «${q}» یافت نشد</div>`;
+              el.style.display='block'; return;
+            }
+            el.innerHTML='';
+            list.forEach(s=>{
+              const c=s.current||{};
+              const hasT=typeof c.temp_c==='number';
+              const tc=hasT?wthTCls(c.temp_c):'';
+              const item=document.createElement('div');
+              item.className='wth-si';
+              item.innerHTML=`
+                <span class="wth-si-ico">${wthEmoji(c.condition)}</span>
+                <div><div class="wth-si-name">${s.name}</div><div class="wth-si-prov">${s.province||'—'}</div></div>
+                ${hasT?`<span class="wth-si-temp ${tc}" dir="ltr">${c.temp_c}°C</span>`:''}`;
+              item.onclick=()=>{wthCloseSug();wthOpenDet(s._id);};
+              el.appendChild(item);
+            });
+            el.style.display='block';
+          }
+
+          // ── Lazy init: wire up when weather card becomes active ──
+          let wthInitialized=false;
+          document.addEventListener('DOMContentLoaded', function() {
+            const card=document.getElementById('weather');
+            if(!card) return;
+            // Wire search input
+            function wthWireSearch() {
+              const q=document.getElementById('wth-q');
+              if(q && !q.dataset.wired) {
+                q.dataset.wired='1';
+                q.addEventListener('input', wthOnQ);
+                q.addEventListener('keydown', e=>{ if(e.key==='Escape') wthCloseSug(); });
+              }
+            }
+            const obs=new MutationObserver(function(mutations) {
+              mutations.forEach(function(m) {
+                if(m.attributeName==='class' && card.classList.contains('active') && !wthInitialized) {
+                  wthInitialized=true;
+                  wthBoot();
+                  wthWireSearch();
+                }
+              });
+            });
+            obs.observe(card,{attributes:true});
+            if(card.classList.contains('active')) {
+              wthInitialized=true;
+              wthBoot();
+              wthWireSearch();
+            }
+          });
+        })();
+
+        // ═══════════════════════════════════════════════════
+        //  TRANSLATE TOOL
+        // ═══════════════════════════════════════════════════
+        window.trSwapLangs = function() {
+          const from=document.getElementById('tr-from');
+          const to=document.getElementById('tr-to');
+          const tmp=from.value; from.value=to.value; to.value=tmp;
+          // Also flip input direction
+          const inp=document.getElementById('tr-input');
+          if(inp) {
+            const rtlLangs=['fa','ar','he'];
+            inp.style.direction=rtlLangs.includes(from.value)?'rtl':'ltr';
+          }
+        };
+        window.trOnInput = function() {
+          const v=document.getElementById('tr-input').value;
+          // Auto-detect direction from first meaningful character
+          const inp=document.getElementById('tr-input');
+          const firstChar=v.replace(/\s/g,'')[0];
+          if(firstChar) {
+            const code=firstChar.codePointAt(0);
+            // Arabic/Persian Unicode range: U+0600–U+06FF, U+0750–U+077F, U+FB50–U+FDFF, U+FE70–U+FEFF
+            const isRTL=(code>=0x0600&&code<=0x06FF)||(code>=0x0750&&code<=0x077F)||(code>=0xFB50&&code<=0xFDFF)||(code>=0xFE70&&code<=0xFEFF);
+            inp.style.direction=isRTL?'rtl':'ltr';
+          }
+          document.getElementById('tr-clear-btn').style.display=v.trim()?'inline-flex':'none';
+        };
+        window.trClear = function() {
+          document.getElementById('tr-input').value='';
+          document.getElementById('tr-input').style.direction='rtl';
+          document.getElementById('tr-output-wrap').style.display='none';
+          document.getElementById('tr-clear-btn').style.display='none';
+          document.getElementById('tr-input').focus();
+        };
+        window.doTranslate = async function() {
+          const text=document.getElementById('tr-input').value.trim();
+          const from=document.getElementById('tr-from').value;
+          const to=document.getElementById('tr-to').value;
+          if(!text) return;
+          const btn=document.getElementById('tr-btn');
+          const out=document.getElementById('tr-output');
+          const wrap=document.getElementById('tr-output-wrap');
+          btn.disabled=true; btn.textContent='⏳ در حال ترجمه…';
+          wrap.style.display='block';
+          out.innerHTML='<span style="color:var(--m3-on-surface-variant);font-size:.85rem">در حال ترجمه…</span>';
+          try {
+            const res=await fetch('https://widgets.dastyar.io/api/translate',{
+              method:'POST',headers:{'Content-Type':'application/json'},
+              body:JSON.stringify({text,from,to})
+            });
+            if(!res.ok) throw new Error('HTTP '+res.status);
+            const data=await res.json();
+            const translated=data.translatedText||data.translated_text||data.result||data.text||'';
+            if(!translated) throw new Error('پاسخ نامعتبر از سرور');
+            out.textContent=translated;
+            const rtlLangs=['fa','ar','he'];
+            out.style.direction=rtlLangs.includes(to)?'rtl':'ltr';
+            out.style.textAlign=rtlLangs.includes(to)?'right':'left';
+          } catch(e) {
+            out.innerHTML=`<span style="color:var(--m3-error,#b91c1c)">⚠️ خطا: ${e.message}</span>`;
+          } finally {
+            btn.disabled=false; btn.textContent='🌍 ترجمه';
+          }
+        };
+
+        // ═══════════════════════════════════════════════════
+        //  CURRENCY TOOL
+        // ═══════════════════════════════════════════════════
+        (function() {
+          const BRS_API   = 'https://brsapi.ir/Api/Market/Gold_Currency.php?key=FreeFusNYvmUj8BOKoqzaZSlwYnQONdS';
+          const NOBITEX_API = 'https://apiv2.nobitex.ir/market/stats';
+          const REFRESH_MS  = 60000;
+          const CRYPTO_COINS = ['BTC','ETH','USDT','SOL','DOGE','TON'];
+          const CRYPTO_META = {
+            BTC:{fa:'بیت‌کوین',icon:'₿'}, ETH:{fa:'اتریوم',icon:'Ξ'},
+            USDT:{fa:'تتر',icon:'₮'}, SOL:{fa:'سولانا',icon:'◎'},
+            DOGE:{fa:'دوج‌کوین',icon:'Ð'}, TON:{fa:'تون',icon:'💎'},
+          };
+
+          let curState={mode:'toman',tab:'all',usdRate:null,brsData:null,cryptoData:null,loading:true,error:null};
+          let curTimer;
+
+          // Format number — Persian digits for toman mode, English for dollar
+          function fNum(n, usePersian) {
+            if(n===null||n===undefined||isNaN(n)) return '—';
+            let str;
+            if(n>=1e9) str=(n/1e9).toFixed(2)+' میلیارد';
+            else if(n>=1e6) str=(n/1e6).toFixed(2)+' میلیون';
+            else if(n>=1e3) str=n.toLocaleString('en-US');
+            else str=String(n);
+            if(usePersian) str=str.replace(/0/g,'۰').replace(/1/g,'۱').replace(/2/g,'۲').replace(/3/g,'۳').replace(/4/g,'۴').replace(/5/g,'۵').replace(/6/g,'۶').replace(/7/g,'۷').replace(/8/g,'۸').replace(/9/g,'۹');
+            return str;
+          }
+          function fDollar(n) {
+            if(!n||isNaN(n)) return '—';
+            if(n>=1e6) return '$'+(n/1e6).toFixed(2)+'M';
+            if(n>=1e3) return '$'+n.toLocaleString('en-US',{maximumFractionDigits:2});
+            return '$'+n.toLocaleString('en-US',{maximumFractionDigits:6});
+          }
+          function chgCls(p){const v=parseFloat(p);if(isNaN(v)||v===0)return 'neutral';return v>0?'up':'down';}
+          function chgArrow(p){const v=parseFloat(p);if(isNaN(v)||v===0)return '•';return v>0?'▲':'▼';}
+          function toTime(u){if(!u)return '';return new Date(u*1000).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'});}
+
+          function buildCard(iconClass, icon, badgeClass, badge, nameFa, nameEn, price, unit, pct, time) {
+            const cc=chgCls(pct), ca=chgArrow(pct);
+            return `<div class="cur-card">
+              <div class="cur-card__header">
+                <div class="cur-card__icon ${iconClass}">${icon}</div>
+                <span class="cur-card__badge ${badgeClass}">${badge}</span>
+              </div>
+              <div class="cur-card__name">${nameFa}</div>
+              <div class="cur-card__sub">${nameEn}</div>
+              <div class="cur-card__price-row">
+                <span class="cur-card__price">${price}</span>
+                <span class="cur-card__unit">${unit}</span>
+              </div>
+              <div class="cur-card__footer">
+                <span class="cur-change cur-change--${cc}">${ca} ${Math.abs(parseFloat(pct)||0).toFixed(2)}%</span>
+                <span class="cur-card__time">${time}</span>
+              </div></div>`;
+          }
+
+          function goldCard(item) {
+            const pct=parseFloat(item.change_percent)||0;
+            const isToman=curState.mode==='toman';
+            let price,unit;
+            if(isToman){price=fNum(parseFloat(item.price),true);unit='تومان';}
+            else{const usd=curState.usdRate?parseFloat(item.price)/curState.usdRate:null;price=usd?fDollar(usd):'—';unit='USD';}
+            return buildCard('cur-card__icon--gold','🥇','cur-card__badge--gold','طلا',item.name,item.name_en||'',price,unit,pct,toTime(item.time_unix));
+          }
+
+          function currencyCard(item) {
+            const pct=parseFloat(item.change_percent)||0;
+            const isToman=curState.mode==='toman';
+            let price,unit;
+            if(isToman){price=fNum(parseFloat(item.price),true);unit='تومان';}
+            else{price=item.symbol==='USD'?'$1':(curState.usdRate?fDollar(parseFloat(item.price)/curState.usdRate):'—');unit='USD';}
+            return buildCard('cur-card__icon--curr','💵','cur-card__badge--curr',item.symbol,item.name,item.name_en||'',price,unit,pct,toTime(item.time_unix));
+          }
+
+          function cryptoCard(symbol,stats) {
+            const meta=CRYPTO_META[symbol]||{fa:symbol,icon:'🪙'};
+            const rlsKey=`${symbol}-RLS`.toLowerCase(), usdtKey=`${symbol}-USDT`.toLowerCase();
+            const statsRls=stats?.[rlsKey], statsUsdt=stats?.[usdtKey];
+            const priceDollar=statsUsdt?.latest?parseFloat(statsUsdt.latest):null;
+            const priceToman=statsRls?.latest?parseFloat(statsRls.latest)/10:(priceDollar&&curState.usdRate?priceDollar*curState.usdRate:null);
+            const pct=parseFloat(statsRls?.dayChange||statsUsdt?.dayChange||0);
+            const isToman=curState.mode==='toman';
+            const price=isToman?(priceToman?fNum(Math.round(priceToman),true):'—'):(priceDollar?fDollar(priceDollar):'—');
+            const unit=isToman?'تومان':'USD';
+            return buildCard('cur-card__icon--crypto',meta.icon,'cur-card__badge--crypto',symbol,meta.fa,`${symbol}/${isToman?'IRT':'USD'}`,price,unit,pct,'نوبیتکس');
+          }
+
+          function skeletons(n=6) {
+            return `<div class="cur-cards-grid">${Array.from({length:n},()=>`<div class="cur-skeleton"><div class="cur-sk-line" style="width:40%;height:28px;margin-bottom:10px"></div><div class="cur-sk-line" style="width:60%"></div><div class="cur-sk-line" style="width:45%"></div><div class="cur-sk-line" style="width:75%;height:20px;margin-top:10px"></div></div>`).join('')}</div>`;
+          }
+
+          function curRender() {
+            const el=document.getElementById('cur-content'); if(!el) return;
+            if(curState.loading){el.innerHTML=skeletons();return;}
+            if(curState.error){el.innerHTML=`<div style="background:color-mix(in srgb,var(--m3-error,#b91c1c) 8%,transparent);border:1px solid color-mix(in srgb,var(--m3-error,#b91c1c) 25%,transparent);border-radius:14px;padding:16px;color:var(--m3-error,#b91c1c);font-size:.85rem;text-align:center">⚠️ ${curState.error}</div>`;return;}
+            const brs=curState.brsData, stats=curState.cryptoData?.stats||{};
+            let html='';
+            if(curState.tab==='all'||curState.tab==='gold')
+              html+=`<div class="cur-section-title">🥇 طلا و سکه</div><div class="cur-cards-grid">${(brs.gold||[]).map(goldCard).join('')}</div>`;
+            if(curState.tab==='all'||curState.tab==='currency') {
+              const mainC=curState.tab==='all'?(brs.currency||[]).filter(c=>['USD','EUR','GBP','AED','TRY'].includes(c.symbol)):(brs.currency||[]);
+              html+=`<div class="cur-section-title">💵 ${curState.tab==='all'?'ارزهای منتخب':'ارزهای خارجی'}</div><div class="cur-cards-grid">${mainC.map(currencyCard).join('')}</div>`;
+            }
+            if(curState.tab==='all'||curState.tab==='crypto')
+              html+=`<div class="cur-section-title">🪙 رمزارز</div><div class="cur-cards-grid">${CRYPTO_COINS.map(s=>cryptoCard(s,stats)).join('')}</div>`;
+            el.innerHTML=html||'<div style="text-align:center;padding:32px;color:var(--m3-on-surface-variant)">داده‌ای یافت نشد</div>';
+          }
+
+          async function curFetchAll() {
+            if(!document.getElementById('cur-content')) return;
+            curState.loading=true; curState.error=null; curRender();
+            const dot=document.getElementById('cur-dot');
+            const badge=document.getElementById('cur-badge-text');
+            if(dot) { dot.style.background='var(--m3-tertiary,#7d5260)'; dot.style.animation='none'; }
+            try {
+              const [brsRes,nbtRes]=await Promise.all([
+                fetch(BRS_API).then(r=>r.json()),
+                fetch(`${NOBITEX_API}?srcCurrency=${CRYPTO_COINS.map(s=>s.toLowerCase()).join(',')}&dstCurrency=rls`).then(r=>r.json())
+              ]);
+              const usdItem=brsRes.currency?.find(c=>c.symbol==='USD');
+              curState.usdRate=usdItem?parseFloat(usdItem.price):null;
+              curState.brsData=brsRes; curState.cryptoData=nbtRes; curState.loading=false;
+              const now=new Date();
+              if(badge) badge.textContent='آخرین بروزرسانی: '+now.toLocaleTimeString('fa-IR');
+              if(dot) { dot.style.background='var(--m3-primary)'; dot.style.animation='pulse2 2s infinite'; }
+            } catch(e) {
+              curState.loading=false; curState.error='خطا در دریافت داده‌ها. اتصال اینترنت را بررسی کنید.';
+              if(badge) badge.textContent='خطا در اتصال';
+              if(dot) { dot.style.background='var(--m3-error,#b91c1c)'; dot.style.animation='none'; }
+            }
+            curRender();
+          }
+
+          window.curSwitchTab = function(tab,btn) {
+            curState.tab=tab;
+            document.querySelectorAll('.cur-tab-btn').forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+            curRender();
+          };
+
+          // M3E Switch toggle — toman(off) / dollar(on)
+          window.curToggleMode = function() {
+            const sw=document.getElementById('cur-mode-switch');
+            const isDollar=sw.getAttribute('aria-checked')==='true';
+            const newMode=isDollar?'toman':'dollar';
+            curState.mode=newMode;
+            sw.setAttribute('aria-checked', newMode==='dollar'?'true':'false');
+            // Label styles
+            document.getElementById('cur-lbl-toman').style.fontWeight=newMode==='toman'?'700':'500';
+            document.getElementById('cur-lbl-toman').style.color=newMode==='toman'?'var(--m3-primary)':'var(--m3-on-surface-variant)';
+            document.getElementById('cur-lbl-dollar').style.fontWeight=newMode==='dollar'?'700':'500';
+            document.getElementById('cur-lbl-dollar').style.color=newMode==='dollar'?'var(--m3-primary)':'var(--m3-on-surface-variant)';
+            curRender();
+          };
+
+          // Lazy-init via MutationObserver
+          let curInitialized=false;
+          document.addEventListener('DOMContentLoaded', function() {
+            const card=document.getElementById('currency');
+            if(!card) return;
+            const obs=new MutationObserver(function(mutations) {
+              mutations.forEach(function(m) {
+                if(m.attributeName==='class' && card.classList.contains('active') && !curInitialized) {
+                  curInitialized=true;
+                  curFetchAll();
+                  curTimer=setInterval(function(){ if(document.getElementById('currency')?.classList.contains('active')) curFetchAll(); }, REFRESH_MS);
+                }
+              });
+            });
+            obs.observe(card,{attributes:true});
+            if(card.classList.contains('active')) {
+              curInitialized=true; curFetchAll();
+              curTimer=setInterval(function(){ if(document.getElementById('currency')?.classList.contains('active')) curFetchAll(); }, REFRESH_MS);
+            }
+          });
+        })();
+        </script>
+
+
+        </div><!-- /tool-container -->
+
 
 
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 3.11 - ۱۴۰۵/۰۱/۲۴
+          ℹ️ نسخه 4.0 - ۱۴۰۵/۰۱/۲۴
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -7287,7 +8220,10 @@
         seotools:'مولد متا تگ SEO',
         audiotools:'ابزار صوتی',
         diwan:'دیوان شعر',
-        filesplit:'تقسیم و مرج فایل'
+        filesplit:'تقسیم و مرج فایل',
+        weather:'آب‌وهوا',
+        translate:'ترجمه متن',
+        currency:'قیمت ارز و طلا'
       };
 
       function _applyTool(id, pushState) {
