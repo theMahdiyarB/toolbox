@@ -7359,10 +7359,10 @@
           [data-theme="dark"] .cur-card__badge--gold { color:#fbbf24; }
           .cur-card__name { font-size: .86rem; font-weight: 700; color: var(--m3-on-surface); margin-bottom: 1px; }
           .cur-card__sub  { font-size: .66rem; color: var(--m3-on-surface-variant); margin-bottom: 8px; }
-          /* Price: bidi-isolated, RTL wrapping fixed */
-          .cur-card__price-row { display: flex; align-items: baseline; gap: 4px; flex-direction: row-reverse; justify-content: flex-end; margin-bottom: 8px; flex-wrap: nowrap; }
-          .cur-card__unit  { font-size: .72rem; color: var(--m3-on-surface-variant); font-weight: 600; white-space: nowrap; }
-          .cur-card__price { font-size: 1rem; font-weight: 800; color: var(--m3-on-surface); direction: ltr; unicode-bidi: isolate; white-space: nowrap; }
+          /* Price: RTL block — unit appears on right, number on left */
+          .cur-card__price-wrap { display: flex; align-items: baseline; gap: 5px; direction: rtl; margin-bottom: 8px; flex-wrap: nowrap; overflow: hidden; }
+          .cur-card__unit  { font-size: .75rem; color: var(--m3-on-surface-variant); font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+          .cur-card__price { font-size: 1.05rem; font-weight: 800; color: var(--m3-on-surface); direction: rtl; unicode-bidi: isolate; white-space: nowrap; flex-shrink: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
           .cur-card__footer { display: flex; align-items: center; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--m3-outline-variant); }
           .cur-change { display: flex; align-items: center; gap: 3px; font-size: .75rem; font-weight: 700; direction: ltr; unicode-bidi: isolate; }
           .cur-change--up      { color: #16a34a; }
@@ -7371,28 +7371,34 @@
           [data-theme="dark"] .cur-change--up   { color: #4ade80; }
           [data-theme="dark"] .cur-change--down { color: #f87171; }
           .cur-card__time { font-size: .63rem; color: var(--m3-on-surface-variant); direction: ltr; unicode-bidi: isolate; }
-          /* Crypto chart sparkline area */
-          .cur-chart-wrap { margin-top: 8px; }
-          .cur-chart-wrap canvas { width: 100% !important; height: 48px !important; }
           /* Skeleton */
           .cur-skeleton { background: var(--m3-surface-container); border: 1.5px solid var(--m3-outline-variant); border-radius: 16px; padding: 14px; }
           .cur-sk-line { height: 12px; border-radius: 6px; background: linear-gradient(90deg,var(--m3-surface-container-high) 25%,var(--m3-outline-variant) 50%,var(--m3-surface-container-high) 75%); background-size:200% 100%; animation:skShimmer 1.5s infinite; margin-bottom:8px; }
           @keyframes skShimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
-          .cur-tab-btn.active { background:var(--m3-secondary-container); color:var(--m3-on-secondary-container); }
+          /* Tab active — higher specificity to override btn-tonal */
+          .btn.btn-tonal.cur-tab-btn { border: 1.5px solid transparent; transition: background .15s, color .15s, border-color .15s, box-shadow .15s; }
+          .btn.btn-tonal.cur-tab-btn.active {
+            background: var(--m3-secondary-container) !important;
+            color: var(--m3-on-secondary-container) !important;
+            border-color: var(--m3-secondary) !important;
+            font-weight: 700 !important;
+          }
 
           /* ─── Weather ─── */
           .wth-sec-hdr { display:flex;align-items:center;gap:6px;margin-bottom:8px; }
           .wth-sec-hdr__ico { font-size:1rem; }
           .wth-sec-hdr__lbl { font-size:.7rem;font-weight:700;color:var(--m3-on-surface-variant);text-transform:uppercase;letter-spacing:.08em;flex:1; }
           .wth-sec-hdr__cnt { font-size:.7rem;color:var(--m3-on-surface-variant);background:var(--m3-surface-container-high);padding:1px 8px;border-radius:99px; }
-          .wth-card-grid { display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px; }
+          .wth-card-grid { display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;max-height:calc(5 * 90px + 4 * 8px);overflow-y:auto; }
           @media(max-width:360px) { .wth-card-grid { grid-template-columns:1fr; } }
+          .wth-card-grid::-webkit-scrollbar { width:3px; }
+          .wth-card-grid::-webkit-scrollbar-thumb { background:var(--m3-outline-variant);border-radius:3px; }
 
           .wth-card {
             background:var(--m3-surface-container);border:1.5px solid var(--m3-outline-variant);
-            border-radius:16px;padding:12px;cursor:pointer;display:flex;flex-direction:column;gap:4px;
+            border-radius:16px;padding:10px 10px 10px 36px;cursor:pointer;display:flex;flex-direction:column;gap:4px;
             direction:rtl;transition:transform .15s,box-shadow .15s,border-color .15s;position:relative;
-            overflow:hidden;animation:wthSlideIn .25s ease both;
+            overflow:hidden;animation:wthSlideIn .25s ease both;min-height:80px;
           }
           .wth-card:hover { transform:translateY(-2px);box-shadow:var(--m3-elevation-2);border-color:var(--m3-primary); }
           .wth-card.hot  { background:linear-gradient(135deg,color-mix(in srgb,#ef4444 8%,var(--m3-surface-container)),var(--m3-surface-container));border-color:color-mix(in srgb,#ef4444 22%,var(--m3-outline-variant)); }
@@ -7410,10 +7416,11 @@
           .wth-card__mm   { display:flex;gap:8px;flex-wrap:wrap; }
           .wth-card__mm-chip { display:flex;align-items:center;gap:2px;font-size:.68rem;color:var(--m3-on-surface-variant); }
           .wth-card__mm-val  { font-weight:700;color:var(--m3-on-surface); }
-          .wth-card__acts { position:absolute;top:6px;left:6px;display:flex;gap:2px; }
-          .wth-act-btn { background:none;border:none;cursor:pointer;color:var(--m3-on-surface-variant);padding:4px;border-radius:50%;line-height:1;transition:background .15s,color .15s;font-size:.8rem; }
-          .wth-act-btn:hover { background:var(--m3-surface-container-high);color:var(--m3-primary); }
-          .wth-act-btn.pinned { color:var(--m3-primary); }
+          .wth-card__acts { position:absolute;top:6px;left:6px;display:flex;flex-direction:column;gap:2px;z-index:2; }
+          .wth-act-btn { background:rgba(0,0,0,.25);backdrop-filter:blur(4px);border:none;cursor:pointer;color:rgba(255,255,255,.8);padding:4px;border-radius:8px;line-height:1;transition:background .15s,color .15s;display:flex;align-items:center;justify-content:center;width:24px;height:24px; }
+          .wth-act-btn:hover { background:rgba(0,0,0,.5);color:white; }
+          .wth-act-btn.pinned { background:var(--m3-primary);color:var(--m3-on-primary); }
+          .wth-act-btn.pinned:hover { background:color-mix(in srgb,var(--m3-primary) 80%,black); }
 
           /* Detail view */
           .wth-det-panel { animation:wthSlideIn .2s ease; }
@@ -7502,18 +7509,23 @@
             document.getElementById('wth-tt-body').textContent=d.body;
             const note=document.getElementById('wth-tt-note');
             if(d.note){note.textContent=d.note;note.style.display='';}else{note.style.display='none';}
-            el.style.display='block';
-            requestAnimationFrame(()=>{
+            // Position off-screen first to measure
+            el.style.top='-9999px';el.style.left='-9999px';el.style.display='block';
+            // Wait for layout then reposition
+            setTimeout(()=>{
               const rect=e.currentTarget.getBoundingClientRect();
               const tw=el.offsetWidth,th=el.offsetHeight,gap=8;
+              // Try above first
               let top=rect.top-th-gap;
               let left=rect.left+rect.width/2-tw/2;
+              // If not enough room above, flip below
               if(top<8)top=rect.bottom+gap;
+              // Clamp horizontally
               left=Math.max(8,Math.min(left,window.innerWidth-tw-8));
               el.style.top=top+'px';el.style.left=left+'px';
-            });
+            },0);
           }
-          function hideTT(){clearTimeout(ttTimer);ttTimer=setTimeout(()=>{document.getElementById('wth-tooltip').style.display='none';},120);}
+          function hideTT(){clearTimeout(ttTimer);ttTimer=setTimeout(()=>{document.getElementById('wth-tooltip').style.display='none';},150);}
           window.wthShowTT=showTT; window.wthHideTT=hideTT;
 
           async function wBoot(){
@@ -7575,8 +7587,15 @@
             ].join('');
             div.innerHTML=`
               <div class="wth-card__acts">
-                <button class="wth-act-btn ${isPon?'pinned':''}" title="${isPon?'برداشتن پین':'پین'}" onclick="wThTogglePin(event,'${s._id}')">📌</button>
-                <button class="wth-act-btn" title="حذف" onclick="wThRmCard(event,'${s._id}')">✕</button>
+                <button class="wth-act-btn" title="حذف" onclick="wThRmCard(event,'${s._id}')">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                </button>
+                <button class="wth-act-btn ${isPon?'pinned':''}" title="${isPon?'برداشتن پین':'پین'}" onclick="wThTogglePin(event,'${s._id}')">
+                  ${isPon
+                    ? `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>`
+                    : `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>`
+                  }
+                </button>
               </div>
               <div class="wth-card__top">
                 <div class="wth-card__emoji">${emoji}</div>
@@ -7669,8 +7688,9 @@
                 <button class="btn btn-tonal" onclick="wCloseDet()" style="height:36px;padding:0 14px;font-size:.82rem;display:flex;align-items:center;gap:6px">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg> برگشت
                 </button>
-                <button class="btn ${isPon?'btn-tonal':'btn-tonal'}" onclick="wThTogglePin(event,'${s._id}')" style="height:36px;padding:0 14px;font-size:.82rem;${isPon?'color:var(--m3-primary);font-weight:700':''}">
-                  📌 ${isPon?'برداشتن پین':'پین کردن'}
+                <button class="btn btn-tonal" onclick="wThTogglePin(event,'${s._id}')" style="height:36px;padding:0 14px;font-size:.82rem;display:flex;align-items:center;gap:6px;${isPon?'background:var(--m3-primary-container);color:var(--m3-primary);font-weight:700':''}">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="${isPon?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
+                  ${isPon?'برداشتن پین':'پین کردن'}
                 </button>
               </div>
               <div class="wth-det-hero">
@@ -7887,7 +7907,7 @@
           function chgArrow(p){const v=parseFloat(p);if(isNaN(v)||v===0)return'•';return v>0?'▲':'▼';}
           function toTime(u){if(!u)return'';return new Date(u*1000).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'});}
 
-          // Build card HTML — price row: [unit] [number] in RTL, properly isolated
+          // Build card HTML — price: unit on right, number on left (natural RTL reading)
           function buildCard(iconHtml,badgeClass,badge,nameFa,nameEn,priceHtml,unit,pct,time){
             const cc=chgCls(pct),ca=chgArrow(pct);
             return `<div class="cur-card">
@@ -7897,7 +7917,7 @@
               </div>
               <div class="cur-card__name">${nameFa}</div>
               <div class="cur-card__sub">${nameEn}</div>
-              <div class="cur-card__price-row">
+              <div class="cur-card__price-wrap">
                 <span class="cur-card__price">${priceHtml}</span>
                 <span class="cur-card__unit">${unit}</span>
               </div>
@@ -7930,7 +7950,7 @@
 
           function cryptoCard(meta,nbStats){
             const sym=meta.s.toLowerCase();
-            const statsUsdt=nbStats['btc-usdt']?nbStats[sym+'-usdt']:null;
+            const statsUsdt=nbStats[sym+'-usdt']||null;
             const statsIrt=nbStats[sym+'-rls']||nbStats[sym+'-irt'];
             // Prefer USDT price (real dollar), fallback to IRT/exchange rate
             let price='—',unit='USD';
@@ -8027,7 +8047,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 4.1 - ۱۴۰۵/۰۱/۲۴
+          ℹ️ نسخه 4.2 - ۱۴۰۵/۰۱/۲۴
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
