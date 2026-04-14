@@ -7369,7 +7369,7 @@
           .cur-skeleton { background: var(--m3-surface-container); border: 1.5px solid var(--m3-outline-variant); border-radius: 16px; padding: 14px; }
           .cur-sk-line { height: 12px; border-radius: 6px; background: linear-gradient(90deg,var(--m3-surface-container-high) 25%,var(--m3-outline-variant) 50%,var(--m3-surface-container-high) 75%); background-size:200% 100%; animation:skShimmer 1.5s infinite; margin-bottom:8px; }
           @keyframes skShimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
-          /* Tab buttons — override btn-tonal defaults */
+          /* Tab active — higher specificity to override btn-tonal */
           .btn.btn-tonal.cur-tab-btn {
             border: 1.5px solid var(--m3-outline-variant) !important;
             background: var(--m3-surface-container) !important;
@@ -7507,23 +7507,20 @@
           function showTT(e,key){
             const d=TT_DATA[key];if(!d)return;
             clearTimeout(ttTimer);
+            // Capture rect NOW, before setTimeout clears currentTarget
+            const rect=e.currentTarget.getBoundingClientRect();
             const el=document.getElementById('wth-tooltip');
             document.getElementById('wth-tt-title').textContent=d.title;
             document.getElementById('wth-tt-body').textContent=d.body;
             const note=document.getElementById('wth-tt-note');
             if(d.note){note.textContent=d.note;note.style.display='';}else{note.style.display='none';}
-            // Position off-screen first to measure
+            // Show off-screen to measure dimensions
             el.style.top='-9999px';el.style.left='-9999px';el.style.display='block';
-            // Wait for layout then reposition
             setTimeout(()=>{
-              const rect=e.currentTarget.getBoundingClientRect();
               const tw=el.offsetWidth,th=el.offsetHeight,gap=8;
-              // Try above first
               let top=rect.top-th-gap;
               let left=rect.left+rect.width/2-tw/2;
-              // If not enough room above, flip below
               if(top<8)top=rect.bottom+gap;
-              // Clamp horizontally
               left=Math.max(8,Math.min(left,window.innerWidth-tw-8));
               el.style.top=top+'px';el.style.left=left+'px';
             },0);
@@ -7951,21 +7948,18 @@
             return buildCard(svg,'cur-card__badge--curr',item.symbol,item.name,item.name_en||'',priceHtml,unit,pct,toTime(item.time_unix));
           }
 
-          function cryptoCard(meta,nbStats){
-            const sym=meta.s.toLowerCase();
-            const statsUsdt=nbStats[sym+'-usdt']||null;
-            const statsIrt=nbStats[sym+'-rls']||nbStats[sym+'-irt'];
-            // Prefer USDT price (real dollar), fallback to IRT/exchange rate
-            let price='—',unit='USD';
-            if(statsUsdt&&statsUsdt.latest){price=fDollar(parseFloat(statsUsdt.latest));}
-            else if(statsIrt&&statsIrt.latest){
-              // show in toman
-              const p=parseFloat(statsIrt.latest)/10;
-              price=fNum(Math.round(p),true);unit='تومان';
-            }
-            const pct=parseFloat((statsUsdt||statsIrt||{}).dayChange||0);
-            const svg=CRYPTO_SVG[meta.s]||`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="${meta.clr||'#888'}"/><text x="17" y="21" text-anchor="middle" font-size="8" font-weight="700" fill="white">${meta.s}</text></svg>`;
-            return buildCard(svg,'cur-card__badge--crypto',meta.s,meta.fa,meta.s+'/USD',price,unit,pct,'نوبیتکس');
+          function cryptoCard(item, nbStats){
+            // item comes from BRS cryptocurrency array: {symbol, name, name_en, price (USD), change_percent, time_unix}
+            const sym = item.symbol.toUpperCase();
+            const nameFa = item.name || sym;
+            const nameEn = item.name_en || sym;
+            // Price from BRS is already in USD
+            const priceUSD = parseFloat(item.price);
+            let price = priceUSD ? fDollar(priceUSD) : '—';
+            let unit = 'USD';
+            const pct = parseFloat(item.change_percent) || 0;
+            const svg = CRYPTO_SVG[sym] || `<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="${(CRYPTO.find(c=>c.s===sym)||{}).clr||'#888'}"/><text x="17" y="21" text-anchor="middle" font-size="8" font-weight="700" fill="white">${sym}</text></svg>`;
+            return buildCard(svg,'cur-card__badge--crypto',sym,nameFa,nameEn,price,unit,pct,toTime(item.time_unix));
           }
 
           function skeletons(n=6){
@@ -7976,7 +7970,7 @@
             const el=document.getElementById('cur-content');if(!el)return;
             if(curState.loading){el.innerHTML=skeletons();return;}
             if(curState.error){el.innerHTML=`<div style="background:color-mix(in srgb,var(--m3-error,#b91c1c) 8%,transparent);border:1px solid color-mix(in srgb,var(--m3-error,#b91c1c) 25%,transparent);border-radius:14px;padding:16px;color:var(--m3-error,#b91c1c);font-size:.85rem;text-align:center">⚠️ ${curState.error}</div>`;return;}
-            const brs=curState.data,nb=curState.nbData||{};
+            const brs=curState.data;
             let html='';
             if(curState.tab==='all'||curState.tab==='gold'){
               html+=`<div class="cur-section-title">🥇 طلا و سکه</div><div class="cur-cards-grid">${(brs.gold||[]).map(goldCard).join('')}</div>`;
@@ -7988,7 +7982,8 @@
               html+=`<div class="cur-section-title">💵 ${curState.tab==='all'?'ارزهای منتخب':'ارزهای خارجی'}</div><div class="cur-cards-grid">${main.map(currencyCard).join('')}</div>`;
             }
             if(curState.tab==='all'||curState.tab==='crypto'){
-              html+=`<div class="cur-section-title">🪙 رمزارز</div><div class="cur-cards-grid">${CRYPTO.map(m=>cryptoCard(m,nb)).join('')}</div>`;
+              const cryptoList = brs.cryptocurrency || [];
+              html+=`<div class="cur-section-title">🪙 رمزارز</div><div class="cur-cards-grid">${cryptoList.map(m=>cryptoCard(m,{})).join('')}</div>`;
             }
             el.innerHTML=html||'<div style="text-align:center;padding:32px;color:var(--m3-on-surface-variant)">داده‌ای یافت نشد</div>';
           }
@@ -7999,16 +7994,9 @@
             const dot=document.getElementById('cur-dot'),badge=document.getElementById('cur-badge-text');
             if(dot){dot.style.background='var(--m3-tertiary,#7d5260)';dot.style.animation='none';}
             try{
-              // Fetch BRS (gold+currency) and Nobitex (crypto USDT+IRT) in parallel
-              const cryptoSyms=CRYPTO.map(c=>c.s.toLowerCase()).join(',');
-              const [brsRes,nbUsdtRes,nbIrtRes]=await Promise.all([
-                fetch(BRS).then(r=>r.json()),
-                fetch(NB+'?srcCurrency='+cryptoSyms+'&dstCurrency=usdt').then(r=>r.json()).catch(()=>({stats:{}})),
-                fetch(NB+'?srcCurrency='+cryptoSyms+'&dstCurrency=rls').then(r=>r.json()).catch(()=>({stats:{}})),
-              ]);
-              // Merge nobitex stats
-              const nb={...((nbUsdtRes||{}).stats||{}),...((nbIrtRes||{}).stats||{})};
-              curState.data=brsRes;curState.nbData=nb;curState.loading=false;
+              // BRS returns gold + currency + cryptocurrency all in one call
+              const brsRes = await fetch(BRS).then(r=>r.json());
+              curState.data=brsRes; curState.loading=false;
               const now=new Date();
               if(badge)badge.textContent='آخرین بروزرسانی: '+now.toLocaleTimeString('fa-IR');
               if(dot){dot.style.background='var(--m3-primary)';dot.style.animation='pulse2 2s infinite';}
@@ -8050,7 +8038,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 4.3 - ۱۴۰۵/۰۱/۲۵
+          ℹ️ نسخه 4.4 - ۱۴۰۵/۰۱/۲۵
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -8068,9 +8056,8 @@
     <button id="back-to-top" aria-label="بازگشت به بالا">↑</button>
 
     <div id="copy-toast">کپی شد!</div>
-
-    <!-- Weather M3E Rich Tooltip — must be at body level to avoid transform stacking context -->
-    <div id="wth-tooltip" style="display:none;position:fixed;z-index:10000;max-width:260px;background:var(--m3-surface-container-high);border:1px solid var(--m3-outline-variant);border-radius:12px;padding:12px 14px;box-shadow:0 4px 24px rgba(0,0,0,.28);pointer-events:none;transition:opacity .1s">
+    <!-- Weather tooltip at body level — must NOT be inside any element with CSS transform/will-change -->
+    <div id="wth-tooltip" style="display:none;position:fixed;z-index:10000;max-width:260px;background:var(--m3-surface-container-high);border:1px solid var(--m3-outline-variant);border-radius:12px;padding:12px 14px;box-shadow:0 4px 24px rgba(0,0,0,.28);pointer-events:none">
       <div id="wth-tt-title" style="font-size:.8rem;font-weight:700;color:var(--m3-on-surface);margin-bottom:4px"></div>
       <div id="wth-tt-body" style="font-size:.75rem;color:var(--m3-on-surface-variant);line-height:1.6"></div>
       <div id="wth-tt-note" style="display:none;font-size:.7rem;color:var(--m3-primary);margin-top:6px;padding-top:6px;border-top:1px solid var(--m3-outline-variant)"></div>
