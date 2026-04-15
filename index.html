@@ -34,7 +34,7 @@
     <!-- PDF.js: load as module and expose pdfjsLib globally for use in classic scripts -->
     <script type="module">
       import * as pdfjsLib from './static/lib/pdf.mjs';
-      pdfjsLib.GlobalWorkerOptions.workerSrc = './lib/pdf.worker.mjs';
+      pdfjsLib.GlobalWorkerOptions.workerSrc = './static/lib/pdf.worker.mjs';
       window.pdfjsLib = pdfjsLib;
       window._pdfjsReady = true;
       window.dispatchEvent(new Event('pdfjsready'));
@@ -7297,6 +7297,17 @@
               <button class="btn btn-tonal cur-tab-btn"        id="cur-tab-crypto" onclick="curSwitchTab('crypto',this)">🪙 رمزارز</button>
             </div>
             <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <!-- M3 Toggle: تومان / USD -->
+              <div style="display:flex;align-items:center;gap:8px">
+                <span id="cur-lbl-toman" style="font-size:.8rem;font-weight:700;color:var(--m3-primary)">تومان</span>
+                <button id="cur-unit-switch" role="switch" aria-checked="false" onclick="curToggleUnit()"
+                  style="position:relative;width:52px;height:32px;border-radius:99px;border:2px solid var(--m3-outline);background:var(--m3-surface-container-highest);cursor:pointer;padding:0;outline:none;transition:background .2s,border-color .2s;flex-shrink:0"
+                  title="تغییر واحد">
+                  <span id="cur-unit-thumb"
+                    style="position:absolute;top:3px;right:3px;width:22px;height:22px;border-radius:50%;background:var(--m3-outline);transition:transform .25s cubic-bezier(.34,1.56,.64,1),background .2s,width .1s,height .1s"></span>
+                </button>
+                <span id="cur-lbl-usd" style="font-size:.8rem;font-weight:500;color:var(--m3-on-surface-variant)">USD</span>
+              </div>
               <div id="cur-update-badge" style="font-size:.72rem;color:var(--m3-on-surface-variant);background:var(--m3-surface-container);padding:4px 12px;border-radius:99px;border:1px solid var(--m3-outline-variant);display:flex;align-items:center;gap:6px">
                 <span id="cur-dot" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--m3-primary);animation:pulse2 2s infinite"></span>
                 <span id="cur-badge-text">در حال بارگذاری...</span>
@@ -7304,7 +7315,7 @@
             </div>
           </div>
           <div id="cur-content"></div>
-          <div class="tool-desc">ارز و طلا از <strong>BrsAPI</strong> — رمزارز از <strong>نوبیتکس</strong> — هر ۶۰ ثانیه بروزرسانی</div>
+          <div class="tool-desc">داده‌ها از <strong>BrsAPI</strong> — هر ۶۰ ثانیه بروزرسانی</div>
         </div>
 
         <!-- ══ STYLES FOR ONLINE TOOLS ══ -->
@@ -7370,20 +7381,22 @@
           .cur-sk-line { height: 12px; border-radius: 6px; background: linear-gradient(90deg,var(--m3-surface-container-high) 25%,var(--m3-outline-variant) 50%,var(--m3-surface-container-high) 75%); background-size:200% 100%; animation:skShimmer 1.5s infinite; margin-bottom:8px; }
           @keyframes skShimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
           /* Tab active — higher specificity to override btn-tonal */
-          .btn.btn-tonal.cur-tab-btn {
-            border: 1.5px solid var(--m3-outline-variant) !important;
-            background: var(--m3-surface-container) !important;
-            color: var(--m3-on-surface-variant) !important;
-            transition: background .15s, color .15s, border-color .15s;
-          }
-          .btn.btn-tonal.cur-tab-btn:hover {
-            background: var(--m3-surface-container-high) !important;
-            color: var(--m3-on-surface) !important;
-          }
-          .btn.btn-tonal.cur-tab-btn.active {
+          /* Unit switch (M3E) */
+          #cur-unit-switch[aria-checked="true"] {
             background: var(--m3-primary) !important;
-            color: var(--m3-on-primary) !important;
             border-color: var(--m3-primary) !important;
+          }
+          #cur-unit-switch[aria-checked="true"] #cur-unit-thumb {
+            transform: translateX(-20px);
+            background: var(--m3-on-primary) !important;
+          }
+          #cur-unit-switch:focus-visible { outline: 3px solid var(--m3-primary); outline-offset: 2px; }
+
+          .btn.btn-tonal.cur-tab-btn { border: 1.5px solid transparent; transition: background .15s, color .15s, border-color .15s, box-shadow .15s; }
+          .btn.btn-tonal.cur-tab-btn.active {
+            background: var(--m3-secondary-container) !important;
+            color: var(--m3-on-secondary-container) !important;
+            border-color: var(--m3-secondary) !important;
             font-weight: 700 !important;
           }
 
@@ -7507,20 +7520,21 @@
           function showTT(e,key){
             const d=TT_DATA[key];if(!d)return;
             clearTimeout(ttTimer);
-            // Capture rect NOW, before setTimeout clears currentTarget
             const rect=e.currentTarget.getBoundingClientRect();
             const el=document.getElementById('wth-tooltip');
             document.getElementById('wth-tt-title').textContent=d.title;
             document.getElementById('wth-tt-body').textContent=d.body;
             const note=document.getElementById('wth-tt-note');
             if(d.note){note.textContent=d.note;note.style.display='';}else{note.style.display='none';}
-            // Show off-screen to measure dimensions
             el.style.top='-9999px';el.style.left='-9999px';el.style.display='block';
             setTimeout(()=>{
               const tw=el.offsetWidth,th=el.offsetHeight,gap=8;
+              // Try above first
               let top=rect.top-th-gap;
               let left=rect.left+rect.width/2-tw/2;
+              // If not enough room above, flip below
               if(top<8)top=rect.bottom+gap;
+              // Clamp horizontally
               left=Math.max(8,Math.min(left,window.innerWidth-tw-8));
               el.style.top=top+'px';el.style.left=left+'px';
             },0);
@@ -7882,7 +7896,7 @@
             ATOM:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#6F7390"/><ellipse cx="17" cy="17" rx="9" ry="4" fill="none" stroke="white" stroke-width="1.5"/><circle cx="17" cy="17" r="2.5" fill="white"/></svg>`,
           };
 
-          let curState={tab:'all',data:null,nbData:{},loading:true,error:null};
+          let curState={tab:'all',unit:'toman',data:null,loading:true,error:null};
           let curTimer,curInit=false;
 
           // Number formatting
@@ -7907,7 +7921,13 @@
           function chgArrow(p){const v=parseFloat(p);if(isNaN(v)||v===0)return'•';return v>0?'▲':'▼';}
           function toTime(u){if(!u)return'';return new Date(u*1000).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'});}
 
-          // Build card HTML — price: unit on right, number on left (natural RTL reading)
+          // Get live USD→Toman rate from USDT_IRT currency entry
+          function getUsdRate(){
+            const list=(curState.data||{}).currency||[];
+            const usdt=list.find(c=>c.symbol==='USDT_IRT')||list.find(c=>c.symbol==='USD');
+            return usdt?parseFloat(usdt.price):159000; // fallback
+          }
+
           function buildCard(iconHtml,badgeClass,badge,nameFa,nameEn,priceHtml,unit,pct,time){
             const cc=chgCls(pct),ca=chgArrow(pct);
             return `<div class="cur-card">
@@ -7928,38 +7948,74 @@
           }
 
           function goldCard(item){
-            // Gold items from BRS have price in IRT (toman); they also carry XAUUSD in dollars
-            const isUSD=item.unit==='دلار';
+            // BRS gold: most items have unit='تومان', XAUUSD has unit='دلار'
+            const itemInToman = item.unit==='تومان';
+            const usdRate = getUsdRate();
             let priceHtml,unit;
-            if(isUSD){priceHtml=fDollar(parseFloat(item.price));unit='USD';}
-            else{priceHtml=fNum(parseFloat(item.price),true);unit='تومان';}
+            if(curState.unit==='toman'){
+              if(itemInToman){
+                priceHtml=fNum(parseFloat(item.price),true);unit='تومان';
+              } else {
+                // USD item → convert to toman
+                const t=parseFloat(item.price)*usdRate;
+                priceHtml=fNum(Math.round(t),true);unit='تومان';
+              }
+            } else {
+              // USD mode
+              if(!itemInToman){
+                priceHtml=fDollar(parseFloat(item.price));unit='USD';
+              } else {
+                // toman item → convert to USD
+                const d=parseFloat(item.price)/usdRate;
+                priceHtml=fDollar(d);unit='USD';
+              }
+            }
             const pct=parseFloat(item.change_percent)||0;
-            const svg=CURRENCY_SVG[item.symbol]||`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#F59E0B"/><text x="17" y="22" text-anchor="middle" font-size="18">🥇</text></svg>`;
+            const svg=CURRENCY_SVG[item.symbol]||`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#F59E0B"/><text x="17" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="white">Au</text></svg>`;
             return buildCard(svg,'cur-card__badge--gold','طلا',item.name,item.name_en||'',priceHtml,unit,pct,toTime(item.time_unix));
           }
 
           function currencyCard(item){
-            const isUSD=item.unit==='دلار';
+            // BRS currency: all in تومان except some edge cases
+            const itemInToman = item.unit==='تومان';
+            const usdRate = getUsdRate();
             let priceHtml,unit;
-            if(isUSD){priceHtml=fDollar(parseFloat(item.price));unit='USD';}
-            else{priceHtml=fNum(parseFloat(item.price),true);unit='تومان';}
+            if(curState.unit==='toman'){
+              if(itemInToman){
+                priceHtml=fNum(parseFloat(item.price),true);unit='تومان';
+              } else {
+                const t=parseFloat(item.price)*usdRate;
+                priceHtml=fNum(Math.round(t),true);unit='تومان';
+              }
+            } else {
+              // USD mode: تومان items → divide by rate
+              if(!itemInToman){
+                priceHtml=fDollar(parseFloat(item.price));unit='USD';
+              } else {
+                const d=parseFloat(item.price)/usdRate;
+                priceHtml=fDollar(d);unit='USD';
+              }
+            }
             const pct=parseFloat(item.change_percent)||0;
-            const svg=CURRENCY_SVG[item.symbol]||CURRENCY_SVG[item.symbol+'_IRT']||`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="var(--m3-primary)"/><text x="17" y="21" text-anchor="middle" font-size="8" font-weight="700" fill="white">${item.symbol}</text></svg>`;
-            return buildCard(svg,'cur-card__badge--curr',item.symbol,item.name,item.name_en||'',priceHtml,unit,pct,toTime(item.time_unix));
+            const svg=CURRENCY_SVG[item.symbol]||CURRENCY_SVG[item.symbol.replace('_IRT','')]||`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="var(--m3-primary)"/><text x="17" y="21" text-anchor="middle" font-size="8" font-weight="700" fill="white">${item.symbol}</text></svg>`;
+            return buildCard(svg,'cur-card__badge--curr',item.symbol.replace('_IRT',''),item.name,item.name_en||'',priceHtml,unit,pct,toTime(item.time_unix));
           }
 
-          function cryptoCard(item, nbStats){
-            // item comes from BRS cryptocurrency array: {symbol, name, name_en, price (USD), change_percent, time_unix}
-            const sym = item.symbol.toUpperCase();
-            const nameFa = item.name || sym;
-            const nameEn = item.name_en || sym;
-            // Price from BRS is already in USD
-            const priceUSD = parseFloat(item.price);
-            let price = priceUSD ? fDollar(priceUSD) : '—';
-            let unit = 'USD';
-            const pct = parseFloat(item.change_percent) || 0;
-            const svg = CRYPTO_SVG[sym] || `<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="${(CRYPTO.find(c=>c.s===sym)||{}).clr||'#888'}"/><text x="17" y="21" text-anchor="middle" font-size="8" font-weight="700" fill="white">${sym}</text></svg>`;
-            return buildCard(svg,'cur-card__badge--crypto',sym,nameFa,nameEn,price,unit,pct,toTime(item.time_unix));
+          function cryptoCard(item){
+            // BRS cryptocurrency: price always in USD
+            const usdPrice=parseFloat(item.price);
+            const usdRate=getUsdRate();
+            let priceHtml,unit;
+            if(curState.unit==='toman'){
+              const t=usdPrice*usdRate;
+              priceHtml=fNum(Math.round(t),true);unit='تومان';
+            } else {
+              priceHtml=fDollar(usdPrice);unit='USD';
+            }
+            const sym=item.symbol.toUpperCase();
+            const pct=parseFloat(item.change_percent)||0;
+            const svg=CRYPTO_SVG[sym]||`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="${(CRYPTO.find(c=>c.s===sym)||{}).clr||'#888'}"/><text x="17" y="21" text-anchor="middle" font-size="8" font-weight="700" fill="white">${sym}</text></svg>`;
+            return buildCard(svg,'cur-card__badge--crypto',sym,item.name,item.name_en||sym,priceHtml,unit,pct,toTime(item.time_unix));
           }
 
           function skeletons(n=6){
@@ -7978,12 +8034,12 @@
             if(curState.tab==='all'||curState.tab==='currency'){
               const list=brs.currency||[];
               const mainSet=['USDT_IRT','USD','EUR','GBP','AED','TRY'];
-              const main=curState.tab==='all'?list.filter(c=>mainSet.some(s=>c.symbol===s||c.symbol===s.replace('_IRT',''))):list;
+              const main=curState.tab==='all'?list.filter(c=>mainSet.some(s=>c.symbol===s||c.symbol===s+'_IRT')):list;
               html+=`<div class="cur-section-title">💵 ${curState.tab==='all'?'ارزهای منتخب':'ارزهای خارجی'}</div><div class="cur-cards-grid">${main.map(currencyCard).join('')}</div>`;
             }
             if(curState.tab==='all'||curState.tab==='crypto'){
-              const cryptoList = brs.cryptocurrency || [];
-              html+=`<div class="cur-section-title">🪙 رمزارز</div><div class="cur-cards-grid">${cryptoList.map(m=>cryptoCard(m,{})).join('')}</div>`;
+              const cryptoList=brs.cryptocurrency||[];
+              html+=`<div class="cur-section-title">🪙 رمزارز</div><div class="cur-cards-grid">${cryptoList.map(cryptoCard).join('')}</div>`;
             }
             el.innerHTML=html||'<div style="text-align:center;padding:32px;color:var(--m3-on-surface-variant)">داده‌ای یافت نشد</div>';
           }
@@ -7994,9 +8050,8 @@
             const dot=document.getElementById('cur-dot'),badge=document.getElementById('cur-badge-text');
             if(dot){dot.style.background='var(--m3-tertiary,#7d5260)';dot.style.animation='none';}
             try{
-              // BRS returns gold + currency + cryptocurrency all in one call
-              const brsRes = await fetch(BRS).then(r=>r.json());
-              curState.data=brsRes; curState.loading=false;
+              const brsRes=await fetch(BRS).then(r=>r.json());
+              curState.data=brsRes;curState.loading=false;
               const now=new Date();
               if(badge)badge.textContent='آخرین بروزرسانی: '+now.toLocaleTimeString('fa-IR');
               if(dot){dot.style.background='var(--m3-primary)';dot.style.animation='pulse2 2s infinite';}
@@ -8012,6 +8067,17 @@
             curState.tab=tab;
             document.querySelectorAll('.cur-tab-btn').forEach(b=>b.classList.remove('active'));
             btn.classList.add('active');curRender();
+          };
+
+          window.curToggleUnit=function(){
+            const isUSD=curState.unit==='usd';
+            curState.unit=isUSD?'toman':'usd';
+            const sw=document.getElementById('cur-unit-switch');
+            sw.setAttribute('aria-checked',isUSD?'false':'true');
+            const lblT=document.getElementById('cur-lbl-toman'),lblU=document.getElementById('cur-lbl-usd');
+            if(lblT){lblT.style.fontWeight=isUSD?'700':'500';lblT.style.color=isUSD?'var(--m3-primary)':'var(--m3-on-surface-variant)';}
+            if(lblU){lblU.style.fontWeight=isUSD?'500':'700';lblU.style.color=isUSD?'var(--m3-on-surface-variant)':'var(--m3-primary)';}
+            curRender();
           };
 
           document.addEventListener('DOMContentLoaded',function(){
@@ -8038,7 +8104,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 4.4 - ۱۴۰۵/۰۱/۲۵
+          ℹ️ نسخه 4.5 - ۱۴۰۵/۰۱/۲۶
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -8056,7 +8122,6 @@
     <button id="back-to-top" aria-label="بازگشت به بالا">↑</button>
 
     <div id="copy-toast">کپی شد!</div>
-    <!-- Weather tooltip at body level — must NOT be inside any element with CSS transform/will-change -->
     <div id="wth-tooltip" style="display:none;position:fixed;z-index:10000;max-width:260px;background:var(--m3-surface-container-high);border:1px solid var(--m3-outline-variant);border-radius:12px;padding:12px 14px;box-shadow:0 4px 24px rgba(0,0,0,.28);pointer-events:none">
       <div id="wth-tt-title" style="font-size:.8rem;font-weight:700;color:var(--m3-on-surface);margin-bottom:4px"></div>
       <div id="wth-tt-body" style="font-size:.75rem;color:var(--m3-on-surface-variant);line-height:1.6"></div>
@@ -10358,7 +10423,7 @@
           }
           try{
             infoEl.textContent='⏳ در حال تجزیه PDF...';
-            lib.GlobalWorkerOptions.workerSrc='./lib/pdf.worker.mjs';
+            lib.GlobalWorkerOptions.workerSrc='./static/lib/pdf.worker.mjs';
             const arr=new Uint8Array(e.target.result);
             _pdfDoc=await lib.getDocument({data:arr}).promise;
             document.getElementById('pdf-pages').textContent=_pdfDoc.numPages;
@@ -10389,7 +10454,7 @@
         else {
           await new Promise((res,rej)=>{
             const s=document.createElement('script');
-            s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+            s.src='static/lib/jspdf.umd.js';
             s.onload=res;s.onerror=rej;document.head.appendChild(s);
           }).catch(()=>{});
           if(typeof window.jspdf!=='undefined') jsPDF=window.jspdf.jsPDF;
