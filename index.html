@@ -7315,7 +7315,13 @@
             </div>
           </div>
           <div id="cur-content"></div>
-          <div class="tool-desc">داده‌ها از <strong>BrsAPI</strong> — هر ۶۰ ثانیه بروزرسانی</div>
+          <div class="tool-desc">
+            <strong>طلا و ارز:</strong> از <strong>BrsAPI</strong> — قیمت‌ها مستقیماً به تومان یا دلار.<br>
+            <strong>رمزارز:</strong> از <strong>نوبیتکس</strong> —
+            در حالت <strong>تومان</strong>: قیمت واقعی بازار ریالی نوبیتکس (تقسیم بر ۱۰) |
+            در حالت <strong>USD</strong>: قیمت بازار تتری نوبیتکس (USDT ≈ USD) |
+            درصد تغییر نسبت به قیمت باز شدن روز گذشته.
+          </div>
         </div>
 
         <!-- ══ STYLES FOR ONLINE TOOLS ══ -->
@@ -7896,7 +7902,7 @@
             ATOM:`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="#6F7390"/><ellipse cx="17" cy="17" rx="9" ry="4" fill="none" stroke="white" stroke-width="1.5"/><circle cx="17" cy="17" r="2.5" fill="white"/></svg>`,
           };
 
-          let curState={tab:'all',unit:'toman',data:null,loading:true,error:null};
+          let curState={tab:'all',unit:'toman',data:null,nbRls:null,nbUsdt:null,loading:true,error:null};
           let curTimer,curInit=false;
 
           // Number formatting
@@ -8002,20 +8008,48 @@
           }
 
           function cryptoCard(item){
-            // BRS cryptocurrency: price always in USD
-            const usdPrice=parseFloat(item.price);
-            const usdRate=getUsdRate();
-            let priceHtml,unit;
+            // Nobitex provides real market prices:
+            // تومان mode: ?dstCurrency=rls → latest is in ریال (÷10 = تومان), dayChange = % vs yesterday open
+            // USD mode:   ?dstCurrency=usdt → latest is in USDT (≈ USD), dayChange = % vs yesterday open
+            const sym = item.symbol.toUpperCase();
+            const symLo = item.symbol.toLowerCase();
+            let priceHtml, unit, source='نوبیتکس';
+
             if(curState.unit==='toman'){
-              const t=usdPrice*usdRate;
-              priceHtml=fNum(Math.round(t),true);unit='تومان';
+              const stats = (curState.nbRls||{})[symLo+'-rls'];
+              if(stats && stats.latest){
+                const toman = parseFloat(stats.latest)/10;
+                priceHtml = fNum(Math.round(toman),true);
+                unit = 'تومان';
+              } else {
+                // Fallback: BRS USD × USD rate
+                const usdPrice = parseFloat(item.price);
+                const t = usdPrice * getUsdRate();
+                priceHtml = fNum(Math.round(t),true);
+                unit = 'تومان';
+                source = 'BrsAPI';
+              }
             } else {
-              priceHtml=fDollar(usdPrice);unit='USD';
+              const stats = (curState.nbUsdt||{})[symLo+'-usdt'];
+              if(stats && stats.latest){
+                priceHtml = fDollar(parseFloat(stats.latest));
+                unit = 'USD';
+              } else {
+                // Fallback: BRS direct USD price
+                priceHtml = fDollar(parseFloat(item.price));
+                unit = 'USD';
+                source = 'BrsAPI';
+              }
             }
-            const sym=item.symbol.toUpperCase();
-            const pct=parseFloat(item.change_percent)||0;
+
+            // Pick change% from the relevant Nobitex dataset
+            const rlsStats  = (curState.nbRls||{})[symLo+'-rls'];
+            const usdtStats = (curState.nbUsdt||{})[symLo+'-usdt'];
+            const activeStats = curState.unit==='toman' ? rlsStats : usdtStats;
+            const pct = parseFloat((activeStats||{}).dayChange || item.change_percent || 0);
+
             const svg=CRYPTO_SVG[sym]||`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="${(CRYPTO.find(c=>c.s===sym)||{}).clr||'#888'}"/><text x="17" y="21" text-anchor="middle" font-size="8" font-weight="700" fill="white">${sym}</text></svg>`;
-            return buildCard(svg,'cur-card__badge--crypto',sym,item.name,item.name_en||sym,priceHtml,unit,pct,toTime(item.time_unix));
+            return buildCard(svg,'cur-card__badge--crypto',sym,item.name,item.name_en||sym,priceHtml,unit,pct,source);
           }
 
           function skeletons(n=6){
@@ -8050,8 +8084,20 @@
             const dot=document.getElementById('cur-dot'),badge=document.getElementById('cur-badge-text');
             if(dot){dot.style.background='var(--m3-tertiary,#7d5260)';dot.style.animation='none';}
             try{
-              const brsRes=await fetch(BRS).then(r=>r.json());
-              curState.data=brsRes;curState.loading=false;
+              // All CRYPTO symbols for Nobitex
+              const syms=CRYPTO.map(c=>c.s.toLowerCase()).join(',');
+              // Fetch BRS (gold+currency+crypto metadata) and Nobitex (real toman + real USD prices) in parallel
+              const [brsRes, nbRlsRes, nbUsdtRes] = await Promise.all([
+                fetch(BRS).then(r=>r.json()),
+                fetch(NB+'?srcCurrency='+syms+'&dstCurrency=rls')
+                  .then(r=>r.json()).catch(()=>({stats:{}})),
+                fetch(NB+'?srcCurrency='+syms+'&dstCurrency=usdt')
+                  .then(r=>r.json()).catch(()=>({stats:{}})),
+              ]);
+              curState.data  = brsRes;
+              curState.nbRls = nbRlsRes.stats || {};
+              curState.nbUsdt= nbUsdtRes.stats || {};
+              curState.loading=false;
               const now=new Date();
               if(badge)badge.textContent='آخرین بروزرسانی: '+now.toLocaleTimeString('fa-IR');
               if(dot){dot.style.background='var(--m3-primary)';dot.style.animation='pulse2 2s infinite';}
@@ -8104,7 +8150,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 4.5 - ۱۴۰۵/۰۱/۲۶
+          ℹ️ نسخه 4.6 - ۱۴۰۵/۰۱/۲۶
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
