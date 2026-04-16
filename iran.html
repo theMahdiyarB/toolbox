@@ -159,6 +159,44 @@
           margin: 0 auto 8px; justify-content: center; }
       }
 
+      /* ── Status Dot ── */
+      .status-dot {
+        display: inline-block;
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        position: absolute;
+        top: 8px;
+        inset-inline-end: 8px;
+        background: #9e9e9e;
+        flex-shrink: 0;
+        transition: background 0.4s ease;
+      }
+      .status-dot.online {
+        background: #4caf50;
+        box-shadow: 0 0 0 0 rgba(76,175,80,0.7);
+        animation: pulse-green 2s ease-in-out infinite;
+      }
+      .status-dot.offline {
+        background: #f44336;
+        animation: none;
+        box-shadow: none;
+      }
+      @keyframes pulse-green {
+        0%   { box-shadow: 0 0 0 0   rgba(76,175,80,0.7); }
+        60%  { box-shadow: 0 0 0 5px rgba(76,175,80,0);   }
+        100% { box-shadow: 0 0 0 0   rgba(76,175,80,0);   }
+      }
+      /* ensure link-card has relative positioning for the dot */
+      .link-card { position: relative; }
+
+      /* ── Global (worldwide) cards — hidden until confirmed reachable ── */
+      .global-card {
+        display: none;
+      }
+      .global-card.reachable {
+        display: flex;
+      }
+
       /* ── back-to-top: above mobile bottom nav ── */
       @media (max-width: 768px) {
         #back-to-top {
@@ -309,8 +347,8 @@
             </svg>
         </div>
         <h1 class="headline-large hero-title">منابع و خدمات داخلی ایران</h1>
-        <p class="body-large hero-subtitle">مجموعه جامع لینک‌ها، ابزارها و خدمات قابل دسترسی در شرایط محدودیت اینترنت؛ همه در یک جا و با به‌روزرسانی مداوم</p>
-        <p class="body-large hero-subtitle">⚠️ برخی از سایت‌ها و سرویس‌ها ممکن است به‌علت اختلال، فیلترینگ و... از دسترس خارج شده باشند.</p>
+        <p class="body-large hero-subtitle">دایرکتوری و مجموعه جامع لینک‌ها، ابزارها و خدمات قابل دسترسی در شرایط محدودیت اینترنت؛ همه در یک جا و با به‌روزرسانی مداوم</p>
+        <p class="body-large hero-subtitle" style="margin-top:20px;">⚠️ برخی از سایت‌ها و سرویس‌ها ممکن است به‌علت اختلال، فیلترینگ و... از دسترس خارج شده باشند. در اولین ورود به سایت، دسترسی شما به لینک‌ها بررسی شده و با نقطه‌ای در کنار هر کارت نمایش داده می‌شود. این بررسی ممکن است دارای اشتباه باشد. برای اطمینان، با کلیک برروی کارت سایت موردنظر، آن را در مرورگر خود باز کنید.</p>
 
         <div class="hero-search-wrapper">
             <div class="hero-search-bar">
@@ -503,6 +541,22 @@
                     <div class="link-card__top"><div class="link-card__emoji">🔗</div><div class="link-card__title">ریسمون</div></div>
                     <div class="link-card__url">reymon.ir</div>
                 </a>
+                <!-- Global search engines — shown only when reachable -->
+                <a href="https://www.google.com" class="link-card global-card" data-check-url="https://www.google.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">Google</div></div>
+                    <div class="link-card__url">google.com</div>
+                    <div class="link-card__desc">موتور جستجوی جهانی</div>
+                </a>
+                <a href="https://duckduckgo.com" class="link-card global-card" data-check-url="https://duckduckgo.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">DuckDuckGo</div></div>
+                    <div class="link-card__url">duckduckgo.com</div>
+                    <div class="link-card__desc">جستجوی حریم‌خصوصی محور</div>
+                </a>
+                <a href="https://www.bing.com" class="link-card global-card" data-check-url="https://www.bing.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">Bing</div></div>
+                    <div class="link-card__url">bing.com</div>
+                    <div class="link-card__desc">موتور جستجوی مایکروسافت</div>
+                </a>
             </div>
         </div>
 
@@ -554,6 +608,17 @@
                     <div class="link-card__top"><div class="link-card__emoji">📘</div><div class="link-card__title">فرهنگ آنلاین عمید</div></div>
                     <div class="link-card__url">dehkhoda.ut.ac.ir/fa/dictionary</div>
                     <div class="link-card__desc">واژه‌نامه فارسی به فارسی</div>
+                </a>
+                <!-- Global translate/dictionary services — shown only when reachable -->
+                <a href="https://translate.google.com" class="link-card global-card" data-check-url="https://translate.google.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">Google Translate</div></div>
+                    <div class="link-card__url">translate.google.com</div>
+                    <div class="link-card__desc">مترجم گوگل</div>
+                </a>
+                <a href="https://www.deepl.com/translator" class="link-card global-card" data-check-url="https://www.deepl.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">DeepL</div></div>
+                    <div class="link-card__url">deepl.com</div>
+                    <div class="link-card__desc">مترجم هوشمند DeepL</div>
                 </a>
             </div>
         </div>
@@ -656,6 +721,32 @@
                     <div class="link-card__url">digimark-ai.com</div>
                     <div class="link-card__desc">تولید متن، عکس، صوت و ویدئو با هوش مصنوعی</div>
                 </a>
+                <!-- Global AI services — shown only when reachable -->
+                <a href="https://chat.openai.com" class="link-card global-card" data-check-url="https://chat.openai.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">ChatGPT</div></div>
+                    <div class="link-card__url">chat.openai.com</div>
+                    <div class="link-card__desc">هوش مصنوعی OpenAI</div>
+                </a>
+                <a href="https://claude.ai" class="link-card global-card" data-check-url="https://claude.ai" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">Claude</div></div>
+                    <div class="link-card__url">claude.ai</div>
+                    <div class="link-card__desc">هوش مصنوعی Anthropic</div>
+                </a>
+                <a href="https://gemini.google.com" class="link-card global-card" data-check-url="https://gemini.google.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">Gemini</div></div>
+                    <div class="link-card__url">gemini.google.com</div>
+                    <div class="link-card__desc">هوش مصنوعی Google</div>
+                </a>
+                <a href="https://www.perplexity.ai" class="link-card global-card" data-check-url="https://www.perplexity.ai" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">Perplexity</div></div>
+                    <div class="link-card__url">perplexity.ai</div>
+                    <div class="link-card__desc">موتور جستجوی هوشمند</div>
+                </a>
+                <a href="https://copilot.microsoft.com" class="link-card global-card" data-check-url="https://copilot.microsoft.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">Microsoft Copilot</div></div>
+                    <div class="link-card__url">copilot.microsoft.com</div>
+                    <div class="link-card__desc">هوش مصنوعی مایکروسافت</div>
+                </a>
             </div>
         </div>
 
@@ -673,6 +764,17 @@
                 <a href="https://balad.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🧭</div><div class="link-card__title">بلد</div></div>
                     <div class="link-card__url">balad.ir</div>
+                </a>
+                <!-- Global map services — shown only when reachable -->
+                <a href="https://maps.google.com" class="link-card global-card" data-check-url="https://maps.google.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">Google Maps</div></div>
+                    <div class="link-card__url">maps.google.com</div>
+                    <div class="link-card__desc">نقشه جهانی گوگل</div>
+                </a>
+                <a href="https://www.openstreetmap.org" class="link-card global-card" data-check-url="https://www.openstreetmap.org" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">OpenStreetMap</div></div>
+                    <div class="link-card__url">openstreetmap.org</div>
+                    <div class="link-card__desc">نقشه متن‌باز جهانی</div>
                 </a>
             </div>
             <iframe title="neshan-map-iframe" style="border-radius: 20px;" src="https://neshan.org/maps/iframe/places/tehran-city#c35.701-51.486-11z-0p/35.70069306001047/51.401448230279264" width="100%" height="450" frameborder="0" style="border:0;" allowFullScreen loading="lazy"></iframe>
@@ -704,7 +806,7 @@
                     <div class="link-card__desc">نیازمند ثبت‌نام با شماره موبایل</div>
                 </a>
             </div>
-            <img src="https://ndc.irimo.ir//parameters/weather/modules/cdk/upload/content/DisplayFile/69/t[3].jpg" title="irimo-temp-iran" style="border-radius: 20px;" width="100%">
+            <img src="https://ndc.irimo.ir//parameters/weather/modules/cdk/upload/content/DisplayFile/69/t[2].jpg" title="irimo-temp-iran" style="border-radius: 20px;" width="100%">
         </div>
 
         <!-- Useful -->
@@ -1262,6 +1364,22 @@
                     <div class="link-card__url">3fa.ir</div>
                     <div class="link-card__desc">دانلود زیرنویس</div>
                 </a>
+                <!-- Global video/streaming services — shown only when reachable -->
+                <a href="https://www.youtube.com" class="link-card global-card" data-check-url="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">YouTube</div></div>
+                    <div class="link-card__url">youtube.com</div>
+                    <div class="link-card__desc">بزرگ‌ترین پلتفرم ویدئو جهان</div>
+                </a>
+                <a href="https://www.netflix.com" class="link-card global-card" data-check-url="https://www.netflix.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">Netflix</div></div>
+                    <div class="link-card__url">netflix.com</div>
+                    <div class="link-card__desc">استریم فیلم و سریال</div>
+                </a>
+                <a href="https://www.imdb.com" class="link-card global-card" data-check-url="https://www.imdb.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">IMDb</div></div>
+                    <div class="link-card__url">imdb.com</div>
+                    <div class="link-card__desc">پایگاه داده فیلم و سریال</div>
+                </a>
             </div>
         </div>
 
@@ -1350,7 +1468,7 @@
                 </a>
                 <a href="https://ememay.ir/music" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">Ⓜ️</div><div class="link-card__title">اِم موزیک</div></div>
-                    <div class="link-card__url">ememay.ir/music<div>
+                    <div class="link-card__url">ememay.ir/music</div>
                 </a>
                 <a href="https://ravkadeh.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🎙️</div><div class="link-card__title">پادکست راوکده</div></div>
@@ -1376,6 +1494,22 @@
                     <div class="link-card__top"><div class="link-card__emoji">🐘</div><div class="link-card__title">پادکست‌های فیدیبو</div></div>
                     <div class="link-card__url">fidibo.com/podcasts</div>
                     <div class="link-card__desc">لیست پادکست‌ها</div>
+                </a>
+                <!-- Global music services — shown only when reachable -->
+                <a href="https://open.spotify.com" class="link-card global-card" data-check-url="https://open.spotify.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">Spotify</div></div>
+                    <div class="link-card__url">open.spotify.com</div>
+                    <div class="link-card__desc">استریم موسیقی جهانی</div>
+                </a>
+                <a href="https://music.apple.com" class="link-card global-card" data-check-url="https://music.apple.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">Apple Music</div></div>
+                    <div class="link-card__url">music.apple.com</div>
+                    <div class="link-card__desc">موسیقی اپل</div>
+                </a>
+                <a href="https://soundcloud.com" class="link-card global-card" data-check-url="https://soundcloud.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">SoundCloud</div></div>
+                    <div class="link-card__url">soundcloud.com</div>
+                    <div class="link-card__desc">موسیقی مستقل و پادکست</div>
                 </a>
             </div>
         </div>
@@ -1514,6 +1648,27 @@
                     <div class="link-card__top"><div class="link-card__emoji">🔹</div><div class="link-card__title">هوشیو</div></div>
                     <div class="link-card__url">hooshio.com</div>
                     <div class="link-card__desc">رسانه هوش مصنوعی</div>
+                </a>
+                <!-- Global news services — shown only when reachable -->
+                <a href="https://www.bbc.com/persian" class="link-card global-card" data-check-url="https://www.bbc.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">BBC فارسی</div></div>
+                    <div class="link-card__url">bbc.com/persian</div>
+                    <div class="link-card__desc">اخبار بین‌المللی به فارسی</div>
+                </a>
+                <a href="https://www.reuters.com" class="link-card global-card" data-check-url="https://www.reuters.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">Reuters</div></div>
+                    <div class="link-card__url">reuters.com</div>
+                    <div class="link-card__desc">خبرگزاری بین‌المللی</div>
+                </a>
+                <a href="https://www.theguardian.com" class="link-card global-card" data-check-url="https://www.theguardian.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">The Guardian</div></div>
+                    <div class="link-card__url">theguardian.com</div>
+                    <div class="link-card__desc">روزنامه بین‌المللی</div>
+                </a>
+                <a href="https://www.reddit.com" class="link-card global-card" data-check-url="https://www.reddit.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">Reddit</div></div>
+                    <div class="link-card__url">reddit.com</div>
+                    <div class="link-card__desc">انجمن‌های بحث جهانی</div>
                 </a>
             </div>
         </div>
@@ -1678,7 +1833,7 @@
                     </div>
                     <div class="dl-card__arrow">↗</div>
                 </a>
-                <a href="https://delta.mahdiyar.info/DeltaChat-2.48.0-Setup.x64.exe" class="dl-card" target="_blank" rel="noopener noreferrer">
+                <a href="https://delta.mahdiyar.info/DeltaChat-2.49.0-Setup.x64.exe" class="dl-card" target="_blank" rel="noopener noreferrer">
                     <div class="dl-card__icon">📥</div>
                     <div class="dl-card__body">
                         <div class="dl-card__title">دانلود مستقیم</div>
@@ -1864,6 +2019,13 @@
                     </div>
                     <div class="link-card__url">mtx.mewer1.dev</div>
                 </a>
+                <a href="https://raxva.net" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top">
+                        <div class="link-card__emoji">🟢</div>
+                        <div class="link-card__title">Raxva</div>
+                    </div>
+                    <div class="link-card__url">raxva.net</div>
+                </a>
             </div>
         </div>
 
@@ -2014,6 +2176,20 @@
                         <div class="link-card__title">Vasl</div>
                     </div>
                     <div class="link-card__url">89.42.199.82:3002</div>
+                </a>
+                <a href="https://chat.zaringo.sbs" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top">
+                        <div class="link-card__emoji">🕊</div>
+                        <div class="link-card__title">زرین گو</div>
+                    </div>
+                    <div class="link-card__url">chat.zaringo.sbs</div>
+                </a>
+                <a href="https://plus.miniplus.space" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top">
+                        <div class="link-card__emoji">🕊</div>
+                        <div class="link-card__title">مینی پلاس</div>
+                    </div>
+                    <div class="link-card__url">plus.miniplus.space</div>
                 </a>
             </div>
         </div>
@@ -2252,6 +2428,11 @@
                     <div class="link-card__top"><div class="link-card__emoji">🔢</div><div class="link-card__title">گیتی زیست دیجیتال</div></div>
                     <div class="link-card__url">zgit-npa1fsz0xu.liara.run</div>
                 </a>
+                <a href="https://scorpian.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🔢</div><div class="link-card__title">ایران گیت</div></div>
+                    <div class="link-card__url">scorpian.ir</div>
+                    <div class="link-card__desc">دانلود رایگان از گیت‌هاب</div>
+                </a>
                 <a href="https://github.devneeds.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🔢</div><div class="link-card__title">DevNeeds</div></div>
                     <div class="link-card__url">github.devneeds.ir</div>
@@ -2300,22 +2481,37 @@
                 <a href="https://guardnet.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🛡</div><div class="link-card__title">گاردنت</div></div>
                     <div class="link-card__url">guardnet.ir</div>
-                    <div class="link-card__desc">بدون نیاز به ثبت‌نام تا ۱۰۰ مگابایت و ۷ روز انقضا</div>
+                    <div class="link-card__desc">بدون نیاز به ثبت‌نام تا ۱۰۰ مگابایت و تا ۷ روز انقضا</div>
                 </a>
                 <a href="https://punkpaste.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🛡</div><div class="link-card__title">پانک‌پیست</div></div>
                     <div class="link-card__url">punkpaste.ir</div>
-                    <div class="link-card__desc">حجم مجاز ۷۰۰ مگابایت و ۲۴ ساعت انقضا - بدون نیاز به ثبت‌نام</div>
+                    <div class="link-card__desc">حجم مجاز ۷۰۰ مگابایت و تا ۲۴ ساعت انقضا - بدون نیاز به ثبت‌نام</div>
                 </a>
                 <a href="http://kalbod-team.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🟣</div><div class="link-card__title">تیم کالبد</div></div>
                     <div class="link-card__url">kalbod-team.ir</div>
-                    <div class="link-card__desc">حجم مجاز ۲۰۰ مگابایت و ۳ روز انقضا - بدون نیاز به ثبت‌نام</div>
+                    <div class="link-card__desc">حجم مجاز ۲۰۰ مگابایت و تا ۳ روز انقضا - بدون نیاز به ثبت‌نام</div>
+                </a>
+                <a href="https://csave.ir" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📦</div><div class="link-card__title">سی‌سیو</div></div>
+                    <div class="link-card__url">csave.ir</div>
+                    <div class="link-card__desc">حجم مجاز ۲۰۰ مگابایت و تا ۳۰ روز انقضا - بدون نیاز به ثبت‌نام</div>
+                </a>
+                <a href="https://storage.zaringo.sbs" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🥇</div><div class="link-card__title">ذخیره‌سازی زرین</div></div>
+                    <div class="link-card__url">storage.zaringo.sbs</div>
+                    <div class="link-card__desc">حجم مجاز ۴۰۰ مگابایت و ۷ روز انقضا - بدون نیاز به ثبت‌نام</div>
                 </a>
                 <a href="https://files.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">☁️</div><div class="link-card__title">فایلز</div></div>
                     <div class="link-card__url">files.ir</div>
                     <div class="link-card__desc">۲ گیگ فصای رایگان - نیاز به ثبت‌نام</div>
+                </a>
+                <a href="https://kalino.site" class="link-card" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">📁</div><div class="link-card__title">آپلودینو</div></div>
+                    <div class="link-card__url">kalino.site</div>
+                    <div class="link-card__desc">۱ گیگ فصای رایگان - نیاز به ثبت‌نام</div>
                 </a>
                 <a href="https://drive.arvancloud.ir" class="link-card" target="_blank" rel="noopener noreferrer">
                     <div class="link-card__top"><div class="link-card__emoji">🔺</div><div class="link-card__title">درایو ابرآروان</div></div>
@@ -2346,6 +2542,17 @@
                     <div class="link-card__top"><div class="link-card__emoji">🌩</div><div class="link-card__title">آپیکسو</div></div>
                     <div class="link-card__url">upixo.ir</div>
                     <div class="link-card__desc">نیاز به ثبت‌نام</div>
+                </a>
+                <!-- Global file sharing services — shown only when reachable -->
+                <a href="https://wetransfer.com" class="link-card global-card" data-check-url="https://wetransfer.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">WeTransfer</div></div>
+                    <div class="link-card__url">wetransfer.com</div>
+                    <div class="link-card__desc">اشتراک‌گذاری فایل تا ۲ گیگ رایگان</div>
+                </a>
+                <a href="https://pastebin.com" class="link-card global-card" data-check-url="https://pastebin.com" target="_blank" rel="noopener noreferrer">
+                    <div class="link-card__top"><div class="link-card__emoji">🌐</div><div class="link-card__title">Pastebin</div></div>
+                    <div class="link-card__url">pastebin.com</div>
+                    <div class="link-card__desc">اشتراک‌گذاری متن و کد</div>
                 </a>
             </div>
         </div>
@@ -3865,7 +4072,7 @@
             <div class="footer-title">منابع و خدمات داخلی ایران</div>
             <div class="footer-subtitle">گردآوری‌شده برای دسترسی آسان‌تر در شرایط محدودیت اینترنت</div>
             <div class="footer-subtitle" style="margin-top:4px;font-size:0.75rem;opacity:0.6;">
-                ۱۴۰۵/۰۱/۲۶ — به‌روزرسانی مداوم
+                ۱۴۰۵/۰۱/۲۷ — به‌روزرسانی مداوم
             </div>
             <a href="https://mahdiyar.info"><div class="footer-subtitle">بازگشت به جعبه‌ابزار ←</div></a>
         </div>
@@ -4086,6 +4293,79 @@
       }
     }
   }, { passive: true });
+})();
+
+/* ════════════════════════════════════════════════════════════
+   SITE STATUS CHECKER
+   — Adds a beating green dot (online) or red dot (offline)
+     to every .link-card that has an href starting with http.
+   — Global (.global-card) cards are hidden by default and
+     only revealed when their target is reachable.
+════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  /* Helper: extract origin from a URL string */
+  function getOrigin(url) {
+    try { return new URL(url).origin; } catch(e) { return null; }
+  }
+
+  /* Create a status dot element */
+  function makeDot() {
+    const dot = document.createElement('span');
+    dot.className = 'status-dot';
+    dot.setAttribute('aria-hidden', 'true');
+    return dot;
+  }
+
+  /* Check a single URL using no-cors fetch (works for any HTTP server).
+     Resolves true if reachable, false otherwise. */
+  function checkURL(url) {
+    return fetch(url, {
+      method: 'HEAD',
+      mode: 'no-cors',
+      cache: 'no-store',
+      signal: AbortSignal.timeout(7000),
+    })
+    .then(() => true)
+    .catch(() => false);
+  }
+
+  /* Deduplicate: one check per origin, shared across all cards with same origin */
+  const originCache = new Map(); // origin -> Promise<boolean>
+
+  function checkOriginOnce(origin) {
+    if (!originCache.has(origin)) {
+      originCache.set(origin, checkURL(origin));
+    }
+    return originCache.get(origin);
+  }
+
+  /* Process all link-cards */
+  document.querySelectorAll('a.link-card[href]').forEach(function(card) {
+    const href = card.getAttribute('href');
+    if (!/^https?:\/\//i.test(href)) return; // skip anchors / relative paths
+
+    const origin = getOrigin(href);
+    if (!origin) return;
+
+    const dot = makeDot();
+    card.appendChild(dot);
+
+    const isGlobal = card.classList.contains('global-card');
+
+    checkOriginOnce(origin).then(function(online) {
+      if (online) {
+        dot.classList.add('online');
+        if (isGlobal) {
+          card.classList.add('reachable');
+        }
+      } else {
+        dot.classList.add('offline');
+        // global cards stay hidden (display:none) when offline
+      }
+    });
+  });
 })();
 </script>
 
