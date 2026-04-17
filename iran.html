@@ -806,7 +806,7 @@
                     <div class="link-card__desc">نیازمند ثبت‌نام با شماره موبایل</div>
                 </a>
             </div>
-            <img src="https://ndc.irimo.ir//parameters/weather/modules/cdk/upload/content/DisplayFile/69/t[2].jpg" title="irimo-temp-iran" style="border-radius: 20px;" width="100%">
+            <img src="https://ndc.irimo.ir//parameters/weather/modules/cdk/upload/content/DisplayFile/69/t[3].jpg" title="irimo-temp-iran" style="border-radius: 20px;" width="100%">
         </div>
 
         <!-- Useful -->
@@ -4318,27 +4318,50 @@
     return dot;
   }
 
-  /* Check a single URL using no-cors fetch (works for any HTTP server).
-     Resolves true if reachable, false otherwise. */
+  /* Check reachability using an Image probe — works from file://, mobile,
+     and any browser without CORS restrictions.
+     Strategy: request /favicon.ico from the origin.
+     - If the server is UP: the browser establishes a TCP connection and gets
+       a response. onerror fires quickly (non-image 404 is still a response).
+     - If the server is DOWN / DNS fails: nothing fires until our timeout.
+     We treat "onerror within timeout" as ONLINE (got a response, even if 404)
+     and "timeout with no event" as OFFLINE. */
   function checkURL(url) {
-    return fetch(url, {
-      method: 'HEAD',
-      mode: 'no-cors',
-      cache: 'no-store',
-      signal: AbortSignal.timeout(7000),
-    })
-    .then(() => true)
-    .catch(() => false);
+    return new Promise(function(resolve) {
+      var origin;
+      try { origin = new URL(url).origin; } catch(e) { return resolve(false); }
+
+      var img = new Image();
+      var settled = false;
+      var TIMEOUT = 8000;
+
+      var timer = setTimeout(function() {
+        if (!settled) { settled = true; img.src = ''; resolve(false); }
+      }, TIMEOUT);
+
+      function markOnline() {
+        if (!settled) { settled = true; clearTimeout(timer); resolve(true); }
+      }
+
+      /* onload: got actual image bytes → definitely online */
+      img.onload = markOnline;
+
+      /* onerror: browser received a response (even 404 / non-image) → online.
+         True network failures (DNS error, no route) take the full timeout. */
+      img.onerror = markOnline;
+
+      img.src = origin + '/favicon.ico?_=' + Date.now();
+    });
   }
 
   /* Deduplicate: one check per origin, shared across all cards with same origin */
-  const originCache = new Map(); // origin -> Promise<boolean>
+  var originCache = {};
 
   function checkOriginOnce(origin) {
-    if (!originCache.has(origin)) {
-      originCache.set(origin, checkURL(origin));
+    if (!originCache[origin]) {
+      originCache[origin] = checkURL(origin);
     }
-    return originCache.get(origin);
+    return originCache[origin];
   }
 
   /* Process all link-cards */
