@@ -190,7 +190,7 @@ toolbox/
 ├── iran.html                          ← صفحه منابع اینترنت ایران
 ├── main.css                           ← استایل‌های مشترک (iran.html)
 ├── manifest.json                      ← تنظیمات PWA
-├── sw.js                              ← Service Worker
+├── sw.js                              ← سرویس Service Worker
 ├── favicon.png
 ├── icon-512.png
 ├── Vazirmatn-VF.ttf                   ← فونت متغیر وزیرمتن
@@ -202,17 +202,17 @@ toolbox/
 │   ├── browser-image-compression.js   ← فشرده‌سازی تصویر
 │   ├── pdf-lib.js                     ← ادغام، تقسیم، مرتب‌سازی PDF (ساختار اصلی حفظ می‌شود)
 │   ├── pdf.mjs                        ← رندر PDF به canvas (برای فشرده‌سازی و استخراج تصویر)
-│   └── pdf.worker.mjs                 ← Web Worker متعلق به PDF.js
+│   └── pdf.worker.mjs                 ← وب Web Worker متعلق به PDF.js
 ├── static/lib/emoticon_dict.json      ← مجموعه ۶۵ هزار اِموتیکون
 ├── holidays/                          ← تقویم تعطیلات ایران (سال‌های ۱۳۹۰-۱۴۲۰)
 │   ├── 1390.json … 1420.json
-├── poems/                             ← مجموعه اشعار شاعران ایرانی
+├── poems/                             ← مجموعه اشعار شاعران ایرانی از گنجور
 │   ├── akhavan/ ferdowsi/ forugh/ hafez/ iraj/ jami/
 │   ├── khayyam/ nima/ nizami/ rumi/ saadi/ sanai/
 │   ├── shahriar/ shamlou/ sohrab-sepehri/ vahshi/
 │   └── [poet]/
 │       ├── bio.xhtml                  ← زندگی‌نامه شاعر
-│       ├── content.opf                ← metadata EPUB
+│       ├── content.opf                ← متادیتای EPUB
 │       ├── structure.json             ← ساختار سلسله‌مراتبی
 │       ├── toc.ncx                    ← فهرست
 │       └── cat*.xhtml                 ← فصل‌ها و قسمت‌ها
