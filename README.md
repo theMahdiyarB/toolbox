@@ -2,6 +2,9 @@
 ![Logo](https://github.com/theMahdiyarB/toolbox/blob/main/static/icon-512.png?raw=true)
 
 <div dir="rtl">
+
+![Logo](https://github.com/theMahdiyarB/toolbox/blob/main/static/icon-512.png?raw=true)
+
 # 🧰 جعبه‌ابزار آفلاین
 
 **بیش از ۱۰۰ ابزار ابزار کاربردی، سبک و آفلاین، قابل نصب روی موبایل و دسکتاپ.**
