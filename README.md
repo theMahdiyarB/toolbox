@@ -1,11 +1,12 @@
 <div dir="rtl">
-   <div align="center">
-   # 🧰 جعبه‌ابزار آفلاین
+![Logo](https://github.com/theMahdiyarB/toolbox/blob/main/static/icon-512.png?raw=true)
 
-   **بیش از ۱۰۰ ابزار ابزار کاربردی، سبک و آفلاین، قابل نصب روی موبایل و دسکتاپ.**
+# 🧰 جعبه‌ابزار آفلاین
 
-   🌐 **پیاده‌سازی‌شده:** [mahdiyar.info](https://mahdiyar.info/)
-   </div>
+**بیش از ۱۰۰ ابزار ابزار کاربردی، سبک و آفلاین، قابل نصب روی موبایل و دسکتاپ.**
+
+🌐 **پیاده‌سازی‌شده:** [mahdiyar.info](https://mahdiyar.info/)
+
 ---
 
 ## ✨ ویژگی‌ها
