@@ -27,10 +27,10 @@
     </script>
     <script src="static/lib/math.js"></script>
     <script src="static/lib/function-plot.js"></script>
-    <script src="static/lib/qrcode.js"></script>
     <script src="static/lib/jsQR.js"></script>
     <script src="static/lib/qr-code-styling.js"></script>
     <script src="static/lib/browser-image-compression.js"></script>
+    <script src="static/lib/pdf-lib.js"></script>
     <!-- PDF.js: load as module and expose pdfjsLib globally for use in classic scripts -->
     <script type="module">
       import * as pdfjsLib from './static/lib/pdf.mjs';
@@ -255,7 +255,7 @@
         gap: 12px;
         margin-bottom: 32px;
       }
-      @media (max-width: 540px) { .share-install-row { grid-template-columns: 1fr; } }
+      @media (max-width: 540px) { .share-install-row { grid-template-columns: 1fr 1fr !important; } }
       .share-card {
         background: var(--m3-surface-container);
         border: 1.5px solid var(--m3-outline-variant);
@@ -667,10 +667,14 @@
         appearance: auto;
         color-scheme: light;
         background-color: var(--m3-surface-container);
+        background-image: none;
       }
       [data-theme="dark"] .select-input {
         color-scheme: dark;
+        background-color: var(--m3-surface-container);
       }
+      /* Make the native dropdown arrow area match the field background */
+      .select-input::-webkit-scrollbar { display: none; }
       /* Hide number spinners */
       .field__input[type="number"]::-webkit-inner-spin-button,
       .field__input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
@@ -2339,7 +2343,7 @@
                 <div class="link-card" onclick="haptic(this);showTool('pdfcompress')"><button class="fav-btn" data-tool="pdfcompress" onclick="event.stopPropagation();toggleFav('pdfcompress',this)">☆</button><span class="link-card__icon">🛠️</span><span class="link-card__name">ابزار PDF</span><span class="link-card__desc">ادغام، تقسیم، مرتب‌سازی، استخراج تصویر</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('filesplit')"><button class="fav-btn" data-tool="filesplit" onclick="event.stopPropagation();toggleFav('filesplit',this)">☆</button><span class="link-card__icon">🗂</span><span class="link-card__name">تقسیم و مرج فایل</span><span class="link-card__desc">فایل‌های بزرگ + رمز</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('watermark')"><button class="fav-btn" data-tool="watermark" onclick="event.stopPropagation();toggleFav('watermark',this)">☆</button><span class="link-card__icon">💧</span><span class="link-card__name">واترمارک تصویر</span><span class="link-card__desc">افزودن لوگو یا متن به تصویر</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('img2b64')"><button class="fav-btn" data-tool="img2b64" onclick="event.stopPropagation();toggleFav('img2b64',this)">☆</button><span class="link-card__icon">🔄</span><span class="link-card__name">تصویر → Base64</span><span class="link-card__desc">برای CSS و HTML</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('img2b64')"><button class="fav-btn" data-tool="img2b64" onclick="event.stopPropagation();toggleFav('img2b64',this)">☆</button><span class="link-card__icon">🔄</span><span class="link-card__name">تصویر ← Base64</span><span class="link-card__desc">برای CSS و HTML</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('csvjson')"><button class="fav-btn" data-tool="csvjson" onclick="event.stopPropagation();toggleFav('csvjson',this)">☆</button><span class="link-card__icon">↔️</span><span class="link-card__name">CSV ↔ JSON</span><span class="link-card__desc">تبدیل دوطرفه</span></div>
               </div>
             </div>
@@ -5039,6 +5043,7 @@
               <div class="prog-wrap" id="pdfs-prog" style="display:none;margin-top:10px"><div class="prog-bar"><div class="prog-fill" id="pdfs-prog-fill"></div></div><div class="prog-lbl" id="pdfs-prog-lbl">در حال تقسیم…</div></div>
               <button class="btn btn-filled" onclick="pdfsProcess()" style="margin-top:12px">✂️ تقسیم و دانلود</button>
             </div>
+            <div id="pdfs-preview-area" style="display:none;margin-top:14px"></div>
           </div>
 
           <!-- ── REORDER ── -->
@@ -5093,8 +5098,9 @@
               <div style="font-size:12px;font-weight:600;margin-bottom:6px">صفحات (خالی = همه):</div>
               <input type="text" id="pdfe-pages-input" class="text-input" placeholder="مثال: 1,3-5 یا خالی برای همه" style="direction:ltr;margin-bottom:10px"/>
               <div class="prog-wrap" id="pdfe-prog" style="display:none"><div class="prog-bar"><div class="prog-fill" id="pdfe-prog-fill"></div></div><div class="prog-lbl" id="pdfe-prog-lbl">در حال رندر…</div></div>
-              <button class="btn btn-filled" onclick="pdfeProcess()">🖼️ استخراج و دانلود ZIP</button>
+              <button class="btn btn-filled" onclick="pdfeProcess()">🖼️ استخراج تصاویر</button>
             </div>
+            <div id="pdfe-preview-area" style="display:none;margin-top:14px"></div>
           </div>
 
           <!-- ── IMAGES → PDF ── -->
@@ -6644,49 +6650,22 @@
           <!-- Game selector grid (shown when no game active) -->
           <div id="mg-menu">
             <label class="field-label" style="margin-bottom:12px;display:block">انتخاب بازی</label>
-            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px">
-              <button class="btn btn-tonal" onclick="mgSetGame('ttt')"         style="padding:18px 10px;flex-direction:column;gap:6px;height:auto;border-radius:16px;display:flex;align-items:center;justify-content:center">
-                <span style="font-size:2rem">❌⭕</span><span style="font-size:13px;font-weight:700">دوز</span>
-              </button>
-              <button class="btn btn-tonal" onclick="mgSetGame('snake')"       style="padding:18px 10px;flex-direction:column;gap:6px;height:auto;border-radius:16px;display:flex;align-items:center;justify-content:center">
-                <span style="font-size:2rem">🐍</span><span style="font-size:13px;font-weight:700">مار</span>
-              </button>
-              <button class="btn btn-tonal" onclick="mgSetGame('dots')"        style="padding:18px 10px;flex-direction:column;gap:6px;height:auto;border-radius:16px;display:flex;align-items:center;justify-content:center">
-                <span style="font-size:2rem">🔵</span><span style="font-size:13px;font-weight:700">نقطه‌چین</span>
-              </button>
-              <button class="btn btn-tonal" onclick="mgSetGame('memory')"      style="padding:18px 10px;flex-direction:column;gap:6px;height:auto;border-radius:16px;display:flex;align-items:center;justify-content:center">
-                <span style="font-size:2rem">🃏</span><span style="font-size:13px;font-weight:700">حافظه</span>
-              </button>
-              <button class="btn btn-tonal" onclick="mgSetGame('2048')"        style="padding:18px 10px;flex-direction:column;gap:6px;height:auto;border-radius:16px;display:flex;align-items:center;justify-content:center">
-                <span style="font-size:2rem">🔢</span><span style="font-size:13px;font-weight:700">۲۰۴۸</span>
-              </button>
-              <button class="btn btn-tonal" onclick="mgSetGame('breakout')"    style="padding:18px 10px;flex-direction:column;gap:6px;height:auto;border-radius:16px;display:flex;align-items:center;justify-content:center">
-                <span style="font-size:2rem">🧱</span><span style="font-size:13px;font-weight:700">بریکاوت</span>
-              </button>
-              <button class="btn btn-tonal" onclick="mgSetGame('minesweeper')" style="padding:18px 10px;flex-direction:column;gap:6px;height:auto;border-radius:16px;display:flex;align-items:center;justify-content:center">
-                <span style="font-size:2rem">💣</span><span style="font-size:13px;font-weight:700">مین‌روب</span>
-              </button>
-              <button class="btn btn-tonal" onclick="mgSetGame('reaction')"    style="padding:18px 10px;flex-direction:column;gap:6px;height:auto;border-radius:16px;display:flex;align-items:center;justify-content:center">
-                <span style="font-size:2rem">🎯</span><span style="font-size:13px;font-weight:700">واکنش‌سنج</span>
-              </button>
-              <button class="btn btn-tonal" onclick="mgSetGame('hangman')"     style="padding:18px 10px;flex-direction:column;gap:6px;height:auto;border-radius:16px;display:flex;align-items:center;justify-content:center">
-                <span style="font-size:2rem">✏️</span><span style="font-size:13px;font-weight:700">دارآویز</span>
-              </button>
-              <button class="btn btn-tonal" onclick="mgSetGame('simon')"       style="padding:18px 10px;flex-direction:column;gap:6px;height:auto;border-radius:16px;display:flex;align-items:center;justify-content:center">
-                <span style="font-size:2rem">🎰</span><span style="font-size:13px;font-weight:700">سیمون</span>
-              </button>
-              <button class="btn btn-tonal" onclick="mgSetGame('flappy')"      style="padding:18px 10px;flex-direction:column;gap:6px;height:auto;border-radius:16px;display:flex;align-items:center;justify-content:center">
-                <span style="font-size:2rem">🐦</span><span style="font-size:13px;font-weight:700">پرنده</span>
-              </button>
-              <button class="btn btn-tonal" onclick="mgSetGame('tetris')"      style="padding:18px 10px;flex-direction:column;gap:6px;height:auto;border-radius:16px;display:flex;align-items:center;justify-content:center">
-                <span style="font-size:2rem">🧩</span><span style="font-size:13px;font-weight:700">تتریس</span>
-              </button>
-              <button class="btn btn-tonal" onclick="mgSetGame('pong')"        style="padding:18px 10px;flex-direction:column;gap:6px;height:auto;border-radius:16px;display:flex;align-items:center;justify-content:center">
-                <span style="font-size:2rem">🏓</span><span style="font-size:13px;font-weight:700">پونگ</span>
-              </button>
-              <button class="btn btn-tonal" onclick="mgSetGame('trex')"        style="padding:18px 10px;flex-direction:column;gap:6px;height:auto;border-radius:16px;display:flex;align-items:center;justify-content:center">
-                <span style="font-size:2rem">🦕</span><span style="font-size:13px;font-weight:700">دایناسور</span>
-              </button>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px">
+              <button class="btn btn-tonal" onclick="mgSetGame('ttt')"         style="padding:12px 6px;flex-direction:column;gap:4px;height:auto;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:0"><span style="font-size:1.7rem">❌⭕</span><span style="font-size:12px;font-weight:700">دوز</span></button>
+              <button class="btn btn-tonal" onclick="mgSetGame('snake')"       style="padding:12px 6px;flex-direction:column;gap:4px;height:auto;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:0"><span style="font-size:1.7rem">🐍</span><span style="font-size:12px;font-weight:700">مار</span></button>
+              <button class="btn btn-tonal" onclick="mgSetGame('dots')"        style="padding:12px 6px;flex-direction:column;gap:4px;height:auto;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:0"><span style="font-size:1.7rem">🔵</span><span style="font-size:12px;font-weight:700">نقطه‌چین</span></button>
+              <button class="btn btn-tonal" onclick="mgSetGame('memory')"      style="padding:12px 6px;flex-direction:column;gap:4px;height:auto;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:0"><span style="font-size:1.7rem">🃏</span><span style="font-size:12px;font-weight:700">حافظه</span></button>
+              <button class="btn btn-tonal" onclick="mgSetGame('2048')"        style="padding:12px 6px;flex-direction:column;gap:4px;height:auto;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:0"><span style="font-size:1.7rem">🔢</span><span style="font-size:12px;font-weight:700">۲۰۴۸</span></button>
+              <button class="btn btn-tonal" onclick="mgSetGame('breakout')"    style="padding:12px 6px;flex-direction:column;gap:4px;height:auto;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:0"><span style="font-size:1.7rem">🧱</span><span style="font-size:12px;font-weight:700">بریکاوت</span></button>
+              <button class="btn btn-tonal" onclick="mgSetGame('minesweeper')" style="padding:12px 6px;flex-direction:column;gap:4px;height:auto;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:0"><span style="font-size:1.7rem">💣</span><span style="font-size:12px;font-weight:700">مین‌روب</span></button>
+              <button class="btn btn-tonal" onclick="mgSetGame('reaction')"    style="padding:12px 6px;flex-direction:column;gap:4px;height:auto;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:0"><span style="font-size:1.7rem">🎯</span><span style="font-size:12px;font-weight:700">واکنش‌سنج</span></button>
+              <button class="btn btn-tonal" onclick="mgSetGame('hangman')"     style="padding:12px 6px;flex-direction:column;gap:4px;height:auto;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:0"><span style="font-size:1.7rem">✏️</span><span style="font-size:12px;font-weight:700">دارآویز</span></button>
+              <button class="btn btn-tonal" onclick="mgSetGame('simon')"       style="padding:12px 6px;flex-direction:column;gap:4px;height:auto;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:0"><span style="font-size:1.7rem">🎰</span><span style="font-size:12px;font-weight:700">سیمون</span></button>
+              <button class="btn btn-tonal" onclick="mgSetGame('flappy')"      style="padding:12px 6px;flex-direction:column;gap:4px;height:auto;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:0"><span style="font-size:1.7rem">🐦</span><span style="font-size:12px;font-weight:700">پرنده</span></button>
+              <button class="btn btn-tonal" onclick="mgSetGame('tetris')"      style="padding:12px 6px;flex-direction:column;gap:4px;height:auto;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:0"><span style="font-size:1.7rem">🧩</span><span style="font-size:12px;font-weight:700">تتریس</span></button>
+              <button class="btn btn-tonal" onclick="mgSetGame('pong')"        style="padding:12px 6px;flex-direction:column;gap:4px;height:auto;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:0"><span style="font-size:1.7rem">🏓</span><span style="font-size:12px;font-weight:700">پونگ</span></button>
+              <button class="btn btn-tonal" onclick="mgSetGame('trex')"        style="padding:12px 6px;flex-direction:column;gap:4px;height:auto;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:0"><span style="font-size:1.7rem">🦕</span><span style="font-size:12px;font-weight:700">دایناسور</span></button>
+              <button class="btn btn-tonal" onclick="mgSetGame('wordle')"      style="padding:12px 6px;flex-direction:column;gap:4px;height:auto;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:0"><span style="font-size:1.7rem">🟩</span><span style="font-size:12px;font-weight:700">واژه</span></button>
             </div>
           </div>
 
@@ -7128,26 +7107,34 @@
         <div id="watermark" class="tool-card">
 
           <div class="tool-title">🖼️ واترمارک‌گذار تصویر</div>
-          <div class="field-row" style="flex-wrap:wrap">
-            <div class="field-col">
-              <label class="field-label">تصویر اصلی</label>
-              <div class="upload-zone" style="padding:14px" onclick="document.getElementById('wm-base-inp').click()">
-                <input type="file" id="wm-base-inp" accept="image/*" style="display:none" onchange="wmLoadBase(this)">
-                <div style="font-size:1.5rem">🖼️</div>
-                <div id="wm-img-label" style="font-size:12px;color:var(--m3-on-surface-variant)">انتخاب تصویر</div>
-              </div>
-            </div>
-            <div class="field-col">
-              <label class="field-label">لوگو / واترمارک (اختیاری)</label>
-              <div class="upload-zone" style="padding:14px" onclick="document.getElementById('wm-logo-inp').click()">
-                <input type="file" id="wm-logo-inp" accept="image/png,image/svg+xml" style="display:none" onchange="wmLoadLogo(this)">
-                <div style="font-size:1.5rem">🏷️</div>
-                <div id="wm-logo-label" style="font-size:12px;color:var(--m3-on-surface-variant)">انتخاب لوگو</div>
-              </div>
-            </div>
+          <p style="font-size:0.8rem;color:var(--m3-on-surface-variant);margin-bottom:14px">📌 پردازش در مرورگر انجام می‌شود — هیچ فایلی به سرور ارسال نمی‌شود</p>
+
+          <!-- Base image upload -->
+          <div class="upload-zone" id="wm-base-zone"
+               onclick="document.getElementById('wm-base-inp').click()"
+               ondragover="wmDrag(event,'wm-base-zone',true)"
+               ondragleave="wmDrag(event,'wm-base-zone',false)"
+               ondrop="wmDropBase(event)">
+            <input type="file" id="wm-base-inp" accept="image/*" style="display:none" onchange="wmLoadBase(this)">
+            <div class="upload-zone__icon">🖼️</div>
+            <div class="upload-zone__text" id="wm-img-label">کلیک یا Drag &amp; Drop تصویر اصلی</div>
+            <div class="upload-zone__limit">JPG، PNG، WebP — حداکثر ۵۰ مگابایت</div>
           </div>
-          <div class="field-row">
-            <div class="field-col"><label class="field-label">متن واترمارک (اگر لوگو ندارید)</label><input type="text" id="wm-text" class="text-input" placeholder="© نام شما" oninput="wmRender()"></div>
+
+          <!-- Logo upload -->
+          <div class="upload-zone" id="wm-logo-zone" style="margin-top:10px"
+               onclick="document.getElementById('wm-logo-inp').click()"
+               ondragover="wmDrag(event,'wm-logo-zone',true)"
+               ondragleave="wmDrag(event,'wm-logo-zone',false)"
+               ondrop="wmDropLogo(event)">
+            <input type="file" id="wm-logo-inp" accept="image/png,image/svg+xml,image/*" style="display:none" onchange="wmLoadLogo(this)">
+            <div class="upload-zone__icon">🏷️</div>
+            <div class="upload-zone__text" id="wm-logo-label">لوگو / واترمارک تصویری (اختیاری)</div>
+            <div class="upload-zone__limit">PNG یا SVG توصیه می‌شود</div>
+          </div>
+
+          <div class="field-row" style="margin-top:12px">
+            <div class="field-col"><label class="field-label">متن واترمارک (اگر لوگو ندارید)</label><input type="text" id="wm-text" class="text-input" placeholder="© نام شما" oninput="wmRender()" style="direction:rtl;text-align:right"></div>
             <div class="field-col"><label class="field-label">موقعیت</label>
               <select id="wm-pos" class="select-input" onchange="wmRender()">
                 <option value="br">پایین‌راست</option><option value="bl">پایین‌چپ</option>
@@ -7159,7 +7146,7 @@
           <div class="range-row"><label>اندازه</label><input type="range" id="wm-scale" min="0.05" max="0.5" step="0.01" value="0.2" oninput="wmRender()"></div>
           <canvas id="wm-canvas" style="display:none;max-width:100%;border-radius:12px;margin-top:10px"></canvas>
           <button class="btn btn-filled" id="wm-dl-btn" onclick="wmDownload()" style="display:none;margin-top:8px">💾 دانلود</button>
-          <div class="tool-desc">واترمارک روی تصویر اصلی قرار می‌گیرد. پردازش در مرورگر انجام می‌شود.</div>
+          <div class="tool-desc">رنگ متن واترمارک به‌صورت خودکار بر اساس روشنایی تصویر انتخاب می‌شود.</div>
         </div>
 
         <!-- ══ SEO TOOLS ══ -->
@@ -8280,7 +8267,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 5.0 - ۱۴۰۵/۰۱/۲۷
+          ℹ️ نسخه 5.4 - ۱۴۰۵/۰۱/۲۹
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -8354,7 +8341,7 @@
         qr:'کد QR', barcode:'بارکد Code-128', colorpicker:'تبدیل رنگ',
         gradient:'گرادیان CSS', shadow:'سایه CSS', borderrad:'گوشه‌گرد CSS',
         aspect:'نسبت ابعاد', imgcompress:'فشرده‌سازی تصویر', pdfcompress:'ابزار PDF',
-        img2b64:'تصویر → Base64', csvjson:'CSV ↔ JSON', device:'اطلاعات دستگاه',
+        img2b64:'تصویر ← Base64', csvjson:'CSV ↔ JSON', device:'اطلاعات دستگاه',
         ua:'User Agent', morse:'کد مورس', roman:'اعداد رومی',
         asciitbl:'جدول ASCII', textbin:'متن ↔ باینری', timezone:'ساعت جهانی',
         counter:'شمارنده', matrix:'ماتریس', numwords:'عدد به حروف فارسی',
@@ -8369,6 +8356,7 @@
         emojis:'ایموجی', calculus:'حسابان', emotcn:'اِموتیکون متنی', pomodoro:'تایمر پومودورو', resistor:'مقاومت رنگی', chart:'نمودار داده', fakejson:'مولد JSON آزمایشی', subnet:'محاسبه‌گر Subnet', textfix:'تبدیل متن و کدگذاری', wcag:'کنتراست رنگ WCAG',
         imgpalette:'پالت رنگ تعاملی',
         minigames:'بازی‌های کوچک',
+        wordle:'واژه (بازی)',
         about:'درباره جعبه‌ابزار',
         wordcloud:'ابر کلمات',
         compass:'قطب‌نما',
@@ -10592,30 +10580,18 @@
         window[fnName]();
       }
       async function pdftEnsurePdfjs() {
-        if (window._pdfjsReady) return window.pdfjsLib;
+        if (window._pdfjsReady && window.pdfjsLib) return window.pdfjsLib;
         await new Promise(resolve => {
-          if (window._pdfjsReady) { resolve(); return; }
-          const tid = setTimeout(resolve, 4000);
+          if (window._pdfjsReady && window.pdfjsLib) { resolve(); return; }
+          const tid = setTimeout(resolve, 5000);
           window.addEventListener('pdfjsready', () => { clearTimeout(tid); resolve(); }, { once: true });
         });
+        if (!window.pdfjsLib) throw new Error('PDF.js بارگذاری نشد — مطمئن شوید pdf.mjs در static/lib وجود دارد و صفحه از http/https باز شده');
         return window.pdfjsLib;
       }
-      async function pdftEnsureJspdf() {
-        if (typeof window.jsPDF !== 'undefined') return window.jsPDF;
-        if (typeof window.jspdf !== 'undefined') return window.jspdf.jsPDF;
-        await new Promise((res, rej) => {
-          const s = document.createElement('script'); s.src = 'static/lib/jspdf.umd.js';
-          s.onload = res; s.onerror = rej; document.head.appendChild(s);
-        }).catch(() => {});
-        return typeof window.jspdf !== 'undefined' ? window.jspdf.jsPDF : null;
-      }
-      async function pdftEnsureJSZip() {
-        if (typeof window.JSZip !== 'undefined') return window.JSZip;
-        await new Promise((res, rej) => {
-          const s = document.createElement('script'); s.src = 'static/lib/jszip.min.js';
-          s.onload = res; s.onerror = rej; document.head.appendChild(s);
-        }).catch(() => {});
-        return typeof window.JSZip !== 'undefined' ? window.JSZip : null;
+      async function pdftEnsurePdfLib() {
+        if (typeof window.PDFLib !== 'undefined') return window.PDFLib;
+        throw new Error('pdf-lib.js بارگذاری نشد — مطمئن شوید static/lib/pdf-lib.js وجود دارد');
       }
       function pdftParsePages(str, max) {
         const pages = new Set();
@@ -10647,10 +10623,8 @@
         _pdfjsOrigSize = f.size; infoEl.textContent = '⏳ در حال بارگذاری...'; infoEl.style.display = 'block';
         const reader = new FileReader();
         reader.onload = async function(e) {
-          const lib = await pdftEnsurePdfjs();
-          if (!lib) { errEl.textContent = 'PDF.js بارگذاری نشد'; infoEl.style.display = 'none'; return; }
           try {
-            lib.GlobalWorkerOptions.workerSrc = './static/lib/pdf.worker.mjs';
+            const lib = await pdftEnsurePdfjs();
             _pdfjsPDFDoc = await lib.getDocument({ data: new Uint8Array(e.target.result) }).promise;
             document.getElementById('pdfc-pages').textContent = _pdfjsPDFDoc.numPages;
             document.getElementById('pdfc-orig').textContent = (f.size/1024/1024).toFixed(2) + ' MB';
@@ -10665,27 +10639,41 @@
         if (!_pdfjsPDFDoc) { alert('ابتدا PDF را بارگذاری کنید'); return; }
         const quality = parseFloat(document.getElementById('pdfc-q').value) || 0.7;
         const prog = document.getElementById('pdfc-prog'); const fill = document.getElementById('pdfc-prog-fill'); const lbl = document.getElementById('pdfc-prog-lbl');
+        const errEl = document.getElementById('pdfc-err');
         prog.style.display = 'block';
-        const jsPDF = await pdftEnsureJspdf();
-        if (!jsPDF) { prog.style.display = 'none'; document.getElementById('pdfc-err').textContent = 'نیاز به اینترنت برای بارگذاری jsPDF'; return; }
-        const n = _pdfjsPDFDoc.numPages;
-        const page1 = await _pdfjsPDFDoc.getPage(1); const vp1 = page1.getViewport({ scale: 1 });
-        const doc = new jsPDF({ unit: 'pt', format: [vp1.width, vp1.height], orientation: vp1.width > vp1.height ? 'landscape' : 'portrait' });
-        let totalBytes = 0;
-        for (let i = 1; i <= n; i++) {
-          lbl.textContent = `صفحه ${i} از ${n}…`; fill.style.width = (i/n*100) + '%';
-          const page = await _pdfjsPDFDoc.getPage(i); const vp = page.getViewport({ scale: 1.5 });
-          const c = document.createElement('canvas'); c.width = vp.width; c.height = vp.height;
-          await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
-          const imgData = c.toDataURL('image/jpeg', quality);
-          totalBytes += Math.round((imgData.length - 22) * 3/4);
-          if (i > 1) doc.addPage([vp1.width, vp1.height]);
-          doc.addImage(imgData, 'JPEG', 0, 0, vp1.width, vp1.height, undefined, 'FAST');
+        try {
+          const PDFLib = await pdftEnsurePdfLib();
+          const { PDFDocument } = PDFLib;
+          const n = _pdfjsPDFDoc.numPages;
+          const outDoc = await PDFDocument.create();
+          let totalBytes = 0;
+          for (let i = 1; i <= n; i++) {
+            lbl.textContent = `صفحه ${i} از ${n}…`; fill.style.width = (i/n*100) + '%';
+            const page = await _pdfjsPDFDoc.getPage(i);
+            const vpNorm = page.getViewport({ scale: 1 });
+            const scale = Math.min(1.5, 1600 / Math.max(vpNorm.width, vpNorm.height));
+            const vp = page.getViewport({ scale });
+            const c = document.createElement('canvas'); c.width = vp.width; c.height = vp.height;
+            await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
+            const blob = await new Promise(res => c.toBlob(res, 'image/jpeg', quality));
+            const arrayBuf = await blob.arrayBuffer();
+            totalBytes += arrayBuf.byteLength;
+            const jpgImage = await outDoc.embedJpg(arrayBuf);
+            const outPage = outDoc.addPage([vpNorm.width, vpNorm.height]);
+            outPage.drawImage(jpgImage, { x:0, y:0, width:vpNorm.width, height:vpNorm.height });
+          }
+          fill.style.width = '100%';
+          const pdfBytes = await outDoc.save();
+          prog.style.display = 'none';
+          document.getElementById('pdfc-outsz').textContent = (pdfBytes.byteLength/1024/1024).toFixed(2) + ' MB';
+          document.getElementById('pdfc-save').textContent = Math.max(0, Math.round((1 - pdfBytes.byteLength/_pdfjsOrigSize)*100)) + '%';
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(new Blob([pdfBytes], {type:'application/pdf'}));
+          a.download = 'compressed.pdf'; a.click();
+        } catch(err) {
+          prog.style.display = 'none';
+          errEl.textContent = 'خطا: ' + (err.message||String(err));
         }
-        prog.style.display = 'none';
-        document.getElementById('pdfc-outsz').textContent = (totalBytes/1024/1024).toFixed(2) + ' MB';
-        document.getElementById('pdfc-save').textContent = Math.round((1 - totalBytes/_pdfjsOrigSize)*100) + '%';
-        doc.save('compressed.pdf');
       }
 
       // ── MERGE ────────────────────────────────────────────────
@@ -10719,31 +10707,33 @@
       function pdfmRemove(i) { _pdfMergeDocs.splice(i,1); pdfmRenderList(); if(!_pdfMergeDocs.length){document.getElementById('pdfm-list').style.display='none';document.getElementById('pdfm-btn').style.display='none';} }
       async function pdfmMerge() {
         if (_pdfMergeDocs.length < 2) { showToast('دست‌کم ۲ فایل نیاز دارید'); return; }
-        const jsPDF = await pdftEnsureJspdf(); const lib = await pdftEnsurePdfjs();
-        if (!jsPDF || !lib) { document.getElementById('pdfm-err').textContent = 'نیاز به اینترنت برای بارگذاری کتابخانه‌ها'; return; }
+        const errEl = document.getElementById('pdfm-err'); errEl.textContent = '';
         const prog = document.getElementById('pdfm-prog'); const fill = document.getElementById('pdfm-prog-fill'); const lbl = document.getElementById('pdfm-prog-lbl');
-        prog.style.display = 'block'; lib.GlobalWorkerOptions.workerSrc = './static/lib/pdf.worker.mjs';
-        let doc = null; let totalPages = 0;
-        for (let fi = 0; fi < _pdfMergeDocs.length; fi++) {
-          const ab = await _pdfMergeDocs[fi].file.arrayBuffer();
-          const pdfDoc = await lib.getDocument({ data: new Uint8Array(ab) }).promise;
-          for (let pi = 1; pi <= pdfDoc.numPages; pi++) {
-            totalPages++;
-            lbl.textContent = `فایل ${fi+1}/${_pdfMergeDocs.length}، صفحه ${pi}/${pdfDoc.numPages}…`;
+        prog.style.display = 'block';
+        try {
+          const PDFLib = await pdftEnsurePdfLib();
+          const { PDFDocument } = PDFLib;
+          const merged = await PDFDocument.create();
+          let totalPages = 0;
+          for (let fi = 0; fi < _pdfMergeDocs.length; fi++) {
+            lbl.textContent = `پردازش فایل ${fi+1} از ${_pdfMergeDocs.length}…`;
             fill.style.width = ((fi / _pdfMergeDocs.length) * 100) + '%';
-            const page = await pdfDoc.getPage(pi); const vp = page.getViewport({ scale: 1.5 });
-            const c = document.createElement('canvas'); c.width = vp.width; c.height = vp.height;
-            await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
-            const imgData = c.toDataURL('image/jpeg', 0.85);
-            const vpNorm = page.getViewport({ scale: 1 });
-            if (!doc) doc = new jsPDF({ unit: 'pt', format: [vpNorm.width, vpNorm.height], orientation: vpNorm.width > vpNorm.height ? 'landscape' : 'portrait' });
-            else doc.addPage([vpNorm.width, vpNorm.height]);
-            doc.addImage(imgData, 'JPEG', 0, 0, vpNorm.width, vpNorm.height, undefined, 'FAST');
+            const ab = await _pdfMergeDocs[fi].file.arrayBuffer();
+            const srcDoc = await PDFDocument.load(ab, { ignoreEncryption: true });
+            const pageIndices = srcDoc.getPageIndices();
+            const copiedPages = await merged.copyPages(srcDoc, pageIndices);
+            copiedPages.forEach(p => { merged.addPage(p); totalPages++; });
           }
+          fill.style.width = '100%'; lbl.textContent = 'در حال ذخیره…';
+          const pdfBytes = await merged.save();
+          prog.style.display = 'none';
+          const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+          const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'merged.pdf'; a.click();
+          showToast(`✅ ادغام ${_pdfMergeDocs.length} فایل (${totalPages} صفحه) — قالب‌بندی حفظ شد`);
+        } catch(err) {
+          prog.style.display = 'none';
+          errEl.textContent = 'خطا در ادغام: ' + err.message;
         }
-        fill.style.width = '100%'; prog.style.display = 'none';
-        doc.save('merged.pdf');
-        showToast(`✅ ادغام ${_pdfMergeDocs.length} فایل (${totalPages} صفحه) انجام شد`);
       }
 
       // ── SPLIT ────────────────────────────────────────────────
@@ -10756,12 +10746,11 @@
         infoEl.textContent = '⏳ در حال بارگذاری...'; infoEl.style.display = 'block';
         const reader = new FileReader();
         reader.onload = async function(e) {
-          const lib = await pdftEnsurePdfjs();
-          lib.GlobalWorkerOptions.workerSrc = './static/lib/pdf.worker.mjs';
           try {
+            const PDFLib = await pdftEnsurePdfLib();
             _pdfsSrcAB = e.target.result;
-            const pdfDoc = await lib.getDocument({ data: new Uint8Array(_pdfsSrcAB) }).promise;
-            infoEl.textContent = '✅ ' + f.name + ' - ' + pdfDoc.numPages + ' صفحه';
+            const srcDoc = await PDFLib.PDFDocument.load(_pdfsSrcAB, { ignoreEncryption: true });
+            infoEl.textContent = '✅ ' + f.name + ' — ' + srcDoc.getPageCount() + ' صفحه';
             document.getElementById('pdfs-opts').style.display = 'block';
           } catch(err) { infoEl.style.display = 'none'; errEl.textContent = 'خطا: ' + err.message; }
         };
@@ -10774,51 +10763,78 @@
       async function pdfsProcess() {
         if (!_pdfsSrcAB) { showToast('ابتدا فایل را بارگذاری کنید'); return; }
         const mode = document.querySelector('input[name="pdfs-mode"]:checked')?.value || 'all';
-        const jsPDF = await pdftEnsureJspdf(); const lib = await pdftEnsurePdfjs();
-        if (!jsPDF || !lib) { document.getElementById('pdfs-err').textContent = 'نیاز به اینترنت برای بارگذاری کتابخانه‌ها'; return; }
-        const JSZip = await pdftEnsureJSZip();
+        const errEl = document.getElementById('pdfs-err'); errEl.textContent = '';
         const prog = document.getElementById('pdfs-prog'); const fill = document.getElementById('pdfs-prog-fill'); const lbl = document.getElementById('pdfs-prog-lbl');
-        prog.style.display = 'block'; lib.GlobalWorkerOptions.workerSrc = './static/lib/pdf.worker.mjs';
-        const pdfDoc = await lib.getDocument({ data: new Uint8Array(_pdfsSrcAB) }).promise;
-        const totalPages = pdfDoc.numPages;
-        let pageList;
-        if (mode === 'all') {
-          pageList = Array.from({length: totalPages}, (_, i) => i+1);
-        } else {
-          const rangeStr = document.getElementById('pdfs-range-input').value;
-          pageList = pdftParsePages(rangeStr, totalPages);
-          if (!pageList.length) { prog.style.display = 'none'; showToast('بازه صفحات معتبر نیست'); return; }
-        }
-        if (JSZip && (mode === 'all' || pageList.length > 1)) {
-          const zip = new JSZip();
+        prog.style.display = 'block';
+        try {
+          const PDFLib = await pdftEnsurePdfLib();
+          const { PDFDocument } = PDFLib;
+          const srcDoc = await PDFDocument.load(_pdfsSrcAB, { ignoreEncryption: true });
+          const totalPages = srcDoc.getPageCount();
+          let pageList;
+          if (mode === 'all') {
+            pageList = Array.from({length: totalPages}, (_, i) => i+1);
+          } else {
+            const rangeStr = document.getElementById('pdfs-range-input').value;
+            pageList = pdftParsePages(rangeStr, totalPages);
+            if (!pageList.length) { prog.style.display = 'none'; showToast('بازه صفحات معتبر نیست'); return; }
+          }
+          lbl.textContent = `در حال آماده‌سازی ${pageList.length} صفحه…`;
+          // Render previews — show clickable tiles for user to download each page
+          const previews = [];
           for (let pi = 0; pi < pageList.length; pi++) {
             const pNum = pageList[pi];
-            lbl.textContent = `صفحه ${pNum}/${totalPages}…`; fill.style.width = ((pi+1)/pageList.length*100)+'%';
-            const page = await pdfDoc.getPage(pNum); const vp = page.getViewport({scale:1.5}); const vpN = page.getViewport({scale:1});
-            const c = document.createElement('canvas'); c.width = vp.width; c.height = vp.height;
-            await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
-            const imgData = c.toDataURL('image/jpeg',0.85);
-            const sDoc = new jsPDF({unit:'pt',format:[vpN.width,vpN.height],orientation:vpN.width>vpN.height?'landscape':'portrait'});
-            sDoc.addImage(imgData,'JPEG',0,0,vpN.width,vpN.height,undefined,'FAST');
-            zip.file(`page-${String(pNum).padStart(3,'0')}.pdf`, sDoc.output('arraybuffer'));
+            fill.style.width = ((pi+1)/pageList.length*100)+'%';
+            lbl.textContent = `صفحه ${pNum}/${totalPages}…`;
+            const sDoc = await PDFDocument.create();
+            const [cp] = await sDoc.copyPages(srcDoc, [pNum-1]);
+            sDoc.addPage(cp);
+            const bytes = await sDoc.save();
+            const blob = new Blob([bytes], {type:'application/pdf'});
+            const url = URL.createObjectURL(blob);
+            previews.push({pNum, url, bytes});
           }
-          fill.style.width='100%'; prog.style.display='none';
-          const blob = await zip.generateAsync({type:'blob'});
-          const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'split-pages.zip'; a.click();
-          showToast(`✅ ${pageList.length} صفحه در ZIP ذخیره شد`);
-        } else {
-          // Single page
-          const pNum = pageList[0];
-          const page = await pdfDoc.getPage(pNum); const vp = page.getViewport({scale:1.5}); const vpN = page.getViewport({scale:1});
-          const c = document.createElement('canvas'); c.width=vp.width;c.height=vp.height;
-          await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
-          const imgData = c.toDataURL('image/jpeg',0.85);
-          const sDoc = new jsPDF({unit:'pt',format:[vpN.width,vpN.height],orientation:vpN.width>vpN.height?'landscape':'portrait'});
-          sDoc.addImage(imgData,'JPEG',0,0,vpN.width,vpN.height,undefined,'FAST');
-          prog.style.display='none'; sDoc.save(`page-${pNum}.pdf`);
+          fill.style.width = '100%'; prog.style.display = 'none';
+          // Show preview gallery
+          const previewArea = document.getElementById('pdfs-preview-area');
+          if (previewArea) {
+            previewArea.innerHTML = '';
+            previewArea.style.display = 'block';
+            const heading = document.createElement('div');
+            heading.style.cssText = 'font-size:13px;font-weight:700;margin-bottom:10px;color:var(--m3-on-surface)';
+            heading.textContent = `${previews.length} فایل آماده دانلود — روی هر کدام کلیک کنید:`;
+            previewArea.appendChild(heading);
+            const grid = document.createElement('div');
+            grid.style.cssText = 'display:flex;flex-wrap:wrap;gap:10px';
+            previews.forEach(({pNum, url}) => {
+              const tile = document.createElement('a');
+              tile.href = url; tile.download = `page-${pNum}.pdf`;
+              tile.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:5px;background:var(--m3-surface-container);border-radius:12px;padding:12px 16px;text-decoration:none;color:var(--m3-on-surface);border:1.5px solid var(--m3-outline-variant);transition:border-color .15s;cursor:pointer;min-width:80px';
+              tile.innerHTML = `<span style="font-size:2rem">📄</span><span style="font-size:12px;font-weight:600">صفحه ${pNum}</span><span style="font-size:11px;color:var(--m3-primary)">دانلود PDF</span>`;
+              tile.addEventListener('mouseover', ()=>tile.style.borderColor='var(--m3-primary)');
+              tile.addEventListener('mouseout', ()=>tile.style.borderColor='var(--m3-outline-variant)');
+              grid.appendChild(tile);
+            });
+            previewArea.appendChild(grid);
+            if (previews.length > 1) {
+              const dlAll = document.createElement('button');
+              dlAll.className = 'btn btn-tonal'; dlAll.style.cssText = 'margin-top:10px;font-size:13px';
+              dlAll.textContent = `⬇️ دانلود همه (${previews.length} فایل)`;
+              dlAll.addEventListener('click', async () => {
+                for (const {url, pNum} of previews) {
+                  const a = document.createElement('a'); a.href = url; a.download = `page-${pNum}.pdf`; a.click();
+                  await new Promise(r => setTimeout(r, 250));
+                }
+              });
+              previewArea.appendChild(dlAll);
+            }
+          }
+          showToast(`✅ ${previews.length} صفحه — قالب‌بندی حفظ شد`);
+        } catch(err) {
+          prog.style.display = 'none';
+          errEl.textContent = 'خطا در تقسیم: ' + err.message;
         }
       }
-
       // ── REORDER ──────────────────────────────────────────────
       var _pdfrSrcAB = null; var _pdfrOrder = [];
       function pdfrLoad() {
@@ -10829,15 +10845,15 @@
         infoEl.textContent = '⏳ در حال بارگذاری...'; infoEl.style.display = 'block';
         const reader = new FileReader();
         reader.onload = async function(e) {
-          const lib = await pdftEnsurePdfjs(); lib.GlobalWorkerOptions.workerSrc = './static/lib/pdf.worker.mjs';
           try {
+            const PDFLib = await pdftEnsurePdfLib();
             _pdfrSrcAB = e.target.result;
-            const pdfDoc = await lib.getDocument({data: new Uint8Array(_pdfrSrcAB)}).promise;
-            _pdfrOrder = Array.from({length: pdfDoc.numPages}, (_,i) => i+1);
-            infoEl.textContent = '✅ ' + f.name + ' - ' + pdfDoc.numPages + ' صفحه';
+            const srcDoc = await PDFLib.PDFDocument.load(_pdfrSrcAB, { ignoreEncryption: true });
+            _pdfrOrder = Array.from({length: srcDoc.getPageCount()}, (_,i) => i+1);
+            infoEl.textContent = '✅ ' + f.name + ' — ' + srcDoc.getPageCount() + ' صفحه';
             pdfrRenderList();
             document.getElementById('pdfr-pages-wrap').style.display = 'block';
-          } catch(err) { infoEl.style.display='none'; errEl.textContent='خطا: '+err.message; }
+          } catch(err) { infoEl.style.display='none'; errEl.textContent='خطا: '+(err.message||String(err)); }
         };
         reader.readAsArrayBuffer(f);
       }
@@ -10861,28 +10877,32 @@
       function pdfrMoveDown(i) { if(i<_pdfrOrder.length-1){[_pdfrOrder[i+1],_pdfrOrder[i]]=[_pdfrOrder[i],_pdfrOrder[i+1]];pdfrRenderList();} }
       async function pdfrProcess() {
         if (!_pdfrSrcAB) { showToast('ابتدا فایل را بارگذاری کنید'); return; }
-        const jsPDF = await pdftEnsureJspdf(); const lib = await pdftEnsurePdfjs();
-        if (!jsPDF || !lib) { document.getElementById('pdfr-err').textContent = 'نیاز به اینترنت'; return; }
+        const errEl = document.getElementById('pdfr-err'); errEl.textContent = '';
         const prog = document.getElementById('pdfr-prog'); const fill = document.getElementById('pdfr-prog-fill'); const lbl = document.getElementById('pdfr-prog-lbl');
-        prog.style.display = 'block'; lib.GlobalWorkerOptions.workerSrc = './static/lib/pdf.worker.mjs';
-        const pdfDoc = await lib.getDocument({data: new Uint8Array(_pdfrSrcAB)}).promise;
-        let doc = null;
-        for (let i = 0; i < _pdfrOrder.length; i++) {
-          const pNum = _pdfrOrder[i]; lbl.textContent=`صفحه ${i+1}/${_pdfrOrder.length}…`; fill.style.width=((i+1)/_pdfrOrder.length*100)+'%';
-          const page = await pdfDoc.getPage(pNum); const vp=page.getViewport({scale:1.5}); const vpN=page.getViewport({scale:1});
-          const c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;
-          await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
-          const imgData=c.toDataURL('image/jpeg',0.9);
-          if(!doc) doc=new jsPDF({unit:'pt',format:[vpN.width,vpN.height],orientation:vpN.width>vpN.height?'landscape':'portrait'});
-          else doc.addPage([vpN.width,vpN.height]);
-          doc.addImage(imgData,'JPEG',0,0,vpN.width,vpN.height,undefined,'FAST');
+        prog.style.display = 'block';
+        try {
+          const PDFLib = await pdftEnsurePdfLib();
+          const { PDFDocument } = PDFLib;
+          const srcDoc = await PDFDocument.load(_pdfrSrcAB, { ignoreEncryption: true });
+          const outDoc = await PDFDocument.create();
+          lbl.textContent = 'در حال مرتب‌سازی صفحات…';
+          const indices = _pdfrOrder.map(n => n-1);
+          const pages = await outDoc.copyPages(srcDoc, indices);
+          pages.forEach(p => outDoc.addPage(p));
+          fill.style.width = '100%'; lbl.textContent = 'در حال ذخیره…';
+          const pdfBytes = await outDoc.save();
+          prog.style.display = 'none';
+          const blob = new Blob([pdfBytes], {type:'application/pdf'});
+          const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'reordered.pdf'; a.click();
+          showToast('✅ PDF با ترتیب جدید ذخیره شد — قالب‌بندی حفظ شد');
+        } catch(err) {
+          prog.style.display = 'none';
+          errEl.textContent = 'خطا: ' + err.message;
         }
-        fill.style.width='100%'; prog.style.display='none';
-        doc.save('reordered.pdf'); showToast('✅ PDF با ترتیب جدید ذخیره شد');
       }
 
       // ── EXTRACT IMAGES ────────────────────────────────────────
-      var _pdfeSrcAB = null;
+      var _pdfeSrcAB = null; // stored as Uint8Array to prevent detached ArrayBuffer
       function pdfeLoad() {
         const f = document.getElementById('pdfe-file').files[0]; if(!f) return;
         const errEl=document.getElementById('pdfe-err'); const infoEl=document.getElementById('pdfe-info');
@@ -10891,52 +10911,89 @@
         infoEl.textContent='⏳ در حال بارگذاری...'; infoEl.style.display='block';
         const reader=new FileReader();
         reader.onload=async function(e){
-          const lib=await pdftEnsurePdfjs(); lib.GlobalWorkerOptions.workerSrc='./static/lib/pdf.worker.mjs';
           try {
-            _pdfeSrcAB=e.target.result;
-            const pdfDoc=await lib.getDocument({data:new Uint8Array(_pdfeSrcAB)}).promise;
-            infoEl.textContent='✅ '+f.name+' - '+pdfDoc.numPages+' صفحه';
+            const lib=await pdftEnsurePdfjs();
+            _pdfeSrcAB = new Uint8Array(e.target.result);
+            const pdfDoc=await lib.getDocument({data: _pdfeSrcAB.slice()}).promise;
+            infoEl.textContent='✅ '+f.name+' — '+pdfDoc.numPages+' صفحه';
             document.getElementById('pdfe-opts').style.display='block';
-          } catch(err){infoEl.style.display='none';errEl.textContent='خطا: '+err.message;}
+          } catch(err){infoEl.style.display='none';errEl.textContent='خطا: '+(err.message||String(err));}
         };
         reader.readAsArrayBuffer(f);
       }
       async function pdfeProcess() {
         if(!_pdfeSrcAB){showToast('ابتدا فایل را بارگذاری کنید');return;}
-        const lib=await pdftEnsurePdfjs(); lib.GlobalWorkerOptions.workerSrc='./static/lib/pdf.worker.mjs';
-        const JSZip=await pdftEnsureJSZip();
+        const errElE=document.getElementById('pdfe-err'); errElE.textContent='';
+        let lib;
+        try { lib=await pdftEnsurePdfjs(); } catch(e){errElE.textContent=e.message;return;}
         const fmt=document.getElementById('pdfe-fmt').value;
         const q=parseFloat(document.getElementById('pdfe-q').value)||0.92;
         const scale=parseFloat(document.getElementById('pdfe-scale').value)||2;
         const ext=fmt==='image/jpeg'?'jpg':fmt==='image/png'?'png':'webp';
         const prog=document.getElementById('pdfe-prog'); const fill=document.getElementById('pdfe-prog-fill'); const lbl=document.getElementById('pdfe-prog-lbl');
         prog.style.display='block';
-        const pdfDoc=await lib.getDocument({data:new Uint8Array(_pdfeSrcAB)}).promise;
-        const totalPages=pdfDoc.numPages;
-        const pagesStr=document.getElementById('pdfe-pages-input').value.trim();
-        const pageList=pagesStr?pdftParsePages(pagesStr,totalPages):Array.from({length:totalPages},(_,i)=>i+1);
-        if(!pageList.length){prog.style.display='none';showToast('بازه صفحات معتبر نیست');return;}
-        const doZip=JSZip&&pageList.length>1;
-        const zip=doZip?new JSZip():null;
-        for(let pi=0;pi<pageList.length;pi++){
-          const pNum=pageList[pi]; lbl.textContent=`صفحه ${pNum}/${totalPages}…`; fill.style.width=((pi+1)/pageList.length*100)+'%';
-          const page=await pdfDoc.getPage(pNum); const vp=page.getViewport({scale});
-          const c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;
-          await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
-          const dataUrl=c.toDataURL(fmt,q);
-          if(doZip){
-            const base64=dataUrl.split(',')[1];
-            zip.file(`page-${String(pNum).padStart(3,'0')}.${ext}`,base64,{base64:true});
-          } else {
-            const a=document.createElement('a');a.href=dataUrl;a.download=`page-${pNum}.${ext}`;a.click();
+        try {
+          const pdfDoc=await lib.getDocument({data: _pdfeSrcAB.slice()}).promise;
+          const totalPages=pdfDoc.numPages;
+          const pagesStr=document.getElementById('pdfe-pages-input').value.trim();
+          const pageList=pagesStr?pdftParsePages(pagesStr,totalPages):Array.from({length:totalPages},(_,i)=>i+1);
+          if(!pageList.length){prog.style.display='none';showToast('بازه صفحات معتبر نیست');return;}
+          // Render all pages and collect blob URLs for preview gallery
+          const results=[];
+          for(let pi=0;pi<pageList.length;pi++){
+            const pNum=pageList[pi]; lbl.textContent=`رندر صفحه ${pNum}/${totalPages}…`; fill.style.width=((pi+1)/pageList.length*100)+'%';
+            const page=await pdfDoc.getPage(pNum); const vp=page.getViewport({scale});
+            const c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;
+            await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
+            const dataUrl=c.toDataURL(fmt,q);
+            results.push({pNum,dataUrl,ext});
           }
+          fill.style.width='100%'; prog.style.display='none';
+          // Show image preview gallery
+          const previewArea=document.getElementById('pdfe-preview-area');
+          if(previewArea){
+            previewArea.innerHTML='';
+            previewArea.style.display='block';
+            const heading=document.createElement('div');
+            heading.style.cssText='font-size:13px;font-weight:700;margin-bottom:10px;color:var(--m3-on-surface)';
+            heading.textContent=`${results.length} تصویر آماده — روی هر کدام کلیک کنید تا دانلود شود:`;
+            previewArea.appendChild(heading);
+            const grid=document.createElement('div');
+            grid.style.cssText='display:flex;flex-wrap:wrap;gap:10px';
+            results.forEach(({pNum,dataUrl,ext})=>{
+              const tile=document.createElement('a');
+              tile.href=dataUrl; tile.download=`page-${pNum}.${ext}`;
+              tile.style.cssText='display:flex;flex-direction:column;align-items:center;gap:5px;text-decoration:none;cursor:pointer';
+              const img=document.createElement('img');
+              img.src=dataUrl;
+              img.style.cssText='width:90px;height:120px;object-fit:cover;border-radius:8px;border:2px solid var(--m3-outline-variant);transition:border-color .15s';
+              img.addEventListener('mouseover',()=>img.style.borderColor='var(--m3-primary)');
+              img.addEventListener('mouseout',()=>img.style.borderColor='var(--m3-outline-variant)');
+              const label=document.createElement('span');
+              label.style.cssText='font-size:11px;color:var(--m3-primary);font-weight:600';
+              label.textContent='صفحه '+pNum;
+              tile.appendChild(img); tile.appendChild(label);
+              grid.appendChild(tile);
+            });
+            previewArea.appendChild(grid);
+            if(results.length>1){
+              const dlAll=document.createElement('button');
+              dlAll.className='btn btn-tonal'; dlAll.style.cssText='margin-top:10px;font-size:13px';
+              dlAll.textContent=`⬇️ دانلود همه (${results.length} تصویر)`;
+              dlAll.addEventListener('click',async()=>{
+                for(const {dataUrl,pNum,ext} of results){
+                  const a=document.createElement('a');a.href=dataUrl;a.download=`page-${pNum}.${ext}`;a.click();
+                  await new Promise(r=>setTimeout(r,200));
+                }
+              });
+              previewArea.appendChild(dlAll);
+            }
+          }
+          showToast(`✅ ${results.length} تصویر آماده`);
+        } catch(err) {
+          prog.style.display='none';
+          errElE.textContent='خطا: '+(err.message||String(err));
         }
-        fill.style.width='100%'; prog.style.display='none';
-        if(doZip){
-          const blob=await zip.generateAsync({type:'blob'});
-          const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`pdf-images.zip`;a.click();
-          showToast(`✅ ${pageList.length} تصویر در ZIP ذخیره شد`);
-        } else showToast('✅ تصویر ذخیره شد');
       }
 
       // ── IMAGES → PDF ──────────────────────────────────────────
@@ -10944,6 +11001,8 @@
         const files=Array.from(document.getElementById('pdfi-files').files);
         const errEl=document.getElementById('pdfi-err'); errEl.textContent='';
         if(!files.length)return;
+        const badFiles = files.filter(f => !f.type.startsWith('image/'));
+        if(badFiles.length) { errEl.textContent = 'فقط فایل‌های تصویری (JPG، PNG، WebP) مجاز هستند. فایل‌های PDF یا غیر‌تصویری قابل قبول نیستند.'; return; }
         _pdfImgFiles=files.map(f=>({name:f.name,file:f}));
         pdfiRenderList();
         document.getElementById('pdfi-list').style.display='block';
@@ -10966,27 +11025,47 @@
       function pdfiRemove(i){_pdfImgFiles.splice(i,1);pdfiRenderList();if(!_pdfImgFiles.length){document.getElementById('pdfi-list').style.display='none';document.getElementById('pdfi-btn').style.display='none';}}
       async function pdfiProcess(){
         if(!_pdfImgFiles.length){showToast('تصویری انتخاب نشده');return;}
-        const jsPDF=await pdftEnsureJspdf();
-        if(!jsPDF){document.getElementById('pdfi-err').textContent='نیاز به اینترنت برای بارگذاری jsPDF';return;}
+        const errEl=document.getElementById('pdfi-err'); errEl.textContent='';
         const prog=document.getElementById('pdfi-prog');const fill=document.getElementById('pdfi-prog-fill');const lbl=document.getElementById('pdfi-prog-lbl');
         prog.style.display='block';
-        let doc=null;
-        for(let i=0;i<_pdfImgFiles.length;i++){
-          lbl.textContent=`تصویر ${i+1}/${_pdfImgFiles.length}…`;fill.style.width=((i+1)/_pdfImgFiles.length*100)+'%';
-          const dataUrl=await new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.onerror=rej;r.readAsDataURL(_pdfImgFiles[i].file);});
-          await new Promise((res,rej)=>{
-            const img=new Image();img.onload=()=>{
-              const W=img.naturalWidth,H=img.naturalHeight;
-              const fmt=dataUrl.includes('data:image/png')?'PNG':'JPEG';
-              if(!doc)doc=new jsPDF({unit:'px',format:[W,H],orientation:W>H?'landscape':'portrait',hotfixes:['px_scaling']});
-              else doc.addPage([W,H],W>H?'landscape':'portrait');
-              doc.addImage(dataUrl,fmt,0,0,W,H);
-              res();
-            };img.onerror=rej;img.src=dataUrl;
-          });
+        try {
+          const PDFLib = await pdftEnsurePdfLib();
+          const { PDFDocument } = PDFLib;
+          const doc = await PDFDocument.create();
+          for(let i=0;i<_pdfImgFiles.length;i++){
+            lbl.textContent=`تصویر ${i+1}/${_pdfImgFiles.length}…`;fill.style.width=((i+1)/_pdfImgFiles.length*100)+'%';
+            const arrayBuf = await _pdfImgFiles[i].file.arrayBuffer();
+            const mime = _pdfImgFiles[i].file.type || '';
+            let img;
+            if(mime==='image/png'){
+              img = await doc.embedPng(arrayBuf);
+            } else if(mime==='image/jpeg'||mime==='image/jpg'){
+              img = await doc.embedJpg(arrayBuf);
+            } else {
+              // webp/other: convert via canvas → jpeg
+              const dataUrl = await new Promise(res=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.readAsDataURL(_pdfImgFiles[i].file);});
+              const jpegBuf = await new Promise((res,rej)=>{
+                const im=new Image(); im.onload=()=>{
+                  const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;
+                  c.getContext('2d').drawImage(im,0,0);
+                  c.toBlob(b=>b.arrayBuffer().then(res),'image/jpeg',0.92);
+                }; im.onerror=rej; im.src=dataUrl;
+              });
+              img = await doc.embedJpg(jpegBuf);
+            }
+            const page = doc.addPage([img.width, img.height]);
+            page.drawImage(img, {x:0,y:0,width:img.width,height:img.height});
+          }
+          fill.style.width='100%'; lbl.textContent='در حال ذخیره…';
+          const pdfBytes = await doc.save();
+          prog.style.display='none';
+          const blob=new Blob([pdfBytes],{type:'application/pdf'});
+          const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='images.pdf';a.click();
+          showToast(`✅ ${_pdfImgFiles.length} تصویر به PDF تبدیل شد`);
+        } catch(err) {
+          prog.style.display='none';
+          errEl.textContent='خطا: '+(err.message||String(err));
         }
-        fill.style.width='100%';prog.style.display='none';
-        doc.save('images.pdf');showToast(`✅ ${_pdfImgFiles.length} تصویر به PDF تبدیل شد`);
       }
 
       // ── DRAG SORT (shared) ────────────────────────────────────
@@ -12668,16 +12747,14 @@
         const url = urlInput.value.trim() || (location.origin + location.pathname);
         container.innerHTML = '';
         if (lbl) lbl.textContent = url;
-        // Use the existing QRCode library (qrcode.js is already loaded)
-        if (typeof QRCode !== 'undefined') {
-          new QRCode(container, {
-            text: url,
-            width: 200,
-            height: 200,
-            colorDark: '#000000',
-            colorLight: '#ffffff',
-            correctLevel: QRCode.CorrectLevel.M
-          });
+        if (typeof QRCodeStyling !== 'undefined') {
+          try {
+            const qr = new QRCodeStyling({width:200,height:200,data:url,
+              dotsOptions:{color:'#000000',type:'square'},
+              backgroundOptions:{color:'#ffffff'},
+              qrOptions:{errorCorrectionLevel:'M'}});
+            qr.append(container);
+          } catch(e) { container.innerHTML = '<div style="padding:20px;color:var(--m3-on-surface-variant);font-size:13px">خطا در تولید QR</div>'; }
         } else {
           container.innerHTML = '<div style="padding:20px;color:var(--m3-on-surface-variant);font-size:13px">کتابخانه QR لود نشد</div>';
         }
@@ -16189,7 +16266,6 @@
         renderEl.innerHTML = '';
         if (output) output.style.display = 'block';
 
-        // Try QRCodeStyling first, then fall back to qrcode.js
         if (typeof QRCodeStyling !== 'undefined') {
           try {
             const qrStyled = new QRCodeStyling({
@@ -16204,19 +16280,13 @@
             window._qrStylingObj = qrStyled;
             const statusEl = document.getElementById('qr-status');
             if (statusEl) statusEl.textContent = `${text.length} کاراکتر · ECC ${level} · ${size}×${size}`;
-            return;
-          } catch(e) { /* fall through */ }
-        }
-        // Fallback qrcode.js
-        try {
-          const _QR_ECC2 = {L:QRCode.CorrectLevel.L, M:QRCode.CorrectLevel.M, Q:QRCode.CorrectLevel.Q, H:QRCode.CorrectLevel.H};
-          if (_qrObjNew) { try { _qrObjNew.clear(); } catch(_){} _qrObjNew=null; }
-          _qrObjNew = new QRCode(renderEl, {text, width:size, height:size, colorDark:fg, colorLight:bg, correctLevel:_QR_ECC2[level]||QRCode.CorrectLevel.M});
-          const statusEl = document.getElementById('qr-status');
-          if (statusEl) statusEl.textContent = `${text.length} کاراکتر · ECC ${level} · ${size}×${size}`;
-        } catch(err) {
+          } catch(e) {
+            if (output) output.style.display = 'none';
+            if (errBox) { errBox.textContent = '✖ ' + e.message; errBox.style.display = 'block'; }
+          }
+        } else {
           if (output) output.style.display = 'none';
-          if (errBox) { errBox.textContent = '✖ ' + err.message; errBox.style.display = 'block'; }
+          if (errBox) { errBox.textContent = 'کتابخانه QR لود نشد'; errBox.style.display = 'block'; }
         }
       }
       function dlQR(fmt) {
@@ -16604,6 +16674,7 @@
         if (window._pongKH) { document.removeEventListener('keydown', window._pongKH); window._pongKH = null; }
         if (window._trexRAF) { cancelAnimationFrame(window._trexRAF); window._trexRAF = null; }
         if (window._trexKH) { document.removeEventListener('keydown', window._trexKH); window._trexKH = null; }
+        if (window._wordleKH) { document.removeEventListener('keydown', window._wordleKH); window._wordleKH = null; }
         if (window._snakeKH) { document.removeEventListener('keydown', window._snakeKH); window._snakeKH = null; }
         if (window._brkKH)   { document.removeEventListener('keydown', window._brkKH);   window._brkKH   = null; }
       }
@@ -16631,7 +16702,7 @@
         if (wrap) wrap.style.display = '';
 
         // Set back button label with game name
-        const NAMES = {ttt:'دوز',snake:'مار',dots:'نقطه‌چین',memory:'حافظه','2048':'۲۰۴۸',breakout:'بریکاوت',minesweeper:'مین‌روب',reaction:'واکنش‌سنج',hangman:'دارآویز',simon:'سیمون',flappy:'پرنده',tetris:'تتریس',pong:'پونگ',trex:'دایناسور'};
+        const NAMES = {ttt:'دوز',snake:'مار',dots:'نقطه‌چین',memory:'حافظه','2048':'۲۰۴۸',breakout:'بریکاوت',minesweeper:'مین‌روب',reaction:'واکنش‌سنج',hangman:'دارآویز',simon:'سیمون',flappy:'پرنده',tetris:'تتریس',pong:'پونگ',trex:'دایناسور',wordle:'واژه'};
         if (backBtn) { backBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:4px"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> ` + (NAMES[name] || name); }
 
         const area = document.getElementById('mg-area');
@@ -16651,6 +16722,7 @@
         else if (name==='tetris')      mgTetris(area);
         else if (name==='pong')        mgPong(area);
         else if (name==='trex')        mgTrex(area);
+        else if (name==='wordle')      mgWordle(area);
       }
 
       // ── REACTION TIME ────────────────────────────────────────
@@ -17546,6 +17618,201 @@
         draw();
         raf = requestAnimationFrame(loop);
         window._trexRAF = raf;
+      }
+
+      // ── WORDLE (Persian 4-letter) ─────────────────────────────
+      function mgWordle(area) {
+        // Curated list of common 4-letter Persian words (no kashida, simple forms)
+        const WORDS = [
+          'درخت','خانه','دریا','کوهی','شهری','میوه','دانش','سنگی','برگه','نقشه',
+          'چشمه','ماهی','جنگل','صحرا','بادل','لبخند'.slice(0,4),'نهال','سپید','روشن','گرما',
+          'بهار','سفید','آرام','دانه','برگل','چراغ','دست','پست','سیب','تیز',
+          'روزه','ماهه','سالی','کاری','آبها','خاکی','بادی','نوری','داری','دلیل',
+          'جانی','دامی','نازی','رازی','کارد','سردی','گرمی','سبزی','آبرو','تنها',
+          'دیوار'.slice(0,4),'باغچه'.slice(0,4),'پنجره'.slice(0,4),'ستاره'.slice(0,4),
+          'آینه','زیبا','تاری','پاری','نارد','کندی','تندی','سختی','راحت','آسان',
+          'چهره','شاخه','تخته','کوچه','جاده','ساده','ساعت','فارس','ایران'.slice(0,4),
+        ].filter(w => [...w].length === 4); // ensure exactly 4 Persian chars
+
+        const TARGET = WORDS[Math.floor(Math.random() * WORDS.length)];
+        const TARGET_CHARS = [...TARGET]; // split into codepoints (Persian chars are multi-byte)
+        const WORD_LEN = 4;
+        const MAX_GUESSES = 6;
+        let guesses = [], currentInput = [], gameOver = false;
+
+        area.innerHTML = '';
+        area.style.cssText = 'direction:rtl;text-align:center';
+
+        const titleEl = document.createElement('div');
+        titleEl.style.cssText = 'font-size:13px;color:var(--m3-on-surface-variant);margin-bottom:10px';
+        titleEl.textContent = `یک کلمه ${WORD_LEN} حرفی فارسی حدس بزنید (${MAX_GUESSES} تلاش)`;
+        area.appendChild(titleEl);
+
+        // Grid — RTL: first char is rightmost
+        const grid = document.createElement('div');
+        grid.style.cssText = 'display:inline-flex;flex-direction:column;gap:5px;margin-bottom:14px';
+        area.appendChild(grid);
+
+        function scoreGuess(guess) {
+          // guess & TARGET_CHARS are arrays of individual chars
+          const result = Array(WORD_LEN).fill(0); // 0=gray 1=yellow 2=green
+          const targetLeft = [...TARGET_CHARS];
+          // Pass 1: greens
+          for (let i = 0; i < WORD_LEN; i++) {
+            if (guess[i] === TARGET_CHARS[i]) { result[i] = 2; targetLeft[i] = null; }
+          }
+          // Pass 2: yellows
+          for (let i = 0; i < WORD_LEN; i++) {
+            if (result[i] === 2) continue;
+            const j = targetLeft.indexOf(guess[i]);
+            if (j !== -1) { result[i] = 1; targetLeft[j] = null; }
+          }
+          return result;
+        }
+
+        function renderGrid() {
+          grid.innerHTML = '';
+          for (let r = 0; r < MAX_GUESSES; r++) {
+            const row = document.createElement('div');
+            // LTR row so cell 0 = rightmost (index 0 = first Persian char = right side)
+            row.style.cssText = 'display:flex;flex-direction:row;gap:5px;direction:ltr';
+            for (let c = WORD_LEN - 1; c >= 0; c--) { // draw right-to-left: c=3 first, c=0 last
+              const cell = document.createElement('div');
+              cell.style.cssText = 'width:50px;height:50px;border:2px solid var(--m3-outline-variant);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:800;font-family:Vazirmatn,sans-serif;transition:background .2s';
+              if (r < guesses.length) {
+                const g = guesses[r];
+                cell.textContent = g[c] || '';
+                const result = scoreGuess(g);
+                if      (result[c] === 2) { cell.style.background='#538d4e'; cell.style.borderColor='#538d4e'; cell.style.color='#fff'; }
+                else if (result[c] === 1) { cell.style.background='#b59f3b'; cell.style.borderColor='#b59f3b'; cell.style.color='#fff'; }
+                else                      { cell.style.background='var(--m3-surface-container-high)'; cell.style.borderColor='var(--m3-outline)'; }
+              } else if (r === guesses.length && !gameOver) {
+                cell.textContent = currentInput[c] || '';
+                if (currentInput[c]) cell.style.borderColor = 'var(--m3-primary)';
+              }
+              row.appendChild(cell);
+            }
+            grid.appendChild(row);
+          }
+        }
+
+        // Used-letter state for keyboard coloring
+        const usedLetters = {};
+        function updateUsed() {
+          Object.keys(usedLetters).forEach(k => delete usedLetters[k]);
+          guesses.forEach(g => {
+            const res = scoreGuess(g);
+            g.forEach((ch, i) => { if ((usedLetters[ch] || 0) < res[i]) usedLetters[ch] = res[i]; });
+          });
+        }
+
+        // On-screen Persian keyboard rows
+        const KB_ROWS = [
+          ['ض','ص','ث','ق','ف','غ','ع','ه','خ','ح','ج','چ'],
+          ['ش','س','ی','ب','ل','ا','ت','ن','م','ک','گ'],
+          ['ظ','ط','ز','ر','ذ','د','پ','و']
+        ];
+
+        const kbEl = document.createElement('div');
+        kbEl.style.cssText = 'display:flex;flex-direction:column;gap:5px;align-items:center;direction:rtl';
+        area.appendChild(kbEl);
+
+        const statusEl = document.createElement('div');
+        statusEl.style.cssText = 'font-size:14px;font-weight:700;margin:10px 0 4px;min-height:22px;font-family:Vazirmatn,sans-serif';
+        area.appendChild(statusEl);
+
+        const newBtn = document.createElement('button');
+        newBtn.className = 'btn btn-tonal'; newBtn.textContent = '↺ بازی جدید';
+        newBtn.style.display = 'none';
+        newBtn.addEventListener('click', () => mgWordle(area));
+        area.appendChild(newBtn);
+
+        function addLetter(ch) {
+          if (gameOver || currentInput.length >= WORD_LEN) return;
+          currentInput.push(ch);
+          renderGrid(); renderKb();
+        }
+        function delLetter() {
+          if (currentInput.length === 0) return;
+          currentInput.pop();
+          renderGrid(); renderKb();
+        }
+        function submitGuess() {
+          if (currentInput.length < WORD_LEN) { shakeGrid(); return; }
+          const guess = [...currentInput];
+          guesses.push(guess);
+          currentInput = [];
+          const won = guess.join('') === TARGET;
+          if (won || guesses.length === MAX_GUESSES) {
+            gameOver = true;
+            renderGrid(); renderKb();
+            setTimeout(() => {
+              statusEl.textContent = won ? `🎉 آفرین! کلمه «${TARGET}» بود` : `😢 کلمه «${TARGET}» بود`;
+              statusEl.style.color = won ? '#538d4e' : 'var(--m3-error)';
+              newBtn.style.display = 'inline-flex';
+            }, 300);
+          } else {
+            renderGrid(); renderKb();
+          }
+        }
+        function shakeGrid() {
+          grid.style.animation = 'none';
+          setTimeout(() => { grid.style.animation = '_wShake 0.4s'; }, 10);
+        }
+
+        function renderKb() {
+          updateUsed();
+          kbEl.innerHTML = '';
+          KB_ROWS.forEach(rowChars => {
+            const rowDiv = document.createElement('div');
+            rowDiv.style.cssText = 'display:flex;gap:4px;flex-direction:row-reverse';
+            rowChars.forEach(ch => {
+              const btn = document.createElement('button');
+              btn.className = 'btn';
+              btn.textContent = ch;
+              btn.style.cssText = 'width:30px;height:36px;padding:0;font-size:0.95rem;font-weight:700;border-radius:7px;min-height:0;font-family:Vazirmatn,sans-serif';
+              const st = usedLetters[ch];
+              if      (st === 2) btn.style.cssText += ';background:#538d4e;color:#fff;border:none';
+              else if (st === 1) btn.style.cssText += ';background:#b59f3b;color:#fff;border:none';
+              else if (st === 0) btn.style.cssText += ';background:var(--m3-surface-container-high);color:var(--m3-on-surface-variant)';
+              else               btn.style.cssText += ';background:var(--m3-surface-container);color:var(--m3-on-surface)';
+              btn.addEventListener('pointerdown', e => { e.preventDefault(); if(!gameOver) addLetter(ch); });
+              rowDiv.appendChild(btn);
+            });
+            kbEl.appendChild(rowDiv);
+          });
+          // Control row
+          const ctrlRow = document.createElement('div');
+          ctrlRow.style.cssText = 'display:flex;gap:6px;margin-top:2px';
+          const enterBtn = document.createElement('button');
+          enterBtn.className = 'btn btn-filled'; enterBtn.textContent = '↵ ثبت';
+          enterBtn.style.cssText = 'padding:8px 14px;font-size:13px;min-height:0;font-family:Vazirmatn,sans-serif';
+          enterBtn.addEventListener('pointerdown', e => { e.preventDefault(); submitGuess(); });
+          const delBtn = document.createElement('button');
+          delBtn.className = 'btn btn-tonal'; delBtn.textContent = '⌫';
+          delBtn.style.cssText = 'padding:8px 14px;font-size:15px;min-height:0';
+          delBtn.addEventListener('pointerdown', e => { e.preventDefault(); delLetter(); });
+          ctrlRow.appendChild(enterBtn); ctrlRow.appendChild(delBtn);
+          kbEl.appendChild(ctrlRow);
+        }
+
+        if (window._wordleKH) document.removeEventListener('keydown', window._wordleKH);
+        window._wordleKH = e => {
+          if (!document.getElementById('minigames')?.classList.contains('active')) return;
+          if (gameOver) return;
+          if (e.key === 'Enter') { submitGuess(); return; }
+          if (e.key === 'Backspace') { delLetter(); return; }
+        };
+        document.addEventListener('keydown', window._wordleKH);
+        _mgListeners.keyboard = window._wordleKH;
+
+        if (!document.getElementById('_wordle_style')) {
+          const s = document.createElement('style'); s.id = '_wordle_style';
+          s.textContent = '@keyframes _wShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}';
+          document.head.appendChild(s);
+        }
+
+        renderGrid(); renderKb();
       }
 
       // TicTacToe
@@ -19310,49 +19577,152 @@
       // ══════════════════════════════════════════════════════════
       //  IMAGE WATERMARK
       // ══════════════════════════════════════════════════════════
-      let _wmBase=null, _wmLogo=null;
-      function wmLoadBase(inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const img=new Image();img.onload=()=>{_wmBase=img;document.getElementById('wm-img-label').textContent=f.name;wmRender();};img.src=e.target.result;};r.readAsDataURL(f);}
-      function wmLoadLogo(inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const img=new Image();img.onload=()=>{_wmLogo=img;document.getElementById('wm-logo-label').textContent=f.name;wmRender();};img.src=e.target.result;};r.readAsDataURL(f);}
-      function wmRender(){
-        if(!_wmBase)return;
-        const c=document.getElementById('wm-canvas');
-        c.width=_wmBase.width;c.height=_wmBase.height;
-        c.style.display='block';
-        const ctx=c.getContext('2d');
-        ctx.drawImage(_wmBase,0,0);
-        const op=parseFloat((document.getElementById('wm-opacity')||{}).value)||0.5;
-        const sc=parseFloat((document.getElementById('wm-scale')||{}).value)||0.2;
-        const pos=(document.getElementById('wm-pos')||{}).value||'br';
-        const text=(document.getElementById('wm-text')||{}).value||'';
-        ctx.globalAlpha=op;
-        if(_wmLogo){
-          const lw=Math.round(_wmBase.width*sc), lh=Math.round(_wmLogo.height*(lw/_wmLogo.width));
-          const margin=Math.round(_wmBase.width*0.02);
-          let dx=0,dy=0;
-          if(pos==='br'){dx=_wmBase.width-lw-margin;dy=_wmBase.height-lh-margin;}
-          else if(pos==='bl'){dx=margin;dy=_wmBase.height-lh-margin;}
-          else if(pos==='tr'){dx=_wmBase.width-lw-margin;dy=margin;}
-          else if(pos==='tl'){dx=margin;dy=margin;}
-          else{dx=(_wmBase.width-lw)/2;dy=(_wmBase.height-lh)/2;}
-          ctx.drawImage(_wmLogo,dx,dy,lw,lh);
-        } else if(text){
-          const fs=Math.round(_wmBase.width*sc*0.2);
-          ctx.font=`bold ${fs}px Vazirmatn,sans-serif`;
-          ctx.fillStyle='#fff';ctx.textBaseline='bottom';
-          const margin=Math.round(_wmBase.width*0.02);
-          const tw=ctx.measureText(text).width;
-          let dx=0,dy=0;
-          if(pos==='br'){dx=_wmBase.width-tw-margin;dy=_wmBase.height-margin;}
-          else if(pos==='bl'){dx=margin;dy=_wmBase.height-margin;}
-          else if(pos==='tr'){dx=_wmBase.width-tw-margin;dy=fs+margin;}
-          else if(pos==='tl'){dx=margin;dy=fs+margin;}
-          else{dx=(_wmBase.width-tw)/2;dy=(_wmBase.height+fs)/2;}
-          ctx.fillText(text,dx,dy);
-        }
-        ctx.globalAlpha=1;
-        const dlBtn=document.getElementById('wm-dl-btn');if(dlBtn)dlBtn.style.display='inline-flex';
+      var _wmBase = null, _wmLogo = null;
+
+      function wmDrag(e, zoneId, on) {
+        e.preventDefault();
+        document.getElementById(zoneId)?.classList.toggle('drag-over', on);
       }
-      function wmDownload(){const c=document.getElementById('wm-canvas');if(!c)return;const a=document.createElement('a');a.download='watermarked.png';a.href=c.toDataURL('image/png');a.click();}
+      function wmDropBase(e) {
+        e.preventDefault();
+        wmDrag(e, 'wm-base-zone', false);
+        const f = e.dataTransfer.files[0];
+        if (f) { const dt = new DataTransfer(); dt.items.add(f); document.getElementById('wm-base-inp').files = dt.files; wmLoadBase(document.getElementById('wm-base-inp')); }
+      }
+      function wmDropLogo(e) {
+        e.preventDefault();
+        wmDrag(e, 'wm-logo-zone', false);
+        const f = e.dataTransfer.files[0];
+        if (f) { const dt = new DataTransfer(); dt.items.add(f); document.getElementById('wm-logo-inp').files = dt.files; wmLoadLogo(document.getElementById('wm-logo-inp')); }
+      }
+      function wmLoadBase(inp) {
+        const f = inp.files[0]; if (!f) return;
+        const r = new FileReader();
+        r.onload = e => {
+          const img = new Image();
+          img.onload = () => {
+            _wmBase = img;
+            const lbl = document.getElementById('wm-img-label');
+            if (lbl) lbl.textContent = f.name;
+            // Update zone to show filename
+            const zone = document.getElementById('wm-base-zone');
+            if (zone) zone.classList.add('drag-over');
+            setTimeout(() => zone?.classList.remove('drag-over'), 300);
+            wmRender();
+          };
+          img.src = e.target.result;
+        };
+        r.readAsDataURL(f);
+      }
+      function wmLoadLogo(inp) {
+        const f = inp.files[0]; if (!f) return;
+        const r = new FileReader();
+        r.onload = e => {
+          const img = new Image();
+          img.onload = () => {
+            _wmLogo = img;
+            const lbl = document.getElementById('wm-logo-label');
+            if (lbl) lbl.textContent = f.name;
+            wmRender();
+          };
+          img.src = e.target.result;
+        };
+        r.readAsDataURL(f);
+      }
+
+      // Sample image brightness to choose watermark text color
+      function wmGetTextColor(ctx, x, y, w, h) {
+        try {
+          const sampleW = Math.min(w, 200), sampleH = Math.min(h, 60);
+          const data = ctx.getImageData(x, y, sampleW, sampleH).data;
+          let sum = 0, count = 0;
+          for (let i = 0; i < data.length; i += 4) {
+            // Perceived luminance
+            sum += 0.299 * data[i] + 0.587 * data[i+1] + 0.114 * data[i+2];
+            count++;
+          }
+          const avg = sum / count;
+          // If the area is bright (>140), use dark text; otherwise white
+          return avg > 140 ? 'rgba(0,0,0,0.85)' : 'rgba(255,255,255,0.92)';
+        } catch(e) {
+          return 'rgba(255,255,255,0.9)';
+        }
+      }
+
+      function wmRender() {
+        if (!_wmBase) return;
+        const c = document.getElementById('wm-canvas');
+        c.width = _wmBase.width; c.height = _wmBase.height;
+        c.style.display = 'block';
+        const ctx = c.getContext('2d');
+        ctx.drawImage(_wmBase, 0, 0);
+
+        const op  = parseFloat(document.getElementById('wm-opacity')?.value) || 0.5;
+        const sc  = parseFloat(document.getElementById('wm-scale')?.value)   || 0.2;
+        const pos = document.getElementById('wm-pos')?.value || 'br';
+        const text = document.getElementById('wm-text')?.value || '';
+        const margin = Math.round(_wmBase.width * 0.02);
+
+        ctx.globalAlpha = op;
+
+        if (_wmLogo) {
+          const lw = Math.round(_wmBase.width * sc);
+          const lh = Math.round(_wmLogo.height * (lw / _wmLogo.width));
+          let dx = 0, dy = 0;
+          if      (pos === 'br') { dx = _wmBase.width  - lw - margin; dy = _wmBase.height - lh - margin; }
+          else if (pos === 'bl') { dx = margin;                        dy = _wmBase.height - lh - margin; }
+          else if (pos === 'tr') { dx = _wmBase.width  - lw - margin; dy = margin; }
+          else if (pos === 'tl') { dx = margin;                        dy = margin; }
+          else                   { dx = (_wmBase.width  - lw) / 2;    dy = (_wmBase.height - lh) / 2; }
+          ctx.drawImage(_wmLogo, dx, dy, lw, lh);
+        } else if (text) {
+          const fs = Math.round(_wmBase.width * sc * 0.2);
+          ctx.font = `bold ${fs}px Vazirmatn,sans-serif`;
+          ctx.textBaseline = 'alphabetic';
+          // RTL: measure width BEFORE positioning
+          const tw = ctx.measureText(text).width;
+
+          // Determine text color from the region where watermark will be placed
+          let sampleX = 0, sampleY = 0;
+          if      (pos === 'br') { sampleX = _wmBase.width  - tw - margin; sampleY = _wmBase.height - fs - margin; }
+          else if (pos === 'bl') { sampleX = margin;                        sampleY = _wmBase.height - fs - margin; }
+          else if (pos === 'tr') { sampleX = _wmBase.width  - tw - margin; sampleY = margin; }
+          else if (pos === 'tl') { sampleX = margin;                        sampleY = margin; }
+          else                   { sampleX = (_wmBase.width  - tw) / 2;    sampleY = (_wmBase.height - fs) / 2; }
+          sampleX = Math.max(0, sampleX);
+          sampleY = Math.max(0, sampleY);
+
+          // Sample BEFORE applying globalAlpha (need real pixel values)
+          const savedAlpha = ctx.globalAlpha;
+          ctx.globalAlpha = 1;
+          const textColor = wmGetTextColor(ctx, sampleX, sampleY, tw, fs + 8);
+          ctx.globalAlpha = savedAlpha;
+
+          ctx.fillStyle = textColor;
+          // Draw text — dx is always the LEFT edge of the text box
+          let dx = sampleX, dy = 0;
+          if      (pos === 'br') { dy = _wmBase.height - margin; }
+          else if (pos === 'bl') { dy = _wmBase.height - margin; }
+          else if (pos === 'tr') { dy = fs + margin; }
+          else if (pos === 'tl') { dy = fs + margin; }
+          else                   { dy = (_wmBase.height + fs) / 2; }
+
+          // Draw a soft shadow for extra contrast
+          ctx.shadowColor = textColor === 'rgba(0,0,0,0.85)' ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.4)';
+          ctx.shadowBlur = Math.max(2, fs * 0.08);
+          ctx.fillText(text, dx, dy);
+          ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0;
+        }
+
+        ctx.globalAlpha = 1;
+        const dlBtn = document.getElementById('wm-dl-btn');
+        if (dlBtn) dlBtn.style.display = 'inline-flex';
+      }
+      function wmDownload() {
+        const c = document.getElementById('wm-canvas'); if (!c) return;
+        const a = document.createElement('a');
+        a.download = 'watermarked.png'; a.href = c.toDataURL('image/png'); a.click();
+      }
 
       // ══════════════════════════════════════════════════════════
       //  SEO META TAGS GENERATOR

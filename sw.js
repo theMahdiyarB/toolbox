@@ -6,12 +6,12 @@
 //    - External/opaque requests: Network-only (skip)
 // ============================================================
 
-const CACHE_VERSION = 'toolbox-v5.0';
+const CACHE_VERSION = 'toolbox-v5.4';
 const CACHE_SHELL   = CACHE_VERSION + '-shell';
 const CACHE_ASSETS  = CACHE_VERSION + '-assets';
 
 // Pages that must be served as their own HTML (not redirected to index.html)
-const STANDALONE_PAGES = ['/iran', '/iran/', '/iran.html'];
+const STANDALONE_PAGES = ['/iran', '/iran/', '/iran.html', '/resume', '/resume/', '/resume.html'];
 
 const SHELL_URLS = [
   '/',
@@ -23,12 +23,12 @@ const SHELL_URLS = [
   '/static/favicon.png',
   '/static/icon-512.png',
   '/static/Vazirmatn-VF.ttf',
-  '/static/lib/qrcode.js',
   '/static/lib/jsQR.js',
   '/static/lib/qr-code-styling.js',
   '/static/lib/browser-image-compression.js',
   '/static/lib/pdf.mjs',
   '/static/lib/pdf.worker.mjs',
+  '/static/lib/pdf-lib.js',
   '/static/lib/function-plot.js',
   '/static/lib/math.js',
   '/static/poems/fersowsi/structure.json',
