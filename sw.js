@@ -6,7 +6,7 @@
 //    - External/opaque requests: Network-only (skip)
 // ============================================================
 
-const CACHE_VERSION = 'toolbox-v5.4';
+const CACHE_VERSION = 'toolbox-v5.10';
 const CACHE_SHELL   = CACHE_VERSION + '-shell';
 const CACHE_ASSETS  = CACHE_VERSION + '-assets';
 
@@ -23,17 +23,19 @@ const SHELL_URLS = [
   '/static/favicon.png',
   '/static/icon-512.png',
   '/static/Vazirmatn-VF.ttf',
-  '/static/lib/jsQR.js',
+  '/static/lib/jsQR.min.js',
   '/static/lib/qr-code-styling.js',
   '/static/lib/browser-image-compression.js',
   '/static/lib/pdf.mjs',
   '/static/lib/pdf.worker.mjs',
-  '/static/lib/pdf-lib.js',
+  '/static/lib/pdf-lib.min.js',
   '/static/lib/function-plot.js',
   '/static/lib/math.js',
+  '/static/poems/akhavan/structure.json',
   '/static/poems/fersowsi/structure.json',
   '/static/poems/forugh/structure.json',
   '/static/poems/hafez/structure.json',
+  '/static/poems/iraj/structure.json',
   '/static/poems/jami/structure.json',
   '/static/poems/khayyam/structure.json',
   '/static/poems/nizami/structure.json',
@@ -41,6 +43,7 @@ const SHELL_URLS = [
   '/static/poems/saadi/structure.json',
   '/static/poems/sanai/structure.json',
   '/static/poems/shahriar/structure.json',
+  '/static/poems/shamlou/structure.json',
   '/static/poems/sohrab-sepehri/structure.json',
   '/static/poems/vahsi/structure.json',
 ];

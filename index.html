@@ -27,10 +27,10 @@
     </script>
     <script src="static/lib/math.js"></script>
     <script src="static/lib/function-plot.js"></script>
-    <script src="static/lib/jsQR.js"></script>
+    <script src="static/lib/jsQR.min.js"></script>
     <script src="static/lib/qr-code-styling.js"></script>
     <script src="static/lib/browser-image-compression.js"></script>
-    <script src="static/lib/pdf-lib.js"></script>
+    <script src="static/lib/pdf-lib.min.js"></script>
     <!-- PDF.js: load as module and expose pdfjsLib globally for use in classic scripts -->
     <script type="module">
       import * as pdfjsLib from './static/lib/pdf.mjs';
@@ -632,23 +632,16 @@
         align-self: stretch;
       }
       select.field__input {
-        appearance: none;
         -webkit-appearance: none;
+        appearance: none;
+        background: transparent;
+        color-scheme: unset;
         padding-inline-end: 28px;
         cursor: pointer;
-        color-scheme: light;
-        background-color: transparent;
         width: 100%; min-width: 0; flex: 1;
       }
       .field__container:has(select.field__input) {
         background-color: var(--m3-surface-container);
-      }
-      /* Dark theme: select native popup gets dark OS rendering */
-      [data-theme="dark"] select.field__input,
-      [data-theme="dark"] .select-input {
-        color-scheme: dark;
-        background-color: var(--m3-surface-container-highest);
-        color: var(--m3-on-surface);
       }
       /* Light: white bg for the field itself */
       select.field__input option,
@@ -659,22 +652,46 @@
       /* Dark: options get the dark surface */
       [data-theme="dark"] select.field__input option,
       [data-theme="dark"] .select-input option {
-        background: #2a3b3e;
+        background: #1a2b2e;
         color: #dce4e6;
       }
+      /* ── .select-input – custom styled select ── */
+      .select-wrap {
+        position: relative;
+        display: inline-flex;
+        width: 100%;
+      }
+      .select-wrap::after {
+        content: '▾';
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1rem;
+        color: var(--m3-on-surface-variant);
+        pointer-events: none;
+        line-height: 1;
+      }
       .select-input {
-        -webkit-appearance: auto;
-        appearance: auto;
-        color-scheme: light;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        color-scheme: unset;
         background-color: var(--m3-surface-container);
         background-image: none;
+        border: none;
+        border-radius: 10px;
+        width: 100%;
+        padding: 10px 12px 10px 32px;
+        font-size: 0.9375rem;
+        color: var(--m3-on-surface);
+        cursor: pointer;
+        outline: none;
       }
-      [data-theme="dark"] .select-input {
-        color-scheme: dark;
-        background-color: var(--m3-surface-container);
+      .select-input:focus {
+        outline: 2px solid var(--m3-primary);
+        outline-offset: -2px;
       }
-      /* Make the native dropdown arrow area match the field background */
-      .select-input::-webkit-scrollbar { display: none; }
       /* Hide number spinners */
       .field__input[type="number"]::-webkit-inner-spin-button,
       .field__input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
@@ -2076,6 +2093,7 @@
         <div class="drawer-item" onclick="showTool('citation')" data-tool="citation"><span class="drawer-item__icon">📚</span>استناد دانشگاهی</div>
         <div class="drawer-item" onclick="showTool('langscores')" data-tool="langscores"><span class="drawer-item__icon">🎓</span>محاسبه نمره</div>
         <div class="drawer-item" onclick="showTool('audiotools')" data-tool="audiotools"><span class="drawer-item__icon">🔊</span>ابزار صوتی</div>
+        <div class="drawer-item" onclick="showTool('tts')" data-tool="tts"><span class="drawer-item__icon">🗣️</span>متن به گفتار (TTS)</div>
 
         <span class="drawer-section-label">🌐 ابزار آنلاین</span>
         <div class="drawer-item" onclick="showTool('weather')" data-tool="weather"><span class="drawer-item__icon">🌤️</span>آب‌وهوا</div>
@@ -2382,6 +2400,7 @@
                 <div class="link-card" onclick="haptic(this);showTool('citation')"><button class="fav-btn" data-tool="citation" onclick="event.stopPropagation();toggleFav('citation',this)">☆</button><span class="link-card__icon">📚</span><span class="link-card__name">استناد دانشگاهی</span><span class="link-card__desc">APA، MLA، Chicago</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('langscores')"><button class="fav-btn" data-tool="langscores" onclick="event.stopPropagation();toggleFav('langscores',this)">☆</button><span class="link-card__icon">🎓</span><span class="link-card__name">محاسبه نمره</span><span class="link-card__desc">IELTS ↔ TOEFL، محاسبه Overall</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('audiotools')"><button class="fav-btn" data-tool="audiotools" onclick="event.stopPropagation();toggleFav('audiotools',this)">☆</button><span class="link-card__icon">🔊</span><span class="link-card__name">ابزار صوتی</span><span class="link-card__desc">تولید فرکانس و سانسور صدا</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('tts')"><button class="fav-btn" data-tool="tts" onclick="event.stopPropagation();toggleFav('tts',this)">☆</button><span class="link-card__icon">🗣️</span><span class="link-card__name">متن به گفتار</span><span class="link-card__desc">TTS فارسی با موتور Piper AI</span></div>
               </div>
             </div>
 
@@ -6623,6 +6642,30 @@
             </div>
           </div>
 
+          <!-- Feature cards -->
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px">
+            <div style="background:color-mix(in srgb,var(--m3-primary) 7%,var(--m3-surface-container-low));border-radius:14px;padding:14px 12px;display:flex;flex-direction:column;gap:6px">
+              <div style="font-size:1.6rem">🔒</div>
+              <div style="font-size:13px;font-weight:700;color:var(--m3-on-surface)">حریم خصوصی کامل</div>
+              <div style="font-size:12px;color:var(--m3-on-surface-variant);line-height:1.6">همه‌چیز در مرورگر شما اجرا می‌شود؛ هیچ داده‌ای به سرور ارسال نمی‌شود</div>
+            </div>
+            <div style="background:color-mix(in srgb,var(--m3-primary) 7%,var(--m3-surface-container-low));border-radius:14px;padding:14px 12px;display:flex;flex-direction:column;gap:6px">
+              <div style="font-size:1.6rem">⚡</div>
+              <div style="font-size:13px;font-weight:700;color:var(--m3-on-surface)">سبک و سریع</div>
+              <div style="font-size:12px;color:var(--m3-on-surface-variant);line-height:1.6">بدون وابستگی‌های خارجی، مناسب اتصال‌های ضعیف</div>
+            </div>
+            <div style="background:color-mix(in srgb,var(--m3-primary) 7%,var(--m3-surface-container-low));border-radius:14px;padding:14px 12px;display:flex;flex-direction:column;gap:6px">
+              <div style="font-size:1.6rem">📴</div>
+              <div style="font-size:13px;font-weight:700;color:var(--m3-on-surface)">آفلاین</div>
+              <div style="font-size:12px;color:var(--m3-on-surface-variant);line-height:1.6">با نصب PWA، اکثر ابزارها بدون اینترنت کار می‌کنند</div>
+            </div>
+            <div style="background:color-mix(in srgb,var(--m3-primary) 7%,var(--m3-surface-container-low));border-radius:14px;padding:14px 12px;display:flex;flex-direction:column;gap:6px">
+              <div style="font-size:1.6rem">🌐</div>
+              <div style="font-size:13px;font-weight:700;color:var(--m3-on-surface)">متن‌باز</div>
+              <div style="font-size:12px;color:var(--m3-on-surface-variant);line-height:1.6">کد منبع آزاد و قابل بررسی برای همه</div>
+            </div>
+          </div>
+
           <!-- Developer info -->
           <div style="background:var(--m3-surface-container);border-radius:16px;padding:20px;margin-bottom:16px">
             <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--m3-on-surface)">👨‍💻 سازنده</div>
@@ -7233,6 +7276,83 @@
             </div>
           </div>
           <div class="tool-desc">مولد فرکانس: هر فرکانس صوتی با شکل موج دلخواه. بیپ/سانسور: قسمتی از فایل صوتی را با بیپ یا سکوت جایگزین کنید.</div>
+        </div>
+
+        <!-- ══ TTS ══ -->
+        <div id="tts" class="tool-card">
+          <div class="tool-title">🗣️ متن به گفتار (TTS)</div>
+          <div class="tool-desc" style="margin-bottom:12px">تبدیل متن فارسی و انگلیسی به صدا — موتور فارسی از مدل Piper AI روی سرور استفاده می‌کند.</div>
+
+          <!-- Status bar -->
+          <div id="tts-status" style="display:none;background:var(--m3-surface-container);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--m3-on-surface-variant);margin-bottom:12px;align-items:center;gap:8px">
+            <span id="tts-status-icon">⏳</span>
+            <span id="tts-status-text"></span>
+          </div>
+
+          <!-- Input -->
+          <textarea id="tts-input" class="text-area" placeholder="متن خود را اینجا بنویسید… (فارسی یا انگلیسی)" style="min-height:120px;direction:rtl;text-align:right"></textarea>
+
+          <!-- Controls -->
+          <div class="field-row" style="margin-top:10px">
+            <div class="field-col">
+              <label class="field-label">موتور TTS</label>
+              <select id="tts-engine" class="select-input" onchange="ttsEngineChanged()">
+                <option value="piper">🤖 مدل هوش مصنوعی فارسی Piper AI</option>
+                <option value="browser">🌐 موتور مرورگر (سیستمی)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Piper section -->
+          <div id="tts-piper-section" style="margin-top:10px">
+            <div class="range-row">
+              <label>سرعت</label>
+              <input type="range" id="tts-speed" min="0.5" max="2.0" step="0.05" value="1.0" oninput="document.getElementById('tts-speed-val').textContent=parseFloat(this.value).toFixed(2)+'x'">
+              <span class="range-val" id="tts-speed-val">1.00x</span>
+            </div>
+          </div>
+
+          <!-- Browser engine section -->
+          <div id="tts-browser-section" style="display:none;margin-top:10px">
+            <div class="field-row">
+              <div class="field-col">
+                <label class="field-label">زبان</label>
+                <select id="tts-lang" class="select-input" onchange="ttsBrowserVoicesPopulate()">
+                  <option value="fa-IR">فارسی</option>
+                  <option value="en-US">English (US)</option>
+                  <option value="en-GB">English (UK)</option>
+                  <option value="ar">عربی</option>
+                </select>
+              </div>
+              <div class="field-col">
+                <label class="field-label">صدا</label>
+                <select id="tts-voice" class="select-input"></select>
+              </div>
+            </div>
+            <div class="range-row" style="margin-top:8px">
+              <label>سرعت</label>
+              <input type="range" id="tts-brate" min="0.5" max="2.0" step="0.05" value="1.0" oninput="document.getElementById('tts-brate-val').textContent=parseFloat(this.value).toFixed(2)+'x'">
+              <span class="range-val" id="tts-brate-val">1.00x</span>
+            </div>
+            <div class="range-row">
+              <label>زیر‌وبمی</label>
+              <input type="range" id="tts-pitch" min="0.5" max="2.0" step="0.05" value="1.0" oninput="document.getElementById('tts-pitch-val').textContent=parseFloat(this.value).toFixed(2)+'x'">
+              <span class="range-val" id="tts-pitch-val">1.00x</span>
+            </div>
+            <div id="tts-browser-warn" style="display:none;background:color-mix(in srgb,var(--m3-error) 12%,var(--m3-surface));border-radius:10px;padding:10px 14px;font-size:12px;color:var(--m3-error);margin-top:8px">
+              ⚠️ صدای فارسی در این مرورگر یافت نشد. از Microsoft Edge یا Android استفاده کنید، یا موتور Piper را انتخاب کنید.
+            </div>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="btn-row" style="margin-top:14px">
+            <button class="btn btn-filled" id="tts-speak-btn" onclick="ttsSpeak()" style="flex:2">🔊 پخش</button>
+            <button class="btn btn-tonal" onclick="ttsStop()">⏹ توقف</button>
+            <button class="btn btn-tonal" id="tts-dl-btn" style="display:none" onclick="ttsDownload()">💾 دانلود WAV</button>
+          </div>
+
+          <!-- Audio player -->
+          <audio id="tts-audio" controls style="display:none;width:100%;margin-top:10px;border-radius:8px"></audio>
         </div>
 
         <!-- ══ DIWAN (POETRY) ══ -->
@@ -8276,7 +8396,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 5.4 - ۱۴۰۵/۰۱/۲۹
+          ℹ️ نسخه 5.10 - ۱۴۰۵/۰۱/۳۰
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -8382,6 +8502,7 @@
         watermark:'واترمارک تصویر',
         seotools:'مولد متا تگ SEO',
         audiotools:'ابزار صوتی',
+        tts:'متن به گفتار فارسی',
         diwan:'دیوان شعر',
         filesplit:'تقسیم و مرج فایل',
         weather:'آب‌وهوا',
@@ -8465,6 +8586,7 @@
         if (id === 'diwan') { document.getElementById('diwan-poet-select').style.display = 'block'; }
         if (id === 'seotools' && typeof buildSEO === 'function') buildSEO();
         if (id === 'audiotools' && typeof atSetTab === 'function') { atSetTab('gen'); setTimeout(atDrawWave, 80); }
+        if (id === 'tts') { ttsEngineChanged(); ttsBrowserVoicesPopulate(); }
         if (id === 'imgpalette') { /* loaded on demand */ }
         if (id === 'wordcloud') { /* ready on demand */ }
         if (id === 'keypair') { /* ready on demand */ }
@@ -9804,7 +9926,9 @@
           const keyBits=await cryptoDeriveKey(pwd);
           const algoName=algo==='aes-256-gcm'?'AES-GCM':'AES-CBC';
           const key=await crypto.subtle.importKey('raw',keyBits,algoName,false,['encrypt']);
-          const iv=crypto.getRandomValues(new Uint8Array(16));
+          // GCM requires 12-byte IV; CBC uses 16-byte IV
+          const ivLen=algo==='aes-256-gcm'?12:16;
+          const iv=crypto.getRandomValues(new Uint8Array(ivLen));
           const enc=new TextEncoder();
           const data=enc.encode(txt);
           
@@ -9815,10 +9939,12 @@
             encrypted=await crypto.subtle.encrypt({name:'AES-CBC',iv:iv},key,data);
           }
 
-          const combined=new Uint8Array(1+iv.length+encrypted.byteLength);
+          // Format: [1 byte algoId][1 byte ivLen][ivLen bytes IV][encrypted bytes]
+          const combined=new Uint8Array(2+iv.length+encrypted.byteLength);
           combined[0]=algo==='aes-256-gcm'?1:0;
-          combined.set(iv,1);
-          combined.set(new Uint8Array(encrypted),1+iv.length);
+          combined[1]=ivLen;
+          combined.set(iv,2);
+          combined.set(new Uint8Array(encrypted),2+iv.length);
 
           if(format==='hex'){
             // Raw hex format
@@ -9896,12 +10022,25 @@
             }
           }
 
-          if(combined.length<18){throw new Error('متن رمز خیلی کوتاه');}
+          if(combined.length<4){throw new Error('متن رمز خیلی کوتاه');}
 
           const algoId=combined[0];
           const algo=algoId===1?'AES-GCM':'AES-CBC';
-          const iv=combined.slice(1,17);
-          const encrypted=combined.slice(17);
+          // New format: byte0=algoId, byte1=ivLen, then IV, then ciphertext
+          // Legacy format (no ivLen byte): algoId + 16-byte IV + ciphertext
+          let iv,encrypted;
+          if(combined[1]===12||combined[1]===16){
+            // New format
+            const ivLen=combined[1];
+            if(combined.length<2+ivLen+1){throw new Error('متن رمز خیلی کوتاه');}
+            iv=combined.slice(2,2+ivLen);
+            encrypted=combined.slice(2+ivLen);
+          }else{
+            // Legacy format: 1 byte algoId + 16 bytes IV
+            if(combined.length<18){throw new Error('متن رمز خیلی کوتاه');}
+            iv=combined.slice(1,17);
+            encrypted=combined.slice(17);
+          }
 
           const keyBits=await cryptoDeriveKey(pwd);
           const algoName=algo==='AES-GCM'?'AES-GCM':'AES-CBC';
@@ -10600,7 +10739,7 @@
       }
       async function pdftEnsurePdfLib() {
         if (typeof window.PDFLib !== 'undefined') return window.PDFLib;
-        throw new Error('pdf-lib.js بارگذاری نشد — مطمئن شوید static/lib/pdf-lib.js وجود دارد');
+        throw new Error('pdf-lib.min.js بارگذاری نشد — مطمئن شوید static/lib/pdf-lib.min.js وجود دارد');
       }
       function pdftParsePages(str, max) {
         const pages = new Set();
@@ -12035,33 +12174,48 @@
       }
 
       // Fixed TTS - handles async voices on iOS/Android correctly
-      function nwSpeak() {
-        if (!window.speechSynthesis) { alert('مرورگر شما TTS را پشتیبانی نمی‌کند.'); return; }
+      async function nwSpeak() {
         const lang = _nwLang;
         const text = lang==='fa'
           ? (document.getElementById('nw-out')?.textContent||'').trim()
           : (document.getElementById('nw-out-en')?.textContent||'').trim();
         if (!text) return;
+        const btn = document.getElementById('nw-speak-btn');
+        const origLabel = btn ? btn.textContent : '';
+        const setBusy = (b) => { if (btn) { btn.disabled = b; if (!b) btn.textContent = origLabel; } };
+
+        // For Persian: try Piper first, browser as fallback
+        if (lang === 'fa') {
+          setBusy(true);
+          if (btn) btn.textContent = '⏳ ...';
+          const ok = await ttsPlayWithPiper(text, 1.0).catch(()=>false);
+          if (ok) { setBusy(false); return; }
+          // Piper failed — fall through to browser
+        }
+
+        // Browser TTS (for English, or if Piper fails for Persian)
+        if (!window.speechSynthesis) { alert('مرورگر شما TTS را پشتیبانی نمی‌کند.'); setBusy(false); return; }
         window.speechSynthesis.cancel();
         const speak = (voices) => {
           const utt = new SpeechSynthesisUtterance(text);
           utt.lang = lang==='fa' ? 'fa-IR' : 'en-US';
           utt.rate = 0.88;
-          const match = voices.find(v=>v.lang.startsWith(lang==='fa'?'fa':'en'));
+          const match = voices.find(v => v.lang.startsWith(lang==='fa' ? 'fa' : 'en'));
+          if (lang==='fa' && !match) {
+            if (btn) { btn.textContent = '⚠️ صدای فارسی یافت نشد'; setTimeout(()=>{ btn.textContent = origLabel; btn.disabled = false; }, 3000); }
+            return;
+          }
           if (match) utt.voice = match;
+          utt.onend = () => setBusy(false);
+          utt.onerror = () => setBusy(false);
           window.speechSynthesis.speak(utt);
         };
+        setBusy(false);
         const voices = window.speechSynthesis.getVoices();
-        if (voices.length) {
-          speak(voices);
-        } else {
-          // iOS/Android defer voice loading - wait for the event
-          window.speechSynthesis.onvoiceschanged = () => {
-            window.speechSynthesis.onvoiceschanged = null;
-            speak(window.speechSynthesis.getVoices());
-          };
-          // Fallback timeout: speak without a specific voice
-          setTimeout(() => { if (!window.speechSynthesis.speaking) speak([]); }, 600);
+        if (voices.length) speak(voices);
+        else {
+          window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.onvoiceschanged = null; speak(window.speechSynthesis.getVoices()); };
+          setTimeout(() => { if (!window.speechSynthesis.speaking) speak(window.speechSynthesis.getVoices()); }, 600);
         }
       }
 
@@ -13876,7 +14030,7 @@
         const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const res = document.getElementById('qrr-result');
         if (typeof jsQR === 'undefined') {
-          if (!fromCamera) res.innerHTML = '<div style="padding:12px;color:var(--m3-on-surface-variant);font-size:13px">📦 برای فعال‌سازی خواندن QR، فایل <code>static/lib/jsqr.js</code> را از <a href="https://github.com/cozmo/jsQR" target="_blank" rel="noopener">github.com/cozmo/jsQR</a> دانلود کرده و در کنار index.html قرار دهید، سپس به head اضافه کنید: <code>&lt;script src="jsqr.js"&gt;&lt;/script&gt;</code></div>';
+          if (!fromCamera) res.innerHTML = '<div style="padding:12px;color:var(--m3-on-surface-variant);font-size:13px">📦 برای فعال‌سازی خواندن QR، فایل <code>static/lib/jsqr.min.js</code> را از <a href="https://github.com/cozmo/jsQR" target="_blank" rel="noopener">github.com/cozmo/jsQR</a> دانلود کرده و در کنار index.html قرار دهید، سپس به head اضافه کنید: <code>&lt;script src="jsqr.min.js"&gt;&lt;/script&gt;</code></div>';
           return;
         }
         const code = jsQR(data.data, data.width, data.height, {inversionAttempts:'dontInvert'});
@@ -16818,10 +16972,24 @@
           return shown.join('');
         }
 
+        // Normalize Persian letter variants to their base form for comparison
+        // آ (U+0622), أ (U+0623), إ (U+0625) → ا (U+0627)
+        // ة (U+0629) → ه (U+0647)
+        // ى (U+0649) → ی (U+06CC)
+        function hmNorm(ch) {
+          return ch
+            .replace(/[\u0622\u0623\u0625]/g, '\u0627') // آ أ إ → ا
+            .replace(/\u0629/g, '\u0647')               // ة → ه
+            .replace(/\u0649/g, '\u06CC');              // ى → ی
+        }
+
+        // Normalize word for matching (keep original for display)
+        const wordNorm = hmNorm(word);
+
         function render() {
-          const won = [...word].every(c => guessed.has(c));
+          const won = [...wordNorm].every(c => guessed.has(c));
           const lost = wrong >= MAX;
-          const display = [...word].map(c => guessed.has(c) ? c : '_').join(' ');
+          const display = [...word].map((c,i) => guessed.has(hmNorm(c)) ? c : '_').join(' ');
           const stroke = lost ? 'var(--m3-error)' : 'var(--m3-on-surface)';
           area.innerHTML = `
             <svg viewBox="0 0 100 130" width="140" height="140" style="display:block" stroke="${stroke}" fill="none">
@@ -16840,10 +17008,17 @@
             LETTERS.forEach(l => {
               const btn = document.createElement('button');
               btn.textContent = l;
-              btn.className = 'btn ' + (guessed.has(l) ? (word.includes(l) ? 'btn-filled' : 'btn-tonal') : 'btn-tonal');
-              btn.style.cssText = `min-width:36px;height:36px;padding:0;font-size:14px;border-radius:8px;opacity:${guessed.has(l)?'0.4':'1'}`;
-              btn.disabled = guessed.has(l);
-              btn.onclick = () => { guessed.add(l); if (!word.includes(l)) wrong++; render(); };
+              const used = guessed.has(l);
+              const correct = used && wordNorm.includes(l);
+              btn.className = 'btn ' + (used ? (correct ? 'btn-filled' : 'btn-tonal') : 'btn-tonal');
+              btn.style.cssText = `min-width:36px;height:36px;padding:0;font-size:14px;border-radius:8px;opacity:${used?'0.4':'1'}`;
+              btn.disabled = used;
+              btn.onclick = () => {
+                const ln = hmNorm(l);
+                guessed.add(ln);
+                if (!wordNorm.includes(ln)) wrong++;
+                render();
+              };
               keys.appendChild(btn);
             });
           }
@@ -16863,21 +17038,22 @@
         if (window._hmKH) document.removeEventListener('keydown', window._hmKH);
         window._hmKH = function(e) {
           if (!document.getElementById('minigames')?.classList.contains('active')) return;
-          const won = [...word].every(c => guessed.has(c));
+          const won = [...wordNorm].every(c => guessed.has(c));
           const lost = wrong >= MAX;
           if (won || lost) return;
           let letter = e.key;
           if (letter.length === 1 && LETTERS.includes(letter)) {
-            // Already a Persian character (user has Persian input active)
+            // Already a Persian character
           } else if (LATIN_TO_FA[letter]) {
             letter = LATIN_TO_FA[letter];
           } else {
             return;
           }
-          if (!LETTERS.includes(letter) || guessed.has(letter)) return;
+          const letterNorm = hmNorm(letter);
+          if (!LETTERS.includes(letter) || guessed.has(letterNorm)) return;
           e.preventDefault();
-          guessed.add(letter);
-          if (!word.includes(letter)) wrong++;
+          guessed.add(letterNorm);
+          if (!wordNorm.includes(letterNorm)) wrong++;
           render();
         };
         document.addEventListener('keydown', window._hmKH);
@@ -17129,10 +17305,10 @@
         const touchRow = document.createElement('div');
         touchRow.style.cssText = 'display:flex;gap:8px;justify-content:center;margin-top:8px';
         touchRow.innerHTML = `
-          <button class="btn btn-tonal" id="t-left"  style="width:52px;height:44px;font-size:1.3rem">←</button>
-          <button class="btn btn-tonal" id="t-rot"   style="width:52px;height:44px;font-size:1.1rem">↻</button>
           <button class="btn btn-tonal" id="t-right" style="width:52px;height:44px;font-size:1.3rem">→</button>
-          <button class="btn btn-tonal" id="t-down"  style="width:52px;height:44px;font-size:1.3rem">↓</button>`;
+          <button class="btn btn-tonal" id="t-rot"   style="width:52px;height:44px;font-size:1.1rem">↻</button>
+          <button class="btn btn-tonal" id="t-down"  style="width:52px;height:44px;font-size:1.3rem">↓</button>
+          <button class="btn btn-tonal" id="t-left"  style="width:52px;height:44px;font-size:1.3rem">←</button>`;
         area.appendChild(touchRow);
         touchRow.querySelector('#t-left').addEventListener('pointerdown',e=>{e.preventDefault();if(state==='playing')moveH(-1);});
         touchRow.querySelector('#t-right').addEventListener('pointerdown',e=>{e.preventDefault();if(state==='playing')moveH(1);});
@@ -18170,6 +18346,7 @@
             ._2048bg{display:grid;gap:8px;background:var(--m3-outline-variant);padding:8px;border-radius:14px}
             ._2048bg-cell{background:var(--m3-surface-container);border-radius:10px}
             ._2048tiles{position:absolute;top:8px;left:8px;right:8px;bottom:8px;pointer-events:none}
+            ._2048overlay{pointer-events:auto}
             ._2048tile{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:10px;font-weight:900;transition:left .1s ease,top .1s ease}
             @keyframes _t_pop{0%{transform:scale(0)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
             @keyframes _t_merge{0%{transform:scale(1)}40%{transform:scale(1.22)}100%{transform:scale(1)}}
@@ -19708,19 +19885,20 @@
           ctx.globalAlpha = savedAlpha;
 
           ctx.fillStyle = textColor;
-          // Draw text — dx is always the LEFT edge of the text box
-          let dx = sampleX, dy = 0;
-          if      (pos === 'br') { dy = _wmBase.height - margin; }
-          else if (pos === 'bl') { dy = _wmBase.height - margin; }
-          else if (pos === 'tr') { dy = fs + margin; }
-          else if (pos === 'tl') { dy = fs + margin; }
-          else                   { dy = (_wmBase.height + fs) / 2; }
+          // Compute draw position based on corner
+          let dx = 0, dy = 0;
+          if      (pos === 'br') { dx = _wmBase.width  - margin; dy = _wmBase.height - margin; ctx.textAlign='right'; }
+          else if (pos === 'bl') { dx = margin;                   dy = _wmBase.height - margin; ctx.textAlign='left'; }
+          else if (pos === 'tr') { dx = _wmBase.width  - margin; dy = fs + margin;             ctx.textAlign='right'; }
+          else if (pos === 'tl') { dx = margin;                   dy = fs + margin;             ctx.textAlign='left'; }
+          else                   { dx = _wmBase.width / 2;        dy = (_wmBase.height + fs) / 2; ctx.textAlign='center'; }
 
           // Draw a soft shadow for extra contrast
           ctx.shadowColor = textColor === 'rgba(0,0,0,0.85)' ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.4)';
           ctx.shadowBlur = Math.max(2, fs * 0.08);
           ctx.fillText(text, dx, dy);
           ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0;
+          ctx.textAlign = 'start';
         }
 
         ctx.globalAlpha = 1;
@@ -19898,9 +20076,136 @@
         return ab;
       }
 
+
       // ══════════════════════════════════════════════════════════════
-      // DIWAN (POETRY TOOL)
+      // TTS — server-side Piper API + browser fallback
+      // POST /api/tts  { text, speed }  → audio/wav
       // ══════════════════════════════════════════════════════════════
+      let _ttsCurrentAudio = null;
+      let _ttsLastWavBlob  = null;
+      let _ttsAbortCtrl    = null;
+
+      function ttsSetStatus(icon, text, show = true) {
+        const el = document.getElementById('tts-status');
+        if (!el) return;
+        el.style.display = show ? 'flex' : 'none';
+        const ic = document.getElementById('tts-status-icon');
+        const tx = document.getElementById('tts-status-text');
+        if (ic) ic.textContent = icon;
+        if (tx) tx.textContent = text;
+      }
+
+      function ttsEngineChanged() {
+        const engine = document.getElementById('tts-engine')?.value;
+        document.getElementById('tts-piper-section').style.display   = engine === 'piper'   ? '' : 'none';
+        document.getElementById('tts-browser-section').style.display = engine === 'browser' ? '' : 'none';
+        document.getElementById('tts-dl-btn').style.display = _ttsLastWavBlob ? '' : 'none';
+        if (engine === 'browser') ttsBrowserVoicesPopulate();
+        ttsSetStatus('', '', false);
+      }
+
+      function ttsBrowserVoicesPopulate() {
+        const lang = document.getElementById('tts-lang')?.value || 'fa-IR';
+        const sel  = document.getElementById('tts-voice');
+        if (!sel) return;
+        const populate = () => {
+          const voices   = window.speechSynthesis?.getVoices() || [];
+          const filtered = voices.filter(v => v.lang.startsWith(lang.split('-')[0]));
+          sel.innerHTML  = '';
+          if (!filtered.length) {
+            sel.innerHTML = '<option value="">— صدایی یافت نشد —</option>';
+            document.getElementById('tts-browser-warn').style.display = lang.startsWith('fa') ? '' : 'none';
+          } else {
+            document.getElementById('tts-browser-warn').style.display = 'none';
+            filtered.forEach(v => {
+              const o = document.createElement('option');
+              o.value = v.name; o.textContent = v.name + (v.localService ? ' ✓' : '');
+              sel.appendChild(o);
+            });
+          }
+        };
+        if (window.speechSynthesis?.getVoices().length) populate();
+        else { window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.onvoiceschanged = null; populate(); }; populate(); }
+      }
+
+      // ── Piper via server API ───────────────────────────────────────
+      async function ttsPlayWithPiper(text, speed) {
+        _ttsAbortCtrl = new AbortController();
+        ttsSetStatus('⏳', 'در حال تولید صدا...');
+        try {
+          const res = await fetch('/api/tts', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify({ text, speed: speed || 1.0 }),
+            signal:  _ttsAbortCtrl.signal,
+          });
+          if (!res.ok) {
+            const err = await res.json().catch(() => ({ detail: res.statusText }));
+            throw new Error(err.detail || res.statusText);
+          }
+          const wavBuffer = await res.arrayBuffer();
+          _ttsLastWavBlob = new Blob([wavBuffer], { type: 'audio/wav' });
+          const url   = URL.createObjectURL(_ttsLastWavBlob);
+          const audio = document.getElementById('tts-audio');
+          if (audio) { audio.src = url; audio.style.display = ''; audio.play().catch(() => {}); }
+          _ttsCurrentAudio = audio;
+          document.getElementById('tts-dl-btn').style.display = '';
+          ttsSetStatus('✅', 'در حال پخش');
+          return true;
+        } catch (e) {
+          if (e.name === 'AbortError') { ttsSetStatus('', '', false); return false; }
+          ttsSetStatus('❌', 'خطا: ' + e.message);
+          return false;
+        }
+      }
+
+      async function ttsSpeak() {
+        const text = document.getElementById('tts-input')?.value?.trim();
+        if (!text) { alert('لطفاً متنی وارد کنید'); return; }
+        ttsStop();
+        const engine = document.getElementById('tts-engine')?.value;
+        if (engine === 'piper') {
+          const speed = parseFloat(document.getElementById('tts-speed')?.value) || 1.0;
+          await ttsPlayWithPiper(text, speed);
+          return;
+        }
+        ttsSpeakBrowser(
+          text,
+          document.getElementById('tts-lang')?.value  || 'fa-IR',
+          parseFloat(document.getElementById('tts-brate')?.value)  || 1.0,
+          parseFloat(document.getElementById('tts-pitch')?.value) || 1.0,
+          document.getElementById('tts-voice')?.value
+        );
+      }
+
+      function ttsSpeakBrowser(text, lang, rate, pitch, voiceName) {
+        if (!window.speechSynthesis) { alert('مرورگر شما TTS ندارد'); return; }
+        const utt   = new SpeechSynthesisUtterance(text);
+        utt.lang    = lang; utt.rate = rate || 1; utt.pitch = pitch || 1;
+        const voices = window.speechSynthesis.getVoices();
+        const match  = voiceName
+          ? voices.find(v => v.name === voiceName)
+          : voices.find(v => v.lang.startsWith(lang.split('-')[0]));
+        if (match) utt.voice = match;
+        ttsSetStatus('🔊', 'در حال پخش...');
+        utt.onend  = () => ttsSetStatus('', '', false);
+        utt.onerror = e => ttsSetStatus('❌', 'خطا: ' + e.error);
+        window.speechSynthesis.speak(utt);
+      }
+
+      function ttsStop() {
+        if (_ttsAbortCtrl) { _ttsAbortCtrl.abort(); _ttsAbortCtrl = null; }
+        if (_ttsCurrentAudio) { _ttsCurrentAudio.pause(); _ttsCurrentAudio.currentTime = 0; }
+        window.speechSynthesis?.cancel();
+        ttsSetStatus('', '', false);
+      }
+
+      function ttsDownload() {
+        if (!_ttsLastWavBlob) return;
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(_ttsLastWavBlob);
+        a.download = 'tts-output.wav'; a.click();
+      }
 
       const POETS_CONFIG = {
         ferdowsi: { folder: 'ferdowsi' },
@@ -20716,20 +21021,28 @@
     }
 
     // ══════════════════════════════════════════════════════════════
-    //  THEME TOGGLE - apply color-scheme to all selects on switch
+    //  CUSTOM SELECT WRAPPER - wraps .select-input in .select-wrap
+    //  for a uniform cross-browser appearance (no native arrow bg)
     // ══════════════════════════════════════════════════════════════
+    function _wrapSelectInputs() {
+      document.querySelectorAll('select.select-input').forEach(function(sel) {
+        if (sel.parentElement && sel.parentElement.classList.contains('select-wrap')) return; // already wrapped
+        const wrap = document.createElement('div');
+        wrap.className = 'select-wrap';
+        sel.parentNode.insertBefore(wrap, sel);
+        wrap.appendChild(sel);
+      });
+    }
     function _applySelectColorScheme() {
+      // Only fix option backgrounds for the native dropdown popup; do NOT set
+      // colorScheme on the element itself (that re-enables the OS arrow background)
       const dark = document.body.dataset.theme === 'dark' ||
                    document.documentElement.dataset.theme === 'dark';
       document.querySelectorAll('select').forEach(function(sel) {
-        sel.style.colorScheme = dark ? 'dark' : 'light';
-        if (dark) {
-          sel.style.backgroundColor = 'var(--m3-surface-container-highest)';
-          sel.style.color = 'var(--m3-on-surface)';
-        } else {
-          sel.style.backgroundColor = '';
-          sel.style.color = '';
-        }
+        // Keep color-scheme unset so Chrome never paints its native arrow area
+        sel.style.colorScheme = 'unset';
+        sel.style.backgroundColor = 'transparent';
+        sel.style.color = '';
       });
     }
 
@@ -20742,8 +21055,10 @@
     // Also apply on initial load
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', _applySelectColorScheme);
+      document.addEventListener('DOMContentLoaded', _wrapSelectInputs);
     } else {
       _applySelectColorScheme();
+      _wrapSelectInputs();
     }
 
     // ══════════════════════════════════════════════════════════════

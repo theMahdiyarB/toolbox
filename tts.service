@@ -1,0 +1,19 @@
+[Unit]
+Description=Piper TTS API Server
+After=network.target
+
+[Service]
+Type=simple
+# ── Change these to match your setup ──────────────────────────────────────────
+User=www-data
+WorkingDirectory=/var/www/toolbox
+ExecStart=/usr/bin/python3 /var/www/toolbox/tts_server.py
+# ──────────────────────────────────────────────────────────────────────────────
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
