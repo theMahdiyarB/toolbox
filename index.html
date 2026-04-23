@@ -8396,7 +8396,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 5.11 - ۱۴۰۵/۰۲/۰۲
+          ℹ️ نسخه 5.12 - ۱۴۰۵/۰۲/۰۳
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -20462,7 +20462,7 @@
         
         try {
           for (const file of categoryData.files) {
-            const response = await fetch(`poems/hafez/${file}`);
+            const response = await fetch(`static/poems/hafez/${file}`);
             const html = await response.text();
             const poems = parsePoems(html, categoryData.name, 'hafez');
             allPoems.push(...poems);
@@ -20495,7 +20495,7 @@
         contentDiv.innerHTML = '<div style="text-align: center; padding: 20px;">در حال بارگذاری...</div>';
         
         try {
-          const response = await fetch(`poems/${currentPoet.folder}/bio.xhtml`);
+          const response = await fetch(`static/poems/${currentPoet.folder}/bio.xhtml`);
           const html = await response.text();
           const parser = new DOMParser();
           const doc = parser.parseFromString(html, 'text/html');
@@ -20619,7 +20619,7 @@
         
         for (const file of files) {
           try {
-            const response = await fetch(`poems/${poet.folder}/${file}`);
+            const response = await fetch(`static/poems/${poet.folder}/${file}`);
             const html = await response.text();
             const poems = parsePoems(html, currentCategory?.name || category.name, currentPoetId);
             allPoems.push(...poems);
