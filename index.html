@@ -41,149 +41,6 @@
     </script>
 
     <style>
-      .page-wrapper {
-        margin-inline-end: 0 !important;
-        margin-inline-start: 0 !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        width: 100% !important;
-      }
-      .drawer-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.45);
-        z-index: 300;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s;
-      }
-      .drawer-overlay.open {
-        opacity: 1;
-        pointer-events: all;
-      }
-      .side-drawer {
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100dvh;
-        width: 280px;
-        background: var(--m3-surface-container-low);
-        border-left: 1px solid var(--m3-outline-variant);
-        z-index: 400;
-        display: flex;
-        flex-direction: column;
-        transform: translateX(100%);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        overflow: hidden;
-      }
-      .side-drawer.open {
-        transform: translateX(0);
-      }
-      .drawer-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 20px 20px 16px;
-        border-bottom: 1px solid var(--m3-outline-variant);
-        flex-shrink: 0;
-      }
-      .drawer-brand-icon {
-        font-size: 2rem;
-        line-height: 1;
-      }
-      .drawer-brand-text {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: var(--m3-primary);
-        letter-spacing: 0.02em;
-      }
-      .drawer-close {
-        margin-right: auto;
-        background: none;
-        border: none;
-        font-size: 1.4rem;
-        cursor: pointer;
-        color: var(--m3-on-surface-variant);
-        padding: 6px;
-        border-radius: 50px;
-        line-height: 1;
-        transition: background 0.2s;
-      }
-      .drawer-close:hover {
-        background: var(--m3-surface-container-high);
-      }
-      .drawer-scroll {
-        height: 0;
-        min-height: 0; 
-        overflow-y: auto;
-        flex: 1;
-        padding: 8px 0 24px;
-        scrollbar-width: thin;
-      }
-      .drawer-section-label {
-        font-size: 10px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        color: var(--m3-on-surface-variant);
-        padding: 14px 20px 4px;
-        display: block;
-      }
-      .drawer-item {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        padding: 9px 20px;
-        cursor: pointer;
-        border-radius: 50px 0 0 50px;
-        margin-left: 12px;
-        transition: background 0.15s;
-        color: var(--m3-on-surface);
-        font-size: 13.5px;
-        font-weight: 500;
-        user-select: none;
-      }
-      .drawer-item:hover {
-        background: var(--m3-surface-container-high);
-      }
-      .drawer-item.active {
-        background: var(--m3-secondary-container);
-        color: var(--m3-on-secondary-container);
-        font-weight: 600;
-      }
-      .drawer-item__icon {
-        font-size: 1.2rem;
-        width: 26px;
-        text-align: center;
-        flex-shrink: 0;
-      }
-      .top-bar {
-        height: 64px;
-        display: flex;
-        align-items: center;
-        padding: 0 16px;
-        border-bottom: 1px solid var(--m3-outline-variant);
-        background: var(--m3-surface-container-low);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        gap: 12px;
-      }
-      .hamburger-btn {
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        color: var(--m3-on-surface);
-        padding: 8px;
-        border-radius: 50px;
-        line-height: 1;
-        transition: background 0.2s;
-        flex-shrink: 0;
-      }
-      .hamburger-btn:hover {
-        background: var(--m3-surface-container-high);
-      }
       .top-bar__back-btn {
         background: none;
         border: none;
@@ -273,6 +130,151 @@
       .share-card__icon  { font-size: 2.2rem; }
       .share-card__title { font-size: 15px; font-weight: 700; color: var(--m3-on-surface); }
       .share-card__desc  { font-size: 12px; color: var(--m3-on-surface-variant); line-height: 1.5; }
+
+      /* ── Minimal overrides (main.css handles the rest) ── */
+
+      /* Remove active left-line indicator */
+      .rail-item.active::before { display: none !important; }
+
+      /* Rail scrollable with fade-out at bottom */
+      .nav-rail { overflow: hidden; }
+      .rail-items {
+        overflow-y: auto; overflow-x: hidden;
+        scrollbar-width: none; -ms-overflow-style: none;
+        gap: 4px; padding-bottom: 4px;
+        -webkit-mask-image: linear-gradient(to bottom, black 0%, black calc(100% - 32px), transparent 100%);
+        mask-image: linear-gradient(to bottom, black 0%, black calc(100% - 32px), transparent 100%);
+      }
+      .rail-items::-webkit-scrollbar { display: none; }
+
+      /* Bottom nav: scrollable overflow for many categories */
+      .bottom-navigation-bar {
+        overflow-x: auto; overflow-y: hidden;
+        justify-content: flex-start !important;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; padding: 0 4px; gap: 0;
+      }
+      .bottom-navigation-bar::-webkit-scrollbar { display: none; }
+      .bottom-nav-item {
+        scroll-snap-align: start; flex: 0 0 auto;
+        min-width: 64px; max-width: 88px; padding: 0 4px;
+      }
+
+      /* Hide top-bar everywhere */
+      .top-bar { display: none !important; }
+
+      /* back-to-top: above mobile bottom nav */
+      @media (max-width: 768px) {
+        #back-to-top {
+          bottom: calc(var(--bottom-nav-height, 80px) + 12px) !important;
+        }
+        .bottom-navigation-bar { position: fixed; }
+        .rail-item-flyout { display: none !important; }
+      }
+
+      /* ── Flyout submenu (desktop only, index.html exclusive) ── */
+      .rail-item-flyout {
+        position: fixed;
+        top: 0;
+        inset-inline-start: var(--nav-rail-width, 80px);
+        height: 100vh;
+        width: 220px;
+        background: var(--m3-surface-container);
+        border-inline-end: 1px solid var(--m3-outline-variant);
+        box-shadow: var(--m3-elevation-2);
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateX(12px);
+        transition: opacity 0.18s, transform 0.18s;
+        overflow: hidden;
+      }
+      [dir="rtl"] .rail-item-flyout {
+        transform: translateX(-12px);
+      }
+      .rail-item-flyout.visible {
+        opacity: 1;
+        pointer-events: all;
+        transform: translateX(0) !important;
+      }
+      .flyout-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 18px 16px 12px;
+        border-bottom: 1px solid var(--m3-outline-variant);
+        flex-shrink: 0;
+      }
+      .flyout-header__icon { font-size: 1.4rem; line-height: 1; }
+      .flyout-header__title {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--m3-on-surface);
+      }
+      .flyout-scroll {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        padding: 6px 0 16px;
+      }
+      .flyout-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 9px 16px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--m3-on-surface);
+        transition: background 0.12s;
+        /* Rounded on the far side from the rail (left side, since rail is on right) */
+        border-radius: 50px 0 0 50px;
+        margin-inline-end: 0;
+        margin-inline-start: 12px;
+      }
+      .flyout-item:hover { background: color-mix(in srgb, var(--m3-on-surface) 8%, transparent); }
+      .flyout-item.active {
+        background: var(--m3-secondary-container);
+        color: var(--m3-on-secondary-container);
+        font-weight: 600;
+      }
+      .flyout-item__icon { font-size: 1.1rem; width: 22px; text-align: center; flex-shrink: 0; }
+
+      /* ── Back FAB (shown when inside a tool) ── */
+      #back-tool-fab {
+        position: fixed;
+        top: var(--m3-spacing-16);
+        inset-inline-end: var(--m3-spacing-20);
+        width: 48px;
+        height: 48px;
+        border-radius: var(--m3-shape-lg, 16px);
+        background: var(--m3-surface-container-high);
+        color: var(--m3-on-surface);
+        border: none;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        cursor: pointer;
+        box-shadow: var(--m3-elevation-2);
+        z-index: 1050;
+        transition: background var(--m3-duration-fast) var(--m3-ease-standard),
+                    box-shadow var(--m3-duration-fast) var(--m3-ease-standard),
+                    transform var(--m3-duration-fast) var(--m3-ease-standard);
+      }
+
+
+      #back-tool-fab.visible { display: flex; }
+      #back-tool-fab:hover {
+        background: var(--m3-surface-container-highest);
+        box-shadow: var(--m3-elevation-3);
+        transform: translateY(-1px);
+      }
+
       /* PWA install popup */
       #pwa-popup {
         display: none;
@@ -1446,6 +1448,11 @@
       #back-to-top {
         bottom: 22px;
       }
+      @media (max-width: 768px) {
+        #back-to-top {
+          bottom: calc(var(--bottom-nav-height, 80px) + 12px);
+        }
+      }
 
       /* LAPS */
       .lap-list {
@@ -2108,16 +2115,145 @@
       </div>
     </nav>
 
-      <div class="page-wrapper">
-      <div class="top-bar">
-        <button class="hamburger-btn" onclick="openDrawer()">☰</button>
-        <span class="top-bar__title" id="page-title">خانه</span>
-        <button class="top-bar__back-btn" id="top-bar-back" onclick="showTool('home')" style="display:none" aria-label="بازگشت به خانه">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
-          </svg>
-        </button>
+<!-- ════ NAV RAIL (desktop) ════ -->
+<nav class="nav-rail" id="nav-rail" aria-label="ناوبری اصلی">
+  <div class="rail-header">
+    <a href="#" onclick="showTool('home');return false;" aria-label="خانه">
+      <div class="rail-item-icon">
+        <img src="static/favicon.png" alt="لوگو" style="width:28px;height:28px;object-fit:contain;border-radius:8px;">
       </div>
+      <span class="rail-item-label">جعبه‌ابزار</span>
+    </a>
+  </div>
+  <div class="rail-items" id="rail-items">
+    <div class="rail-item active" data-cat="sec-general" data-cat-icon="🧮" data-cat-label="محاسبه">
+      <div class="rail-item-icon">🧮</div>
+      <span class="rail-item-label">محاسبه</span>
+    </div>
+    <div class="rail-item" data-cat="sec-time" data-cat-icon="⏱️" data-cat-label="زمان">
+      <div class="rail-item-icon">⏱️</div>
+      <span class="rail-item-label">زمان</span>
+    </div>
+    <div class="rail-item" data-cat="sec-science" data-cat-icon="📐" data-cat-label="علوم">
+      <div class="rail-item-icon">📐</div>
+      <span class="rail-item-label">علوم</span>
+    </div>
+    <div class="rail-item" data-cat="sec-text" data-cat-icon="✏️" data-cat-label="متن">
+      <div class="rail-item-icon">✏️</div>
+      <span class="rail-item-label">متن</span>
+    </div>
+    <div class="rail-item" data-cat="sec-dev" data-cat-icon="💻" data-cat-label="توسعه">
+      <div class="rail-item-icon">💻</div>
+      <span class="rail-item-label">توسعه</span>
+    </div>
+    <div class="rail-item" data-cat="sec-gen" data-cat-icon="⚡" data-cat-label="مولدها">
+      <div class="rail-item-icon">⚡</div>
+      <span class="rail-item-label">مولدها</span>
+    </div>
+    <div class="rail-item" data-cat="sec-design" data-cat-icon="🎨" data-cat-label="طراحی">
+      <div class="rail-item-icon">🎨</div>
+      <span class="rail-item-label">طراحی</span>
+    </div>
+    <div class="rail-item" data-cat="sec-file" data-cat-icon="📁" data-cat-label="فایل">
+      <div class="rail-item-icon">📁</div>
+      <span class="rail-item-label">فایل</span>
+    </div>
+    <div class="rail-item" data-cat="sec-sys" data-cat-icon="🛠️" data-cat-label="ایران">
+      <div class="rail-item-icon">🛠️</div>
+      <span class="rail-item-label">ایران</span>
+    </div>
+    <div class="rail-item" data-cat="sec-games" data-cat-icon="🎮" data-cat-label="بازی">
+      <div class="rail-item-icon">🎮</div>
+      <span class="rail-item-label">بازی</span>
+    </div>
+    <div class="rail-item" data-cat="sec-pro" data-cat-icon="🧭" data-cat-label="تخصصی">
+      <div class="rail-item-icon">🧭</div>
+      <span class="rail-item-label">تخصصی</span>
+    </div>
+    <div class="rail-item" data-cat="sec-online" data-cat-icon="🌐" data-cat-label="آنلاین">
+      <div class="rail-item-icon">🌐</div>
+      <span class="rail-item-label">آنلاین</span>
+    </div>
+    <div class="rail-item" data-cat="sec-share" data-cat-icon="ℹ️" data-cat-label="درباره">
+      <div class="rail-item-icon">ℹ️</div>
+      <span class="rail-item-label">درباره</span>
+    </div>
+  </div>
+  <div class="rail-footer">
+    <button class="theme-toggle-rail" id="themeToggleRail" type="button" aria-label="تغییر تم">🌙</button>
+  </div>
+</nav>
+
+<!-- ════ FLYOUT SUBMENU ════ -->
+<div class="rail-item-flyout" id="rail-flyout" aria-hidden="true">
+  <div class="flyout-header">
+    <span class="flyout-header__icon" id="flyout-icon"></span>
+    <span class="flyout-header__title" id="flyout-title"></span>
+  </div>
+  <div class="flyout-scroll" id="flyout-scroll"></div>
+</div>
+
+<!-- ════ BOTTOM NAV (mobile) ════ -->
+<nav class="bottom-navigation-bar" id="bottom-nav" aria-label="ناوبری پایین">
+  <a class="bottom-nav-item active" data-cat="sec-general" onclick="railNavTo('sec-general',this)">
+    <span class="bottom-nav-icon">🧮</span>
+    <span class="bottom-nav-label">محاسبه</span>
+  </a>
+  <a class="bottom-nav-item" data-cat="sec-time" onclick="railNavTo('sec-time',this)">
+    <span class="bottom-nav-icon">⏱️</span>
+    <span class="bottom-nav-label">زمان</span>
+  </a>
+  <a class="bottom-nav-item" data-cat="sec-text" onclick="railNavTo('sec-text',this)">
+    <span class="bottom-nav-icon">✏️</span>
+    <span class="bottom-nav-label">متن</span>
+  </a>
+  <a class="bottom-nav-item" data-cat="sec-dev" onclick="railNavTo('sec-dev',this)">
+    <span class="bottom-nav-icon">💻</span>
+    <span class="bottom-nav-label">توسعه</span>
+  </a>
+  <a class="bottom-nav-item" data-cat="sec-design" onclick="railNavTo('sec-design',this)">
+    <span class="bottom-nav-icon">🎨</span>
+    <span class="bottom-nav-label">طراحی</span>
+  </a>
+  <a class="bottom-nav-item" data-cat="sec-file" onclick="railNavTo('sec-file',this)">
+    <span class="bottom-nav-icon">📁</span>
+    <span class="bottom-nav-label">فایل</span>
+  </a>
+  <a class="bottom-nav-item" data-cat="sec-gen" onclick="railNavTo('sec-gen',this)">
+    <span class="bottom-nav-icon">⚡</span>
+    <span class="bottom-nav-label">مولدها</span>
+  </a>
+  <a class="bottom-nav-item" data-cat="sec-sys" onclick="railNavTo('sec-sys',this)">
+    <span class="bottom-nav-icon">🛠️</span>
+    <span class="bottom-nav-label">ایران</span>
+  </a>
+  <a class="bottom-nav-item" data-cat="sec-online" onclick="railNavTo('sec-online',this)">
+    <span class="bottom-nav-icon">🌐</span>
+    <span class="bottom-nav-label">آنلاین</span>
+  </a>
+  <a class="bottom-nav-item" data-cat="sec-games" onclick="railNavTo('sec-games',this)">
+    <span class="bottom-nav-icon">🎮</span>
+    <span class="bottom-nav-label">بازی</span>
+  </a>
+  <a class="bottom-nav-item" data-cat="sec-pro" onclick="railNavTo('sec-pro',this)">
+    <span class="bottom-nav-icon">🧭</span>
+    <span class="bottom-nav-label">تخصصی</span>
+  </a>
+  <a class="bottom-nav-item" data-cat="sec-share" onclick="railNavTo('sec-share',this)">
+    <span class="bottom-nav-icon">ℹ️</span>
+    <span class="bottom-nav-label">درباره</span>
+  </a>
+</nav>
+
+      <div class="page-wrapper">
+
+      <!-- Back FAB: shown when inside a tool -->
+      <button id="back-tool-fab" onclick="showTool('home')" aria-label="بازگشت به خانه">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+        </svg>
+      </button>
+
       <div class="tool-container main-content">
         <!-- ══ HOME ══ -->
         <div id="home" class="">
@@ -8396,7 +8532,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 5.12 - ۱۴۰۵/۰۲/۰۳
+          ℹ️ نسخه 6.0 - ۱۴۰۵/۰۲/۰۴
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -8405,10 +8541,8 @@
     </footer>
   </div><!-- /page-wrapper -->
 
-    <button class="theme-fab" onclick="toggleTheme()" title="تغییر پوسته"
-      style="display: var(--_bale-fab-display, flex)">
-      🌙
-    </button>
+    <!-- ════ FAB ════ -->
+    <button class="theme-toggle-fab" id="themeToggleFab" type="button" aria-label="تغییر تم">🌙</button>
     
     <!-- ── Back to top ── -->
     <button id="back-to-top" aria-label="بازگشت به بالا">↑</button>
@@ -8521,10 +8655,32 @@
         document.querySelectorAll('.drawer-item').forEach(i =>
           i.classList.toggle('active', i.dataset.tool === id)
         );
+        // Sync rail: mark the category that contains this tool as active
+        (function syncRailCat(toolId) {
+          if (toolId === 'home') {
+            // don't change category highlight on home
+            return;
+          }
+          for (const [catId, cat] of Object.entries(window.RAIL_CATS || {})) {
+            if (cat.tools.some(t => t.id === toolId)) {
+              document.querySelectorAll('#rail-items .rail-item').forEach(ri =>
+                ri.classList.toggle('active', ri.dataset.cat === catId)
+              );
+              document.querySelectorAll('#bottom-nav .bottom-nav-item').forEach(bi =>
+                bi.classList.toggle('active', bi.dataset.cat === catId)
+              );
+              document.querySelectorAll('.flyout-item').forEach(fi =>
+                fi.classList.toggle('active', fi.dataset.tool === toolId)
+              );
+              break;
+            }
+          }
+          document.dispatchEvent(new CustomEvent('toolChanged', {detail:{id:toolId}}));
+        })(id);
         const title = TOOL_TITLES[id] || id;
-        document.getElementById('page-title').textContent = title;
-        const backBtn = document.getElementById('top-bar-back');
-        if (backBtn) backBtn.style.display = (id === 'home') ? 'none' : 'flex';
+        // Back FAB: show when inside a tool, hide on home
+        const backFab = document.getElementById('back-tool-fab');
+        if (backFab) backFab.classList.toggle('visible', id !== 'home');
         closeDrawer();
         window.scrollTo(0, 0);
         // Re-seed --val on sliders in the newly visible card
@@ -8650,6 +8806,248 @@
 
       function openDrawer()  { document.getElementById('side-drawer').classList.add('open'); document.getElementById('drawer-overlay').classList.add('open'); document.body.style.overflow='hidden'; }
       function closeDrawer() { document.getElementById('side-drawer').classList.remove('open'); document.getElementById('drawer-overlay').classList.remove('open'); document.body.style.overflow=''; }
+
+      // ══ NAV RAIL: flyout submenu logic ══
+      const RAIL_CATS = window.RAIL_CATS = {
+        'sec-general': {
+          icon: '🧮', label: 'محاسبه و ریاضی',
+          tools: [
+            {id:'calc',icon:'🧮',name:'ماشین‌حساب'},{id:'calculus',icon:'∫',name:'حسابان'},
+            {id:'linsolve',icon:'📐',name:'حل معادله'},{id:'bmi',icon:'⚖️',name:'شاخص BMI'},
+            {id:'avg',icon:'📊',name:'میانگین و آمار'},{id:'pct',icon:'%',name:'محاسبه درصد'},
+            {id:'matrix',icon:'📐',name:'ماتریس'},{id:'multable',icon:'✖️',name:'جدول ضرب'},
+            {id:'loan',icon:'🏦',name:'محاسبه وام'},{id:'deposit',icon:'💰',name:'سود سپرده'},
+            {id:'rentcalc',icon:'🏠',name:'رهن و اجاره'},{id:'taxdisc',icon:'🏷️',name:'مالیات و تخفیف'},
+            {id:'tip',icon:'🧾',name:'تقسیم صورت‌حساب'}
+          ]
+        },
+        'sec-time': {
+          icon: '⏱️', label: 'زمان و تقویم',
+          tools: [
+            {id:'stopwatch',icon:'⏱️',name:'کرونومتر'},{id:'timer',icon:'⏳',name:'تایمر'},
+            {id:'pomodoro',icon:'🍅',name:'پومودورو'},{id:'counter',icon:'🔢',name:'شمارنده'},
+            {id:'timezone',icon:'🌐',name:'ساعت جهانی'},{id:'jcal',icon:'📅',name:'تقویم خورشیدی'},
+            {id:'dateconv',icon:'🗓️',name:'مبدل تاریخ'},{id:'age',icon:'🎂',name:'محاسبه سن'}
+          ]
+        },
+        'sec-science': {
+          icon: '📐', label: 'علوم و مهندسی',
+          tools: [
+            {id:'unitconv',icon:'📏',name:'تبدیل واحد'},{id:'geometry',icon:'📐',name:'هندسه'},
+            {id:'periodic',icon:'⚗️',name:'جدول تناوبی'},{id:'resistor',icon:'🔧',name:'مقاومت رنگی'},
+            {id:'subnet',icon:'🌐',name:'محاسبه‌گر Subnet'}
+          ]
+        },
+        'sec-text': {
+          icon: '✏️', label: 'متن و محتوا',
+          tools: [
+            {id:'text',icon:'✏️',name:'ابزار متن'},{id:'charcount',icon:'#️⃣',name:'آنالیز متن'},
+            {id:'whitespace',icon:'␣',name:'حذف فاصله'},{id:'oneline',icon:'↔️',name:'تک‌خطی کردن'},
+            {id:'lorem',icon:'📄',name:'لورم ایپسوم'},{id:'markdown',icon:'🖊️',name:'تبدیل Markdown'},
+            {id:'diff',icon:'🔀',name:'مقایسه دو متن'},{id:'slugify',icon:'🔗',name:'ساخت Slug'},
+            {id:'morse',icon:'📡',name:'کد مورس'},{id:'roman',icon:'Ⅰ',name:'اعداد رومی'},
+            {id:'numconvert',icon:'🔢',name:'تبدیل اعداد'},{id:'textfix',icon:'🔤',name:'رفع خرابی متن'},
+            {id:'notes',icon:'📝',name:'یادداشت'},{id:'emojis',icon:'😀',name:'ایموجی'},
+            {id:'emotcn',icon:':‑)',name:'اِموتیکون'}
+          ]
+        },
+        'sec-dev': {
+          icon: '💻', label: 'توسعه',
+          tools: [
+            {id:'json',icon:'📋',name:'فرمت JSON'},{id:'xml',icon:'🏷️',name:'فرمت XML'},
+            {id:'htmlesc',icon:'🔤',name:'HTML Escaper'},{id:'hash',icon:'🔏',name:'هش رمزنگاری'},
+            {id:'crypto',icon:'🔐',name:'رمزنگاری متن'},{id:'jwt',icon:'🔑',name:'JWT Parser'},
+            {id:'pxrem',icon:'📐',name:'PX ↔ REM'},{id:'regex',icon:'🔍',name:'تست Regex'},
+            {id:'cron',icon:'🕐',name:'Cron Parser'},{id:'urlparse',icon:'🌐',name:'تجزیه URL'},
+            {id:'numbase',icon:'🔣',name:'تبدیل مبنا'},{id:'asciitbl',icon:'🔤',name:'جدول ASCII'},
+            {id:'enctools',icon:'🔡',name:'ابزار کدگذاری'},{id:'chart',icon:'📊',name:'نمودار داده'},
+            {id:'fakejson',icon:'🗄️',name:'مولد JSON'},{id:'numwords',icon:'💬',name:'عدد به حروف'},
+            {id:'seotools',icon:'🔍',name:'متا تگ SEO'},{id:'htaccess',icon:'⚙️',name:'مولد .htaccess'},
+            {id:'keypair',icon:'🔐',name:'کلیدهای RSA/ECC'}
+          ]
+        },
+        'sec-gen': {
+          icon: '⚡', label: 'مولدها',
+          tools: [
+            {id:'pass',icon:'🔐',name:'رمز عبور'},{id:'uuid',icon:'🪪',name:'UUID / ULID'},
+            {id:'randnum',icon:'🎲',name:'عدد تصادفی'},{id:'randip',icon:'🌐',name:'IP تصادفی'},
+            {id:'randcolor',icon:'🎨',name:'رنگ تصادفی'},{id:'fake',icon:'👤',name:'داده ساختگی'},
+            {id:'credit',icon:'💳',name:'کارت اعتباری'},{id:'avatar',icon:'🖼️',name:'آواتار'},
+            {id:'placeholder',icon:'🗃️',name:'تصویر جایگزین'},{id:'qr',icon:'📱',name:'کد QR'},
+            {id:'qrread',icon:'📷',name:'خواندن QR'},{id:'barcode',icon:'📊',name:'بارکد'}
+          ]
+        },
+        'sec-design': {
+          icon: '🎨', label: 'طراحی و رنگ',
+          tools: [
+            {id:'colorpicker',icon:'🖌️',name:'تبدیل رنگ'},{id:'wcag',icon:'♿',name:'کنتراست WCAG'},
+            {id:'colorblind',icon:'👁',name:'شبیه‌ساز کوررنگی'},{id:'gradient',icon:'🌈',name:'گرادیان CSS'},
+            {id:'shadow',icon:'🌑',name:'سایه CSS'},{id:'borderrad',icon:'⬛',name:'گوشه‌گرد CSS'},
+            {id:'aspect',icon:'📐',name:'نسبت ابعاد'},{id:'goldenratio',icon:'φ',name:'نسبت طلایی'},
+            {id:'svgviewer',icon:'🖼️',name:'پیش‌نمایش SVG'},{id:'gridbuilder',icon:'⚏',name:'Grid/Flexbox'},
+            {id:'imgpalette',icon:'🎨',name:'پالت رنگ تعاملی'}
+          ]
+        },
+        'sec-file': {
+          icon: '📁', label: 'فایل',
+          tools: [
+            {id:'imgcompress',icon:'🗜️',name:'فشرده‌سازی تصویر'},{id:'pdfcompress',icon:'🛠️',name:'ابزار PDF'},
+            {id:'filesplit',icon:'🗂',name:'تقسیم و مرج فایل'},{id:'watermark',icon:'💧',name:'واترمارک تصویر'},
+            {id:'img2b64',icon:'🔄',name:'تصویر ← Base64'},{id:'csvjson',icon:'↔️',name:'CSV ↔ JSON'}
+          ]
+        },
+        'sec-sys': {
+          icon: '🛠️', label: 'ایران و سیستم',
+          tools: [
+            {id:'emergency',icon:'🚨',name:'شماره ضروری'},{id:'citycodes',icon:'📞',name:'کد شهرها'},
+            {id:'trafficfines',icon:'🚗',name:'جرایم رانندگی'},{id:'metromap',icon:'🚇',name:'نقشه مترو'},
+            {id:'device',icon:'💻',name:'اطلاعات دستگاه'},{id:'ua',icon:'ℹ️',name:'User Agent'}
+          ]
+        },
+        'sec-games': {
+          icon: '🎮', label: 'بازی و سرگرمی',
+          tools: [
+            {id:'minigames',icon:'🕹️',name:'بازی‌های کوچک'},{id:'wordcloud',icon:'☁️',name:'ابر کلمات'},
+            {id:'diwan',icon:'📖',name:'دیوان شعر'}
+          ]
+        },
+        'sec-pro': {
+          icon: '🧭', label: 'ابزارهای تخصصی',
+          tools: [
+            {id:'compass',icon:'🧭',name:'قطب‌نما'},{id:'bmc',icon:'🗂️',name:'بوم کسب‌وکار'},
+            {id:'eisenhower',icon:'⬜',name:'ماتریس آیزنهاور'},{id:'decmatrix',icon:'📊',name:'ماتریس تصمیم'},
+            {id:'citation',icon:'📚',name:'استناد دانشگاهی'},{id:'langscores',icon:'🎓',name:'محاسبه نمره'},
+            {id:'audiotools',icon:'🔊',name:'ابزار صوتی'},{id:'tts',icon:'🗣️',name:'متن به گفتار'}
+          ]
+        },
+        'sec-online': {
+          icon: '🌐', label: 'ابزارهای آنلاین',
+          tools: [
+            {id:'weather',icon:'🌤️',name:'آب‌وهوا'},{id:'translate',icon:'🌍',name:'ترجمه'},
+            {id:'currency',icon:'💹',name:'قیمت و نرخ'}
+          ]
+        },
+        'sec-share': {
+          icon: 'ℹ️', label: 'درباره و نصب',
+          tools: [
+            {id:'share',icon:'🔗',name:'اشتراک‌گذاری'},{id:'pwa',icon:'📲',name:'نصب اپ'},
+            {id:'analytics',icon:'📊',name:'آمار بازدید'},{id:'about',icon:'ℹ️',name:'درباره'}
+          ]
+        }
+      };
+
+      let _railActiveCat = 'sec-general';
+      let _flyoutHideTimer = null;
+
+      function _buildFlyout(catId) {
+        const cat = RAIL_CATS[catId];
+        if (!cat) return;
+        document.getElementById('flyout-icon').textContent = cat.icon;
+        document.getElementById('flyout-title').textContent = cat.label;
+        const scroll = document.getElementById('flyout-scroll');
+        const currentTool = document.querySelector('.tool-card.active')?.id || 'home';
+        scroll.innerHTML = cat.tools.map(t =>
+          `<div class="flyout-item${currentTool===t.id?' active':''}" onclick="showTool('${t.id}')" data-tool="${t.id}">
+            <span class="flyout-item__icon">${t.icon}</span>${t.name}
+          </div>`
+        ).join('');
+      }
+
+      function _showFlyout(catId) {
+        if (_flyoutHideTimer) { clearTimeout(_flyoutHideTimer); _flyoutHideTimer = null; }
+        _buildFlyout(catId);
+        const flyout = document.getElementById('rail-flyout');
+        flyout.classList.add('visible');
+        flyout.setAttribute('aria-hidden', 'false');
+      }
+
+      function _hideFlyout() {
+        _flyoutHideTimer = setTimeout(() => {
+          const flyout = document.getElementById('rail-flyout');
+          flyout.classList.remove('visible');
+          flyout.setAttribute('aria-hidden', 'true');
+        }, 120);
+      }
+
+      // Wire up rail items
+      document.querySelectorAll('#rail-items .rail-item').forEach(item => {
+        const cat = item.dataset.cat;
+        item.addEventListener('mouseenter', () => {
+          _showFlyout(cat);
+          // set hovered active state visually
+          document.querySelectorAll('#rail-items .rail-item').forEach(i => i.classList.remove('hovered'));
+          item.classList.add('hovered');
+        });
+        item.addEventListener('mouseleave', () => {
+          item.classList.remove('hovered');
+          _hideFlyout();
+        });
+        item.addEventListener('click', () => {
+          // On click: scroll home to that section
+          showTool('home');
+          setTimeout(() => {
+            const sec = document.getElementById(cat);
+            if (sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
+          }, 50);
+          // Update active
+          document.querySelectorAll('#rail-items .rail-item').forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+          _railActiveCat = cat;
+        });
+      });
+
+      // Flyout: keep open when mouse is over it
+      document.getElementById('rail-flyout').addEventListener('mouseenter', () => {
+        if (_flyoutHideTimer) { clearTimeout(_flyoutHideTimer); _flyoutHideTimer = null; }
+      });
+      document.getElementById('rail-flyout').addEventListener('mouseleave', _hideFlyout);
+
+      // Bottom nav category navigation
+      function railNavTo(catId, el) {
+        document.querySelectorAll('#bottom-nav .bottom-nav-item').forEach(i => i.classList.remove('active'));
+        if (el) el.classList.add('active');
+        showTool('home');
+        setTimeout(() => {
+          const sec = document.getElementById(catId);
+          if (sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
+        }, 50);
+      }
+
+      // Theme toggle rail button — syncs with main toggleTheme()
+      function _syncThemeIcon() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+          || document.documentElement.classList.contains('dark-theme')
+          || document.documentElement.hasAttribute('data-theme-dark');
+        const icon = isDark ? '☀️' : '🌙';
+        const railBtn = document.getElementById('themeToggleRail');
+        if (railBtn) railBtn.textContent = icon;
+        const mainFab = document.querySelector('.theme-fab');
+        if (mainFab) mainFab.textContent = icon;
+      }
+      const _themeRailBtn = document.getElementById('themeToggleRail');
+      if (_themeRailBtn) {
+        _themeRailBtn.addEventListener('click', () => {
+          if (typeof toggleTheme === 'function') {
+            toggleTheme();
+          } else {
+            document.documentElement.toggleAttribute('data-theme-dark');
+          }
+          setTimeout(_syncThemeIcon, 50);
+        });
+      }
+      // Observe theme changes to keep icon in sync
+      new MutationObserver(_syncThemeIcon).observe(document.documentElement, {
+        attributes: true, attributeFilter: ['data-theme', 'class', 'data-theme-dark']
+      });
+      _syncThemeIcon();
+
+      // Sync flyout active items when a tool is shown
+      document.addEventListener('toolChanged', (e) => {
+        const id = e.detail?.id;
+        document.querySelectorAll('.flyout-item').forEach(fi =>
+          fi.classList.toggle('active', fi.dataset.tool === id)
+        );
+      });
 
       // ══════════════════════════════════════════════════════
       //  UX #3: Last-used state persistence per tool (sessionStorage)
