@@ -423,12 +423,6 @@
         box-shadow: var(--m3-elevation-3);
         transform: translateY(-1px);
       }
-      /* On desktop: push back FAB left of the rail */
-      @media (min-width: 1025px) {
-        #back-tool-fab {
-          inset-inline-end: calc(var(--nav-rail-width, 80px) + 16px);
-        }
-      }
 
       /* PWA install popup */
       #pwa-popup {
@@ -2357,6 +2351,10 @@
     <span class="bottom-nav-icon">⏱️</span>
     <span class="bottom-nav-label">زمان</span>
   </a>
+  <a class="bottom-nav-item" data-cat="sec-text" onclick="railNavTo('sec-science',this)">
+    <span class="bottom-nav-icon">📐</span>
+    <span class="bottom-nav-label">علوم</span>
+  </a>
   <a class="bottom-nav-item" data-cat="sec-text" onclick="railNavTo('sec-text',this)">
     <span class="bottom-nav-icon">✏️</span>
     <span class="bottom-nav-label">متن</span>
@@ -2364,6 +2362,10 @@
   <a class="bottom-nav-item" data-cat="sec-dev" onclick="railNavTo('sec-dev',this)">
     <span class="bottom-nav-icon">💻</span>
     <span class="bottom-nav-label">توسعه</span>
+  </a>
+  <a class="bottom-nav-item" data-cat="sec-gen" onclick="railNavTo('sec-gen',this)">
+    <span class="bottom-nav-icon">⚡</span>
+    <span class="bottom-nav-label">مولدها</span>
   </a>
   <a class="bottom-nav-item" data-cat="sec-design" onclick="railNavTo('sec-design',this)">
     <span class="bottom-nav-icon">🎨</span>
@@ -2373,17 +2375,9 @@
     <span class="bottom-nav-icon">📁</span>
     <span class="bottom-nav-label">فایل</span>
   </a>
-  <a class="bottom-nav-item" data-cat="sec-gen" onclick="railNavTo('sec-gen',this)">
-    <span class="bottom-nav-icon">⚡</span>
-    <span class="bottom-nav-label">مولدها</span>
-  </a>
   <a class="bottom-nav-item" data-cat="sec-sys" onclick="railNavTo('sec-sys',this)">
     <span class="bottom-nav-icon">🛠️</span>
     <span class="bottom-nav-label">ایران</span>
-  </a>
-  <a class="bottom-nav-item" data-cat="sec-online" onclick="railNavTo('sec-online',this)">
-    <span class="bottom-nav-icon">🌐</span>
-    <span class="bottom-nav-label">آنلاین</span>
   </a>
   <a class="bottom-nav-item" data-cat="sec-games" onclick="railNavTo('sec-games',this)">
     <span class="bottom-nav-icon">🎮</span>
@@ -2392,6 +2386,10 @@
   <a class="bottom-nav-item" data-cat="sec-pro" onclick="railNavTo('sec-pro',this)">
     <span class="bottom-nav-icon">🧭</span>
     <span class="bottom-nav-label">تخصصی</span>
+  </a>
+  <a class="bottom-nav-item" data-cat="sec-online" onclick="railNavTo('sec-online',this)">
+    <span class="bottom-nav-icon">🌐</span>
+    <span class="bottom-nav-label">آنلاین</span>
   </a>
   <a class="bottom-nav-item" data-cat="sec-share" onclick="railNavTo('sec-share',this)">
     <span class="bottom-nav-icon">ℹ️</span>
@@ -2490,11 +2488,12 @@
                 <div class="iran-cta__title">منابع و سرویس‌های ایران</div>
                 <div class="iran-cta__desc">مجموعه لینک‌ها، ابزارها و سرویس‌های قابل دسترس در شرایط محدودیت اینترنت - سرورهای چت، میرورها، رسانه و بیشتر.</div>
                 <div class="iran-cta__chips">
+                  <a class="iran-cta__chip" href="./iran#tools" onclick="event.stopPropagation()">🔧 ابزار</a>
+                  <a class="iran-cta__chip" href="./iran#media" onclick="event.stopPropagation()">🎬 رسانه</a>
                   <a class="iran-cta__chip" href="./iran#chat" onclick="event.stopPropagation()">💬 پیام‌رسان</a>
                   <a class="iran-cta__chip" href="./iran#mirrors" onclick="event.stopPropagation()">🔄 میرورها</a>
-                  <a class="iran-cta__chip" href="./iran#media" onclick="event.stopPropagation()">🎬 رسانه</a>
                   <a class="iran-cta__chip" href="./iran#software" onclick="event.stopPropagation()">📦 نرم‌افزار</a>
-                  <a class="iran-cta__chip" href="./iran#services" onclick="event.stopPropagation()">🏛️ سرویس‌ها</a>
+                  <a class="iran-cta__chip" href="./iran#services" onclick="event.stopPropagation()">🏛️ خدمات</a>
                 </div>
               </div>
               <svg class="iran-cta__arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -4301,37 +4300,38 @@
 
           <!-- ── DICE ── -->
           <div id="rand-panel-dice" style="display:none">
-            <div class="field-row" style="align-items:center;gap:12px;margin-bottom:10px">
+            <div class="field-row" style="align-items:center;gap:12px;margin-bottom:14px">
               <div class="field-col" style="flex:0 0 auto">
                 <label class="field-label">تعداد تاس</label>
-                <input type="number" id="dice-count" class="text-input" value="1" min="1" max="6" style="width:70px"/>
+                <input type="number" id="dice-count" class="text-input" value="1" min="1" max="4" style="width:70px" onchange="buildDiceScene()"/>
               </div>
               <div class="field-col" style="flex:0 0 auto">
                 <label class="field-label">نوع تاس</label>
-                <select id="dice-sides" class="text-input" style="width:90px">
-                  <option value="6">D6</option>
-                  <option value="4">D4</option>
-                  <option value="8">D8</option>
-                  <option value="10">D10</option>
-                  <option value="12">D12</option>
-                  <option value="20">D20</option>
+                <select id="dice-sides" class="text-input" style="width:90px" onchange="buildDiceScene()">
+                  <option value="6">۶ وجهی</option>
+                  <option value="4">۴ وجهی</option>
+                  <option value="8">۸ وجهی</option>
+                  <option value="10">۱۰ وجهی</option>
+                  <option value="12">۱۲ وجهی</option>
+                  <option value="20">۲۰ وجهی</option>
                 </select>
               </div>
             </div>
-            <button class="btn btn-filled" onclick="rollDice()">🎲 بینداز</button>
-            <div id="dice-display" style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:16px;min-height:80px"></div>
-            <div id="dice-sum" style="text-align:center;font-size:15px;color:var(--md-sys-color-outline);margin-top:6px"></div>
+            <!-- 3D dice scene — populated by buildDiceScene() -->
+            <div id="dice-scene" style="display:flex;flex-wrap:wrap;gap:28px;justify-content:center;perspective:600px;min-height:100px;align-items:center;margin:50px auto 50px;"></div>
+            <button class="btn btn-filled" onclick="rollDice()" style="width:100%">🎲 تاس بنداز!</button>
+            <div id="dice-sum" style="text-align:center;font-size:15px;color:var(--md-sys-color-outline);margin-top:8px;min-height:22px"></div>
           </div>
 
           <!-- ── COIN ── -->
-          <div id="rand-panel-coin" style="display:none;text-align:center">
-            <button class="btn btn-filled" onclick="flipCoin()" style="margin-bottom:16px">🪙 پرتاب سکه</button>
-            <div id="coin-scene" style="perspective:600px;width:100px;height:100px;margin:0 auto 12px">
+          <div id="rand-panel-coin" style="display:none;text-align:center;">
+            <div id="coin-scene" style="perspective:600px;width:100px;height:100px;margin:50px auto 50px;">
               <div id="coin-inner" style="width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 0.8s cubic-bezier(.4,0,.2,1)">
                 <div id="coin-heads" style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffe082,#ffa000);display:flex;align-items:center;justify-content:center;font-size:38px;backface-visibility:hidden;box-shadow:0 4px 16px #0003">🦁</div>
                 <div id="coin-tails" style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 35%,#b0bec5,#546e7a);display:flex;align-items:center;justify-content:center;font-size:38px;backface-visibility:hidden;transform:rotateY(180deg);box-shadow:0 4px 16px #0003">⚡</div>
               </div>
             </div>
+            <button class="btn btn-filled" onclick="flipCoin()" style="width:100%">🪙 پرتاب سکه</button>
             <div id="coin-result" style="font-size:20px;font-weight:600;min-height:32px"></div>
           </div>
 
@@ -8879,7 +8879,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 6.8 - ۱۴۰۵/۰۲/۰۶
+          ℹ️ نسخه 6.9 - ۱۴۰۵/۰۲/۰۶
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -11082,6 +11082,7 @@
           const btn=document.getElementById('rand-tab-'+id);
           btn.className=id===t?'btn btn-filled':'btn btn-tonal';
         });
+        if(t==='dice') buildDiceScene();
       }
 
       // ── NUMBER ──
@@ -11097,40 +11098,205 @@
       }
 
       // ── DICE ──
-      const DICE_FACES={
-        6:['⚀','⚁','⚂','⚃','⚄','⚅'],
-        4:['1','2','3','4'],
-        8:['1','2','3','4','5','6','7','8'],
-        10:['1','2','3','4','5','6','7','8','9','10'],
-        12:['1','2','3','4','5','6','7','8','9','10','11','12'],
-        20:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20']
+      // Dot layouts for each face of a D6 (positions as [top%,left%])
+      const D6_DOTS={
+        1:[[50,50]],
+        2:[[25,25],[75,75]],
+        3:[[25,25],[50,50],[75,75]],
+        4:[[25,25],[25,75],[75,25],[75,75]],
+        5:[[25,25],[25,75],[50,50],[75,25],[75,75]],
+        6:[[25,25],[25,75],[50,25],[50,75],[75,25],[75,75]]
       };
-      function rollDice(){
-        const count=Math.min(6,parseInt(document.getElementById('dice-count').value)||1);
-        const sides=parseInt(document.getElementById('dice-sides').value);
-        const faces=DICE_FACES[sides];
-        const arr=new Uint32Array(count); crypto.getRandomValues(arr);
-        const results=Array.from(arr,v=>(v%sides)+1);
-        const display=document.getElementById('dice-display');
-        display.innerHTML='';
-        results.forEach((val,i)=>{
-          const d=document.createElement('div');
-          d.style.cssText=`width:72px;height:72px;border-radius:14px;background:var(--md-sys-color-surface-variant);
-            display:flex;align-items:center;justify-content:center;font-size:${sides===6?40:22}px;
-            font-weight:700;box-shadow:0 3px 10px #0003;cursor:default;
-            animation:diceRoll 0.5s ${i*80}ms both;color:var(--md-sys-color-on-surface-variant)`;
-          d.textContent=faces[val-1];
-          display.appendChild(d);
-        });
-        const sum=results.reduce((a,b)=>a+b,0);
-        document.getElementById('dice-sum').textContent=count>1?`مجموع: ${sum}`:'';
-      }
-      // inject dice roll keyframe once
+      // Final transform per face value (face 1=front, 6=back, 2=bottom, 5=top, 3=right, 4=left)
+      const D6_FINAL={
+        1:'rotateX(0deg) rotateY(0deg)',
+        6:'rotateX(180deg) rotateY(0deg)',
+        2:'rotateX(-90deg) rotateY(0deg)',
+        5:'rotateX(90deg) rotateY(0deg)',
+        3:'rotateX(0deg) rotateY(-90deg)',
+        4:'rotateX(0deg) rotateY(90deg)'
+      };
+
+      // Inject dice CSS once
       (()=>{
         const s=document.createElement('style');
-        s.textContent=`@keyframes diceRoll{0%{opacity:0;transform:rotateX(90deg) scale(.5)}60%{transform:rotateX(-15deg) scale(1.1)}100%{opacity:1;transform:rotateX(0) scale(1)}}`;
+        s.textContent=`
+          .dice3d-wrap{width:80px;height:80px;perspective:300px}
+          .dice3d{
+            position:relative;width:80px;height:80px;
+            transform-style:preserve-3d;
+            transition:transform 0.6s ease;
+            cursor:default;
+          }
+          @keyframes dice3d-roll{
+            0%  {transform:rotateX(0deg) rotateY(0deg)}
+            25% {transform:rotateX(280deg) rotateY(120deg)}
+            50% {transform:rotateX(455deg) rotateY(455deg)}
+            75% {transform:rotateX(520deg) rotateY(310deg)}
+            100%{transform:rotateX(540deg) rotateY(360deg)}
+          }
+          .dice3d.rolling{animation:dice3d-roll 1s ease-in-out}
+          .dice3d-face{
+            position:absolute;width:80px;height:80px;
+            border-radius:14px;
+            border:3px solid rgba(255,255,255,.25);
+            background:linear-gradient(145deg,#e8e4e0,#fff);
+            transform-style:preserve-3d;
+            box-sizing:border-box;
+          }
+          .dice3d-face::before{
+            content:'';position:absolute;inset:0;border-radius:11px;
+            background:#f5f2ef;transform:translateZ(-1px);
+          }
+          .dice3d-face.f-front {transform:translateZ(40px)}
+          .dice3d-face.f-back  {transform:rotateX(180deg) translateZ(40px)}
+          .dice3d-face.f-top   {transform:rotateX(90deg)  translateZ(40px)}
+          .dice3d-face.f-bottom{transform:rotateX(-90deg) translateZ(40px)}
+          .dice3d-face.f-right {transform:rotateY(90deg)  translateZ(40px)}
+          .dice3d-face.f-left  {transform:rotateY(-90deg) translateZ(40px)}
+          .dice3d-dot{
+            position:absolute;border-radius:50%;
+            background:#1a1612;
+            transform:translate(-50%,-50%);
+          }
+          .dice3d-dot.red{background:#d32f2f}
+          .dice3d-flat{
+            width:80px;height:80px;border-radius:14px;
+            background:linear-gradient(145deg,#e8e4e0,#fff);
+            border:3px solid rgba(0,0,0,.1);
+            display:flex;align-items:center;justify-content:center;
+            font-size:22px;font-weight:700;
+            color:#1a1612;
+            box-shadow:0 4px 14px #0002,0 2px 4px #0001;
+          }
+          @keyframes dice3d-flat-roll{
+            0%  {opacity:0;transform:rotateY(0deg) scale(.5)}
+            40% {transform:rotateY(540deg) scale(1.1)}
+            70% {transform:rotateY(700deg) scale(.95)}
+            100%{opacity:1;transform:rotateY(720deg) scale(1)}
+          }
+          .dice3d-flat.rolling{animation:dice3d-flat-roll 1.1s ease both}
+        `;
         document.head.appendChild(s);
       })();
+
+      let _diceRolling=false;
+
+      function _makeDot(top,left,isRed){
+        const d=document.createElement('div');
+        d.className='dice3d-dot'+(isRed?' red':'');
+        d.style.cssText=`top:${top}%;left:${left}%;width:14px;height:14px`;
+        return d;
+      }
+
+      function _makeD6Face(cls, val){
+        const face=document.createElement('div');
+        face.className=`dice3d-face ${cls}`;
+        const dots=D6_DOTS[val]||[];
+        dots.forEach(([t,l],i)=>{
+          face.appendChild(_makeDot(t,l, val===1&&i===0));
+        });
+        return face;
+      }
+
+      function _makeD6(id){
+        const wrap=document.createElement('div');
+        wrap.className='dice3d-wrap';
+        const cube=document.createElement('div');
+        cube.className='dice3d';
+        cube.id='dice3d-'+id;
+        // face order: front=1, back=6, top=5, bottom=2, right=3, left=4
+        [['f-front',1],['f-back',6],['f-top',5],['f-bottom',2],['f-right',3],['f-left',4]]
+          .forEach(([cls,val])=>cube.appendChild(_makeD6Face(cls,val)));
+        wrap.appendChild(cube);
+        return wrap;
+      }
+
+      function _makeFlatDie(id, sides){
+        const wrap=document.createElement('div');
+        wrap.style.cssText='display:flex;align-items:center;justify-content:center';
+        const flat=document.createElement('div');
+        flat.className='dice3d-flat';
+        flat.id='dice3d-'+id;
+        flat.textContent='?';
+        flat.dataset.sides=sides;
+        wrap.appendChild(flat);
+        return wrap;
+      }
+
+      function buildDiceScene(){
+        const count=Math.min(4,parseInt(document.getElementById('dice-count').value)||1);
+        const sides=parseInt(document.getElementById('dice-sides').value);
+        const scene=document.getElementById('dice-scene');
+        scene.innerHTML='';
+        document.getElementById('dice-sum').textContent='';
+        for(let i=0;i<count;i++){
+          scene.appendChild(sides===6?_makeD6(i):_makeFlatDie(i,sides));
+        }
+      }
+
+      function rollDice(){
+        if(_diceRolling)return;
+        const count=Math.min(4,parseInt(document.getElementById('dice-count').value)||1);
+        const sides=parseInt(document.getElementById('dice-sides').value);
+        // ensure scene is built
+        const scene=document.getElementById('dice-scene');
+        if(!scene.children.length) buildDiceScene();
+
+        const arr=new Uint32Array(count); crypto.getRandomValues(arr);
+        const results=Array.from(arr,v=>(v%sides)+1);
+        _diceRolling=true;
+        document.getElementById('dice-sum').textContent='';
+
+        if(sides===6){
+          // 3D cube animation
+          results.forEach((val,i)=>{
+            const cube=document.getElementById('dice3d-'+i);
+            if(!cube)return;
+            cube.style.transition='none';
+            cube.style.transform='rotateX(0deg) rotateY(0deg)';
+            // force reflow
+            cube.offsetHeight;
+            cube.classList.add('rolling');
+          });
+          setTimeout(()=>{
+            results.forEach((val,i)=>{
+              const cube=document.getElementById('dice3d-'+i);
+              if(!cube)return;
+              cube.classList.remove('rolling');
+              cube.style.transition='transform 0.4s ease';
+              cube.style.transform=D6_FINAL[val];
+            });
+            _diceRolling=false;
+            const sum=results.reduce((a,b)=>a+b,0);
+            document.getElementById('dice-sum').textContent=count>1?`مجموع: ${sum}`:'';
+          },1050);
+        } else {
+          // Flat spinning animation for non-D6
+          results.forEach((val,i)=>{
+            const flat=document.getElementById('dice3d-'+i);
+            if(!flat)return;
+            flat.classList.remove('rolling');
+            flat.textContent='?';
+            flat.offsetHeight;
+            flat.classList.add('rolling');
+          });
+          setTimeout(()=>{
+            results.forEach((val,i)=>{
+              const flat=document.getElementById('dice3d-'+i);
+              if(!flat)return;
+              flat.classList.remove('rolling');
+              flat.textContent=val;
+            });
+            _diceRolling=false;
+            const sum=results.reduce((a,b)=>a+b,0);
+            document.getElementById('dice-sum').textContent=count>1?`مجموع: ${sum}`:'';
+          },1150);
+        }
+      }
+
+      // Build default scene on first tab open
+      document.addEventListener('DOMContentLoaded',()=>buildDiceScene());
 
       // ── COIN ──
       let _coinFlipping=false;
