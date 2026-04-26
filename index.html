@@ -2072,7 +2072,7 @@
           // Sync dark/light with Bale app theme
           if (wa.colorScheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
-            var fab = document.querySelector('.theme-fab');
+            var fab = document.querySelector('.theme-toggle-fab');
             if (fab) fab.textContent = '☀️';
           }
 
@@ -8742,7 +8742,8 @@
     </footer>
   </div><!-- /page-wrapper -->
 
-    <button class="theme-fab" onclick="toggleTheme()" title="تغییر پوسته"
+  <!-- ════ FAB ════ -->
+    <button class="theme-toggle-fab" onclick="toggleTheme()" title="تغییر پوسته"
       style="display: var(--_bale-fab-display, flex)">
       🌙
     </button>
@@ -9351,7 +9352,7 @@
         const icon = isDark ? '☀️' : '🌙';
         const railBtn = document.getElementById('themeToggleRail');
         if (railBtn) railBtn.textContent = icon;
-        const mainFab = document.querySelector('.theme-fab');
+        const mainFab = document.querySelector('.theme-toggle-fab');
         if (mainFab) mainFab.textContent = icon;
       }
       const _themeRailBtn = document.getElementById('themeToggleRail');
