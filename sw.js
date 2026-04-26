@@ -6,7 +6,7 @@
 //    - External/opaque requests: Network-only (skip)
 // ============================================================
 
-const CACHE_VERSION = 'toolbox-v6.0';
+const CACHE_VERSION = 'toolbox-v6.5';
 const CACHE_SHELL   = CACHE_VERSION + '-shell';
 const CACHE_ASSETS  = CACHE_VERSION + '-assets';
 
@@ -31,6 +31,8 @@ const SHELL_URLS = [
   '/static/lib/pdf-lib.min.js',
   '/static/lib/function-plot.js',
   '/static/lib/math.js',
+  '/static/lib/background-removal-data.mjs',
+  '/static/lib/ort-bundled.mjs',
   '/static/poems/akhavan/structure.json',
   '/static/poems/fersowsi/structure.json',
   '/static/poems/forugh/structure.json',

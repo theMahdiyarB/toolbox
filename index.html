@@ -41,6 +41,142 @@
     </script>
 
     <style>
+      .drawer-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 300;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+      }
+      .drawer-overlay.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .side-drawer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100dvh;
+        width: 280px;
+        background: var(--m3-surface-container-low);
+        border-left: 1px solid var(--m3-outline-variant);
+        z-index: 400;
+        display: flex;
+        flex-direction: column;
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+      }
+      .side-drawer.open {
+        transform: translateX(0);
+      }
+      .drawer-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 20px 20px 16px;
+        border-bottom: 1px solid var(--m3-outline-variant);
+        flex-shrink: 0;
+      }
+      .drawer-brand-icon {
+        font-size: 2rem;
+        line-height: 1;
+      }
+      .drawer-brand-text {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--m3-primary);
+        letter-spacing: 0.02em;
+      }
+      .drawer-close {
+        margin-right: auto;
+        background: none;
+        border: none;
+        font-size: 1.4rem;
+        cursor: pointer;
+        color: var(--m3-on-surface-variant);
+        padding: 6px;
+        border-radius: 50px;
+        line-height: 1;
+        transition: background 0.2s;
+      }
+      .drawer-close:hover {
+        background: var(--m3-surface-container-high);
+      }
+      .drawer-scroll {
+        height: 0;
+        min-height: 0; 
+        overflow-y: auto;
+        flex: 1;
+        padding: 8px 0 24px;
+        scrollbar-width: thin;
+      }
+      .drawer-section-label {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--m3-on-surface-variant);
+        padding: 14px 20px 4px;
+        display: block;
+      }
+      .drawer-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 9px 20px;
+        cursor: pointer;
+        border-radius: 50px 0 0 50px;
+        margin-left: 12px;
+        transition: background 0.15s;
+        color: var(--m3-on-surface);
+        font-size: 13.5px;
+        font-weight: 500;
+        user-select: none;
+      }
+      .drawer-item:hover {
+        background: var(--m3-surface-container-high);
+      }
+      .drawer-item.active {
+        background: var(--m3-secondary-container);
+        color: var(--m3-on-secondary-container);
+        font-weight: 600;
+      }
+      .drawer-item__icon {
+        font-size: 1.2rem;
+        width: 26px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+      .top-bar {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--m3-outline-variant);
+        background: var(--m3-surface-container-low);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        gap: 12px;
+      }
+      .hamburger-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--m3-on-surface);
+        padding: 8px;
+        border-radius: 50px;
+        line-height: 1;
+        transition: background 0.2s;
+        flex-shrink: 0;
+      }
+      .hamburger-btn:hover {
+        background: var(--m3-surface-container-high);
+      }
       .top-bar__back-btn {
         background: none;
         border: none;
@@ -130,7 +266,6 @@
       .share-card__icon  { font-size: 2.2rem; }
       .share-card__title { font-size: 15px; font-weight: 700; color: var(--m3-on-surface); }
       .share-card__desc  { font-size: 12px; color: var(--m3-on-surface-variant); line-height: 1.5; }
-
       /* ── Minimal overrides (main.css handles the rest) ── */
 
       /* Remove active left-line indicator */
@@ -247,8 +382,8 @@
       /* ── Back FAB (shown when inside a tool) ── */
       #back-tool-fab {
         position: fixed;
-        top: var(--m3-spacing-16);
-        inset-inline-end: var(--m3-spacing-20);
+        top: 16px;
+        inset-inline-end: 16px;
         width: 48px;
         height: 48px;
         border-radius: var(--m3-shape-lg, 16px);
@@ -266,13 +401,17 @@
                     box-shadow var(--m3-duration-fast) var(--m3-ease-standard),
                     transform var(--m3-duration-fast) var(--m3-ease-standard);
       }
-
-
       #back-tool-fab.visible { display: flex; }
       #back-tool-fab:hover {
         background: var(--m3-surface-container-highest);
         box-shadow: var(--m3-elevation-3);
         transform: translateY(-1px);
+      }
+      /* On desktop: push back FAB left of the rail */
+      @media (min-width: 1025px) {
+        #back-tool-fab {
+          inset-inline-end: calc(var(--nav-rail-width, 80px) + 16px);
+        }
       }
 
       /* PWA install popup */
@@ -2073,6 +2212,7 @@
 
         <span class="drawer-section-label">📁 فایل</span>
         <div class="drawer-item" onclick="showTool('imgcompress')" data-tool="imgcompress"><span class="drawer-item__icon">🗜️</span>فشرده‌سازی تصویر</div>
+        <div class="drawer-item" onclick="showTool('bgremove')" data-tool="bgremove"><span class="drawer-item__icon">✂️</span>حذف پس‌زمینه</div>
         <div class="drawer-item" onclick="showTool('pdfcompress')" data-tool="pdfcompress"><span class="drawer-item__icon">🛠️</span>ابزار PDF</div>
         <div class="drawer-item" onclick="showTool('filesplit')" data-tool="filesplit"><span class="drawer-item__icon">🗂</span>تقسیم و مرج فایل</div>
         <div class="drawer-item" onclick="showTool('watermark')" data-tool="watermark"><span class="drawer-item__icon">💧</span>واترمارک تصویر</div>
@@ -2178,9 +2318,6 @@
       <div class="rail-item-icon">ℹ️</div>
       <span class="rail-item-label">درباره</span>
     </div>
-  </div>
-  <div class="rail-footer">
-    <button class="theme-toggle-rail" id="themeToggleRail" type="button" aria-label="تغییر تم">🌙</button>
   </div>
 </nav>
 
@@ -2494,6 +2631,7 @@
               <div class="section__title">📁 ابزارهای فایل - کاملاً آفلاین</div>
               <div class="tool-grid">
                 <div class="link-card" onclick="haptic(this);showTool('imgcompress')"><button class="fav-btn" data-tool="imgcompress" onclick="event.stopPropagation();toggleFav('imgcompress',this)">☆</button><span class="link-card__icon">🗜️</span><span class="link-card__name">فشرده‌سازی تصویر</span><span class="link-card__desc">پردازش کامل در مرورگر</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('bgremove')"><button class="fav-btn" data-tool="bgremove" onclick="event.stopPropagation();toggleFav('bgremove',this)">☆</button><span class="link-card__icon">✂️</span><span class="link-card__name">حذف پس‌زمینه</span><span class="link-card__desc">بدون API · کاملاً آفلاین</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('pdfcompress')"><button class="fav-btn" data-tool="pdfcompress" onclick="event.stopPropagation();toggleFav('pdfcompress',this)">☆</button><span class="link-card__icon">🛠️</span><span class="link-card__name">ابزار PDF</span><span class="link-card__desc">ادغام، تقسیم، مرتب‌سازی، استخراج تصویر</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('filesplit')"><button class="fav-btn" data-tool="filesplit" onclick="event.stopPropagation();toggleFav('filesplit',this)">☆</button><span class="link-card__icon">🗂</span><span class="link-card__name">تقسیم و مرج فایل</span><span class="link-card__desc">فایل‌های بزرگ + رمز</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('watermark')"><button class="fav-btn" data-tool="watermark" onclick="event.stopPropagation();toggleFav('watermark',this)">☆</button><span class="link-card__icon">💧</span><span class="link-card__name">واترمارک تصویر</span><span class="link-card__desc">افزودن لوگو یا متن به تصویر</span></div>
@@ -6337,7 +6475,7 @@
             <img id="mm-img" alt="نقشه مترو" draggable="false"
               style="position:absolute;top:0;left:0;transform-origin:0 0;max-width:none;display:none;image-rendering:high-quality">
           </div>
-          <div class="tool-desc">نقشه مترو - تصاویر JPG را در پوشه maps/ قرار دهید: tehran-metro.jpg و غیره. برای دانلود فایل PDF اصلی از دکمه دانلود استفاده کنید.</div>
+          <div class="tool-desc">نقشه مترو - تصاویر JPG را در پوشه <code>static/maps/</code> قرار دهید: <code>tehran-metro.jpg</code> و غیره. برای دانلود فایل PDF اصلی از دکمه دانلود استفاده کنید.</div>
         </div>
 
         <!-- ══ emojis ══ -->
@@ -7326,6 +7464,69 @@
           <canvas id="wm-canvas" style="display:none;max-width:100%;border-radius:12px;margin-top:10px"></canvas>
           <button class="btn btn-filled" id="wm-dl-btn" onclick="wmDownload()" style="display:none;margin-top:8px">💾 دانلود</button>
           <div class="tool-desc">رنگ متن واترمارک به‌صورت خودکار بر اساس روشنایی تصویر انتخاب می‌شود.</div>
+        </div>
+
+        <!-- ══ BACKGROUND REMOVE ══ -->
+        <div id="bgremove" class="tool-card">
+          <div class="tool-title">✂️ حذف پس‌زمینه تصویر</div>
+          <p style="font-size:0.8rem;color:var(--m3-on-surface-variant);margin-bottom:14px">📌 پردازش کاملاً در مرورگر — هیچ فایلی به سرور ارسال نمی‌شود. بار اول کمی طول می‌کشد (دانلود مدل ~۵ مگابایت).</p>
+
+          <div class="upload-zone" id="bgr-zone"
+            onclick="document.getElementById('bgr-file').click()"
+            ondragover="bgrDrag(event,true)" ondragleave="bgrDrag(event,false)" ondrop="bgrDrop(event)">
+            <input type="file" id="bgr-file" accept="image/*" onchange="bgrLoad()">
+            <div class="upload-zone__icon">🖼️</div>
+            <div class="upload-zone__text">کلیک یا Drag & Drop تصویر</div>
+            <div class="upload-zone__limit">JPG · PNG · WebP</div>
+          </div>
+
+          <div id="bgr-err" class="tool-err"></div>
+
+          <!-- Progress bar -->
+          <div id="bgr-progress-wrap" style="display:none;margin-top:12px">
+            <div style="font-size:0.82rem;color:var(--m3-on-surface-variant);margin-bottom:6px;text-align:center" id="bgr-status">در حال پردازش…</div>
+            <div style="height:6px;border-radius:99px;background:var(--m3-surface-container-high);overflow:hidden">
+              <div id="bgr-bar" style="height:100%;width:0%;border-radius:99px;background:var(--m3-primary);transition:width 0.3s ease"></div>
+            </div>
+          </div>
+
+          <!-- Preview: before/after split -->
+          <div id="bgr-preview" style="display:none;margin-top:16px">
+            <div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap">
+              <div style="flex:1;min-width:140px">
+                <div style="font-size:0.75rem;color:var(--m3-on-surface-variant);margin-bottom:4px;text-align:center">قبل</div>
+                <img id="bgr-orig" style="width:100%;border-radius:10px;border:1px solid var(--m3-outline-variant)">
+              </div>
+              <div style="flex:1;min-width:140px">
+                <div style="font-size:0.75rem;color:var(--m3-on-surface-variant);margin-bottom:4px;text-align:center">بعد</div>
+                <!-- Checkerboard background to show transparency -->
+                <div style="border-radius:10px;border:1px solid var(--m3-outline-variant);overflow:hidden;background:repeating-conic-gradient(#ccc 0% 25%, #fff 0% 50%) 0 0/16px 16px">
+                  <img id="bgr-result" style="width:100%;display:block">
+                </div>
+              </div>
+            </div>
+
+            <!-- Background color options -->
+            <div style="margin-top:14px">
+              <div style="font-size:0.8rem;font-weight:600;margin-bottom:8px">پس‌زمینه خروجی</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+                <button class="btn btn-tonal bgr-bg-btn active" data-bg="transparent" onclick="bgrSetBg('transparent',this)" style="font-size:12px;padding:5px 12px">شفاف (PNG)</button>
+                <button class="btn btn-tonal bgr-bg-btn" data-bg="white" onclick="bgrSetBg('white',this)" style="font-size:12px;padding:5px 12px">سفید</button>
+                <button class="btn btn-tonal bgr-bg-btn" data-bg="black" onclick="bgrSetBg('black',this)" style="font-size:12px;padding:5px 12px">مشکی</button>
+                <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer">
+                  <input type="color" id="bgr-custom-color" value="#ffffff" oninput="bgrSetBg(this.value, document.querySelector('.bgr-bg-btn[data-bg=custom]'))" style="width:28px;height:28px;border:none;border-radius:6px;cursor:pointer;padding:0">
+                  <button class="btn btn-tonal bgr-bg-btn" data-bg="custom" onclick="bgrSetBg(document.getElementById('bgr-custom-color').value, this)" style="font-size:12px;padding:5px 12px">دلخواه</button>
+                </label>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+              <button class="btn btn-filled" onclick="bgrDownload()" style="flex:1">💾 دانلود PNG</button>
+              <button class="btn btn-tonal" onclick="bgrReset()" style="flex:0 0 auto">🔄 تصویر جدید</button>
+            </div>
+          </div>
+
+          <div class="tool-desc">از مدل <strong>RMBG-1.4</strong> (ISNet) از طریق کتابخانه <code>@imgly/background-removal</code> استفاده می‌کند.</div>
         </div>
 
         <!-- ══ SEO TOOLS ══ -->
@@ -8532,17 +8733,19 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 6.0 - ۱۴۰۵/۰۲/۰۴
+          ℹ️ نسخه 6.5 - ۱۴۰۵/۰۲/۰۶
         </span>
         <span class="body-medium footer-muted">
-          By <a href="https://github.com/themahdiyarb" target="_blank" rel="noopener">theMahdiyarB</a>
+          By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
         </span>
       </div>
     </footer>
   </div><!-- /page-wrapper -->
 
-    <!-- ════ FAB ════ -->
-    <button class="theme-toggle-fab" id="themeToggleFab" type="button" aria-label="تغییر تم">🌙</button>
+    <button class="theme-fab" onclick="toggleTheme()" title="تغییر پوسته"
+      style="display: var(--_bale-fab-display, flex)">
+      🌙
+    </button>
     
     <!-- ── Back to top ── -->
     <button id="back-to-top" aria-label="بازگشت به بالا">↑</button>
@@ -8603,7 +8806,7 @@
         credit:'کارت اعتباری تستی', avatar:'مولد آواتار', placeholder:'تصویر جایگزین',
         qr:'کد QR', barcode:'بارکد Code-128', colorpicker:'تبدیل رنگ',
         gradient:'گرادیان CSS', shadow:'سایه CSS', borderrad:'گوشه‌گرد CSS',
-        aspect:'نسبت ابعاد', imgcompress:'فشرده‌سازی تصویر', pdfcompress:'ابزار PDF',
+        aspect:'نسبت ابعاد', imgcompress:'فشرده‌سازی تصویر', bgremove:'حذف پس‌زمینه', pdfcompress:'ابزار PDF',
         img2b64:'تصویر ← Base64', csvjson:'CSV ↔ JSON', device:'اطلاعات دستگاه',
         ua:'User Agent', morse:'کد مورس', roman:'اعداد رومی',
         asciitbl:'جدول ASCII', textbin:'متن ↔ باینری', timezone:'ساعت جهانی',
@@ -8892,7 +9095,7 @@
           icon: '📁', label: 'فایل',
           tools: [
             {id:'imgcompress',icon:'🗜️',name:'فشرده‌سازی تصویر'},{id:'pdfcompress',icon:'🛠️',name:'ابزار PDF'},
-            {id:'filesplit',icon:'🗂',name:'تقسیم و مرج فایل'},{id:'watermark',icon:'💧',name:'واترمارک تصویر'},
+            {id:'bgremove',icon:'✂️',name:'حذف پس‌زمینه'},{id:'filesplit',icon:'🗂',name:'تقسیم و مرج فایل'},{id:'watermark',icon:'💧',name:'واترمارک تصویر'},
             {id:'img2b64',icon:'🔄',name:'تصویر ← Base64'},{id:'csvjson',icon:'↔️',name:'CSV ↔ JSON'}
           ]
         },
@@ -9003,6 +9206,133 @@
       document.getElementById('rail-flyout').addEventListener('mouseleave', _hideFlyout);
 
       // Bottom nav category navigation
+      // ══════════════════════════════════════════════════════
+      //  BACKGROUND REMOVAL
+      // ══════════════════════════════════════════════════════
+      (function() {
+        let _bgrOrigUrl  = null;   // original image object URL
+        let _bgrMaskBlob = null;   // result PNG blob (transparent)
+        let _bgrBg       = 'transparent';
+        let _bgrLib      = null;   // cached imglyRemoveBackground function
+
+        async function _loadLib() {
+          if (_bgrLib) return _bgrLib;
+          // Fully self-hosted — no CDN. Run download_static_assets.sh to get model chunks.
+          const mod = await import('./static/lib/background-removal.mjs');
+          _bgrLib = mod.removeBackground || mod.default?.removeBackground || mod.default;
+          return _bgrLib;
+        }
+
+        window.bgrDrag = function(e, on) {
+          e.preventDefault();
+          document.getElementById('bgr-zone').classList.toggle('drag-over', on);
+        };
+        window.bgrDrop = function(e) {
+          e.preventDefault();
+          bgrDrag(e, false);
+          const f = e.dataTransfer?.files?.[0];
+          if (f) _bgrProcess(f);
+        };
+        window.bgrLoad = function() {
+          const f = document.getElementById('bgr-file').files[0];
+          if (f) _bgrProcess(f);
+        };
+
+        async function _bgrProcess(file) {
+          // Reset
+          document.getElementById('bgr-err').textContent = '';
+          document.getElementById('bgr-preview').style.display = 'none';
+          document.getElementById('bgr-progress-wrap').style.display = 'block';
+          _setBar(5, 'در حال بارگذاری مدل…');
+
+          if (_bgrOrigUrl) URL.revokeObjectURL(_bgrOrigUrl);
+          _bgrOrigUrl = URL.createObjectURL(file);
+          document.getElementById('bgr-orig').src = _bgrOrigUrl;
+
+          try {
+            const removeBackground = await _loadLib();
+            _setBar(20, 'مدل بارگذاری شد، در حال پردازش…');
+
+            const blob = await removeBackground(file, {
+              progress: (key, current, total) => {
+                if (total > 0) {
+                  const pct = Math.round(20 + (current / total) * 70);
+                  _setBar(pct, 'در حال پردازش… ' + pct + '%');
+                }
+              },
+              publicPath: window.location.origin + '/static/lib/background-removal-data/',
+              model: 'medium',
+              output: { format: 'image/png', quality: 1 }
+            });
+
+            _bgrMaskBlob = blob;
+            _setBar(100, 'پردازش کامل شد ✅');
+
+            const resultUrl = URL.createObjectURL(blob);
+            document.getElementById('bgr-result').src = resultUrl;
+            document.getElementById('bgr-progress-wrap').style.display = 'none';
+            document.getElementById('bgr-preview').style.display = 'block';
+            _applyBgToPreview();
+
+          } catch(err) {
+            document.getElementById('bgr-progress-wrap').style.display = 'none';
+            document.getElementById('bgr-err').textContent = '❌ خطا: ' + (err.message || err);
+          }
+        }
+
+        function _setBar(pct, msg) {
+          document.getElementById('bgr-bar').style.width = pct + '%';
+          document.getElementById('bgr-status').textContent = msg;
+        }
+
+        function _applyBgToPreview() {
+          if (!_bgrMaskBlob) return;
+          if (_bgrBg === 'transparent') {
+            document.getElementById('bgr-result').src = URL.createObjectURL(_bgrMaskBlob);
+            return;
+          }
+          const img = new Image();
+          img.onload = () => {
+            const c = document.createElement('canvas');
+            c.width = img.naturalWidth; c.height = img.naturalHeight;
+            const ctx = c.getContext('2d');
+            ctx.fillStyle = _bgrBg;
+            ctx.fillRect(0, 0, c.width, c.height);
+            ctx.drawImage(img, 0, 0);
+            document.getElementById('bgr-result').src = c.toDataURL('image/png');
+          };
+          img.src = URL.createObjectURL(_bgrMaskBlob);
+        }
+
+        window.bgrSetBg = function(color, btn) {
+          _bgrBg = color;
+          document.querySelectorAll('.bgr-bg-btn').forEach(b => b.classList.remove('active'));
+          if (btn) btn.classList.add('active');
+          _applyBgToPreview();
+        };
+
+        window.bgrDownload = function() {
+          if (!_bgrMaskBlob && !document.getElementById('bgr-result').src) return;
+          const a = document.createElement('a');
+          if (_bgrBg === 'transparent') {
+            a.href = URL.createObjectURL(_bgrMaskBlob);
+          } else {
+            a.href = document.getElementById('bgr-result').src;
+          }
+          a.download = 'background-removed.png';
+          a.click();
+        };
+
+        window.bgrReset = function() {
+          _bgrMaskBlob = null;
+          if (_bgrOrigUrl) { URL.revokeObjectURL(_bgrOrigUrl); _bgrOrigUrl = null; }
+          document.getElementById('bgr-file').value = '';
+          document.getElementById('bgr-preview').style.display = 'none';
+          document.getElementById('bgr-err').textContent = '';
+          document.getElementById('bgr-progress-wrap').style.display = 'none';
+        };
+      })();
+
       function railNavTo(catId, el) {
         document.querySelectorAll('#bottom-nav .bottom-nav-item').forEach(i => i.classList.remove('active'));
         if (el) el.classList.add('active');
@@ -14852,16 +15182,16 @@
       //  METRO MAP - JPG image viewer with pan/zoom
       // ══════════════════════════════════════════════════════
       const MM_JPG = {
-        tehran:  'maps/tehran-metro.jpg',
-        shiraz:  'maps/shiraz-metro.jpg',
-        isfahan: 'maps/isfahan-metro.jpg',
-        mashhad: 'maps/mashhad-metro.jpg',
+        tehran:  'static/maps/tehran-metro.jpg',
+        shiraz:  'static/maps/shiraz-metro.jpg',
+        isfahan: 'static/maps/isfahan-metro.jpg',
+        mashhad: 'static/maps/mashhad-metro.jpg',
       };
       const MM_PDF = {
-        tehran:  'maps/tehran-metro.pdf',
-        shiraz:  'maps/shiraz-metro.pdf',
-        isfahan: 'maps/isfahan-metro.pdf',
-        mashhad: 'maps/mashhad-metro.pdf',
+        tehran:  'static/maps/tehran-metro.pdf',
+        shiraz:  'static/maps/shiraz-metro.pdf',
+        isfahan: 'static/maps/isfahan-metro.pdf',
+        mashhad: 'static/maps/mashhad-metro.pdf',
       };
 
       var _mmCity = 'tehran';
@@ -14914,7 +15244,7 @@
       function mmImgError() {
         const loading = document.getElementById('mm-loading');
         if (loading) {
-          loading.textContent = '⚠ تصویر نقشه یافت نشد - فایل maps/' + _mmCity + '-metro.jpg را بررسی کنید';
+          loading.textContent = '⚠ تصویر نقشه یافت نشد - فایل static/maps/' + _mmCity + '-metro.jpg را بررسی کنید';
         }
       }
 
