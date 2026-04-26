@@ -3,6 +3,22 @@
 
 <head>
     <meta charset="UTF-8" />
+    <!-- ▶ Anti-flash: apply saved theme BEFORE any CSS renders -->
+    <script>
+      (function() {
+        var saved;
+        try { saved = localStorage.getItem('maddy-theme'); } catch(e) {}
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var isDark = saved === 'dark' || (!saved && prefersDark);
+        if (isDark) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.style.background = '#111418';
+          document.documentElement.style.colorScheme = 'dark';
+        } else {
+          document.documentElement.style.colorScheme = 'light';
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>منابع و خدمات داخلی ایران</title>
     <meta name="description" content="مجموعه جامع لینک‌ها، ابزارها و خدمات قابل دسترسی در شرایط محدودیت اینترنت — همه در یک جا">
@@ -283,9 +299,6 @@
             <span class="rail-item-icon">🎓</span>
             <span class="rail-item-label">آموزش</span>
         </a>
-    </div>
-    <div class="rail-footer">
-        <button class="theme-toggle-rail" id="themeToggleRail" type="button" aria-label="تغییر تم">🌙</button>
     </div>
 </nav>
 

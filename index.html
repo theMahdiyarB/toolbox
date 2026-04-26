@@ -3,6 +3,22 @@
 
   <head>
     <meta charset="UTF-8" />
+    <!-- ▶ Anti-flash: apply saved theme BEFORE any CSS renders -->
+    <script>
+      (function() {
+        var saved;
+        try { saved = localStorage.getItem('maddy-theme'); } catch(e) {}
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var isDark = saved === 'dark' || (!saved && prefersDark);
+        if (isDark) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.style.background = '#111418';
+          document.documentElement.style.colorScheme = 'dark';
+        } else {
+          document.documentElement.style.colorScheme = 'light';
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>جعبه‌ابزار آفلاین</title>
     <meta name="description" content="بیش از ۱۰۰ ابزار کاربردی، سبک و آفلاین">
@@ -14,7 +30,7 @@
     <link rel="icon" type="image/png" href="static/favicon.png">
     <link rel="apple-touch-icon" href="static/favicon.png">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="static/main.css" />
+    <link rel="stylesheet" href="static/main.css" onload="document.documentElement.style.background='';document.documentElement.style.colorScheme='';" />
     <link rel="apple-touch-icon" sizes="512x512" href="static/icon-512.png">
     <script src="static/main.js"></script>
     <script>
@@ -8733,7 +8749,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 6.5 - ۱۴۰۵/۰۲/۰۶
+          ℹ️ نسخه 6.6 - ۱۴۰۵/۰۲/۰۶
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -8743,10 +8759,7 @@
   </div><!-- /page-wrapper -->
 
   <!-- ════ FAB ════ -->
-    <button class="theme-toggle-fab" onclick="toggleTheme()" title="تغییر پوسته"
-      style="display: var(--_bale-fab-display, flex)">
-      🌙
-    </button>
+  <button class="theme-toggle-fab" id="themeToggleFab" type="button" aria-label="تغییر پوسته" style="display: var(--_bale-fab-display, flex)">🌙</button>
     
     <!-- ── Back to top ── -->
     <button id="back-to-top" aria-label="بازگشت به بالا">↑</button>
@@ -9344,33 +9357,8 @@
         }, 50);
       }
 
-      // Theme toggle rail button — syncs with main toggleTheme()
-      function _syncThemeIcon() {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
-          || document.documentElement.classList.contains('dark-theme')
-          || document.documentElement.hasAttribute('data-theme-dark');
-        const icon = isDark ? '☀️' : '🌙';
-        const railBtn = document.getElementById('themeToggleRail');
-        if (railBtn) railBtn.textContent = icon;
-        const mainFab = document.querySelector('.theme-toggle-fab');
-        if (mainFab) mainFab.textContent = icon;
-      }
-      const _themeRailBtn = document.getElementById('themeToggleRail');
-      if (_themeRailBtn) {
-        _themeRailBtn.addEventListener('click', () => {
-          if (typeof toggleTheme === 'function') {
-            toggleTheme();
-          } else {
-            document.documentElement.toggleAttribute('data-theme-dark');
-          }
-          setTimeout(_syncThemeIcon, 50);
-        });
-      }
-      // Observe theme changes to keep icon in sync
-      new MutationObserver(_syncThemeIcon).observe(document.documentElement, {
-        attributes: true, attributeFilter: ['data-theme', 'class', 'data-theme-dark']
-      });
-      _syncThemeIcon();
+      // Theme toggle rail — handled by main.js bindThemeToggles() (looks up #themeToggleRail by id)
+      // and updateThemeButtons() keeps icons in sync. Nothing needed here.
 
       // Sync flyout active items when a tool is shown
       document.addEventListener('toolChanged', (e) => {
