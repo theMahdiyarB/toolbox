@@ -2177,6 +2177,7 @@
         <div class="drawer-item" onclick="showTool('notes')" data-tool="notes"><span class="drawer-item__icon">📝</span>یادداشت و چک‌لیست</div>
         <div class="drawer-item" onclick="showTool('emojis')" data-tool="emojis"><span class="drawer-item__icon">😀</span>ایموجی</div>
         <div class="drawer-item" onclick="showTool('emotcn')" data-tool="emotcn"><span class="drawer-item__icon">:‑)</span>اِموتیکون</div>
+        <div class="drawer-item" onclick="showTool('pasban')" data-tool="pasban"><span class="drawer-item__icon">📖</span>فرهنگ واژه پارسی</div>
 
         <span class="drawer-section-label">💻 توسعه</span>
         <div class="drawer-item" onclick="showTool('json')" data-tool="json"><span class="drawer-item__icon">📋</span>فرمت‌دهی JSON</div>
@@ -2576,6 +2577,7 @@
                 <div class="link-card" onclick="haptic(this);showTool('notes')"><button class="fav-btn" data-tool="notes" onclick="event.stopPropagation();toggleFav('notes',this)">☆</button><span class="link-card__icon">📝</span><span class="link-card__name">یادداشت و چک‌لیست</span><span class="link-card__desc">ذخیره در مرورگر</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('emojis')"><button class="fav-btn" data-tool="emojis" onclick="event.stopPropagation();toggleFav('emojis',this)">☆</button><span class="link-card__icon">😀</span><span class="link-card__name">ایموجی</span><span class="link-card__desc">تمام ایموجی‌های Unicode</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('emotcn')"><button class="fav-btn" data-tool="emotcn" onclick="event.stopPropagation();toggleFav('emotcn',this)">☆</button><span class="link-card__icon">:‑)</span><span class="link-card__name">اِموتیکون متنی</span><span class="link-card__desc">صورتک‌های ASCII و کائوموجی</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('pasban')"><button class="fav-btn" data-tool="pasban" onclick="event.stopPropagation();toggleFav('pasban',this)">☆</button><span class="link-card__icon">📖</span><span class="link-card__name">فرهنگ واژه پارسی</span><span class="link-card__desc">واژه‌های پارسی‌گزین - پایگاه پاسبان</span></div>
               </div>
             </div>
 
@@ -6789,6 +6791,24 @@
           <div class="tool-desc">کلیک روی هر اِموتیکون آن را کپی می‌کند. اِموتیکون‌ها (Kaomoji) کاراکترهای متنی هستند و در همه جا کار می‌کنند.</div>
         </div>
 
+        <!-- ══ فرهنگ واژه پارسی ══ -->
+        <div id="pasban" class="tool-card">
+          <div class="tool-title">📖 فرهنگ واژه پارسی</div>
+          <div class="tool-desc" style="margin-bottom:14px">
+            جستجو در پایگاه داده واژه‌های پارسی‌گزین برای برابرنهاده‌های فارسی.
+          </div>
+          <div style="display:flex;gap:8px;margin-bottom:12px;align-items:center">
+            <div class="field__container" style="flex:1">
+              <input type="text" id="pasban-input" class="field__input" placeholder="جستجو... مثال: کامپیوتر، تلفن، دموکراسی" oninput="pasbanSearch()" autocomplete="off" autocorrect="off" spellcheck="false" style="direction:rtl">
+            </div>
+            <button class="btn btn-tonal" onclick="pasbanClear()" id="pasban-clear" style="display:none">پاک</button>
+          </div>
+          <div id="pasban-status" style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:10px;min-height:18px"></div>
+          <div id="pasban-results" style="display:flex;flex-direction:column;gap:8px;max-height:480px;overflow-y:auto"></div>
+          <div class="tool-desc">منبع:
+            <a href="https://github.com/keyaruga33/pasban_db" target="_blank" rel="noopener" style="color:var(--m3-primary)">keyaruga33/pasban_db</a></div>
+        </div>
+
         <!-- ══ POMODORO ══ -->
         <div id="pomodoro" class="tool-card">
 
@@ -7634,7 +7654,7 @@
             </div>
           </div>
 
-          <div class="tool-desc">از مدل <strong>RMBG-1.4</strong> (ISNet) از طریق کتابخانه <code>@imgly/background-removal</code> استفاده می‌کند.</div>
+          <div class="tool-desc">از مدل <strong>RMBG-1.4</strong> (ISNet) از طریق کتابخانه <code>@imgly/background-removal</code> استفاده می‌کند. در بار اول حدود ۵ دقیقه (نسبت به سرعت اینترنت) طول می‌کشد.</div>
         </div>
 
         <!-- ══ SEO TOOLS ══ -->
@@ -8859,7 +8879,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 6.7 - ۱۴۰۵/۰۲/۰۶
+          ℹ️ نسخه 6.8 - ۱۴۰۵/۰۲/۰۶
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -8943,7 +8963,7 @@
         linsolve:'حل معادله', enctools:'ابزار کدگذاری',
         jcal:'تقویم خورشیدی', geometry:'هندسه - محیط و مساحت',
         qrread:'خواندن QR', periodic:'جدول تناوبی', metromap:'نقشه مترو و BRT',
-        emojis:'ایموجی', calculus:'حسابان', emotcn:'اِموتیکون متنی', pomodoro:'تایمر پومودورو', resistor:'مقاومت رنگی', chart:'نمودار داده', fakejson:'مولد JSON آزمایشی', subnet:'محاسبه‌گر Subnet', textfix:'تبدیل متن و کدگذاری', wcag:'کنتراست رنگ WCAG',
+        emojis:'ایموجی', calculus:'حسابان', emotcn:'اِموتیکون متنی', pasban:'فرهنگ واژه پارسی', pomodoro:'تایمر پومودورو', resistor:'مقاومت رنگی', chart:'نمودار داده', fakejson:'مولد JSON آزمایشی', subnet:'محاسبه‌گر Subnet', textfix:'تبدیل متن و کدگذاری', wcag:'کنتراست رنگ WCAG',
         imgpalette:'پالت رنگ تعاملی',
         minigames:'بازی‌های کوچک',
         wordle:'واژه (بازی)',
@@ -9054,6 +9074,7 @@
           // Start loading immediately if not yet loaded; show spinner + trigger filter
           emotcnSearch();
         }
+        if (id === 'pasban') pasbanInit();
         if (id === 'calculus' && typeof calcSetTab === 'function') calcSetTab('deriv');
         if (typeof recentAdd === 'function') recentAdd(id);
         if (id === 'minigames') { _mgCleanup(); _mgCurrent = ''; const mn=document.getElementById('mg-menu'); const gw=document.getElementById('mg-game-wrap'); if(mn)mn.style.display=''; if(gw)gw.style.display='none'; }
@@ -9175,7 +9196,7 @@
             {id:'morse',icon:'📡',name:'کد مورس'},{id:'roman',icon:'Ⅰ',name:'اعداد رومی'},
             {id:'numconvert',icon:'🔢',name:'تبدیل اعداد'},{id:'textfix',icon:'🔤',name:'رفع خرابی متن'},
             {id:'notes',icon:'📝',name:'یادداشت'},{id:'emojis',icon:'😀',name:'ایموجی'},
-            {id:'emotcn',icon:':‑)',name:'اِموتیکون'}
+            {id:'emotcn',icon:':‑)',name:'اِموتیکون'},{id:'pasban',icon:'📖',name:'فرهنگ واژه پارسی'}
           ]
         },
         'sec-dev': {
@@ -17963,6 +17984,91 @@
           const t = e.touches[0]; moveDot(c, t.clientX, t.clientY); e.preventDefault();
         }, {passive:false});
         document.addEventListener('touchend', () => { _dragging = -1; });
+      })();
+
+      // ══════════════════════════════════════════════════════════
+      //  فرهنگ واژه پارسی (PASBAN)
+      // ══════════════════════════════════════════════════════════
+      (function() {
+        var _pasbanData = null;
+        var _pasbanLoading = false;
+
+        window.pasbanInit = function() {
+          var inp = document.getElementById('pasban-input');
+          if (inp) inp.value = '';
+          var clr = document.getElementById('pasban-clear');
+          if (clr) clr.style.display = 'none';
+          var res = document.getElementById('pasban-results');
+          if (res) res.innerHTML = '';
+          var st = document.getElementById('pasban-status');
+          if (_pasbanData) {
+            if (st) st.textContent = Object.keys(_pasbanData).length.toLocaleString('fa') + ' واژه بارگذاری شده';
+          } else {
+            if (st) st.textContent = 'در حال بارگذاری پایگاه داده…';
+            _loadPasban();
+          }
+        };
+
+        function _loadPasban() {
+          if (_pasbanLoading) return;
+          _pasbanLoading = true;
+          fetch('static/pasban.json')
+            .then(function(r) { return r.json(); })
+            .then(function(d) {
+              _pasbanData = d;
+              _pasbanLoading = false;
+              var st = document.getElementById('pasban-status');
+              if (st) st.textContent = Object.keys(d).length.toLocaleString('fa') + ' واژه بارگذاری شده';
+            })
+            .catch(function(e) {
+              _pasbanLoading = false;
+              var st = document.getElementById('pasban-status');
+              if (st) st.textContent = '⚠️ خطا در بارگذاری: ' + e.message;
+            });
+        }
+
+        window.pasbanSearch = function() {
+          var inp = document.getElementById('pasban-input');
+          var q = (inp ? inp.value : '').trim();
+          var clr = document.getElementById('pasban-clear');
+          if (clr) clr.style.display = q ? '' : 'none';
+          var res = document.getElementById('pasban-results');
+          var st = document.getElementById('pasban-status');
+          if (!res) return;
+          if (!q) { res.innerHTML = ''; if (st && _pasbanData) st.textContent = Object.keys(_pasbanData).length.toLocaleString('fa') + ' واژه بارگذاری شده'; return; }
+          if (!_pasbanData) {
+            if (st) st.textContent = 'در حال بارگذاری…';
+            _loadPasban();
+            return;
+          }
+          var ql = q.toLowerCase();
+          var exact = [], starts = [], contains = [];
+          Object.keys(_pasbanData).forEach(function(k) {
+            var kl = k.toLowerCase();
+            if (kl === ql) exact.push(k);
+            else if (kl.startsWith(ql)) starts.push(k);
+            else if (kl.includes(ql)) contains.push(k);
+          });
+          var matches = exact.concat(starts, contains).slice(0, 60);
+          if (st) st.textContent = matches.length === 0 ? 'نتیجه‌ای یافت نشد' : matches.length + ' نتیجه';
+          if (matches.length === 0) {
+            res.innerHTML = '<div style="color:var(--m3-on-surface-variant);font-size:13px;padding:12px 0">هیچ واژه‌ای یافت نشد.</div>';
+            return;
+          }
+          res.innerHTML = matches.map(function(k) {
+            var esc = function(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+            return '<div style="background:var(--m3-surface-container);border:1.5px solid var(--m3-outline-variant);border-radius:14px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer;transition:border-color .15s" onclick="copyToClipboard(\'' + k.replace(/'/g,"\'") + ': ' + _pasbanData[k].replace(/'/g,"\'") + '\')" title="کپی">'
+              + '<div style="font-size:14px;font-weight:700;color:var(--m3-on-surface)">' + esc(k) + '</div>'
+              + '<div style="font-size:13px;color:var(--m3-primary);text-align:left">' + esc(_pasbanData[k]) + '</div>'
+              + '</div>';
+          }).join('');
+        };
+
+        window.pasbanClear = function() {
+          var inp = document.getElementById('pasban-input');
+          if (inp) { inp.value = ''; inp.focus(); }
+          pasbanSearch();
+        };
       })();
 
       // ══════════════════════════════════════════════════════════

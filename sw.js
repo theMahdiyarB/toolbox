@@ -6,7 +6,7 @@
 //    - External/opaque requests: Network-only (skip)
 // ============================================================
 
-const CACHE_VERSION = 'toolbox-v6.7';
+const CACHE_VERSION = 'toolbox-v6.8';
 const CACHE_SHELL   = CACHE_VERSION + '-shell';
 const CACHE_ASSETS  = CACHE_VERSION + '-assets';
 
@@ -17,9 +17,9 @@ const SHELL_URLS = [
   '/',
   '/index.html',
   '/iran.html',
+  '/manifest.json',
   '/static/main.css',
   '/static/main.js',
-  '/static/manifest.json',
   '/static/favicon.png',
   '/static/icon-512.png',
   '/static/Vazirmatn-VF.ttf',
@@ -31,10 +31,10 @@ const SHELL_URLS = [
   '/static/lib/pdf-lib.min.js',
   '/static/lib/function-plot.js',
   '/static/lib/math.js',
-  '/static/lib/background-removal-data.mjs',
+  '/static/lib/background-removal.mjs',
   '/static/lib/ort-bundled.mjs',
   '/static/poems/akhavan/structure.json',
-  '/static/poems/fersowsi/structure.json',
+  '/static/poems/ferdowsi/structure.json',
   '/static/poems/forugh/structure.json',
   '/static/poems/hafez/structure.json',
   '/static/poems/iraj/structure.json',
@@ -47,7 +47,7 @@ const SHELL_URLS = [
   '/static/poems/shahriar/structure.json',
   '/static/poems/shamlou/structure.json',
   '/static/poems/sohrab-sepehri/structure.json',
-  '/static/poems/vahsi/structure.json',
+  '/static/poems/vahshi/structure.json',
 ];
 
 // ── Install: cache app shell (resilient — one missing file won't abort) ───────
