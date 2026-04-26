@@ -2202,7 +2202,7 @@
         <span class="drawer-section-label">⚡ مولدها</span>
         <div class="drawer-item" onclick="showTool('pass')" data-tool="pass"><span class="drawer-item__icon">🔐</span>رمز عبور</div>
         <div class="drawer-item" onclick="showTool('uuid')" data-tool="uuid"><span class="drawer-item__icon">🪪</span>UUID / ULID</div>
-        <div class="drawer-item" onclick="showTool('randnum')" data-tool="randnum"><span class="drawer-item__icon">🎲</span>عدد تصادفی</div>
+        <div class="drawer-item" onclick="showTool('randnum')" data-tool="randnum"><span class="drawer-item__icon">🎲</span>تصادفی‌ساز</div>
         <div class="drawer-item" onclick="showTool('randip')" data-tool="randip"><span class="drawer-item__icon">🌐</span>IP تصادفی</div>
         <div class="drawer-item" onclick="showTool('randcolor')" data-tool="randcolor"><span class="drawer-item__icon">🎨</span>رنگ تصادفی</div>
         <div class="drawer-item" onclick="showTool('fake')" data-tool="fake"><span class="drawer-item__icon">👤</span>داده ساختگی</div>
@@ -2611,7 +2611,7 @@
               <div class="tool-grid">
                 <div class="link-card" onclick="haptic(this);showTool('pass')"><button class="fav-btn" data-tool="pass" onclick="event.stopPropagation();toggleFav('pass',this)">☆</button><span class="link-card__icon">🔐</span><span class="link-card__name">رمز عبور</span><span class="link-card__desc">رمز امن با معیار دلخواه</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('uuid')"><button class="fav-btn" data-tool="uuid" onclick="event.stopPropagation();toggleFav('uuid',this)">☆</button><span class="link-card__icon">🪪</span><span class="link-card__name">UUID / ULID</span><span class="link-card__desc">شناسه یکتا استاندارد</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('randnum')"><button class="fav-btn" data-tool="randnum" onclick="event.stopPropagation();toggleFav('randnum',this)">☆</button><span class="link-card__icon">🎲</span><span class="link-card__name">عدد تصادفی</span><span class="link-card__desc">در بازه دلخواه</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('randnum')" data-tool="randnum"><button class="fav-btn" data-tool="randnum" onclick="event.stopPropagation();toggleFav('randnum',this)">☆</button><span class="link-card__icon">🎲</span><span class="link-card__name">تصادفی‌ساز</span><span class="link-card__desc">عدد، تاس، سکه، چرخ</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('randip')"><button class="fav-btn" data-tool="randip" onclick="event.stopPropagation();toggleFav('randip',this)">☆</button><span class="link-card__icon">🌐</span><span class="link-card__name">IP تصادفی</span><span class="link-card__desc">IPv4 و IPv6</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('randcolor')"><button class="fav-btn" data-tool="randcolor" onclick="event.stopPropagation();toggleFav('randcolor',this)">☆</button><span class="link-card__icon">🎨</span><span class="link-card__name">رنگ تصادفی</span><span class="link-card__desc">HEX + RGB + HSL</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('fake')"><button class="fav-btn" data-tool="fake" onclick="event.stopPropagation();toggleFav('fake',this)">☆</button><span class="link-card__icon">👤</span><span class="link-card__name">داده ساختگی</span><span class="link-card__desc">نام، ایمیل، تلفن فارسی</span></div>
@@ -4265,42 +4265,134 @@
         <!-- ══ RANDOM NUMBER ══ -->
         <div id="randnum" class="tool-card">
 
-          <div class="tool-title">🎲 عدد تصادفی</div>
-          <div class="field-row">
-            <div class="field-col">
-              <label class="field-label">کمینه</label
-              ><input
-                type="number"
-                id="rand-min"
-                class="text-input"
-                value="1"
-              />
-            </div>
-            <div class="field-col">
-              <label class="field-label">بیشینه</label
-              ><input
-                type="number"
-                id="rand-max"
-                class="text-input"
-                value="100"
-              />
-            </div>
-            <div class="field-col">
-              <label class="field-label">تعداد</label
-              ><input
-                type="number"
-                id="rand-cnt"
-                class="text-input"
-                value="1"
-                min="1"
-                max="100"
-              />
-            </div>
-          </div>
-          <button class="btn btn-filled" onclick="genRand()">🎲 تولید</button>
-          <div class="result-big" id="rand-res" style="margin-top: 12px"></div>
+          <div class="tool-title">🎲 تصادفی‌ساز</div>
 
-          <div class="tool-desc">اعداد صحیح تصادفی در بازه دلخواه تولید می‌کند. می‌توانید چند عدد هم‌زمان تولید کنید.</div>
+          <!-- Tab bar -->
+          <div class="field-row" style="flex-wrap:wrap;gap:6px;margin-bottom:14px">
+            <button class="btn btn-filled"  id="rand-tab-num"   onclick="randSetTab('num')"   style="flex:1;min-width:0">🔢 عدد</button>
+            <button class="btn btn-tonal"   id="rand-tab-dice"  onclick="randSetTab('dice')"  style="flex:1;min-width:0">🎲 تاس</button>
+            <button class="btn btn-tonal"   id="rand-tab-coin"  onclick="randSetTab('coin')"  style="flex:1;min-width:0">🪙 سکه</button>
+            <button class="btn btn-tonal"   id="rand-tab-wheel" onclick="randSetTab('wheel')" style="flex:1;min-width:0">🎡 چرخ</button>
+            <button class="btn btn-tonal"   id="rand-tab-card"  onclick="randSetTab('card')"  style="flex:1;min-width:0">🃏 کارت</button>
+            <button class="btn btn-tonal"   id="rand-tab-list"  onclick="randSetTab('list')"  style="flex:1;min-width:0">🔀 لیست</button>
+          </div>
+
+          <!-- ── NUMBER ── -->
+          <div id="rand-panel-num">
+            <div class="field-row">
+              <div class="field-col">
+                <label class="field-label">کمینه</label>
+                <input type="number" id="rand-min" class="text-input" value="1"/>
+              </div>
+              <div class="field-col">
+                <label class="field-label">بیشینه</label>
+                <input type="number" id="rand-max" class="text-input" value="100"/>
+              </div>
+              <div class="field-col">
+                <label class="field-label">تعداد</label>
+                <input type="number" id="rand-cnt" class="text-input" value="1" min="1" max="100"/>
+              </div>
+            </div>
+            <button class="btn btn-filled" onclick="genRand()">🔢 تولید</button>
+            <div class="result-big" id="rand-res" style="margin-top:14px;min-height:48px"></div>
+          </div>
+
+          <!-- ── DICE ── -->
+          <div id="rand-panel-dice" style="display:none">
+            <div class="field-row" style="align-items:center;gap:12px;margin-bottom:10px">
+              <div class="field-col" style="flex:0 0 auto">
+                <label class="field-label">تعداد تاس</label>
+                <input type="number" id="dice-count" class="text-input" value="1" min="1" max="6" style="width:70px"/>
+              </div>
+              <div class="field-col" style="flex:0 0 auto">
+                <label class="field-label">نوع تاس</label>
+                <select id="dice-sides" class="text-input" style="width:90px">
+                  <option value="6">D6</option>
+                  <option value="4">D4</option>
+                  <option value="8">D8</option>
+                  <option value="10">D10</option>
+                  <option value="12">D12</option>
+                  <option value="20">D20</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-filled" onclick="rollDice()">🎲 بینداز</button>
+            <div id="dice-display" style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:16px;min-height:80px"></div>
+            <div id="dice-sum" style="text-align:center;font-size:15px;color:var(--md-sys-color-outline);margin-top:6px"></div>
+          </div>
+
+          <!-- ── COIN ── -->
+          <div id="rand-panel-coin" style="display:none;text-align:center">
+            <button class="btn btn-filled" onclick="flipCoin()" style="margin-bottom:16px">🪙 پرتاب سکه</button>
+            <div id="coin-scene" style="perspective:600px;width:100px;height:100px;margin:0 auto 12px">
+              <div id="coin-inner" style="width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 0.8s cubic-bezier(.4,0,.2,1)">
+                <div id="coin-heads" style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffe082,#ffa000);display:flex;align-items:center;justify-content:center;font-size:38px;backface-visibility:hidden;box-shadow:0 4px 16px #0003">🦁</div>
+                <div id="coin-tails" style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 35%,#b0bec5,#546e7a);display:flex;align-items:center;justify-content:center;font-size:38px;backface-visibility:hidden;transform:rotateY(180deg);box-shadow:0 4px 16px #0003">⚡</div>
+              </div>
+            </div>
+            <div id="coin-result" style="font-size:20px;font-weight:600;min-height:32px"></div>
+          </div>
+
+          <!-- ── WHEEL ── -->
+          <div id="rand-panel-wheel" style="display:none">
+            <div style="margin-bottom:10px">
+              <label class="field-label">گزینه‌ها (هر خط یک گزینه — برای وزن: گزینه (عدد))</label>
+              <textarea id="wheel-input" class="text-input" rows="5" style="width:100%;box-sizing:border-box;resize:vertical;font-family:inherit"
+                placeholder="سارا (۲)&#10;سمیرا (۱)&#10;مریم (۳)&#10;ترانه (۱)"></textarea>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+              <button class="btn btn-tonal" onclick="buildWheel()" style="flex:1">🔄 ساخت چرخ</button>
+              <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer">
+                <input type="checkbox" id="wheel-remove"> حذف بعد از انتخاب
+              </label>
+            </div>
+            <div style="position:relative;width:100%;max-width:320px;margin:0 auto 10px">
+              <canvas id="wheel-canvas" width="320" height="320" style="width:100%;border-radius:50%;display:block"></canvas>
+              <!-- Pointer -->
+              <div style="position:absolute;top:50%;right:-8px;transform:translateY(-50%);font-size:26px;line-height:1;filter:drop-shadow(0 2px 4px #0006)">◀</div>
+            </div>
+            <button class="btn btn-filled" id="wheel-spin-btn" onclick="spinWheel()" style="width:100%;margin-bottom:10px">🎡 بچرخون!</button>
+            <div id="wheel-result" style="text-align:center;font-size:20px;font-weight:700;min-height:36px;color:var(--md-sys-color-primary)"></div>
+            <div id="wheel-history" style="margin-top:10px;font-size:13px;color:var(--md-sys-color-outline)"></div>
+          </div>
+
+          <!-- ── CARD DRAW ── -->
+          <div id="rand-panel-card" style="display:none">
+            <div class="field-row" style="align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+              <div class="field-col" style="flex:0 0 auto">
+                <label class="field-label">تعداد کارت</label>
+                <input type="number" id="card-count" class="text-input" value="1" min="1" max="52" style="width:70px"/>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:18px">
+                <button class="btn btn-filled" onclick="drawCards()">🃏 بکش</button>
+                <button class="btn btn-tonal"  onclick="resetDeck()">🔄 دک جدید</button>
+              </div>
+            </div>
+            <div id="card-deck-status" style="font-size:12px;color:var(--md-sys-color-outline);margin-bottom:8px">۵۲ کارت در دک</div>
+            <div id="card-display" style="display:flex;flex-wrap:wrap;gap:8px;min-height:90px;justify-content:flex-start"></div>
+            <div id="card-drawn-list" style="margin-top:10px;font-size:12px;color:var(--md-sys-color-outline);line-height:1.7"></div>
+          </div>
+
+          <!-- ── LIST PICKER ── -->
+          <div id="rand-panel-list" style="display:none">
+            <label class="field-label">لیست (هر خط یک گزینه)</label>
+            <textarea id="list-input" class="text-input" rows="6" style="width:100%;box-sizing:border-box;resize:vertical;font-family:inherit;margin-bottom:10px"
+              placeholder="آلما&#10;بهار&#10;چیستا&#10;دیبا&#10;رها"></textarea>
+            <div class="field-row" style="align-items:center;gap:10px;flex-wrap:wrap">
+              <div class="field-col" style="flex:0 0 auto">
+                <label class="field-label">تعداد انتخاب</label>
+                <input type="number" id="list-pick-n" class="text-input" value="1" min="1" style="width:70px"/>
+              </div>
+              <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;margin-top:18px">
+                <input type="checkbox" id="list-unique" checked> بدون تکرار
+              </label>
+              <button class="btn btn-filled" onclick="pickFromList()" style="margin-top:18px">🔀 انتخاب</button>
+              <button class="btn btn-tonal"  onclick="shuffleList()"  style="margin-top:18px">🔃 شافل کل</button>
+            </div>
+            <div id="list-result" style="margin-top:14px;min-height:40px"></div>
+          </div>
+
+          <div class="tool-desc">شش ابزار تصادفی: عدد، تاس، سکه، چرخ شانس، کارت بازی، و انتخاب از لیست.</div>
         </div>
 
         <!-- ══ RANDOM IP ══ -->
@@ -8749,7 +8841,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 6.6 - ۱۴۰۵/۰۲/۰۶
+          ℹ️ نسخه 6.7 - ۱۴۰۵/۰۲/۰۶
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -8815,7 +8907,7 @@
         json:'فرمت‌دهی JSON', xml:'فرمت‌دهی XML', htmlesc:'HTML Escaper',
         hash:'هش رمزنگاری', crypto:'رمزنگاری متن', jwt:'JWT Parser', pxrem:'PX ↔ REM',
         regex:'تست Regex', cron:'تجزیه Cron', urlparse:'تجزیه URL', numbase:'تبدیل مبنا',
-        pass:'مولد رمز عبور', uuid:'UUID / ULID', randnum:'عدد تصادفی',
+        pass:'مولد رمز عبور', uuid:'UUID / ULID', randnum:'تصادفی‌ساز',
         randip:'IP تصادفی', randcolor:'رنگ تصادفی', fake:'داده ساختگی',
         credit:'کارت اعتباری تستی', avatar:'مولد آواتار', placeholder:'تصویر جایگزین',
         qr:'کد QR', barcode:'بارکد Code-128', colorpicker:'تبدیل رنگ',
@@ -9087,7 +9179,7 @@
           icon: '⚡', label: 'مولدها',
           tools: [
             {id:'pass',icon:'🔐',name:'رمز عبور'},{id:'uuid',icon:'🪪',name:'UUID / ULID'},
-            {id:'randnum',icon:'🎲',name:'عدد تصادفی'},{id:'randip',icon:'🌐',name:'IP تصادفی'},
+            {id:'randnum',icon:'🎲',name:'تصادفی‌ساز'},{id:'randip',icon:'🌐',name:'IP تصادفی'},
             {id:'randcolor',icon:'🎨',name:'رنگ تصادفی'},{id:'fake',icon:'👤',name:'داده ساختگی'},
             {id:'credit',icon:'💳',name:'کارت اعتباری'},{id:'avatar',icon:'🖼️',name:'آواتار'},
             {id:'placeholder',icon:'🗃️',name:'تصویر جایگزین'},{id:'qr',icon:'📱',name:'کد QR'},
@@ -10942,16 +11034,347 @@
       // ══════════════════════════════════════════════════════
       //  RANDOM NUMBER
       // ══════════════════════════════════════════════════════
+      // ══════════════════════════════════════════════════════
+      //  RAND TOOL — tabs
+      // ══════════════════════════════════════════════════════
+      function randSetTab(t){
+        ['num','dice','coin','wheel','card','list'].forEach(id=>{
+          document.getElementById('rand-panel-'+id).style.display=id===t?'':'none';
+          const btn=document.getElementById('rand-tab-'+id);
+          btn.className=id===t?'btn btn-filled':'btn btn-tonal';
+        });
+      }
+
+      // ── NUMBER ──
       function genRand(){
         const mn=parseInt(document.getElementById('rand-min').value),mx=parseInt(document.getElementById('rand-max').value);
         const cnt=parseInt(document.getElementById('rand-cnt').value)||1;
         const arr=new Uint32Array(cnt); crypto.getRandomValues(arr);
         const nums=Array.from(arr,v=>mn+v%(mx-mn+1));
-        document.getElementById('rand-res').textContent=cnt===1?nums[0]:nums.join('، ');
+        const el=document.getElementById('rand-res');
+        el.style.opacity=0;
+        el.textContent=cnt===1?nums[0]:nums.join('، ');
+        el.animate([{opacity:0,transform:'scale(.8)'},{opacity:1,transform:'scale(1)'}],{duration:300,fill:'forwards'});
       }
 
-      // ══════════════════════════════════════════════════════
-      //  RANDOM IP
+      // ── DICE ──
+      const DICE_FACES={
+        6:['⚀','⚁','⚂','⚃','⚄','⚅'],
+        4:['1','2','3','4'],
+        8:['1','2','3','4','5','6','7','8'],
+        10:['1','2','3','4','5','6','7','8','9','10'],
+        12:['1','2','3','4','5','6','7','8','9','10','11','12'],
+        20:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20']
+      };
+      function rollDice(){
+        const count=Math.min(6,parseInt(document.getElementById('dice-count').value)||1);
+        const sides=parseInt(document.getElementById('dice-sides').value);
+        const faces=DICE_FACES[sides];
+        const arr=new Uint32Array(count); crypto.getRandomValues(arr);
+        const results=Array.from(arr,v=>(v%sides)+1);
+        const display=document.getElementById('dice-display');
+        display.innerHTML='';
+        results.forEach((val,i)=>{
+          const d=document.createElement('div');
+          d.style.cssText=`width:72px;height:72px;border-radius:14px;background:var(--md-sys-color-surface-variant);
+            display:flex;align-items:center;justify-content:center;font-size:${sides===6?40:22}px;
+            font-weight:700;box-shadow:0 3px 10px #0003;cursor:default;
+            animation:diceRoll 0.5s ${i*80}ms both;color:var(--md-sys-color-on-surface-variant)`;
+          d.textContent=faces[val-1];
+          display.appendChild(d);
+        });
+        const sum=results.reduce((a,b)=>a+b,0);
+        document.getElementById('dice-sum').textContent=count>1?`مجموع: ${sum}`:'';
+      }
+      // inject dice roll keyframe once
+      (()=>{
+        const s=document.createElement('style');
+        s.textContent=`@keyframes diceRoll{0%{opacity:0;transform:rotateX(90deg) scale(.5)}60%{transform:rotateX(-15deg) scale(1.1)}100%{opacity:1;transform:rotateX(0) scale(1)}}`;
+        document.head.appendChild(s);
+      })();
+
+      // ── COIN ──
+      let _coinFlipping=false;
+      function flipCoin(){
+        if(_coinFlipping)return;
+        _coinFlipping=true;
+        const inner=document.getElementById('coin-inner');
+        const arr=new Uint32Array(1); crypto.getRandomValues(arr);
+        const heads=arr[0]%2===0;
+        const spins=8+Math.floor(arr[0]%4); // random extra rotations
+        const finalDeg=heads? spins*360 : spins*360+180;
+        inner.style.transition='transform 1.4s cubic-bezier(.25,.1,.25,1)';
+        inner.style.transform=`rotateY(${finalDeg}deg)`;
+        document.getElementById('coin-result').textContent='';
+        setTimeout(()=>{
+          _coinFlipping=false;
+          document.getElementById('coin-result').textContent=heads?'🦁 شیر':'⚡ خط';
+          inner.style.transition='none';
+          inner.style.transform=`rotateY(${heads?0:180}deg)`;
+        },1450);
+      }
+
+      // ── WHEEL ──
+      let _wheelItems=[];
+      let _wheelAngle=0;
+      let _wheelSpinning=false;
+      let _wheelHistory=[];
+
+      function _parseWheelInput(){
+        const raw=document.getElementById('wheel-input').value.trim();
+        if(!raw)return[];
+        return raw.split('\n').filter(l=>l.trim()).map(line=>{
+          const m=line.match(/^(.*?)\s*[(\uFF08]([۰-۹\d]+)[)\uFF09]\s*$/u);
+          if(m){
+            const name=m[1].trim();
+            // convert Persian digits to latin
+            const w=parseInt(m[2].replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)));
+            return {name,weight:isNaN(w)||w<1?1:w};
+          }
+          return {name:line.trim(),weight:1};
+        }).filter(i=>i.name);
+      }
+
+      function _expandItems(items){
+        // expand by weight into slots
+        const slots=[];
+        items.forEach(it=>{for(let i=0;i<it.weight;i++)slots.push(it.name);});
+        return slots;
+      }
+
+      const WHEEL_COLORS=['#e53935','#8e24aa','#1e88e5','#00897b','#f4511e','#43a047','#fb8c00','#00acc1','#d81b60','#6d4c41'];
+
+      function _drawWheel(slots,highlightIdx=-1){
+        const canvas=document.getElementById('wheel-canvas');
+        const ctx=canvas.getContext('2d');
+        const cx=canvas.width/2,cy=canvas.height/2,r=cx-8;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        if(!slots||!slots.length){
+          ctx.fillStyle='var(--md-sys-color-surface-variant,#e0e0e0)';
+          ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();
+          return;
+        }
+        const n=slots.length;
+        const arc=Math.PI*2/n;
+        // dedupe for color assignment
+        const unique=[...new Set(slots)];
+        slots.forEach((name,i)=>{
+          const start=_wheelAngle+i*arc, end=start+arc;
+          const ci=unique.indexOf(name)%WHEEL_COLORS.length;
+          ctx.beginPath();
+          ctx.moveTo(cx,cy);
+          ctx.arc(cx,cy,r,start,end);
+          ctx.closePath();
+          ctx.fillStyle=i===highlightIdx?'#fff176':WHEEL_COLORS[ci];
+          ctx.fill();
+          ctx.strokeStyle='#fff4';ctx.lineWidth=1.5;ctx.stroke();
+          // label
+          ctx.save();
+          ctx.translate(cx,cy);
+          ctx.rotate(start+arc/2);
+          ctx.textAlign='right';
+          ctx.fillStyle='#fff';
+          ctx.font=`bold ${Math.max(10,Math.min(16,200/n))}px Vazirmatn,sans-serif`;
+          ctx.shadowColor='#0006';ctx.shadowBlur=3;
+          ctx.fillText(name,r-10,4);
+          ctx.restore();
+        });
+        // center circle
+        ctx.beginPath();ctx.arc(cx,cy,18,0,Math.PI*2);
+        ctx.fillStyle='var(--md-sys-color-surface,#fff)';ctx.fill();
+        ctx.strokeStyle='var(--md-sys-color-outline,#aaa)';ctx.lineWidth=2;ctx.stroke();
+      }
+
+      function buildWheel(){
+        _wheelItems=_parseWheelInput();
+        _wheelAngle=0;
+        _wheelHistory=[];
+        document.getElementById('wheel-result').textContent='';
+        document.getElementById('wheel-history').textContent='';
+        const slots=_expandItems(_wheelItems);
+        _drawWheel(slots);
+        document.getElementById('wheel-spin-btn').disabled=slots.length<2;
+      }
+
+      function spinWheel(){
+        if(_wheelSpinning||!_wheelItems.length)return;
+        const removeMode=document.getElementById('wheel-remove').checked;
+        const slots=_expandItems(_wheelItems);
+        if(slots.length<2)return;
+        _wheelSpinning=true;
+        document.getElementById('wheel-result').textContent='';
+
+        const arr=new Uint32Array(2); crypto.getRandomValues(arr);
+        const targetSlot=arr[0]%slots.length;
+        const slotArc=Math.PI*2/slots.length;
+        // We want slot targetSlot to land at "right side" (angle 0 = right = where pointer is)
+        // The pointer is at 3 o'clock. The wheel rotates. Slot i starts at _wheelAngle + i*slotArc.
+        // We want: _wheelAngle + targetSlot*slotArc + slotArc/2 ≡ 0 (mod 2π) after rotation
+        const spins=(5+arr[1]%4)*Math.PI*2;
+        const targetAngle=-(targetSlot*slotArc+slotArc/2);
+        const totalRotation=spins+targetAngle-(_wheelAngle%(Math.PI*2));
+
+        const duration=3000+arr[1]%1500;
+        const startAngle=_wheelAngle;
+        const endAngle=startAngle+totalRotation;
+        const start=performance.now();
+
+        function easeOut(t){return 1-Math.pow(1-t,4);}
+
+        function frame(now){
+          const t=Math.min(1,(now-start)/duration);
+          _wheelAngle=startAngle+totalRotation*easeOut(t);
+          _drawWheel(slots, t===1?targetSlot:-1);
+          if(t<1){requestAnimationFrame(frame);}
+          else{
+            _wheelAngle=endAngle;
+            const winner=slots[targetSlot];
+            document.getElementById('wheel-result').textContent='🏆 '+winner;
+            _wheelHistory.unshift(winner);
+            if(_wheelHistory.length>5)_wheelHistory.pop();
+            document.getElementById('wheel-history').textContent=
+              _wheelHistory.length>1?'آخرین‌ها: '+_wheelHistory.slice(1).join(' ← '):'';
+            if(removeMode){
+              // remove one instance of winner from _wheelItems
+              let removed=false;
+              _wheelItems=_wheelItems.map(it=>{
+                if(!removed&&it.name===winner){
+                  if(it.weight>1){removed=true;return{...it,weight:it.weight-1};}
+                  removed=true;return null;
+                }
+                return it;
+              }).filter(Boolean);
+              // sync textarea
+              document.getElementById('wheel-input').value=
+                _wheelItems.map(it=>it.weight>1?`${it.name} (${it.weight})`:it.name).join('\n');
+              setTimeout(()=>{
+                _wheelAngle=0;
+                const newSlots=_expandItems(_wheelItems);
+                _drawWheel(newSlots);
+                document.getElementById('wheel-spin-btn').disabled=newSlots.length<2;
+              },1200);
+            }
+            _wheelSpinning=false;
+          }
+        }
+        requestAnimationFrame(frame);
+      }
+
+      // ── CARD DRAW ──
+      const CARD_SUITS=[
+        {sym:'♠',color:'#212121',name:'پیک'},
+        {sym:'♥',color:'#c62828',name:'دل'},
+        {sym:'♦',color:'#c62828',name:'خشت'},
+        {sym:'♣',color:'#212121',name:'گشنیز'}
+      ];
+      const CARD_RANKS=[
+        {v:'A',fa:'آس'},{v:'2',fa:'۲'},{v:'3',fa:'۳'},{v:'4',fa:'۴'},
+        {v:'5',fa:'۵'},{v:'6',fa:'۶'},{v:'7',fa:'۷'},{v:'8',fa:'۸'},
+        {v:'9',fa:'۹'},{v:'10',fa:'۱۰'},{v:'J',fa:'سرباز'},{v:'Q',fa:'بانو'},{v:'K',fa:'شاه'}
+      ];
+      let _deck=[];
+      let _drawnCards=[];
+
+      function _freshDeck(){
+        const d=[];
+        CARD_SUITS.forEach(s=>CARD_RANKS.forEach(r=>d.push({suit:s,rank:r})));
+        return d;
+      }
+      function _shuffleDeck(d){
+        for(let i=d.length-1;i>0;i--){
+          const j=Math.floor(Math.random()*( i+1));
+          [d[i],d[j]]=[d[j],d[i]];
+        }
+        return d;
+      }
+      function resetDeck(){
+        _deck=_shuffleDeck(_freshDeck());
+        _drawnCards=[];
+        document.getElementById('card-display').innerHTML='';
+        document.getElementById('card-drawn-list').textContent='';
+        document.getElementById('card-deck-status').textContent=`۵۲ کارت در دک`;
+      }
+      function _cardHTML(card,delay){
+        const {suit,rank}=card;
+        return `<div style="
+          width:58px;height:86px;border-radius:8px;
+          background:#fff;border:1.5px solid #ddd;
+          display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+          padding:4px 5px;box-sizing:border-box;
+          box-shadow:0 3px 10px #0003;
+          color:${suit.color};font-weight:700;
+          animation:cardFlip 0.4s ${delay}ms both;
+          font-family:Vazirmatn,sans-serif;
+          position:relative;user-select:none">
+          <div style="font-size:14px;align-self:flex-start;line-height:1">${rank.v}<br><span style="font-size:10px">${suit.sym}</span></div>
+          <div style="font-size:26px;line-height:1">${suit.sym}</div>
+          <div style="font-size:14px;align-self:flex-end;transform:rotate(180deg);line-height:1">${rank.v}<br><span style="font-size:10px">${suit.sym}</span></div>
+        </div>`;
+      }
+      (()=>{
+        const s=document.createElement('style');
+        s.textContent=`@keyframes cardFlip{0%{opacity:0;transform:rotateY(90deg) scale(.7)}100%{opacity:1;transform:rotateY(0) scale(1)}}`;
+        document.head.appendChild(s);
+        _deck=_shuffleDeck(_freshDeck());
+      })();
+
+      function drawCards(){
+        const n=Math.min(parseInt(document.getElementById('card-count').value)||1, _deck.length);
+        if(!_deck.length){
+          document.getElementById('card-deck-status').textContent='دک خالی است! دک جدید بزن.';
+          return;
+        }
+        const drawn=_deck.splice(0,n);
+        _drawnCards.push(...drawn);
+        const display=document.getElementById('card-display');
+        display.innerHTML='';
+        drawn.forEach((c,i)=>{display.innerHTML+=_cardHTML(c,i*80);});
+        const rem=_deck.length;
+        document.getElementById('card-deck-status').textContent=`${rem} کارت باقی‌مانده در دک`;
+        // history: last 10 drawn as text
+        const hist=_drawnCards.slice(-10).map(c=>`${c.rank.fa}${c.suit.sym}`).join(' ');
+        document.getElementById('card-drawn-list').textContent=
+          _drawnCards.length>n?`آخرین کارت‌های کشیده‌شده: ${hist}`:'';
+      }
+
+      // ── LIST PICKER ──
+      function pickFromList(){
+        const lines=document.getElementById('list-input').value.trim().split('\n').filter(l=>l.trim());
+        if(!lines.length)return;
+        const n=parseInt(document.getElementById('list-pick-n').value)||1;
+        const unique=document.getElementById('list-unique').checked;
+        let pool=[...lines];
+        const picks=[];
+        const arr=new Uint32Array(Math.min(n,pool.length)*2);
+        crypto.getRandomValues(arr);
+        let ai=0;
+        for(let i=0;i<Math.min(n,unique?pool.length:n);i++){
+          const idx=arr[ai++]%pool.length;
+          picks.push(pool[idx]);
+          if(unique)pool.splice(idx,1);
+        }
+        const res=document.getElementById('list-result');
+        res.innerHTML=picks.map((p,i)=>`
+          <div style="padding:8px 12px;margin-bottom:6px;border-radius:10px;
+            background:var(--md-sys-color-secondary-container,#e8def8);
+            color:var(--md-sys-color-on-secondary-container,#1d192b);
+            font-size:16px;font-weight:600;
+            animation:cardFlip 0.3s ${i*60}ms both">
+            ${i+1 > 1 ? `<span style="opacity:.5;font-size:12px;margin-left:6px">#${i+1}</span>`:''}${p}
+          </div>`).join('');
+      }
+      function shuffleList(){
+        const ta=document.getElementById('list-input');
+        const lines=ta.value.trim().split('\n').filter(l=>l.trim());
+        if(lines.length<2)return;
+        for(let i=lines.length-1;i>0;i--){
+          const j=Math.floor(Math.random()*(i+1));
+          [lines[i],lines[j]]=[lines[j],lines[i]];
+        }
+        ta.value=lines.join('\n');
+        document.getElementById('list-result').innerHTML=
+          `<div style="font-size:13px;color:var(--md-sys-color-outline)">لیست شافل شد ✓</div>`;
+      }
       // ══════════════════════════════════════════════════════
       function genIP(){
         if(document.getElementById('ip-v6').checked){
