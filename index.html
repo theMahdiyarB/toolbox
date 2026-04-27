@@ -423,12 +423,6 @@
         box-shadow: var(--m3-elevation-3);
         transform: translateY(-1px);
       }
-      /* On desktop: push back FAB left of the rail */
-      @media (min-width: 1025px) {
-        #back-tool-fab {
-          inset-inline-end: calc(var(--nav-rail-width, 80px) + 16px);
-        }
-      }
 
       /* PWA install popup */
       #pwa-popup {
@@ -2204,6 +2198,7 @@
         <div class="drawer-item" onclick="showTool('pass')" data-tool="pass"><span class="drawer-item__icon">🔐</span>رمز عبور</div>
         <div class="drawer-item" onclick="showTool('uuid')" data-tool="uuid"><span class="drawer-item__icon">🪪</span>UUID / ULID</div>
         <div class="drawer-item" onclick="showTool('randnum')" data-tool="randnum"><span class="drawer-item__icon">🎲</span>تصادفی‌ساز</div>
+        <div class="drawer-item" onclick="showTool('textbeauty')" data-tool="textbeauty"><span class="drawer-item__icon">✨</span>زیباساز متن</div>
         <div class="drawer-item" onclick="showTool('invoice')" data-tool="invoice"><span class="drawer-item__icon">🧾</span>فاکتور رسمی</div>
         <div class="drawer-item" onclick="showTool('randip')" data-tool="randip"><span class="drawer-item__icon">🌐</span>IP تصادفی</div>
         <div class="drawer-item" onclick="showTool('randcolor')" data-tool="randcolor"><span class="drawer-item__icon">🎨</span>رنگ تصادفی</div>
@@ -2620,6 +2615,7 @@
                 <div class="link-card" onclick="haptic(this);showTool('pass')"><button class="fav-btn" data-tool="pass" onclick="event.stopPropagation();toggleFav('pass',this)">☆</button><span class="link-card__icon">🔐</span><span class="link-card__name">رمز عبور</span><span class="link-card__desc">رمز امن با معیار دلخواه</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('uuid')"><button class="fav-btn" data-tool="uuid" onclick="event.stopPropagation();toggleFav('uuid',this)">☆</button><span class="link-card__icon">🪪</span><span class="link-card__name">UUID / ULID</span><span class="link-card__desc">شناسه یکتا استاندارد</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('randnum')" data-tool="randnum"><button class="fav-btn" data-tool="randnum" onclick="event.stopPropagation();toggleFav('randnum',this)">☆</button><span class="link-card__icon">🎲</span><span class="link-card__name">تصادفی‌ساز</span><span class="link-card__desc">عدد، تاس، سکه، چرخ</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('textbeauty')" data-tool="textbeauty"><button class="fav-btn" data-tool="textbeauty" onclick="event.stopPropagation();toggleFav('textbeauty',this)">☆</button><span class="link-card__icon">✨</span><span class="link-card__name">زیباساز متن</span><span class="link-card__desc">فونت‌های فانتزی کپی‌پذیر</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('invoice')" data-tool="invoice"><button class="fav-btn" data-tool="invoice" onclick="event.stopPropagation();toggleFav('invoice',this)">☆</button><span class="link-card__icon">🧾</span><span class="link-card__name">فاکتور رسمی</span><span class="link-card__desc">صدور فاکتور و خروجی PDF</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('randip')"><button class="fav-btn" data-tool="randip" onclick="event.stopPropagation();toggleFav('randip',this)">☆</button><span class="link-card__icon">🌐</span><span class="link-card__name">IP تصادفی</span><span class="link-card__desc">IPv4 و IPv6</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('randcolor')"><button class="fav-btn" data-tool="randcolor" onclick="event.stopPropagation();toggleFav('randcolor',this)">☆</button><span class="link-card__icon">🎨</span><span class="link-card__name">رنگ تصادفی</span><span class="link-card__desc">HEX + RGB + HSL</span></div>
@@ -4416,7 +4412,7 @@
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
               <div>
                 <label class="field-label">شماره سریال</label>
-                <input class="text-input" id="inv-serial" value="14050001" style="direction:ltr"/>
+                <input class="text-input" id="inv-serial" value="14030001" style="direction:ltr"/>
               </div>
               <div>
                 <label class="field-label">تاریخ (جلالی)</label>
@@ -4428,17 +4424,14 @@
               <input class="text-input" id="inv-attach" placeholder="---"/>
             </div>
 
-            <!-- seller / buyer tabs -->
-            <div style="display:flex;gap:8px;margin-bottom:10px">
-              <button class="btn btn-filled btn-xs" id="inv-tab-seller" onclick="invTab('seller')">مشخصات فروشنده</button>
-              <button class="btn btn-tonal  btn-xs" id="inv-tab-buyer"  onclick="invTab('buyer')">مشخصات خریدار</button>
-            </div>
-
-            <!-- seller panel -->
-            <div id="inv-panel-seller" style="margin-bottom:14px">
-              <div style="display:flex;gap:6px;margin-bottom:8px">
-                <button class="btn btn-filled btn-xs" id="inv-s-real"  onclick="invParty('s','real')">حقیقی</button>
-                <button class="btn btn-tonal  btn-xs" id="inv-s-legal" onclick="invParty('s','legal')">حقوقی</button>
+            <!-- seller section (always visible) -->
+            <div style="border:1px solid var(--md-sys-color-outline-variant,#ccc);border-radius:10px;padding:12px;margin-bottom:12px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                <span style="font-weight:700;font-size:14px">مشخصات فروشنده</span>
+                <div style="display:flex;gap:6px">
+                  <button class="btn btn-filled btn-xs" id="inv-s-real"  onclick="invParty('s','real')">حقیقی</button>
+                  <button class="btn btn-tonal  btn-xs" id="inv-s-legal" onclick="invParty('s','legal')">حقوقی</button>
+                </div>
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
                 <div><label class="field-label">نام شخص / شرکت</label><input class="text-input" id="inv-s-name" placeholder="---"/></div>
@@ -4449,11 +4442,14 @@
               </div>
             </div>
 
-            <!-- buyer panel -->
-            <div id="inv-panel-buyer" style="display:none;margin-bottom:14px">
-              <div style="display:flex;gap:6px;margin-bottom:8px">
-                <button class="btn btn-filled btn-xs" id="inv-b-real"  onclick="invParty('b','real')">حقیقی</button>
-                <button class="btn btn-tonal  btn-xs" id="inv-b-legal" onclick="invParty('b','legal')">حقوقی</button>
+            <!-- buyer section (always visible) -->
+            <div style="border:1px solid var(--md-sys-color-outline-variant,#ccc);border-radius:10px;padding:12px;margin-bottom:12px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                <span style="font-weight:700;font-size:14px">مشخصات خریدار</span>
+                <div style="display:flex;gap:6px">
+                  <button class="btn btn-filled btn-xs" id="inv-b-real"  onclick="invParty('b','real')">حقیقی</button>
+                  <button class="btn btn-tonal  btn-xs" id="inv-b-legal" onclick="invParty('b','legal')">حقوقی</button>
+                </div>
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
                 <div><label class="field-label">نام شخص / شرکت</label><input class="text-input" id="inv-b-name" placeholder="نام شرکت..."/></div>
@@ -4469,17 +4465,17 @@
             <!-- items table -->
             <div class="field-label" style="margin-bottom:6px">اقلام / خدمات</div>
             <div id="inv-items-wrap" style="overflow-x:auto;margin-bottom:8px">
-              <table id="inv-items" style="width:100%;border-collapse:collapse;font-size:13px;direction:rtl;min-width:560px">
+              <table id="inv-items" style="width:100%;border-collapse:collapse;font-size:13px;direction:rtl;min-width:600px">
                 <thead>
                   <tr style="background:var(--md-sys-color-surface-variant,#eee)">
                     <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:28px">#</th>
                     <th style="padding:6px 4px;border:1px solid var(--md-sys-color-outline-variant,#ccc)">شرح کالا / خدمات</th>
-                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:50px">تعداد</th>
-                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:48px">واحد</th>
+                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:70px">تعداد</th>
+                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:64px">واحد</th>
                     <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:110px">مبلغ واحد (ریال)</th>
                     <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:110px">مبلغ کل (ریال)</th>
-                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:60px">تخفیف</th>
-                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:110px">مبلغ کل پس از تخفیف</th>
+                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:64px">تخفیف%</th>
+                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:110px">مبلغ پس از تخفیف</th>
                     <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:28px"></th>
                   </tr>
                 </thead>
@@ -4511,17 +4507,55 @@
               <textarea class="text-input" id="inv-notes" rows="3" style="width:100%;box-sizing:border-box;resize:vertical" placeholder="لطفاً مبلغ فاکتور را به شماره شبا IR... نزد بانک ... به نام ... واریز نمایید."></textarea>
             </div>
 
-            <!-- logo upload -->
+            <!-- logo upload with drag-drop -->
             <div style="margin-bottom:16px">
               <label class="field-label">لوگوی فروشنده (اختیاری)</label>
-              <input type="file" id="inv-logo-file" accept="image/*" onchange="invLoadLogo()" style="font-size:13px;width:100%"/>
-              <div id="inv-logo-preview" style="margin-top:6px;display:none"><img id="inv-logo-img" style="max-height:60px;border-radius:8px;border:1px solid var(--md-sys-color-outline-variant,#ccc)"/></div>
+              <div id="inv-logo-zone"
+                onclick="document.getElementById('inv-logo-file').click()"
+                ondragover="event.preventDefault();this.style.borderColor='var(--md-sys-color-primary)'"
+                ondragleave="this.style.borderColor=''"
+                ondrop="event.preventDefault();this.style.borderColor='';invLoadLogo(event.dataTransfer.files[0])"
+                style="border:2px dashed var(--md-sys-color-outline-variant,#ccc);border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:border-color .2s;min-height:56px;display:flex;align-items:center;justify-content:center;gap:10px">
+                <input type="file" id="inv-logo-file" accept="image/*" style="display:none" onchange="invLoadLogo(this.files[0])"/>
+                <div id="inv-logo-placeholder" style="font-size:13px;color:var(--md-sys-color-outline,#888)">🖼 کلیک یا Drag & Drop لوگو اینجا</div>
+                <img id="inv-logo-img" style="display:none;max-height:52px;max-width:160px;border-radius:6px;object-fit:contain"/>
+              </div>
+              <button id="inv-logo-clear" onclick="invClearLogo()" style="display:none;margin-top:6px;background:none;border:none;cursor:pointer;font-size:12px;color:var(--md-sys-color-error,#c00)">✕ حذف لوگو</button>
             </div>
 
             <button class="btn btn-filled" onclick="invPreview()" style="width:100%;margin-bottom:8px">👁 پیش‌نمایش و چاپ / PDF</button>
           </div>
 
           <div class="tool-desc">فاکتور رسمی حقیقی/حقوقی با جدول اقلام، محاسبه مالیات، لوگو و خروجی PDF.</div>
+        </div>
+
+        <!-- ══ TEXT BEAUTIFIER ══ -->
+        <div id="textbeauty" class="tool-card">
+          <div class="tool-title">✨ زیباساز متن</div>
+          <div style="margin-bottom:12px">
+            <label class="field-label">متن انگلیسی وارد کنید</label>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input type="text" id="tb-input" class="text-input" placeholder="This is an example"
+                oninput="tbUpdate()" style="flex:1;direction:ltr" maxlength="80"/>
+              <button class="btn btn-tonal" onclick="document.getElementById('tb-input').value='';tbUpdate()" style="padding:0 12px;white-space:nowrap;flex-shrink:0">✕</button>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:4px;font-size:12px;color:var(--md-sys-color-outline)">
+              <span>حروف انگلیسی وارد کنید</span>
+              <span id="tb-count">۰ کاراکتر</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px" id="tb-filters">
+            <button class="btn btn-filled  btn-xs" data-tf="all"    onclick="tbFilter(this)">همه</button>
+            <button class="btn btn-tonal   btn-xs" data-tf="bold"   onclick="tbFilter(this)">Bold</button>
+            <button class="btn btn-tonal   btn-xs" data-tf="italic" onclick="tbFilter(this)">Italic</button>
+            <button class="btn btn-tonal   btn-xs" data-tf="script" onclick="tbFilter(this)">Script</button>
+            <button class="btn btn-tonal   btn-xs" data-tf="gothic" onclick="tbFilter(this)">Gothic</button>
+            <button class="btn btn-tonal   btn-xs" data-tf="bubble" onclick="tbFilter(this)">Bubble</button>
+            <button class="btn btn-tonal   btn-xs" data-tf="deco"   onclick="tbFilter(this)">دکوراتیو</button>
+            <button class="btn btn-tonal   btn-xs" data-tf="effect" onclick="tbFilter(this)">افکت</button>
+          </div>
+          <div id="tb-results" style="display:flex;flex-direction:column;gap:8px"></div>
+          <div class="tool-desc">متن انگلیسی را به بیش از ۳۰ سبک فانتزی تبدیل کرده و با یک ضربه کپی کنید.</div>
         </div>
 
         <!-- ══ RANDOM IP ══ -->
@@ -9005,7 +9039,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 7.0 - ۱۴۰۵/۰۲/۰۷
+          ℹ️ نسخه 7.1 - ۱۴۰۵/۰۲/۰۷
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -9071,7 +9105,7 @@
         json:'فرمت‌دهی JSON', xml:'فرمت‌دهی XML', htmlesc:'HTML Escaper',
         hash:'هش رمزنگاری', crypto:'رمزنگاری متن', jwt:'JWT Parser', pxrem:'PX ↔ REM',
         regex:'تست Regex', cron:'تجزیه Cron', urlparse:'تجزیه URL', numbase:'تبدیل مبنا',
-        pass:'مولد رمز عبور', uuid:'UUID / ULID', randnum:'تصادفی‌ساز', invoice:'فاکتور رسمی',
+        pass:'مولد رمز عبور', uuid:'UUID / ULID', randnum:'تصادفی‌ساز', invoice:'فاکتور رسمی', textbeauty:'زیباساز متن',
         randip:'IP تصادفی', randcolor:'رنگ تصادفی', fake:'داده ساختگی',
         credit:'کارت اعتباری تستی', avatar:'مولد آواتار', placeholder:'تصویر جایگزین',
         qr:'کد QR', barcode:'بارکد Code-128', colorpicker:'تبدیل رنگ',
@@ -9346,7 +9380,7 @@
           icon: '⚡', label: 'مولدها',
           tools: [
             {id:'pass',icon:'🔐',name:'رمز عبور'},{id:'uuid',icon:'🪪',name:'UUID / ULID'},
-            {id:'randnum',icon:'🎲',name:'تصادفی‌ساز'},{id:'invoice',icon:'🧾',name:'فاکتور رسمی'},{id:'randip',icon:'🌐',name:'IP تصادفی'},
+            {id:'randnum',icon:'🎲',name:'تصادفی‌ساز'},{id:'invoice',icon:'🧾',name:'فاکتور رسمی'},{id:'textbeauty',icon:'✨',name:'زیباساز متن'},{id:'randip',icon:'🌐',name:'IP تصادفی'},
             {id:'randcolor',icon:'🎨',name:'رنگ تصادفی'},{id:'fake',icon:'👤',name:'داده ساختگی'},
             {id:'credit',icon:'💳',name:'کارت اعتباری'},{id:'avatar',icon:'🖼️',name:'آواتار'},
             {id:'placeholder',icon:'🗃️',name:'تصویر جایگزین'},{id:'qr',icon:'📱',name:'کد QR'},
@@ -11557,14 +11591,6 @@
         }
         function parseNum(s){return parseFloat((s||'').replace(/,/g,'').replace(/[۰-۹]/g,d=>d.charCodeAt(0)-0x06F0))||0;}
 
-        // ── tab switching ──
-        window.invTab=function(t){
-          document.getElementById('inv-panel-seller').style.display=t==='seller'?'':'none';
-          document.getElementById('inv-panel-buyer').style.display=t==='buyer'?'':'none';
-          document.getElementById('inv-tab-seller').className=t==='seller'?'btn btn-filled btn-xs':'btn btn-tonal btn-xs';
-          document.getElementById('inv-tab-buyer').className=t==='buyer'?'btn btn-filled btn-xs':'btn btn-tonal btn-xs';
-        };
-
         // ── party type (real/legal) ──
         window.invParty=function(prefix,type){
           ['real','legal'].forEach(t=>{
@@ -11575,15 +11601,16 @@
 
         // ── row management ──
         function invRowHTML(i){
+          const inp='background:var(--md-sys-color-surface,#fff);color:var(--md-sys-color-on-surface,#000);border:none;width:100%;font-size:13px;padding:5px 4px;font-family:inherit';
           return `<tr id="inv-row-${i}">
             <td style="padding:4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);font-size:12px">${toFa(i)}</td>
-            <td style="padding:4px;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><input class="text-input" style="width:100%;min-width:100px;font-size:13px;padding:4px" placeholder="خدمات" oninput="invCalc()"/></td>
-            <td style="padding:4px;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><input class="text-input inv-qty" style="width:100%;font-size:13px;padding:4px;direction:ltr;text-align:center" value="1" type="number" min="1" oninput="invCalc()"/></td>
-            <td style="padding:4px;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><input class="text-input" style="width:100%;font-size:13px;padding:4px;text-align:center" placeholder="عدد"/></td>
-            <td style="padding:4px;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><input class="text-input inv-price" style="width:100%;font-size:13px;padding:4px;direction:ltr;text-align:center" placeholder="0" type="number" min="0" oninput="invCalc()"/></td>
-            <td style="padding:4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);font-size:13px" id="inv-row-total-${i}">۰</td>
-            <td style="padding:4px;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><input class="text-input inv-disc" style="width:100%;font-size:13px;padding:4px;direction:ltr;text-align:center" placeholder="0" type="number" min="0" max="100" oninput="invCalc()"/></td>
-            <td style="padding:4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);font-size:13px" id="inv-row-net-${i}">۰</td>
+            <td style="padding:0;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><input style="${inp};min-width:100px" placeholder="شرح کالا / خدمات" oninput="invCalc()"/></td>
+            <td style="padding:0;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><input class="inv-qty" style="${inp};direction:ltr;text-align:center;min-width:60px" value="1" type="number" min="1" oninput="invCalc()"/></td>
+            <td style="padding:0;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><input style="${inp};text-align:center;min-width:54px" placeholder="عدد"/></td>
+            <td style="padding:0;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><input class="inv-price" style="${inp};direction:ltr;text-align:center;min-width:90px" placeholder="0" type="number" min="0" oninput="invCalc()"/></td>
+            <td style="padding:5px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);font-size:13px;direction:ltr" id="inv-row-total-${i}">۰</td>
+            <td style="padding:0;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><input class="inv-disc" style="${inp};direction:ltr;text-align:center;min-width:54px" placeholder="0" type="number" min="0" max="100" oninput="invCalc()"/></td>
+            <td style="padding:5px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);font-size:13px;font-weight:600;direction:ltr" id="inv-row-net-${i}">۰</td>
             <td style="padding:4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><button onclick="invRemoveRow(${i})" style="background:none;border:none;cursor:pointer;color:#c00;font-size:16px;padding:0 4px">×</button></td>
           </tr>`;
         }
@@ -11629,17 +11656,27 @@
         };
 
         // ── logo loader ──
-        window.invLoadLogo=function(){
-          const file=document.getElementById('inv-logo-file').files[0];
+        window.invLoadLogo=function(file){
+          if(!file) file=document.getElementById('inv-logo-file').files[0];
           if(!file)return;
           const reader=new FileReader();
           reader.onload=e=>{
             _invLogoDataUrl=e.target.result;
             const img=document.getElementById('inv-logo-img');
             img.src=_invLogoDataUrl;
-            document.getElementById('inv-logo-preview').style.display='';
+            img.style.display='';
+            document.getElementById('inv-logo-placeholder').style.display='none';
+            document.getElementById('inv-logo-clear').style.display='';
           };
           reader.readAsDataURL(file);
+        };
+        window.invClearLogo=function(){
+          _invLogoDataUrl=null;
+          document.getElementById('inv-logo-img').style.display='none';
+          document.getElementById('inv-logo-img').src='';
+          document.getElementById('inv-logo-placeholder').style.display='';
+          document.getElementById('inv-logo-clear').style.display='none';
+          document.getElementById('inv-logo-file').value='';
         };
 
         // ── number to Persian words (for invoice footer) ──
@@ -12167,6 +12204,148 @@
             }catch(e){}
           }
         };
+      })();
+      // ══════════════════════════════════════════════════════
+      //  TEXT BEAUTIFIER
+      // ══════════════════════════════════════════════════════
+      (()=>{
+        const _lc='abcdefghijklmnopqrstuvwxyz';
+        const _uc='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const _dg='0123456789';
+
+        function blockMap(str,lcBase,ucBase,dgBase){
+          return[...str].map(c=>{
+            const li=_lc.indexOf(c);if(li>=0)return String.fromCodePoint(lcBase+li);
+            const ui=_uc.indexOf(c);if(ui>=0)return String.fromCodePoint(ucBase+ui);
+            if(dgBase!=null){const di=_dg.indexOf(c);if(di>=0)return String.fromCodePoint(dgBase+di);}
+            return c;
+          }).join('');
+        }
+        const B={
+          BoldSerifLC:0x1D41A,BoldSerifUC:0x1D400,BoldSerifDg:0x1D7CE,
+          ItalicSerifLC:0x1D44E,ItalicSerifUC:0x1D434,
+          BoldItalicSerifLC:0x1D482,BoldItalicSerifUC:0x1D468,
+          BoldSansLC:0x1D5EE,BoldSansUC:0x1D5D4,BoldSansDg:0x1D7EC,
+          ItalicSansLC:0x1D622,ItalicSansUC:0x1D608,
+          BoldItalicSansLC:0x1D656,BoldItalicSansUC:0x1D63C,
+          MonoLC:0x1D68A,MonoUC:0x1D670,MonoDg:0x1D7F6,
+          DoubleLC:0x1D552,DoubleUC:0x1D538,DoubleDg:0x1D7D8,
+          FrakturLC:0x1D51E,FrakturUC:0x1D504,
+          BoldFrakturLC:0x1D586,BoldFrakturUC:0x1D56C,
+          SansSerifLC:0x1D5BA,SansSerifUC:0x1D5A0,SansSerifDg:0x1D7E2,
+          ScriptLC:0x1D4B6,ScriptUC:0x1D49C,
+          BoldScriptLC:0x1D4EA,BoldScriptUC:0x1D4D0,
+        };
+        const ITALIC_LC_EX={h:'\u210E'};
+        const SCRIPT_LC_EX={e:'\u212F',g:'\u210A',o:'\u2134'};
+        const SCRIPT_UC_EX={B:'\u212C',E:'\u2130',F:'\u2131',H:'\u210B',I:'\u2110',L:'\u2112',M:'\u2133',R:'\u211B'};
+        const FRAKTUR_UC_EX={C:'\u212D',H:'\u210C',I:'\u2111',R:'\u211C',Z:'\u2128'};
+        const DOUBLE_UC_EX={C:'\u2102',H:'\u210D',N:'\u2115',P:'\u2119',Q:'\u211A',R:'\u211D',Z:'\u2124'};
+
+        function _italicSerif(s){return[...s].map(c=>ITALIC_LC_EX[c]||(()=>{const li=_lc.indexOf(c);if(li>=0)return String.fromCodePoint(B.ItalicSerifLC+li);const ui=_uc.indexOf(c);if(ui>=0)return String.fromCodePoint(B.ItalicSerifUC+ui);return c;})()).join('');}
+        function _script(s){return[...s].map(c=>SCRIPT_LC_EX[c]||SCRIPT_UC_EX[c]||(()=>{const li=_lc.indexOf(c);if(li>=0)return String.fromCodePoint(B.ScriptLC+li);const ui=_uc.indexOf(c);if(ui>=0)return String.fromCodePoint(B.ScriptUC+ui);return c;})()).join('');}
+        function _fraktur(s){return[...s].map(c=>FRAKTUR_UC_EX[c]||(()=>{const li=_lc.indexOf(c);if(li>=0)return String.fromCodePoint(B.FrakturLC+li);const ui=_uc.indexOf(c);if(ui>=0)return String.fromCodePoint(B.FrakturUC+ui);return c;})()).join('');}
+        function _double(s){return[...s].map(c=>DOUBLE_UC_EX[c]||(()=>{const li=_lc.indexOf(c);if(li>=0)return String.fromCodePoint(B.DoubleLC+li);const ui=_uc.indexOf(c);if(ui>=0)return String.fromCodePoint(B.DoubleUC+ui);const di=_dg.indexOf(c);if(di>=0)return String.fromCodePoint(B.DoubleDg+di);return c;})()).join('');}
+
+        const CIR_LC=[...'ⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩ'];
+        const CIR_UC=[...'ⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿⓀⓁⓂⓃⓄⓅⓆⓇⓈⓉⓊⓋⓌⓍⓎⓏ'];
+        const CIR_BK=[...'🅐🅑🅒🅓🅔🅕🅖🅗🅘🅙🅚🅛🅜🅝🅞🅟🅠🅡🅢🅣🅤🅥🅦🅧🅨🅩'];
+        const SQ_WH=[...'🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉'];
+        const SQ_BK=[...'🅰🅱🅲🅳🅴🅵🅶🅷🅸🅹🅺🅻🅼🅽🅾🅿🆀🆁🆂🆃🆄🆅🆆🆇🆈🆉'];
+        function _bubbles(s,filled){return[...s].map(c=>{const li=_lc.indexOf(c);if(li>=0)return filled?CIR_BK[li]:CIR_LC[li];const ui=_uc.indexOf(c);if(ui>=0)return filled?CIR_BK[ui]:CIR_UC[ui];return c;}).join('');}
+        function _squares(s,filled){return[...s.toUpperCase()].map(c=>{const ui=_uc.indexOf(c);if(ui>=0)return filled?SQ_BK[ui]:SQ_WH[ui];return c;}).join('');}
+        function _wide(s){return[...s].map(c=>{const code=c.charCodeAt(0);if(code>=33&&code<=126)return String.fromCharCode(code+0xFEE0);if(code===32)return'\u3000';return c;}).join('');}
+        const SC={a:'ᴀ',b:'ʙ',c:'ᴄ',d:'ᴅ',e:'ᴇ',f:'ꜰ',g:'ɢ',h:'ʜ',i:'ɪ',j:'ᴊ',k:'ᴋ',l:'ʟ',m:'ᴍ',n:'ɴ',o:'ᴏ',p:'ᴘ',q:'q',r:'ʀ',s:'ꜱ',t:'ᴛ',u:'ᴜ',v:'ᴠ',w:'ᴡ',x:'x',y:'ʏ',z:'ᴢ'};
+        function _smallCaps(s){return[...s].map(c=>_uc.includes(c)?c:SC[c]||c).join('');}
+        const SUP={a:'ᵃ',b:'ᵇ',c:'ᶜ',d:'ᵈ',e:'ᵉ',f:'ᶠ',g:'ᵍ',h:'ʰ',i:'ⁱ',j:'ʲ',k:'ᵏ',l:'ˡ',m:'ᵐ',n:'ⁿ',o:'ᵒ',p:'ᵖ',r:'ʳ',s:'ˢ',t:'ᵗ',u:'ᵘ',v:'ᵛ',w:'ʷ',x:'ˣ',y:'ʸ',z:'ᶻ',A:'ᴬ',B:'ᴮ',D:'ᴰ',E:'ᴱ',G:'ᴳ',H:'ᴴ',I:'ᴵ',J:'ᴶ',K:'ᴷ',L:'ᴸ',M:'ᴹ',N:'ᴺ',O:'ᴼ',P:'ᴾ',R:'ᴿ',T:'ᵀ',U:'ᵁ',W:'ᵂ','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
+        const SUB={a:'ₐ',e:'ₑ',h:'ₕ',i:'ᵢ',j:'ⱼ',k:'ₖ',l:'ₗ',m:'ₘ',n:'ₙ',o:'ₒ',p:'ₚ',r:'ᵣ',s:'ₛ',t:'ₜ',u:'ᵤ',v:'ᵥ',x:'ₓ','0':'₀','1':'₁','2':'₂','3':'₃','4':'₄','5':'₅','6':'₆','7':'₇','8':'₈','9':'₉'};
+        function _combo(s,c){return[...s].map(ch=>ch===' '?ch:ch+c).join('');}
+        const CURR={a:'₳',b:'฿',c:'₵',d:'Đ',e:'Ɇ',f:'₣',g:'₲',h:'Ħ',i:'ł',k:'₭',l:'Ⱡ',m:'₥',n:'₦',o:'Ø',p:'₱',r:'Ɽ',s:'₴',t:'₮',u:'Ʉ',w:'₩',x:'Ӿ',y:'Ɏ',z:'Ƶ'};
+
+        window._TB_FONTS=[
+          {id:'bfSerif',name:'Bold Serif',tags:['bold'],fn:s=>blockMap(s,B.BoldSerifLC,B.BoldSerifUC,B.BoldSerifDg)},
+          {id:'bfSans',name:'Bold Sans',tags:['bold'],fn:s=>blockMap(s,B.BoldSansLC,B.BoldSansUC,B.BoldSansDg)},
+          {id:'itSerif',name:'Italic Serif',tags:['italic'],fn:_italicSerif},
+          {id:'itSans',name:'Italic Sans',tags:['italic'],fn:s=>blockMap(s,B.ItalicSansLC,B.ItalicSansUC)},
+          {id:'biSerif',name:'Bold Italic Serif',tags:['bold','italic'],fn:s=>blockMap(s,B.BoldItalicSerifLC,B.BoldItalicSerifUC)},
+          {id:'biSans',name:'Bold Italic Sans',tags:['bold','italic'],fn:s=>blockMap(s,B.BoldItalicSansLC,B.BoldItalicSansUC)},
+          {id:'scNorm',name:'Script Normal',tags:['script'],fn:_script},
+          {id:'scBold',name:'Script Bold',tags:['script'],fn:s=>blockMap(s,B.BoldScriptLC,B.BoldScriptUC)},
+          {id:'frakNorm',name:'Fraktur',tags:['gothic'],fn:_fraktur},
+          {id:'frakBold',name:'Fraktur Bold',tags:['gothic'],fn:s=>blockMap(s,B.BoldFrakturLC,B.BoldFrakturUC)},
+          {id:'dblStruck',name:'Double Struck',tags:['gothic'],fn:_double},
+          {id:'sansSerif',name:'Sans-Serif',tags:['bold'],fn:s=>blockMap(s,B.SansSerifLC,B.SansSerifUC,B.SansSerifDg)},
+          {id:'typewriter',name:'Typewriter',tags:['deco'],fn:s=>blockMap(s,B.MonoLC,B.MonoUC,B.MonoDg)},
+          {id:'bubblesW',name:'Bubbles',tags:['bubble'],fn:s=>_bubbles(s,false)},
+          {id:'bubblesB',name:'Bubbles Black',tags:['bubble'],fn:s=>_bubbles(s,true)},
+          {id:'squareW',name:'Square',tags:['bubble'],fn:s=>_squares(s,false)},
+          {id:'squareB',name:'Square Black',tags:['bubble'],fn:s=>_squares(s,true)},
+          {id:'wide',name:'Wide / Vaporwave',tags:['deco'],fn:_wide},
+          {id:'smCaps',name:'Small Caps',tags:['deco'],fn:_smallCaps},
+          {id:'superscript',name:'Superscript Tiny',tags:['deco'],fn:s=>[...s].map(c=>SUP[c]||c).join('')},
+          {id:'subscript',name:'Subscript',tags:['deco'],fn:s=>[...s].map(c=>SUB[c]||c).join('')},
+          {id:'currency',name:'Currency',tags:['effect'],fn:s=>[...s].map(c=>CURR[c.toLowerCase()]||c).join('')},
+          {id:'strike',name:'Strikethrough',tags:['effect'],fn:s=>_combo(s,'\u0336')},
+          {id:'underline',name:'Underline',tags:['effect'],fn:s=>_combo(s,'\u0332')},
+          {id:'dblUnder',name:'Double Underline',tags:['effect'],fn:s=>_combo(s,'\u0333')},
+          {id:'overline',name:'Overline',tags:['effect'],fn:s=>_combo(s,'\u0305')},
+          {id:'stars',name:'Stars Between',tags:['effect'],fn:s=>[...s].join('★')},
+          {id:'hearts',name:'Hearts Between',tags:['effect'],fn:s=>[...s].join('♥')},
+          {id:'dots',name:'Dots Between',tags:['effect'],fn:s=>[...s].join('·')},
+          {id:'slashed',name:'Slashed',tags:['effect'],fn:s=>_combo(s,'\u0338')},
+        ];
+
+        let _tbFilter='all';
+        window.tbFilter=function(btn){
+          document.querySelectorAll('#tb-filters .btn').forEach(b=>b.className=b===btn?'btn btn-filled btn-xs':'btn btn-tonal btn-xs');
+          _tbFilter=btn.dataset.tf;
+          tbUpdate();
+        };
+        window.tbUpdate=function(){
+          const str=document.getElementById('tb-input').value;
+          document.getElementById('tb-count').textContent=String(str.length).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d])+' کاراکتر';
+          const res=document.getElementById('tb-results');
+          if(!str.trim()){res.innerHTML='';return;}
+          const fonts=_tbFilter==='all'?window._TB_FONTS:window._TB_FONTS.filter(f=>f.tags.includes(_tbFilter));
+          res.innerHTML=fonts.map(f=>{
+            let out='';try{out=f.fn(str);}catch(e){out=str;}
+            return `<div class="tb-row" onclick="tbCopy(this,'${f.id}')" title="کپی">
+              <span class="tb-copy-icon" id="tb-icon-${f.id}">⧉</span>
+              <span class="tb-name">${f.name}</span>
+              <span class="tb-text" id="tb-text-${f.id}" dir="ltr">${out}</span>
+            </div>`;
+          }).join('');
+        };
+        window.tbCopy=function(row,id){
+          const span=document.getElementById('tb-text-'+id);
+          const icon=document.getElementById('tb-icon-'+id);
+          if(!span)return;
+          navigator.clipboard.writeText(span.textContent).then(()=>{
+            row.style.background='var(--md-sys-color-secondary-container,#e8def8)';
+            icon.textContent='✓';
+            setTimeout(()=>{row.style.background='';icon.textContent='⧉';},1200);
+          }).catch(()=>{
+            const r=document.createRange();r.selectNode(span);
+            window.getSelection().removeAllRanges();window.getSelection().addRange(r);
+            document.execCommand('copy');window.getSelection().removeAllRanges();
+          });
+        };
+        // inject styles
+        const _s=document.createElement('style');
+        _s.textContent=`
+          .btn-xs{font-size:12px!important;padding:4px 10px!important;border-radius:20px!important}
+          .tb-row{display:flex;flex-direction:column;padding:10px 14px;border-radius:12px;
+            background:var(--md-sys-color-surface-variant,#f0eef6);cursor:pointer;
+            transition:background .2s;position:relative;gap:2px}
+          .tb-row:active{background:var(--md-sys-color-secondary-container,#e8def8)}
+          .tb-copy-icon{position:absolute;top:8px;left:10px;font-size:15px;
+            color:var(--md-sys-color-outline,#888);opacity:.6}
+          .tb-name{font-size:11px;color:var(--md-sys-color-outline,#888);
+            text-align:right;margin-bottom:2px}
+          .tb-text{font-size:17px;padding-right:4px;word-break:break-all;
+            line-height:1.5;color:var(--md-sys-color-on-surface,#1c1b1f)}
+        `;
+        document.head.appendChild(_s);
       })();
       // ══════════════════════════════════════════════════════
       function genIP(){
