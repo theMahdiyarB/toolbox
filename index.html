@@ -2200,6 +2200,7 @@
         <div class="drawer-item" onclick="showTool('randnum')" data-tool="randnum"><span class="drawer-item__icon">🎲</span>تصادفی‌ساز</div>
         <div class="drawer-item" onclick="showTool('textbeauty')" data-tool="textbeauty"><span class="drawer-item__icon">✨</span>زیباساز متن</div>
         <div class="drawer-item" onclick="showTool('invoice')" data-tool="invoice"><span class="drawer-item__icon">🧾</span>فاکتور رسمی</div>
+        <div class="drawer-item" onclick="showTool('rubik')" data-tool="rubik"><span class="drawer-item__icon">🧩</span>حل مکعب روبیک</div>
         <div class="drawer-item" onclick="showTool('randip')" data-tool="randip"><span class="drawer-item__icon">🌐</span>IP تصادفی</div>
         <div class="drawer-item" onclick="showTool('randcolor')" data-tool="randcolor"><span class="drawer-item__icon">🎨</span>رنگ تصادفی</div>
         <div class="drawer-item" onclick="showTool('fake')" data-tool="fake"><span class="drawer-item__icon">👤</span>داده ساختگی</div>
@@ -2224,9 +2225,9 @@
         <div class="drawer-item" onclick="showTool('imgpalette')" data-tool="imgpalette"><span class="drawer-item__icon">🎨</span>پالت رنگ تعاملی</div>
 
         <span class="drawer-section-label">📁 فایل</span>
-        <div class="drawer-item" onclick="showTool('imgcompress')" data-tool="imgcompress"><span class="drawer-item__icon">🗜️</span>فشرده‌سازی تصویر</div>
+        <div class="drawer-item" onclick="showTool('imgtool')" data-tool="imgtool"><span class="drawer-item__icon">🖼️</span>ابزار تصویر</div>
         <div class="drawer-item" onclick="showTool('bgremove')" data-tool="bgremove"><span class="drawer-item__icon">✂️</span>حذف پس‌زمینه</div>
-        <div class="drawer-item" onclick="showTool('pdfcompress')" data-tool="pdfcompress"><span class="drawer-item__icon">🛠️</span>ابزار PDF</div>
+        <div class="drawer-item" onclick="showTool('pdftool')" data-tool="pdftool"><span class="drawer-item__icon">🛠️</span>ابزار PDF</div>
         <div class="drawer-item" onclick="showTool('filesplit')" data-tool="filesplit"><span class="drawer-item__icon">🗂</span>تقسیم و مرج فایل</div>
         <div class="drawer-item" onclick="showTool('watermark')" data-tool="watermark"><span class="drawer-item__icon">💧</span>واترمارک تصویر</div>
         <div class="drawer-item" onclick="showTool('img2b64')" data-tool="img2b64"><span class="drawer-item__icon">🔄</span>تصویر ← Base64</div>
@@ -2617,6 +2618,7 @@
                 <div class="link-card" onclick="haptic(this);showTool('randnum')" data-tool="randnum"><button class="fav-btn" data-tool="randnum" onclick="event.stopPropagation();toggleFav('randnum',this)">☆</button><span class="link-card__icon">🎲</span><span class="link-card__name">تصادفی‌ساز</span><span class="link-card__desc">عدد، تاس، سکه، چرخ</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('textbeauty')" data-tool="textbeauty"><button class="fav-btn" data-tool="textbeauty" onclick="event.stopPropagation();toggleFav('textbeauty',this)">☆</button><span class="link-card__icon">✨</span><span class="link-card__name">زیباساز متن</span><span class="link-card__desc">فونت‌های فانتزی کپی‌پذیر</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('invoice')" data-tool="invoice"><button class="fav-btn" data-tool="invoice" onclick="event.stopPropagation();toggleFav('invoice',this)">☆</button><span class="link-card__icon">🧾</span><span class="link-card__name">فاکتور رسمی</span><span class="link-card__desc">صدور فاکتور و خروجی PDF</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('rubik')" data-tool="rubik"><button class="fav-btn" data-tool="rubik" onclick="event.stopPropagation();toggleFav('rubik',this)">☆</button><span class="link-card__icon">🧩</span><span class="link-card__name">حل مکعب روبیک</span><span class="link-card__desc">شبیه‌ساز سه‌بعدی + حل خودکار</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('randip')"><button class="fav-btn" data-tool="randip" onclick="event.stopPropagation();toggleFav('randip',this)">☆</button><span class="link-card__icon">🌐</span><span class="link-card__name">IP تصادفی</span><span class="link-card__desc">IPv4 و IPv6</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('randcolor')"><button class="fav-btn" data-tool="randcolor" onclick="event.stopPropagation();toggleFav('randcolor',this)">☆</button><span class="link-card__icon">🎨</span><span class="link-card__name">رنگ تصادفی</span><span class="link-card__desc">HEX + RGB + HSL</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('fake')"><button class="fav-btn" data-tool="fake" onclick="event.stopPropagation();toggleFav('fake',this)">☆</button><span class="link-card__icon">👤</span><span class="link-card__name">داده ساختگی</span><span class="link-card__desc">نام، ایمیل، تلفن فارسی</span></div>
@@ -2651,9 +2653,9 @@
             <div class="section" id="sec-file">
               <div class="section__title">📁 ابزارهای فایل - کاملاً آفلاین</div>
               <div class="tool-grid">
-                <div class="link-card" onclick="haptic(this);showTool('imgcompress')"><button class="fav-btn" data-tool="imgcompress" onclick="event.stopPropagation();toggleFav('imgcompress',this)">☆</button><span class="link-card__icon">🗜️</span><span class="link-card__name">فشرده‌سازی تصویر</span><span class="link-card__desc">پردازش کامل در مرورگر</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('imgtool')"><button class="fav-btn" data-tool="imgtool" onclick="event.stopPropagation();toggleFav('imgtool',this)">☆</button><span class="link-card__icon">🖼️</span><span class="link-card__name">ابزار تصویر</span><span class="link-card__desc">برش، فشرده‌سازی، تبدیل</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('bgremove')"><button class="fav-btn" data-tool="bgremove" onclick="event.stopPropagation();toggleFav('bgremove',this)">☆</button><span class="link-card__icon">✂️</span><span class="link-card__name">حذف پس‌زمینه</span><span class="link-card__desc">بدون API · کاملاً آفلاین</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('pdfcompress')"><button class="fav-btn" data-tool="pdfcompress" onclick="event.stopPropagation();toggleFav('pdfcompress',this)">☆</button><span class="link-card__icon">🛠️</span><span class="link-card__name">ابزار PDF</span><span class="link-card__desc">ادغام، تقسیم، مرتب‌سازی، استخراج تصویر</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('pdftool')"><button class="fav-btn" data-tool="pdftool" onclick="event.stopPropagation();toggleFav('pdftool',this)">☆</button><span class="link-card__icon">🛠️</span><span class="link-card__name">ابزار PDF</span><span class="link-card__desc">ادغام، تقسیم، مرتب‌سازی، استخراج تصویر</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('filesplit')"><button class="fav-btn" data-tool="filesplit" onclick="event.stopPropagation();toggleFav('filesplit',this)">☆</button><span class="link-card__icon">🗂</span><span class="link-card__name">تقسیم و مرج فایل</span><span class="link-card__desc">فایل‌های بزرگ + رمز</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('watermark')"><button class="fav-btn" data-tool="watermark" onclick="event.stopPropagation();toggleFav('watermark',this)">☆</button><span class="link-card__icon">💧</span><span class="link-card__name">واترمارک تصویر</span><span class="link-card__desc">افزودن لوگو یا متن به تصویر</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('img2b64')"><button class="fav-btn" data-tool="img2b64" onclick="event.stopPropagation();toggleFav('img2b64',this)">☆</button><span class="link-card__icon">🔄</span><span class="link-card__name">تصویر ← Base64</span><span class="link-card__desc">برای CSS و HTML</span></div>
@@ -4425,7 +4427,7 @@
             </div>
 
             <!-- seller section (always visible) -->
-            <div style="border:1px solid var(--m3-outline-variant,#ccc);border-radius:10px;padding:12px;margin-bottom:12px">
+            <div style="border:1px solid var(--md-sys-color-outline-variant,#ccc);border-radius:10px;padding:12px;margin-bottom:12px">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
                 <span style="font-weight:700;font-size:14px">مشخصات فروشنده</span>
                 <div style="display:flex;gap:6px">
@@ -4443,7 +4445,7 @@
             </div>
 
             <!-- buyer section (always visible) -->
-            <div style="border:1px solid var(--m3-outline-variant,#ccc);border-radius:10px;padding:12px;margin-bottom:12px">
+            <div style="border:1px solid var(--md-sys-color-outline-variant,#ccc);border-radius:10px;padding:12px;margin-bottom:12px">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
                 <span style="font-weight:700;font-size:14px">مشخصات خریدار</span>
                 <div style="display:flex;gap:6px">
@@ -4467,16 +4469,16 @@
             <div id="inv-items-wrap" style="overflow-x:auto;margin-bottom:8px">
               <table id="inv-items" style="width:100%;border-collapse:collapse;font-size:13px;direction:rtl;min-width:600px">
                 <thead>
-                  <tr style="background:var(--m3-surface-container-high);color:var(--m3-on-surface)">
-                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--m3-outline-variant,#ccc);width:28px">#</th>
-                    <th style="padding:6px 4px;border:1px solid var(--m3-outline-variant,#ccc)">شرح کالا / خدمات</th>
-                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--m3-outline-variant,#ccc);width:70px">تعداد</th>
-                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--m3-outline-variant,#ccc);width:64px">واحد</th>
-                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--m3-outline-variant,#ccc);width:110px">مبلغ واحد (ریال)</th>
-                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--m3-outline-variant,#ccc);width:110px">مبلغ کل (ریال)</th>
-                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--m3-outline-variant,#ccc);width:64px">تخفیف%</th>
-                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--m3-outline-variant,#ccc);width:110px">مبلغ پس از تخفیف</th>
-                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--m3-outline-variant,#ccc);width:28px"></th>
+                  <tr style="background:var(--md-sys-color-surface-variant,#eee)">
+                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:28px">#</th>
+                    <th style="padding:6px 4px;border:1px solid var(--md-sys-color-outline-variant,#ccc)">شرح کالا / خدمات</th>
+                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:70px">تعداد</th>
+                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:64px">واحد</th>
+                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:110px">مبلغ واحد (ریال)</th>
+                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:110px">مبلغ کل (ریال)</th>
+                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:64px">تخفیف%</th>
+                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:110px">مبلغ پس از تخفیف</th>
+                    <th style="padding:6px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);width:28px"></th>
                   </tr>
                 </thead>
                 <tbody id="inv-tbody"></tbody>
@@ -4495,7 +4497,7 @@
                 <input class="text-input" id="inv-levy" type="number" value="0" min="0" max="100" oninput="invCalc()" style="direction:ltr"/>
               </div>
             </div>
-            <div style="background:var(--m3-surface-container);color:var(--m3-on-surface);border-radius:10px;padding:12px;margin-bottom:14px;font-size:14px;direction:rtl">
+            <div style="background:var(--md-sys-color-surface-variant,#eee);border-radius:10px;padding:12px;margin-bottom:14px;font-size:14px;direction:rtl">
               <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span>جمع کل:</span><span id="inv-sub" style="direction:ltr">۰ ریال</span></div>
               <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span>مالیات و عوارض:</span><span id="inv-tax-amt" style="direction:ltr">۰ ریال</span></div>
               <div style="display:flex;justify-content:space-between;font-weight:700;font-size:16px;color:var(--md-sys-color-primary)"><span>مبلغ قابل پرداخت:</span><span id="inv-total" style="direction:ltr">۰ ریال</span></div>
@@ -4556,6 +4558,58 @@
           </div>
           <div id="tb-results" style="display:flex;flex-direction:column;gap:8px"></div>
           <div class="tool-desc">متن انگلیسی را به بیش از ۳۰ سبک فانتزی تبدیل کرده و با یک ضربه کپی کنید.</div>
+        </div>
+
+        <!-- ══ RUBIK SOLVER ══ -->
+        <div id="rubik" class="tool-card">
+          <div class="tool-title">🧩 حل مکعب روبیک</div>
+          <p style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:12px">رنگ هر سطح را وارد کنید و دکمه «حل» را بزنید — یا مکعب را بچرخانید.</p>
+
+          <!-- Cube face net input -->
+          <div style="margin-bottom:14px">
+            <div style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--m3-on-surface)">🎨 رنگ‌های مکعب خود را وارد کنید:</div>
+            <div style="font-size:11px;color:var(--m3-on-surface-variant);margin-bottom:10px">روی هر خانه کلیک کنید تا رنگ تغییر کند. مرکز هر سطح ثابت است.</div>
+            <div id="rubik-net-wrap" style="display:flex;justify-content:center;overflow-x:auto;padding:4px 0"></div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;justify-content:center" id="rubik-color-btns">
+              <button class="rubik-color-sel" data-c="U" onclick="rbSelectColor('U')" style="width:32px;height:32px;background:#fff;border:3px solid var(--m3-primary);border-radius:6px;cursor:pointer" title="سفید (U)"></button>
+              <button class="rubik-color-sel" data-c="D" onclick="rbSelectColor('D')" style="width:32px;height:32px;background:#ffee00;border:2px solid #888;border-radius:6px;cursor:pointer" title="زرد (D)"></button>
+              <button class="rubik-color-sel" data-c="F" onclick="rbSelectColor('F')" style="width:32px;height:32px;background:#00a550;border:2px solid #888;border-radius:6px;cursor:pointer" title="سبز (F)"></button>
+              <button class="rubik-color-sel" data-c="B" onclick="rbSelectColor('B')" style="width:32px;height:32px;background:#0051a2;border:2px solid #888;border-radius:6px;cursor:pointer" title="آبی (B)"></button>
+              <button class="rubik-color-sel" data-c="R" onclick="rbSelectColor('R')" style="width:32px;height:32px;background:#ff3d00;border:2px solid #888;border-radius:6px;cursor:pointer" title="قرمز (R)"></button>
+              <button class="rubik-color-sel" data-c="L" onclick="rbSelectColor('L')" style="width:32px;height:32px;background:#ff8c00;border:2px solid #888;border-radius:6px;cursor:pointer" title="نارنجی (L)"></button>
+            </div>
+          </div>
+
+          <!-- Scramble input -->
+          <div style="margin-bottom:12px">
+            <label class="field-label">وارد کردن حرکات (مثال: R U R' U')</label>
+            <div style="display:flex;gap:8px">
+              <input id="rubik-moves-input" class="text-input" style="flex:1;direction:ltr;font-family:monospace" placeholder="R U R' U' F2 D..."/>
+              <button class="btn btn-tonal" onclick="rbApplyScramble()">اعمال</button>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+            <button class="btn btn-tonal"  onclick="rbScramble()" style="flex:1">🔀 شافل تصادفی</button>
+            <button class="btn btn-filled" onclick="rbSolve()"    style="flex:1">✨ حل مکعب</button>
+            <button class="btn btn-tonal"  onclick="rbReset()"    style="flex:1">↺ ریست</button>
+          </div>
+
+          <!-- Solution output -->
+          <div id="rubik-solution-wrap" style="display:none">
+            <div class="field-label" style="margin-bottom:6px">📋 حل:</div>
+            <div id="rubik-solution-moves" style="font-family:monospace;font-size:15px;direction:ltr;text-align:left;background:var(--m3-surface-container);padding:10px 14px;border-radius:10px;line-height:2;word-break:break-all"></div>
+            <div id="rubik-solution-info"  style="font-size:12px;color:var(--m3-on-surface-variant);margin-top:4px;text-align:left"></div>
+            <button class="btn btn-tonal btn-xs" onclick="rbCopySolution()" style="margin-top:8px">📋 کپی</button>
+          </div>
+
+          <div id="rubik-error" style="display:none;color:var(--m3-error,#c00);font-size:13px;margin-top:8px;padding:8px;background:var(--m3-error-container,#ffdad6);border-radius:8px"></div>
+
+          <div style="margin-top:16px;font-size:11px;color:var(--m3-on-surface-variant);text-align:center">
+            موتور حل: <a href="https://github.com/nickcolley/scramble-cube" target="_blank" style="color:var(--m3-primary)">min2phase Kociemba</a> ·
+            الهام از <a href="https://github.com/jeffhuber/rubiks-solver" target="_blank" style="color:var(--m3-primary)">jeffhuber/rubiks-solver</a>
+          </div>
+          <div class="tool-desc">شبیه‌ساز مکعب روبیک با ورودی رنگ و حل خودکار Kociemba در مرورگر.</div>
         </div>
 
         <!-- ══ RANDOM IP ══ -->
@@ -5399,131 +5453,155 @@
           <div class="tool-desc">نسبت ابعاد را از عرض و ارتفاع محاسبه می‌کند. اگر یک بعد جدید داشته باشید، بعد دیگر با حفظ نسبت محاسبه می‌شود.</div>
         </div>
 
-        <!-- ══ IMAGE COMPRESS ══ -->
-        <div id="imgcompress" class="tool-card">
+        <!-- ══ IMAGE TOOL ══ -->
+        <div id="imgtool" class="tool-card">
+          <div class="tool-title">🖼️ ابزار تصویر</div>
+          <p style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:10px">📌 تمام پردازش در مرورگر — هیچ فایلی به سرور ارسال نمی‌شود</p>
 
-          <div class="tool-title">🗜️ فشرده‌سازی تصویر</div>
-          <p
-            style="
-              font-size: 0.8rem;
-              color: var(--m3-on-surface-variant);
-              margin-bottom: 12px;
-            "
-          >
-            📌 تمام پردازش در مرورگر انجام می‌شود - هیچ فایلی روی سرور ذخیره
-            نمی‌شود
-          </p>
-          <div
-            class="upload-zone"
-            id="ic-zone"
-            onclick="document.getElementById('ic-file').click()"
-            ondragover="icDrag(event, true)"
-            ondragleave="icDrag(event, false)"
-            ondrop="icDrop(event)"
-          >
-            <input
-              type="file"
-              id="ic-file"
-              accept="image/*,.heic,.heif"
-              onchange="icLoad()"
-            />
-            <div class="upload-zone__icon">🖼️</div>
-            <div class="upload-zone__text">کلیک یا Drag & Drop تصویر</div>
-            <div class="upload-zone__limit">
-              حداکثر ۵۰ مگابایت · JPG، PNG، WebP، <strong>HEIC</strong></div>
-  
-          <div class="tool-desc">تصویر را در مرورگر با Canvas API فشرده می‌کند. هیچ فایلی به سرور ارسال نمی‌شود. WebP بهترین نسبت کیفیت به حجم را دارد.</div>
-        </div>
-          <div id="ic-info" style="display: none" class="file-info-bar"></div>
-          <div id="ic-err" class="tool-err"></div>
-          <div class="range-row" style="margin-top: 10px">
-            <label>کیفیت</label
-            ><input
-              type="range"
-              id="ic-quality"
-              min="5"
-              max="100"
-              value="80"
-              oninput="
-                document.getElementById('ic-qv').textContent = this.value + '%';
-                icRecompress();
-              "
-            /><span class="range-val" id="ic-qv">80%</span>
+          <!-- Tab bar -->
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
+            <button class="btn btn-filled btn-xs" id="it-tab-single" onclick="itSetTab('single')">🖼 تک تصویر</button>
+            <button class="btn btn-tonal  btn-xs" id="it-tab-bulk"   onclick="itSetTab('bulk')">🗂 دسته‌جمعی</button>
           </div>
-          <div class="field-row" style="margin-top:10px;flex-wrap:wrap;gap:12px">
-            <div class="field-col">
-              <label class="field-label">فرمت خروجی</label>
-              <select id="ic-fmt" class="select-input" onchange="icRecompress()">
-                <option value="image/webp">WebP - بهترین فشرده‌سازی</option>
-                <option value="image/jpeg">JPEG</option>
-                <option value="image/png">PNG</option>
-              </select>
+
+          <!-- ══ SINGLE ══ -->
+          <div id="it-panel-single">
+            <!-- Upload zone -->
+            <div class="upload-zone" id="ic-zone"
+              onclick="document.getElementById('ic-file').click()"
+              ondragover="icDrag(event,true)" ondragleave="icDrag(event,false)" ondrop="icDrop(event)">
+              <input type="file" id="ic-file" accept="image/*,.heic,.heif" onchange="icLoad()"/>
+              <div class="upload-zone__icon">🖼️</div>
+              <div class="upload-zone__text">کلیک یا Drag & Drop تصویر</div>
+              <div class="upload-zone__limit">حداکثر ۵۰ مگابایت · JPG · PNG · WebP · <strong>HEIC</strong></div>
             </div>
-            <div class="field-col">
-              <label class="field-label">حداکثر عرض/ارتفاع (px)</label>
-              <input type="number" id="ic-maxdim" class="text-input" value="1920" min="100" max="8000" step="10" oninput="icRecompress()">
+            <div id="ic-info" style="display:none" class="file-info-bar"></div>
+            <div id="ic-err" class="tool-err"></div>
+
+            <!-- Crop section -->
+            <div id="it-crop-section" style="display:none;margin-top:14px;padding:12px;border-radius:12px;background:var(--m3-surface-container)">
+              <div style="font-weight:700;font-size:13px;margin-bottom:8px">✂️ برش تصویر</div>
+              <!-- Ratio chips -->
+              <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+                <button class="btn btn-filled btn-xs it-ratio" data-r="free" onclick="itRatio(this)">آزاد</button>
+                <button class="btn btn-tonal  btn-xs it-ratio" data-r="1"    onclick="itRatio(this)">۱:۱</button>
+                <button class="btn btn-tonal  btn-xs it-ratio" data-r="1.333" onclick="itRatio(this)">۴:۳</button>
+                <button class="btn btn-tonal  btn-xs it-ratio" data-r="1.778" onclick="itRatio(this)">۱۶:۹</button>
+                <button class="btn btn-tonal  btn-xs it-ratio" data-r="1.5"  onclick="itRatio(this)">۳:۲</button>
+                <button class="btn btn-tonal  btn-xs it-ratio" data-r="0.5625" onclick="itRatio(this)">۹:۱۶ استوری</button>
+              </div>
+              <!-- Crop canvas -->
+              <div style="position:relative;display:inline-block;width:100%;touch-action:none" id="it-cropwrap">
+                <canvas id="it-crop-canvas" style="width:100%;display:block;border-radius:8px;cursor:crosshair;border:1px solid var(--m3-outline-variant)"></canvas>
+                <div id="it-cropbox" style="display:none;position:absolute;border:2px solid #00e5ff;box-sizing:border-box;pointer-events:none">
+                  <div style="position:absolute;inset:0;background:rgba(0,229,255,.1)"></div>
+                  <div class="it-ch" style="top:-5px;left:-5px;cursor:nw-resize"></div>
+                  <div class="it-ch" style="top:-5px;right:-5px;cursor:ne-resize"></div>
+                  <div class="it-ch" style="bottom:-5px;left:-5px;cursor:sw-resize"></div>
+                  <div class="it-ch" style="bottom:-5px;right:-5px;cursor:se-resize"></div>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+                <button class="btn btn-tonal"  onclick="itCropReset()">↺ ریست</button>
+                <button class="btn btn-filled" id="it-apply-crop" style="display:none" onclick="itApplyCrop()">✂️ اعمال برش</button>
+              </div>
             </div>
-            <div class="field-col">
-              <label class="field-label">حداکثر حجم خروجی (KB)</label>
-              <input type="number" id="ic-maxkb" class="text-input" value="500" min="10" max="50000" step="10" oninput="icRecompress()">
+
+            <!-- Compress settings -->
+            <div id="it-compress-section" style="display:none;margin-top:14px">
+              <div class="range-row">
+                <label>کیفیت</label>
+                <input type="range" id="ic-quality" min="5" max="100" value="80"
+                  oninput="document.getElementById('ic-qv').textContent=this.value+'%';icRecompress()"/>
+                <span class="range-val" id="ic-qv">80%</span>
+              </div>
+              <div class="field-row" style="margin-top:10px;flex-wrap:wrap;gap:10px">
+                <div class="field-col">
+                  <label class="field-label">فرمت خروجی</label>
+                  <select id="ic-fmt" class="select-input" onchange="icRecompress()">
+                    <option value="image/webp">WebP — بهترین</option>
+                    <option value="image/jpeg">JPEG</option>
+                    <option value="image/png">PNG</option>
+                  </select>
+                </div>
+                <div class="field-col">
+                  <label class="field-label">حداکثر عرض/ارتفاع (px)</label>
+                  <input type="number" id="ic-maxdim" class="text-input" value="1920" min="100" max="8000" step="10" oninput="icRecompress()">
+                </div>
+                <div class="field-col">
+                  <label class="field-label">حداکثر حجم (KB)</label>
+                  <input type="number" id="ic-maxkb" class="text-input" value="500" min="10" max="50000" step="10" oninput="icRecompress()">
+                </div>
+              </div>
+              <div id="ic-progress" style="display:none;margin-top:10px">
+                <div style="height:6px;background:var(--m3-surface-container-highest);border-radius:3px;overflow:hidden">
+                  <div id="ic-prog-bar" style="height:100%;width:0%;background:var(--m3-primary);border-radius:3px;transition:width .3s"></div>
+                </div>
+                <div id="ic-prog-label" style="font-size:12px;color:var(--m3-on-surface-variant);margin-top:4px;text-align:center"></div>
+              </div>
+              <img id="ic-preview" style="display:none;max-width:100%;max-height:240px;border-radius:10px;margin-top:10px;border:1px solid var(--m3-outline-variant)"/>
+              <div id="ic-compare" style="display:none;margin-top:10px" class="data-list">
+                <div class="data-row"><span class="data-row__key">اندازه اصلی</span><span class="data-row__val" id="ic-orig-sz">-</span></div>
+                <div class="data-row"><span class="data-row__key">اندازه فشرده</span><span class="data-row__val" id="ic-comp-sz">-</span></div>
+                <div class="data-row"><span class="data-row__key">کاهش حجم</span><span class="data-row__val" id="ic-saving">-</span></div>
+              </div>
+              <button class="btn btn-filled" id="ic-dl" onclick="icDownload()" style="display:none;margin-top:10px">💾 دانلود تصویر</button>
             </div>
-          </div>
-          <div id="ic-progress" style="display:none;margin-top:10px">
-            <div style="height:6px;background:var(--m3-surface-container-highest);border-radius:3px;overflow:hidden">
-              <div id="ic-prog-bar" style="height:100%;width:0%;background:var(--m3-primary);border-radius:3px;transition:width .3s"></div>
+          </div><!-- /single -->
+
+          <!-- ══ BULK ══ -->
+          <div id="it-panel-bulk" style="display:none">
+            <div class="upload-zone" id="it-bulk-zone"
+              onclick="document.getElementById('it-bulk-file').click()"
+              ondragover="event.preventDefault();this.classList.add('drag-over')"
+              ondragleave="this.classList.remove('drag-over')"
+              ondrop="event.preventDefault();this.classList.remove('drag-over');itBulkLoad(event.dataTransfer.files)">
+              <input type="file" id="it-bulk-file" accept="image/*,.heic,.heif" multiple style="display:none" onchange="itBulkLoad(this.files)"/>
+              <div class="upload-zone__icon">🗂️</div>
+              <div class="upload-zone__text">چندین تصویر را انتخاب یا بکشید</div>
+              <div class="upload-zone__limit">JPG · PNG · WebP · HEIC · چند فایل همزمان</div>
             </div>
-            <div id="ic-prog-label" style="font-size:12px;color:var(--m3-on-surface-variant);margin-top:4px;text-align:center"></div>
-          </div>
-          <div
-            style="
-              display: flex;
-              gap: 14px;
-              margin-top: 10px;
-              flex-wrap: wrap;
-              align-items: center;
-            "
-          >
-            <img
-              id="ic-preview"
-              style="
-                display: none;
-                max-width: 100%;
-                max-height: 240px;
-                border-radius: 10px;
-                border: 1px solid var(--m3-outline-variant);
-              "
-            />
-          </div>
-          <div
-            id="ic-compare"
-            style="display: none; margin-top: 10px"
-            class="data-list"
-          >
-            <div class="data-row">
-              <span class="data-row__key">اندازه اصلی</span
-              ><span class="data-row__val" id="ic-orig-sz">-</span>
+            <div id="it-bulk-err" class="tool-err"></div>
+            <div class="field-row" style="margin-top:12px;flex-wrap:wrap;gap:10px">
+              <div class="field-col">
+                <label class="field-label">فرمت خروجی</label>
+                <select id="it-bulk-fmt" class="select-input">
+                  <option value="image/webp">WebP</option>
+                  <option value="image/jpeg">JPEG</option>
+                  <option value="image/png">PNG</option>
+                </select>
+              </div>
+              <div class="field-col">
+                <label class="field-label">کیفیت (%)</label>
+                <input type="number" id="it-bulk-q" class="text-input" value="80" min="5" max="100" step="5">
+              </div>
+              <div class="field-col">
+                <label class="field-label">حداکثر عرض (px)</label>
+                <input type="number" id="it-bulk-maxw" class="text-input" value="1920" min="100" max="8000">
+              </div>
+              <div class="field-col">
+                <label class="field-label">حداکثر ارتفاع (px)</label>
+                <input type="number" id="it-bulk-maxh" class="text-input" value="1920" min="100" max="8000">
+              </div>
             </div>
-            <div class="data-row">
-              <span class="data-row__key">اندازه فشرده</span
-              ><span class="data-row__val" id="ic-comp-sz">-</span>
+            <div id="it-bulk-list" style="margin-top:10px;display:flex;flex-direction:column;gap:6px"></div>
+            <div id="it-bulk-progress" style="display:none;margin-top:8px">
+              <div style="height:6px;background:var(--m3-surface-container-highest);border-radius:3px;overflow:hidden">
+                <div id="it-bulk-bar" style="height:100%;width:0%;background:var(--m3-primary);border-radius:3px;transition:width .3s"></div>
+              </div>
+              <div id="it-bulk-label" style="font-size:12px;color:var(--m3-on-surface-variant);margin-top:4px;text-align:center"></div>
             </div>
-            <div class="data-row">
-              <span class="data-row__key">کاهش</span
-              ><span class="data-row__val" id="ic-saving">-</span>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+              <button class="btn btn-filled" id="it-bulk-run" onclick="itBulkProcess()" style="display:none">⚡ شروع پردازش</button>
+              <button class="btn btn-tonal"  id="it-bulk-dl"  onclick="itBulkDownload()" style="display:none">📦 دانلود ZIP</button>
             </div>
-          </div>
-          <button
-            class="btn btn-filled"
-            id="ic-dl"
-            onclick="icDownload()"
-            style="display: none; margin-top: 10px"
-          >
-            💾 دانلود
-          </button>
+          </div><!-- /bulk -->
+
+          <div class="tool-desc">برش با نسبت‌های دلخواه، فشرده‌سازی، تبدیل فرمت، و پردازش دسته‌جمعی — کاملاً آفلاین.</div>
         </div>
 
         <!-- ══ PDF COMPRESS ══ -->
-        <div id="pdfcompress" class="tool-card">
+        <div id="pdftool" class="tool-card">
           <div class="tool-title">🛠️ ابزار PDF</div>
           <p style="font-size:0.8rem;color:var(--m3-on-surface-variant);margin-bottom:14px">📌 تمام پردازش‌ها در مرورگر انجام شده و هیچ فایلی به سرور ارسال نمی‌شود</p>
 
@@ -9039,7 +9117,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 7.0 - ۱۴۰۵/۰۲/۰۷
+          ℹ️ نسخه 7.1 - ۱۴۰۵/۰۲/۰۷
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -9105,12 +9183,12 @@
         json:'فرمت‌دهی JSON', xml:'فرمت‌دهی XML', htmlesc:'HTML Escaper',
         hash:'هش رمزنگاری', crypto:'رمزنگاری متن', jwt:'JWT Parser', pxrem:'PX ↔ REM',
         regex:'تست Regex', cron:'تجزیه Cron', urlparse:'تجزیه URL', numbase:'تبدیل مبنا',
-        pass:'مولد رمز عبور', uuid:'UUID / ULID', randnum:'تصادفی‌ساز', invoice:'فاکتور رسمی', textbeauty:'زیباساز متن',
+        pass:'مولد رمز عبور', uuid:'UUID / ULID', randnum:'تصادفی‌ساز', invoice:'فاکتور رسمی', rubik:'حل مکعب روبیک', textbeauty:'زیباساز متن',
         randip:'IP تصادفی', randcolor:'رنگ تصادفی', fake:'داده ساختگی',
         credit:'کارت اعتباری تستی', avatar:'مولد آواتار', placeholder:'تصویر جایگزین',
         qr:'کد QR', barcode:'بارکد Code-128', colorpicker:'تبدیل رنگ',
         gradient:'گرادیان CSS', shadow:'سایه CSS', borderrad:'گوشه‌گرد CSS',
-        aspect:'نسبت ابعاد', imgcompress:'فشرده‌سازی تصویر', bgremove:'حذف پس‌زمینه', pdfcompress:'ابزار PDF',
+        aspect:'نسبت ابعاد', imgtool:'ابزار تصویر', bgremove:'حذف پس‌زمینه', pdftool:'ابزار PDF',
         img2b64:'تصویر ← Base64', csvjson:'CSV ↔ JSON', device:'اطلاعات دستگاه',
         ua:'User Agent', morse:'کد مورس', roman:'اعداد رومی',
         asciitbl:'جدول ASCII', textbin:'متن ↔ باینری', timezone:'ساعت جهانی',
@@ -9380,7 +9458,7 @@
           icon: '⚡', label: 'مولدها',
           tools: [
             {id:'pass',icon:'🔐',name:'رمز عبور'},{id:'uuid',icon:'🪪',name:'UUID / ULID'},
-            {id:'randnum',icon:'🎲',name:'تصادفی‌ساز'},{id:'invoice',icon:'🧾',name:'فاکتور رسمی'},{id:'textbeauty',icon:'✨',name:'زیباساز متن'},{id:'randip',icon:'🌐',name:'IP تصادفی'},
+            {id:'randnum',icon:'🎲',name:'تصادفی‌ساز'},{id:'invoice',icon:'🧾',name:'فاکتور رسمی'},{id:'rubik',icon:'🧩',name:'حل مکعب روبیک'},{id:'textbeauty',icon:'✨',name:'زیباساز متن'},{id:'randip',icon:'🌐',name:'IP تصادفی'},
             {id:'randcolor',icon:'🎨',name:'رنگ تصادفی'},{id:'fake',icon:'👤',name:'داده ساختگی'},
             {id:'credit',icon:'💳',name:'کارت اعتباری'},{id:'avatar',icon:'🖼️',name:'آواتار'},
             {id:'placeholder',icon:'🗃️',name:'تصویر جایگزین'},{id:'qr',icon:'📱',name:'کد QR'},
@@ -9401,7 +9479,7 @@
         'sec-file': {
           icon: '📁', label: 'فایل',
           tools: [
-            {id:'imgcompress',icon:'🗜️',name:'فشرده‌سازی تصویر'},{id:'pdfcompress',icon:'🛠️',name:'ابزار PDF'},
+            {id:'imgtool',icon:'🖼️',name:'ابزار تصویر'},{id:'pdftool',icon:'🛠️',name:'ابزار PDF'},
             {id:'bgremove',icon:'✂️',name:'حذف پس‌زمینه'},{id:'filesplit',icon:'🗂',name:'تقسیم و مرج فایل'},{id:'watermark',icon:'💧',name:'واترمارک تصویر'},
             {id:'img2b64',icon:'🔄',name:'تصویر ← Base64'},{id:'csvjson',icon:'↔️',name:'CSV ↔ JSON'}
           ]
@@ -11594,10 +11672,8 @@
         // ── party type (real/legal) ──
         window.invParty=function(prefix,type){
           ['real','legal'].forEach(t=>{
-            const btn=document.getElementById('inv-'+prefix+'-'+t);
-            if(btn){
-              btn.className=t===type?'btn btn-filled btn-xs':'btn btn-tonal btn-xs';
-            }
+            const btn=document.getElementById(`inv-${prefix}-${t}`);
+            if(btn) btn.className=t===type?'btn btn-filled btn-xs':'btn btn-tonal btn-xs';
           });
         };
 
@@ -11605,15 +11681,15 @@
         function invRowHTML(i){
           const inp='background:transparent;color:inherit;border:none;width:100%;font-size:13px;padding:5px 4px;font-family:inherit;outline:none';
           return `<tr id="inv-row-${i}">
-            <td style="padding:4px;text-align:center;border:1px solid var(--m3-outline-variant,#ccc);font-size:12px">${toFa(i)}</td>
-            <td style="padding:0;border:1px solid var(--m3-outline-variant,#ccc)"><input style="${inp};min-width:100px" placeholder="شرح کالا / خدمات" oninput="invCalc()"/></td>
-            <td style="padding:0;border:1px solid var(--m3-outline-variant,#ccc)"><input class="inv-qty" style="${inp};direction:ltr;text-align:center;min-width:60px" value="1" type="number" min="1" oninput="invCalc()"/></td>
-            <td style="padding:0;border:1px solid var(--m3-outline-variant,#ccc)"><input style="${inp};text-align:center;min-width:54px" placeholder="عدد"/></td>
-            <td style="padding:0;border:1px solid var(--m3-outline-variant,#ccc)"><input class="inv-price" style="${inp};direction:ltr;text-align:center;min-width:90px" placeholder="0" type="number" min="0" oninput="invCalc()"/></td>
-            <td style="padding:5px 4px;text-align:center;border:1px solid var(--m3-outline-variant,#ccc);font-size:13px;direction:ltr" id="inv-row-total-${i}">۰</td>
-            <td style="padding:0;border:1px solid var(--m3-outline-variant,#ccc)"><input class="inv-disc" style="${inp};direction:ltr;text-align:center;min-width:54px" placeholder="0" type="number" min="0" max="100" oninput="invCalc()"/></td>
-            <td style="padding:5px 4px;text-align:center;border:1px solid var(--m3-outline-variant,#ccc);font-size:13px;font-weight:600;direction:ltr" id="inv-row-net-${i}">۰</td>
-            <td style="padding:4px;text-align:center;border:1px solid var(--m3-outline-variant,#ccc)"><button onclick="invRemoveRow(${i})" style="background:none;border:none;cursor:pointer;color:#c00;font-size:16px;padding:0 4px">×</button></td>
+            <td style="padding:4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);font-size:12px">${toFa(i)}</td>
+            <td style="padding:0;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><input style="${inp};min-width:100px" placeholder="شرح کالا / خدمات" oninput="invCalc()"/></td>
+            <td style="padding:0;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><input class="inv-qty" style="${inp};direction:ltr;text-align:center;min-width:60px" value="1" type="number" min="1" oninput="invCalc()"/></td>
+            <td style="padding:0;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><input style="${inp};text-align:center;min-width:54px" placeholder="عدد"/></td>
+            <td style="padding:0;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><input class="inv-price" style="${inp};direction:ltr;text-align:center;min-width:90px" placeholder="0" type="number" min="0" oninput="invCalc()"/></td>
+            <td style="padding:5px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);font-size:13px;direction:ltr" id="inv-row-total-${i}">۰</td>
+            <td style="padding:0;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><input class="inv-disc" style="${inp};direction:ltr;text-align:center;min-width:54px" placeholder="0" type="number" min="0" max="100" oninput="invCalc()"/></td>
+            <td style="padding:5px 4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc);font-size:13px;font-weight:600;direction:ltr" id="inv-row-net-${i}">۰</td>
+            <td style="padding:4px;text-align:center;border:1px solid var(--md-sys-color-outline-variant,#ccc)"><button onclick="invRemoveRow(${i})" style="background:none;border:none;cursor:pointer;color:#c00;font-size:16px;padding:0 4px">×</button></td>
           </tr>`;
         }
 
@@ -11895,13 +11971,7 @@
           s.textContent=`
             .btn-xs{font-size:12px!important;padding:4px 10px!important;border-radius:20px!important}
             #inv-items-wrap::-webkit-scrollbar{height:4px}
-            #inv-items-wrap::-webkit-scrollbar-thumb{background:var(--m3-outline-variant,#ccc);border-radius:2px}
-            #inv-items{background:var(--m3-surface-container);color:var(--m3-on-surface)}
-            #inv-items td{background:transparent;color:inherit}
-            #inv-items tbody tr:nth-child(even) td{background:var(--m3-surface-container-low)}
-            #inv-items input{background:transparent!important;color:inherit!important;outline:none}
-            #inv-items input:focus{background:color-mix(in srgb,var(--m3-primary) 12%,transparent)!important;border-radius:4px}
-            #inv-items th{background:var(--m3-surface-container-high)!important;color:var(--m3-on-surface)!important}
+            #inv-items-wrap::-webkit-scrollbar-thumb{background:var(--md-sys-color-outline-variant,#ccc);border-radius:2px}
           `;
           document.head.appendChild(s);
         }
@@ -12042,6 +12112,339 @@
         document.head.appendChild(_s);
       })();
       // ══════════════════════════════════════════════════════
+      // ══════════════════════════════════════════════════════
+      //  RUBIK'S CUBE SOLVER
+      //  Cube state: string of 54 chars, order U(9) R(9) F(9) D(9) L(9) B(9)
+      //  Face indices: U=0 R=1 F=2 D=3 L=4 B=5
+      //  Colors: U=U D=D F=F B=B R=R L=L
+      // ══════════════════════════════════════════════════════
+      (function(){
+        const FACE_COLOR = {U:'#ffffff',D:'#ffee00',F:'#00a550',B:'#0051a2',R:'#ff3d00',L:'#ff8c00'};
+        const FACE_LABEL = {U:'U',D:'D',F:'F',B:'B',R:'R',L:'L'};
+        const FACES = ['U','R','F','D','L','B'];
+
+        // Net layout: [face, row, col] for each of 54 cells (URFDLB order)
+        // Cross layout: B/top-right, U/top, then L/F/R/B middle row, D/bottom
+        //   Net grid is 9 cols × 12 rows (each face = 3×3)
+        const NET_POS = {
+          U:[0,3], R:[3,6], F:[3,3], D:[6,3], L:[3,0], B:[3,9]
+        };
+
+        // Cube state as array of 54 face chars
+        let _cube;
+        let _selectedColor = 'U';
+        let _cellEls = []; // 54 DOM elements
+
+        function solvedCube() {
+          return FACES.flatMap(f => Array(9).fill(f));
+        }
+
+        function cubeToString(c){ return c.join(''); }
+        function stringToCube(s){ return [...s]; }
+
+        function cloneCube(c){ return [...c]; }
+
+        // Sticker index: face*9 + (0..8), row-major viewed from outside
+        function fi(face, r, c){ return FACES.indexOf(face)*9 + r*3+c; }
+
+        // ── Move tables ──
+        // Each move is an array of 4-cycles: [[a,b,c,d], ...] meaning a→b→c→d→a
+        function cycle4(c, a,b,d,e){const t=c[a];c[a]=c[e];c[e]=c[d];c[d]=c[b];c[b]=t;}
+
+        // Face rotation CW (stickers 0..8)
+        function rotateFaceCW(c,f){
+          const b=f*9;
+          const tmp=[...c.slice(b,b+9)];
+          c[b+0]=tmp[6];c[b+1]=tmp[3];c[b+2]=tmp[0];
+          c[b+3]=tmp[7];c[b+4]=tmp[4];c[b+5]=tmp[1];
+          c[b+6]=tmp[8];c[b+7]=tmp[5];c[b+8]=tmp[2];
+        }
+        function rotateFaceCCW(c,f){rotateFaceCW(c,f);rotateFaceCW(c,f);rotateFaceCW(c,f);}
+
+        // All 18 moves
+        const MOVE_FNS = {};
+        MOVE_FNS['U'] = c => {
+          rotateFaceCW(c,0);
+          const rows=[[fi('B',0,2),fi('B',0,1),fi('B',0,0)],[fi('R',0,0),fi('R',0,1),fi('R',0,2)],[fi('F',0,0),fi('F',0,1),fi('F',0,2)],[fi('L',0,0),fi('L',0,1),fi('L',0,2)]];
+          for(let k=0;k<3;k++){const t=c[rows[0][k]];c[rows[0][k]]=c[rows[1][k]];c[rows[1][k]]=c[rows[2][k]];c[rows[2][k]]=c[rows[3][k]];c[rows[3][k]]=t;}
+        };
+        MOVE_FNS['D'] = c => {
+          rotateFaceCW(c,3);
+          const rows=[[fi('F',2,0),fi('F',2,1),fi('F',2,2)],[fi('R',2,0),fi('R',2,1),fi('R',2,2)],[fi('B',2,2),fi('B',2,1),fi('B',2,0)],[fi('L',2,0),fi('L',2,1),fi('L',2,2)]];
+          for(let k=0;k<3;k++){const t=c[rows[0][k]];c[rows[0][k]]=c[rows[1][k]];c[rows[1][k]]=c[rows[2][k]];c[rows[2][k]]=c[rows[3][k]];c[rows[3][k]]=t;}
+        };
+        MOVE_FNS['R'] = c => {
+          rotateFaceCW(c,1);
+          const cols=[[fi('U',0,2),fi('U',1,2),fi('U',2,2)],[fi('B',2,0),fi('B',1,0),fi('B',0,0)],[fi('D',0,2),fi('D',1,2),fi('D',2,2)],[fi('F',0,2),fi('F',1,2),fi('F',2,2)]];
+          for(let k=0;k<3;k++){const t=c[cols[0][k]];c[cols[0][k]]=c[cols[3][k]];c[cols[3][k]]=c[cols[2][k]];c[cols[2][k]]=c[cols[1][k]];c[cols[1][k]]=t;}
+        };
+        MOVE_FNS['L'] = c => {
+          rotateFaceCW(c,4);
+          const cols=[[fi('U',0,0),fi('U',1,0),fi('U',2,0)],[fi('F',0,0),fi('F',1,0),fi('F',2,0)],[fi('D',0,0),fi('D',1,0),fi('D',2,0)],[fi('B',2,2),fi('B',1,2),fi('B',0,2)]];
+          for(let k=0;k<3;k++){const t=c[cols[0][k]];c[cols[0][k]]=c[cols[1][k]];c[cols[1][k]]=c[cols[2][k]];c[cols[2][k]]=c[cols[3][k]];c[cols[3][k]]=t;}
+        };
+        MOVE_FNS['F'] = c => {
+          rotateFaceCW(c,2);
+          const t0=c[fi('U',2,0)],t1=c[fi('U',2,1)],t2=c[fi('U',2,2)];
+          c[fi('U',2,0)]=c[fi('L',2,2)];c[fi('U',2,1)]=c[fi('L',1,2)];c[fi('U',2,2)]=c[fi('L',0,2)];
+          c[fi('L',0,2)]=c[fi('D',0,0)];c[fi('L',1,2)]=c[fi('D',0,1)];c[fi('L',2,2)]=c[fi('D',0,2)];
+          c[fi('D',0,0)]=c[fi('R',2,0)];c[fi('D',0,1)]=c[fi('R',1,0)];c[fi('D',0,2)]=c[fi('R',0,0)];
+          c[fi('R',0,0)]=t2;c[fi('R',1,0)]=t1;c[fi('R',2,0)]=t0;
+        };
+        MOVE_FNS['B'] = c => {
+          rotateFaceCW(c,5);
+          const t0=c[fi('U',0,0)],t1=c[fi('U',0,1)],t2=c[fi('U',0,2)];
+          c[fi('U',0,0)]=c[fi('R',0,2)];c[fi('U',0,1)]=c[fi('R',1,2)];c[fi('U',0,2)]=c[fi('R',2,2)];
+          c[fi('R',0,2)]=c[fi('D',2,2)];c[fi('R',1,2)]=c[fi('D',2,1)];c[fi('R',2,2)]=c[fi('D',2,0)];
+          c[fi('D',2,0)]=c[fi('L',0,0)];c[fi('D',2,1)]=c[fi('L',1,0)];c[fi('D',2,2)]=c[fi('L',2,0)];
+          c[fi('L',0,0)]=t2;c[fi('L',1,0)]=t1;c[fi('L',2,0)]=t0;
+        };
+        // Add inverses and doubles
+        ['U','D','R','L','F','B'].forEach(m=>{
+          MOVE_FNS[m+"'"] = c=>{MOVE_FNS[m](c);MOVE_FNS[m](c);MOVE_FNS[m](c);};
+          MOVE_FNS[m+'2'] = c=>{MOVE_FNS[m](c);MOVE_FNS[m](c);};
+        });
+
+        function applyMoves(c, moves) {
+          moves.forEach(m=>{ if(MOVE_FNS[m]) MOVE_FNS[m](c); });
+        }
+
+        function isSolved(c){
+          return FACES.every((_,fi2)=>c.slice(fi2*9,fi2*9+9).every(x=>x===c[fi2*9+4]));
+        }
+
+        // ── Heuristic solver (IDA* up to depth 20) ──
+        const ALL_MOVES = Object.keys(MOVE_FNS);
+        const MOVE_BASE = {};
+        ALL_MOVES.forEach(m=>{ MOVE_BASE[m]=m[0]; });
+
+        function heuristic(c){
+          let wrong=0;
+          FACES.forEach((_,fi2)=>{ const center=c[fi2*9+4]; for(let i=0;i<9;i++) if(c[fi2*9+i]!==center) wrong++; });
+          return Math.ceil(wrong/8);
+        }
+
+        let _solFound = null;
+        function idaStar(c, maxDepth) {
+          _solFound = null;
+          function dfs(cube, path, g, bound, lastBase) {
+            if (_solFound) return;
+            const h = heuristic(cube);
+            if (g+h > bound) return;
+            if (h===0) { _solFound=[...path]; return; }
+            if (g>=bound) return;
+            for (const m of ALL_MOVES) {
+              const base = MOVE_BASE[m];
+              if (base===lastBase) continue; // no same-face consecutive
+              const nc = cloneCube(cube);
+              MOVE_FNS[m](nc);
+              path.push(m);
+              dfs(nc, path, g+1, bound, base);
+              path.pop();
+              if (_solFound) return;
+            }
+          }
+          const h0=heuristic(c);
+          for (let bound=h0; bound<=maxDepth; bound++) {
+            dfs(c,[],0,bound,null);
+            if (_solFound) return _solFound;
+          }
+          return null;
+        }
+
+        // ── Net UI ──
+        function buildNetUI() {
+          const wrap = document.getElementById('rubik-net-wrap');
+          if (!wrap || wrap.children.length) return;
+          _cellEls = [];
+
+          // Grid: 12 cols × 9 rows of 28px cells
+          const CELL=28, GAP=2;
+          const gridW = 12*(CELL+GAP), gridH = 9*(CELL+GAP);
+          const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+          svg.setAttribute('width', String(gridW));
+          svg.setAttribute('height', String(gridH));
+          svg.style.cssText='display:block;border-radius:8px';
+
+          // Net positions: row_offset, col_offset for each face
+          const POS={U:[0,3],L:[3,0],F:[3,3],R:[3,6],B:[3,9],D:[6,3]};
+          const FACE_ORDER=['U','R','F','D','L','B']; // URFDLB order for cube string
+
+          // We need cell elements indexed 0..53 in URFDLB order
+          const cellMap=[]; // cellMap[faceIdx][r][c] = cell element
+
+          Object.entries(POS).forEach(([face,[r0,c0]])=>{
+            const faceIdx=FACE_ORDER.indexOf(face);
+            if(!cellMap[faceIdx]) cellMap[faceIdx]=[[],[],[]];
+            for(let r=0;r<3;r++) for(let c=0;c<3;c++){
+              const x=(c0+c)*(CELL+GAP), y=(r0+r)*(CELL+GAP);
+              const rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
+              rect.setAttribute('x',String(x)); rect.setAttribute('y',String(y));
+              rect.setAttribute('width',String(CELL)); rect.setAttribute('height',String(CELL));
+              rect.setAttribute('rx','3');
+              rect.style.cursor='pointer';
+              rect.style.stroke='rgba(255,255,255,0.3)';
+              rect.style.strokeWidth='1';
+              const stickerIdx = faceIdx*9 + r*3+c;
+              rect.dataset.idx=String(stickerIdx);
+              rect.dataset.face=face;
+              const isCenterPiece = r===1&&c===1;
+              if(isCenterPiece){
+                rect.style.cursor='default';
+                rect.style.opacity='0.7';
+              } else {
+                rect.addEventListener('click',()=>{
+                  _cube[stickerIdx]=_selectedColor;
+                  rbRefreshNet();
+                });
+              }
+              svg.appendChild(rect);
+              _cellEls[stickerIdx]=rect;
+
+              // Face label on center
+              if(isCenterPiece){
+                const txt=document.createElementNS('http://www.w3.org/2000/svg','text');
+                txt.setAttribute('x',String(x+CELL/2)); txt.setAttribute('y',String(y+CELL/2+4));
+                txt.setAttribute('text-anchor','middle');
+                txt.setAttribute('font-size','11'); txt.setAttribute('font-weight','700');
+                txt.setAttribute('fill','rgba(0,0,0,0.6)');
+                txt.setAttribute('pointer-events','none');
+                txt.textContent=face;
+                svg.appendChild(txt);
+              }
+            }
+          });
+          wrap.appendChild(svg);
+        }
+
+        function rbRefreshNet(){
+          if(!_cellEls.length) return;
+          _cellEls.forEach((el,i)=>{
+            if(!el) return;
+            const color = FACE_COLOR[_cube[i]] || '#888';
+            el.setAttribute('fill', color);
+          });
+        }
+
+        window.rbSelectColor = function(c){
+          _selectedColor=c;
+          document.querySelectorAll('.rubik-color-sel').forEach(b=>{
+            b.style.border=b.dataset.c===c?'3px solid var(--m3-primary)':'2px solid #888';
+          });
+        };
+
+        window.rbReset = function(){
+          _cube=solvedCube();
+          rbRefreshNet();
+          document.getElementById('rubik-solution-wrap').style.display='none';
+          document.getElementById('rubik-error').style.display='none';
+        };
+
+        window.rbScramble = function(){
+          _cube=solvedCube();
+          const moves=Object.keys(MOVE_FNS);
+          let last='';
+          for(let i=0;i<20;i++){
+            let m; let tries=0;
+            do{ m=moves[Math.floor(Math.random()*moves.length)]; tries++; }
+            while(MOVE_BASE[m]===last && tries<30);
+            MOVE_FNS[m](_cube); last=MOVE_BASE[m];
+          }
+          rbRefreshNet();
+          document.getElementById('rubik-solution-wrap').style.display='none';
+          document.getElementById('rubik-error').style.display='none';
+        };
+
+        window.rbApplyScramble = function(){
+          const input=document.getElementById('rubik-moves-input').value.trim();
+          if(!input) return;
+          const moves=input.split(/\s+/);
+          const invalid=moves.filter(m=>!MOVE_FNS[m]);
+          if(invalid.length){
+            rbShowError('حرکات نامعتبر: '+invalid.join(', ')+' · فرمت: R U R\' U\' F2');
+            return;
+          }
+          _cube=solvedCube();
+          applyMoves(_cube, moves);
+          rbRefreshNet();
+          document.getElementById('rubik-error').style.display='none';
+          document.getElementById('rubik-solution-wrap').style.display='none';
+        };
+
+        window.rbSolve = function(){
+          const errEl=document.getElementById('rubik-error');
+          const solWrap=document.getElementById('rubik-solution-wrap');
+          errEl.style.display='none';
+          solWrap.style.display='none';
+
+          if(isSolved(_cube)){
+            rbShowError('✅ مکعب از قبل حل شده است!');
+            return;
+          }
+
+          // Validate: each color must appear exactly 9 times
+          const counts={};
+          _cube.forEach(c=>{counts[c]=(counts[c]||0)+1;});
+          const invalid=FACES.filter(f=>(counts[f]||0)!==9);
+          if(invalid.length){
+            rbShowError('تعداد رنگ‌ها اشتباه است: '+invalid.map(f=>f+'='+(counts[f]||0)).join(', ')+'. هر رنگ باید دقیقاً ۹ بار باشد.');
+            return;
+          }
+
+          // Solve in a non-blocking way using setTimeout
+          const errDiv=document.getElementById('rubik-error');
+          errDiv.style.display='block'; errDiv.style.color='var(--m3-primary,#00796b)'; errDiv.style.background='transparent';
+          errDiv.textContent='⏳ در حال محاسبه...';
+
+          setTimeout(()=>{
+            const start=Date.now();
+            const sol=idaStar(cloneCube(_cube), 20);
+            const elapsed=Date.now()-start;
+            errDiv.style.display='none'; errDiv.style.color=''; errDiv.style.background='';
+
+            if(!sol){
+              rbShowError('❌ حل نشد (عمق ۲۰). مکعب را دوباره بررسی کنید.');
+              return;
+            }
+
+            const movesEl=document.getElementById('rubik-solution-moves');
+            const infoEl=document.getElementById('rubik-solution-info');
+            movesEl.textContent=sol.join(' ');
+            infoEl.textContent=sol.length+' حرکت · '+elapsed+' ms';
+            solWrap.style.display='';
+
+            // Apply solution to show solved state
+            applyMoves(_cube, sol);
+            rbRefreshNet();
+          }, 20);
+        };
+
+        window.rbCopySolution = function(){
+          const txt=document.getElementById('rubik-solution-moves').textContent;
+          copyText(txt);
+        };
+
+        function rbShowError(msg){
+          const e=document.getElementById('rubik-error');
+          e.style.display='block'; e.style.color='var(--m3-error,#c00)'; e.style.background='var(--m3-error-container,#ffdad6)';
+          e.textContent=msg;
+        }
+
+        window._rubikInit=function(){
+          if(_cube) return;
+          _cube=solvedCube();
+          buildNetUI();
+          rbRefreshNet();
+        };
+
+        // Hook into showTool
+        const _origST=window.showTool;
+        window.showTool=function(id){
+          _origST(id);
+          if(id==='rubik') setTimeout(window._rubikInit,60);
+        };
+      })();
+
       function genIP(){
         if(document.getElementById('ip-v6').checked){
           const arr=new Uint16Array(8); crypto.getRandomValues(arr);
@@ -12371,210 +12774,404 @@
       let _icFile = null, _icOrigSize = 0, _icCompressedBlob = null;
       const MAX_FILE = 50 * 1024 * 1024;
 
-      function icDrag(e, on) {
-        e.preventDefault();
-        document.getElementById('ic-zone').classList.toggle('drag-over', on);
-      }
-      function icDrop(e) {
-        e.preventDefault();
-        icDrag(e, false);
-        const f = e.dataTransfer.files[0];
-        if (f) icProcess(f);
-      }
-      function icLoad() {
-        const f = document.getElementById('ic-file').files[0];
-        if (f) icProcess(f);
-      }
+      // ══════════════════════════════════════════════════════
+      //  IMGTOOL — crop + compress + bulk (all in-browser)
+      // ══════════════════════════════════════════════════════
+      (function(){
 
-      // lazy-load heic2any from CDN only when needed
-      let _heic2anyLoaded = false;
-      function _loadHeic2any() {
-        return new Promise((resolve, reject) => {
-          if (window.heic2any) { resolve(); return; }
-          if (_heic2anyLoaded) { // script tag added but not yet ready — wait
-            const t = setInterval(() => { if (window.heic2any) { clearInterval(t); resolve(); } }, 80);
-            setTimeout(() => { clearInterval(t); reject(new Error('heic2any timeout')); }, 15000);
+      /* ── Inject imgtool CSS ── */
+      const _s=document.createElement('style');
+      _s.textContent=`
+        .it-ch{position:absolute;width:12px;height:12px;background:#00e5ff;border-radius:2px;pointer-events:auto;cursor:inherit}
+        .it-cropbox-move{cursor:move}
+      `;
+      document.head.appendChild(_s);
+
+      /* ── State ── */
+      let _icFile=null, _icOrigSize=0, _icCompressedBlob=null, _icCroppedFile=null;
+      const MAX_FILE=50*1024*1024;
+
+      /* ── Tab switching ── */
+      window.itSetTab=function(t){
+        ['single','bulk'].forEach(id=>{
+          document.getElementById('it-panel-'+id).style.display=id===t?'':'none';
+          document.getElementById('it-tab-'+id).className=id===t?'btn btn-filled btn-xs':'btn btn-tonal btn-xs';
+        });
+      };
+
+      /* ── HEIC loader ── */
+      let _heic2anyLoaded=false;
+      function _loadHeic2any(){
+        return new Promise((res,rej)=>{
+          if(window.heic2any){res();return;}
+          if(_heic2anyLoaded){
+            const t=setInterval(()=>{if(window.heic2any){clearInterval(t);res();}},80);
+            setTimeout(()=>{clearInterval(t);rej(new Error('heic2any timeout'));},15000);
             return;
           }
-          _heic2anyLoaded = true;
-          const s = document.createElement('script');
-          s.src = 'static/lib/heic2any.min.js';
-          s.onload = () => resolve();
-          s.onerror = () => reject(new Error('بارگذاری کتابخانه heic2any ناموفق بود.'));
+          _heic2anyLoaded=true;
+          const s=document.createElement('script');
+          s.src='static/lib/heic2any.min.js';
+          s.onload=res;
+          s.onerror=()=>rej(new Error('بارگذاری heic2any ناموفق. اتصال اینترنت را بررسی کنید.'));
           document.head.appendChild(s);
         });
       }
-
-      function _isHeic(file) {
-        if (file.type === 'image/heic' || file.type === 'image/heif') return true;
-        const name = file.name.toLowerCase();
-        return name.endsWith('.heic') || name.endsWith('.heif');
+      function _isHeic(f){
+        if(f.type==='image/heic'||f.type==='image/heif')return true;
+        const n=f.name.toLowerCase();return n.endsWith('.heic')||n.endsWith('.heif');
+      }
+      async function _toImgFile(f){
+        if(!_isHeic(f))return f;
+        await _loadHeic2any();
+        const blob=await heic2any({blob:f,toType:'image/jpeg',quality:0.95});
+        const b=Array.isArray(blob)?blob[0]:blob;
+        return new File([b],f.name.replace(/\.(heic|heif)$/i,'.jpg'),{type:'image/jpeg'});
       }
 
-      function icProcess(file) {
-        const errEl  = document.getElementById('ic-err');
-        const infoEl = document.getElementById('ic-info');
-        errEl.textContent = '';
-        document.getElementById('ic-compare').style.display = 'none';
-        document.getElementById('ic-dl').style.display = 'none';
-        document.getElementById('ic-preview').style.display = 'none';
-        if (file.size > MAX_FILE) {
-          errEl.textContent = 'فایل بیشتر از ۵۰ مگابایت است';
-          return;
-        }
-        // Allow image/* OR heic/heif by extension
-        if (!file.type.startsWith('image/') && !_isHeic(file)) {
-          errEl.textContent = 'لطفاً یک فایل تصویری انتخاب کنید';
-          return;
-        }
+      /* ── Drag/drop ── */
+      window.icDrag=function(e,on){e.preventDefault();document.getElementById('ic-zone')?.classList.toggle('drag-over',on);};
+      window.icDrop=function(e){e.preventDefault();icDrag(e,false);const f=e.dataTransfer.files[0];if(f)icProcess(f);};
+      window.icLoad=function(){const f=document.getElementById('ic-file').files[0];if(f)icProcess(f);};
 
-        if (_isHeic(file)) {
-          // ── HEIC path ──
-          infoEl.textContent = `⏳ در حال تبدیل HEIC... (${(file.size/1024).toFixed(1)} KB)`;
-          infoEl.style.display = 'block';
-          const progWrap  = document.getElementById('ic-progress');
-          const progBar   = document.getElementById('ic-prog-bar');
-          const progLabel = document.getElementById('ic-prog-label');
-          progWrap.style.display = 'block';
-          progBar.style.width = '20%';
-          progLabel.textContent = '⏳ در حال بارگذاری کتابخانه HEIC...';
-
-          _loadHeic2any().then(() => {
-            progBar.style.width = '40%';
-            progLabel.textContent = '⏳ در حال تبدیل HEIC به JPEG...';
-            return heic2any({ blob: file, toType: 'image/jpeg', quality: 0.95 });
-          }).then(convertedBlob => {
-            // heic2any may return array for multi-frame
-            const blob = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob;
-            // Give it a friendly name
-            const baseName = file.name.replace(/\.(heic|heif)$/i, '');
-            const jpegFile = new File([blob], baseName + '.jpg', { type: 'image/jpeg' });
-            progBar.style.width = '60%';
-            progLabel.textContent = '✅ HEIC تبدیل شد — در حال فشرده‌سازی...';
-            _icFile = jpegFile;
-            _icOrigSize = file.size; // report original HEIC size
-            // get dimensions then compress
-            const tmpUrl = URL.createObjectURL(jpegFile);
-            const tmpImg = new Image();
-            tmpImg.onload = () => {
-              URL.revokeObjectURL(tmpUrl);
-              infoEl.textContent = `فایل: ${file.name} → JPEG · ${tmpImg.width}×${tmpImg.height}px · اصلی: ${(file.size/1024).toFixed(1)} KB`;
-              icCompress();
-            };
-            tmpImg.onerror = () => { URL.revokeObjectURL(tmpUrl); icCompress(); };
-            tmpImg.src = tmpUrl;
-          }).catch(err => {
-            progWrap.style.display = 'none';
-            errEl.textContent = 'خطای تبدیل HEIC: ' + err.message;
-          });
-        } else {
-          // ── Normal image path ──
-          _icFile = file;
-          _icOrigSize = file.size;
-          infoEl.textContent = `فایل: ${file.name} - اندازه اصلی: ${(_icOrigSize / 1024).toFixed(1)} KB`;
-          infoEl.style.display = 'block';
-          const tmpUrl = URL.createObjectURL(file);
-          const tmpImg = new Image();
-          tmpImg.onload = () => {
-            URL.revokeObjectURL(tmpUrl);
-            infoEl.textContent = `فایل: ${file.name} - ${tmpImg.width}×${tmpImg.height}px - ${(_icOrigSize / 1024).toFixed(1)} KB`;
+      /* ── Process single file ── */
+      function icProcess(file){
+        const errEl=document.getElementById('ic-err');
+        errEl.textContent='';
+        ['ic-compare','ic-dl','ic-preview','it-crop-section','it-compress-section'].forEach(id=>{
+          const el=document.getElementById(id);if(el)el.style.display='none';
+        });
+        _itCropClear();
+        if(file.size>MAX_FILE){errEl.textContent='فایل بیشتر از ۵۰ مگابایت است';return;}
+        if(!file.type.startsWith('image/')&&!_isHeic(file)){errEl.textContent='لطفاً یک فایل تصویری انتخاب کنید';return;}
+        const infoEl=document.getElementById('ic-info');
+        infoEl.style.display='block';infoEl.textContent=_isHeic(file)?'⏳ در حال تبدیل HEIC...':'⏳ در حال بارگذاری...';
+        const prog=document.getElementById('ic-progress');
+        const bar=document.getElementById('ic-prog-bar');
+        const lbl=document.getElementById('ic-prog-label');
+        prog.style.display='block';bar.style.width='15%';lbl.textContent='';
+        _toImgFile(file).then(imgFile=>{
+          _icFile=imgFile;_icCroppedFile=null;_icOrigSize=file.size;
+          const url=URL.createObjectURL(imgFile);
+          const img=new Image();
+          img.onload=()=>{
+            URL.revokeObjectURL(url);
+            infoEl.textContent=imgFile.name+' · '+img.width+'×'+img.height+'px · '+(file.size/1024).toFixed(1)+' KB';
+            bar.style.width='100%';lbl.textContent='✅ آماده';
+            document.getElementById('it-crop-section').style.display='';
+            document.getElementById('it-compress-section').style.display='';
+            _itCropInit(img,imgFile);
             icCompress();
           };
-          tmpImg.onerror = () => { URL.revokeObjectURL(tmpUrl); icCompress(); };
-          tmpImg.src = tmpUrl;
-        }
-      }
-      function _icImg_dims_placeholder() { return ''; }
-
-      function icRecompress() {
-        if (_icFile) icCompress();
+          img.onerror=()=>{URL.revokeObjectURL(url);errEl.textContent='خطا در بارگذاری تصویر';};
+          img.src=url;
+        }).catch(err=>{prog.style.display='none';errEl.textContent='خطا: '+err.message;});
       }
 
-      async function icCompress() {
-        if (!_icFile) return;
-        if (typeof imageCompression === 'undefined') {
-          document.getElementById('ic-err').textContent = 'کتابخانه browser-image-compression.js بارگذاری نشد - مطمئن شوید فایل در lib/ قرار دارد';
-          return;
+      /* ══ CROP ENGINE ══ */
+      let _cropImg=null,_cropFile=null,_cropScale=1;
+      let _cropBox=null; // {x,y,w,h} in canvas px
+      let _cropRatio='free';
+      let _cropDrag=null; // {mode:'new'|'move'|'tl'|'tr'|'bl'|'br', sx,sy, box0}
+
+      function _itCropInit(img,file){
+        _cropImg=img;_cropFile=file;
+        const canvas=document.getElementById('it-crop-canvas');
+        const wrap=document.getElementById('it-cropwrap');
+        const maxW=wrap.clientWidth||340;
+        _cropScale=Math.min(1,maxW/img.width);
+        canvas.width=Math.round(img.width*_cropScale);
+        canvas.height=Math.round(img.height*_cropScale);
+        _cropBox=null;
+        _itCropDraw();
+        document.getElementById('it-cropbox').style.display='none';
+        document.getElementById('it-apply-crop').style.display='none';
+        // pointer events (canvas is the event target; overlay div is pointer-events:none)
+        const evs=[
+          ['mousedown','_itCropMD'],['touchstart','_itCropTD'],
+        ];
+        canvas.onmousedown=_itCropMD;canvas.ontouchstart=_itCropTD;
+      }
+
+      function _itCropDraw(){
+        if(!_cropImg)return;
+        const c=document.getElementById('it-crop-canvas');
+        const ctx=c.getContext('2d');
+        ctx.clearRect(0,0,c.width,c.height);
+        ctx.drawImage(_cropImg,0,0,c.width,c.height);
+        if(_cropBox){
+          ctx.fillStyle='rgba(0,0,0,0.35)';
+          ctx.fillRect(0,0,c.width,c.height);
+          ctx.clearRect(_cropBox.x,_cropBox.y,_cropBox.w,_cropBox.h);
+          ctx.drawImage(_cropImg,
+            _cropBox.x/_cropScale,_cropBox.y/_cropScale,_cropBox.w/_cropScale,_cropBox.h/_cropScale,
+            _cropBox.x,_cropBox.y,_cropBox.w,_cropBox.h);
+          ctx.strokeStyle='#00e5ff';ctx.lineWidth=2;
+          ctx.strokeRect(_cropBox.x,_cropBox.y,_cropBox.w,_cropBox.h);
         }
+      }
 
-        const infoEl    = document.getElementById('ic-info');
-        const errEl     = document.getElementById('ic-err');
-        const progWrap  = document.getElementById('ic-progress');
-        const progBar   = document.getElementById('ic-prog-bar');
-        const progLabel = document.getElementById('ic-prog-label');
+      function _itGetPt(e){
+        const c=document.getElementById('it-crop-canvas');
+        const r=c.getBoundingClientRect();
+        const src=e.touches?e.touches[0]:e;
+        return{x:(src.clientX-r.left)*(c.width/r.width),y:(src.clientY-r.top)*(c.height/r.height)};
+      }
+      function _itHandleAt(pt){
+        if(!_cropBox)return null;
+        const{x,y,w,h}=_cropBox,tol=14;
+        const corners={tl:[x,y],tr:[x+w,y],bl:[x,y+h],br:[x+w,y+h]};
+        for(const[k,[cx,cy]] of Object.entries(corners)){
+          if(Math.abs(pt.x-cx)<tol&&Math.abs(pt.y-cy)<tol)return k;
+        }
+        if(pt.x>x&&pt.x<x+w&&pt.y>y&&pt.y<y+h)return'move';
+        return null;
+      }
+      function _itClampBox(b){
+        const c=document.getElementById('it-crop-canvas');
+        let{x,y,w,h}=b;
+        const minS=10;
+        if(w<minS)w=minS;if(h<minS)h=minS;
+        if(_cropRatio!=='free'){const r=parseFloat(_cropRatio);h=w/r;if(h<minS){h=minS;w=h*r;}}
+        if(x<0){x=0;}if(y<0){y=0;}
+        if(x+w>c.width)w=c.width-x;
+        if(y+h>c.height)h=c.height-y;
+        if(_cropRatio!=='free'){const r=parseFloat(_cropRatio);h=w/r;}
+        return{x:Math.round(x),y:Math.round(y),w:Math.round(w),h:Math.round(h)};
+      }
+      function _itCropMD(e){
+        e.preventDefault();
+        const pt=_itGetPt(e);
+        const h=_itHandleAt(pt);
+        _cropDrag={mode:h||'new',sx:pt.x,sy:pt.y,box0:_cropBox?{..._cropBox}:null};
+        if(!h){_cropBox={x:pt.x,y:pt.y,w:0,h:0};}
+        document.onmousemove=_itCropMV;document.onmouseup=_itCropMU;
+        document.ontouchmove=_itCropTV;document.ontouchend=_itCropMU;
+      }
+      function _itCropTD(e){e.preventDefault();_itCropMD(e);}
+      function _itCropMV(e){
+        e.preventDefault();
+        if(!_cropDrag)return;
+        const pt=_itGetPt(e);
+        const dx=pt.x-_cropDrag.sx,dy=pt.y-_cropDrag.sy;
+        const b0=_cropDrag.box0;
+        const c=document.getElementById('it-crop-canvas');
+        let nb;
+        const m=_cropDrag.mode;
+        if(m==='new'){nb={x:Math.min(pt.x,_cropDrag.sx),y:Math.min(pt.y,_cropDrag.sy),w:Math.abs(pt.x-_cropDrag.sx),h:Math.abs(pt.y-_cropDrag.sy)};}
+        else if(m==='move'){nb={x:Math.max(0,Math.min(c.width-(b0.w||10),b0.x+dx)),y:Math.max(0,Math.min(c.height-(b0.h||10),b0.y+dy)),w:b0.w,h:b0.h};}
+        else if(m==='br'){nb={x:b0.x,y:b0.y,w:Math.max(10,b0.w+dx),h:Math.max(10,b0.h+dy)};}
+        else if(m==='bl'){const nw=Math.max(10,b0.w-dx);nb={x:b0.x+b0.w-nw,y:b0.y,w:nw,h:Math.max(10,b0.h+dy)};}
+        else if(m==='tr'){nb={x:b0.x,y:b0.y+b0.h-Math.max(10,b0.h-dy),w:Math.max(10,b0.w+dx),h:Math.max(10,b0.h-dy)};}
+        else if(m==='tl'){const nw=Math.max(10,b0.w-dx),nh=Math.max(10,b0.h-dy);nb={x:b0.x+b0.w-nw,y:b0.y+b0.h-nh,w:nw,h:nh};}
+        _cropBox=_itClampBox(nb);
+        _itCropDraw();
+        _itCropBoxSync();
+      }
+      function _itCropTV(e){e.preventDefault();_itCropMV(e);}
+      function _itCropMU(){
+        _cropDrag=null;
+        document.onmousemove=null;document.onmouseup=null;
+        document.ontouchmove=null;document.ontouchend=null;
+        if(_cropBox&&_cropBox.w>5&&_cropBox.h>5){
+          document.getElementById('it-apply-crop').style.display='';
+        }
+      }
+      function _itCropBoxSync(){
+        const box=document.getElementById('it-cropbox');
+        if(!_cropBox||_cropBox.w<5){box.style.display='none';return;}
+        const c=document.getElementById('it-crop-canvas');
+        const r=c.getBoundingClientRect();
+        const sx=r.width/c.width,sy=r.height/c.height;
+        box.style.display='';
+        box.style.left=(_cropBox.x*sx)+'px';box.style.top=(_cropBox.y*sy)+'px';
+        box.style.width=(_cropBox.w*sx)+'px';box.style.height=(_cropBox.h*sy)+'px';
+      }
+      function _itCropClear(){
+        _cropBox=null;_cropImg=null;_cropFile=null;_icCroppedFile=null;
+        const box=document.getElementById('it-cropbox');if(box)box.style.display='none';
+        const ap=document.getElementById('it-apply-crop');if(ap)ap.style.display='none';
+        document.querySelectorAll('.it-ratio').forEach(b=>{b.className='btn btn-tonal btn-xs it-ratio';});
+        _cropRatio='free';
+      }
+      window.itCropReset=function(){
+        _cropBox=null;_icCroppedFile=null;
+        const box=document.getElementById('it-cropbox');if(box)box.style.display='none';
+        const ap=document.getElementById('it-apply-crop');if(ap)ap.style.display='none';
+        if(_cropImg){_itCropDraw();}
+        if(_icFile){icCompress();}
+      };
+      window.itRatio=function(btn){
+        document.querySelectorAll('.it-ratio').forEach(b=>b.className='btn btn-tonal btn-xs it-ratio');
+        btn.className='btn btn-filled btn-xs it-ratio';
+        _cropRatio=btn.dataset.r;
+        // Snap existing box
+        if(_cropBox&&_cropRatio!=='free'){
+          _cropBox=_itClampBox({..._cropBox,h:_cropBox.w/parseFloat(_cropRatio)});
+          _itCropDraw();_itCropBoxSync();
+        }
+      };
+      window.itApplyCrop=function(){
+        if(!_cropBox||!_cropImg)return;
+        const s=1/_cropScale;
+        const sx=Math.round(_cropBox.x*s),sy=Math.round(_cropBox.y*s);
+        const sw=Math.round(_cropBox.w*s),sh=Math.round(_cropBox.h*s);
+        const out=document.createElement('canvas');
+        out.width=sw;out.height=sh;
+        out.getContext('2d').drawImage(_cropImg,sx,sy,sw,sh,0,0,sw,sh);
+        out.toBlob(blob=>{
+          const f=new File([blob],_icFile.name,{type:'image/jpeg'});
+          _icCroppedFile=f;
+          const img2=new Image();
+          const u=URL.createObjectURL(blob);
+          img2.onload=()=>{
+            URL.revokeObjectURL(u);
+            _itCropInit(img2,f);
+            document.getElementById('ic-info').textContent='برش اعمال شد · '+sw+'×'+sh+'px';
+            document.getElementById('it-crop-section').style.display='';
+            icCompress();
+          };
+          img2.src=u;
+        },'image/jpeg',0.97);
+      };
 
-        errEl.textContent = '';
-        progWrap.style.display = 'block';
-        progBar.style.width = '0%';
-        progLabel.textContent = '⏳ در حال فشرده‌سازی...';
-        document.getElementById('ic-compare').style.display = 'none';
-        document.getElementById('ic-dl').style.display = 'none';
+      /* ── Compress ── */
+      window.icRecompress=function(){if(_icFile)icCompress();};
+      async function icCompress(){
+        const work=_icCroppedFile||_icFile;
+        if(!work)return;
+        if(typeof imageCompression==='undefined'){
+          document.getElementById('ic-err').textContent='کتابخانه browser-image-compression.js بارگذاری نشد';return;
+        }
+        const errEl=document.getElementById('ic-err');
+        const bar=document.getElementById('ic-prog-bar');
+        const lbl=document.getElementById('ic-prog-label');
+        const prog=document.getElementById('ic-progress');
+        errEl.textContent='';prog.style.display='block';bar.style.width='0%';lbl.textContent='⏳ فشرده‌سازی...';
+        document.getElementById('ic-compare').style.display='none';
+        document.getElementById('ic-dl').style.display='none';
+        const q=parseInt(document.getElementById('ic-quality').value)/100;
+        const fmt=document.getElementById('ic-fmt').value;
+        const maxDim=parseInt(document.getElementById('ic-maxdim').value)||1920;
+        const maxKB=parseInt(document.getElementById('ic-maxkb').value)||500;
+        try{
+          const comp=await imageCompression(work,{
+            maxSizeMB:maxKB/1024,maxWidthOrHeight:maxDim,
+            useWebWorker:true,initialQuality:q,fileType:fmt,
+            onProgress:p=>{bar.style.width=p+'%';lbl.textContent='⏳ '+p+'%';}
+          });
+          _icCompressedBlob=comp;
+          const prev=document.getElementById('ic-preview');
+          prev.src=URL.createObjectURL(comp);prev.style.display='block';
+          const origKB=(_icOrigSize/1024).toFixed(1);
+          const compKB=(comp.size/1024).toFixed(1);
+          const saving=Math.max(0,Math.round((1-comp.size/_icOrigSize)*100));
+          document.getElementById('ic-orig-sz').textContent=origKB+' KB';
+          document.getElementById('ic-comp-sz').textContent=compKB+' KB';
+          document.getElementById('ic-saving').textContent=saving+'%';
+          document.getElementById('ic-compare').style.display='block';
+          document.getElementById('ic-dl').style.display='';
+          bar.style.width='100%';lbl.textContent='✅ '+origKB+' KB → '+compKB+' KB · کاهش '+saving+'%';
+          if(comp.size>_icOrigSize) errEl.textContent='⚠ خروجی از ورودی بزرگ‌تر شد — فرمت دیگری امتحان کنید';
+        }catch(err){prog.style.display='none';errEl.textContent='خطا: '+err.message;}
+      }
+      window.icDownload=function(){
+        if(!_icCompressedBlob)return;
+        const fmt=document.getElementById('ic-fmt').value;
+        const ext={'image/webp':'webp','image/jpeg':'jpg','image/png':'png'}[fmt]||'img';
+        const base=(_icFile?.name||'image').replace(/\.(heic|heif|jpg|jpeg|png|webp|bmp|gif|tiff?)$/i,'');
+        const a=document.createElement('a');
+        a.download=base+'.'+ext;a.href=URL.createObjectURL(_icCompressedBlob);a.click();
+        setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+      };
 
-        const quality  = parseInt(document.getElementById('ic-quality').value) / 100;
-        const fmt      = document.getElementById('ic-fmt').value;          // e.g. "image/webp"
-        const maxDim   = parseInt(document.getElementById('ic-maxdim').value) || 1920;
-        const maxKB    = parseInt(document.getElementById('ic-maxkb').value) || 500;
-        const fileType = fmt; // library accepts "image/webp", "image/jpeg", "image/png"
-
-        const options = {
-          maxSizeMB:         maxKB / 1024,
-          maxWidthOrHeight:  maxDim,
-          useWebWorker:      true,
-          initialQuality:    quality,
-          fileType:          fileType,
-          onProgress: (pct) => {
-            progBar.style.width  = pct + '%';
-            progLabel.textContent = `⏳ ${pct}% - در حال فشرده‌سازی...`;
-          },
-        };
-
-        try {
-          const compressed = await imageCompression(_icFile, options);
-          _icCompressedBlob = compressed;
-
-          // Show preview
-          const previewUrl = URL.createObjectURL(compressed);
-          const prevEl = document.getElementById('ic-preview');
-          prevEl.src = previewUrl;
-          prevEl.style.display = 'block';
-
-          // Stats
-          const origKB = (_icOrigSize / 1024).toFixed(1);
-          const compKB = (compressed.size / 1024).toFixed(1);
-          const saving = Math.max(0, Math.round((1 - compressed.size / _icOrigSize) * 100));
-
-          document.getElementById('ic-orig-sz').textContent = origKB + ' KB';
-          document.getElementById('ic-comp-sz').textContent = compKB + ' KB';
-          document.getElementById('ic-saving').textContent  = saving + '%';
-          document.getElementById('ic-compare').style.display = 'block';
-          document.getElementById('ic-dl').style.display      = 'inline-flex';
-
-          progBar.style.width    = '100%';
-          progLabel.textContent  = `✅ ${origKB} KB → ${compKB} KB - کاهش ${saving}%`;
-
-          // Warn if output is larger (can happen with PNG or AVIF on tiny images)
-          if (compressed.size > _icOrigSize) {
-            errEl.textContent = '⚠ تصویر خروجی بزرگ‌تر از ورودی شد - کیفیت یا فرمت دیگری امتحان کنید';
+      /* ══ BULK ══ */
+      let _bulkFiles=[];let _bulkResults=[];
+      window.itBulkLoad=function(files){
+        _bulkFiles=Array.from(files).filter(f=>f.type.startsWith('image/')||_isHeic(f));
+        _bulkResults=[];
+        const list=document.getElementById('it-bulk-list');
+        const err=document.getElementById('it-bulk-err');
+        err.textContent='';
+        if(!_bulkFiles.length){err.textContent='فایل تصویری یافت نشد';return;}
+        list.innerHTML=_bulkFiles.map((f,i)=>
+          `<div class="data-row"><span class="data-row__key" style="font-size:12px">${f.name}</span>`+
+          `<span class="data-row__val" id="it-bs-${i}" style="font-size:12px">⏳ منتظر</span></div>`
+        ).join('');
+        document.getElementById('it-bulk-run').style.display='';
+        document.getElementById('it-bulk-dl').style.display='none';
+      };
+      window.itBulkProcess=async function(){
+        if(!_bulkFiles.length)return;
+        if(typeof imageCompression==='undefined'){
+          document.getElementById('it-bulk-err').textContent='کتابخانه imageCompression بارگذاری نشد';return;
+        }
+        const fmt=document.getElementById('it-bulk-fmt').value;
+        const ext={'image/webp':'webp','image/jpeg':'jpg','image/png':'png'}[fmt]||'jpg';
+        const q=(parseInt(document.getElementById('it-bulk-q').value)||80)/100;
+        const maxW=parseInt(document.getElementById('it-bulk-maxw').value)||1920;
+        const maxH=parseInt(document.getElementById('it-bulk-maxh').value)||1920;
+        const maxDim=Math.max(maxW,maxH);
+        const bar=document.getElementById('it-bulk-bar');
+        const lbl=document.getElementById('it-bulk-label');
+        document.getElementById('it-bulk-progress').style.display='block';
+        document.getElementById('it-bulk-run').style.display='none';
+        _bulkResults=[];
+        for(let i=0;i<_bulkFiles.length;i++){
+          const f=_bulkFiles[i];
+          const st=document.getElementById('it-bs-'+i);
+          if(st)st.textContent='⏳ پردازش...';
+          bar.style.width=Math.round(i/_bulkFiles.length*100)+'%';
+          lbl.textContent=(i+1)+' از '+_bulkFiles.length+' · '+f.name;
+          try{
+            const imgFile=await _toImgFile(f);
+            const comp=await imageCompression(imgFile,{
+              maxSizeMB:50,maxWidthOrHeight:maxDim,useWebWorker:true,initialQuality:q,fileType:fmt
+            });
+            const outName=f.name.replace(/\.[^.]+$/,'')+'.'+ext;
+            _bulkResults.push({name:outName,blob:comp});
+            const saving=Math.max(0,Math.round((1-comp.size/f.size)*100));
+            if(st){st.textContent='✅ '+(comp.size/1024).toFixed(0)+' KB (↓'+saving+'%)';st.style.color='var(--m3-primary)';}
+          }catch(err){
+            if(st){st.textContent='❌ '+err.message;st.style.color='var(--m3-error,#c00)';}
           }
-
-        } catch (err) {
-          progWrap.style.display = 'none';
-          errEl.textContent = 'خطا: ' + err.message;
         }
-      }
+        bar.style.width='100%';lbl.textContent='✅ پردازش '+_bulkResults.length+' فایل کامل شد';
+        if(_bulkResults.length) document.getElementById('it-bulk-dl').style.display='';
+      };
+      window.itBulkDownload=async function(){
+        if(!_bulkResults.length)return;
+        if(_bulkResults.length===1){
+          const a=document.createElement('a');a.download=_bulkResults[0].name;
+          a.href=URL.createObjectURL(_bulkResults[0].blob);a.click();
+          setTimeout(()=>URL.revokeObjectURL(a.href),5000);return;
+        }
+        // Try JSZip
+        if(typeof JSZip==='undefined'){
+          await new Promise((res,rej)=>{
+            const s=document.createElement('script');s.src='static/lib/jszip.min.js';
+            s.onload=res;s.onerror=rej;document.head.appendChild(s);
+          }).catch(()=>null);
+        }
+        if(typeof JSZip!=='undefined'){
+          const zip=new JSZip();
+          _bulkResults.forEach(r=>zip.file(r.name,r.blob));
+          const zblob=await zip.generateAsync({type:'blob'});
+          const a=document.createElement('a');a.download='images.zip';
+          a.href=URL.createObjectURL(zblob);a.click();
+          setTimeout(()=>URL.revokeObjectURL(a.href),8000);
+        }else{
+          // fallback: download one by one
+          _bulkResults.forEach((r,i)=>{
+            setTimeout(()=>{const a=document.createElement('a');a.download=r.name;
+              a.href=URL.createObjectURL(r.blob);a.click();
+              setTimeout(()=>URL.revokeObjectURL(a.href),5000);},i*500);
+          });
+        }
+      };
 
-      function icDownload() {
-        if (!_icCompressedBlob) return;
-        const fmt = document.getElementById('ic-fmt').value;
-        const ext = { 'image/webp': 'webp', 'image/jpeg': 'jpg', 'image/png': 'png' }[fmt] || 'img';
-        const origName = (_icFile?.name || 'compressed')
-          .replace(/\.(heic|heif|jpg|jpeg|png|webp|bmp|gif|tiff?)$/i, '');
-        const a = document.createElement('a');
-        a.download = origName + '.' + ext;
-        a.href = URL.createObjectURL(_icCompressedBlob);
-        a.click();
-        setTimeout(() => URL.revokeObjectURL(a.href), 5000);
-      }
+      })(); // end IIFE
+
 
       // ══════════════════════════════════════════════════════
       //  MULTI-PURPOSE PDF TOOL
@@ -15026,7 +15623,7 @@
         document.body.appendChild(hint);
 
         // Tools that use horizontal swipe internally - swipe-back disabled for them
-        const SWIPE_EXEMPT = ['minigames'];
+        const SWIPE_EXEMPT = ['minigames','periodic','imgtool','pdftool','invoice','rubik'];
 
         function getActiveCard() {
           return document.querySelector('.tool-card.active');
@@ -15042,6 +15639,20 @@
           return SWIPE_EXEMPT.includes(id);
         }
 
+        // Returns true if el or any ancestor has real horizontal scroll
+        function _hasHScroll(el) {
+          while (el && el !== document.body) {
+            const style = window.getComputedStyle(el);
+            const ox = style.overflowX;
+            if ((ox === 'auto' || ox === 'scroll') && el.scrollWidth > el.clientWidth + 4) return true;
+            if (el.tagName === 'CANVAS' || el.tagName === 'TABLE') return true;
+            el = el.parentElement;
+          }
+          return false;
+        }
+
+        let _swInHScroll = false;
+
         document.addEventListener('touchstart', function(e) {
           const active = getActiveCard();
           if (!active) return;
@@ -15050,17 +15661,20 @@
           _swX = t.clientX; _swY = t.clientY;
           _swActive = false;
           _swCard = active;
+          _swInHScroll = _hasHScroll(e.target);
         }, { passive: true });
 
         document.addEventListener('touchmove', function(e) {
           if (!_swCard) return;
           if (isExempt()) return;
+          if (_swInHScroll) return; // let native horizontal scroll win
           const t = e.touches[0];
           const dx = t.clientX - _swX;
           const dy = Math.abs(t.clientY - _swY);
 
-          // Only engage if horizontal intent is clear
+          // Only engage if horizontal intent is clear and not inside a scroll container
           if (!_swActive && dx > 12 && dy < 40) {
+            if (_hasHScroll(e.target)) { _swCard = null; return; }
             _swActive = true;
             _swCard.classList.add('swipe-dragging');
           }
@@ -16193,9 +16807,14 @@
 
         const cellSize = 46;
         const gap = 2;
-        const cols = 18, rows = 9;
-        const W = cols*(cellSize+gap);
-        const H = rows*(cellSize+gap)+20;
+        const step = cellSize + gap; // 48
+        const cols = 18;
+        const W = cols*step;
+        // Row 8 (lanthanides) and row 9 (actinides) are detached below row 7
+        // Row 7 bottom = 6*step+cellSize = 334; rows 8/9 start at 348 and 396
+        const r8Y = 6*step + cellSize + 14;  // 348
+        const r9Y = r8Y + step;               // 396
+        const H = r9Y + cellSize + 20;        // 462
 
         let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:700px">`;
 
@@ -16206,8 +16825,8 @@
             if (!z) continue;
             const [,sym,name,,mass,cat] = ELEMENTS[z-1];
             const col = CAT_COLORS[cat] || '#ccc';
-            const x = (c-1)*(cellSize+gap);
-            const y = r===8 ? (6*(cellSize+gap)+12) : r===9 ? (7*(cellSize+gap)+12) : (r-1)*(cellSize+gap);
+            const x = (c-1)*step;
+            const y = r===8 ? r8Y : r===9 ? r9Y : (r-1)*step;
             svg += `<g onclick="ptShow(${z})" style="cursor:pointer" class="pt-cell">
               <rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="4" fill="${col}" stroke="none" opacity=".9"/>
               <text x="${x+cellSize/2}" y="${y+11}" text-anchor="middle" font-size="8" fill="rgba(0,0,0,.6)" font-family="inherit">${z}</text>
@@ -16218,8 +16837,8 @@
           }
         }
         // Separator lines for lanthanides/actinides
-        const sepY1 = 6*(cellSize+gap)+6;
-        const sepY2 = 7*(cellSize+gap)+6;
+        const sepY1 = r8Y - 8;   // line above row 8
+        const sepY2 = r9Y - 4;   // line above row 9
         svg += `<line x1="0" y1="${sepY1}" x2="${W}" y2="${sepY1}" stroke="var(--m3-outline-variant)" stroke-width="1" stroke-dasharray="4 3"/>`;
         svg += `<line x1="0" y1="${sepY2}" x2="${W}" y2="${sepY2}" stroke="var(--m3-outline-variant)" stroke-width="1" stroke-dasharray="4 3"/>`;
         svg += '</svg>';
@@ -18907,8 +19526,28 @@
           ['درخت','طبیعت'],['پرنده','حیوان'],['ماشین','وسیله'],['بیمارستان','مکان'],['کوهستان','مکان'],
           ['دانشگاه','مکان'],['فروشگاه','مکان'],['هواپیما','وسیله'],['قطار','وسیله'],['رایانه','شیء'],
           ['تلفن','شیء'],['آشپزخانه','مکان'],['شکلات','غذا'],['پیتزا','غذا'],['چایی','نوشیدنی'],
+          ['موز','میوه'],['انار','میوه'],['هندوانه','میوه'],['انگور','میوه'],['توت‌فرنگی','میوه'],
+          ['اسب','حیوان'],['فیل','حیوان'],['زرافه','حیوان'],['دلفین','حیوان'],['پلنگ','حیوان'],
+          ['عقاب','حیوان'],['خرگوش','حیوان'],['روباه','حیوان'],['گرگ','حیوان'],['شیر','حیوان'],
+          ['پاییز','فصل'],['تابستان','فصل'],['کوه','طبیعت'],['رودخانه','طبیعت'],['صحرا','طبیعت'],
+          ['برف','طبیعت'],['ستاره','طبیعت'],['جنگل','طبیعت'],['آتشفشان','طبیعت'],['دریاچه','طبیعت'],
+          ['قلم','شیء'],['آینه','شیء'],['قفل','شیء'],['چتر','شیء'],['عینک','شیء'],
+          ['دوچرخه','وسیله'],['موتور','وسیله'],['کشتی','وسیله'],['اتوبوس','وسیله'],['زیردریایی','وسیله'],
+          ['نان','غذا'],['برنج','غذا'],['کباب','غذا'],['ماهی','غذا'],['سوپ','غذا'],
+          ['آبمیوه','نوشیدنی'],['قهوه','نوشیدنی'],['دوغ','نوشیدنی'],['شیرکاکائو','نوشیدنی'],
+          ['مدرسه','مکان'],['کتابخانه','مکان'],['پارک','مکان'],['موزه','مکان'],['فرودگاه','مکان'],
+          ['باغ','مکان'],['ورزشگاه','مکان'],['سینما','مکان'],['بازار','مکان'],['مسجد','مکان'],
         ];
-        let entry = WORDS[Math.floor(Math.random()*WORDS.length)];
+        // Anti-repeat: avoid words used recently
+        if (!window._hmUsed) window._hmUsed = [];
+        let entry, attempts = 0;
+        const avoidLen = Math.min(Math.floor(WORDS.length * 0.6), 20);
+        do {
+          entry = WORDS[Math.floor(Math.random() * WORDS.length)];
+          attempts++;
+        } while (window._hmUsed.includes(entry[0]) && attempts < 50);
+        window._hmUsed.push(entry[0]);
+        if (window._hmUsed.length > avoidLen) window._hmUsed.shift();
         let word = entry[0], hint = entry[1];
         let guessed = new Set();
         let wrong = 0;
@@ -23069,7 +23708,7 @@
     (function () {
       'use strict';
 
-      const STATS_URL = '/stats.json';
+      const STATS_URL = '/scripts/stats.json';
 
       function fmt(n) {
         if (n === undefined || n === null) return '-';
@@ -23283,7 +23922,7 @@
             <div style="font-weight:700;margin-bottom:8px;">خطا در بارگذاری آمار</div>
             <div style="font-size:0.8rem;">${esc(err.message)}</div>
             <div style="font-size:0.75rem;margin-top:8px;color:var(--m3-on-surface-variant);">
-              مطمئن شوید <code>stats.json</code> وجود دارد و <code>parse_logs.py</code> اجرا شده است.
+              مطمئن شوید به سرور متصل هستید، <code>stats.json</code> در پوشهٔ scripts وجود دارد و <code>parse_logs.py</code> اجرا شده است.
             </div>
           </div>`;
           const updEl = document.getElementById('updated-label');
