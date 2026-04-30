@@ -7,7 +7,7 @@ Type=simple
 # ── Change these to match your setup ──────────────────────────────────────────
 User=www-data
 WorkingDirectory=/var/www/toolbox
-ExecStart=/usr/bin/python3 /var/www/toolbox/tts_server.py
+ExecStart=/var/www/toolbox/venv/bin/python /var/www/toolbox/tts_server.py
 # ──────────────────────────────────────────────────────────────────────────────
 Restart=on-failure
 RestartSec=5
