@@ -210,7 +210,7 @@ toolbox/
 │
 ├── scripts/                           ← اسکریپت‌های کمکی
 │   ├── parse_logs.py                  ← تحلیل لاگ‌های سایت
-│   └── weather_proxy.py               ← Proxy برای سرویس هواشناسی
+│   └── weather_proxy.py               ← پروکسی برای سرویس هواشناسی
 │
 ├── static/
 │   ├── main.css                       ← استایل‌های مشترک
@@ -234,12 +234,12 @@ toolbox/
 │   │   ├── browser-image-compression.js ← فشرده‌سازی تصویر
 │   │   ├── heic2any.min.js            ← تبدیل HEIC (Apple)
 │   │   ├── background-removal.mjs     ← حذف پس‌زمینه (ML)
-│   │   ├── ort-bundled.mjs            ← ONNX Runtime
+│   │   ├── ort-bundled.mjs            ← یک ONNX Runtime
 │   │   ├── fa_IR-ganji-medium.onnx    ← مدل فارسی برای background removal
 │   │   ├── fa_IR-ganji-medium.onnx.json
 │   │   ├── pdf-lib.min.js             ← دستکاری PDF
 │   │   ├── pdf.mjs                    ← رندر PDF
-│   │   ├── pdf.worker.mjs             ← Web Worker برای PDF
+│   │   ├── pdf.worker.mjs             ← یک Web Worker برای PDF
 │   │   ├── background-removal-data/   ← داده‌های مدل ML
 │   │   │   └── [binary data files]
 │   │
@@ -446,7 +446,7 @@ git push
 
 ---
 
-## �🙏 تشکر و قدردانی
+## 🙏 تشکر و قدردانی
 
 - [وزیرمتن](https://github.com/rastikerdar/vazirmatn) صابر رستی‌کردار - فونت زیبای فارسی مورد استفاده در سراسر پروژه
 - [Material Design 3](https://m3.material.io/) توسط Google - سیستم طراحی و توکن‌های رنگی
