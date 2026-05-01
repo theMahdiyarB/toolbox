@@ -2449,7 +2449,11 @@
     </a>
   </div>
   <div class="rail-items" id="rail-items">
-    <div class="rail-item active" data-cat="sec-general" data-cat-icon="🧮" data-cat-label="محاسبه">
+    <div class="rail-item active" data-cat="home" data-cat-icon="🏠" data-cat-label="خانه">
+      <div class="rail-item-icon">🏠</div>
+      <span class="rail-item-label">خانه</span>
+    </div>
+    <div class="rail-item" data-cat="sec-general" data-cat-icon="🧮" data-cat-label="محاسبه">
       <div class="rail-item-icon">🧮</div>
       <span class="rail-item-label">محاسبه</span>
     </div>
@@ -2487,7 +2491,7 @@
     </div>
     <div class="rail-item" data-cat="sec-games" data-cat-icon="🎮" data-cat-label="بازی">
       <div class="rail-item-icon">🎮</div>
-      <span class="rail-item-label">بازی</span>
+      <span class="rail-item-label">سرگرمی</span>
     </div>
     <div class="rail-item" data-cat="sec-pro" data-cat-icon="🧭" data-cat-label="تخصصی">
       <div class="rail-item-icon">🧭</div>
@@ -2515,7 +2519,11 @@
 
 <!-- ════ BOTTOM NAV (mobile) ════ -->
 <nav class="bottom-navigation-bar" id="bottom-nav" aria-label="ناوبری پایین">
-  <a class="bottom-nav-item active" data-cat="sec-general" onclick="railNavTo('sec-general',this)">
+  <a class="bottom-nav-item active" data-cat="home" onclick="railNavTo('home',this)">
+    <span class="bottom-nav-icon">🏠</span>
+    <span class="bottom-nav-label">خانه</span>
+  </a>
+  <a class="bottom-nav-item" data-cat="sec-general" onclick="railNavTo('sec-general',this)">
     <span class="bottom-nav-icon">🧮</span>
     <span class="bottom-nav-label">محاسبه</span>
   </a>
@@ -2553,7 +2561,7 @@
   </a>
   <a class="bottom-nav-item" data-cat="sec-games" onclick="railNavTo('sec-games',this)">
     <span class="bottom-nav-icon">🎮</span>
-    <span class="bottom-nav-label">بازی</span>
+    <span class="bottom-nav-label">سرگرمی</span>
   </a>
   <a class="bottom-nav-item" data-cat="sec-pro" onclick="railNavTo('sec-pro',this)">
     <span class="bottom-nav-icon">🧭</span>
