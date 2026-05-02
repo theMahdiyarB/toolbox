@@ -3041,9 +3041,6 @@
             <strong id="sci-frac" style="font-size:1.2rem;color:var(--m3-primary);font-family:'Courier New',monospace"></strong>
             <button class="btn btn-tonal" onclick="copyToClipboard(document.getElementById('sci-frac').textContent)" style="font-size:12px;margin-right:8px">📋</button>
           </div>
-            <div style="margin-top: 8px">
-              <div id="sci-frac-wrap" style="display: none; margin-top: 4px; font-size: 0.85rem; background: var(--m3-surface-variant); padding: 6px; border-radius: 4px">-</div>
-            </div>
           </div>
 
           <div class="btn-row" style="margin-top: 10px">
@@ -4500,8 +4497,8 @@
                 </select>
               </div>
             </div>
-            <!-- 3D dice scene — populated by buildDiceScene() -->
-            <div id="dice-scene" style="display:flex;flex-wrap:wrap;gap:28px;justify-content:center;perspective:600px;min-height:100px;align-items:center;margin:50px auto 50px;"></div>
+            <!-- 3D dice scene -->
+            <div id="dice-scene" style="display:flex;flex-wrap:wrap;gap:40px;justify-content:center;perspective:700px;min-height:120px;align-items:center;margin:36px auto 28px;"></div>
             <button class="btn btn-filled" onclick="rollDice()" style="width:100%">🎲 تاس بنداز!</button>
             <div id="dice-sum" style="text-align:center;font-size:15px;color:var(--md-sys-color-outline);margin-top:8px;min-height:22px"></div>
           </div>
@@ -4534,7 +4531,7 @@
             <div style="position:relative;width:100%;max-width:320px;margin:0 auto 10px">
               <canvas id="wheel-canvas" width="320" height="320" style="width:100%;border-radius:50%;display:block"></canvas>
               <!-- Pointer -->
-              <div style="position:absolute;top:50%;right:-8px;transform:translateY(-50%);font-size:26px;line-height:1;filter:drop-shadow(0 2px 4px #0006)">◀</div>
+              <div style="position:absolute;top:50%;right:-14px;transform:translateY(-50%);width:0;height:0;border-top:14px solid transparent;border-bottom:14px solid transparent;border-right:22px solid #f44336;filter:drop-shadow(-2px 0 4px rgba(244,67,54,0.5))"></div>
             </div>
             <button class="btn btn-filled" id="wheel-spin-btn" onclick="spinWheel()" style="width:100%;margin-bottom:10px">🎡 بچرخون!</button>
             <div id="wheel-result" style="text-align:center;font-size:20px;font-weight:700;min-height:36px;color:var(--md-sys-color-primary)"></div>
@@ -8446,7 +8443,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 7.3 - ۱۴۰۵/۰۲/۱۱
+          ℹ️ نسخه 7.4 - ۱۴۰۵/۰۲/۱۲
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -8692,6 +8689,13 @@
         // Restore state for new tool (after DOM is visible)
         if (id !== 'home') setTimeout(() => _restoreToolState(id), 0);
         if (id==='invoice') setTimeout(()=>{ if(window.invInit) window.invInit(); },50);
+        // Auto-render previews for CSS generator tools and color picker on first open
+        setTimeout(()=>{
+          if(id==='gradient'  && typeof updateGrad==='function') updateGrad();
+          if(id==='shadow'    && typeof updateShad==='function') updateShad();
+          if(id==='borderrad' && typeof updateBR==='function')   updateBR();
+          if(id==='colorpicker'&& typeof cpUpdate==='function')  cpUpdate(document.getElementById('cp-hex')?.value||'#3498db');
+        }, 60);
       }
 
       // Handle browser back/forward
@@ -9686,7 +9690,17 @@
               if (pb2) { pb2.textContent = '▶ شروع'; pb2.style.background = 'var(--m3-primary)'; pb2.style.color = 'var(--m3-on-primary)'; }
               if (navigator.vibrate) navigator.vibrate([300,100,300,100,300]);
               _tmrBeep();
-              try { new Notification('تایمر', {body: (document.getElementById('tmr-label').value||'وقت تمام شد!')}); } catch(_){}
+              // Request permission first, then show notification
+              if ('Notification' in window) {
+                const label = (document.getElementById('tmr-label').value||'وقت تمام شد!');
+                if (Notification.permission === 'granted') {
+                  try { new Notification('تایمر', {body: label}); } catch(_){}
+                } else if (Notification.permission !== 'denied') {
+                  Notification.requestPermission().then(p => {
+                    if (p === 'granted') try { new Notification('تایمر', {body: label}); } catch(_){}
+                  });
+                }
+              }
             }
           }, 1000);
         }
@@ -10023,13 +10037,22 @@
       // ══════════════════════════════════════════════════════
       //  JSON
       // ══════════════════════════════════════════════════════
-      function fmtJSON(){try{document.getElementById('json-out').value=JSON.stringify(JSON.parse(document.getElementById('json-in').value),null,2);}catch(e){alert('JSON نامعتبر');}}
-      function minJSON(){try{document.getElementById('json-out').value=JSON.stringify(JSON.parse(document.getElementById('json-in').value));}catch(e){alert('JSON نامعتبر');}}
+            function fmtJSON(){
+        const out=document.getElementById('json-out');
+        try{out.value=JSON.stringify(JSON.parse(document.getElementById('json-in').value),null,2);}
+        catch(e){out.value='// ⚠ JSON نامعتبر: '+e.message;}
+      }
+      function minJSON(){
+        const out=document.getElementById('json-out');
+        try{out.value=JSON.stringify(JSON.parse(document.getElementById('json-in').value));}
+        catch(e){out.value='// ⚠ JSON نامعتبر: '+e.message;}
+      }
       function sortJSON(){
+        const out=document.getElementById('json-out');
         try {
           function sortObj(o){if(typeof o!=='object'||!o||Array.isArray(o))return o;return Object.fromEntries(Object.entries(o).sort(([a],[b])=>a.localeCompare(b)).map(([k,v])=>[k,sortObj(v)]));}
-          document.getElementById('json-out').value=JSON.stringify(sortObj(JSON.parse(document.getElementById('json-in').value)),null,2);
-        }catch(e){alert('JSON نامعتبر');}
+          out.value=JSON.stringify(sortObj(JSON.parse(document.getElementById('json-in').value)),null,2);
+        }catch(e){out.value='// ⚠ JSON نامعتبر: '+e.message;}
       }
 
       // ══════════════════════════════════════════════════════
@@ -10297,6 +10320,24 @@
         return CRYPTO_EMOJIS[byteValue%CRYPTO_EMOJIS.length];
       }
 
+      // Called when algo or emoji toggle changes — updates the algo hint label
+      function cryptoUpdateUI(){
+        const algo = (document.getElementById('crypto-algo')||{}).value||'aes-256-gcm';
+        const useEmoji = (document.getElementById('crypto-emoji')||{}).checked;
+        // Show a small hint about the selected algo if there's a hint element
+        const hintEl = document.getElementById('crypto-algo-hint');
+        if(hintEl){
+          hintEl.textContent = algo==='aes-256-gcm'
+            ? 'AES-GCM: احراز هویت داده‌ها + رمزنگاری (پیشنهادی)'
+            : 'AES-CBC: سازگاری بیشتر، بدون احراز هویت';
+        }
+        // If output already exists, clear it to avoid confusion after settings change
+        const out = document.getElementById('crypto-output');
+        if(out && out.value) out.value = '';
+        const errEl = document.getElementById('crypto-error');
+        if(errEl) errEl.style.display='none';
+      }
+
       function cryptoSetFormat(format){
         // Update button states
         ['hex','fa','en'].forEach(f=>{
@@ -10487,7 +10528,7 @@
 
       function cryptoCopyToKey(){
         const output=document.getElementById('crypto-output').value;
-        if(!output){alert('متن رمز خالی است');return;}
+        if(!output){showToast('متن رمز خالی است');return;}
         document.getElementById('crypto-key').value=output;
       }
 
@@ -10498,14 +10539,35 @@
         const t=document.getElementById('jwt-input').value.trim();
         try {
           const parts=t.split('.');
-          if(parts.length<2) throw new Error();
-          const head=JSON.parse(atob(parts[0].replace(/-/g,'+').replace(/_/g,'/')));
-          const pay=JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
+          if(parts.length<2) throw new Error('bad format');
+          // Fix base64url → base64 and add required padding
+          function b64decode(s){
+            s=s.replace(/-/g,'+').replace(/_/g,'/');
+            while(s.length%4) s+='=';
+            return JSON.parse(decodeURIComponent(atob(s).split('').map(c=>'%'+c.charCodeAt(0).toString(16).padStart(2,'0')).join('')));
+          }
+          const head=b64decode(parts[0]);
+          const pay=b64decode(parts[1]);
           document.getElementById('jwt-head').textContent=JSON.stringify(head,null,2);
           document.getElementById('jwt-pay').textContent=JSON.stringify(pay,null,2);
-          document.getElementById('jwt-exp').textContent=pay.exp?new Date(pay.exp*1000).toLocaleString('fa-IR'):'ندارد';
+          // Show exp as both Jalali and remaining time
+          if(pay.exp){
+            const expDate=new Date(pay.exp*1000);
+            const now=Date.now();
+            const diff=pay.exp*1000-now;
+            const expired=diff<0;
+            const absDiff=Math.abs(diff);
+            const mins=Math.floor(absDiff/60000);
+            const hrs=Math.floor(mins/60);
+            const days=Math.floor(hrs/24);
+            const timeStr=days>0?days+' روز':hrs>0?hrs+' ساعت':mins>0?mins+' دقیقه':'چند ثانیه';
+            document.getElementById('jwt-exp').textContent=
+              expDate.toLocaleString('fa-IR')+' ('+(expired?'منقضی شده '+timeStr+' پیش':'انقضا در '+timeStr)+')';
+          } else {
+            document.getElementById('jwt-exp').textContent='ندارد';
+          }
           document.getElementById('jwt-output').style.display='block';
-        }catch(e){alert('JWT نامعتبر');}
+        }catch(e){showToast('JWT نامعتبر: '+e.message);}
       }
 
       // ══════════════════════════════════════════════════════
@@ -10524,16 +10586,31 @@
       // ══════════════════════════════════════════════════════
       function runReg(){
         const pat=document.getElementById('rx-pat').value;
-        const flags=document.getElementById('rx-flags').value;
+        const flags=document.getElementById('rx-flags').value.replace(/[^gimsuy]/g,''); // sanitize flags
         const text=document.getElementById('rx-text').value;
         const out=document.getElementById('rx-out');
         const info=document.getElementById('rx-info');
-        if(!pat){out.innerHTML=text.replace(/&/g,'&amp;').replace(/</g,'&lt;');info.textContent='';return;}
+        function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+        if(!pat){out.innerHTML=esc(text);info.textContent='';return;}
         try {
-
-          const matches=[];try{const _r=new RegExp(pat,'g');let _m;while((_m=_r.exec(text))!==null)matches.push(_m);}catch(e){}
-          const hl=text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(new RegExp(pat,flags),m=>`<mark style="background:var(--m3-primary-container);color:var(--m3-on-primary-container);border-radius:3px">${m.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</mark>`);
-          out.innerHTML=hl;
+          // Build regex safely - catch invalid patterns
+          let re;
+          try { re=new RegExp(pat, flags.includes('g')?flags:flags+'g'); }
+          catch(e){ out.textContent='خطای الگو: '+e.message; info.textContent=''; return; }
+          // Count matches first
+          const matches=[...text.matchAll(re)];
+          // Build highlighted output by splitting on match positions (avoids innerHTML injection)
+          let result='', last=0;
+          // reset lastIndex
+          re.lastIndex=0;
+          for(const m of matches){
+            result+=esc(text.slice(last,m.index));
+            result+=`<mark style="background:var(--m3-primary-container);color:var(--m3-on-primary-container);border-radius:3px">${esc(m[0])}</mark>`;
+            last=m.index+m[0].length;
+            if(m[0].length===0){ last++; if(last>text.length) break; } // avoid infinite loop on zero-length match
+          }
+          result+=esc(text.slice(last));
+          out.innerHTML=result;
           info.textContent=`${matches.length} تطابق پیدا شد`;
         }catch(e){out.textContent='خطای Regex: '+e.message;info.textContent='';}
       }
@@ -10584,16 +10661,24 @@
       //  NUMBER BASE
       // ══════════════════════════════════════════════════════
       function nbFrom(src){
-        let n;
-        if(src==='dec') n=parseInt(document.getElementById('nb-dec').value,10);
-        else if(src==='hex') n=parseInt(document.getElementById('nb-hex').value,16);
-        else if(src==='bin') n=parseInt(document.getElementById('nb-bin').value,2);
-        else n=parseInt(document.getElementById('nb-oct').value,8);
-        if(isNaN(n)){['nb-dec','nb-hex','nb-bin','nb-oct'].filter(id=>id!=='nb-'+src).forEach(id=>document.getElementById(id).value='');return;}
+        const ids=['nb-dec','nb-hex','nb-bin','nb-oct'];
+        const bases={dec:10,hex:16,bin:2,oct:8};
+        const raw=document.getElementById('nb-'+src).value.trim();
+        if(!raw){ids.filter(id=>id!=='nb-'+src).forEach(id=>document.getElementById(id).value='');return;}
+        // Allow leading minus for signed input (dec and hex only)
+        const neg=raw.startsWith('-');
+        const absStr=neg?raw.slice(1):raw;
+        let n=parseInt(absStr,bases[src]);
+        if(isNaN(n)){ids.filter(id=>id!=='nb-'+src).forEach(id=>document.getElementById(id).value='⚠');return;}
+        if(neg) n=-n;
+        // Clamp to safe integer range
+        if(n>2**53||n<-(2**53)){ids.filter(id=>id!=='nb-'+src).forEach(id=>document.getElementById(id).value='عدد خیلی بزرگ');return;}
+        const prefix=neg?'-':'';
+        const absN=Math.abs(n);
         if(src!=='dec') document.getElementById('nb-dec').value=n;
-        if(src!=='hex') document.getElementById('nb-hex').value=n.toString(16).toUpperCase();
-        if(src!=='bin') document.getElementById('nb-bin').value=n.toString(2);
-        if(src!=='oct') document.getElementById('nb-oct').value=n.toString(8);
+        if(src!=='hex') document.getElementById('nb-hex').value=prefix+absN.toString(16).toUpperCase();
+        if(src!=='bin') document.getElementById('nb-bin').value=prefix+absN.toString(2);
+        if(src!=='oct') document.getElementById('nb-oct').value=prefix+absN.toString(8);
       }
 
       // ══════════════════════════════════════════════════════
@@ -10651,55 +10736,191 @@
           const btn=document.getElementById('rand-tab-'+id);
           btn.className=id===t?'btn btn-filled':'btn btn-tonal';
         });
+        // Auto-init sub-panels on first open
+        if(t==='wheel'){
+          // Draw blank placeholder if wheel hasn't been built yet
+          const canvas=document.getElementById('wheel-canvas');
+          if(canvas){
+            const ctx=canvas.getContext('2d');
+            const cx=canvas.width/2,cy=canvas.height/2,r=cx-10;
+            // Only draw placeholder if canvas is empty (no pixel data)
+            const pxData=ctx.getImageData(0,0,1,1).data;
+            if(pxData[3]===0){ _wheelAngle=0; _drawWheel([]); }
+          }
+        }
+        if(t==='dice') buildDiceScene();
       }
 
       // ── NUMBER ──
       function genRand(){
-        const mn=parseInt(document.getElementById('rand-min').value),mx=parseInt(document.getElementById('rand-max').value);
-        const cnt=parseInt(document.getElementById('rand-cnt').value)||1;
-        const arr=new Uint32Array(cnt); crypto.getRandomValues(arr);
-        const nums=Array.from(arr,v=>mn+v%(mx-mn+1));
+        let mn=parseInt(document.getElementById('rand-min').value),mx=parseInt(document.getElementById('rand-max').value);
+        const cnt=Math.min(100,Math.max(1,parseInt(document.getElementById('rand-cnt').value)||1));
         const el=document.getElementById('rand-res');
+        if(isNaN(mn)||isNaN(mx)){el.textContent='⚠ عدد وارد کنید';return;}
+        if(mn>mx){[mn,mx]=[mx,mn];} // swap silently
+        if(mn===mx){el.textContent=String(mn);return;}
+        const range=mx-mn+1;
+        const arr=new Uint32Array(cnt); crypto.getRandomValues(arr);
+        const nums=Array.from(arr,v=>mn+v%range);
         el.style.opacity=0;
         el.textContent=cnt===1?nums[0]:nums.join('، ');
         el.animate([{opacity:0,transform:'scale(.8)'},{opacity:1,transform:'scale(1)'}],{duration:300,fill:'forwards'});
       }
 
       // ── DICE ──
-      const DICE_FACES={
-        6:['⚀','⚁','⚂','⚃','⚄','⚅'],
-        4:['1','2','3','4'],
-        8:['1','2','3','4','5','6','7','8'],
-        10:['1','2','3','4','5','6','7','8','9','10'],
-        12:['1','2','3','4','5','6','7','8','9','10','11','12'],
-        20:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20']
-      };
-      function rollDice(){
-        const count=Math.min(6,parseInt(document.getElementById('dice-count').value)||1);
-        const sides=parseInt(document.getElementById('dice-sides').value);
-        const faces=DICE_FACES[sides];
-        const arr=new Uint32Array(count); crypto.getRandomValues(arr);
-        const results=Array.from(arr,v=>(v%sides)+1);
-        const display=document.getElementById('dice-display');
-        display.innerHTML='';
-        results.forEach((val,i)=>{
-          const d=document.createElement('div');
-          d.style.cssText=`width:72px;height:72px;border-radius:14px;background:var(--md-sys-color-surface-variant);
-            display:flex;align-items:center;justify-content:center;font-size:${sides===6?40:22}px;
-            font-weight:700;box-shadow:0 3px 10px #0003;cursor:default;
-            animation:diceRoll 0.5s ${i*80}ms both;color:var(--md-sys-color-on-surface-variant)`;
-          d.textContent=faces[val-1];
-          display.appendChild(d);
-        });
-        const sum=results.reduce((a,b)=>a+b,0);
-        document.getElementById('dice-sum').textContent=count>1?`مجموع: ${sum}`:'';
-      }
-      // inject dice roll keyframe once
+      // Inject 3D dice styles once (reference implementation)
       (()=>{
         const s=document.createElement('style');
-        s.textContent=`@keyframes diceRoll{0%{opacity:0;transform:rotateX(90deg) scale(.5)}60%{transform:rotateX(-15deg) scale(1.1)}100%{opacity:1;transform:rotateX(0) scale(1)}}`;
+        s.textContent=`
+          .dice3d-wrap{perspective:600px;display:inline-flex;align-items:center;justify-content:center;}
+          .dice3d{
+            position:relative;width:90px;height:90px;
+            transform-style:preserve-3d;
+            transition:transform 1s ease;
+          }
+          @keyframes diceRolling{50%{transform:rotateX(455deg) rotateY(455deg);}}
+          .dice3d.rolling{animation:diceRolling 4s ease;}
+          .dice3d .face{
+            position:absolute;width:100%;height:100%;border-radius:18px;
+            border:4px solid #f6f3f0;transform-style:preserve-3d;
+            background:linear-gradient(145deg,#dddbd8,#fff);
+          }
+          .dice3d .face::before{
+            position:absolute;content:'';width:100%;height:100%;
+            border-radius:18px;background:#f6f3f0;transform:translateZ(-1px);
+          }
+          .dice3d .face::after{
+            position:absolute;content:'';top:50%;left:50%;
+            width:14px;height:14px;border-radius:50%;background:#131210;
+          }
+          .dice3d .face.d-front {transform:translateZ(45px);}
+          .dice3d .face.d-back  {transform:rotateX(180deg) translateZ(45px);}
+          .dice3d .face.d-top   {transform:rotateX(90deg)  translateZ(45px);}
+          .dice3d .face.d-bottom{transform:rotateX(-90deg) translateZ(45px);}
+          .dice3d .face.d-right {transform:rotateY(90deg)  translateZ(45px);}
+          .dice3d .face.d-left  {transform:rotateY(-90deg) translateZ(45px);}
+          /* face 1 — big red center pip */
+          .dice3d .face.d-front::after{width:26px;height:26px;background:#f63330;margin:-13px 0 0 -13px;}
+          /* face 6 */
+          .dice3d .face.d-back::after  {margin:-33px 0 0 -29px;box-shadow:40px 0,0 24px,40px 24px,0 48px,40px 48px;}
+          /* face 2 */
+          .dice3d .face.d-top::after   {margin:-29px 0 0 -29px;box-shadow:40px 40px;}
+          /* face 5 */
+          .dice3d .face.d-bottom::after{margin:-34px 0 0 -34px;box-shadow:26px 26px,52px 52px,52px 0,0 52px;}
+          /* face 3 */
+          .dice3d .face.d-right::after {margin:-29px 0 0 -29px;box-shadow:40px 0,0 40px,40px 40px;}
+          /* face 4 */
+          .dice3d .face.d-left::after  {margin:-33px 0 0 -33px;box-shadow:25px 25px,50px 50px;}
+          /* flat fallback for non-6-sided */
+          .dice-flat{
+            width:88px;height:88px;border-radius:16px;
+            background:linear-gradient(145deg,#dddbd8,#fff);
+            border:3px solid #e0ddd9;box-shadow:0 4px 18px #0003;
+            display:flex;align-items:center;justify-content:center;
+            font-size:26px;font-weight:800;color:#1a1814;
+            font-family:'Courier New',monospace;
+          }
+          @keyframes flatRoll{0%{opacity:0;transform:rotateX(90deg) scale(.5)}60%{transform:rotateX(-15deg) scale(1.1)}100%{opacity:1;transform:rotateX(0) scale(1)}}
+          .dice-flat.rolling{animation:flatRoll 0.6s ease forwards;}
+        `;
         document.head.appendChild(s);
       })();
+
+      // Map value → final CSS transform (faces in standard opposite-faces-sum-7 layout)
+      const DICE6_TRANSFORMS={
+        1:'rotateX(0deg)   rotateY(0deg)',    // front
+        6:'rotateX(180deg) rotateY(0deg)',    // back
+        2:'rotateX(-90deg) rotateY(0deg)',    // top
+        5:'rotateX(90deg)  rotateY(0deg)',    // bottom
+        3:'rotateX(0deg)   rotateY(90deg)',   // right
+        4:'rotateX(0deg)   rotateY(-90deg)',  // left
+      };
+
+      function _make3DDie(){
+        const wrap=document.createElement('div');
+        wrap.className='dice3d-wrap';
+        const die=document.createElement('div');
+        die.className='dice3d';
+        ['d-front','d-back','d-top','d-bottom','d-right','d-left'].forEach(cls=>{
+          const f=document.createElement('div');
+          f.className='face '+cls;
+          die.appendChild(f);
+        });
+        wrap.appendChild(die);
+        return {wrap,die};
+      }
+
+      function buildDiceScene(){
+        const count=Math.min(4,Math.max(1,parseInt((document.getElementById('dice-count')||{}).value)||1));
+        const sides=parseInt((document.getElementById('dice-sides')||{}).value)||6;
+        const scene=document.getElementById('dice-scene');
+        if(!scene)return;
+        scene.innerHTML='';
+        for(let i=0;i<count;i++){
+          if(sides===6){
+            const {wrap,die}=_make3DDie();
+            die.style.transform=DICE6_TRANSFORMS[1]; // idle on face 1
+            scene.appendChild(wrap);
+          } else {
+            const flat=document.createElement('div');
+            flat.className='dice-flat';
+            flat.textContent='?';
+            flat.style.opacity='0.45';
+            scene.appendChild(flat);
+          }
+        }
+        document.getElementById('dice-sum').textContent='';
+      }
+
+      function rollDice(){
+        const count=Math.min(4,Math.max(1,parseInt(document.getElementById('dice-count').value)||1));
+        const sides=parseInt(document.getElementById('dice-sides').value)||6;
+        const scene=document.getElementById('dice-scene');
+        const arr=new Uint32Array(count);
+        crypto.getRandomValues(arr);
+        const results=Array.from(arr,v=>(v%sides)+1);
+
+        // Rebuild scene fresh so animation always restarts
+        scene.innerHTML='';
+        const ANIM_MS=4050; // match animation duration
+
+        results.forEach((val,i)=>{
+          const delay=i*150;
+          if(sides===6){
+            const {wrap,die}=_make3DDie();
+            // Kick off roll animation
+            die.style.transform=DICE6_TRANSFORMS[1];
+            die.style.animation='none';
+            // Force reflow then start
+            requestAnimationFrame(()=>{
+              requestAnimationFrame(()=>{
+                die.style.animation=`diceRolling ${4}s ease`;
+                setTimeout(()=>{
+                  die.style.animation='none';
+                  die.style.transform=DICE6_TRANSFORMS[val];
+                }, ANIM_MS + delay);
+              });
+            });
+            scene.appendChild(wrap);
+          } else {
+            const flat=document.createElement('div');
+            flat.className='dice-flat rolling';
+            flat.textContent='?';
+            flat.style.opacity='1';
+            setTimeout(()=>{
+              flat.className='dice-flat';
+              flat.textContent=val;
+            }, 700 + delay);
+            scene.appendChild(flat);
+          }
+        });
+
+        const sum=results.reduce((a,b)=>a+b,0);
+        setTimeout(()=>{
+          document.getElementById('dice-sum').textContent=count>1?`مجموع: ${sum}`:'';
+        }, ANIM_MS + (results.length-1)*150 + 100);
+      }
+
 
       // ── COIN ──
       let _coinFlipping=false;
@@ -10750,47 +10971,76 @@
         return slots;
       }
 
-      const WHEEL_COLORS=['#e53935','#8e24aa','#1e88e5','#00897b','#f4511e','#43a047','#fb8c00','#00acc1','#d81b60','#6d4c41'];
+      const WHEEL_COLORS=[
+        ['#e53935','#ef9a9a'],['#8e24aa','#ce93d8'],['#1e88e5','#90caf9'],
+        ['#00897b','#80cbc4'],['#f4511e','#ffab91'],['#43a047','#a5d6a7'],
+        ['#fb8c00','#ffcc80'],['#00acc1','#80deea'],['#d81b60','#f48fb1'],
+        ['#6d4c41','#bcaaa4']
+      ];
 
       function _drawWheel(slots,highlightIdx=-1){
         const canvas=document.getElementById('wheel-canvas');
         const ctx=canvas.getContext('2d');
-        const cx=canvas.width/2,cy=canvas.height/2,r=cx-8;
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        const W=canvas.width, H=canvas.height;
+        const cx=W/2, cy=H/2, r=cx-10;
+        ctx.clearRect(0,0,W,H);
+        // outer glow ring
+        const glowG=ctx.createRadialGradient(cx,cy,r-4,cx,cy,r+10);
+        glowG.addColorStop(0,'rgba(255,255,255,0.18)'); glowG.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.beginPath();ctx.arc(cx,cy,r+10,0,Math.PI*2);
+        ctx.fillStyle=glowG;ctx.fill();
         if(!slots||!slots.length){
-          ctx.fillStyle='var(--md-sys-color-surface-variant,#e0e0e0)';
+          ctx.fillStyle='#e0e0e0';
           ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();
           return;
         }
         const n=slots.length;
         const arc=Math.PI*2/n;
-        // dedupe for color assignment
         const unique=[...new Set(slots)];
         slots.forEach((name,i)=>{
           const start=_wheelAngle+i*arc, end=start+arc;
           const ci=unique.indexOf(name)%WHEEL_COLORS.length;
+          const [base,light]=WHEEL_COLORS[ci];
+          // radial gradient per slice
+          const midA=start+arc/2;
+          const gx=cx+Math.cos(midA)*r*0.5, gy=cy+Math.sin(midA)*r*0.5;
+          const sg=ctx.createRadialGradient(gx,gy,0,cx,cy,r);
+          if(i===highlightIdx){
+            sg.addColorStop(0,'#fffde7'); sg.addColorStop(1,'#fff176');
+          } else {
+            sg.addColorStop(0,light); sg.addColorStop(1,base);
+          }
           ctx.beginPath();
           ctx.moveTo(cx,cy);
           ctx.arc(cx,cy,r,start,end);
           ctx.closePath();
-          ctx.fillStyle=i===highlightIdx?'#fff176':WHEEL_COLORS[ci];
+          ctx.fillStyle=sg;
           ctx.fill();
-          ctx.strokeStyle='#fff4';ctx.lineWidth=1.5;ctx.stroke();
+          ctx.strokeStyle='rgba(255,255,255,0.35)';ctx.lineWidth=2;ctx.stroke();
           // label
           ctx.save();
           ctx.translate(cx,cy);
           ctx.rotate(start+arc/2);
           ctx.textAlign='right';
-          ctx.fillStyle='#fff';
-          ctx.font=`bold ${Math.max(10,Math.min(16,200/n))}px Vazirmatn,sans-serif`;
-          ctx.shadowColor='#0006';ctx.shadowBlur=3;
-          ctx.fillText(name,r-10,4);
+          const fs=Math.max(10,Math.min(15,190/n));
+          ctx.font=`bold ${fs}px Vazirmatn,sans-serif`;
+          ctx.fillStyle=i===highlightIdx?'#5d4037':'#fff';
+          ctx.shadowColor='rgba(0,0,0,0.5)';ctx.shadowBlur=4;
+          ctx.fillText(name,r-14,fs*0.35);
           ctx.restore();
         });
-        // center circle
-        ctx.beginPath();ctx.arc(cx,cy,18,0,Math.PI*2);
-        ctx.fillStyle='var(--md-sys-color-surface,#fff)';ctx.fill();
-        ctx.strokeStyle='var(--md-sys-color-outline,#aaa)';ctx.lineWidth=2;ctx.stroke();
+        // outer border ring
+        ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+        ctx.strokeStyle='rgba(255,255,255,0.6)';ctx.lineWidth=3;ctx.stroke();
+        // metallic center hub
+        const hubG=ctx.createRadialGradient(cx-5,cy-5,2,cx,cy,22);
+        hubG.addColorStop(0,'#fff');hubG.addColorStop(0.4,'#e0e0e0');hubG.addColorStop(1,'#9e9e9e');
+        ctx.beginPath();ctx.arc(cx,cy,22,0,Math.PI*2);
+        ctx.fillStyle=hubG;ctx.fill();
+        ctx.strokeStyle='rgba(0,0,0,0.15)';ctx.lineWidth=1.5;ctx.stroke();
+        // star/dot in center
+        ctx.beginPath();ctx.arc(cx,cy,6,0,Math.PI*2);
+        ctx.fillStyle='#616161';ctx.fill();
       }
 
       function buildWheel(){
@@ -10905,18 +11155,18 @@
       function _cardHTML(card,delay){
         const {suit,rank}=card;
         return `<div style="
-          width:58px;height:86px;border-radius:8px;
+          width:82px;height:120px;border-radius:12px;
           background:#fff;border:1.5px solid #ddd;
           display:flex;flex-direction:column;align-items:center;justify-content:space-between;
-          padding:4px 5px;box-sizing:border-box;
-          box-shadow:0 3px 10px #0003;
+          padding:7px 8px;box-sizing:border-box;
+          box-shadow:0 4px 16px #0004;
           color:${suit.color};font-weight:700;
           animation:cardFlip 0.4s ${delay}ms both;
           font-family:Vazirmatn,sans-serif;
           position:relative;user-select:none">
-          <div style="font-size:14px;align-self:flex-start;line-height:1">${rank.v}<br><span style="font-size:10px">${suit.sym}</span></div>
-          <div style="font-size:26px;line-height:1">${suit.sym}</div>
-          <div style="font-size:14px;align-self:flex-end;transform:rotate(180deg);line-height:1">${rank.v}<br><span style="font-size:10px">${suit.sym}</span></div>
+          <div style="font-size:17px;align-self:flex-start;line-height:1.15">${rank.v}<br><span style="font-size:12px">${suit.sym}</span></div>
+          <div style="font-size:34px;line-height:1">${suit.sym}</div>
+          <div style="font-size:17px;align-self:flex-end;transform:rotate(180deg);line-height:1.15">${rank.v}<br><span style="font-size:12px">${suit.sym}</span></div>
         </div>`;
       }
       (()=>{
@@ -11276,7 +11526,7 @@
         window.invPreview=function(){
           const html=buildInvoiceHTML();
           const win=window.open('','_blank','width=860,height=900,scrollbars=yes');
-          if(!win){alert('لطفاً پاپ‌آپ را برای این سایت مجاز کنید.');return;}
+          if(!win){showToast('پاپ‌آپ مسدود است - اجازه دهید');return;}
           win.document.open();
           win.document.write(html);
           win.document.close();
@@ -11542,43 +11792,70 @@
           return FACES.every((_,fi2)=>c.slice(fi2*9,fi2*9+9).every(x=>x===c[fi2*9+4]));
         }
 
-        // ── Heuristic solver (IDA* up to depth 20) ──
+        // ── Heuristic solver — runs in Web Worker to avoid blocking UI ──
+        // Worker blob is built from the same move logic
         const ALL_MOVES = Object.keys(MOVE_FNS);
         const MOVE_BASE = {};
         ALL_MOVES.forEach(m=>{ MOVE_BASE[m]=m[0]; });
 
+        // Keep a lightweight heuristic for quick "is solved" checks on main thread
         function heuristic(c){
           let wrong=0;
-          FACES.forEach((_,fi2)=>{ const center=c[fi2*9+4]; for(let i=0;i<9;i++) if(c[fi2*9+i]!==center) wrong++; });
+          for(let fi2=0;fi2<6;fi2++){ const center=c[fi2*9+4]; for(let i=0;i<9;i++) if(c[fi2*9+i]!==center) wrong++; }
           return Math.ceil(wrong/8);
         }
 
-        let _solFound = null;
-        function idaStar(c, maxDepth) {
-          _solFound = null;
-          function dfs(cube, path, g, bound, lastBase) {
-            if (_solFound) return;
-            const h = heuristic(cube);
-            if (g+h > bound) return;
-            if (h===0) { _solFound=[...path]; return; }
-            if (g>=bound) return;
-            for (const m of ALL_MOVES) {
-              const base = MOVE_BASE[m];
-              if (base===lastBase) continue; // no same-face consecutive
-              const nc = cloneCube(cube);
-              MOVE_FNS[m](nc);
-              path.push(m);
-              dfs(nc, path, g+1, bound, base);
-              path.pop();
-              if (_solFound) return;
-            }
-          }
-          const h0=heuristic(c);
-          for (let bound=h0; bound<=maxDepth; bound++) {
-            dfs(c,[],0,bound,null);
-            if (_solFound) return _solFound;
-          }
-          return null;
+        let _rbWorker = null;
+
+        function _buildWorkerBlob(){
+          // Serialize all we need inside the worker as a self-contained script
+          const workerSrc = `
+const FACES=['U','R','F','D','L','B'];
+function fi(face,r,c){return FACES.indexOf(face)*9+r*3+c;}
+function rotateFaceCW(c,f){const b=f*9,tmp=[...c.slice(b,b+9)];c[b+0]=tmp[6];c[b+1]=tmp[3];c[b+2]=tmp[0];c[b+3]=tmp[7];c[b+4]=tmp[4];c[b+5]=tmp[1];c[b+6]=tmp[8];c[b+7]=tmp[5];c[b+8]=tmp[2];}
+const MOVE_FNS={};
+MOVE_FNS['U']=c=>{rotateFaceCW(c,0);const rows=[[fi('B',0,2),fi('B',0,1),fi('B',0,0)],[fi('R',0,0),fi('R',0,1),fi('R',0,2)],[fi('F',0,0),fi('F',0,1),fi('F',0,2)],[fi('L',0,0),fi('L',0,1),fi('L',0,2)]];for(let k=0;k<3;k++){const t=c[rows[0][k]];c[rows[0][k]]=c[rows[1][k]];c[rows[1][k]]=c[rows[2][k]];c[rows[2][k]]=c[rows[3][k]];c[rows[3][k]]=t;}};
+MOVE_FNS['D']=c=>{rotateFaceCW(c,3);const rows=[[fi('F',2,0),fi('F',2,1),fi('F',2,2)],[fi('R',2,0),fi('R',2,1),fi('R',2,2)],[fi('B',2,2),fi('B',2,1),fi('B',2,0)],[fi('L',2,0),fi('L',2,1),fi('L',2,2)]];for(let k=0;k<3;k++){const t=c[rows[0][k]];c[rows[0][k]]=c[rows[1][k]];c[rows[1][k]]=c[rows[2][k]];c[rows[2][k]]=c[rows[3][k]];c[rows[3][k]]=t;}};
+MOVE_FNS['R']=c=>{rotateFaceCW(c,1);const cols=[[fi('U',0,2),fi('U',1,2),fi('U',2,2)],[fi('B',2,0),fi('B',1,0),fi('B',0,0)],[fi('D',0,2),fi('D',1,2),fi('D',2,2)],[fi('F',0,2),fi('F',1,2),fi('F',2,2)]];for(let k=0;k<3;k++){const t=c[cols[0][k]];c[cols[0][k]]=c[cols[3][k]];c[cols[3][k]]=c[cols[2][k]];c[cols[2][k]]=c[cols[1][k]];c[cols[1][k]]=t;}};
+MOVE_FNS['L']=c=>{rotateFaceCW(c,4);const cols=[[fi('U',0,0),fi('U',1,0),fi('U',2,0)],[fi('F',0,0),fi('F',1,0),fi('F',2,0)],[fi('D',0,0),fi('D',1,0),fi('D',2,0)],[fi('B',2,2),fi('B',1,2),fi('B',0,2)]];for(let k=0;k<3;k++){const t=c[cols[0][k]];c[cols[0][k]]=c[cols[1][k]];c[cols[1][k]]=c[cols[2][k]];c[cols[2][k]]=c[cols[3][k]];c[cols[3][k]]=t;}};
+MOVE_FNS['F']=c=>{rotateFaceCW(c,2);const t0=c[fi('U',2,0)],t1=c[fi('U',2,1)],t2=c[fi('U',2,2)];c[fi('U',2,0)]=c[fi('L',2,2)];c[fi('U',2,1)]=c[fi('L',1,2)];c[fi('U',2,2)]=c[fi('L',0,2)];c[fi('L',0,2)]=c[fi('D',0,0)];c[fi('L',1,2)]=c[fi('D',0,1)];c[fi('L',2,2)]=c[fi('D',0,2)];c[fi('D',0,0)]=c[fi('R',2,0)];c[fi('D',0,1)]=c[fi('R',1,0)];c[fi('D',0,2)]=c[fi('R',0,0)];c[fi('R',0,0)]=t2;c[fi('R',1,0)]=t1;c[fi('R',2,0)]=t0;};
+MOVE_FNS['B']=c=>{rotateFaceCW(c,5);const t0=c[fi('U',0,0)],t1=c[fi('U',0,1)],t2=c[fi('U',0,2)];c[fi('U',0,0)]=c[fi('R',0,2)];c[fi('U',0,1)]=c[fi('R',1,2)];c[fi('U',0,2)]=c[fi('R',2,2)];c[fi('R',0,2)]=c[fi('D',2,2)];c[fi('R',1,2)]=c[fi('D',2,1)];c[fi('R',2,2)]=c[fi('D',2,0)];c[fi('D',2,0)]=c[fi('L',0,0)];c[fi('D',2,1)]=c[fi('L',1,0)];c[fi('D',2,2)]=c[fi('L',2,0)];c[fi('L',0,0)]=t2;c[fi('L',1,0)]=t1;c[fi('L',2,0)]=t0;};
+['U','D','R','L','F','B'].forEach(m=>{
+  MOVE_FNS[m+"'"]=c=>{MOVE_FNS[m](c);MOVE_FNS[m](c);MOVE_FNS[m](c);};
+  MOVE_FNS[m+'2']=c=>{MOVE_FNS[m](c);MOVE_FNS[m](c);};
+});
+const ALL_MOVES=Object.keys(MOVE_FNS);
+const MOVE_BASE={}; ALL_MOVES.forEach(m=>{MOVE_BASE[m]=m[0];});
+function heuristic(c){let w=0;for(let f=0;f<6;f++){const ct=c[f*9+4];for(let i=0;i<9;i++)if(c[f*9+i]!==ct)w++;}return Math.ceil(w/8);}
+let _found=null;
+function dfs(cube,path,g,bound,lastBase,deadline){
+  if(_found)return;
+  if(Date.now()>deadline){_found='TIMEOUT';return;}
+  const h=heuristic(cube);
+  if(g+h>bound)return;
+  if(h===0){_found=[...path];return;}
+  if(g>=bound)return;
+  for(const m of ALL_MOVES){
+    if(MOVE_BASE[m]===lastBase)continue;
+    const nc=[...cube]; MOVE_FNS[m](nc);
+    path.push(m); dfs(nc,path,g+1,bound,MOVE_BASE[m],deadline); path.pop();
+    if(_found)return;
+  }
+}
+self.onmessage=function(e){
+  const {cube,maxDepth,timeoutMs}=e.data;
+  _found=null;
+  const deadline=Date.now()+(timeoutMs||8000);
+  const h0=heuristic(cube);
+  for(let bound=h0;bound<=maxDepth;bound++){
+    dfs(cube,[],0,bound,null,deadline);
+    if(_found==='TIMEOUT'){self.postMessage({error:'timeout'});return;}
+    if(_found){self.postMessage({solution:_found,bound});return;}
+  }
+  self.postMessage({error:'unsolvable'});
+};
+`;
+          return new Blob([workerSrc],{type:'application/javascript'});
         }
 
         // ── Net UI ──
@@ -11720,32 +11997,56 @@
             return;
           }
 
-          // Solve in a non-blocking way using setTimeout
-          const errDiv=document.getElementById('rubik-error');
-          errDiv.style.display='block'; errDiv.style.color='var(--m3-primary,#00796b)'; errDiv.style.background='transparent';
-          errDiv.textContent='⏳ در حال محاسبه...';
+          // Kill any running worker
+          if(_rbWorker){ _rbWorker.terminate(); _rbWorker=null; }
 
-          setTimeout(()=>{
-            const start=Date.now();
-            const sol=idaStar(cloneCube(_cube), 20);
-            const elapsed=Date.now()-start;
-            errDiv.style.display='none'; errDiv.style.color=''; errDiv.style.background='';
+          // Show spinner & disable button
+          const solveBtn=document.querySelector('#rubik .btn-filled');
+          if(solveBtn){solveBtn.disabled=true;solveBtn.textContent='⏳ در حال محاسبه...';}
+          errEl.style.display='block'; errEl.style.color='var(--m3-primary,#00796b)'; errEl.style.background='transparent';
+          errEl.textContent='⏳ در حال محاسبه… (حداکثر چند ثانیه)';
 
-            if(!sol){
-              rbShowError('❌ حل نشد (عمق ۲۰). مکعب را دوباره بررسی کنید.');
+          const blob = _buildWorkerBlob();
+          const url  = URL.createObjectURL(blob);
+          _rbWorker  = new Worker(url);
+          const start= Date.now();
+
+          _rbWorker.onmessage = function(e){
+            URL.revokeObjectURL(url);
+            _rbWorker=null;
+            errEl.style.display='none'; errEl.style.color=''; errEl.style.background='';
+            if(solveBtn){solveBtn.disabled=false;solveBtn.textContent='✨ حل مکعب';}
+
+            if(e.data.error){
+              if(e.data.error==='timeout'){
+                rbShowError('⏱ زمان حل بیش از حد بود. مکعب بیش از ۱۳۱ حرکت دارد یا رنگ اشتباه است.');
+              } else {
+                rbShowError('❌ حل نشد. مکعب را دوباره بررسی کنید.');
+              }
               return;
             }
 
+            const sol=e.data.solution;
+            const elapsed=Date.now()-start;
             const movesEl=document.getElementById('rubik-solution-moves');
             const infoEl=document.getElementById('rubik-solution-info');
             movesEl.textContent=sol.join(' ');
             infoEl.textContent=sol.length+' حرکت · '+elapsed+' ms';
             solWrap.style.display='';
-
-            // Apply solution to show solved state
             applyMoves(_cube, sol);
             rbRefreshNet();
-          }, 20);
+          };
+
+          _rbWorker.onerror = function(err){
+            URL.revokeObjectURL(url);
+            _rbWorker=null;
+            errEl.style.display='none';
+            if(solveBtn){solveBtn.disabled=false;solveBtn.textContent='✨ حل مکعب';}
+            rbShowError('❌ خطا در حل: '+err.message);
+          };
+
+          // Send cube state to worker (max depth 20, 8s timeout)
+          _rbWorker.postMessage({cube:[..._cube], maxDepth:20, timeoutMs:8000});
         };
 
         window.rbCopySolution = function(){
@@ -11934,7 +12235,7 @@
         let check=BC128.START_B;
         for(let i=0;i<input.length;i++){
           const c=BC128.vals[input[i]];
-          if(c===undefined){alert('کاراکتر پشتیبانی نمی‌شود: '+input[i]);return;}
+          if(c===undefined){showToast('کاراکتر پشتیبانی نمی‌شود: '+input[i]);return;}
           codes.push(c);check+=c*(i+1);
         }
         codes.push(check%103,BC128.STOP);
@@ -12586,7 +12887,7 @@
         reader.readAsArrayBuffer(f);
       }
       async function pdfcDownload() {
-        if (!_pdfjsPDFDoc) { alert('ابتدا PDF را بارگذاری کنید'); return; }
+        if (!_pdfjsPDFDoc) { showToast('ابتدا PDF را بارگذاری کنید'); return; }
         const quality = parseFloat(document.getElementById('pdfc-q').value) || 0.7;
         const prog = document.getElementById('pdfc-prog'); const fill = document.getElementById('pdfc-prog-fill'); const lbl = document.getElementById('pdfc-prog-lbl');
         const errEl = document.getElementById('pdfc-err');
@@ -13700,9 +14001,9 @@
         morseStopAll();
         _morseStop = false;
         const code = document.getElementById('morse-out').value.trim();
-        if (!code) { alert('ابتدا متنی وارد کنید.'); return; }
+        if (!code) { showToast('ابتدا متنی وارد کنید'); return; }
         if (!navigator.mediaDevices?.getUserMedia) {
-          alert('دوربین در این مرورگر پشتیبانی نمی‌شود.'); return;
+          showToast('دوربین در این مرورگر پشتیبانی نمی‌شود'); return;
         }
         const btn = document.getElementById('morse-flash-btn');
         try {
@@ -13712,7 +14013,7 @@
           if (!cap.torch) {
             stream.getTracks().forEach(t=>t.stop());
             _morseFlashTrack = null;
-            alert('چراغ‌قوه روی این دستگاه یا مرورگر پشتیبانی نمی‌شود.\nChrome اندروید لازم است.');
+            showToast('چراغ‌قوه پشتیبانی نمی‌شود — Chrome اندروید لازم است');
             return;
           }
           if (btn) btn.textContent = '🔦 در حال ارسال...';
@@ -13728,7 +14029,7 @@
             else if (s==='/') { await wait(wrd); }
           }
         } catch(e) {
-          alert('خطا: ' + e.message);
+          showToast('خطا: ' + e.message);
         } finally {
           if (_morseFlashTrack) {
             try { await _morseFlashTrack.applyConstraints({advanced:[{torch:false}]}); } catch(_){}
@@ -13996,7 +14297,7 @@
         }
 
         // Browser TTS (for English, or if Piper fails for Persian)
-        if (!window.speechSynthesis) { alert('مرورگر شما TTS را پشتیبانی نمی‌کند.'); setBusy(false); return; }
+        if (!window.speechSynthesis) { showToast('مرورگر شما TTS را پشتیبانی نمی‌کند'); setBusy(false); return; }
         window.speechSynthesis.cancel();
         const speak = (voices) => {
           const utt = new SpeechSynthesisUtterance(text);
@@ -18073,7 +18374,7 @@
       }
       function cp2Extract(){
         var c=document.getElementById('cp2-canvas');
-        if(!c||c.width===0){alert('ابتدا تصویر انتخاب کنید');return;}
+        if(!c||c.width===0){showToast('ابتدا تصویر انتخاب کنید');return;}
         var k=Math.min(20,parseInt(document.getElementById('cp2-count').value)||8);
         var ctx=c.getContext('2d');
         var data=ctx.getImageData(0,0,c.width,c.height).data;
@@ -18140,6 +18441,14 @@
           wcagCalc();
         }
       }
+      function wcagApplySuggestion(hex){
+        const fgInput = document.getElementById('wcag-fg');
+        const fgHex   = document.getElementById('wcag-fg-hex');
+        if(fgInput){ fgInput.value = hex; }
+        if(fgHex)  { fgHex.value  = hex; }
+        wcagCalc();
+      }
+
       function wcagCalc(){
         var fg=document.getElementById('wcag-fg').value;
         var bg=document.getElementById('wcag-bg').value;
@@ -20251,7 +20560,7 @@
               card.flipped=true;selected.push(i);
               if(selected.length===2){
                 moves++;locked=true;
-                if(cards[selected[0]].emoji===cards[selected[1]].emoji){cards[selected[0]].matched=cards[selected[1]].matched=true;selected=[];locked=false;render();if(cards.every(c=>c.matched)){setTimeout(()=>alert('🎉 برنده شدید! '+moves+' حرکت'),200);}}
+                if(cards[selected[0]].emoji===cards[selected[1]].emoji){cards[selected[0]].matched=cards[selected[1]].matched=true;selected=[];locked=false;render();if(cards.every(c=>c.matched)){setTimeout(()=>{area.insertAdjacentHTML('afterbegin',`<div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9;gap:12px"><div style="font-size:3rem">🎉</div><div style="color:#fff;font-size:1.2rem;font-weight:700">برنده شدید!</div><div style="color:#ffffffcc;font-size:0.95rem">${moves} حرکت</div><button onclick="mgSetGame('memory')" style="margin-top:8px;padding:10px 28px;border-radius:99px;border:none;background:var(--m3-primary);color:var(--m3-on-primary);font-size:1rem;font-weight:700;cursor:pointer">دوباره بازی کن</button></div>`);area.style.position='relative';},200);}}
                 else{setTimeout(()=>{cards[selected[0]].flipped=cards[selected[1]].flipped=false;selected=[];locked=false;render();},900);}
               }
               render();
@@ -21399,7 +21708,7 @@
       function bmcExportPNG() {
         const grid=document.getElementById('bmc-grid');if(!grid)return;
         // Simple: open in new window
-        alert('برای خروجی PNG از ابزار اسکرین‌شات مرورگر استفاده کنید (Print > Save as PDF یا Ctrl+Shift+S).');
+        showToast('برای PNG از Print > Save as PDF یا Ctrl+Shift+S استفاده کنید');
       }
 
       // ══════════════════════════════════════════════════════════
@@ -21600,25 +21909,25 @@
           document.getElementById('kp-pub').value=toPEM(pubDer,'PUBLIC KEY');
           document.getElementById('kp-prv').value=toPEM(prvDer,'PRIVATE KEY');
           document.getElementById('kp-output').style.display='block';
-        }catch(e){alert('خطا: '+e.message);}
+        }catch(e){showToast('خطا: '+e.message);}
         document.getElementById('kp-progress').style.display='none';
         document.getElementById('kp-gen-btn').style.display='';
       }
       async function kpEncrypt(){
-        if(!_kpKeyPair||_kpKeyPair.privateKey.algorithm.name!=='RSA-OAEP'){alert('ابتدا کلید RSA تولید کنید');return;}
+        if(!_kpKeyPair||_kpKeyPair.privateKey.algorithm.name!=='RSA-OAEP'){showToast('ابتدا کلید RSA تولید کنید');return;}
         const plain=document.getElementById('kp-plain').value;
         if(!plain)return;
         const enc=await crypto.subtle.encrypt({name:'RSA-OAEP'},_kpKeyPair.publicKey,new TextEncoder().encode(plain));
         document.getElementById('kp-cipher').value=btoa(String.fromCharCode(...new Uint8Array(enc)));
       }
       async function kpDecrypt(){
-        if(!_kpKeyPair||_kpKeyPair.privateKey.algorithm.name!=='RSA-OAEP'){alert('ابتدا کلید RSA تولید کنید');return;}
+        if(!_kpKeyPair||_kpKeyPair.privateKey.algorithm.name!=='RSA-OAEP'){showToast('ابتدا کلید RSA تولید کنید');return;}
         const cipher=document.getElementById('kp-cipher').value.trim();
         if(!cipher)return;
         try{
           const dec=await crypto.subtle.decrypt({name:'RSA-OAEP'},_kpKeyPair.privateKey,Uint8Array.from(atob(cipher),c=>c.charCodeAt(0)));
           document.getElementById('kp-plain').value=new TextDecoder().decode(dec);
-        }catch(e){alert('رمزگشایی ناموفق: '+e.message);}
+        }catch(e){showToast('رمزگشایی ناموفق: '+e.message);}
       }
 
       // ══════════════════════════════════════════════════════════
@@ -21658,7 +21967,7 @@
       function dmAddOption(){const v=document.getElementById('dm-opt-new').value.trim();if(!v)return;_dmOptions.push(v);document.getElementById('dm-opt-new').value='';dmRenderLists();}
       function dmAddCriteria(){const v=document.getElementById('dm-crit-new').value.trim();if(!v)return;_dmCriteria.push({name:v,weight:3});document.getElementById('dm-crit-new').value='';dmRenderLists();}
       function dmBuildMatrix(){
-        if(!_dmOptions.length||!_dmCriteria.length){alert('حداقل یک گزینه و یک معیار نیاز است');return;}
+        if(!_dmOptions.length||!_dmCriteria.length){showToast('حداقل یک گزینه و یک معیار نیاز است');return;}
         const wrap=document.getElementById('dm-matrix-wrap');
         const scores=_dmOptions.map(()=>_dmCriteria.map(()=>5));// default
         let html=`<table style="border-collapse:collapse;width:100%;font-size:13px">
@@ -21968,7 +22277,7 @@
         r.readAsArrayBuffer(f);
       }
       async function atApplyBeep(){
-        if(!_atAudioBuf){alert('فایل صوتی بارگذاری نشده');return;}
+        if(!_atAudioBuf){showToast('فایل صوتی بارگذاری نشده');return;}
         const start=parseFloat((document.getElementById('at-beep-start')||{}).value)||0;
         const end=parseFloat((document.getElementById('at-beep-end')||{}).value)||10;
         const type=(document.getElementById('at-beep-type')||{}).value||'beep';
@@ -22090,7 +22399,7 @@
 
       async function ttsSpeak() {
         const text = document.getElementById('tts-input')?.value?.trim();
-        if (!text) { alert('لطفاً متنی وارد کنید'); return; }
+        if (!text) { showToast('لطفاً متنی وارد کنید'); return; }
         ttsStop();
         const engine = document.getElementById('tts-engine')?.value;
         if (engine === 'piper') {
@@ -22108,7 +22417,7 @@
       }
 
       function ttsSpeakBrowser(text, lang, rate, pitch, voiceName) {
-        if (!window.speechSynthesis) { alert('مرورگر شما TTS ندارد'); return; }
+        if (!window.speechSynthesis) { showToast('مرورگر شما TTS ندارد'); return; }
         const utt   = new SpeechSynthesisUtterance(text);
         utt.lang    = lang; utt.rate = rate || 1; utt.pitch = pitch || 1;
         const voices = window.speechSynthesis.getVoices();
@@ -22378,7 +22687,7 @@
           .find(([catId, catData]) => catData.name.includes('غزلیات') && catData.files && catData.files.length > 0);
         
         if (!ghazalCat) {
-          alert('غزلیات حافظ یافت نشد');
+          showToast('غزلیات حافظ یافت نشد');
           return;
         }
         
