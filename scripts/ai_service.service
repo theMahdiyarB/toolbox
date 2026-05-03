@@ -1,0 +1,19 @@
+[Unit]
+Description=Toolbox AI Service (TTS + OCR + STT)
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/toolbox/scripts
+ExecStart=/var/www/toolbox/venv/bin/python /var/www/toolbox/scripts/ai_service.py
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+Environment=PYTHONUNBUFFERED=1
+MemoryMax=2G
+CPUQuota=90%
+
+[Install]
+WantedBy=multi-user.target

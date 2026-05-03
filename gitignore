@@ -24,3 +24,6 @@ node_modules/
 # Deployment keys / secrets
 *.pem
 *.key
+
+# etc
+**/whisper-models/

@@ -2303,9 +2303,10 @@
         <div class="drawer-item" onclick="showTool('multable')" data-tool="multable"><span class="drawer-item__icon">✖️</span>جدول ضرب</div>
         <div class="drawer-item" onclick="showTool('loan')" data-tool="loan"><span class="drawer-item__icon">🏦</span>محاسبه وام</div>
         <div class="drawer-item" onclick="showTool('deposit')" data-tool="deposit"><span class="drawer-item__icon">💰</span>سود سپرده</div>
+        <div class="drawer-item" onclick="showTool('inflationdebt')" data-tool="inflationdebt"><span class="drawer-item__icon">📈</span>بدهی با تورم</div>
         <div class="drawer-item" onclick="showTool('rentcalc')" data-tool="rentcalc"><span class="drawer-item__icon">🏠</span>رهن و اجاره</div>
         <div class="drawer-item" onclick="showTool('taxdisc')" data-tool="taxdisc"><span class="drawer-item__icon">🏷️</span>مالیات و تخفیف</div>
-        <div class="drawer-item" onclick="showTool('tip')" data-tool="tip"><span class="drawer-item__icon">🧾</span>تقسیم صورت‌حساب</div>
+        <div class="drawer-item" onclick="showTool('tip')" data-tool="tip"><span class="drawer-item__icon">🍽️</span>دنگ — تقسیم هزینه</div>
 
         <span class="drawer-section-label">⏱️ زمان و تقویم</span>
         <div class="drawer-item" onclick="showTool('stopwatch')" data-tool="stopwatch"><span class="drawer-item__icon">⏱️</span>کرونومتر</div>
@@ -2396,6 +2397,8 @@
         <span class="drawer-section-label">📁 فایل</span>
         <div class="drawer-item" onclick="showTool('imgtool')" data-tool="imgtool"><span class="drawer-item__icon">🖼️</span>ابزار تصویر</div>
         <div class="drawer-item" onclick="showTool('bgremove')" data-tool="bgremove"><span class="drawer-item__icon">✂️</span>حذف پس‌زمینه</div>
+        <div class="drawer-item" onclick="showTool('ocrtool')" data-tool="ocrtool"><span class="drawer-item__icon">🔬</span>تشخیص متن OCR</div>
+        <div class="drawer-item" onclick="showTool('stttool')" data-tool="stttool"><span class="drawer-item__icon">🎙️</span>گفتار به متن STT</div>
         <div class="drawer-item" onclick="showTool('pdftool')" data-tool="pdftool"><span class="drawer-item__icon">🛠️</span>ابزار PDF</div>
         <div class="drawer-item" onclick="showTool('filesplit')" data-tool="filesplit"><span class="drawer-item__icon">🗂</span>تقسیم و مرج فایل</div>
         <div class="drawer-item" onclick="showTool('watermark')" data-tool="watermark"><span class="drawer-item__icon">💧</span>واترمارک تصویر</div>
@@ -2704,9 +2707,10 @@
                 <div class="link-card" onclick="haptic(this);showTool('multable')"><button class="fav-btn" data-tool="multable" onclick="event.stopPropagation();toggleFav('multable',this)">☆</button><span class="link-card__icon">✖️</span><span class="link-card__name">جدول ضرب</span><span class="link-card__desc">تمرین تعاملی</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('loan')"><button class="fav-btn" data-tool="loan" onclick="event.stopPropagation();toggleFav('loan',this)">☆</button><span class="link-card__icon">🏦</span><span class="link-card__name">محاسبه وام</span><span class="link-card__desc">قسط ماهانه و کل بهره</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('deposit')"><button class="fav-btn" data-tool="deposit" onclick="event.stopPropagation();toggleFav('deposit',this)">☆</button><span class="link-card__icon">💰</span><span class="link-card__name">سود سپرده</span><span class="link-card__desc">سود ساده و مرکب</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('inflationdebt')"><button class="fav-btn" data-tool="inflationdebt" onclick="event.stopPropagation();toggleFav('inflationdebt',this)">☆</button><span class="link-card__icon">📈</span><span class="link-card__name">بدهی با تورم</span><span class="link-card__desc">ارزش واقعی بدهی قدیمی</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('rentcalc')"><button class="fav-btn" data-tool="rentcalc" onclick="event.stopPropagation();toggleFav('rentcalc',this)">☆</button><span class="link-card__icon">🏠</span><span class="link-card__name">رهن و اجاره</span><span class="link-card__desc">تبدیل رهن به اجاره</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('taxdisc')"><button class="fav-btn" data-tool="taxdisc" onclick="event.stopPropagation();toggleFav('taxdisc',this)">☆</button><span class="link-card__icon">🏷️</span><span class="link-card__name">مالیات و تخفیف</span><span class="link-card__desc">ارزش افزوده و تخفیف</span></div>
-                <div class="link-card" onclick="haptic(this);showTool('tip')"><button class="fav-btn" data-tool="tip" onclick="event.stopPropagation();toggleFav('tip',this)">☆</button><span class="link-card__icon">🧾</span><span class="link-card__name">تقسیم صورت‌حساب</span><span class="link-card__desc">بین چند نفر با سرویس</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('tip')"><button class="fav-btn" data-tool="tip" onclick="event.stopPropagation();toggleFav('tip',this)">☆</button><span class="link-card__icon">🍽️</span><span class="link-card__name">دنگ — تقسیم هزینه</span><span class="link-card__desc">تقسیم هزینه بین چند نفر</span></div>
               </div>
             </div>
 
@@ -2832,6 +2836,8 @@
               <div class="tool-grid">
                 <div class="link-card" onclick="haptic(this);showTool('imgtool')"><button class="fav-btn" data-tool="imgtool" onclick="event.stopPropagation();toggleFav('imgtool',this)">☆</button><span class="link-card__icon">🖼️</span><span class="link-card__name">ابزار تصویر</span><span class="link-card__desc">برش، فشرده‌سازی، تبدیل</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('bgremove')"><button class="fav-btn" data-tool="bgremove" onclick="event.stopPropagation();toggleFav('bgremove',this)">☆</button><span class="link-card__icon">✂️</span><span class="link-card__name">حذف پس‌زمینه</span><span class="link-card__desc">بدون API · کاملاً آفلاین</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('ocrtool')"><button class="fav-btn" data-tool="ocrtool" onclick="event.stopPropagation();toggleFav('ocrtool',this)">☆</button><span class="link-card__icon">🔬</span><span class="link-card__name">تشخیص متن OCR</span><span class="link-card__desc">تصویر و PDF · فارسی و انگلیسی</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('stttool')"><button class="fav-btn" data-tool="stttool" onclick="event.stopPropagation();toggleFav('stttool',this)">☆</button><span class="link-card__icon">🎙️</span><span class="link-card__name">گفتار به متن STT</span><span class="link-card__desc">ضبط یا آپلود · Whisper</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('pdftool')"><button class="fav-btn" data-tool="pdftool" onclick="event.stopPropagation();toggleFav('pdftool',this)">☆</button><span class="link-card__icon">🛠️</span><span class="link-card__name">ابزار PDF</span><span class="link-card__desc">ادغام، تقسیم، مرتب‌سازی، استخراج تصویر</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('filesplit')"><button class="fav-btn" data-tool="filesplit" onclick="event.stopPropagation();toggleFav('filesplit',this)">☆</button><span class="link-card__icon">🗂</span><span class="link-card__name">تقسیم و مرج فایل</span><span class="link-card__desc">فایل‌های بزرگ + رمز</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('watermark')"><button class="fav-btn" data-tool="watermark" onclick="event.stopPropagation();toggleFav('watermark',this)">☆</button><span class="link-card__icon">💧</span><span class="link-card__name">واترمارک تصویر</span><span class="link-card__desc">افزودن لوگو یا متن به تصویر</span></div>
@@ -3577,65 +3583,54 @@
         <!-- ══ TIP SPLITTER ══ -->
         <div id="tip" class="tool-card">
 
-          <div class="tool-title">🧾 تقسیم صورت‌حساب</div>
-          <div class="field-row">
-            <div class="field-col">
-              <label class="field-label">مبلغ صورت‌حساب</label
-              ><input
-                type="number"
-                id="tip-bill"
-                class="text-input"
-                value="500000"
-                oninput="calcTip()"
-              />
-            </div>
-            <div class="field-col">
-              <label class="field-label">درصد سرویس (%)</label
-              ><input
-                type="number"
-                id="tip-pct"
-                class="text-input"
-                value="10"
-                oninput="calcTip()"
-              />
-            </div>
-            <div class="field-col">
-              <label class="field-label">تعداد نفرات</label
-              ><input
-                type="number"
-                id="tip-ppl"
-                class="text-input"
-                value="4"
-                min="1"
-                oninput="calcTip()"
-              />
-            </div>
+          <div class="tool-title">🍽️ دنگ — تقسیم هزینه</div>
+
+          <!-- Sessions list + New session -->
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <select id="dang-session-sel" class="text-input" style="flex:1;font-size:13px" onchange="dangLoadSession()"></select>
+            <button class="btn btn-tonal" onclick="dangNewSession()" style="white-space:nowrap;font-size:12px">+ جلسه جدید</button>
+            <button class="btn btn-tonal" onclick="dangDeleteSession()" style="white-space:nowrap;font-size:12px;color:var(--m3-error)">🗑</button>
           </div>
-          <div class="data-list" id="tip-res">
-            <div class="data-row">
-              <span class="data-row__key">مبلغ سرویس</span
-              ><span class="data-row__val" id="tip-tv">-</span>
+          <div style="display:flex;gap:8px;margin-bottom:12px;align-items:center">
+            <input type="text" id="dang-session-name" class="text-input" placeholder="نام جلسه (مثلاً: سفر شمال)" style="flex:1;font-size:13px" oninput="dangAutoSave()">
+          </div>
+
+          <!-- Totals row -->
+          <div class="field-row" style="margin-bottom:8px">
+            <div class="field-col">
+              <label class="field-label">مبلغ کل (ریال)</label>
+              <input type="number" id="dang-total" class="text-input" placeholder="0" oninput="dangCalc()">
             </div>
-            <div class="data-row">
-              <span class="data-row__key">جمع کل</span
-              ><span class="data-row__val" id="tip-tot">-</span>
+            <div class="field-col">
+              <label class="field-label">درصد اضافه (%)</label>
+              <input type="number" id="dang-pct" class="text-input" value="0" min="0" oninput="dangCalc()">
             </div>
-            <div class="data-row">
-              <span class="data-row__key">سهم هر نفر</span
-              ><span
-                class="data-row__val"
-                id="tip-per"
-                style="
-                  font-size: 1.2rem;
-                  font-weight: 700;
-                  color: var(--m3-primary);
-                "
-                >-</span
-              >
+            <div class="field-col">
+              <label class="field-label">هزینه جانبی (ریال)</label>
+              <input type="number" id="dang-extra" class="text-input" value="0" min="0" placeholder="مثل کرایه" oninput="dangCalc()">
             </div>
           </div>
 
-          <div class="tool-desc">محاسبه انعام رستوران. مبلغ صورت‌حساب، درصد سرویس و تعداد نفرات را وارد کنید تا سهم هر نفر (با و بدون انعام) به‌طور شفاف مشخص شود. <strong>کاربرد:</strong> رستوران، کافه، خدمات مهمانداری، سفرهای گروهی.</div>
+          <!-- People columns -->
+          <div style="font-size:13px;font-weight:600;margin:10px 0 6px;display:flex;align-items:center;gap:8px">
+            <span>افراد</span>
+            <button class="btn btn-tonal" onclick="dangAddPerson()" style="font-size:11px;padding:2px 10px">+ نفر</button>
+          </div>
+          <div id="dang-people" style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px"></div>
+
+          <!-- Result -->
+          <div id="dang-result" style="display:none;margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid var(--m3-outline-variant)"></div>
+
+          <!-- Summary totals -->
+          <div id="dang-summary" style="display:none;margin-top:8px" class="data-list"></div>
+
+          <!-- History -->
+          <div style="margin-top:14px">
+            <div style="font-size:12px;font-weight:600;color:var(--m3-on-surface-variant);margin-bottom:6px">📋 تاریخچه جلسات</div>
+            <div id="dang-history" style="display:flex;flex-direction:column;gap:6px;max-height:180px;overflow-y:auto"></div>
+          </div>
+
+          <div class="tool-desc">تقسیم هزینه مشترک (دنگ). مبلغ کل را وارد کنید، درصد اضافه (مثل سرویس رستوران) و هزینه جانبی (مثل کرایه تاکسی) را بیفزایید، سپس نام هر نفر را مشخص کنید. سهم هر نفر محاسبه می‌شود. جلسات در مرورگر ذخیره می‌شوند. <strong>کاربرد:</strong> سفر، رستوران، جشن، اتاق مشترک.</div>
         </div>
 
         <!-- ══ NOTES ══ -->
@@ -6585,6 +6580,62 @@
           <div id="dep-result" style="display:none;margin-top:14px"></div>
         </div>
 
+        <!-- ══ INFLATION DEBT ══ -->
+        <div id="inflationdebt" class="tool-card">
+
+          <div class="tool-title">📈 محاسبه بدهی با نرخ تورم</div>
+          <p style="font-size:13px;line-height:1.7;color:var(--m3-on-surface-variant);margin-bottom:14px">
+            ارزش واقعی یک مبلغ در گذر زمان بر اساس نرخ تورم سالانه محاسبه می‌شود. مبلغ اولیه و سال‌های تورم را مشخص کنید — یا از داده‌های رسمی بانک مرکزی استفاده کنید.
+          </p>
+
+          <div class="field-row" style="margin-bottom:12px">
+            <div class="field-col">
+              <label class="field-label">مبلغ اولیه (ریال)</label>
+              <input type="number" id="ifd-amount" class="text-input" placeholder="مثلاً ۱۰۰۰۰۰۰۰" oninput="ifdCalc()">
+            </div>
+          </div>
+
+          <!-- Mode toggle -->
+          <div style="display:flex;gap:8px;margin-bottom:12px">
+            <button class="btn btn-filled" id="ifd-tab-manual" onclick="ifdSetMode('manual')">✏️ وارد کردن دستی</button>
+            <button class="btn btn-tonal"  id="ifd-tab-cbi"    onclick="ifdSetMode('cbi')">🏦 داده‌های بانک مرکزی</button>
+          </div>
+
+          <!-- Manual mode -->
+          <div id="ifd-panel-manual">
+            <div style="font-size:13px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px">
+              <span>نرخ تورم سالانه</span>
+              <button class="btn btn-tonal" onclick="ifdAddRow()" style="font-size:11px;padding:2px 10px">+ سال</button>
+            </div>
+            <div id="ifd-rows" style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px"></div>
+          </div>
+
+          <!-- CBI preset mode -->
+          <div id="ifd-panel-cbi" style="display:none">
+            <div class="field-row" style="margin-bottom:8px">
+              <div class="field-col">
+                <label class="field-label">از سال (شمسی)</label>
+                <select id="ifd-from" class="text-input" onchange="ifdCalc()"></select>
+              </div>
+              <div class="field-col">
+                <label class="field-label">تا سال (شمسی)</label>
+                <select id="ifd-to" class="text-input" onchange="ifdCalc()"></select>
+              </div>
+            </div>
+            <div id="ifd-cbi-preview" style="font-size:11.5px;color:var(--m3-on-surface-variant);line-height:1.8;margin-bottom:8px;max-height:140px;overflow-y:auto;padding:8px;background:var(--m3-surface-container);border-radius:8px"></div>
+          </div>
+
+          <!-- Result -->
+          <div id="ifd-result" style="display:none;margin-top:14px;padding:16px;background:var(--m3-primary-container);border-radius:12px;text-align:center">
+            <div style="font-size:12px;color:var(--m3-on-primary-container);margin-bottom:4px">ارزش امروز بدهی</div>
+            <div id="ifd-result-val" style="font-size:1.6rem;font-weight:800;color:var(--m3-on-primary-container)"></div>
+            <div id="ifd-result-mult" style="font-size:12px;color:var(--m3-on-primary-container);margin-top:6px;opacity:.8"></div>
+          </div>
+          <div id="ifd-breakdown" style="margin-top:10px;display:none" class="data-list"></div>
+
+          <div class="tool-desc">ارزش واقعی یک بدهی یا مبلغ را با احتساب تورم سالانه محاسبه می‌کند. فرمول: مبلغ × ∏(۱ + نرخ_تورم/۱۰۰). داده‌های رسمی نرخ تورم از بانک مرکزی ایران (۱۳۱۶–۱۴۰۴) پیش‌بارگذاری شده‌اند. <strong>کاربرد:</strong> محاسبه ارزش واقعی طلب قدیمی، برنامه‌ریزی مالی، تعدیل بدهی.</div>
+        </div>
+
         <!-- ══ RENT CALCULATOR ══ -->
         <div id="rentcalc" class="tool-card">
 
@@ -8067,6 +8118,127 @@
           <div class="tool-desc">حذف پس‌زمینه تصویر با مدل RMBG-1.4 (ISNet) کاملاً در مرورگر. اولین اجرا مدل را دانلود می‌کند و پس از آن آفلاین کار می‌کند. <strong>کاربرد:</strong> عکس پروفایل، محصول، ارائه، طراحی.</div>
         </div>
 
+        <!-- ══ OCR ══ -->
+        <div id="ocrtool" class="tool-card">
+          <div class="tool-title">🔬 تشخیص متن (OCR)</div>
+          <p style="font-size:13px;line-height:1.7;color:var(--m3-on-surface-variant);margin-bottom:12px">
+            متن موجود در تصویر یا PDF را استخراج کنید. پردازش روی سرور با Tesseract انجام می‌شود — هیچ داده‌ای ذخیره نمی‌شود.
+          </p>
+
+          <!-- Language -->
+          <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+            <label style="font-size:13px;font-weight:600;align-self:center">زبان:</label>
+            <button class="btn btn-filled"  id="ocr-lang-fa"  onclick="ocrSetLang('fas')"  style="font-size:12px">🇮🇷 فارسی</button>
+            <button class="btn btn-tonal"   id="ocr-lang-en"  onclick="ocrSetLang('eng')"  style="font-size:12px">🇬🇧 English</button>
+            <button class="btn btn-tonal"   id="ocr-lang-both" onclick="ocrSetLang('fas+eng')" style="font-size:12px">هر دو</button>
+          </div>
+
+          <!-- Drop zone -->
+          <div id="ocr-drop"
+            ondragover="event.preventDefault();this.style.borderColor='var(--m3-primary)'"
+            ondragleave="this.style.borderColor=''"
+            ondrop="ocrHandleDrop(event)"
+            style="border:2px dashed var(--m3-outline-variant);border-radius:14px;padding:28px;text-align:center;cursor:pointer;transition:border-color .2s;margin-bottom:10px"
+            onclick="document.getElementById('ocr-file-in').click()">
+            <div style="font-size:2rem;margin-bottom:8px">📄</div>
+            <div style="font-size:13px;color:var(--m3-on-surface-variant)">تصویر یا PDF را اینجا رها کنید<br>یا کلیک کنید</div>
+            <div style="font-size:11px;color:var(--m3-outline);margin-top:6px">JPG · PNG · WebP · BMP · TIFF · PDF</div>
+          </div>
+          <input type="file" id="ocr-file-in" accept="image/*,.pdf" style="display:none" onchange="ocrHandleFile(this.files[0])">
+
+          <!-- PDF page selector (shown only for PDFs) -->
+          <div id="ocr-pdf-ctrl" style="display:none;margin-bottom:10px">
+            <div style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:6px">صفحات PDF:</div>
+            <div id="ocr-pdf-pages" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn btn-tonal" onclick="ocrSelectAllPages(true)"  style="font-size:11px">انتخاب همه</button>
+              <button class="btn btn-tonal" onclick="ocrSelectAllPages(false)" style="font-size:11px">لغو انتخاب</button>
+            </div>
+          </div>
+
+          <!-- Preview strip -->
+          <div id="ocr-previews" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px"></div>
+
+          <!-- Run button -->
+          <button class="btn btn-filled" onclick="ocrRun()" id="ocr-run-btn" style="width:100%;margin-bottom:10px" disabled>
+            🔬 شروع تشخیص متن
+          </button>
+
+          <!-- Progress -->
+          <div id="ocr-progress" style="display:none;margin-bottom:10px">
+            <div style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:4px" id="ocr-progress-label">در حال پردازش...</div>
+            <div style="height:6px;background:var(--m3-surface-variant);border-radius:99px;overflow:hidden">
+              <div id="ocr-progress-bar" style="height:100%;background:var(--m3-primary);border-radius:99px;width:0%;transition:width .3s"></div>
+            </div>
+          </div>
+
+          <!-- Result -->
+          <div id="ocr-result-wrap" style="display:none">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <span style="font-size:13px;font-weight:600">متن استخراج‌شده</span>
+              <div style="display:flex;gap:6px">
+                <button class="btn btn-tonal" onclick="ocrCopy()" style="font-size:12px">📋 کپی</button>
+                <button class="btn btn-tonal" onclick="ocrDownload()" style="font-size:12px">⬇️ TXT</button>
+                <button class="btn btn-tonal" onclick="ocrClear()" style="font-size:12px;color:var(--m3-error)">🗑</button>
+              </div>
+            </div>
+            <textarea id="ocr-output" class="text-area" style="min-height:180px;direction:rtl;font-size:13px;line-height:1.8" placeholder="نتیجه اینجا نمایش داده می‌شود..." readonly></textarea>
+            <div id="ocr-stats" style="font-size:11px;color:var(--m3-outline);margin-top:4px;text-align:left;direction:ltr"></div>
+          </div>
+
+          <div class="tool-desc">استخراج متن از تصویر (JPG، PNG، WebP، TIFF) و PDF با موتور Tesseract. برای PDF هر صفحه با PDF.js به تصویر تبدیل شده، سپس OCR می‌شود. پشتیبانی از فارسی، انگلیسی یا هر دو. <strong>کاربرد:</strong> دیجیتالی‌کردن اسناد، استخراج متن از اسکن، پردازش فاکتور.</div>
+        </div>
+
+        <!-- ══ STT ══ -->
+        <div id="stttool" class="tool-card">
+          <div class="tool-title">🎙️ تبدیل گفتار به متن (STT)</div>
+          <p style="font-size:13px;line-height:1.7;color:var(--m3-on-surface-variant);margin-bottom:12px">
+            صدا را ضبط کنید یا فایل صوتی آپلود کنید. پردازش روی سرور با Whisper انجام می‌شود.
+          </p>
+
+          <!-- Language -->
+          <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+            <label style="font-size:13px;font-weight:600;align-self:center">زبان:</label>
+            <button class="btn btn-filled" id="stt-lang-fa" onclick="sttSetLang('fa')" style="font-size:12px">🇮🇷 فارسی</button>
+            <button class="btn btn-tonal"  id="stt-lang-en" onclick="sttSetLang('en')" style="font-size:12px">🇬🇧 English</button>
+            <button class="btn btn-tonal"  id="stt-lang-auto" onclick="sttSetLang('auto')" style="font-size:12px">🌐 خودکار</button>
+          </div>
+
+          <!-- Record panel -->
+          <div style="background:var(--m3-surface-container);border-radius:14px;padding:16px;margin-bottom:12px;text-align:center">
+            <div id="stt-waveform" style="height:48px;display:flex;align-items:center;justify-content:center;gap:2px;margin-bottom:12px">
+              <div style="font-size:28px;color:var(--m3-on-surface-variant)">🎙️</div>
+            </div>
+            <div id="stt-timer" style="font-size:1.1rem;font-weight:700;font-variant-numeric:tabular-nums;margin-bottom:12px;color:var(--m3-on-surface-variant)">00:00</div>
+            <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+              <button class="btn btn-filled" id="stt-rec-btn" onclick="sttToggleRecord()" style="min-width:110px">🔴 ضبط</button>
+              <button class="btn btn-tonal"  id="stt-send-rec-btn" onclick="sttSendRecording()" style="display:none">📤 ارسال</button>
+              <button class="btn btn-tonal"  onclick="document.getElementById('stt-file-in').click()" style="font-size:12px">📁 آپلود فایل</button>
+            </div>
+            <input type="file" id="stt-file-in" accept="audio/*,video/*" style="display:none" onchange="sttHandleFile(this.files[0])">
+            <div id="stt-rec-info" style="font-size:11px;color:var(--m3-outline);margin-top:8px">MP3 · WAV · OGG · M4A · MP4 پشتیبانی می‌شود</div>
+          </div>
+
+          <!-- Status -->
+          <div id="stt-status" style="display:none;padding:10px 14px;border-radius:10px;background:var(--m3-primary-container);font-size:13px;color:var(--m3-on-primary-container);margin-bottom:10px;text-align:center"></div>
+
+          <!-- Result -->
+          <div id="stt-result-wrap" style="display:none">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <span style="font-size:13px;font-weight:600">متن تشخیص داده‌شده</span>
+              <div style="display:flex;gap:6px">
+                <button class="btn btn-tonal" onclick="sttCopy()" style="font-size:12px">📋 کپی</button>
+                <button class="btn btn-tonal" onclick="sttDownload()" style="font-size:12px">⬇️ TXT</button>
+                <button class="btn btn-tonal" onclick="sttClear()" style="font-size:12px;color:var(--m3-error)">🗑</button>
+              </div>
+            </div>
+            <textarea id="stt-output" class="text-area" style="min-height:140px;font-size:14px;line-height:1.8" placeholder="متن اینجا نمایش داده می‌شود..." readonly></textarea>
+            <div id="stt-meta" style="font-size:11px;color:var(--m3-outline);margin-top:4px;display:flex;gap:12px;direction:ltr"></div>
+          </div>
+
+          <div class="tool-desc">تبدیل گفتار به متن با مدل faster-whisper base روی سرور. ضبط مستقیم از میکروفون یا آپلود فایل صوتی/ویدیویی. پشتیبانی از فارسی، انگلیسی یا تشخیص خودکار زبان. <strong>کاربرد:</strong> پیاده‌سازی جلسه، دیکته، زیرنویس، یادداشت صوتی.</div>
+        </div>
+
         <!-- ══ SEO TOOLS ══ -->
         <div id="seotools" class="tool-card">
 
@@ -8437,7 +8609,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 7.5 - ۱۴۰۵/۰۲/۱۳
+          ℹ️ نسخه 7.6 - ۱۴۰۵/۰۲/۱۱
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -8496,7 +8668,7 @@
       const TOOL_TITLES = {
         home:'خانه', calc:'ماشین‌حساب', bmi:'شاخص BMI',
         avg:'میانگین و آمار', pct:'محاسبه درصد', stopwatch:'کرونومتر', timer:'تایمر',
-        unitconv:'تبدیل واحد', age:'محاسبه سن', loan:'محاسبه وام', tip:'تقسیم صورت‌حساب',
+        unitconv:'تبدیل واحد', age:'محاسبه سن', loan:'محاسبه وام', tip:'دنگ — تقسیم هزینه',
         notes:'یادداشت سریع', text:'ابزار متن', charcount:'آنالیز متن و شمارش',
         whitespace:'حذف فاصله', oneline:'تک‌خطی کردن', lorem:'لورم ایپسوم',
         markdown:'پیش‌نمایش Markdown', diff:'مقایسه دو متن', slugify:'ساخت Slug',
@@ -8515,7 +8687,7 @@
         counter:'شمارنده', matrix:'ماتریس', numwords:'عدد به حروف فارسی',
         colorblind:'شبیه‌ساز کوررنگی',
         dateconv:'مبدل تاریخ', emergency:'شماره‌های ضروری', citycodes:'کد شهرها',
-        trafficfines:'جرایم رانندگی', deposit:'سود سپرده', rentcalc:'رهن و اجاره',
+        trafficfines:'جرایم رانندگی', deposit:'سود سپرده', inflationdebt:'بدهی با نرخ تورم', rentcalc:'رهن و اجاره',
         taxdisc:'مالیات و تخفیف', share:'اشتراک‌گذاری', pwa:'نصب اپ', analytics:'آمار بازدید',
         numconvert:'تبدیل اعداد فارسی/لاتین', multable:'جدول ضرب تعاملی',
         linsolve:'حل معادله', enctools:'ابزار کدگذاری',
@@ -8523,6 +8695,8 @@
         qrread:'خواندن QR', periodic:'جدول تناوبی', metromap:'نقشه مترو و BRT',
         emojis:'ایموجی', calculus:'حسابان', emotcn:'اِموتیکون متنی', pasban:'فرهنگ واژه پارسی', pomodoro:'تایمر پومودورو', resistor:'مقاومت رنگی', chart:'نمودار داده', fakejson:'مولد JSON آزمایشی', subnet:'محاسبه‌گر Subnet', textfix:'تبدیل متن و کدگذاری', wcag:'کنتراست رنگ WCAG',
         imgpalette:'پالت رنگ تعاملی',
+        ocrtool:'تشخیص متن OCR',
+        stttool:'گفتار به متن STT',
         minigames:'بازی‌های کوچک',
         wordle:'واژه (بازی)',
         about:'درباره جعبه‌ابزار',
@@ -8689,6 +8863,8 @@
           if(id==='shadow'    && typeof updateShad==='function') updateShad();
           if(id==='borderrad' && typeof updateBR==='function')   updateBR();
           if(id==='colorpicker'&& typeof cpUpdate==='function')  cpUpdate(document.getElementById('cp-hex')?.value||'#3498db');
+          if(id==='tip'        && typeof dangInit==='function')  dangInit();
+          if(id==='inflationdebt' && typeof ifdInit==='function') ifdInit();
         }, 60);
       }
 
@@ -9814,14 +9990,302 @@
       // ══════════════════════════════════════════════════════
       //  TIP SPLITTER
       // ══════════════════════════════════════════════════════
-      function calcTip() {
-        const bill=parseFloat(document.getElementById('tip-bill').value)||0;
-        const pct=parseFloat(document.getElementById('tip-pct').value)||0;
-        const ppl=parseInt(document.getElementById('tip-ppl').value)||1;
-        const tv=bill*pct/100, tot=bill+tv, per=tot/ppl;
-        document.getElementById('tip-tv').textContent=tv.toLocaleString('fa-IR')+'  ریال';
-        document.getElementById('tip-tot').textContent=tot.toLocaleString('fa-IR')+' ریال';
-        document.getElementById('tip-per').textContent=per.toLocaleString('fa-IR')+' ریال';
+      // ══════════════════════════════════════════════════════
+      //  دنگ — BILL SPLITTING
+      // ══════════════════════════════════════════════════════
+      const DANG_KEY = 'tbfa_dang_sessions';
+      let _dangSessions = [];
+      let _dangCur = 0;
+
+      function dangInit(){
+        try { _dangSessions = JSON.parse(localStorage.getItem(DANG_KEY)||'[]'); } catch(e){ _dangSessions=[]; }
+        if(!_dangSessions.length) _dangSessions = [{ name:'جلسه ۱', total:'', pct:'0', extra:'0', people:[{name:'نفر ۱'},{name:'نفر ۲'}] }];
+        _dangCur = 0;
+        dangRenderSessionList();
+        dangRenderSession();
+      }
+
+      function dangSave(){
+        localStorage.setItem(DANG_KEY, JSON.stringify(_dangSessions));
+      }
+
+      function dangAutoSave(){
+        const s = _dangSessions[_dangCur];
+        s.name = document.getElementById('dang-session-name').value || 'جلسه بی‌نام';
+        s.total = document.getElementById('dang-total').value;
+        s.pct   = document.getElementById('dang-pct').value;
+        s.extra = document.getElementById('dang-extra').value;
+        dangSave();
+        dangRenderSessionList();
+        dangCalc();
+      }
+
+      function dangRenderSessionList(){
+        const sel = document.getElementById('dang-session-sel');
+        if(!sel) return;
+        sel.innerHTML = _dangSessions.map((s,i)=>`<option value="${i}" ${i===_dangCur?'selected':''}>${s.name}</option>`).join('');
+      }
+
+      function dangLoadSession(){
+        _dangCur = parseInt(document.getElementById('dang-session-sel').value)||0;
+        dangRenderSession();
+      }
+
+      function dangNewSession(){
+        _dangSessions.push({ name:`جلسه ${_dangSessions.length+1}`, total:'', pct:'0', extra:'0', people:[{name:'نفر ۱'},{name:'نفر ۲'}] });
+        _dangCur = _dangSessions.length-1;
+        dangSave();
+        dangRenderSessionList();
+        dangRenderSession();
+      }
+
+      function dangDeleteSession(){
+        if(_dangSessions.length<=1){ showToast('حداقل یک جلسه باید باشد'); return; }
+        _dangSessions.splice(_dangCur,1);
+        _dangCur = Math.max(0,_dangCur-1);
+        dangSave();
+        dangRenderSessionList();
+        dangRenderSession();
+      }
+
+      function dangRenderSession(){
+        const s = _dangSessions[_dangCur];
+        document.getElementById('dang-session-name').value = s.name;
+        document.getElementById('dang-total').value = s.total;
+        document.getElementById('dang-pct').value   = s.pct;
+        document.getElementById('dang-extra').value = s.extra;
+        dangRenderPeople();
+        dangCalc();
+      }
+
+      function dangRenderPeople(){
+        const s = _dangSessions[_dangCur];
+        const el = document.getElementById('dang-people');
+        if(!el) return;
+        el.innerHTML = s.people.map((p,i)=>`
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-size:18px">👤</span>
+            <input type="text" class="text-input" value="${p.name}" placeholder="نام نفر ${i+1}"
+              style="flex:1;font-size:13px" oninput="dangPersonName(${i},this.value)">
+            ${s.people.length>1?`<button onclick="dangRemovePerson(${i})" style="background:none;border:none;cursor:pointer;font-size:16px;color:var(--m3-error);padding:0 4px">✕</button>`:''}
+          </div>`).join('');
+      }
+
+      function dangPersonName(i, val){
+        _dangSessions[_dangCur].people[i].name = val;
+        dangSave();
+      }
+
+      function dangAddPerson(){
+        const s = _dangSessions[_dangCur];
+        s.people.push({name:`نفر ${s.people.length+1}`});
+        dangSave();
+        dangRenderPeople();
+        dangCalc();
+      }
+
+      function dangRemovePerson(i){
+        const s = _dangSessions[_dangCur];
+        if(s.people.length<=1){ showToast('حداقل یک نفر باید باشد'); return; }
+        s.people.splice(i,1);
+        dangSave();
+        dangRenderPeople();
+        dangCalc();
+      }
+
+      function dangCalc(){
+        const s = _dangSessions[_dangCur];
+        const total   = parseFloat(document.getElementById('dang-total')?.value)||0;
+        const pct     = parseFloat(document.getElementById('dang-pct')?.value)||0;
+        const extra   = parseFloat(document.getElementById('dang-extra')?.value)||0;
+        const n       = s.people.length;
+        const pctAmt  = total * pct / 100;
+        const grand   = total + pctAmt + extra;
+        const perHead = n > 0 ? grand / n : 0;
+
+        const resEl  = document.getElementById('dang-result');
+        const sumEl  = document.getElementById('dang-summary');
+        if(!resEl) return;
+
+        if(total<=0){ resEl.style.display='none'; sumEl.style.display='none'; return; }
+
+        // Table
+        const cols = ['نام','سهم (ریال)'];
+        let rows = s.people.map(p=>`
+          <tr>
+            <td style="padding:8px 12px;border-bottom:1px solid var(--m3-outline-variant)">${p.name}</td>
+            <td style="padding:8px 12px;border-bottom:1px solid var(--m3-outline-variant);font-weight:700;color:var(--m3-primary);text-align:left;direction:ltr">${perHead.toLocaleString('fa-IR',{maximumFractionDigits:0})}</td>
+          </tr>`).join('');
+
+        resEl.innerHTML = `<table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead><tr style="background:var(--m3-surface-container-high)">
+            ${cols.map(c=>`<th style="padding:8px 12px;text-align:right;font-weight:600">${c}</th>`).join('')}
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>`;
+        resEl.style.display='block';
+
+        sumEl.innerHTML = `
+          <div class="data-row"><span class="data-row__key">مبلغ اصلی</span><span class="data-row__val">${total.toLocaleString('fa-IR')} ریال</span></div>
+          ${pct>0?`<div class="data-row"><span class="data-row__key">مبلغ درصد (${pct}٪)</span><span class="data-row__val">${pctAmt.toLocaleString('fa-IR')} ریال</span></div>`:''}
+          ${extra>0?`<div class="data-row"><span class="data-row__key">هزینه جانبی</span><span class="data-row__val">${extra.toLocaleString('fa-IR')} ریال</span></div>`:''}
+          <div class="data-row"><span class="data-row__key">جمع کل</span><span class="data-row__val" style="font-weight:700">${grand.toLocaleString('fa-IR')} ریال</span></div>
+          <div class="data-row"><span class="data-row__key" style="color:var(--m3-primary);font-weight:700">سهم هر نفر</span><span class="data-row__val" style="font-size:1.15rem;font-weight:800;color:var(--m3-primary)">${perHead.toLocaleString('fa-IR',{maximumFractionDigits:0})} ریال</span></div>`;
+        sumEl.style.display='block';
+
+        dangRenderHistory();
+      }
+
+      function dangRenderHistory(){
+        const el = document.getElementById('dang-history');
+        if(!el) return;
+        const sessions = _dangSessions.filter(s=>parseFloat(s.total)>0);
+        if(!sessions.length){ el.innerHTML='<div style="font-size:12px;color:var(--m3-on-surface-variant)">هنوز جلسه‌ای محاسبه نشده</div>'; return; }
+        el.innerHTML = sessions.map((s,i)=>{
+          const total=parseFloat(s.total)||0, pct=parseFloat(s.pct)||0, extra=parseFloat(s.extra)||0;
+          const grand=total+total*pct/100+extra;
+          const per=s.people.length?grand/s.people.length:0;
+          return `<div style="padding:8px 12px;background:var(--m3-surface-container);border-radius:8px;font-size:12px;cursor:pointer"
+            onclick="dangJumpTo(${_dangSessions.indexOf(s)})">
+            <span style="font-weight:600">${s.name}</span>
+            <span style="margin-right:8px;color:var(--m3-on-surface-variant)">${s.people.length} نفر</span>
+            <span style="float:left;font-weight:700;color:var(--m3-primary)">${per.toLocaleString('fa-IR',{maximumFractionDigits:0})} ریال/نفر</span>
+          </div>`;
+        }).join('');
+      }
+
+      function dangJumpTo(i){
+        _dangCur = i;
+        dangRenderSessionList();
+        dangRenderSession();
+      }
+
+      // ══════════════════════════════════════════════════════
+      //  INFLATION DEBT CALCULATOR
+      // ══════════════════════════════════════════════════════
+      const IFD_CBI = {
+        "۱۴۰۴":48.3,"۱۴۰۳":35.8,"۱۴۰۲":47.4,"۱۴۰۱":53.1,"۱۴۰۰":46.2,
+        "۱۳۹۹":47.1,"۱۳۹۸":41.2,"۱۳۹۷":31.2,"۱۳۹۶":9.6,"۱۳۹۵":9.0,
+        "۱۳۹۴":11.9,"۱۳۹۳":15.6,"۱۳۹۲":34.7,"۱۳۹۱":30.5,"۱۳۹۰":21.5,
+        "۱۳۸۹":12.4,"۱۳۸۸":10.8,"۱۳۸۷":25.4,"۱۳۸۶":18.4,"۱۳۸۵":11.9,
+        "۱۳۸۴":10.4,"۱۳۸۳":15.2,"۱۳۸۲":15.6,"۱۳۸۱":15.8,"۱۳۸۰":11.4,
+        "۱۳۷۹":12.6,"۱۳۷۸":20.1,"۱۳۷۷":18.1,"۱۳۷۶":17.3,"۱۳۷۵":23.2,
+        "۱۳۷۴":49.4,"۱۳۷۳":35.2,"۱۳۷۲":22.9,"۱۳۷۱":24.4,"۱۳۷۰":20.7,
+        "۱۳۶۹":9.0,"۱۳۶۸":17.4,"۱۳۶۷":28.9,"۱۳۶۶":27.7,"۱۳۶۵":23.7,
+        "۱۳۶۴":6.9,"۱۳۶۳":10.4,"۱۳۶۲":14.8,"۱۳۶۱":19.2,"۱۳۶۰":22.8,
+        "۱۳۵۹":23.5,"۱۳۵۸":11.4,"۱۳۵۷":10.0,"۱۳۵۶":25.1,"۱۳۵۵":16.6,
+        "۱۳۵۴":9.9,"۱۳۵۳":15.5,"۱۳۵۲":11.2,"۱۳۵۱":6.3,"۱۳۵۰":5.5,
+        "۱۳۴۹":1.5,"۱۳۴۸":3.6,"۱۳۴۷":1.5,"۱۳۴۶":0.8,"۱۳۴۵":0.8,
+        "۱۳۴۴":0.3,"۱۳۴۳":4.5,"۱۳۴۲":1.0,"۱۳۴۱":0.9,"۱۳۴۰":1.6,
+        "۱۳۳۹":7.9,"۱۳۳۸":13.0,"۱۳۳۷":1.0,"۱۳۳۶":4.4,"۱۳۳۵":8.8,
+        "۱۳۳۴":1.7,"۱۳۳۳":15.9,"۱۳۳۲":9.2,"۱۳۳۱":7.2,"۱۳۳۰":8.3,
+        "۱۳۲۹":-17.2,"۱۳۲۸":2.3,"۱۳۲۷":11.1,"۱۳۲۶":6.6,"۱۳۲۵":-11.5,
+        "۱۳۲۴":-14.4,"۱۳۲۳":2.7,"۱۳۲۲":110.5,"۱۳۲۱":96.2,"۱۳۲۰":49.5,
+        "۱۳۱۹":13.8,"۱۳۱۸":8.0,"۱۳۱۷":8.8,"۱۳۱۶":21.2
+      };
+      const IFD_YEARS = Object.keys(IFD_CBI).sort();
+      let _ifdMode = 'manual';
+      let _ifdRowCount = 1;
+
+      function ifdInit(){
+        // Populate CBI selects
+        const fromSel=document.getElementById('ifd-from');
+        const toSel=document.getElementById('ifd-to');
+        if(!fromSel) return;
+        const years=[...IFD_YEARS].reverse(); // newest first
+        fromSel.innerHTML=years.map(y=>`<option value="${y}">${y}</option>`).join('');
+        toSel.innerHTML=years.map(y=>`<option value="${y}">${y}</option>`).join('');
+        // default: from 2 years ago to now
+        fromSel.value=years[2]||years[0];
+        toSel.value=years[0];
+        // Add first manual row
+        ifdAddRow();
+        ifdCalc();
+      }
+
+      function ifdSetMode(m){
+        _ifdMode=m;
+        document.getElementById('ifd-panel-manual').style.display=m==='manual'?'':'none';
+        document.getElementById('ifd-panel-cbi').style.display=m==='cbi'?'':'none';
+        document.getElementById('ifd-tab-manual').className=m==='manual'?'btn btn-filled':'btn btn-tonal';
+        document.getElementById('ifd-tab-cbi').className=m==='cbi'?'btn btn-filled':'btn btn-tonal';
+        ifdCalc();
+      }
+
+      function ifdAddRow(){
+        _ifdRowCount++;
+        const el=document.getElementById('ifd-rows');
+        if(!el) return;
+        const i=el.children.length;
+        const row=document.createElement('div');
+        row.style.cssText='display:flex;align-items:center;gap:8px';
+        row.innerHTML=`
+          <span style="font-size:12px;color:var(--m3-on-surface-variant);white-space:nowrap;min-width:48px">سال ${i+1}</span>
+          <input type="number" class="text-input ifd-rate" placeholder="نرخ تورم %" style="flex:1;font-size:13px" oninput="ifdCalc()">
+          <button onclick="this.parentElement.remove();ifdCalc()" style="background:none;border:none;cursor:pointer;font-size:15px;color:var(--m3-error)">✕</button>`;
+        el.appendChild(row);
+        ifdCalc();
+      }
+
+      function ifdCalc(){
+        const amtEl=document.getElementById('ifd-amount');
+        const resEl=document.getElementById('ifd-result');
+        const brkEl=document.getElementById('ifd-breakdown');
+        if(!amtEl||!resEl) return;
+
+        const amount=parseFloat(amtEl.value)||0;
+        if(amount<=0){ resEl.style.display='none'; brkEl.style.display='none'; return; }
+
+        let rates=[];
+        let labels=[];
+
+        if(_ifdMode==='manual'){
+          const inputs=document.querySelectorAll('#ifd-rows .ifd-rate');
+          inputs.forEach((inp,i)=>{
+            const v=parseFloat(inp.value);
+            if(!isNaN(v)){ rates.push(v); labels.push(`سال ${i+1}`); }
+          });
+        } else {
+          const from=document.getElementById('ifd-from').value;
+          const to=document.getElementById('ifd-to').value;
+          const fromN=parseInt(from.replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)));
+          const toN=parseInt(to.replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)));
+          const [y1,y2]=[Math.min(fromN,toN),Math.max(fromN,toN)];
+          // Iterate years from y1+1 to y2 (inflation of year y means price rise during that year)
+          const allYears=Object.keys(IFD_CBI).sort();
+          let preview='';
+          allYears.forEach(yr=>{
+            const n=parseInt(yr.replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)));
+            if(n>y1&&n<=y2){
+              rates.push(IFD_CBI[yr]);
+              labels.push(yr);
+              preview+=`<span style="margin-left:12px">${yr}: ${IFD_CBI[yr]}٪</span>`;
+            }
+          });
+          const previewEl=document.getElementById('ifd-cbi-preview');
+          if(previewEl) previewEl.innerHTML=preview||'<em>بازه را انتخاب کنید</em>';
+        }
+
+        if(!rates.length){ resEl.style.display='none'; brkEl.style.display='none'; return; }
+
+        // Compound: value = amount × ∏(1 + rate/100)
+        let val=amount;
+        let brkRows='';
+        rates.forEach((r,i)=>{
+          const before=val;
+          val=val*(1+r/100);
+          brkRows+=`<div class="data-row">
+            <span class="data-row__key">${labels[i]} (${r}٪)</span>
+            <span class="data-row__val" style="direction:ltr">${before.toLocaleString('fa-IR',{maximumFractionDigits:0})} ← ${val.toLocaleString('fa-IR',{maximumFractionDigits:0})}</span>
+          </div>`;
+        });
+
+        const mult=(val/amount).toFixed(2);
+        document.getElementById('ifd-result-val').textContent=val.toLocaleString('fa-IR',{maximumFractionDigits:0})+' ریال';
+        document.getElementById('ifd-result-mult').textContent=`ضریب رشد: ${mult}× — ارزش امروز ${mult} برابر مبلغ اولیه است`;
+        resEl.style.display='block';
+        brkEl.innerHTML=brkRows;
+        brkEl.style.display='block';
       }
 
       // ══════════════════════════════════════════════════════
@@ -22331,10 +22795,366 @@ self.onmessage=function(e){
       }
 
 
-      // ══════════════════════════════════════════════════════════════
-      // TTS — server-side Piper API + browser fallback
-      // POST /api/tts  { text, speed }  → audio/wav
-      // ══════════════════════════════════════════════════════════════
+      // ══════════════════════════════════════════════════════
+      //  OCR TOOL  — POST /api/ocr  { image: base64, lang }
+      // ══════════════════════════════════════════════════════
+      let _ocrLang = 'fas';
+      let _ocrPages = [];      // {canvas, selected} for PDF pages
+      let _ocrImageFile = null; // single image file
+      let _ocrMode = 'image';  // 'image' | 'pdf'
+
+      function ocrSetLang(l){
+        _ocrLang = l;
+        ['fa','en','both'].forEach(k=>{
+          const id = k==='fa'?'ocr-lang-fa':k==='en'?'ocr-lang-en':'ocr-lang-both';
+          const active = (k==='fa'&&l==='fas')||(k==='en'&&l==='eng')||(k==='both'&&l==='fas+eng');
+          const el = document.getElementById(id);
+          if(el) el.className = active?'btn btn-filled':'btn btn-tonal';
+        });
+      }
+
+      function ocrHandleDrop(e){
+        e.preventDefault();
+        document.getElementById('ocr-drop').style.borderColor='';
+        const f = e.dataTransfer.files[0];
+        if(f) ocrHandleFile(f);
+      }
+
+      async function ocrHandleFile(f){
+        if(!f) return;
+        ocrClear(true);
+        const isPDF = f.type==='application/pdf' || f.name.toLowerCase().endsWith('.pdf');
+        _ocrMode = isPDF ? 'pdf' : 'image';
+        document.getElementById('ocr-drop').querySelector('div').textContent = isPDF?'📄':'🖼️';
+
+        if(isPDF){
+          await ocrLoadPDF(f);
+        } else {
+          _ocrImageFile = f;
+          // Show image preview
+          const url = URL.createObjectURL(f);
+          const prevEl = document.getElementById('ocr-previews');
+          prevEl.innerHTML = `<div style="position:relative">
+            <img src="${url}" style="max-height:120px;border-radius:8px;box-shadow:0 2px 8px #0003" onload="URL.revokeObjectURL(this.src)">
+            <div style="position:absolute;bottom:4px;left:4px;background:#000a;color:#fff;font-size:10px;border-radius:4px;padding:2px 6px">${f.name}</div>
+          </div>`;
+          document.getElementById('ocr-pdf-ctrl').style.display='none';
+          document.getElementById('ocr-run-btn').disabled = false;
+        }
+      }
+
+      async function ocrLoadPDF(f){
+        const pdfCtrl = document.getElementById('ocr-pdf-ctrl');
+        const pagesEl = document.getElementById('ocr-pdf-pages');
+        const prevEl  = document.getElementById('ocr-previews');
+        pdfCtrl.style.display='';
+        pagesEl.innerHTML='<span style="font-size:12px;color:var(--m3-on-surface-variant)">⏳ در حال بارگذاری PDF...</span>';
+        prevEl.innerHTML='';
+        _ocrPages=[];
+
+        // Wait for PDF.js to be ready
+        if(!window.pdfjsLib){
+          await new Promise(res=>window.addEventListener('pdfjsready',res,{once:true}));
+        }
+        const arrayBuf = await f.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({data:arrayBuf}).promise;
+        pagesEl.innerHTML='';
+
+        for(let i=1;i<=pdf.numPages;i++){
+          const page = await pdf.getPage(i);
+          const viewport = page.getViewport({scale:2.0}); // high-res for OCR
+          const canvas = document.createElement('canvas');
+          canvas.width  = viewport.width;
+          canvas.height = viewport.height;
+          await page.render({canvasContext:canvas.getContext('2d'), viewport}).promise;
+
+          _ocrPages.push({canvas, selected:true});
+
+          // Thumbnail
+          const thumb = document.createElement('canvas');
+          thumb.width=60; thumb.height=Math.round(canvas.height*60/canvas.width);
+          thumb.getContext('2d').drawImage(canvas,0,0,thumb.width,thumb.height);
+
+          const idx=i-1;
+          const wrap=document.createElement('div');
+          wrap.style.cssText='display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer';
+          wrap.innerHTML=`<div id="ocr-page-thumb-${idx}" style="border:2px solid var(--m3-primary);border-radius:6px;overflow:hidden;opacity:1;transition:.2s"></div>
+            <span style="font-size:10px;color:var(--m3-on-surface-variant)">صفحه ${i}</span>`;
+          wrap.querySelector('div').appendChild(thumb);
+          wrap.onclick=()=>ocrTogglePage(idx);
+          pagesEl.appendChild(wrap);
+
+          // Compact page pill
+          const pill=document.createElement('span');
+          pill.id=`ocr-page-pill-${idx}`;
+          pill.style.cssText='display:none';
+        }
+
+        document.getElementById('ocr-run-btn').disabled = false;
+        // Preview strip — show first few page thumbs inline
+        _ocrPages.slice(0,6).forEach(({canvas},i)=>{
+          const th=document.createElement('canvas');
+          th.width=50; th.height=Math.round(canvas.height*50/canvas.width);
+          th.getContext('2d').drawImage(canvas,0,0,th.width,th.height);
+          th.style.cssText='border-radius:6px;box-shadow:0 2px 6px #0003';
+          prevEl.appendChild(th);
+        });
+        if(pdf.numPages>6){
+          const more=document.createElement('div');
+          more.style.cssText='font-size:12px;color:var(--m3-on-surface-variant);align-self:center';
+          more.textContent=`+${pdf.numPages-6} صفحه دیگر`;
+          prevEl.appendChild(more);
+        }
+      }
+
+      function ocrTogglePage(i){
+        _ocrPages[i].selected = !_ocrPages[i].selected;
+        const thumb=document.getElementById(`ocr-page-thumb-${i}`);
+        if(thumb){
+          thumb.style.borderColor=_ocrPages[i].selected?'var(--m3-primary)':'var(--m3-outline-variant)';
+          thumb.style.opacity=_ocrPages[i].selected?'1':'0.35';
+        }
+      }
+
+      function ocrSelectAllPages(sel){
+        _ocrPages.forEach((_,i)=>{ _ocrPages[i].selected=sel; ocrTogglePage(i); _ocrPages[i].selected=sel; });
+        // fix the toggle double-flip
+        _ocrPages.forEach((_,i)=>{
+          const thumb=document.getElementById(`ocr-page-thumb-${i}`);
+          if(thumb){
+            thumb.style.borderColor=sel?'var(--m3-primary)':'var(--m3-outline-variant)';
+            thumb.style.opacity=sel?'1':'0.35';
+          }
+        });
+      }
+
+      async function ocrRun(){
+        const btn=document.getElementById('ocr-run-btn');
+        const prog=document.getElementById('ocr-progress');
+        const progBar=document.getElementById('ocr-progress-bar');
+        const progLabel=document.getElementById('ocr-progress-label');
+        btn.disabled=true;
+        prog.style.display='';
+        document.getElementById('ocr-result-wrap').style.display='none';
+
+        let images=[]; // array of base64 PNG strings
+        if(_ocrMode==='image' && _ocrImageFile){
+          images=[await ocrFileToB64(_ocrImageFile)];
+        } else if(_ocrMode==='pdf'){
+          images=_ocrPages.filter(p=>p.selected).map(p=>p.canvas.toDataURL('image/png').split(',')[1]);
+        }
+        if(!images.length){ showToast('هیچ تصویری انتخاب نشده'); btn.disabled=false; prog.style.display='none'; return; }
+
+        let allText='';
+        const t0=Date.now();
+        for(let i=0;i<images.length;i++){
+          const pct=Math.round((i/images.length)*100);
+          progBar.style.width=pct+'%';
+          progLabel.textContent=images.length>1?`صفحه ${i+1} از ${images.length}...`:'در حال پردازش...';
+          try {
+            const res=await fetch('/api/ocr',{
+              method:'POST',
+              headers:{'Content-Type':'application/json'},
+              body:JSON.stringify({image:images[i], lang:_ocrLang})
+            });
+            if(!res.ok) throw new Error((await res.json().catch(()=>({}))).detail||res.statusText);
+            const data=await res.json();
+            if(images.length>1) allText+=`\n\n── صفحه ${i+1} ──\n`;
+            allText+=data.text||'';
+          } catch(e){
+            allText+=`\n[خطا در صفحه ${i+1}: ${e.message}]`;
+          }
+        }
+        progBar.style.width='100%';
+        const elapsed=((Date.now()-t0)/1000).toFixed(1);
+        prog.style.display='none';
+        btn.disabled=false;
+
+        const out=document.getElementById('ocr-output');
+        out.value=allText.trim();
+        // detect RTL/LTR
+        out.style.direction=/[\u0600-\u06FF]/.test(allText)?'rtl':'ltr';
+        const words=allText.trim().split(/\s+/).filter(Boolean).length;
+        document.getElementById('ocr-stats').textContent=`${words} کلمه · ${allText.trim().length} کاراکتر · ${elapsed}s`;
+        document.getElementById('ocr-result-wrap').style.display='';
+      }
+
+      function ocrFileToB64(f){
+        return new Promise(res=>{
+          const r=new FileReader();
+          r.onload=()=>res(r.result.split(',')[1]);
+          r.readAsDataURL(f);
+        });
+      }
+
+      function ocrCopy(){ navigator.clipboard.writeText(document.getElementById('ocr-output').value).then(()=>showToast('کپی شد')); }
+      function ocrDownload(){
+        const text=document.getElementById('ocr-output').value;
+        const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));
+        a.download='ocr-result.txt'; a.click();
+      }
+      function ocrClear(silent=false){
+        _ocrPages=[]; _ocrImageFile=null; _ocrMode='image';
+        const ids=['ocr-previews','ocr-pdf-pages'];
+        ids.forEach(id=>{ const el=document.getElementById(id); if(el) el.innerHTML=''; });
+        document.getElementById('ocr-pdf-ctrl').style.display='none';
+        document.getElementById('ocr-progress').style.display='none';
+        document.getElementById('ocr-result-wrap').style.display='none';
+        document.getElementById('ocr-run-btn').disabled=true;
+        document.getElementById('ocr-drop').querySelector('div').textContent='📄';
+        if(!silent) document.getElementById('ocr-file-in').value='';
+      }
+
+      // ══════════════════════════════════════════════════════
+      //  STT TOOL  — POST /api/stt  (multipart: audio file + lang)
+      // ══════════════════════════════════════════════════════
+      let _sttLang     = 'fa';
+      let _sttRecorder = null;
+      let _sttChunks   = [];
+      let _sttBlob     = null;
+      let _sttStream   = null;
+      let _sttTimer    = null;
+      let _sttSecs     = 0;
+      let _sttAnalyser = null;
+      let _sttAnimReq  = null;
+      let _sttRecording= false;
+
+      function sttSetLang(l){
+        _sttLang=l;
+        ['fa','en','auto'].forEach(k=>{
+          const el=document.getElementById(`stt-lang-${k}`);
+          if(el) el.className=(k===l)?'btn btn-filled':'btn btn-tonal';
+        });
+      }
+
+      function sttSetStatus(msg, visible=true){
+        const el=document.getElementById('stt-status');
+        if(!el) return;
+        el.style.display=visible?'':'none';
+        el.textContent=msg;
+      }
+
+      async function sttToggleRecord(){
+        if(_sttRecording){ sttStopRecord(); return; }
+        try {
+          _sttStream=await navigator.mediaDevices.getUserMedia({audio:{sampleRate:16000,channelCount:1}});
+        } catch(e){
+          showToast('دسترسی به میکروفون رد شد: '+e.message); return;
+        }
+        _sttChunks=[]; _sttBlob=null; _sttSecs=0; _sttRecording=true;
+        document.getElementById('stt-result-wrap').style.display='none';
+        sttSetStatus('');
+
+        // Waveform visualizer
+        const actx=new AudioContext();
+        _sttAnalyser=actx.createAnalyser();
+        _sttAnalyser.fftSize=64;
+        actx.createMediaStreamSource(_sttStream).connect(_sttAnalyser);
+        sttDrawWaveform();
+
+        _sttRecorder=new MediaRecorder(_sttStream, {mimeType:MediaRecorder.isTypeSupported('audio/webm;codecs=opus')?'audio/webm;codecs=opus':'audio/webm'});
+        _sttRecorder.ondataavailable=e=>{if(e.data.size>0)_sttChunks.push(e.data);};
+        _sttRecorder.onstop=()=>{
+          _sttBlob=new Blob(_sttChunks,{type:_sttRecorder.mimeType||'audio/webm'});
+          document.getElementById('stt-send-rec-btn').style.display='';
+        };
+        _sttRecorder.start(200);
+
+        // Timer
+        _sttTimer=setInterval(()=>{
+          _sttSecs++;
+          const m=String(Math.floor(_sttSecs/60)).padStart(2,'0');
+          const s=String(_sttSecs%60).padStart(2,'0');
+          document.getElementById('stt-timer').textContent=`${m}:${s}`;
+        },1000);
+
+        const btn=document.getElementById('stt-rec-btn');
+        btn.textContent='⏹ توقف'; btn.style.background='var(--m3-error)'; btn.style.color='#fff';
+      }
+
+      function sttStopRecord(){
+        _sttRecording=false;
+        if(_sttRecorder&&_sttRecorder.state!=='inactive') _sttRecorder.stop();
+        if(_sttStream) _sttStream.getTracks().forEach(t=>t.stop());
+        clearInterval(_sttTimer);
+        cancelAnimationFrame(_sttAnimReq);
+        const btn=document.getElementById('stt-rec-btn');
+        btn.textContent='🔴 ضبط'; btn.style.background=''; btn.style.color='';
+        document.getElementById('stt-waveform').innerHTML='<div style="font-size:24px">🎙️</div>';
+      }
+
+      function sttDrawWaveform(){
+        const el=document.getElementById('stt-waveform');
+        const data=new Uint8Array(_sttAnalyser.frequencyBinCount);
+        const draw=()=>{
+          if(!_sttRecording) return;
+          _sttAnimReq=requestAnimationFrame(draw);
+          _sttAnalyser.getByteFrequencyData(data);
+          const bars=Array.from(data.slice(0,16)).map(v=>{
+            const h=Math.max(4,Math.round(v/4));
+            return `<div style="width:5px;height:${h}px;border-radius:3px;background:var(--m3-primary);transition:height .1s"></div>`;
+          }).join('');
+          el.innerHTML=`<div style="display:flex;align-items:center;gap:3px;height:48px">${bars}</div>`;
+        };
+        draw();
+      }
+
+      async function sttSendRecording(){
+        if(!_sttBlob){ showToast('ابتدا صدا را ضبط کنید'); return; }
+        await sttTranscribe(_sttBlob, 'recording.webm');
+      }
+
+      async function sttHandleFile(f){
+        if(!f) return;
+        document.getElementById('stt-result-wrap').style.display='none';
+        await sttTranscribe(f, f.name);
+      }
+
+      async function sttTranscribe(blob, filename){
+        sttSetStatus('⏳ در حال پردازش... ممکن است چند ثانیه طول بکشد');
+        document.getElementById('stt-send-rec-btn').style.display='none';
+
+        const form=new FormData();
+        form.append('audio', blob, filename);
+        form.append('lang', _sttLang==='auto'?'':_sttLang);
+
+        const t0=Date.now();
+        try {
+          const res=await fetch('/api/stt',{method:'POST',body:form});
+          if(!res.ok) throw new Error((await res.json().catch(()=>({}))).detail||res.statusText);
+          const data=await res.json();
+          const elapsed=((Date.now()-t0)/1000).toFixed(1);
+
+          const out=document.getElementById('stt-output');
+          out.value=data.text||'(متنی تشخیص داده نشد)';
+          out.style.direction=/[\u0600-\u06FF]/.test(data.text||'')?'rtl':'ltr';
+
+          const meta=document.getElementById('stt-meta');
+          meta.innerHTML=`<span>زبان: ${data.language||_sttLang}</span><span>مدت: ${data.duration||'?'}s</span><span>پردازش: ${elapsed}s</span>`;
+
+          document.getElementById('stt-result-wrap').style.display='';
+          sttSetStatus('',false);
+        } catch(e){
+          sttSetStatus('❌ خطا: '+e.message);
+        }
+      }
+
+      function sttCopy(){ navigator.clipboard.writeText(document.getElementById('stt-output').value).then(()=>showToast('کپی شد')); }
+      function sttDownload(){
+        const text=document.getElementById('stt-output').value;
+        const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));
+        a.download='stt-result.txt'; a.click();
+      }
+      function sttClear(){
+        _sttBlob=null; _sttChunks=[];
+        document.getElementById('stt-result-wrap').style.display='none';
+        document.getElementById('stt-send-rec-btn').style.display='none';
+        sttSetStatus('',false);
+        document.getElementById('stt-timer').textContent='00:00';
+        document.getElementById('stt-file-in').value='';
+      }
+
+
       let _ttsCurrentAudio = null;
       let _ttsLastWavBlob  = null;
       let _ttsAbortCtrl    = null;
