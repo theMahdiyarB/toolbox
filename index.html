@@ -3047,7 +3047,7 @@
             <button class="btn btn-tonal" onclick="copyVal('calc-disp')">📋 کپی پاسخ</button>
           </div>
 
-          <div class="tool-desc">ماشین‌حساب - عبارات کامل مثل <code>2*(3+4)</code> را پشتیبانی می‌کند. کیبورد نیز کار می‌کند. برای حالت علمی روی دکمه «حالت» کلیک کنید.</div>
+          <div class="tool-desc">ماشین‌حساب پیشرفته با پشتیبانی از عبارات کامل مانند <code>2*(3+4)</code> و توابع علمی. کیبورد مستقیم کار می‌کند. برای محاسبه مثلثات، لگاریتم، توان و رادیکال به حالت علمی سوئیچ کنید. نتایج را با دکمه کپی، به کلیپ‌بورد منتقل کنید. <strong>کاربرد:</strong> محاسبات روزمره، مهندسی، ریاضی دانشگاهی.</div>
         </div>
 
 
@@ -3079,7 +3079,7 @@
               />
             </div>
   
-          <div class="tool-desc">با تقسیم وزن (kg) بر مجذور قد (m) محاسبه می‌شود. زیر ۱۸.۵ کم‌وزن، ۱۸.۵ تا ۲۴.۹ طبیعی، ۲۵ تا ۲۹.۹ اضافه‌وزن، و بالای ۳۰ چاقی است. این ابزار فقط جنبه اطلاعاتی دارد.</div>
+          <div class="tool-desc">شاخص توده بدنی (BMI) با فرمول وزن(kg) ÷ قد²(m) محاسبه می‌شود. وزن و قد را وارد کنید تا دسته‌بندی وزنی ببینید: کم‌وزن (<۱۸.۵)، طبیعی (۱۸.۵–۲۴.۹)، اضافه‌وزن (۲۵–۲۹.۹) یا چاق (>۳۰). <strong>توجه:</strong> BMI ابزار غربالگری است نه تشخیص پزشکی؛ برای ارزیابی دقیق با پزشک مشورت کنید.</div>
         </div>
           <button class="btn btn-filled" onclick="calcBMI()">محاسبه</button>
           <div id="bmi-res" style="display: none; margin-top: 16px">
@@ -3121,7 +3121,7 @@
         <div id="avg" class="tool-card">
 
           <div class="tool-title">📊 میانگین و آمار
-          <div class="tool-desc">اعداد را با خط جدید یا ویرگول وارد کنید. میانگین، میانه (عدد وسط مجموعه مرتب‌شده)، کمینه، بیشینه، مجموع، تعداد و انحراف معیار (میزان پراکندگی) نمایش داده می‌شوند.</div>
+          <div class="tool-desc">اعداد را با خط جدید یا ویرگول وارد کنید. ابزار به‌صورت خودکار میانگین، میانه، کمینه، بیشینه، مجموع، تعداد، انحراف معیار و نما (Mode) را محاسبه می‌کند. <strong>کاربرد:</strong> تحلیل داده، آمار پایه، بررسی نتایج آزمون، محاسبه میانگین درآمد یا هزینه.</div>
 </div>
           <label class="field-label">اعداد (با خط جدید یا ویرگول)</label>
           <textarea
@@ -3288,7 +3288,7 @@
           </div>
           <button class="btn btn-filled" onclick="calcPct3()">محاسبه</button>
 
-          <div class="tool-desc">سه نوع محاسبه: ۱) X درصد از Y چقدر است، ۲) X چند درصد از Y است، ۳) تغییر درصدی از مقدار A به B.</div>
+          <div class="tool-desc">سه نوع محاسبه درصد: ۱) <em>X درصد از Y چقدر است؟</em> مثلاً ۲۰٪ از ۵۰۰ = ۱۰۰ ۲) <em>X چند درصد از Y است؟</em> مثلاً ۸۰ از ۳۲۰ = ۲۵٪ ۳) <em>تغییر درصدی</em> از A به B چقدر است؟ <strong>کاربرد:</strong> محاسبه تخفیف، مالیات، رشد فروش، نرخ تورم.</div>
         </div>
 
         <!-- ══ STOPWATCH ══ -->
@@ -3317,7 +3317,7 @@
             <button class="btn btn-tonal" onclick="resetSW()" style="border-radius:50px;min-width:100px;font-size:1rem;padding:14px 20px">↺ ریست</button>
           </div>
 
-          <div class="tool-desc">زمان را با دقت صدم ثانیه اندازه‌گیری می‌کند. دکمه لپ برای ثبت زمان هر مرحله بدون متوقف شدن کرونومتر استفاده می‌شود.</div>
+          <div class="tool-desc">کرونومتر با دقت صدم‌ثانیه. دکمه «لپ» زمان هر مرحله را ثبت می‌کند بدون اینکه شمارش متوقف شود. تاریخچه لپ‌ها به‌صورت جدول نمایش داده می‌شود. <strong>کاربرد:</strong> ورزش، کدنویسی و اندازه‌گیری کارایی، مسابقات، آشپزی.</div>
         </div>
 
         <!-- ══ TIMER ══ -->
@@ -3388,7 +3388,7 @@
           <div id="tmr-done" style="display:none;text-align:center;margin-top:16px;font-size:1.4rem;animation:_tmrPulse 1s ease infinite alternate">🔔 وقت تمام شد!</div>
           <style>@keyframes _tmrPulse{from{opacity:1}to{opacity:.4}}</style>
 
-          <div class="tool-desc">تایمر شمارش معکوس با نمایش حلقه‌ای. پیش‌تنظیم‌های سریع یا زمان دلخواه وارد کنید.</div>
+          <div class="tool-desc">تایمر شمارش معکوس با نمایش حلقه SVG. پیش‌تنظیم‌های سریع (۵، ۱۰، ۱۵، ۲۵، ۳۰، ۶۰ دقیقه) یا زمان دلخواه. پس از پایان زنگ صوتی پخش و ویبره ارسال می‌شود. اعلان مرورگر در صورت اجازه فعال می‌شود. <strong>کاربرد:</strong> پومودورو، آشپزی، ورزش، امتحان.</div>
         </div>
 
         <!-- ══ UNIT CONVERTER ══ -->
@@ -3440,14 +3440,14 @@
           </div>
           <div class="result-big" id="uc-result" style="direction:ltr;text-align:right;unicode-bidi:embed;font-family:'Courier New',monospace">-</div>
 
-          <div class="tool-desc">۱۲ دسته: طول، وزن، مساحت، حجم، سرعت، داده، دما، انرژی، فشار، زمان، زاویه و مصرف سوخت. برای دما تبدیل سلسیوس، فارنهایت و کلوین پشتیبانی می‌شود.</div>
+          <div class="tool-desc">تبدیل واحد در ۱۲ دسته: طول، وزن، مساحت، حجم، سرعت، داده، دما، انرژی، فشار، زمان، زاویه و مصرف سوخت. دما با فرمول دقیق (نه فقط ضرب) تبدیل می‌شود. <strong>کاربرد:</strong> مهندسی، سفر، آشپزی بین‌المللی، دانشگاه، واردات و صادرات.</div>
         </div>
 
         <!-- ══ AGE CALCULATOR ══ -->
         <div id="age" class="tool-card">
 
           <div class="tool-title">🎂 محاسبه سن
-          <div class="tool-desc">سن دقیق به سال، ماه و روز. پشتیبانی از تقویم خورشیدی (شمسی) و میلادی.</div>
+          <div class="tool-desc">سن دقیق به سال، ماه، روز، ساعت و دقیقه. پشتیبانی از تقویم خورشیدی (شمسی) با الگوریتم دقیق تبدیل. تاریخ تولد را وارد کنید تا سن لحظه‌ای ببینید. <strong>کاربرد:</strong> احراز سن برای قراردادها، مدارک رسمی، تولدها، محاسبه بازنشستگی.</div>
 </div>
           <div class="btn-row" style="margin-bottom:10px">
             <button class="btn btn-tonal" id="age-cal-sh" onclick="ageSetCal('shamsi')" style="flex:1">📅 خورشیدی</button>
@@ -3547,7 +3547,7 @@
               />
             </div>
   
-          <div class="tool-desc">با فرمول PMT محاسبه می‌شود. مبلغ، نرخ بهره سالانه و تعداد اقساط را وارد کنید تا قسط ماهانه، مجموع پرداختی و کل بهره نمایش داده شود.</div>
+          <div class="tool-desc">محاسبه قسط وام با فرمول PMT استاندارد. مبلغ وام، نرخ بهره سالانه (٪) و تعداد اقساط را وارد کنید تا قسط ماهانه، کل بهره پرداختی و جدول استهلاک کامل را ببینید. <strong>کاربرد:</strong> وام مسکن، خودرو، بانکی، قرارداد اقساطی.</div>
         </div>
           <button class="btn btn-filled" onclick="calcLoan()">محاسبه</button>
           <div id="ln-res" style="display: none; margin-top: 14px">
@@ -3635,7 +3635,7 @@
             </div>
           </div>
 
-          <div class="tool-desc">مبلغ کل صورت‌حساب، درصد سرویس (انعام) و تعداد نفرات را وارد کنید. سهم هر نفر با احتساب سرویس محاسبه می‌شود.</div>
+          <div class="tool-desc">محاسبه انعام رستوران. مبلغ صورت‌حساب، درصد سرویس و تعداد نفرات را وارد کنید تا سهم هر نفر (با و بدون انعام) به‌طور شفاف مشخص شود. <strong>کاربرد:</strong> رستوران، کافه، خدمات مهمانداری، سفرهای گروهی.</div>
         </div>
 
         <!-- ══ NOTES ══ -->
@@ -3667,7 +3667,7 @@
             </div>
             <div id="check-progress" style="margin-top:10px;font-size:12px;color:var(--m3-on-surface-variant);text-align:center"></div>
           </div>
-          <div class="tool-desc">یادداشت‌ها و چک‌لیست در localStorage مرورگر ذخیره می‌شوند.</div>
+          <div class="tool-desc">یادداشت سریع با ذخیره خودکار در localStorage مرورگر. می‌توانید متن آزاد بنویسید یا با <code>- [ ]</code> چک‌لیست بسازید. داده‌ها حتی بعد از بستن مرورگر حفظ می‌شوند. <strong>کاربرد:</strong> یادداشت روزانه، لیست خرید، چک‌لیست وظایف.</div>
         </div>
 
         <!-- ══ TEXT TOOLS ══ -->
@@ -3702,7 +3702,7 @@
             </button>
           </div>
 
-          <div class="tool-desc">تبدیل به حروف بزرگ/کوچک/عنوان، معکوس کردن، مرتب‌سازی خطوط به ترتیب الفبایی و حذف خطوط تکراری.</div>
+          <div class="tool-desc">ابزار دستکاری متن: تبدیل به حروف بزرگ/کوچک، عنوان‌نویسی (Title Case)، معکوس کردن رشته، مرتب‌سازی خطوط الفبایی، حذف خطوط تکراری و شمارش خطوط. <strong>کاربرد:</strong> ویرایش محتوا، برنامه‌نویسی، پردازش خروجی فایل‌های متنی.</div>
         </div>
 
         <!-- ══ CHAR COUNT ══ -->
@@ -3720,7 +3720,7 @@
             <div class="stat-box"><div class="stat-val" id="cc-avgword">0</div><div class="stat-lbl">میانگین طول کلمه</div></div>
           </div>
           <div id="cc-freq" style="margin-top:10px"></div>
-          <div class="tool-desc">آمار کامل متن شامل کاراکتر، کلمه، خط، جمله، پاراگراف، زمان مطالعه، میانگین طول کلمات و پرتکرارترین کلمات - همه به‌صورت زنده.</div>
+          <div class="tool-desc">آنالیز کامل متن: تعداد کاراکتر (با/بدون فاصله)، کلمات، خطوط، جملات، پاراگراف‌ها، زمان مطالعه تخمینی، میانگین طول کلمات و ۱۰ کلمه پرتکرار. همه به‌صورت زنده با هر ضربه کیبورد به‌روز می‌شوند. <strong>کاربرد:</strong> نویسندگی، SEO، ویرایش مقاله، محدودیت کاراکتر شبکه‌های اجتماعی.</div>
         </div>
 
         <!-- ══ WHITESPACE ══ -->
@@ -3745,7 +3745,7 @@
             📋 کپی
           </button>
 
-          <div class="tool-desc">چند فاصله متوالی را به یک فاصله تبدیل و فاصله‌های ابتدا/انتهای متن را حذف می‌کند. برای پاک‌سازی متن کپی‌شده از منابع مختلف مفید است.</div>
+          <div class="tool-desc">پاک‌سازی فضاهای خالی اضافه: تبدیل چند فاصله متوالی به یک، حذف فاصله ابتدا/انتهای خطوط، نرمال‌سازی شکست‌خط. <strong>کاربرد:</strong> پاک‌سازی متن کپی‌شده از PDF، وب یا Word، آماده‌سازی داده برای پایگاه‌داده.</div>
         </div>
 
         <!-- ══ ONE LINE ══ -->
@@ -3770,7 +3770,7 @@
             📋 کپی
           </button>
 
-          <div class="tool-desc">متن چندخطی را با حذف شکست‌خطوط به یک خط تبدیل می‌کند. برای ساخت دستورات تک‌خطی، SQL یا JSON فشرده کاربردی است.</div>
+          <div class="tool-desc">تبدیل متن چندخطی به یک خط واحد با حذف شکست‌خطوط و فاصله‌های اضافه. <strong>کاربرد:</strong> ساخت دستورات shell تک‌خطی، فشرده‌سازی SQL یا JSON، کپی متن به فیلدهایی که چندخط نمی‌پذیرند.</div>
         </div>
 
         <!-- ══ LOREM ══ -->
@@ -3808,7 +3808,7 @@
             📋 کپی
           </button>
 
-          <div class="tool-desc">متن نمونه برای طراحی رابط کاربری تولید می‌کند. نسخه فارسی از متن استاندارد لورم فارسی استفاده می‌کند. تعداد پاراگراف دلخواه را انتخاب کنید.</div>
+          <div class="tool-desc">تولید متن Lorem Ipsum فارسی برای mock-up و طراحی رابط کاربری. تعداد پاراگراف دلخواه را انتخاب کنید. <strong>کاربرد:</strong> پر کردن جای خالی در طراحی سایت/اپ، ارائه نمونه کار به مشتری، تست فونت و چیدمان.</div>
         </div>
 
         <!-- ══ MARKDOWN ══ -->
@@ -3835,7 +3835,7 @@
             <label class="field-label">HTML خروجی</label>
             <textarea id="md-html-src" class="text-area mono" style="min-height:100px;direction:ltr;text-align:left;font-size:12px" readonly></textarea>
           </div>
-          <div class="tool-desc">تبدیل Markdown به HTML - پیش‌نمایش زنده، کپی HTML، دانلود فایل .md یا .html</div>
+          <div class="tool-desc">تبدیل Markdown به HTML با پیش‌نمایش زنده. تمام نحو Markdown پشتیبانی می‌شود: تیتر، لیست، جدول، کد، لینک، تصویر و بیشتر. خروجی HTML یا فایل .md را دانلود کنید. <strong>کاربرد:</strong> نوشتن مستندات، README، وبلاگ، ایمیل فنی.</div>
         </div>
 
         <!-- ══ DIFF ══ -->
@@ -3876,7 +3876,7 @@
             "
           ></pre>
 
-          <div class="tool-desc">با الگوریتم LCS دو متن را خط به خط مقایسه می‌کند. خطوط اضافه‌شده سبز و حذف‌شده قرمز نمایش داده می‌شوند.</div>
+          <div class="tool-desc">مقایسه دو متن خط‌به‌خط با الگوریتم LCS. خطوط اضافه‌شده با سبز و حذف‌شده با قرمز مشخص می‌شوند. <strong>کاربرد:</strong> بررسی تغییرات فایل کانفیگ، مقایسه نسخه‌های مختلف یک متن، code review سریع.</div>
         </div>
 
         <!-- ══ SLUGIFY ══ -->
@@ -3902,7 +3902,7 @@
             📋 کپی
           </button>
 
-          <div class="tool-desc">متن فارسی یا انگلیسی را به فرمت مناسب URL تبدیل می‌کند. حروف فارسی به لاتین ترانسلیتریت، فاصله‌ها به خط تیره و کاراکترهای خاص حذف می‌شوند.</div>
+          <div class="tool-desc">تبدیل متن فارسی/انگلیسی به فرمت URL-friendly. حروف فارسی به لاتین ترانسلیتریت، فاصله‌ها به خط‌تیره و کاراکترهای خاص حذف می‌شوند. <strong>کاربرد:</strong> ساخت slug برای آدرس مقاله، نام پوشه، URL صفحات وب.</div>
         </div>
 
         <!-- ══ JSON ══ -->
@@ -3932,7 +3932,7 @@
             readonly
           ></textarea>
 
-          <div class="tool-desc">زیباسازی با تورفتگی ۲ فاصله، فشرده یا مرتب‌سازی کلیدهای آبجکت به ترتیب الفبایی.</div>
+          <div class="tool-desc">زیباسازی (Pretty Print)، فشرده‌سازی (Minify) و مرتب‌سازی کلیدها (Sort Keys) برای JSON. خطاهای JSON مستقیماً در خروجی نمایش داده می‌شوند. <strong>کاربرد:</strong> debug API، خواندن response‌های سرویس، آماده‌سازی داده برای config فایل.</div>
         </div>
 
         <!-- ══ XML ══ -->
@@ -3958,7 +3958,7 @@
             readonly
           ></textarea>
 
-          <div class="tool-desc">فرمت‌دهی با تورفتگی مناسب، ساختار تگ‌های تودرتو به‌صورت درختی نمایش داده می‌شود.</div>
+          <div class="tool-desc">فرمت‌دهی XML با تورفتگی مناسب و نمایش ساختار درختی تگ‌های تودرتو. <strong>کاربرد:</strong> خواندن فایل‌های XML پیچیده، debug پاسخ SOAP/RSS، ویرایش config فایل‌های XML مانند AndroidManifest یا pom.xml.</div>
         </div>
 
         <!-- ══ HTML ESCAPE ══ -->
@@ -3986,7 +3986,7 @@
             readonly
           ></textarea>
 
-          <div class="tool-desc">HTML Escaper - کاراکترهای خاص HTML را به موجودیت‌های HTML تبدیل می‌کند (Escape) یا برعکس (Unescape).</div>
+          <div class="tool-desc">تبدیل کاراکترهای خاص HTML به موجودیت‌های امن (Escape) یا برعکس (Unescape). مثلاً <code>&lt;</code> ↔ <code>&amp;lt;</code>. <strong>کاربرد:</strong> نمایش کد HTML در صفحه وب، جلوگیری از XSS، ذخیره HTML در دیتابیس.</div>
         </div>
 
         <!-- ══ HASH ══ -->
@@ -4024,7 +4024,7 @@
             </button>
           </div>
 
-          <div class="tool-desc">از MD5، SHA-1، SHA-256 و SHA-512 پشتیبانی می‌کند. هش یک تابع یک‌طرفه است۹ بازیابی متن اصلی از هش ممکن نیست. SHA-256 توصیه می‌شود.</div>
+          <div class="tool-desc">محاسبه Hash با الگوریتم‌های MD5، SHA-1، SHA-256 و SHA-512. هش تابع یک‌طرفه است؛ بازگشت به متن اصلی ممکن نیست. SHA-256 برای اکثر کاربردها توصیه می‌شود. <strong>کاربرد:</strong> بررسی یکپارچگی فایل، ذخیره رمز عبور، امضای دیجیتال.</div>
         </div>
 
         <!-- ══ CRYPTO ══ -->
@@ -4087,16 +4087,14 @@
 
           <div id="crypto-error" style="display:none;margin-top:10px;padding:10px;background:var(--m3-error-container);color:var(--m3-on-error-container);border-radius:10px;font-size:13px"></div>
 
-          <div class="tool-desc">
-            رمزنگاری AES-256 در مرورگر - قابل رمزنگاری به‌صورت raw hex، کلمات فارسی، یا انگلیسی. فرمت human-readable برای ارسال اطلاعات حساس.
-          </div>
+          <div class="tool-desc">رمزنگاری و رمزگشایی AES-256 کاملاً در مرورگر، هیچ داده‌ای به سرور ارسال نمی‌شود. خروجی به‌صورت Hex، متن فارسی یا انگلیسی قابل انتخاب است. <strong>کاربرد:</strong> ارسال پیام محرمانه، ذخیره اطلاعات حساس، رمزگذاری یادداشت.</div>
         </div>
 
         <!-- ══ JWT ══ -->
         <div id="jwt" class="tool-card">
 
           <div class="tool-title">🔑 رمزگشایی JWT
-          <div class="tool-desc">JWT Parser - هدر، پیلود و زمان انقضای توکن را نمایش می‌دهد. توجه: فقط رمزگشایی می‌کند، اعتبارسنجی امضا ندارد.</div>
+          <div class="tool-desc">رمزگشایی و نمایش محتوای توکن JWT بدون نیاز به کلید. Header، Payload و زمان انقضا (با نمایش «X دقیقه مانده» یا «منقضی شده») نمایش داده می‌شوند. <strong>توجه:</strong> امضا تأیید نمی‌شود. <strong>کاربرد:</strong> debug توکن احراز هویت، بررسی claims، تست API.</div>
 </div>
           <textarea
             id="jwt-input"
@@ -4173,7 +4171,7 @@
             </div>
           </div>
 
-          <div class="tool-desc">REM نسبت به فونت پایه root تعریف می‌شود (معمولاً ۱۶px). تبدیل دوطرفه است۹ هر طرف که تغییر کنید طرف دیگر خودکار به‌روز می‌شود.</div>
+          <div class="tool-desc">تبدیل دوطرفه بین پیکسل (px) و REM. REM نسبت به فونت ریشه (معمولاً ۱۶px) تعریف می‌شود. هر طرف که تغییر کنید، طرف دیگر به‌صورت خودکار به‌روز می‌شود. <strong>کاربرد:</strong> طراحی ریسپانسیو CSS، دسترس‌پذیری، سیستم‌های طراحی.</div>
         </div>
 
         <!-- ══ BASE64 ══ -->
@@ -4233,7 +4231,7 @@
             "
           ></div>
 
-          <div class="tool-desc">الگوی Regex را روی متن آزمایش می‌کند و تطابق‌ها را هایلایت می‌کند. پرچم‌های g، i، m پشتیبانی می‌شوند.</div>
+          <div class="tool-desc">آزمون Regex روی متن دلخواه با هایلایت تطابق‌ها. پرچم‌های g (همه)، i (بدون حساسیت به بزرگی/کوچکی)، m (چندخطی)، s و u پشتیبانی می‌شوند. الگوهای نامعتبر با پیام خطا نشان داده می‌شوند. <strong>کاربرد:</strong> اعتبارسنجی فرم، جستجوی پیشرفته، پردازش متن.</div>
         </div>
 
         <!-- ══ CRON ══ -->
@@ -4270,7 +4268,7 @@
             style="margin-top: 10px"
           ></div>
 
-          <div class="tool-desc">عبارت Cron را به فارسی توضیح می‌دهد. فرمت: <code>دقیقه ساعت روز‌ماه ماه روز‌هفته</code>. ستاره (*) یعنی هر، و <code>*/n</code> یعنی هر n واحد.</div>
+          <div class="tool-desc">توضیح عبارت Cron به فارسی. فرمت: <code>دقیقه ساعت روز‌ماه ماه روز‌هفته</code>. ستاره یعنی «هر»، <code>*/n</code> یعنی «هر n». پیش‌تنظیم‌های رایج مثل <code>@daily</code> و <code>@weekly</code> پشتیبانی می‌شوند. <strong>کاربرد:</strong> زمان‌بندی وظایف سرور، backup، ایمیل خودکار.</div>
         </div>
 
         <!-- ══ URL PARSE ══ -->
@@ -4286,7 +4284,7 @@
           />
           <div class="data-list" id="url-res"></div>
 
-          <div class="tool-desc">آدرس URL را به اجزا تقسیم می‌کند: پروتکل، دامنه، پورت، مسیر، query string و fragment. پارامترهای query به‌صورت جداگانه نمایش داده می‌شوند.</div>
+          <div class="tool-desc">تجزیه URL به اجزا: پروتکل، دامنه، پورت، مسیر، query string و fragment. پارامترهای query به‌صورت جدول کلید-مقدار نمایش داده می‌شوند. <strong>کاربرد:</strong> debug لینک‌های خراب، تحلیل ساختار API، بررسی redirect.</div>
         </div>
 
         <!-- ══ NUMBER BASE ══ -->
@@ -4334,7 +4332,7 @@
             </div>
           </div>
 
-          <div class="tool-desc">اعداد صحیح را بین مبناهای ۱۰ (decimal)، ۱۶ (hex)، ۲ (binary) و ۸ (octal) تبدیل می‌کند. در هر فیلد که تایپ کنید بقیه خودکار به‌روز می‌شوند.</div>
+          <div class="tool-desc">تبدیل اعداد صحیح (از جمله منفی) بین مبناهای ۱۰ (دسیمال)، ۱۶ (هگز)، ۲ (باینری) و ۸ (اکتال). هر فیلد که تایپ کنید، بقیه خودکار به‌روز می‌شوند. <strong>کاربرد:</strong> برنامه‌نویسی سیستم، آدرس‌دهی حافظه، کد رنگ HTML، مجوزهای فایل Linux.</div>
         </div>
 
         <!-- ══ PASSWORD ══ -->
@@ -4416,7 +4414,7 @@
             ↻ مجدد
           </button>
 
-          <div class="tool-desc">از crypto.getRandomValues برای تصادفی واقعی استفاده می‌کند. طول و نوع کاراکترها قابل تنظیم است. قدرت رمز نیز نمایش داده می‌شود.</div>
+          <div class="tool-desc">تولید رمز عبور با <code>crypto.getRandomValues</code> برای تصادفی‌بودن واقعی. طول، حروف بزرگ/کوچک، اعداد و نمادها قابل تنظیم‌اند. قدرت رمز با نوار رنگی نشان داده می‌شود. <strong>کاربرد:</strong> ساخت رمز امن برای حساب‌های آنلاین، API key، دیتابیس.</div>
         </div>
 
         <!-- ══ UUID ══ -->
@@ -4440,7 +4438,7 @@
             📋 کپی
           </button>
 
-          <div class="tool-desc">UUID v4 یک شناسه ۱۲۸ بیتی تصادفی است. ULID علاوه بر یکتایی، مرتب‌پذیر زمانی هست چون پیشوند آن timestamp است.</div>
+          <div class="tool-desc">تولید UUID v4 (کاملاً تصادفی ۱۲۸ بیتی) یا ULID (مرتب‌پذیر زمانی با پیشوند timestamp). هر بار کلیک یک شناسه جدید ایجاد می‌کند. <strong>کاربرد:</strong> کلید اصلی دیتابیس، شناسه session، نام‌گذاری فایل‌های آپلود.</div>
         </div>
 
         <!-- ══ RANDOM NUMBER ══ -->
@@ -4551,8 +4549,8 @@
               </div>
             </div>
             <div id="card-deck-status" style="font-size:12px;color:var(--md-sys-color-outline);margin-bottom:8px">۵۲ کارت در دک</div>
-            <div id="card-display" style="display:flex;flex-wrap:wrap;gap:8px;min-height:90px;justify-content:flex-start"></div>
-            <div id="card-drawn-list" style="margin-top:10px;font-size:12px;color:var(--md-sys-color-outline);line-height:1.7"></div>
+            <div id="card-display" style="display:flex;flex-wrap:wrap;gap:14px;min-height:130px;justify-content:center;align-items:flex-start;margin:10px 0"></div>
+            <div id="card-drawn-list" style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;align-items:center"></div>
           </div>
 
           <!-- ── LIST PICKER ── -->
@@ -4574,7 +4572,7 @@
             <div id="list-result" style="margin-top:14px;min-height:40px"></div>
           </div>
 
-          <div class="tool-desc">شش ابزار تصادفی: عدد، تاس، سکه، چرخ شانس، کارت بازی، و انتخاب از لیست.</div>
+          <div class="tool-desc">شش ابزار تصادفی در یک‌جا: عدد در بازه دلخواه، تاس سه‌بعدی (d4/d6/d8/d10/d12/d20)، پرتاب سکه، چرخ شانس، کشیدن کارت از دک، و انتخاب تصادفی از لیست. <strong>کاربرد:</strong> بازی‌های رومیزی، قرعه‌کشی، نمونه‌گیری تصادفی.</div>
         </div>
 
         <!-- ══ INVOICE ══ -->
@@ -4702,7 +4700,7 @@
             <button class="btn btn-filled" onclick="invPreview()" style="width:100%;margin-bottom:8px">👁 پیش‌نمایش و چاپ / PDF</button>
           </div>
 
-          <div class="tool-desc">فاکتور رسمی حقیقی/حقوقی با جدول اقلام، محاسبه مالیات، لوگو و خروجی PDF.</div>
+          <div class="tool-desc">ساخت فاکتور رسمی با قابلیت اضافه کردن لوگو، اطلاعات فروشنده/خریدار، جدول اقلام، محاسبه مالیات ارزش افزوده و تخفیف. خروجی PDF قابل چاپ. <strong>کاربرد:</strong> کسب‌وکارهای کوچک، فریلنسرها، صدور فاکتور سریع.</div>
         </div>
 
         <!-- ══ TEXT BEAUTIFIER ══ -->
@@ -4731,7 +4729,7 @@
             <button class="btn btn-tonal   btn-xs" data-tf="effect" onclick="tbFilter(this)">افکت</button>
           </div>
           <div id="tb-results" style="display:flex;flex-direction:column;gap:8px"></div>
-          <div class="tool-desc">متن انگلیسی را به بیش از ۳۰ سبک فانتزی تبدیل کرده و با یک ضربه کپی کنید.</div>
+          <div class="tool-desc">تبدیل متن انگلیسی به بیش از ۳۰ سبک فانتزی یونیکد مانند 𝓒𝓾𝓻𝓼𝓲𝓿𝓮، 𝔊𝔬𝔱𝔥𝔦𝔠، 🅒🅘🅡🅒🅛🅔🅓 و بیشتر. روی هر سبک کلیک کنید تا کپی شود. <strong>کاربرد:</strong> بیو شبکه‌های اجتماعی، نام کاربری، پست‌های تزئینی.</div>
         </div>
 
         <!-- ══ RUBIK SOLVER ══ -->
@@ -4783,7 +4781,7 @@
             موتور حل: <a href="https://github.com/nickcolley/scramble-cube" target="_blank" style="color:var(--m3-primary)">min2phase Kociemba</a> ·
             الهام از <a href="https://github.com/jeffhuber/rubiks-solver" target="_blank" style="color:var(--m3-primary)">jeffhuber/rubiks-solver</a>
           </div>
-          <div class="tool-desc">شبیه‌ساز مکعب روبیک با ورودی رنگ و حل خودکار Kociemba در مرورگر.</div>
+          <div class="tool-desc">شبیه‌ساز مکعب روبیک با رابط رنگ‌گذاری. رنگ هر خانه را تنظیم کنید، سپس با الگوریتم IDA* در Web Worker (بدون مسدودکردن صفحه) حل می‌شود. <strong>کاربرد:</strong> یادگیری حل مکعب، آزمایش الگوریتم‌ها، سرگرمی.</div>
         </div>
 
         <!-- ══ RANDOM IP ══ -->
@@ -4817,7 +4815,7 @@
             </button>
           </div>
 
-          <div class="tool-desc">آدرس IPv4 (چهار عدد ۰-۲۵۵) یا IPv6 (هشت گروه hex) تصادفی تولید می‌کند. برای تست شبکه کاربرد دارد.</div>
+          <div class="tool-desc">تولید آدرس IPv4 (چهار عدد ۰–۲۵۵ جدا با نقطه) یا IPv6 (هشت گروه hex جدا با دو‌نقطه) تصادفی. <strong>کاربرد:</strong> تست شبکه، mock داده برای API، آموزش مفاهیم شبکه.</div>
         </div>
 
         <!-- ══ RANDOM COLOR ══ -->
@@ -4913,7 +4911,7 @@
             </div>
           </div>
 
-          <div class="tool-desc">رنگ تصادفی در سه فرمت HEX، RGB و HSL نمایش می‌دهد.</div>
+          <div class="tool-desc">تولید رنگ تصادفی با نمایش همزمان در فرمت‌های HEX، RGB و HSL. با کلیک روی هر فرمت کپی می‌شود. <strong>کاربرد:</strong> الهام رنگی برای طراحی، تست UI، پالت‌سازی تصادفی.</div>
         </div>
 
         <!-- ══ FAKE PERSON ══ -->
@@ -4929,7 +4927,7 @@
               </select>
             </div>
   
-          <div class="tool-desc">اطلاعات شخصی واقع‌نما اما کاملاً جعلی برای تست. هرگز برای فریب دیگران استفاده نشود.</div>
+          <div class="tool-desc">تولید پروفایل شخصی جعلی اما واقع‌نما: نام، ایمیل، شماره تلفن، آدرس، کد ملی، شغل، شرکت و بیشتر. <strong>هشدار:</strong> فقط برای تست نرم‌افزار. استفاده برای فریب دیگران غیرقانونی است.</div>
         </div>
           <button class="btn btn-filled" onclick="genFake()">
             تولید شخص ساختگی
@@ -5006,7 +5004,7 @@
             ⚠ فقط برای آزمایش - معتبر Luhn اما غیرواقعی
           </p>
 
-          <div class="tool-desc">شماره‌هایی تولید می‌کند که از اعتبارسنجی Luhn عبور می‌کنند اما واقعی نیستند. فقط برای sandbox و تست.</div>
+          <div class="tool-desc">تولید شماره کارت اعتباری (Visa/Master/Amex/Discover) که از اعتبارسنجی Luhn عبور می‌کند اما واقعی نیست. <strong>هشدار:</strong> فقط برای محیط sandbox و تست پرداخت. استفاده واقعی جرم است.</div>
         </div>
 
         <!-- ══ AVATAR ══ -->
@@ -5035,7 +5033,7 @@
             "
           ></svg>
 
-          <div class="tool-desc">آواتار تصادفی در قالب SVG تولید می‌کند. SVG فرمت برداری است که در هر اندازه بدون افت کیفیت نمایش داده می‌شود.</div>
+          <div class="tool-desc">تولید آواتار SVG هندسی تصادفی. هر بار الگو و رنگ‌بندی منحصربه‌فرد ساخته می‌شود. SVG برداری است و در هر اندازه بدون افت کیفیت نمایش داده می‌شود. <strong>کاربرد:</strong> placeholder تصویر کاربر، آیکون پروفایل، شخصیت‌سازی.</div>
         </div>
 
         <!-- ══ PLACEHOLDER ══ -->
@@ -5102,7 +5100,7 @@
             💾 دانلود PNG
           </button>
 
-          <div class="tool-desc">تصویر PNG با ابعاد و رنگ دلخواه تولید می‌کند. برای جایگزین موقت تصاویر در طراحی رابط کاربری مفید است.</div>
+          <div class="tool-desc">تولید تصویر placeholder PNG با ابعاد و رنگ دلخواه. متن روی تصویر نمایش داده می‌شود. <strong>کاربرد:</strong> جای‌نگه‌دار موقت تصویر در طراحی، wireframe، تست چیدمان صفحه.</div>
         </div>
 
         <!-- ══ QR CODE ══ -->
@@ -5198,7 +5196,7 @@
             </div>
           </div>
 
-          <div class="tool-desc">هر متن، URL، مخاطب (vCard) یا WiFi را به QR قابل اسکن تبدیل می‌کند.</div>
+          <div class="tool-desc">تولید QR Code از هر متن، URL، vCard (مخاطب) یا اطلاعات WiFi. اندازه و رنگ قابل تنظیم است. خروجی PNG دانلود می‌شود. <strong>کاربرد:</strong> لینک‌های سریع، منوی رستوران، کارت ویزیت، اشتراک WiFi.</div>
 
           <button class="btn btn-filled" onclick="generateQR()" style="margin-top:8px">
             تولید QR
@@ -5242,7 +5240,7 @@
             💾 دانلود SVG
           </button>
 
-          <div class="tool-desc">بارکد Code-128 تمام ASCII را رمزگذاری می‌کند. خروجی SVG قابل دانلود است.</div>
+          <div class="tool-desc">تولید بارکد Code-128 که تمام کاراکترهای ASCII را رمزگذاری می‌کند. خروجی SVG با کیفیت بالا قابل دانلود است. <strong>کاربرد:</strong> انبارداری، لیبل محصول، سیستم‌های کتابخانه، سریال‌شماره.</div>
         </div>
 
         <!-- ══ COLOR PICKER ══ -->
@@ -5297,7 +5295,7 @@
               </div>
             </div>
           </div>
-          <div class="tool-desc">تبدیل دوطرفه بین HEX، RGB، HSL، HSV، CMYK. هر فرمت را ویرایش کن - بقیه به‌روز می‌شوند.</div>
+          <div class="tool-desc">تبدیل دوطرفه بین فرمت‌های HEX، RGB، HSL، HSV و CMYK. هر فیلد که ویرایش کنید، بقیه به‌صورت خودکار به‌روز می‌شوند. نمونه رنگ و تاریخچه رنگ‌های انتخاب‌شده نمایش داده می‌شود. <strong>کاربرد:</strong> طراحی گرافیک، CSS، تطبیق رنگ.</div>
         </div>
 
                 <!-- ══ GRADIENT ══ -->
@@ -5353,7 +5351,7 @@
               >
             </div>
   
-          <div class="tool-desc">گرادیان‌های خطی و شعاعی با دو یا سه رنگ می‌سازد. روی کد CSS خروجی کلیک کنید تا کپی شود.</div>
+          <div class="tool-desc">ساخت گرادیان خطی یا شعاعی با ۲ یا ۳ رنگ و زاویه دلخواه. پیش‌نمایش زنده و کد CSS خروجی با یک کلیک کپی می‌شود. <strong>کاربرد:</strong> پس‌زمینه دکمه، بنر، header، تزئین صفحه.</div>
         </div>
           <div id="gr-preview" class="css-preview" style="height: 90px"></div>
           <div
@@ -5484,7 +5482,7 @@
             کلیک کنید تا کپی شود
           </div>
 
-          <div class="tool-desc">با کنترل‌های تعاملی کد box-shadow تولید می‌کند. افست، پخش، گسترش و سایه داخلی قابل تنظیم است.</div>
+          <div class="tool-desc">ساخت کد <code>box-shadow</code> با کنترل‌های تعاملی: افست X و Y، مقدار پخش (blur)، گسترش (spread)، رنگ و سایه داخلی/خارجی. <strong>کاربرد:</strong> استایل‌دهی کارت، مودال، دکمه در CSS.</div>
         </div>
 
         <!-- ══ BORDER RADIUS ══ -->
@@ -5567,7 +5565,7 @@
             کلیک کنید تا کپی شود
           </div>
 
-          <div class="tool-desc">گوشه‌های المان را بصری تنظیم می‌کند. می‌توانید همه گوشه‌ها را یکسان یا هر گوشه را مستقل تنظیم کنید.</div>
+          <div class="tool-desc">تنظیم بصری گوشه‌های المان. می‌توانید همه گوشه‌ها را یکسان یا هر کدام را مستقل تنظیم کنید. کد <code>border-radius</code> به‌صورت خودکار تولید می‌شود. <strong>کاربرد:</strong> طراحی کارت، دکمه، مودال، تصویر پروفایل.</div>
         </div>
 
         <!-- ══ ASPECT RATIO ══ -->
@@ -5624,7 +5622,7 @@
             </div>
           </div>
 
-          <div class="tool-desc">نسبت ابعاد را از عرض و ارتفاع محاسبه می‌کند. اگر یک بعد جدید داشته باشید، بعد دیگر با حفظ نسبت محاسبه می‌شود.</div>
+          <div class="tool-desc">محاسبه نسبت ابعاد از عرض و ارتفاع. اگر یک بعد جدید داشته باشید، بعد دیگر با حفظ نسبت محاسبه می‌شود. نسبت‌های رایج (16:9، 4:3، 1:1) نمایش داده می‌شوند. <strong>کاربرد:</strong> ریسپانسیو کردن ویدیو، تغییر اندازه تصویر، طراحی thumbnail.</div>
         </div>
 
         <!-- ══ IMAGE TOOL ══ -->
@@ -5771,7 +5769,7 @@
             </div>
           </div><!-- /bulk -->
 
-          <div class="tool-desc">برش با نسبت‌های دلخواه، فشرده‌سازی، تبدیل فرمت، و پردازش دسته‌جمعی — کاملاً آفلاین.</div>
+          <div class="tool-desc">پردازش تصویر کاملاً آفلاین: برش با نسبت دلخواه، فشرده‌سازی با کیفیت قابل تنظیم، تبدیل فرمت (JPG/PNG/WebP) و پردازش دسته‌جمعی (Batch). <strong>کاربرد:</strong> آماده‌سازی تصویر برای وب، کاهش حجم قبل از آپلود.</div>
         </div>
 
         <!-- ══ PDF COMPRESS ══ -->
@@ -5935,6 +5933,7 @@
             <button class="btn btn-filled" id="pdfi-btn" onclick="pdfiProcess()" style="display:none;margin-top:10px">📄 ساخت PDF و دانلود</button>
           </div>
 
+          <div class="tool-desc">مشاهده، تقسیم، ادغام و مرتب‌سازی صفحات PDF در مرورگر با کتابخانه PDF.js. هیچ داده‌ای به سرور ارسال نمی‌شود. <strong>کاربرد:</strong> خواندن PDF بدون نصب نرم‌افزار، جدا کردن صفحات خاص، ترکیب چند PDF.</div>
         </div>
 
         <!-- ══ IMAGE TO BASE64 ══ -->
@@ -5955,7 +5954,7 @@
             <div class="upload-zone__text">کلیک برای انتخاب تصویر</div>
             <div class="upload-zone__limit">حداکثر ۵۰ مگابایت</div>
   
-          <div class="tool-desc">تصویر را به Base64 تبدیل می‌کند که مستقیم در CSS یا HTML قابل استفاده است.</div>
+          <div class="tool-desc">تبدیل تصویر به رشته Base64 که مستقیماً در CSS (<code>url(data:...)</code>) یا HTML (<code>&lt;img src="data:..."&gt;</code>) قابل استفاده است. <strong>کاربرد:</strong> جاسازی تصویر در کد، حذف وابستگی به فایل خارجی، ایمیل HTML.</div>
         </div>
           <div id="i2b-err" class="tool-err"></div>
           <div id="i2b-res" style="display: none">
@@ -6005,7 +6004,7 @@
             readonly
           ></textarea>
 
-          <div class="tool-desc">CSV را به آرایه JSON (ردیف اول به‌عنوان کلید) یا برعکس تبدیل می‌کند.</div>
+          <div class="tool-desc">تبدیل دوطرفه بین CSV و JSON. ردیف اول CSV به‌عنوان کلید آبجکت‌های JSON استفاده می‌شود. <strong>کاربرد:</strong> ایمپورت/اکسپورت داده بین Excel و API، تبدیل گزارش‌های CSV به فرمت قابل پردازش.</div>
         </div>
 
         <!-- ══ File Splitter & Merger ══ -->
@@ -6124,7 +6123,7 @@
           </div>
 
           <div id="filesplit-error" style="display:none;margin-top:12px;padding:10px;background:var(--m3-error-container);color:var(--m3-on-error-container);border-radius:6px;font-size:13px"></div>
-          <div class="tool-desc">فایل‌های بزرگ را به قسمت‌های کوچک‌تر تقسیم کنید (برای آپلود یا انتقال)، یا دوباره مرج کنید. از رمز عبور برای حفاظت اختیاری استفاده کنید.</div>
+          <div class="tool-desc">تقسیم فایل بزرگ به قسمت‌های کوچک‌تر برای ارسال یا آپلود، و ادغام مجدد آن‌ها. گزینه حفاظت با رمز عبور نیز در دسترس است. <strong>کاربرد:</strong> ارسال فایل‌های بزرگ از طریق ایمیل، آپلود در سرویس‌های با محدودیت حجم.</div>
         </div>
 
         <!-- ══ DEVICE INFO ══ -->
@@ -6135,7 +6134,7 @@
             🔄 بروزرسانی
           </button>
           <div class="data-list" id="device-list"></div>
-          <div class="tool-desc">اطلاعات کامل دستگاه، مرورگر، شبکه، صفحه‌نمایش، سخت‌افزار، حافظه و تنظیمات مرورگر - مستقیماً از Browser API. این ابزار به شما کمک می‌کند تا ببینید تمام سایت‌هایی که روزانه از آن‌ها بازدید می‌کنید، چه اطلاعاتی را از مرورگر شما به‌سادگی دریافت می‌کنند. بدون حای یک دسترسی اضافی.</div>
+          <div class="tool-desc">نمایش اطلاعات کامل دستگاه و مرورگر از Browser API: مدل، OS، نسخه مرورگر، وضعیت اینترنت، مشخصات صفحه، حافظه RAM، تعداد هسته CPU و تنظیمات. <strong>کاربرد:</strong> debug مشکل مرورگر، مستندسازی محیط توسعه.</div>
         </div>
 
         <!-- ══ USER AGENT ══ -->
@@ -6160,7 +6159,7 @@
           </button>
           <div class="data-list" id="ua-res" style="margin-top: 12px"></div>
 
-          <div class="tool-desc">رشته User Agent را تجزیه و مرورگر، نسخه و سیستم‌عامل را استخراج می‌کند.</div>
+          <div class="tool-desc">تجزیه رشته User Agent و استخراج مرورگر، نسخه، موتور رندرینگ، سیستم‌عامل و نوع دستگاه. می‌توانید UA دلخواه وارد کنید. <strong>کاربرد:</strong> تحلیل لاگ سرور، debug مشکلات مرورگر خاص.</div>
         </div>
 
         <!-- ══ MORSE CODE ══ -->
@@ -6182,8 +6181,7 @@
             <button class="btn btn-tonal" onclick="morseStop()"     style="font-size:12px">⏹</button>
           </div>
           <div id="morse-vis" style="margin-top:10px;min-height:24px;font-family:'Courier New',monospace;font-size:1.3rem;letter-spacing:.2em;color:var(--m3-primary);text-align:center;word-break:break-all"></div>
-          <div class="tool-desc">کد مورس بین‌المللی (EN) و فارسی (FA). فاصله بین حروف: اسپیس | بین کلمات: /.<br>
-          <strong>چراغ‌قوه:</strong> فقط Chrome اندروید - به دسترسی دوربین نیاز دارد.</div>
+          <div class="tool-desc">تبدیل متن به کد مورس بین‌المللی (EN) و فارسی (FA). قابلیت پخش صوتی، نمایش چشمک‌زن و ارسال با چراغ‌قوه دستگاه موبایل. فاصله بین حروف: space | بین کلمات: /. <strong>کاربرد:</strong> یادگیری مورس، ارتباط اورژانسی، سرگرمی.</div>
         </div>
 
         <!-- ══ ROMAN NUMERALS ══ -->
@@ -6206,7 +6204,7 @@
             <input type="text" id="roman-in" class="text-input" placeholder="مثال: MMXXV" oninput="romanToDec()">
             <input type="text" id="roman-dec-out" class="text-input text-input--ro" readonly style="max-width:130px">
           </div>
-          <div class="tool-desc">I=1، V=5، X=10، L=50، C=100، D=500، M=1000. عدد کوچکتر قبل از بزرگتر تفریق می‌شود (مثلاً IV=4، IX=9).</div>
+          <div class="tool-desc">تبدیل دوطرفه عدد عربی به رومی. قوانین: I=1، V=5، X=10، L=50، C=100، D=500، M=1000. عدد کوچک‌تر قبل از بزرگ‌تر تفریق می‌شود (IV=4، IX=9). محدوده: ۱ تا ۳۹۹۹. <strong>کاربرد:</strong> عنوان‌بندی فصل، تاریخ رویدادها، آثار هنری.</div>
         </div>
 
         <!-- ══ ASCII TABLE ══ -->
@@ -6227,7 +6225,7 @@
               <tbody id="ascii-tbody"></tbody>
             </table>
           </div>
-          <div class="tool-desc">کدگذاری استاندارد برای کاراکترهای متنی. کدهای 0-31 کنترلی هستند، 32-126 قابل چاپ، و 127 کد Delete است.</div>
+          <div class="tool-desc">جدول کامل کدهای ASCII ۰–۱۲۷ با نمایش کاراکتر، کد دسیمال، هگز و باینری. کدهای ۰–۳۱ کنترلی، ۳۲–۱۲۶ قابل چاپ، ۱۲۷ کد Delete. <strong>کاربرد:</strong> برنامه‌نویسی سیستم، پروتکل ارتباطی، آموزش کدگذاری.</div>
         </div>
 
 
@@ -6270,7 +6268,7 @@
           </div>
 
           <div id="tz-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px"></div>
-          <div class="tool-desc">ساعت جهانی - مناطق زمانی مورد علاقه را اضافه یا حذف کنید.</div>
+          <div class="tool-desc">ساعت جهانی با پشتیبانی از تمام مناطق زمانی. مناطق موردعلاقه را اضافه یا حذف کنید. ساعت به‌صورت زنده به‌روز می‌شود. <strong>کاربرد:</strong> جلسات بین‌المللی، کار با تیم‌های ریموت، هماهنگی با مشتریان خارجی.</div>
         </div>
 
         <!-- ══ COUNTER ══ -->
@@ -6297,7 +6295,7 @@
             </div>
           </div>
           <div id="ctr-laps" style="display:none;margin-top:14px" class="lap-list"></div>
-          <div class="tool-desc">برای شمارش تعداد آیتم‌ها، افراد یا رویدادها. گام شمارش قابل تنظیم است. دکمه ثبت مقدار فعلی را ذخیره می‌کند.</div>
+          <div class="tool-desc">شمارنده با دکمه‌های +/- و گام دلخواه. دکمه «ثبت» مقدار فعلی را به تاریخچه اضافه می‌کند. <strong>کاربرد:</strong> شمارش افراد، موجودی انبار، آمارگیری میدانی، شمارش تکرار تمرین ورزشی.</div>
         </div>
 
         <!-- ══ MATRIX ══ -->
@@ -6322,7 +6320,7 @@
             <button class="btn btn-tonal" onclick="matOp('detA')">دترمینان A</button>
           </div>
           <div id="mat-res" style="font-family:'Courier New',monospace;font-size:.9rem;background:var(--m3-surface-container);border-radius:10px;padding:14px;min-height:56px;white-space:pre;margin-top:4px;overflow-x:auto;direction:ltr;text-align:left;unicode-bidi:plaintext"></div>
-          <div class="tool-desc">جمع، تفریق، ضرب ماتریسی، ترانهاده (Transpose) و دترمینان (برای ماتریس 2x2 و 3x3). اعداد ردیف را با فاصله (اسپیس) و ردیف‌ها را با Enter جدا کنید.</div>
+          <div class="tool-desc">عملیات ماتریسی: جمع، تفریق، ضرب، ترانهاده (Transpose) و دترمینان (برای ۲×۲ و ۳×۳). اعداد ردیف را با فاصله و ردیف‌ها را با خط جدید وارد کنید. <strong>کاربرد:</strong> جبرخطی، گرافیک کامپیوتری، آمار، یادگیری ماشین.</div>
         </div>
 
         <!-- ══ NUMBER TO FARSI WORDS ══ -->
@@ -6341,7 +6339,7 @@
             <button class="btn btn-tonal" onclick="nwSpeak()" id="nw-speak-btn">🔊 خواندن</button>
             <button class="btn btn-tonal" onclick="window.speechSynthesis&&window.speechSynthesis.cancel()" style="font-size:12px">⏹</button>
           </div>
-          <div class="tool-desc">تبدیل عدد به نوشتار فارسی و انگلیسی. برای چک، قرارداد و اسناد رسمی مفید است.</div>
+          <div class="tool-desc">تبدیل عدد به نوشتار کامل فارسی و انگلیسی. مثلاً ۱۲۳۴۵ → «دوازده هزار و سیصد و چهل و پنج». <strong>کاربرد:</strong> نوشتن چک، قرارداد رسمی، اسناد مالی، سیستم‌های حسابداری.</div>
         </div>
 
         <!-- ══ COLOR BLINDNESS ══ -->
@@ -6359,14 +6357,14 @@
             </div>
           </div>
           <div id="cb-swatches" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-top:10px"></div>
-          <div class="tool-desc">نمایش می‌دهد که رنگ برای افراد مبتلا به انواع کوررنگی چگونه دیده می‌شود. Deuteranopia: ناتوانی در دیدن سبز - Protanopia: قرمز - Tritanopia: آبی.</div>
+          <div class="tool-desc">شبیه‌سازی دید افراد مبتلا به انواع کوررنگی روی تصویر یا رنگ انتخابی. Deuteranopia (سبز)، Protanopia (قرمز)، Tritanopia (آبی). <strong>کاربرد:</strong> طراحی دسترس‌پذیر (Accessible Design)، انتخاب پالت رنگی فراگیر.</div>
         </div>
 
         <!-- ══ SHARE TOOL ══ -->
         <div id="share" class="tool-card">
 
           <div class="tool-title">🔗 اشتراک‌گذاری</div>
-          <div class="tool-desc">QR کد جعبه‌ابزار را با دوستانت به اشتراک بگذار. همچنین می‌توانی لینک مستقیم هر ابزار را کپی کنی.</div>
+          <div class="tool-desc">اشتراک‌گذاری جعبه‌ابزار از طریق QR Code یا لینک مستقیم. می‌توانید لینک مستقیم هر ابزار خاص را هم کپی کنید. <strong>کاربرد:</strong> معرفی ابزار به دوستان و همکاران.</div>
           <div style="text-align:center;margin:16px 0">
             <div id="share-qr" style="display:inline-block;background:#fff;padding:14px;border-radius:16px;box-shadow:var(--m3-elevation-2)"></div>
             <div style="margin-top:10px;font-size:13px;color:var(--m3-on-surface-variant)" id="share-url-lbl"></div>
@@ -6392,7 +6390,7 @@
         <div id="pwa" class="tool-card">
 
           <div class="tool-title">📲 نصب اپ (PWA)</div>
-          <div class="tool-desc">جعبه‌ابزار را روی موبایل یا دسکتاپ نصب کن. پس از نصب، <strong>بدون هیچ اینترنتی</strong> کار می‌کند.</div>
+          <div class="tool-desc">نصب جعبه‌ابزار روی صفحه اصلی موبایل یا دسکتاپ به‌عنوان Progressive Web App. پس از نصب، <strong>بدون هیچ اینترنتی</strong> کار می‌کند (Service Worker cache). <strong>کاربرد:</strong> دسترسی سریع بدون باز کردن مرورگر، استفاده آفلاین.</div>
 
           <div style="display:grid;gap:12px;margin:16px 0">
             <div style="background:var(--m3-surface-container);border-radius:14px;padding:16px">
@@ -6438,7 +6436,7 @@
         <div id="analytics" class="tool-card">
 
           <div class="tool-title">📊 آمار بازدید</div>
-          <div class="tool-desc">آمار عمومی بازدیدهای جعبه‌ابزار - مرورگرها، دستگاه‌ها، صفحات پربازدید و بیشتر.</div>
+          <div class="tool-desc">آمار بازدیدهای جعبه‌ابزار از لاگ سرور: پربازدیدترین ابزارها، مرورگرها، دستگاه‌ها، کشورها و روند روزانه. <strong>کاربرد:</strong> بررسی محبوب‌ترین ابزارها، برنامه‌ریزی توسعه بر اساس کاربرد واقعی.</div>
           <div style="text-align:center">
             <div class="analytics-page"></div>
               <div class="analytics-topbar">
@@ -6466,7 +6464,7 @@
         <div id="dateconv" class="tool-card">
 
           <div class="tool-title">🗓️ مبدل تاریخ</div>
-          <div class="tool-desc">تبدیل دقیق بین تقویم‌های خورشیدی (شمسی)، میلادی و قمری (هجری). از الگوریتم بورکوفسکی استفاده می‌شود.</div>
+          <div class="tool-desc">تبدیل دقیق بین تقویم‌های خورشیدی (شمسی)، میلادی و قمری (هجری) با الگوریتم بورکوفسکی. تاریخ را در هر فرمت وارد کنید. <strong>کاربرد:</strong> تبدیل تاریخ قراردادها، سالگرد رویدادها، مکاتبات رسمی.</div>
           <div class="btn-row" style="margin-bottom:14px">
             <button class="btn btn-filled" id="dc-tab-j" onclick="dcSetTab('j')" style="flex:1">خورشیدی</button>
             <button class="btn btn-tonal" id="dc-tab-g" onclick="dcSetTab('g')" style="flex:1">میلادی</button>
@@ -6503,7 +6501,7 @@
         <div id="emergency" class="tool-card">
 
           <div class="tool-title">🚨 شماره‌های ضروری ایران</div>
-          <div class="tool-desc">شماره‌های اورژانس و خدمات عمومی ایران.</div>
+          <div class="tool-desc">فهرست جامع شماره‌های اورژانس و خدمات عمومی ایران: اورژانس، آتش‌نشانی، پلیس، اورژانس اجتماعی، خط اضطراری و بیشتر. <strong>کاربرد:</strong> دسترسی سریع در موقعیت‌های اضطراری.</div>
           <div class="data-list" style="margin-bottom:16px">
             <div class="data-row"><span class="data-row__key">🚑 اورژانس</span><span class="data-row__val" style="font-size:1.3rem;font-weight:700;color:var(--m3-error)" onclick="copyToClipboard('115')">۱۱۵</span></div>
             <div class="data-row"><span class="data-row__key">🔥 آتش‌نشانی</span><span class="data-row__val" style="font-size:1.3rem;font-weight:700;color:var(--m3-error)" onclick="copyToClipboard('125')">۱۲۵</span></div>
@@ -6541,7 +6539,7 @@
         <div id="citycodes" class="tool-card">
 
           <div class="tool-title">📞 کد شهرهای ایران</div>
-          <div class="tool-desc">پیش‌شماره تلفن ثابت شهرهای ایران - قابل جستجو.</div>
+          <div class="tool-desc">پیش‌شماره تلفن ثابت تمام شهرهای ایران. جستجو بر اساس نام شهر یا کد. <strong>کاربرد:</strong> بررسی منشاء تماس تلفنی، پر کردن فرم‌های رسمی، شناسایی شهر از روی شماره.</div>
           <input type="text" id="cc-search" class="text-input" placeholder="نام شهر یا استان را بنویسید..." oninput="ccSearch()" style="margin-bottom:10px">
           <div id="cc-list" style="max-height:420px;overflow-y:auto"></div>
         </div>
@@ -6550,7 +6548,7 @@
         <div id="trafficfines" class="tool-card">
 
           <div class="tool-title">🚗 جرایم رانندگی ایران</div>
-          <div class="tool-desc">فهرست جرایم رانندگی مطابق آخرین تعرفه‌ها - قابل جستجو.</div>
+          <div class="tool-desc">فهرست جرایم رانندگی با مبالغ مطابق آخرین تعرفه‌های رسمی ایران. جستجو بر اساس نوع تخلف. <strong>کاربرد:</strong> اطلاع از مبلغ جریمه قبل از پرداخت، آموزش قوانین راهنمایی.</div>
           <input type="text" id="tf-search" class="text-input" placeholder="جستجو در جرایم..." oninput="tfSearch()" style="margin-bottom:10px">
           <div id="tf-list"></div>
         </div>
@@ -6559,7 +6557,7 @@
         <div id="deposit" class="tool-card">
 
           <div class="tool-title">🏦 محاسبه سود سپرده</div>
-          <div class="tool-desc">محاسبه سود سپرده بانکی با نرخ ساده و مرکب.</div>
+          <div class="tool-desc">محاسبه سود سپرده بانکی با نرخ ساده و مرکب. مبلغ، نرخ سود سالانه و مدت زمان را وارد کنید. <strong>کاربرد:</strong> مقایسه طرح‌های سرمایه‌گذاری، برنامه‌ریزی پس‌انداز.</div>
           <div class="field-row" style="margin-bottom:14px">
             <div class="field-col">
               <label class="field-label">مبلغ سپرده (تومان)</label>
@@ -6591,7 +6589,7 @@
         <div id="rentcalc" class="tool-card">
 
           <div class="tool-title">🏠 محاسبه رهن و اجاره</div>
-          <div class="tool-desc">تبدیل رهن به اجاره یا اجاره به رهن. نرخ تبدیل معمول بانک‌ها ۳۶٪ سالانه است.</div>
+          <div class="tool-desc">تبدیل رهن به اجاره یا اجاره به رهن بر اساس نرخ تبدیل بانکی (معمولاً ۳۶٪ سالانه). <strong>کاربرد:</strong> مذاکره اجاره مسکن، مقایسه پیشنهادات مختلف رهن/اجاره.</div>
           <div class="field-row">
             <div class="field-col">
               <label class="field-label">رهن کامل (تومان)</label>
@@ -6619,7 +6617,7 @@
         <div id="taxdisc" class="tool-card">
 
           <div class="tool-title">🏷️ مالیات و تخفیف</div>
-          <div class="tool-desc">محاسبه قیمت با مالیات ارزش افزوده یا قیمت پس از تخفیف.</div>
+          <div class="tool-desc">محاسبه قیمت نهایی با اضافه‌کردن مالیات ارزش افزوده، یا قیمت قبل از مالیات از روی قیمت نهایی. همچنین محاسبه قیمت بعد از تخفیف. <strong>کاربرد:</strong> صدور فاکتور، مقایسه قیمت، محاسبه سریع.</div>
           <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
             <button class="btn btn-filled" id="td-tab-vat" onclick="tdSetTab('vat')" style="flex:1">مالیات ارزش افزوده</button>
             <button class="btn btn-tonal" id="td-tab-disc" onclick="tdSetTab('disc')" style="flex:1">تخفیف</button>
@@ -6655,14 +6653,14 @@
             <button class="btn btn-tonal" onclick="copyToClipboard(document.getElementById('nc-out').textContent)">📋 کپی</button>
             <button class="btn btn-tonal" id="nc-digits-only" onclick="ncToggleDigits()" style="font-size:12px">فقط ارقام: خاموش</button>
           </div>
-          <div class="tool-desc">تبدیل ارقام در متن. <strong>فارسی/عربی ← لاتین:</strong> ۱۲۳ و ١٢٣ → 123 | <strong>لاتین/عربی → فارسی:</strong> 123 و ١٢٣ → ۱۲۳ | <strong>فارسی/لاتین → عربی:</strong> ۱۲۳ و 123 → ١٢٣</div>
+          <div class="tool-desc">تبدیل ارقام در متن: فارسی/عربی ← لاتین (۱۲۳ → 123) و لاتین ← فارسی (123 → ۱۲۳). متن مخلوط را به‌صورت کامل تبدیل می‌کند. <strong>کاربرد:</strong> پاک‌سازی داده، نرمال‌سازی متن برای پایگاه‌داده.</div>
         </div>
 
                 <!-- ══ MULTIPLICATION TABLE ══ -->
         <div id="multable" class="tool-card">
 
           <div class="tool-title">✖️ جدول ضرب تعاملی</div>
-          <div class="tool-desc">روی هر خانه کلیک کن تا هایلایت شود. برای تمرین، عدد مخفی را حدس بزن.</div>
+          <div class="tool-desc">جدول ضرب ۱۰×۱۰ با قابلیت کلیک برای هایلایت. حالت تمرین: عدد مخفی می‌شود و باید حدس زده شود. <strong>کاربرد:</strong> آموزش ضرب به کودکان، تمرین محاسبه ذهنی.</div>
           <div class="field-row" style="align-items:center;margin-bottom:12px">
             <label class="field-label" style="margin:0;flex-shrink:0">از</label>
             <input type="number" id="mt-from" class="text-input" value="1" min="1" max="20" style="width:70px;margin:0 8px">
@@ -6753,7 +6751,7 @@
           </div>
 
           <div id="ls-result" style="margin-top:12px"></div>
-          <div class="tool-desc">حل معادله با دستخط مدرسه: x^2+3*x-5=0، sin(x)=0.5، e^x=8، log(x)=2. از math.js برای پارسینگ دقیق استفاده می‌شود. دستگاه ۲×۲ و ۳×۳ با قانون کرامر.</div>
+          <div class="tool-desc">حل معادله و دستگاه معادلات با دستخط مدرسه. از توابع مثلثاتی، لگاریتم، توان و رادیکال پشتیبانی می‌کند. مثال: <code>x^2+3*x-5=0</code>، <code>sin(x)=0.5</code>. <strong>کاربرد:</strong> حل تکالیف ریاضی، آموزش، مهندسی.</div>
         </div>
 
         <!-- ══ ENCODING TOOLS (merged with textbin) ══ -->
@@ -6800,12 +6798,7 @@
             <button class="btn btn-tonal" onclick="encSwap()">⇅ جابجا</button>
           </div>
           <div id="enc-table" style="margin-top:10px"></div>
-          <div class="tool-desc">
-            <strong>Base64</strong> رمزگذاری/رمزگشایی باینری‌ایمن (مثل <code>base64 -d</code>) -
-            <strong>URL</strong> percent-encoding -
-            <strong>Hex/باینری</strong> byte-level -
-            <strong>Unix TS</strong> تبدیل دو‌طرفه epoch ↔ تاریخ
-          </div>
+          <div class="tool-desc">ابزارهای کدگذاری: Base64 (رمزگذاری/رمزگشایی باینری‌ایمن)، URL Encode/Decode، HTML Entity. هر ورودی را وارد کنید و نتیجه فوری ببینید. <strong>کاربرد:</strong> API، انتقال داده، جلوگیری از کاراکترهای خاص.</div>
         </div>
 
         <!-- ══ JALALI CALENDAR ══ -->
@@ -6885,7 +6878,9 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
               امروز
             </button>
-          </div>
+          
+          <div class="tool-desc">تقویم شمسی با نمایش ماه جاری، ناوبری بین ماه‌ها و هایلایت امروز. <strong>کاربرد:</strong> مشاهده تاریخ شمسی، برنامه‌ریزی رویدادها، تطبیق تاریخ فارسی.</div>
+        </div>
         </div>
 
         <!-- ══ GEOMETRY ══ -->
@@ -6920,7 +6915,9 @@
             </div>
           </div>
           <div id="geo-formula" style="margin-top:10px;padding:10px 14px;background:var(--m3-surface-container);border-radius:10px;font-family:'Courier New',monospace;font-size:13px;direction:ltr;text-align:left;color:var(--m3-on-surface-variant);display:none"></div>
-          <div id="geo-result" style="margin-top:12px"></div>
+          <div id="geo-result" style="margin-top:12px">
+          <div class="tool-desc">محاسبه مساحت، محیط و حجم اشکال هندسی: مربع، مستطیل، مثلث، دایره، کره، مخروط، استوانه و بیشتر. <strong>کاربرد:</strong> مهندسی، معماری، حل تکالیف هندسه، برآورد مواد.</div>
+        </div>
         </div>
 
         <!-- ══ QR READER ══ -->
@@ -6942,7 +6939,9 @@
             <button class="btn btn-tonal" onclick="qrrClearHistory()" style="font-size:12px">🗑️ پاک کردن تاریخچه</button>
           </div>
           <div id="qrr-result" style="margin-top:10px"></div>
-          <div id="qrr-history" style="margin-top:14px"></div>
+          <div id="qrr-history" style="margin-top:14px">
+          <div class="tool-desc">اسکن و رمزگشایی QR Code از تصویر آپلود‌شده یا دوربین دستگاه. <strong>کاربرد:</strong> خواندن QR بدون نیاز به اپ، رمزگشایی QR در تصویر ذخیره‌شده.</div>
+        </div>
         </div>
 
         <!-- ══ PERIODIC TABLE ══ -->
@@ -6965,7 +6964,7 @@
             <div id="pt-quiz-fb" style="text-align:center;font-size:1rem;min-height:28px;font-weight:600"></div>
             <div style="text-align:center;margin-top:8px;font-size:13px;color:var(--m3-on-surface-variant)" id="pt-quiz-score"></div>
           </div>
-          <div class="tool-desc">همه ۱۱۸ عنصر جدول مندلیف با نام فارسی. روی هر عنصر کلیک کن تا جزئیات ببینی. در حالت تمرین، عنصر را از روی نماد یا عدد اتمی حدس بزن.</div>
+          <div class="tool-desc">جدول مندلیف با تمام ۱۱۸ عنصر و نام فارسی. روی هر عنصر کلیک کنید تا جزئیات (جرم اتمی، گروه، دوره، ظرفیت) ببینید. حالت تمرین برای حفظ جدول. <strong>کاربرد:</strong> آموزش شیمی، مرجع سریع.</div>
         </div>
 
         <!-- ══ METRO MAP ══ -->
@@ -6997,7 +6996,7 @@
             <img id="mm-img" alt="نقشه مترو" draggable="false"
               style="position:absolute;top:0;left:0;transform-origin:0 0;max-width:none;display:none;image-rendering:high-quality">
           </div>
-          <div class="tool-desc">نقشه مترو - تصاویر JPG را در پوشه <code>static/maps/</code> قرار دهید: <code>tehran-metro.jpg</code> و غیره. برای دانلود فایل PDF اصلی از دکمه دانلود استفاده کنید.</div>
+          <div class="tool-desc">نقشه‌های مترو شهرهای ایران با قابلیت زوم و پن. <strong>کاربرد:</strong> یافتن مسیر مترو، برنامه‌ریزی سفر درون‌شهری.</div>
         </div>
 
         <!-- ══ emojis ══ -->
@@ -7022,7 +7021,7 @@
           </div>
           <div id="emo-copied" style="display:none;text-align:center;color:var(--m3-primary);font-size:13px;margin-bottom:6px;font-weight:600">✅ کپی شد!</div>
           <div id="emo-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:4px;max-height:400px;overflow-y:auto"></div>
-          <div class="tool-desc">کلیک روی هر ایموجی آن را کپی می‌کند.</div>
+          <div class="tool-desc">مرجع سریع ایموجی‌های استاندارد Unicode با جستجو. کلیک روی هر ایموجی آن را کپی می‌کند. <strong>کاربرد:</strong> پیدا کردن ایموجی مناسب، ارسال در چت، محتوای شبکه‌های اجتماعی.</div>
         </div>
 
         <!-- ══ CALCULUS ══ -->
@@ -7152,7 +7151,7 @@
             <div id="calc-special-pts" style="margin-top:6px;font-size:12px"></div>
           </div>
 
-          <div class="tool-desc">ابزار حسابان - مشتق عددی، انتگرال (روش سیمپسون)، حد دوطرفه و نمودار تابع. توابع را طبق راهنمای بالا وارد کنید.</div>
+          <div class="tool-desc">ابزار حسابان: مشتق عددی، انتگرال عددی (روش سیمپسون)، محاسبه حد دوطرفه و رسم نمودار تابع. از math.js برای پارسینگ دقیق استفاده می‌کند. <strong>کاربرد:</strong> آموزش ریاضی، تجسم توابع، محاسبات مهندسی.</div>
         </div>
 
 
@@ -7200,7 +7199,7 @@
           </div>
           <div id="etcn-copied" style="display:none;text-align:center;color:var(--m3-primary);font-size:13px;margin-bottom:6px;font-weight:600">✅ کپی شد!</div>
           <div id="etcn-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px;max-height:440px;overflow-y:auto"></div>
-          <div class="tool-desc">کلیک روی هر اِموتیکون آن را کپی می‌کند. اِموتیکون‌ها (Kaomoji) کاراکترهای متنی هستند و در همه جا کار می‌کنند.</div>
+          <div class="tool-desc">مجموعه اِموتیکون‌های Kaomoji (کاراکترهای متنی ASCII/Unicode) با دسته‌بندی. کلیک روی هر اِموتیکون آن را کپی می‌کند. <strong>کاربرد:</strong> پیام‌رسان‌ها، توییتر، متن‌های متنی بدون ایموجی.</div>
         </div>
 
         <!-- ══ فرهنگ واژه پارسی ══ -->
@@ -7217,8 +7216,7 @@
           </div>
           <div id="pasban-status" style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:10px;min-height:18px"></div>
           <div id="pasban-results" style="display:flex;flex-direction:column;gap:8px;max-height:480px;overflow-y:auto"></div>
-          <div class="tool-desc">منبع:
-            <a href="https://github.com/keyaruga33/pasban_db" target="_blank" rel="noopener" style="color:var(--m3-primary)">keyaruga33/pasban_db</a></div>
+          <div class="tool-desc">بررسی رمز عبور در پایگاه‌داده رمزهای لو‌رفته (Have I Been Pwned). اگر رمز شما در این پایگاه‌داده باشد، باید تغییر دهید. <strong>توجه:</strong> رمز به سرور ارسال نمی‌شود؛ فقط هش SHA-1 بررسی می‌شود.</div>
         </div>
 
         <!-- ══ POMODORO ══ -->
@@ -7257,7 +7255,7 @@
             <div class="field-col"><label class="field-label">استراحت بلند</label><input type="number" id="pom-long" class="text-input" value="15" min="1" max="60" oninput="pomReset()"></div>
           </div>
           <div id="pom-dots" style="display:flex;justify-content:center;gap:8px;margin-top:14px"></div>
-          <div class="tool-desc">روش پومودورو: ۲۵ دقیقه تمرکز، ۵ دقیقه استراحت. بعد از ۴ جلسه، استراحت بلند‌تر.</div>
+          <div class="tool-desc">تایمر روش پومودورو: ۲۵ دقیقه تمرکز کامل، ۵ دقیقه استراحت کوتاه، بعد از ۴ جلسه استراحت بلند. <strong>کاربرد:</strong> مدیریت زمان، تمرکز در کار/تحصیل، غلبه بر اهمال‌کاری.</div>
         </div>
 
         <!-- ══ RESISTOR ══ -->
@@ -7288,7 +7286,7 @@
             <textarea id="res-vals" class="text-area" rows="4" placeholder="100&#10;220&#10;470" style="direction:ltr;font-family:monospace" oninput="resCalcCombo()"></textarea>
             <div id="res-combo-res" style="margin-top:10px"></div>
           </div>
-          <div class="tool-desc">رمزگشایی رنگ‌بندی مقاومت (۳، ۴، ۵ نوار) و محاسبه مدارهای سری و موازی.</div>
+          <div class="tool-desc">رمزگشایی رنگ‌بندی مقاومت‌های ۳، ۴ و ۵ نواری. محاسبه مقاومت معادل در مدارهای سری و موازی. <strong>کاربرد:</strong> الکترونیک، ساخت مدار، دانشجویان برق.</div>
         </div>
 
         <!-- ══ TEXT FIX ══ -->
@@ -7308,7 +7306,7 @@
             <button class="btn btn-tonal" onclick="copyVal('tf-output')">📋 کپی</button>
             <button class="btn btn-tonal" onclick="tfSwap()">⇄ جابجا</button>
           </div>
-          <div class="tool-desc">تشخیص و رفع متن‌های خراب فارسی/عربی، تبدیل کدگذاری‌های متداول، شناسایی نوع متن.</div>
+          <div class="tool-desc">تشخیص و رفع متن‌های فارسی/عربی خراب (کد‌گذاری نادرست)، تبدیل بین کدگذاری‌های متداول. <strong>کاربرد:</strong> نجات داده از پایگاه‌داده قدیمی، رفع مشکل متن Mojibake.</div>
         </div>
 
         <!-- ══ DATA CHART ══ -->
@@ -7329,7 +7327,7 @@
           <div class="btn-row" style="margin-top:8px">
             <button class="btn btn-tonal" onclick="chartDownload()">💾 دانلود PNG</button>
           </div>
-          <div class="tool-desc">رسم نمودار از داده‌های ساده. هر خط: نام,مقدار. از CSV هم می‌توانید کپی کنید.</div>
+          <div class="tool-desc">رسم نمودار میله‌ای، خطی یا دایره‌ای از داده‌های ساده. هر خط: نام,مقدار. از CSV کپی کنید. خروجی PNG دانلود می‌شود. <strong>کاربرد:</strong> گزارش سریع، ارائه، تجسم داده.</div>
         </div>
 
         <!-- ══ FAKE JSON ══ -->
@@ -7349,7 +7347,7 @@
             <button class="btn btn-tonal" onclick="fjDownloadCSV()">💾 دانلود CSV</button>
           </div>
           <textarea id="fj-out" class="text-area mono" rows="8" readonly style="direction:ltr;font-family:monospace;font-size:12px;margin-top:8px;background:var(--m3-surface-container)"></textarea>
-          <div class="tool-desc">تولید داده JSON آزمایشی با طرح دلخواه. از همه نوع‌های متداول پشتیبانی می‌شود.</div>
+          <div class="tool-desc">تولید داده JSON آزمایشی با طرح (Schema) دلخواه. از انواع string، number، boolean، array و object پشتیبانی می‌کند. <strong>کاربرد:</strong> mock API، تست frontend، seed دیتابیس.</div>
         </div>
 
         <!-- ══ SUBNET ══ -->
@@ -7372,7 +7370,7 @@
               </div>
             </div>
           </div>
-          <div class="tool-desc">محاسبه آدرس شبکه، Broadcast، ماسک، محدوده هاست‌ها و تعداد آدرس‌های قابل استفاده از CIDR.</div>
+          <div class="tool-desc">محاسبه شبکه از CIDR: آدرس شبکه، Broadcast، ماسک، محدوده هاست‌ها و تعداد آدرس‌های قابل استفاده. <strong>کاربرد:</strong> طراحی شبکه، تنظیم فایروال، آموزش CCNA.</div>
         </div>
 
         <!-- ══ WCAG CONTRAST ══ -->
@@ -7404,7 +7402,7 @@
             <div class="field-label">پیشنهاد رنگ با کنتراست کافی</div>
             <div id="wcag-suggest" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"></div>
           </div>
-          <div class="tool-desc">محاسبه نسبت کنتراست WCAG 2.1. AA نیاز به ۴.۵:۱ برای متن معمولی و ۳:۱ برای متن بزرگ دارد. AAA نیاز به ۷:۱ دارد.</div>
+          <div class="tool-desc">محاسبه نسبت کنتراست رنگ مطابق WCAG 2.1. AA: ۴.۵:۱ برای متن معمولی، ۳:۱ برای متن بزرگ. AAA: ۷:۱. پیشنهاد رنگ‌های جایگزین برای گذراندن آزمون. <strong>کاربرد:</strong> طراحی دسترس‌پذیر، الزامات قانونی.</div>
         </div>
 
         <!-- ══ IMGPALETTE (Interactive) ══ -->
@@ -7429,7 +7427,7 @@
             </div>
             <div id="icp-swatches" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px"></div>
           </div>
-          <div class="tool-desc">نقاط رنگی را روی تصویر بکشید تا رنگ بگیرند. روی هر نمونه کلیک کنید تا HEX کپی شود.</div>
+          <div class="tool-desc">استخراج رنگ‌های اصلی از تصویر. نقاط رنگی را روی تصویر بکشید تا کد HEX هر رنگ را بگیرید. <strong>کاربرد:</strong> ساخت پالت رنگی از تصویر، طراحی برند، تطبیق رنگ.</div>
         </div>
 
         <!-- ══ ABOUT ══ -->
@@ -7496,7 +7494,9 @@
                 </div>
               </div>
             </div>
-          </div>
+          
+          <div class="tool-desc">اطلاعات درباره جعبه‌ابزار: نسخه، تعداد ابزارها، لایسنس، مشخصات فنی و فرم تماس با سازنده. برای گزارش باگ یا پیشنهاد ابزار جدید از اینجا استفاده کنید.</div>
+        </div>
         </div>
 
         <!-- ══ MINI GAMES ══ -->
@@ -7532,7 +7532,7 @@
             <div id="mg-area" style="display:flex;flex-direction:column;align-items:center;gap:12px"></div>
           </div>
 
-          <div class="tool-desc">بازی‌های آفلاین سبک - کاملاً در مرورگر، بدون اینترنت.</div>
+          <div class="tool-desc">مجموعه بازی‌های آفلاین: ۲۰۴۸، مار (Snake)، دفترچه یادداشت (Breakout)، حافظه (Memory)، دارت واژه (Hangman)، سیمون گفت، زمان واکنش و فلپی برد. <strong>کاربرد:</strong> سرگرمی، تیزکردن واکنش، رفع خستگی.</div>
         </div>
 
         <!-- ══ WORD CLOUD ══ -->
@@ -7627,9 +7627,7 @@
             <button class="btn btn-tonal" id="wc-copy-btn" onclick="wcCopyWords()" style="display:none">📋 کپی کلمات</button>
           </div>
 
-          <div class="tool-desc">
-            کلمات پرتکرار با اندازه بزرگ‌تر نمایش داده می‌شوند. متن فارسی به‌طور کامل پشتیبانی می‌شود.
-          </div>
+          <div class="tool-desc">تولید ابر کلمات از متن دلخواه. کلمات پرتکرار با اندازه بزرگ‌تر نمایش داده می‌شوند. متن فارسی کاملاً پشتیبانی می‌شود. <strong>کاربرد:</strong> تجسم محتوا، تحلیل متن، ارائه، پوستر.</div>
         </div>
 
         <!-- ══ COMPASS ══ -->
@@ -7654,7 +7652,7 @@
             <button class="btn btn-filled" onclick="compassStart()">🧭 شروع</button>
             <button class="btn btn-tonal" onclick="compassStop()">⏹ توقف</button>
           </div>
-          <div class="tool-desc">به دسترسی به حسگر جهت دستگاه نیاز دارد. روی iOS ابتدا دکمه شروع را بزنید تا مجوز داده شود.</div>
+          <div class="tool-desc">قطب‌نمای دیجیتال که از حسگر جهت دستگاه استفاده می‌کند. در iOS ابتدا باید مجوز داده شود. <strong>کاربرد:</strong> پیدا کردن جهت قبله، جهت‌یابی، کمپینگ.</div>
         </div>
 
         <!-- ══ GOLDEN RATIO ══ -->
@@ -7673,7 +7671,7 @@
           </div>
           <div id="gr-results" style="margin-top:12px"></div>
           <svg id="gr-svg" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;margin-top:14px;background:var(--m3-surface-container);border-radius:14px;padding:10px"></svg>
-          <div class="tool-desc">φ ≈ 1.618. نسبت طلایی در طبیعت، هنر و طراحی فراوان است. مستطیل طلایی با تقسیم به مربع + مستطیل کوچک‌تر، همان نسبت را حفظ می‌کند.</div>
+          <div class="tool-desc">محاسبه نسبت طلایی (φ ≈ ۱.۶۱۸). ابعاد را وارد کنید تا نسبت طلایی پیشنهاد شود. <strong>کاربرد:</strong> طراحی گرافیک، معماری، عکاسی، چیدمان صفحه.</div>
         </div>
 
         <!-- ══ SVG VIEWER ══ -->
@@ -7690,7 +7688,7 @@
           </div>
           <div id="svg-info" style="font-size:12px;color:var(--m3-on-surface-variant);margin-bottom:8px"></div>
           <div id="svg-preview" style="background:var(--m3-surface-container);border-radius:12px;padding:16px;min-height:100px;display:flex;align-items:center;justify-content:center;overflow:auto;border:1px solid var(--m3-outline-variant)"></div>
-          <div class="tool-desc">کد SVG را وارد کنید تا پیش‌نمایش ببینید. می‌توانید به‌عنوان SVG یا PNG دانلود کنید.</div>
+          <div class="tool-desc">پیش‌نمایش کد SVG با رندر زنده. کد را ویرایش کنید و تغییر را فوری ببینید. خروجی به‌عنوان SVG یا PNG قابل دانلود است. <strong>کاربرد:</strong> طراحی آیکون، ویرایش SVG، اشکال‌زدایی.</div>
         </div>
 
         <!-- ══ GRID BUILDER ══ -->
@@ -7731,7 +7729,7 @@
           <div id="gb-preview" style="margin:12px 0;min-height:80px;border-radius:12px;padding:16px;background:var(--m3-surface-container)"></div>
           <label class="field-label">کد CSS</label>
           <pre id="gb-code" class="css-code-box" onclick="copyText(this.textContent)" style="cursor:pointer;white-space:pre;font-size:12px"></pre>
-          <div class="tool-desc">روی کد کلیک کنید تا کپی شود.</div>
+          <div class="tool-desc">ساخت CSS Grid با کنترل‌های بصری: تعداد ستون‌ها، ردیف‌ها، فاصله (gap) و تراز. کد CSS خروجی با کلیک کپی می‌شود. <strong>کاربرد:</strong> طراحی چیدمان وب، یادگیری CSS Grid.</div>
         </div>
 
         <!-- ══ BUSINESS MODEL CANVAS ══ -->
@@ -7743,7 +7741,7 @@
             <button class="btn btn-tonal" onclick="bmcExportPNG()">📸 راهنمای خروجی</button>
           </div>
           <div id="bmc-grid"></div>
-          <div class="tool-desc">محتوا به‌صورت خودکار در مرورگر ذخیره می‌شود.</div>
+          <div class="tool-desc">بوم کسب‌وکار (Business Model Canvas) برای برنامه‌ریزی مدل تجاری. ۹ بخش: مشتریان، ارزش پیشنهادی، کانال‌ها، ارتباط مشتری، منابع، فعالیت‌ها، شرکا، هزینه‌ها و درآمد. محتوا در مرورگر ذخیره می‌شود.</div>
         </div>
 
         <!-- ══ EISENHOWER MATRIX ══ -->
@@ -7766,7 +7764,7 @@
           <div class="btn-row" style="margin-top:10px">
             <button class="btn btn-tonal" onclick="eisClear()">🗑 پاک کردن همه</button>
           </div>
-          <div class="tool-desc">وظایف در localStorage ذخیره می‌شوند. ربع ۱=انجام بده، ربع ۲=برنامه‌ریزی کن، ربع ۳=واگذار کن، ربع ۴=حذف کن.</div>
+          <div class="tool-desc">ماتریس آیزنهاور برای اولویت‌بندی وظایف. چهار ربع: مهم+فوری (انجام بده)، مهم+غیرفوری (برنامه‌ریزی)، غیرمهم+فوری (واگذار کن)، غیرمهم+غیرفوری (حذف کن). وظایف در localStorage ذخیره می‌شوند.</div>
         </div>
 
         <!-- ══ CITATION GENERATOR ══ -->
@@ -7790,7 +7788,7 @@
             <div id="cit-result" style="background:var(--m3-surface-container);border-radius:12px;padding:14px;font-size:14px;line-height:1.9;direction:ltr;text-align:left"></div>
             <button class="btn btn-tonal" onclick="copyToClipboard(document.getElementById('cit-result').textContent)" style="margin-top:8px">📋 کپی</button>
           </div>
-          <div class="tool-desc">فرمت‌های APA، MLA و Chicago. برای کتاب، مقاله علمی و وب‌سایت.</div>
+          <div class="tool-desc">تولید رفرنس استاندارد در فرمت‌های APA، MLA و Chicago برای کتاب، مقاله علمی و وب‌سایت. اطلاعات را وارد کنید و رفرنس آماده را کپی کنید. <strong>کاربرد:</strong> مقاله علمی، پایان‌نامه، تحقیق.</div>
         </div>
 
         <!-- ══ LANGUAGE SCORES ══ -->
@@ -7870,7 +7868,7 @@
               <div id="gpa-conv-result" style="margin-top:10px"></div>
             </div>
           </div>
-          <div class="tool-desc">IELTS، TOEFL iBT، تبدیل دوطرفه، GPA در مقیاس‌های ۴/۲۰/۱۰۰.</div>
+          <div class="tool-desc">تبدیل امتیازات زبانی: IELTS ↔ TOEFL iBT ↔ درصد. همچنین تبدیل GPA بین مقیاس‌های ۴، ۲۰ و ۱۰۰. <strong>کاربرد:</strong> درخواست دانشگاه خارجی، ترجمه کارنامه، مقایسه مدارک.</div>
         </div>
 
         <!-- ══ KEY PAIR GENERATOR ══ -->
@@ -7907,7 +7905,7 @@
               <textarea id="kp-cipher" class="text-area mono" rows="3" placeholder="متن رمزشده…" style="font-size:11px;direction:ltr;text-align:left"></textarea>
             </div>
           </div>
-          <div class="tool-desc">کلیدها با Web Crypto API در مرورگر تولید می‌شوند. هرگز کلید خصوصی را به اشتراک نگذارید.</div>
+          <div class="tool-desc">تولید جفت کلید RSA-2048 یا ECDSA با Web Crypto API در مرورگر. کلیدها در قالب PEM قابل دانلود هستند. <strong>هشدار:</strong> هرگز کلید خصوصی را به اشتراک نگذارید.</div>
         </div>
 
         <!-- ══ HTACCESS GENERATOR ══ -->
@@ -7935,7 +7933,7 @@
             <button class="btn btn-tonal" onclick="copyVal('ht-output')">📋 کپی</button>
           </div>
           <textarea id="ht-output" class="text-area mono" rows="12" readonly style="direction:ltr;text-align:left;font-size:12px;margin-top:8px"></textarea>
-          <div class="tool-desc">فایل .htaccess برای Apache. تیک بزنید و کد آماده را کپی کنید.</div>
+          <div class="tool-desc">تولید فایل <code>.htaccess</code> برای Apache با تیک‌زدن گزینه‌ها: HTTPS اجباری، WWW، کش مرورگر، فشرده‌سازی Gzip، محدودیت آپلود، حفاظت دایرکتوری. <strong>کاربرد:</strong> امنیت و بهینه‌سازی سرور.</div>
         </div>
 
         <!-- ══ DECISION MATRIX ══ -->
@@ -7957,7 +7955,7 @@
           <button class="btn btn-filled" onclick="dmBuildMatrix()" style="margin-top:10px">ساخت ماتریس</button>
           <div id="dm-matrix-wrap" style="margin-top:14px;overflow-x:auto"></div>
           <div id="dm-result" style="margin-top:10px"></div>
-          <div class="tool-desc">برای هر گزینه در برابر هر معیار امتیاز ۱-۱۰ وارد کنید. امتیاز نهایی = جمع (امتیاز × وزن).</div>
+          <div class="tool-desc">ماتریس تصمیم‌گیری وزن‌دار. گزینه‌ها و معیارها را تعریف کنید، وزن هر معیار را مشخص کنید و امتیاز ۱–۱۰ وارد کنید. امتیاز نهایی = جمع (امتیاز × وزن). <strong>کاربرد:</strong> انتخاب بین چند گزینه، خرید، استخدام.</div>
         </div>
 
         <!-- ══ WATERMARK ══ -->
@@ -8003,7 +8001,7 @@
           <div class="range-row"><label>اندازه</label><input type="range" id="wm-scale" min="0.05" max="0.5" step="0.01" value="0.2" oninput="wmRender()"></div>
           <canvas id="wm-canvas" style="display:none;max-width:100%;border-radius:12px;margin-top:10px"></canvas>
           <button class="btn btn-filled" id="wm-dl-btn" onclick="wmDownload()" style="display:none;margin-top:8px">💾 دانلود</button>
-          <div class="tool-desc">رنگ متن واترمارک به‌صورت خودکار بر اساس روشنایی تصویر انتخاب می‌شود.</div>
+          <div class="tool-desc">افزودن واترمارک متنی یا تصویری روی عکس. موقعیت، شفافیت، اندازه و رنگ قابل تنظیم است. <strong>کاربرد:</strong> محافظت از حق مالکیت عکس، برندسازی تصاویر.</div>
         </div>
 
         <!-- ══ BACKGROUND REMOVE ══ -->
@@ -8066,7 +8064,7 @@
             </div>
           </div>
 
-          <div class="tool-desc">از مدل <strong>RMBG-1.4</strong> (ISNet) از طریق کتابخانه <code>@imgly/background-removal</code> استفاده می‌کند. در بار اول حدود ۵ دقیقه (نسبت به سرعت اینترنت) طول می‌کشد.</div>
+          <div class="tool-desc">حذف پس‌زمینه تصویر با مدل RMBG-1.4 (ISNet) کاملاً در مرورگر. اولین اجرا مدل را دانلود می‌کند و پس از آن آفلاین کار می‌کند. <strong>کاربرد:</strong> عکس پروفایل، محصول، ارائه، طراحی.</div>
         </div>
 
         <!-- ══ SEO TOOLS ══ -->
@@ -8093,7 +8091,7 @@
             <button class="btn btn-tonal" onclick="copyVal('seo-output')">📋 کپی</button>
           </div>
           <textarea id="seo-output" class="text-area mono" rows="10" readonly style="direction:ltr;text-align:left;font-size:12px;margin-top:8px"></textarea>
-          <div class="tool-desc">متا تگ‌های استاندارد برای SEO، شبکه‌های اجتماعی (Open Graph) و Twitter Cards.</div>
+          <div class="tool-desc">تولید متاتگ‌های استاندارد برای SEO، Open Graph (فیسبوک) و Twitter Cards. پیش‌نمایش نمایش در گوگل و شبکه‌های اجتماعی. <strong>کاربرد:</strong> بهینه‌سازی موتور جستجو، اشتراک‌گذاری لینک.</div>
         </div>
 
         <!-- ══ AUDIO TOOLS ══ -->
@@ -8152,7 +8150,7 @@
               <div id="at-beep-status" style="font-size:13px;color:var(--m3-primary);margin-top:6px"></div>
             </div>
           </div>
-          <div class="tool-desc">مولد فرکانس: هر فرکانس صوتی با شکل موج دلخواه. بیپ/سانسور: قسمتی از فایل صوتی را با بیپ یا سکوت جایگزین کنید.</div>
+          <div class="tool-desc">دو ابزار صوتی: ۱) مولد فرکانس با شکل موج دلخواه (Sine/Square/Sawtooth) برای تست صدا و تیون. ۲) جایگزینی بخشی از فایل صوتی با بیپ یا سکوت. <strong>کاربرد:</strong> موسیقی، تست بلندگو، سانسور صوتی.</div>
         </div>
 
         <!-- ══ TTS ══ -->
@@ -8298,7 +8296,7 @@
             <button class="btn btn-text" onclick="backToPoemsList()" style="margin-bottom: 12px;">← بازگشت به لیست</button>
             <div id="diwan-poem-content"></div>
           </div>
-          <div class="tool-desc">دیوان اشعار شاعرهای معروف ایرانی - استخراج‌شده از سایت گنجور</div>
+          <div class="tool-desc">دیوان شعر شاعران کلاسیک و معاصر ایران از گنجور: حافظ، سعدی، مولانا، فردوسی، خیام، نیما، شاملو و بیشتر. جستجو در اشعار، مطالعه و کپی. <strong>کاربرد:</strong> مطالعه ادبیات فارسی، جستجوی بیت خاص.</div>
         </div>
 
 
@@ -8344,7 +8342,9 @@
             </div>
           </div>
           <!-- Detail view (replaces home) -->
-          <div id="wth-det-view" style="display:none"></div>
+          <div id="wth-det-view" style="display:none">
+          <div class="tool-desc">نمایش آب‌وهوای فعلی و پیش‌بینی چند روزه برای شهر موردنظر. دما، رطوبت، باد، فشار هوا و وضعیت آسمان. <strong>کاربرد:</strong> برنامه‌ریزی سفر، فعالیت‌های فضای باز.</div>
+        </div>
         </div>
 
         <!-- ══ ترجمه ══ -->
@@ -8397,7 +8397,7 @@
             </div>
             <div id="tr-output" style="background:var(--m3-surface-container);border-radius:16px;padding:16px;font-size:.95rem;line-height:1.85;min-height:60px;color:var(--m3-on-surface);word-break:break-word"></div>
           </div>
-          <div class="tool-desc">برای ترجمه توسط وب‌سرویس Dastyar استفاده می‌شود. نیاز به اتصال اینترنت دارد.</div>
+          <div class="tool-desc">ترجمه متن با استفاده از وب‌سرویس Dastyar. نیاز به اینترنت دارد. زبان‌های متعدد پشتیبانی می‌شوند. <strong>کاربرد:</strong> ترجمه سریع متن، یادگیری زبان، درک محتوای خارجی.</div>
         </div>
 
         <!-- ══ قیمت ══ -->
@@ -8429,13 +8429,7 @@
             </div>
           </div>
           <div id="cur-content"></div>
-          <div class="tool-desc">
-            <strong>طلا و ارز:</strong> از <strong>BrsAPI</strong> - قیمت‌ها مستقیماً به تومان یا دلار.<br>
-            <strong>رمزارز:</strong> از <strong>نوبیتکس</strong> -
-            در حالت <strong>تومان</strong>: قیمت واقعی بازار ریالی نوبیتکس (تقسیم بر ۱۰) |
-            در حالت <strong>USD</strong>: قیمت بازار تتری نوبیتکس (USDT ≈ USD) |
-            درصد تغییر نسبت به قیمت باز شدن روز گذشته.
-          </div>
+          <div class="tool-desc">قیمت لحظه‌ای ارزها، طلا و ارزهای دیجیتال از BrsAPI. نرخ تبدیل بین واحدهای مختلف. <strong>کاربرد:</strong> مقایسه نرخ ارز، برنامه‌ریزی مالی، خرید و فروش ارز.</div>
         </div>
 
         </div><!-- /tool-container -->
@@ -8443,7 +8437,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 7.4 - ۱۴۰۵/۰۲/۱۲
+          ℹ️ نسخه 7.5 - ۱۴۰۵/۰۲/۱۳
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -10800,17 +10794,17 @@
           .dice3d .face.d-right {transform:rotateY(90deg)  translateZ(45px);}
           .dice3d .face.d-left  {transform:rotateY(-90deg) translateZ(45px);}
           /* face 1 — big red center pip */
-          .dice3d .face.d-front::after{width:26px;height:26px;background:#f63330;margin:-13px 0 0 -13px;}
-          /* face 6 */
-          .dice3d .face.d-back::after  {margin:-33px 0 0 -29px;box-shadow:40px 0,0 24px,40px 24px,0 48px,40px 48px;}
-          /* face 2 */
-          .dice3d .face.d-top::after   {margin:-29px 0 0 -29px;box-shadow:40px 40px;}
-          /* face 5 */
-          .dice3d .face.d-bottom::after{margin:-34px 0 0 -34px;box-shadow:26px 26px,52px 52px,52px 0,0 52px;}
-          /* face 3 */
-          .dice3d .face.d-right::after {margin:-29px 0 0 -29px;box-shadow:40px 0,0 40px,40px 40px;}
-          /* face 4 */
-          .dice3d .face.d-left::after  {margin:-33px 0 0 -33px;box-shadow:25px 25px,50px 50px;}
+          .dice3d .face.d-front::after{width:26px;height:26px;background:#f63330;margin:-13px 0 0 -13px;box-shadow:none;}
+          /* face 6: 3 rows x 2 cols */
+          .dice3d .face.d-back::after  {margin:-33px 0 0 -29px;box-shadow:40px 0 0 0 #131210,0 24px 0 0 #131210,40px 24px 0 0 #131210,0 48px 0 0 #131210,40px 48px 0 0 #131210;}
+          /* face 2: top-right + bottom-left */
+          .dice3d .face.d-top::after   {margin:-29px 0 0 -29px;box-shadow:40px 40px 0 0 #131210;}
+          /* face 5: 4 corners + center */
+          .dice3d .face.d-bottom::after{margin:-34px 0 0 -34px;box-shadow:26px 26px 0 0 #131210,52px 52px 0 0 #131210,52px 0 0 0 #131210,0 52px 0 0 #131210;}
+          /* face 3: top-right + center + bottom-left */
+          .dice3d .face.d-right::after {margin:-29px 0 0 -29px;box-shadow:40px 0 0 0 #131210,0 40px 0 0 #131210,40px 40px 0 0 #131210;}
+          /* face 4: 2 rows x 2 cols */
+          .dice3d .face.d-left::after  {margin:-33px 0 0 -33px;box-shadow:25px 25px 0 0 #131210,50px 50px 0 0 #131210;}
           /* flat fallback for non-6-sided */
           .dice-flat{
             width:88px;height:88px;border-radius:16px;
@@ -11149,24 +11143,24 @@
         _deck=_shuffleDeck(_freshDeck());
         _drawnCards=[];
         document.getElementById('card-display').innerHTML='';
-        document.getElementById('card-drawn-list').textContent='';
+        document.getElementById('card-drawn-list').innerHTML='';
         document.getElementById('card-deck-status').textContent=`۵۲ کارت در دک`;
       }
       function _cardHTML(card,delay){
         const {suit,rank}=card;
         return `<div style="
-          width:82px;height:120px;border-radius:12px;
-          background:#fff;border:1.5px solid #ddd;
+          width:105px;height:155px;border-radius:14px;
+          background:#fff;border:1.5px solid #e0e0e0;
           display:flex;flex-direction:column;align-items:center;justify-content:space-between;
-          padding:7px 8px;box-sizing:border-box;
-          box-shadow:0 4px 16px #0004;
+          padding:9px 10px;box-sizing:border-box;
+          box-shadow:0 6px 24px #0005;
           color:${suit.color};font-weight:700;
           animation:cardFlip 0.4s ${delay}ms both;
           font-family:Vazirmatn,sans-serif;
           position:relative;user-select:none">
-          <div style="font-size:17px;align-self:flex-start;line-height:1.15">${rank.v}<br><span style="font-size:12px">${suit.sym}</span></div>
-          <div style="font-size:34px;line-height:1">${suit.sym}</div>
-          <div style="font-size:17px;align-self:flex-end;transform:rotate(180deg);line-height:1.15">${rank.v}<br><span style="font-size:12px">${suit.sym}</span></div>
+          <div style="font-size:20px;align-self:flex-start;line-height:1.2">${rank.v}<br><span style="font-size:15px">${suit.sym}</span></div>
+          <div style="font-size:46px;line-height:1">${suit.sym}</div>
+          <div style="font-size:20px;align-self:flex-end;transform:rotate(180deg);line-height:1.2">${rank.v}<br><span style="font-size:15px">${suit.sym}</span></div>
         </div>`;
       }
       (()=>{
@@ -11189,10 +11183,32 @@
         drawn.forEach((c,i)=>{display.innerHTML+=_cardHTML(c,i*80);});
         const rem=_deck.length;
         document.getElementById('card-deck-status').textContent=`${rem} کارت باقی‌مانده در دک`;
-        // history: last 10 drawn as text
-        const hist=_drawnCards.slice(-10).map(c=>`${c.rank.fa}${c.suit.sym}`).join(' ');
-        document.getElementById('card-drawn-list').textContent=
-          _drawnCards.length>n?`آخرین کارت‌های کشیده‌شده: ${hist}`:'';
+        // history: last 10 drawn as color-coded pills
+        const histEl=document.getElementById('card-drawn-list');
+        const hist=_drawnCards.slice(-10);
+        if(_drawnCards.length>n && hist.length){
+          const label=document.createElement('span');
+          label.style.cssText='font-size:12px;color:var(--md-sys-color-outline);white-space:nowrap;margin-left:4px';
+          label.textContent='آخرین کارت‌های کشیده‌شده:';
+          histEl.innerHTML='';
+          histEl.appendChild(label);
+          hist.forEach(card=>{
+            const pill=document.createElement('span');
+            const isRed=card.suit.color==='#e53935'||card.suit.color==='#c62828'||(card.suit.color||'').includes('e53')||(card.suit.color||'').includes('d32')||card.suit.sym==='♥'||card.suit.sym==='♦';
+            pill.style.cssText=`
+              display:inline-flex;align-items:center;gap:2px;
+              padding:3px 9px;border-radius:99px;font-size:13px;font-weight:700;
+              background:${isRed?'rgba(229,57,53,0.12)':'var(--md-sys-color-surface-variant)'};
+              color:${isRed?'#e53935':'var(--md-sys-color-on-surface-variant)'};
+              border:1px solid ${isRed?'rgba(229,57,53,0.3)':'var(--md-sys-color-outline-variant)'};
+              font-family:Vazirmatn,sans-serif;
+            `;
+            pill.textContent=`${card.rank.v}${card.suit.sym}`;
+            histEl.appendChild(pill);
+          });
+        } else {
+          histEl.innerHTML='';
+        }
       }
 
       // ── LIST PICKER ──
