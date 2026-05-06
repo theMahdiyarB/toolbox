@@ -2340,6 +2340,7 @@
         <div class="drawer-item" onclick="showTool('textfix')" data-tool="textfix"><span class="drawer-item__icon">🔤</span>رفع خرابی متن</div>
         <div class="drawer-item" onclick="showTool('notes')" data-tool="notes"><span class="drawer-item__icon">📝</span>یادداشت و چک‌لیست</div>
         <div class="drawer-item" onclick="showTool('emojis')" data-tool="emojis"><span class="drawer-item__icon">😀</span>ایموجی</div>
+        <div class="drawer-item" onclick="showTool('worldmap')" data-tool="worldmap"><span class="drawer-item__icon">🌍</span>نقشه جهان و پرچم‌ها</div>
         <div class="drawer-item" onclick="showTool('emotcn')" data-tool="emotcn"><span class="drawer-item__icon">:‑)</span>اِموتیکون</div>
         <div class="drawer-item" onclick="showTool('pasban')" data-tool="pasban"><span class="drawer-item__icon">📖</span>فرهنگ واژه پارسی</div>
 
@@ -2759,6 +2760,7 @@
                 <div class="link-card" onclick="haptic(this);showTool('textfix')"><span class="use-badge"></span><button class="fav-btn" data-tool="textfix" onclick="event.stopPropagation();toggleFav('textfix',this)">☆</button><span class="link-card__icon">🔤</span><span class="link-card__name">رفع خرابی متن</span><span class="link-card__desc">تصحیح ی/ک و کدگذاری</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('notes')"><button class="fav-btn" data-tool="notes" onclick="event.stopPropagation();toggleFav('notes',this)">☆</button><span class="link-card__icon">📝</span><span class="link-card__name">یادداشت و چک‌لیست</span><span class="link-card__desc">ذخیره در مرورگر</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('emojis')"><button class="fav-btn" data-tool="emojis" onclick="event.stopPropagation();toggleFav('emojis',this)">☆</button><span class="link-card__icon">😀</span><span class="link-card__name">ایموجی</span><span class="link-card__desc">تمام ایموجی‌های Unicode</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('worldmap')"><button class="fav-btn" data-tool="worldmap" onclick="event.stopPropagation();toggleFav('worldmap',this)">☆</button><span class="link-card__icon">🌍</span><span class="link-card__name">نقشه جهان</span><span class="link-card__desc">نقشه، پرچم‌ها و کوییز</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('emotcn')"><button class="fav-btn" data-tool="emotcn" onclick="event.stopPropagation();toggleFav('emotcn',this)">☆</button><span class="link-card__icon">:‑)</span><span class="link-card__name">اِموتیکون متنی</span><span class="link-card__desc">صورتک‌های ASCII و کائوموجی</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('pasban')"><button class="fav-btn" data-tool="pasban" onclick="event.stopPropagation();toggleFav('pasban',this)">☆</button><span class="link-card__icon">📖</span><span class="link-card__name">فرهنگ واژه پارسی</span><span class="link-card__desc">واژه‌های پارسی‌گزین - پایگاه پاسبان</span></div>
               </div>
@@ -7075,6 +7077,87 @@
           <div class="tool-desc">مرجع سریع ایموجی‌های استاندارد Unicode با جستجو. کلیک روی هر ایموجی آن را کپی می‌کند. <strong>کاربرد:</strong> پیدا کردن ایموجی مناسب، ارسال در چت، محتوای شبکه‌های اجتماعی.</div>
         </div>
 
+        <!-- ══ WORLD MAP ══ -->
+        <div id="worldmap" class="tool-card">
+          <div class="tool-title">🌍 نقشه جهان و پرچم‌ها</div>
+
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
+            <button class="btn btn-filled" id="wm-tab-map"   onclick="wmSetTab('map')">🗺️ نقشه</button>
+            <button class="btn btn-tonal"  id="wm-tab-flags" onclick="wmSetTab('flags')">🏳️ پرچم‌ها</button>
+            <button class="btn btn-tonal"  id="wm-tab-quiz"  onclick="wmSetTab('quiz')">🧠 کوییز</button>
+            <button class="btn btn-tonal"  id="wm-tab-proj"  onclick="wmSetTab('proj')">📐 تصویرگری</button>
+          </div>
+
+          <!-- MAP PANEL -->
+          <div id="wm-panel-map">
+            <input type="text" id="wm-search" class="text-input" placeholder="جستجوی کشور به فارسی یا انگلیسی..." oninput="wmSearchCountry()" style="margin-bottom:8px;width:100%">
+
+            <!-- SVG wrapper: overflow hidden, pan/zoom via SVG transform -->
+            <div id="wm-svg-wrap" style="position:relative;border-radius:12px;overflow:hidden;background:var(--m3-surface-container);cursor:grab;touch-action:none;user-select:none">
+              <!-- SVG injected here by wmInjectSVG() — scales via viewBox+CSS -->
+              <div id="wm-svg-container" style="line-height:0"></div>
+              <div id="wm-map-loading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--m3-on-surface-variant);min-height:200px">⏳ در حال بارگذاری نقشه...</div>
+              <div id="wm-tooltip" style="display:none;position:absolute;background:#000d;color:#fff;font-size:12px;padding:5px 12px;border-radius:8px;pointer-events:none;white-space:nowrap;z-index:10;top:0;left:0"></div>
+            </div>
+
+            <!-- Zoom controls -->
+            <div style="display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap">
+              <div style="display:flex;gap:4px">
+                <button class="btn btn-tonal" onclick="wmZoom(1.4)"  style="font-size:14px;padding:3px 10px;min-width:32px">＋</button>
+                <button class="btn btn-tonal" onclick="wmZoom(1/1.4)" style="font-size:14px;padding:3px 10px;min-width:32px">－</button>
+                <button class="btn btn-tonal" onclick="wmResetView()" style="font-size:11px;padding:3px 10px">↺ ریست</button>
+              </div>
+              <div style="display:flex;gap:4px;align-items:center;margin-right:auto">
+                <span style="font-size:11px;color:var(--m3-on-surface-variant)">رنگ:</span>
+                <button class="btn btn-filled" id="wm-color-continent" onclick="wmSetColor('continent')" style="font-size:11px;padding:3px 9px">قاره</button>
+                <button class="btn btn-tonal"  id="wm-color-pop"       onclick="wmSetColor('pop')"       style="font-size:11px;padding:3px 9px">جمعیت</button>
+                <button class="btn btn-tonal"  id="wm-color-area"      onclick="wmSetColor('area')"      style="font-size:11px;padding:3px 9px">مساحت</button>
+                <button class="btn btn-tonal"  id="wm-color-plain"     onclick="wmSetColor('plain')"     style="font-size:11px;padding:3px 9px">ساده</button>
+              </div>
+            </div>
+
+            <div id="wm-country-info" style="display:none;margin-top:8px;padding:12px 14px;background:var(--m3-surface-container);border-radius:12px">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+                <span id="wm-ci-flag" style="font-size:2.4rem;line-height:1"></span>
+                <div>
+                  <div id="wm-ci-name" style="font-size:1.05rem;font-weight:700"></div>
+                  <div id="wm-ci-capital" style="font-size:12px;color:var(--m3-on-surface-variant);margin-top:2px"></div>
+                </div>
+              </div>
+              <div id="wm-ci-details" class="data-list" style="font-size:12.5px"></div>
+            </div>
+          </div>
+
+          <!-- FLAGS PANEL -->
+          <div id="wm-panel-flags" style="display:none">
+            <input type="text" id="wm-flag-search" class="text-input" placeholder="جستجوی کشور یا پرچم..." oninput="wmFlagSearch()" style="margin-bottom:10px;width:100%">
+            <div id="wm-flags-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;max-height:480px;overflow-y:auto"></div>
+          </div>
+
+          <!-- QUIZ PANEL -->
+          <div id="wm-panel-quiz" style="display:none;text-align:center">
+            <div style="display:flex;gap:8px;justify-content:center;margin-bottom:14px;flex-wrap:wrap">
+              <button class="btn btn-filled" id="wm-qt-flag"    onclick="wmQuizSetType('flag')">🏳️ پرچم ← کشور</button>
+              <button class="btn btn-tonal"  id="wm-qt-country" onclick="wmQuizSetType('country')">🗺️ کشور ← پایتخت</button>
+              <button class="btn btn-tonal"  id="wm-qt-capital" onclick="wmQuizSetType('capital')">🏛️ پایتخت ← کشور</button>
+            </div>
+            <div id="wm-quiz-card" style="min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:8px">
+              <button class="btn btn-filled" onclick="wmQuizStart()" style="font-size:1rem;padding:12px 32px">▶ شروع کوییز</button>
+            </div>
+            <div id="wm-quiz-score" style="display:none;margin-top:10px;font-size:13px;font-weight:600;color:var(--m3-primary)"></div>
+          </div>
+
+          <!-- PROJECTIONS INFO PANEL -->
+          <div id="wm-panel-proj" style="display:none">
+            <p style="font-size:13px;color:var(--m3-on-surface-variant);margin-bottom:12px;line-height:1.7">
+              تصویرگری نقشه فرآیند تبدیل سطح کروی زمین به یک صفحه مسطح است. هیچ تصویرگری‌ای نمی‌تواند هم‌زمان مساحت، فرم، فاصله و جهت را بدون تحریف حفظ کند. کلیک روی هر کارت برای مشاهده آن تصویرگری.
+            </p>
+            <div id="wm-proj-cards" style="display:flex;flex-direction:column;gap:12px"></div>
+          </div>
+
+          <div class="tool-desc">نقشه تعاملی جهان با ۵ تصویرگری (Mercator، Equal Earth، Gall-Peters، Robinson، کره چرخان). اطلاعات ۱۹۶ کشور با کلیک، پرچم همه کشورها با جستجو، کوییز پرچم/کشور/پایتخت، و توضیح تفاوت تصویرگری‌ها. <strong>کاربرد:</strong> آموزش جغرافیا، شناخت پرچم‌ها، سرگرمی.</div>
+        </div>
+
         <!-- ══ CALCULUS ══ -->
         <div id="calculus" class="tool-card">
 
@@ -8609,7 +8692,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 7.6 - ۱۴۰۵/۰۲/۱۱
+          ℹ️ نسخه 7.7 - ۱۴۰۵/۰۲/۱۶
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -8693,7 +8776,7 @@
         linsolve:'حل معادله', enctools:'ابزار کدگذاری',
         jcal:'تقویم خورشیدی', geometry:'هندسه - محیط و مساحت',
         qrread:'خواندن QR', periodic:'جدول تناوبی', metromap:'نقشه مترو و BRT',
-        emojis:'ایموجی', calculus:'حسابان', emotcn:'اِموتیکون متنی', pasban:'فرهنگ واژه پارسی', pomodoro:'تایمر پومودورو', resistor:'مقاومت رنگی', chart:'نمودار داده', fakejson:'مولد JSON آزمایشی', subnet:'محاسبه‌گر Subnet', textfix:'تبدیل متن و کدگذاری', wcag:'کنتراست رنگ WCAG',
+        emojis:'ایموجی', worldmap:'نقشه جهان و پرچم‌ها', calculus:'حسابان', emotcn:'اِموتیکون متنی', pasban:'فرهنگ واژه پارسی', pomodoro:'تایمر پومودورو', resistor:'مقاومت رنگی', chart:'نمودار داده', fakejson:'مولد JSON آزمایشی', subnet:'محاسبه‌گر Subnet', textfix:'تبدیل متن و کدگذاری', wcag:'کنتراست رنگ WCAG',
         imgpalette:'پالت رنگ تعاملی',
         ocrtool:'تشخیص متن OCR',
         stttool:'گفتار به متن STT',
@@ -8865,6 +8948,7 @@
           if(id==='colorpicker'&& typeof cpUpdate==='function')  cpUpdate(document.getElementById('cp-hex')?.value||'#3498db');
           if(id==='tip'        && typeof dangInit==='function')  dangInit();
           if(id==='inflationdebt' && typeof ifdInit==='function') ifdInit();
+          if(id==='worldmap'  && typeof wmSetTab==='function')   wmSetTab('map');
         }, 60);
       }
 
@@ -14531,7 +14615,679 @@ self.onmessage=function(e){
       }
       const morseStop = morseStopAll; // alias for button onclick
 
-      // ══════════════════════════════════════════════════════
+      // ══════════════════════════════════════════════════════════════════════
+      //  WORLD MAP TOOL  — inline SVG with pan/zoom + dark theme support
+      // ══════════════════════════════════════════════════════════════════════
+      const WM_COUNTRIES = [
+        ["AFG","🇦🇫","Afghanistan","افغانستان","Kabul","کابل","Asia",41.1,652.9,33.9,67.7],
+        ["ALB","🇦🇱","Albania","آلبانی","Tirana","تیرانا","Europe",2.8,28.7,41.2,20.2],
+        ["DZA","🇩🇿","Algeria","الجزایر","Algiers","الجزیره","Africa",44.9,2381.7,28.0,1.7],
+        ["AND","🇦🇩","Andorra","آندورا","Andorra la Vella","آندورا لا ولا","Europe",0.08,0.5,42.5,1.5],
+        ["AGO","🇦🇴","Angola","آنگولا","Luanda","لوآندا","Africa",34.5,1246.7,-11.2,17.9],
+        ["ATG","🇦🇬","Antigua and Barbuda","آنتیگوا و باربودا","Saint John's","سنت جانز","Americas",0.1,0.4,17.1,-61.8],
+        ["ARG","🇦🇷","Argentina","آرژانتین","Buenos Aires","بوئنوس‌آیرس","Americas",45.2,2780.4,-34.0,-64.0],
+        ["ARM","🇦🇲","Armenia","ارمنستان","Yerevan","ایروان","Asia",3.0,29.7,40.1,45.0],
+        ["AUS","🇦🇺","Australia","استرالیا","Canberra","کانبرا","Oceania",25.9,7741.2,-25.0,133.0],
+        ["AUT","🇦🇹","Austria","اتریش","Vienna","وین","Europe",9.0,83.9,47.5,14.6],
+        ["AZE","🇦🇿","Azerbaijan","آذربایجان","Baku","باکو","Asia",10.1,86.6,40.5,47.5],
+        ["BHS","🇧🇸","Bahamas","باهاما","Nassau","ناسائو","Americas",0.4,13.9,25.0,-77.4],
+        ["BHR","🇧🇭","Bahrain","بحرین","Manama","منامه","Asia",1.7,0.8,26.0,50.6],
+        ["BGD","🇧🇩","Bangladesh","بنگلادش","Dhaka","داکا","Asia",169.4,147.6,23.7,90.4],
+        ["BRB","🇧🇧","Barbados","باربادوس","Bridgetown","بریجتاون","Americas",0.3,0.4,13.2,-59.5],
+        ["BLR","🇧🇾","Belarus","بلاروس","Minsk","مینسک","Europe",9.4,207.6,53.7,27.9],
+        ["BEL","🇧🇪","Belgium","بلژیک","Brussels","بروکسل","Europe",11.6,30.5,50.8,4.5],
+        ["BLZ","🇧🇿","Belize","بلیز","Belmopan","بلموپان","Americas",0.4,23.0,17.2,-88.5],
+        ["BEN","🇧🇯","Benin","بنین","Porto-Novo","پورتو نووو","Africa",12.9,112.6,9.3,2.3],
+        ["BTN","🇧🇹","Bhutan","بوتان","Thimphu","تیمفو","Asia",0.8,38.4,27.5,90.4],
+        ["BOL","🇧🇴","Bolivia","بولیوی","Sucre","سوکره","Americas",11.8,1098.6,-17.0,-65.0],
+        ["BIH","🇧🇦","Bosnia and Herzegovina","بوسنی و هرزگوین","Sarajevo","سارایوو","Europe",3.3,51.2,44.2,17.5],
+        ["BWA","🇧🇼","Botswana","بوتسوانا","Gaborone","گابورونه","Africa",2.6,581.7,-22.3,24.7],
+        ["BRA","🇧🇷","Brazil","برزیل","Brasília","برازیلیا","Americas",214.3,8515.8,-10.0,-55.0],
+        ["BRN","🇧🇳","Brunei","برونئی","Bandar Seri Begawan","باندار سری بگاوان","Asia",0.4,5.8,4.5,114.7],
+        ["BGR","🇧🇬","Bulgaria","بلغارستان","Sofia","صوفیه","Europe",6.5,111.0,42.8,25.2],
+        ["BFA","🇧🇫","Burkina Faso","بورکینا فاسو","Ouagadougou","واگادوگو","Africa",22.1,274.2,12.4,-1.6],
+        ["BDI","🇧🇮","Burundi","بوروندی","Gitega","گیتگا","Africa",12.2,27.8,-3.4,29.9],
+        ["CPV","🇨🇻","Cabo Verde","کیپ ورد","Praia","پرایا","Africa",0.6,4.0,16.0,-24.0],
+        ["KHM","🇰🇭","Cambodia","کامبوج","Phnom Penh","پنوم‌پن","Asia",16.7,181.0,12.6,104.9],
+        ["CMR","🇨🇲","Cameroon","کامرون","Yaoundé","یائوندی","Africa",27.9,475.4,7.4,12.4],
+        ["CAN","🇨🇦","Canada","کانادا","Ottawa","اتاوا","Americas",38.2,9984.7,56.1,-96.3],
+        ["CAF","🇨🇫","Central African Republic","جمهوری آفریقای مرکزی","Bangui","بانگی","Africa",5.0,622.9,6.6,20.9],
+        ["TCD","🇹🇩","Chad","چاد","N'Djamena","ندجامنا","Africa",17.4,1284.0,15.5,18.7],
+        ["CHL","🇨🇱","Chile","شیلی","Santiago","سانتیاگو","Americas",19.1,756.1,-30.0,-71.0],
+        ["CHN","🇨🇳","China","چین","Beijing","پکن","Asia",1412.0,9596.9,35.9,104.2],
+        ["COL","🇨🇴","Colombia","کلمبیا","Bogotá","بوگوتا","Americas",51.5,1141.7,4.1,-73.1],
+        ["COM","🇰🇲","Comoros","کومور","Moroni","مورونی","Africa",0.9,2.2,-11.6,43.3],
+        ["COD","🇨🇩","Congo (DRC)","کنگو (جمهوری دموکراتیک)","Kinshasa","کینشاسا","Africa",99.0,2344.9,-2.9,23.7],
+        ["COG","🇨🇬","Congo","کنگو","Brazzaville","برازاویل","Africa",5.8,342.0,-0.2,15.8],
+        ["CRI","🇨🇷","Costa Rica","کاستاریکا","San José","سان خوزه","Americas",5.2,51.1,9.9,-84.2],
+        ["CIV","🇨🇮","Côte d'Ivoire","ساحل عاج","Yamoussoukro","یاموسوکرو","Africa",27.5,322.5,7.5,-5.5],
+        ["HRV","🇭🇷","Croatia","کرواسی","Zagreb","زاگرب","Europe",4.0,56.6,45.2,15.5],
+        ["CUB","🇨🇺","Cuba","کوبا","Havana","هاوانا","Americas",11.3,109.9,22.0,-79.5],
+        ["CYP","🇨🇾","Cyprus","قبرس","Nicosia","نیکوزیا","Europe",1.2,9.3,35.1,33.4],
+        ["CZE","🇨🇿","Czech Republic","جمهوری چک","Prague","پراگ","Europe",10.9,78.9,49.8,15.5],
+        ["DNK","🇩🇰","Denmark","دانمارک","Copenhagen","کپنهاگ","Europe",5.9,43.1,56.3,9.5],
+        ["DJI","🇩🇯","Djibouti","جیبوتی","Djibouti","جیبوتی","Africa",1.0,23.2,11.8,42.6],
+        ["DMA","🇩🇲","Dominica","دومینیکا","Roseau","روسو","Americas",0.07,0.8,15.4,-61.4],
+        ["DOM","🇩🇴","Dominican Republic","جمهوری دومینیکن","Santo Domingo","سانتو دومینگو","Americas",11.1,48.7,18.9,-70.2],
+        ["ECU","🇪🇨","Ecuador","اکوادور","Quito","کیتو","Americas",17.8,283.6,-1.8,-78.2],
+        ["EGY","🇪🇬","Egypt","مصر","Cairo","قاهره","Africa",104.3,1001.4,26.8,30.8],
+        ["SLV","🇸🇻","El Salvador","السالوادور","San Salvador","سان سالوادور","Americas",6.5,21.0,13.8,-88.9],
+        ["GNQ","🇬🇶","Equatorial Guinea","گینه استوایی","Malabo","مالابو","Africa",1.5,28.1,1.6,10.3],
+        ["ERI","🇪🇷","Eritrea","اریتره","Asmara","اسمره","Africa",3.5,117.6,15.2,39.8],
+        ["EST","🇪🇪","Estonia","استونی","Tallinn","تالین","Europe",1.3,45.2,58.6,25.0],
+        ["SWZ","🇸🇿","Eswatini","اسواتینی","Mbabane","امبابانه","Africa",1.2,17.4,-26.5,31.5],
+        ["ETH","🇪🇹","Ethiopia","اتیوپی","Addis Ababa","آدیس‌آبابا","Africa",117.9,1104.3,9.1,40.5],
+        ["FJI","🇫🇯","Fiji","فیجی","Suva","سووا","Oceania",0.9,18.3,-17.8,178.0],
+        ["FIN","🇫🇮","Finland","فنلاند","Helsinki","هلسینکی","Europe",5.5,338.4,61.9,26.0],
+        ["FRA","🇫🇷","France","فرانسه","Paris","پاریس","Europe",67.8,551.7,46.6,2.4],
+        ["GAB","🇬🇦","Gabon","گابن","Libreville","لیبرویل","Africa",2.2,267.7,-0.8,11.6],
+        ["GMB","🇬🇲","Gambia","گامبیا","Banjul","بانجول","Africa",2.5,11.3,13.5,-15.3],
+        ["GEO","🇬🇪","Georgia","گرجستان","Tbilisi","تفلیس","Asia",3.7,69.7,42.2,43.5],
+        ["DEU","🇩🇪","Germany","آلمان","Berlin","برلین","Europe",83.2,357.1,51.2,10.5],
+        ["GHA","🇬🇭","Ghana","غنا","Accra","اکرا","Africa",32.4,238.5,8.0,-1.1],
+        ["GRC","🇬🇷","Greece","یونان","Athens","آتن","Europe",10.7,132.0,39.1,22.0],
+        ["GRD","🇬🇩","Grenada","گرنادا","Saint George's","سنت جورج","Americas",0.1,0.3,12.1,-61.7],
+        ["GTM","🇬🇹","Guatemala","گواتمالا","Guatemala City","شهر گواتمالا","Americas",17.1,108.9,15.6,-90.4],
+        ["GIN","🇬🇳","Guinea","گینه","Conakry","کوناکری","Africa",13.1,245.9,11.0,-10.9],
+        ["GNB","🇬🇼","Guinea-Bissau","گینه بیسائو","Bissau","بیسائو","Africa",2.0,36.1,12.0,-15.2],
+        ["GUY","🇬🇾","Guyana","گویان","Georgetown","جرج‌تاون","Americas",0.8,214.9,4.9,-59.0],
+        ["HTI","🇭🇹","Haiti","هائیتی","Port-au-Prince","پورتو پرنس","Americas",11.5,27.8,18.9,-72.7],
+        ["HND","🇭🇳","Honduras","هندوراس","Tegucigalpa","تگوسیگالپا","Americas",10.3,112.5,15.0,-86.5],
+        ["HUN","🇭🇺","Hungary","مجارستان","Budapest","بوداپست","Europe",9.7,93.0,47.2,19.4],
+        ["ISL","🇮🇸","Iceland","ایسلند","Reykjavik","ریکیاویک","Europe",0.4,103.0,64.9,-18.1],
+        ["IND","🇮🇳","India","هند","New Delhi","نیودهلی","Asia",1380.0,3287.3,22.9,79.6],
+        ["IDN","🇮🇩","Indonesia","اندونزی","Jakarta","جاکارتا","Asia",273.5,1904.6,-0.8,113.9],
+        ["IRN","🇮🇷","Iran","ایران","Tehran","تهران","Asia",85.0,1648.2,32.6,54.0],
+        ["IRQ","🇮🇶","Iraq","عراق","Baghdad","بغداد","Asia",40.2,438.3,33.2,43.7],
+        ["IRL","🇮🇪","Ireland","ایرلند","Dublin","دوبلین","Europe",5.1,70.3,53.2,-8.2],
+        ["ISR","🇮🇱","Israel","اسرائیل","Jerusalem","اورشلیم","Asia",9.2,22.1,31.5,35.0],
+        ["ITA","🇮🇹","Italy","ایتالیا","Rome","رم","Europe",60.3,301.3,42.8,12.8],
+        ["JAM","🇯🇲","Jamaica","جامائیکا","Kingston","کینگستون","Americas",3.0,11.0,18.1,-77.3],
+        ["JPN","🇯🇵","Japan","ژاپن","Tokyo","توکیو","Asia",125.7,377.9,36.2,138.3],
+        ["JOR","🇯🇴","Jordan","اردن","Amman","عمان","Asia",10.2,89.3,31.2,36.5],
+        ["KAZ","🇰🇿","Kazakhstan","قزاقستان","Astana","آستانه","Asia",18.8,2724.9,47.8,67.0],
+        ["KEN","🇰🇪","Kenya","کنیا","Nairobi","نایروبی","Africa",54.0,580.4,-0.2,37.9],
+        ["KIR","🇰🇮","Kiribati","کیریباتی","Tarawa","تاراوا","Oceania",0.1,0.8,1.4,173.0],
+        ["PRK","🇰🇵","North Korea","کره شمالی","Pyongyang","پیونگ‌یانگ","Asia",25.9,120.5,40.2,127.0],
+        ["KOR","🇰🇷","South Korea","کره جنوبی","Seoul","سئول","Asia",51.7,100.4,36.5,127.8],
+        ["KWT","🇰🇼","Kuwait","کویت","Kuwait City","شهر کویت","Asia",4.3,17.8,29.3,47.5],
+        ["KGZ","🇰🇬","Kyrgyzstan","قرقیزستان","Bishkek","بیشکک","Asia",6.6,199.9,41.5,74.6],
+        ["LAO","🇱🇦","Laos","لائوس","Vientiane","وینتیان","Asia",7.4,236.8,17.5,103.0],
+        ["LVA","🇱🇻","Latvia","لتونی","Riga","ریگا","Europe",1.8,64.6,56.9,24.6],
+        ["LBN","🇱🇧","Lebanon","لبنان","Beirut","بیروت","Asia",6.8,10.5,33.9,35.9],
+        ["LSO","🇱🇸","Lesotho","لسوتو","Maseru","ماسرو","Africa",2.1,30.4,-29.6,28.2],
+        ["LBR","🇱🇷","Liberia","لیبریا","Monrovia","مونروویا","Africa",5.1,111.4,6.4,-9.4],
+        ["LBY","🇱🇾","Libya","لیبی","Tripoli","طرابلس","Africa",6.9,1759.5,26.3,17.2],
+        ["LIE","🇱🇮","Liechtenstein","لیختن‌اشتاین","Vaduz","وادوز","Europe",0.04,0.2,47.1,9.6],
+        ["LTU","🇱🇹","Lithuania","لیتوانی","Vilnius","ویلنیوس","Europe",2.8,65.3,55.9,23.9],
+        ["LUX","🇱🇺","Luxembourg","لوکزامبورگ","Luxembourg","لوکزامبورگ","Europe",0.6,2.6,49.8,6.1],
+        ["MDG","🇲🇬","Madagascar","ماداگاسکار","Antananarivo","آنتاناناریوو","Africa",28.2,587.0,-19.3,46.9],
+        ["MWI","🇲🇼","Malawi","مالاوی","Lilongwe","لیلونگوه","Africa",19.6,118.5,-13.3,34.3],
+        ["MYS","🇲🇾","Malaysia","مالزی","Kuala Lumpur","کوالالامپور","Asia",32.4,329.8,4.2,108.1],
+        ["MDV","🇲🇻","Maldives","مالدیو","Malé","ماله","Asia",0.5,0.3,4.2,73.5],
+        ["MLI","🇲🇱","Mali","مالی","Bamako","باماکو","Africa",22.4,1240.2,17.6,-3.3],
+        ["MLT","🇲🇹","Malta","مالت","Valletta","والتا","Europe",0.5,0.3,35.9,14.5],
+        ["MHL","🇲🇭","Marshall Islands","جزایر مارشال","Majuro","ماجورو","Oceania",0.04,0.2,7.1,171.2],
+        ["MRT","🇲🇷","Mauritania","موریتانی","Nouakchott","نواکشوت","Africa",4.7,1030.7,20.3,-10.9],
+        ["MUS","🇲🇺","Mauritius","موریس","Port Louis","پورت لوئیس","Africa",1.3,2.0,-20.3,57.6],
+        ["MEX","🇲🇽","Mexico","مکزیک","Mexico City","مکزیکوسیتی","Americas",126.7,1964.4,23.6,-102.6],
+        ["FSM","🇫🇲","Micronesia","میکرونزی","Palikir","پالیکیر","Oceania",0.1,0.7,6.9,158.2],
+        ["MDA","🇲🇩","Moldova","مولداوی","Chișinău","کیشینائو","Europe",2.6,33.8,47.4,28.5],
+        ["MCO","🇲🇨","Monaco","موناکو","Monaco","موناکو","Europe",0.04,0.002,43.7,7.4],
+        ["MNG","🇲🇳","Mongolia","مغولستان","Ulaanbaatar","اولان‌باتور","Asia",3.3,1564.1,46.9,103.8],
+        ["MNE","🇲🇪","Montenegro","مونتنگرو","Podgorica","پودگوریتسا","Europe",0.6,13.8,42.7,19.4],
+        ["MAR","🇲🇦","Morocco","مراکش","Rabat","رباط","Africa",37.5,446.6,31.8,-7.1],
+        ["MOZ","🇲🇿","Mozambique","موزامبیک","Maputo","ماپوتو","Africa",32.8,801.6,-17.3,35.6],
+        ["MMR","🇲🇲","Myanmar","میانمار","Naypyidaw","نایپیداو","Asia",54.4,676.6,19.1,96.7],
+        ["NAM","🇳🇦","Namibia","نامیبیا","Windhoek","ویندهوک","Africa",2.6,824.3,-22.0,17.1],
+        ["NRU","🇳🇷","Nauru","نائورو","Yaren","یارن","Oceania",0.01,0.02,-0.5,166.9],
+        ["NPL","🇳🇵","Nepal","نپال","Kathmandu","کاتماندو","Asia",29.2,147.2,28.4,84.1],
+        ["NLD","🇳🇱","Netherlands","هلند","Amsterdam","آمستردام","Europe",17.6,41.5,52.3,5.3],
+        ["NZL","🇳🇿","New Zealand","نیوزیلند","Wellington","ولینگتون","Oceania",5.1,270.5,-41.3,172.5],
+        ["NIC","🇳🇮","Nicaragua","نیکاراگوئه","Managua","ماناگوا","Americas",6.7,130.4,12.9,-85.2],
+        ["NER","🇳🇪","Niger","نیجر","Niamey","نیامی","Africa",25.1,1267.0,17.6,8.1],
+        ["NGA","🇳🇬","Nigeria","نیجریه","Abuja","آبوجا","Africa",213.4,923.8,10.4,8.7],
+        ["MKD","🇲🇰","North Macedonia","مقدونیه شمالی","Skopje","اسکوپیه","Europe",2.1,25.7,41.6,21.7],
+        ["NOR","🇳🇴","Norway","نروژ","Oslo","اسلو","Europe",5.4,385.2,64.5,17.9],
+        ["OMN","🇴🇲","Oman","عمان","Muscat","مسقط","Asia",4.5,309.5,21.5,57.5],
+        ["PAK","🇵🇰","Pakistan","پاکستان","Islamabad","اسلام‌آباد","Asia",220.9,881.9,30.4,69.3],
+        ["PLW","🇵🇼","Palau","پالائو","Ngerulmud","نگرولمود","Oceania",0.02,0.5,7.5,134.6],
+        ["PAN","🇵🇦","Panama","پاناما","Panama City","شهر پاناما","Americas",4.4,75.4,8.5,-80.1],
+        ["PNG","🇵🇬","Papua New Guinea","پاپوا گینه نو","Port Moresby","پورت مورزبی","Oceania",9.1,462.8,-6.3,143.9],
+        ["PRY","🇵🇾","Paraguay","پاراگوئه","Asunción","آسونسیون","Americas",7.4,406.8,-23.4,-58.4],
+        ["PER","🇵🇪","Peru","پرو","Lima","لیما","Americas",33.0,1285.2,-9.2,-75.0],
+        ["PHL","🇵🇭","Philippines","فیلیپین","Manila","مانیل","Asia",111.1,300.0,12.9,121.8],
+        ["POL","🇵🇱","Poland","لهستان","Warsaw","ورشو","Europe",37.8,312.7,52.1,19.5],
+        ["PRT","🇵🇹","Portugal","پرتغال","Lisbon","لیسبون","Europe",10.3,92.2,39.6,-8.0],
+        ["QAT","🇶🇦","Qatar","قطر","Doha","دوحه","Asia",2.9,11.6,25.4,51.2],
+        ["ROU","🇷🇴","Romania","رومانی","Bucharest","بخارست","Europe",19.0,238.4,45.8,24.9],
+        ["RUS","🇷🇺","Russia","روسیه","Moscow","مسکو","Europe",144.1,17098.2,60.0,100.0],
+        ["RWA","🇷🇼","Rwanda","رواندا","Kigali","کیگالی","Africa",13.5,26.3,-1.9,29.9],
+        ["KNA","🇰🇳","Saint Kitts and Nevis","سنت کیتس و نویس","Basseterre","باستر","Americas",0.05,0.3,17.4,-62.8],
+        ["LCA","🇱🇨","Saint Lucia","سنت لوسیا","Castries","کاستریس","Americas",0.18,0.6,13.9,-61.0],
+        ["VCT","🇻🇨","Saint Vincent","سنت وینسنت","Kingstown","کینگستاون","Americas",0.1,0.4,13.1,-61.2],
+        ["WSM","🇼🇸","Samoa","ساموآ","Apia","آپیا","Oceania",0.2,2.8,-13.8,-172.1],
+        ["SMR","🇸🇲","San Marino","سان مارینو","San Marino","سان مارینو","Europe",0.03,0.06,43.9,12.5],
+        ["STP","🇸🇹","São Tomé and Príncipe","سائوتومه","São Tomé","سائوتومه","Africa",0.2,1.0,0.2,6.6],
+        ["SAU","🇸🇦","Saudi Arabia","عربستان سعودی","Riyadh","ریاض","Asia",35.0,2149.7,24.2,45.1],
+        ["SEN","🇸🇳","Senegal","سنگال","Dakar","داکار","Africa",17.2,196.7,14.5,-14.5],
+        ["SRB","🇷🇸","Serbia","صربستان","Belgrade","بلگراد","Europe",6.8,77.5,44.0,21.0],
+        ["SYC","🇸🇨","Seychelles","سیشل","Victoria","ویکتوریا","Africa",0.1,0.5,-4.7,55.5],
+        ["SLE","🇸🇱","Sierra Leone","سیرالئون","Freetown","فری‌تاون","Africa",8.1,71.7,8.5,-11.8],
+        ["SGP","🇸🇬","Singapore","سنگاپور","Singapore","سنگاپور","Asia",5.7,0.7,1.4,103.8],
+        ["SVK","🇸🇰","Slovakia","اسلواکی","Bratislava","براتیسلاوا","Europe",5.5,49.0,48.7,19.5],
+        ["SVN","🇸🇮","Slovenia","اسلوونی","Ljubljana","لوبلیانا","Europe",2.1,20.3,46.1,14.9],
+        ["SLB","🇸🇧","Solomon Islands","جزایر سلیمان","Honiara","هونیارا","Oceania",0.7,28.9,-9.6,160.2],
+        ["SOM","🇸🇴","Somalia","سومالی","Mogadishu","موگادیشو","Africa",17.1,637.7,6.1,46.2],
+        ["ZAF","🇿🇦","South Africa","آفریقای جنوبی","Pretoria","پرتوریا","Africa",59.3,1221.0,-29.0,25.1],
+        ["SSD","🇸🇸","South Sudan","سودان جنوبی","Juba","جوبا","Africa",11.4,619.7,7.9,30.2],
+        ["ESP","🇪🇸","Spain","اسپانیا","Madrid","مادرید","Europe",47.4,505.9,40.3,-3.7],
+        ["LKA","🇱🇰","Sri Lanka","سریلانکا","Colombo","کلمبو","Asia",22.2,65.6,7.9,80.8],
+        ["SDN","🇸🇩","Sudan","سودان","Khartoum","خارطوم","Africa",44.9,1861.5,15.5,30.2],
+        ["SUR","🇸🇷","Suriname","سورینام","Paramaribo","پاراماریبو","Americas",0.6,163.8,4.1,-56.0],
+        ["SWE","🇸🇪","Sweden","سوئد","Stockholm","استکهلم","Europe",10.4,450.3,62.0,15.0],
+        ["CHE","🇨🇭","Switzerland","سوئیس","Bern","برن","Europe",8.7,41.3,46.8,8.2],
+        ["SYR","🇸🇾","Syria","سوریه","Damascus","دمشق","Asia",21.3,185.2,35.0,38.3],
+        ["TWN","🇹🇼","Taiwan","تایوان","Taipei","تایپه","Asia",23.6,36.2,23.6,120.9],
+        ["TJK","🇹🇯","Tajikistan","تاجیکستان","Dushanbe","دوشنبه","Asia",9.8,143.1,38.9,71.3],
+        ["TZA","🇹🇿","Tanzania","تانزانیا","Dodoma","دودوما","Africa",63.3,945.1,-6.4,34.9],
+        ["THA","🇹🇭","Thailand","تایلند","Bangkok","بانکوک","Asia",71.6,513.1,15.9,100.9],
+        ["TLS","🇹🇱","Timor-Leste","تیمور شرقی","Dili","دیلی","Asia",1.3,15.0,-8.9,125.7],
+        ["TGO","🇹🇬","Togo","توگو","Lomé","لومه","Africa",8.6,56.8,8.6,1.2],
+        ["TON","🇹🇴","Tonga","تونگا","Nukualofa","نوکوآلوفا","Oceania",0.1,0.7,-21.2,-175.2],
+        ["TTO","🇹🇹","Trinidad and Tobago","ترینیداد و توباگو","Port of Spain","پورت اسپین","Americas",1.4,5.1,10.7,-61.3],
+        ["TUN","🇹🇳","Tunisia","تونس","Tunis","تونس","Africa",11.9,163.6,34.0,9.0],
+        ["TUR","🇹🇷","Turkey","ترکیه","Ankara","آنکارا","Asia",84.3,783.6,39.1,35.2],
+        ["TKM","🇹🇲","Turkmenistan","ترکمنستان","Ashgabat","عشق‌آباد","Asia",6.1,488.1,40.0,59.6],
+        ["TUV","🇹🇻","Tuvalu","تووالو","Funafuti","فونافوتی","Oceania",0.01,0.03,-8.5,179.2],
+        ["UGA","🇺🇬","Uganda","اوگاندا","Kampala","کامپالا","Africa",47.1,241.6,1.4,32.4],
+        ["UKR","🇺🇦","Ukraine","اوکراین","Kyiv","کیف","Europe",43.5,603.7,49.0,31.4],
+        ["ARE","🇦🇪","United Arab Emirates","امارات متحده عربی","Abu Dhabi","ابوظبی","Asia",9.9,83.6,24.5,54.4],
+        ["GBR","🇬🇧","United Kingdom","بریتانیا","London","لندن","Europe",67.2,243.6,54.7,-3.4],
+        ["USA","🇺🇸","United States","ایالات متحده آمریکا","Washington D.C.","واشنگتن دی‌سی","Americas",331.4,9833.5,39.8,-98.6],
+        ["URY","🇺🇾","Uruguay","اروگوئه","Montevideo","مونته‌ویدئو","Americas",3.5,176.2,-32.5,-55.8],
+        ["UZB","🇺🇿","Uzbekistan","ازبکستان","Tashkent","تاشکند","Asia",34.9,448.9,41.4,63.9],
+        ["VUT","🇻🇺","Vanuatu","وانواتو","Port Vila","پورت ویلا","Oceania",0.3,12.2,-15.4,166.9],
+        ["VEN","🇻🇪","Venezuela","ونزوئلا","Caracas","کاراکاس","Americas",28.7,912.1,7.1,-65.7],
+        ["VNM","🇻🇳","Vietnam","ویتنام","Hanoi","هانوی","Asia",97.3,331.2,16.6,107.7],
+        ["YEM","🇾🇪","Yemen","یمن","Sana'a","صنعا","Asia",33.7,527.9,15.9,48.5],
+        ["ZMB","🇿🇲","Zambia","زامبیا","Lusaka","لوساکا","Africa",19.5,752.6,-13.5,27.9],
+        ["ZWE","🇿🇼","Zimbabwe","زیمبابوه","Harare","هراره","Africa",15.9,390.8,-19.0,29.9],
+        ["XKX","🇽🇰","Kosovo","کوزوو","Pristina","پریشتینا","Europe",1.8,10.9,42.6,20.9],
+        ["PSE","🇵🇸","Palestine","فلسطین","Ramallah","رام‌الله","Asia",5.3,6.0,31.9,35.2],
+      ];
+      const WM_BY_ID = Object.fromEntries(WM_COUNTRIES.map(c=>[c[0],c]));
+      const WM_ISO3TO2 = {
+        AFG:"af",ALB:"al",DZA:"dz",AND:"ad",AGO:"ao",ATG:"ag",ARG:"ar",ARM:"am",
+        AUS:"au",AUT:"at",AZE:"az",BHS:"bs",BHR:"bh",BGD:"bd",BRB:"bb",BLR:"by",
+        BEL:"be",BLZ:"bz",BEN:"bj",BTN:"bt",BOL:"bo",BIH:"ba",BWA:"bw",BRA:"br",
+        BRN:"bn",BGR:"bg",BFA:"bf",BDI:"bi",CPV:"cv",KHM:"kh",CMR:"cm",CAN:"ca",
+        CAF:"cf",TCD:"td",CHL:"cl",CHN:"cn",COL:"co",COM:"km",COD:"cd",COG:"cg",
+        CRI:"cr",CIV:"ci",HRV:"hr",CUB:"cu",CYP:"cy",CZE:"cz",DNK:"dk",DJI:"dj",
+        DMA:"dm",DOM:"do",ECU:"ec",EGY:"eg",SLV:"sv",GNQ:"gq",ERI:"er",EST:"ee",
+        SWZ:"sz",ETH:"et",FJI:"fj",FIN:"fi",FRA:"fr",GAB:"ga",GMB:"gm",GEO:"ge",
+        DEU:"de",GHA:"gh",GRC:"gr",GRD:"gd",GTM:"gt",GIN:"gn",GNB:"gw",GUY:"gy",
+        HTI:"ht",HND:"hn",HUN:"hu",ISL:"is",IND:"in",IDN:"id",IRN:"ir",IRQ:"iq",
+        IRL:"ie",ISR:"il",ITA:"it",JAM:"jm",JPN:"jp",JOR:"jo",KAZ:"kz",KEN:"ke",
+        KIR:"ki",PRK:"kp",KOR:"kr",KWT:"kw",KGZ:"kg",LAO:"la",LVA:"lv",LBN:"lb",
+        LSO:"ls",LBR:"lr",LBY:"ly",LIE:"li",LTU:"lt",LUX:"lu",MDG:"mg",MWI:"mw",
+        MYS:"my",MDV:"mv",MLI:"ml",MLT:"mt",MHL:"mh",MRT:"mr",MUS:"mu",MEX:"mx",
+        FSM:"fm",MDA:"md",MCO:"mc",MNG:"mn",MNE:"me",MAR:"ma",MOZ:"mz",MMR:"mm",
+        NAM:"na",NRU:"nr",NPL:"np",NLD:"nl",NZL:"nz",NIC:"ni",NER:"ne",NGA:"ng",
+        MKD:"mk",NOR:"no",OMN:"om",PAK:"pk",PLW:"pw",PAN:"pa",PNG:"pg",PRY:"py",
+        PER:"pe",PHL:"ph",POL:"pl",PRT:"pt",QAT:"qa",ROU:"ro",RUS:"ru",RWA:"rw",
+        KNA:"kn",LCA:"lc",VCT:"vc",WSM:"ws",SMR:"sm",STP:"st",SAU:"sa",SEN:"sn",
+        SRB:"rs",SYC:"sc",SLE:"sl",SGP:"sg",SVK:"sk",SVN:"si",SLB:"sb",SOM:"so",
+        ZAF:"za",SSD:"ss",ESP:"es",LKA:"lk",SDN:"sd",SUR:"sr",SWE:"se",CHE:"ch",
+        SYR:"sy",TWN:"tw",TJK:"tj",TZA:"tz",THA:"th",TLS:"tl",TGO:"tg",TON:"to",
+        TTO:"tt",TUN:"tn",TUR:"tr",TKM:"tm",TUV:"tv",UGA:"ug",UKR:"ua",ARE:"ae",
+        GBR:"gb",USA:"us",URY:"uy",UZB:"uz",VUT:"vu",VEN:"ve",VNM:"vn",YEM:"ye",
+        ZMB:"zm",ZWE:"zw",XKX:"xk",PSE:"ps"
+      };
+      const WM_ISO2TO3 = Object.fromEntries(Object.entries(WM_ISO3TO2).map(([k,v])=>[v,k]));
+      const WM_CONT_COLORS = {
+        light:{ Africa:'#e8a87c',Asia:'#87ceeb',Europe:'#90ee90',Americas:'#f4a460',Oceania:'#dda0dd' },
+        dark: { Africa:'#8b4513',Asia:'#1a5276',Europe:'#1e6b2e',Americas:'#7b4e1c',Oceania:'#6b2fa0' }
+      };
+
+      // ── State ──────────────────────────────────────────────────────────────
+      let _wmTab='map', _wmSVGEl=null, _wmSelected=null, _wmColorMode='continent';
+      let _wmQuizType='flag', _wmQuizQ=null, _wmQuizScore={correct:0,total:0};
+      let _wmLoaded=false;
+      // Pan/zoom state
+      let _wmScale=1, _wmTX=0, _wmTY=0;
+      let _wmDragging=false, _wmDragStart=null, _wmLastPos=null;
+      let _wmPinchDist=null;
+      // SVG native dimensions (matches viewBox)
+      const WM_SVG_W=2754, WM_SVG_H=1398;
+
+      // ── Load SVG inline via fetch ─────────────────────────────────────────
+      async function wmInjectSVG(){
+        const container = document.getElementById('wm-svg-container');
+        const loading   = document.getElementById('wm-map-loading');
+        const wrap      = document.getElementById('wm-svg-wrap');
+        if(!container || _wmLoaded) return;
+        try {
+          const res = await fetch('static/lib/world.svg');
+          if(!res.ok) throw new Error('HTTP '+res.status);
+          let svgText = await res.text();
+          // Strip XML declaration
+          svgText = svgText.replace(/<\?xml[^?]*\?>\s*/,'');
+          // Ensure style block is controllable
+          svgText = svgText.replace(/<style[^>]*>[\s\S]*?<\/style>/,
+            '<style id="wm-dynamic-style"></style>');
+          // Ensure viewBox exists and SVG fills container via CSS
+          svgText = svgText.replace(/<svg([^>]*)>/, (m, attrs) => {
+            // Remove fixed width/height attrs so CSS controls sizing
+            attrs = attrs.replace(/\s*width="[^"]*"/, '').replace(/\s*height="[^"]*"/, '');
+            // Add viewBox if missing
+            if (!attrs.includes('viewBox')) attrs += ' viewBox="0 0 2754 1398"';
+            // Remove any existing style attr on SVG root (we set it via container)
+            attrs = attrs.replace(/\s*style="[^"]*"/, '');
+            return `<svg${attrs} style="display:block;width:100%;height:auto;transform-origin:0 0">`;
+          });
+          container.innerHTML = svgText;
+          _wmSVGEl = container.querySelector('svg');
+          _wmLoaded = true;
+          if(loading) loading.style.display='none';
+          wmApplyColors();
+          wmResetView();
+          wmBindEvents(wrap);
+        } catch(e) {
+          if(loading) loading.textContent='⚠️ خطا: '+e.message+' — فایل world.svg را در static/lib/ قرار دهید';
+        }
+      }
+
+      // ── Pan / Zoom ─────────────────────────────────────────────────────────
+      // Strategy: the SVG scales to fill wrap width via viewBox + CSS width:100%
+      // We then apply an ADDITIONAL transform on the SVG element for pan/zoom
+      // _wmScale starts at 1.0 (meaning "fit to wrap width"), _wmTX/_wmTY are pan offsets
+
+      function wmSetTransform(){
+        if(!_wmSVGEl) return;
+        _wmSVGEl.style.transform = `translate(${_wmTX}px,${_wmTY}px) scale(${_wmScale})`;
+      }
+
+      function wmResetView(){
+        _wmScale = 1;
+        _wmTX = 0;
+        _wmTY = 0;
+        wmSetTransform();
+      }
+
+      function wmZoom(factor, cx, cy){
+        const wrap = document.getElementById('wm-svg-wrap');
+        if(!wrap || !_wmSVGEl) return;
+        const ww = wrap.clientWidth;
+        cx = cx ?? ww/2;
+        cy = cy ?? (wrap.clientHeight||320)/2;
+        const newScale = Math.max(0.5, Math.min(20, _wmScale*factor));
+        const ratio = newScale/_wmScale;
+        _wmTX = cx - ratio*(cx - _wmTX);
+        _wmTY = cy - ratio*(cy - _wmTY);
+        _wmScale = newScale;
+        wmSetTransform();
+      }
+
+      function wmBindEvents(wrap){
+        if(!wrap) return;
+        const tooltip = document.getElementById('wm-tooltip');
+
+        // Mouse wheel zoom
+        wrap.addEventListener('wheel', e=>{
+          e.preventDefault();
+          const rect = wrap.getBoundingClientRect();
+          wmZoom(e.deltaY<0?1.15:1/1.15, e.clientX-rect.left, e.clientY-rect.top);
+        }, {passive:false});
+
+        // Mouse drag
+        wrap.addEventListener('mousedown', e=>{
+          if(e.button!==0) return;
+          _wmDragging=true; _wmDragStart={x:e.clientX-_wmTX, y:e.clientY-_wmTY};
+          wrap.style.cursor='grabbing';
+        });
+        window.addEventListener('mousemove', e=>{
+          if(!_wmDragging) return;
+          _wmTX=e.clientX-_wmDragStart.x; _wmTY=e.clientY-_wmDragStart.y;
+          wmSetTransform();
+        });
+        window.addEventListener('mouseup', ()=>{
+          _wmDragging=false;
+          if(wrap) wrap.style.cursor='grab';
+        });
+
+        // Touch: drag + pinch-zoom
+        wrap.addEventListener('touchstart', e=>{
+          if(e.touches.length===1){
+            _wmDragStart={x:e.touches[0].clientX-_wmTX, y:e.touches[0].clientY-_wmTY};
+            _wmPinchDist=null;
+          } else if(e.touches.length===2){
+            _wmPinchDist=Math.hypot(
+              e.touches[0].clientX-e.touches[1].clientX,
+              e.touches[0].clientY-e.touches[1].clientY);
+          }
+        },{passive:true});
+        wrap.addEventListener('touchmove', e=>{
+          e.preventDefault();
+          if(e.touches.length===1&&_wmDragStart){
+            _wmTX=e.touches[0].clientX-_wmDragStart.x;
+            _wmTY=e.touches[0].clientY-_wmDragStart.y;
+            wmSetTransform();
+          } else if(e.touches.length===2&&_wmPinchDist!==null){
+            const rect=wrap.getBoundingClientRect();
+            const cx=(e.touches[0].clientX+e.touches[1].clientX)/2-rect.left;
+            const cy=(e.touches[0].clientY+e.touches[1].clientY)/2-rect.top;
+            const dist=Math.hypot(
+              e.touches[0].clientX-e.touches[1].clientX,
+              e.touches[0].clientY-e.touches[1].clientY);
+            wmZoom(dist/_wmPinchDist, cx, cy);
+            _wmPinchDist=dist;
+          }
+        },{passive:false});
+        wrap.addEventListener('touchend',()=>{ _wmDragStart=null; _wmPinchDist=null; });
+
+        // Country click & hover — delegate to SVG paths
+        if(_wmSVGEl){
+          _wmSVGEl.addEventListener('mousemove', e=>{
+            const el = e.target.closest('[class]');
+            const iso2 = wmGetISO2FromEl(el);
+            if(iso2&&tooltip){
+              const iso3=WM_ISO2TO3[iso2];
+              const c=iso3?WM_BY_ID[iso3]:null;
+              if(c){
+                const rect=wrap.getBoundingClientRect();
+                tooltip.textContent=c[1]+' '+c[3];
+                tooltip.style.left=(e.clientX-rect.left+14)+'px';
+                tooltip.style.top=(e.clientY-rect.top-34)+'px';
+                tooltip.style.display='block';
+                if(iso2!==_wmSelected) el.style.opacity='0.75';
+              }
+            } else {
+              if(tooltip) tooltip.style.display='none';
+              // Reset opacity on non-selected
+              const prev=document.querySelector('#wm-svg-container [data-hovered]');
+              if(prev){ prev.style.opacity=''; delete prev.dataset.hovered; }
+            }
+          });
+          _wmSVGEl.addEventListener('mouseleave',()=>{ if(tooltip) tooltip.style.display='none'; });
+          _wmSVGEl.addEventListener('click', e=>{
+            const el = e.target.closest('[class]');
+            const iso2 = wmGetISO2FromEl(el);
+            // Deselect old
+            if(_wmSelected){ wmRecolorISO2(_wmSelected); }
+            if(iso2){
+              _wmSelected=iso2;
+              wmHighlightISO2(iso2);
+              const iso3=WM_ISO2TO3[iso2];
+              const c=iso3?WM_BY_ID[iso3]:null;
+              if(c) wmShowCountryInfo(c);
+            } else {
+              _wmSelected=null;
+              document.getElementById('wm-country-info').style.display='none';
+            }
+          });
+        }
+      }
+
+      function wmGetISO2FromEl(el){
+        if(!el) return null;
+        const cls=(el.getAttribute('class')||'').split(' ');
+        const hasLand=cls.some(c=>c==='landxx'||c==='circlexx');
+        if(!hasLand) return null;
+        return cls.find(c=>c.length===2&&/^[a-z]{2}$/.test(c)&&c!=='eu')||null;
+      }
+
+      // ── Colors ─────────────────────────────────────────────────────────────
+      function wmGetTheme(){
+        return (document.documentElement.getAttribute('data-theme')==='dark'||
+          (!document.documentElement.getAttribute('data-theme')&&
+           window.matchMedia('(prefers-color-scheme:dark)').matches)) ? 'dark':'light';
+      }
+
+      function wmApplyColors(){
+        if(!_wmSVGEl) return;
+        const theme=wmGetTheme();
+        const isDark=theme==='dark';
+
+        // Update dynamic style block: ocean bg + default land color
+        const styleEl=_wmSVGEl.querySelector('#wm-dynamic-style')||_wmSVGEl.querySelector('style');
+        if(styleEl){
+          const oceanColor = isDark?'#0d2137':'#a8d0e6';
+          const defaultLand= isDark?'#2a4a5e':'#c8d8c0';
+          const strokeColor= isDark?'#0a1925':'#ffffff';
+          styleEl.textContent=`
+            svg { background:${oceanColor}; }
+            .landxx, .circlexx { fill:${defaultLand}; stroke:${strokeColor}; stroke-width:0.5px; fill-rule:evenodd; cursor:pointer; transition:fill 0.15s; }
+            .coastxx { stroke-width:0.3px; }
+            .subxx,.limitxx { fill:none; stroke:${isDark?'#1a3a52':'#aaaaaa'}; stroke-width:0.4px; }
+            .antxx { display:none; }
+            .oceanxx,.graticulexx,.noxx { display:none; }
+          `;
+        }
+
+        // Apply per-country fills
+        const colors=WM_CONT_COLORS[theme];
+        WM_COUNTRIES.forEach(c=>{
+          const [iso3,,,,,,cont,,area,,,]=c;
+          const iso2=WM_ISO3TO2[iso3]; if(!iso2) return;
+          const els=wmGetElsByISO2(iso2);
+          let fill;
+          if(_wmColorMode==='continent') fill=colors[cont];
+          else if(_wmColorMode==='pop'){
+            const p=c[7];
+            fill=p>500?'#0d47a1':p>100?'#1565c0':p>50?'#1976d2':p>20?'#1e88e5':p>5?'#42a5f5':p>1?'#90caf9':'#bbdefb';
+          } else if(_wmColorMode==='area'){
+            const a=c[8];
+            fill=a>5000?'#1b5e20':a>1000?'#2e7d32':a>500?'#388e3c':a>100?'#43a047':a>50?'#66bb6a':a>10?'#a5d6a7':'#c8e6c9';
+          }
+          if(fill) els.forEach(el=>{ el.style.fill=fill; el.style.stroke=isDark?'#0a1925':'#ffffff'; });
+        });
+
+        // Re-apply selection
+        if(_wmSelected) wmHighlightISO2(_wmSelected);
+      }
+
+      function wmGetElsByISO2(iso2){
+        if(!_wmSVGEl||!iso2) return [];
+        return Array.from(_wmSVGEl.querySelectorAll(`[class~="${iso2}"]`)).filter(el=>{
+          const cls=el.getAttribute('class')||'';
+          return cls.includes('landxx')||cls.includes('circlexx');
+        });
+      }
+
+      function wmHighlightISO2(iso2){
+        wmGetElsByISO2(iso2).forEach(el=>{
+          el.style.fill='#e53935';
+          el.style.stroke='#b71c1c';
+          el.style.strokeWidth='1.5px';
+        });
+      }
+
+      function wmRecolorISO2(iso2){
+        if(!iso2) return;
+        const iso3=WM_ISO2TO3[iso2];
+        const c=iso3?WM_BY_ID[iso3]:null;
+        const theme=wmGetTheme(); const isDark=theme==='dark';
+        const colors=WM_CONT_COLORS[theme];
+        const els=wmGetElsByISO2(iso2);
+        let fill=isDark?'#2a4a5e':'#c8d8c0';
+        if(c){
+          const [,,,,,, cont,,area]=c;
+          if(_wmColorMode==='continent') fill=colors[cont]||fill;
+          else if(_wmColorMode==='pop'){
+            const p=c[7];
+            fill=p>500?'#0d47a1':p>100?'#1565c0':p>50?'#1976d2':p>20?'#1e88e5':p>5?'#42a5f5':p>1?'#90caf9':'#bbdefb';
+          } else if(_wmColorMode==='area'){
+            const a=c[8];
+            fill=a>5000?'#1b5e20':a>1000?'#2e7d32':a>500?'#388e3c':a>100?'#43a047':a>50?'#66bb6a':a>10?'#a5d6a7':'#c8e6c9';
+          }
+        }
+        els.forEach(el=>{ el.style.fill=fill; el.style.stroke=isDark?'#0a1925':'#ffffff'; el.style.strokeWidth='0.5px'; });
+      }
+
+      function wmSetColor(mode){
+        _wmColorMode=mode;
+        ['continent','pop','area','plain'].forEach(k=>{
+          const el=document.getElementById('wm-color-'+k);
+          if(!el) return;
+          el.className=k===mode?'btn btn-filled':'btn btn-tonal';
+          el.style.fontSize='11px'; el.style.padding='3px 9px';
+        });
+        wmApplyColors();
+      }
+
+      // ── Country info ───────────────────────────────────────────────────────
+      function wmShowCountryInfo(c){
+        if(!c){document.getElementById('wm-country-info').style.display='none';return;}
+        const [id,flag,nameEN,nameFA,capEN,capFA,cont,pop,area]=c;
+        const contFA={Africa:'آفریقا',Asia:'آسیا',Europe:'اروپا',Americas:'آمریکا',Oceania:'اقیانوسیه'};
+        document.getElementById('wm-ci-flag').textContent=flag;
+        document.getElementById('wm-ci-name').textContent=nameFA+'  '+nameEN;
+        document.getElementById('wm-ci-capital').textContent='پایتخت: '+capFA+' ('+capEN+')';
+        document.getElementById('wm-ci-details').innerHTML=`
+          <div class="data-row"><span class="data-row__key">قاره</span><span class="data-row__val">${contFA[cont]||cont}</span></div>
+          <div class="data-row"><span class="data-row__key">جمعیت</span><span class="data-row__val">${pop>=1?pop.toFixed(1)+' میلیون':(pop*1000).toFixed(0)+' هزار'}</span></div>
+          <div class="data-row"><span class="data-row__key">مساحت</span><span class="data-row__val">${area.toLocaleString('fa-IR')} هزار km²</span></div>
+          <div class="data-row"><span class="data-row__key">کد ISO</span><span class="data-row__val" style="direction:ltr">${id} / ${WM_ISO3TO2[id]||'—'}</span></div>`;
+        document.getElementById('wm-country-info').style.display='';
+      }
+
+      // ── Search ──────────────────────────────────────────────────────────────
+      function wmSearchCountry(){
+        const q=(document.getElementById('wm-search').value||'').toLowerCase().trim();
+        if(!q) return;
+        const found=WM_COUNTRIES.find(c=>c[2].toLowerCase().includes(q)||c[3].includes(q));
+        if(found){
+          if(_wmSelected) wmRecolorISO2(_wmSelected);
+          const iso2=WM_ISO3TO2[found[0]];
+          _wmSelected=iso2;
+          wmHighlightISO2(iso2);
+          wmShowCountryInfo(found);
+        }
+      }
+
+      // ── Tabs ────────────────────────────────────────────────────────────────
+      function wmSetTab(t){
+        _wmTab=t;
+        ['map','flags','quiz','proj'].forEach(id=>{
+          const panel=document.getElementById('wm-panel-'+id);
+          const btn=document.getElementById('wm-tab-'+id);
+          if(panel) panel.style.display=id===t?'':'none';
+          if(btn) btn.className=id===t?'btn btn-filled':'btn btn-tonal';
+        });
+        if(t==='map'){
+          if(!_wmLoaded) wmInjectSVG();
+          else { wmApplyColors(); wmResetView(); }
+        }
+        if(t==='flags') wmRenderFlags('');
+        if(t==='proj')  wmRenderProjInfo();
+      }
+
+      // ── Flags ────────────────────────────────────────────────────────────────
+      function wmRenderFlags(q){
+        const grid=document.getElementById('wm-flags-grid'); if(!grid) return;
+        const ql=q.toLowerCase();
+        const filtered=q?WM_COUNTRIES.filter(c=>c[2].toLowerCase().includes(ql)||c[3].includes(q)||c[1].includes(q)):WM_COUNTRIES;
+        grid.innerHTML=filtered.map(c=>`
+          <div onclick="wmFlagClick('${c[0]}')"
+            style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;
+            border-radius:10px;cursor:pointer;background:var(--m3-surface-container);transition:background .15s"
+            onmouseenter="this.style.background='var(--m3-surface-container-high)'"
+            onmouseleave="this.style.background='var(--m3-surface-container)'">
+            <div style="font-size:2rem;line-height:1.2">${c[1]}</div>
+            <div style="font-size:10px;text-align:center;color:var(--m3-on-surface-variant);word-break:break-word;line-height:1.3">${c[3]}</div>
+          </div>`).join('');
+      }
+      function wmFlagSearch(){ wmRenderFlags(document.getElementById('wm-flag-search').value||''); }
+      function wmFlagClick(iso3){
+        wmSetTab('map');
+        const c=WM_BY_ID[iso3]; if(!c) return;
+        const iso2=WM_ISO3TO2[iso3];
+        if(_wmSelected) wmRecolorISO2(_wmSelected);
+        _wmSelected=iso2;
+        wmHighlightISO2(iso2);
+        wmShowCountryInfo(c);
+        document.getElementById('wm-search').value=c[3];
+      }
+
+      // ── Quiz ─────────────────────────────────────────────────────────────────
+      function wmQuizSetType(t){
+        _wmQuizType=t;
+        ['flag','country','capital'].forEach(k=>{
+          const el=document.getElementById('wm-qt-'+k);
+          if(el) el.className=k===t?'btn btn-filled':'btn btn-tonal';
+        });
+        if(_wmQuizQ) wmQuizNext();
+      }
+      function wmQuizStart(){
+        _wmQuizScore={correct:0,total:0};
+        document.getElementById('wm-quiz-score').style.display='';
+        wmQuizNext();
+      }
+      function wmQuizNext(){
+        const pool=[...WM_COUNTRIES];
+        const correct=pool[Math.floor(Math.random()*pool.length)];
+        _wmQuizQ=correct;
+        const others=pool.filter(c=>c[0]!==correct[0]).sort(()=>Math.random()-0.5).slice(0,3);
+        const choices=[...others,correct].sort(()=>Math.random()-0.5);
+        let question='', getAns;
+        if(_wmQuizType==='flag'){
+          question=`<div style="font-size:4.5rem;line-height:1.2;margin-bottom:10px">${correct[1]}</div><div style="font-size:14px;color:var(--m3-on-surface-variant)">این پرچم متعلق به کدام کشور است؟</div>`;
+          getAns=c=>c[3];
+        } else if(_wmQuizType==='country'){
+          question=`<div style="font-size:1.4rem;font-weight:700;margin-bottom:8px">${correct[3]}</div><div style="font-size:13px;color:var(--m3-on-surface-variant)">پایتخت این کشور کجاست؟</div>`;
+          getAns=c=>c[5];
+        } else {
+          question=`<div style="font-size:1.3rem;font-weight:700;margin-bottom:8px">${correct[5]}</div><div style="font-size:13px;color:var(--m3-on-surface-variant)">این پایتخت متعلق به کدام کشور است؟</div>`;
+          getAns=c=>c[3];
+        }
+        const correctAns=getAns(correct);
+        const safe=s=>s.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        const btns=choices.map(c=>`<button onclick="wmQuizAnswer(this,'${safe(getAns(c))}','${safe(correctAns)}')"
+          style="padding:10px 12px;border-radius:10px;border:1.5px solid var(--m3-outline-variant);
+          background:var(--m3-surface-container);cursor:pointer;font-size:13px;
+          font-family:Vazirmatn,sans-serif;width:100%;text-align:center;transition:background .15s"
+          onmouseenter="if(!this.disabled)this.style.background='var(--m3-surface-container-high)'"
+          onmouseleave="if(!this.disabled)this.style.background='var(--m3-surface-container)'">${getAns(c)}</button>`).join('');
+        document.getElementById('wm-quiz-card').innerHTML=`
+          <div style="text-align:center">${question}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%">${btns}</div>`;
+        document.getElementById('wm-quiz-score').textContent=`امتیاز: ${_wmQuizScore.correct} از ${_wmQuizScore.total}`;
+      }
+      function wmQuizAnswer(btn,chosen,correct){
+        _wmQuizScore.total++;
+        btn.parentElement.querySelectorAll('button').forEach(b=>{b.disabled=true;b.onmouseenter=null;});
+        if(chosen===correct){
+          _wmQuizScore.correct++;
+          btn.style.cssText+=';background:#4caf50!important;color:#fff;border-color:#388e3c';
+        } else {
+          btn.style.cssText+=';background:#f44336!important;color:#fff;border-color:#c62828';
+          btn.parentElement.querySelectorAll('button').forEach(b=>{if(b.textContent.trim()===correct)b.style.cssText+=';background:#4caf50!important;color:#fff;';});
+        }
+        document.getElementById('wm-quiz-score').textContent=`امتیاز: ${_wmQuizScore.correct} از ${_wmQuizScore.total}`;
+        setTimeout(wmQuizNext,1300);
+      }
+
+      // ── Projection info ───────────────────────────────────────────────────
+      const WM_PROJ_INFO=[
+        {name:"Mercator (1569) — مرکاتور",desc:"برای ناوبری دریایی طراحی شد. زوایا و شکل کشورها دقیقاً حفظ می‌شوند (conformal) اما مساحت مناطق قطبی به‌شدت بزرگ‌نمایی می‌شود. گرینلند به اندازه آفریقا به‌نظر می‌رسد در حالی که ۱۴ برابر کوچک‌تر است. Google Maps از این تصویرگری استفاده می‌کند.",pros:"✅ ناوبری دقیق  ✅ شکل کشورها درست است",cons:"❌ مساحت قطب‌ها تحریف شدید دارد",use:"📌 نقشه‌های ناوبری، اینترنت"},
+        {name:"Gall-Peters (1855/1974) — گال-پیترز",desc:"مساحت تمام کشورها نسبت به هم دقیق است. آفریقا بسیار بزرگ‌تر از اروپا نمایش داده می‌شود که واقع‌بینانه‌تر است. اما شکل کشورها کشیده و مسطح می‌شود. پیام سیاسی آن (برابری کشورهای جنوب با شمال) مشهور است.",pros:"✅ مساحت دقیق  ✅ پیام برابری",cons:"❌ شکل کشورها کشیده و ناطبیعی است",use:"📌 نقشه‌های سیاسی و سازمان‌های بین‌المللی"},
+        {name:"Robinson (1963) — رابینسون",desc:"توسط آرتور رابینسون برای National Geographic طراحی شد. نه کاملاً equal-area است و نه conformal، اما تعادلی زیبا بین مساحت و شکل ایجاد می‌کند. قطب‌ها به‌صورت خط نشان داده می‌شوند.",pros:"✅ ظاهر طبیعی و زیبا  ✅ تعادل خوب",cons:"❌ هیچ ویژگی کاملاً دقیق نیست",use:"📌 نقشه‌های عمومی و کتاب‌های درسی"},
+        {name:"Equal Earth (2018) — زمین برابر",desc:"جدیدترین تصویرگری علمی (۲۰۱۸). مساحت تمام کشورها دقیق است و شکل آن‌ها طبیعی‌تر از Gall-Peters است. جایگزین بهتری برای نقشه‌های آموزشی است.",pros:"✅ مساحت دقیق  ✅ شکل طبیعی‌تر",cons:"❌ شکل کشورها کاملاً دقیق نیست",use:"📌 نقشه‌های آموزشی و اینفوگرافیک"},
+        {name:"Winkel Tripel (1921) — وینکل تریپل",desc:"نام «Tripel» به سه هدف اشاره دارد: کاهش خطا در مساحت، فاصله و شکل. از ۱۹۹۸ نقشه رسمی National Geographic است و توسط بسیاری از متخصصان بهترین تصویرگری دو‌بُعدی شناخته می‌شود.",pros:"✅ کمترین خطای کلی  ✅ تعادل سه‌گانه",cons:"❌ نه conformal نه equal-area",use:"📌 نقشه‌های آموزشی مدرن"},
+      ];
+      function wmRenderProjInfo(){
+        const el=document.getElementById('wm-proj-cards'); if(!el) return;
+        el.innerHTML=`<p style="font-size:13px;color:var(--m3-on-surface-variant);margin-bottom:12px;line-height:1.75">هیچ تصویرگری نمی‌تواند هم‌زمان مساحت، فرم، فاصله و جهت را بدون تحریف حفظ کند. نقشه‌ای که روزانه می‌بینید (Mercator) هیچ‌کدام از قاره‌ها را به اندازه واقعی‌شان نشان نمی‌دهد.</p>`+
+          WM_PROJ_INFO.map(p=>`<div style="padding:14px;background:var(--m3-surface-container);border-radius:12px">
+            <div style="font-weight:700;font-size:0.95rem;margin-bottom:6px">${p.name}</div>
+            <div style="font-size:13px;line-height:1.75;color:var(--m3-on-surface-variant);margin-bottom:8px">${p.desc}</div>
+            <div style="font-size:12px;display:flex;flex-direction:column;gap:3px">${p.pros}<br>${p.cons}<br>${p.use}</div>
+          </div>`).join('');
+      }
+
+
+
       //  ROMAN NUMERALS
       // ══════════════════════════════════════════════════════
       function decToRoman() {
