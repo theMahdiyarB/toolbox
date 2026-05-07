@@ -8692,7 +8692,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 7.7 - ۱۴۰۵/۰۲/۱۶
+          ℹ️ نسخه 7.8 - ۱۴۰۵/۰۲/۱۷
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -14868,7 +14868,7 @@ self.onmessage=function(e){
         const wrap      = document.getElementById('wm-svg-wrap');
         if(!container || _wmLoaded) return;
         try {
-          const res = await fetch('static/lib/world.svg');
+          const res = await fetch('static/world.svg');
           if(!res.ok) throw new Error('HTTP '+res.status);
           let svgText = await res.text();
           // Strip XML declaration
@@ -14940,14 +14940,17 @@ self.onmessage=function(e){
           wmZoom(e.deltaY<0?1.15:1/1.15, e.clientX-rect.left, e.clientY-rect.top);
         }, {passive:false});
 
-        // Mouse drag
+        // Mouse drag — track if we actually moved to avoid click-after-drag false triggers
+        let _wmDragMoved = false;
         wrap.addEventListener('mousedown', e=>{
           if(e.button!==0) return;
-          _wmDragging=true; _wmDragStart={x:e.clientX-_wmTX, y:e.clientY-_wmTY};
+          _wmDragging=true; _wmDragMoved=false;
+          _wmDragStart={x:e.clientX-_wmTX, y:e.clientY-_wmTY};
           wrap.style.cursor='grabbing';
         });
         window.addEventListener('mousemove', e=>{
           if(!_wmDragging) return;
+          _wmDragMoved=true;
           _wmTX=e.clientX-_wmDragStart.x; _wmTY=e.clientY-_wmDragStart.y;
           wmSetTransform();
         });
@@ -15011,6 +15014,8 @@ self.onmessage=function(e){
           });
           _wmSVGEl.addEventListener('mouseleave',()=>{ if(tooltip) tooltip.style.display='none'; });
           _wmSVGEl.addEventListener('click', e=>{
+            // Ignore if user was dragging
+            if(_wmDragMoved) { _wmDragMoved=false; return; }
             const el = e.target.closest('[class]');
             const iso2 = wmGetISO2FromEl(el);
             // Deselect old
@@ -15049,14 +15054,13 @@ self.onmessage=function(e){
         const theme=wmGetTheme();
         const isDark=theme==='dark';
 
-        // Update dynamic style block: ocean bg + default land color
+        // Update dynamic style block — scoped inside the SVG document, no global leakage
         const styleEl=_wmSVGEl.querySelector('#wm-dynamic-style')||_wmSVGEl.querySelector('style');
         if(styleEl){
-          const oceanColor = isDark?'#0d2137':'#a8d0e6';
           const defaultLand= isDark?'#2a4a5e':'#c8d8c0';
           const strokeColor= isDark?'#0a1925':'#ffffff';
+          // No svg{background} here — the wrap container provides the ocean color
           styleEl.textContent=`
-            svg { background:${oceanColor}; }
             .landxx, .circlexx { fill:${defaultLand}; stroke:${strokeColor}; stroke-width:0.5px; fill-rule:evenodd; cursor:pointer; transition:fill 0.15s; }
             .coastxx { stroke-width:0.3px; }
             .subxx,.limitxx { fill:none; stroke:${isDark?'#1a3a52':'#aaaaaa'}; stroke-width:0.4px; }
@@ -15064,6 +15068,11 @@ self.onmessage=function(e){
             .oceanxx,.graticulexx,.noxx { display:none; }
           `;
         }
+        // Set wrap background = ocean color (no SVG background needed)
+        const wrapEl = document.getElementById('wm-svg-wrap');
+        if(wrapEl) wrapEl.style.background = isDark ? '#0d2137' : '#a8d0e6';
+        // Ensure SVG itself is transparent
+        if(_wmSVGEl) _wmSVGEl.style.background = 'none';
 
         // Apply per-country fills
         const colors=WM_CONT_COLORS[theme];
@@ -15177,11 +15186,22 @@ self.onmessage=function(e){
         });
         if(t==='map'){
           if(!_wmLoaded) wmInjectSVG();
-          else { wmApplyColors(); wmResetView(); }
+          else { wmApplyColors(); }
         }
         if(t==='flags') wmRenderFlags('');
         if(t==='proj')  wmRenderProjInfo();
       }
+
+      // Re-apply colors when theme changes (dark/light toggle)
+      (()=>{
+        const obs = new MutationObserver(muts=>{
+          if(muts.some(m=>m.attributeName==='data-theme') && _wmLoaded) wmApplyColors();
+        });
+        obs.observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+        window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change', ()=>{
+          if(_wmLoaded) wmApplyColors();
+        });
+      })();
 
       // ── Flags ────────────────────────────────────────────────────────────────
       function wmRenderFlags(q){
@@ -16095,7 +16115,6 @@ self.onmessage=function(e){
         updateGrad();
         updateShad();
         updateBR();
-        calcTip();
         calcAspect();
         notesRender();
         loadDevice();
