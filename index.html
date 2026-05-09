@@ -14868,7 +14868,7 @@ self.onmessage=function(e){
         const wrap      = document.getElementById('wm-svg-wrap');
         if(!container || _wmLoaded) return;
         try {
-          const res = await fetch('static/lib/world.svg');
+          const res = await fetch('static/world.svg');
           if(!res.ok) throw new Error('HTTP '+res.status);
           let svgText = await res.text();
           // Strip XML declaration
@@ -16115,7 +16115,7 @@ self.onmessage=function(e){
         updateGrad();
         updateShad();
         updateBR();
-        calcTip();
+        // dangInit called lazily when tip tool is opened
         calcAspect();
         notesRender();
         loadDevice();
@@ -21075,6 +21075,20 @@ self.onmessage=function(e){
         loadImg('horizon', SPR_HORIZON);
         loadImg('text',    SPR_TEXT);
         loadImg('restart', SPR_RESTART);
+
+        // ── Physics & dimension constants ───────────────────────────────────
+        const SPEED_INIT  = 6;
+        const SPEED_MAX   = 13;
+        const ACCEL       = 0.001;
+        const GRAVITY     = 0.6;
+        const JUMP_VEL    = -10;
+        const DROP_COEFF  = 3;
+        const MIN_JUMP_H  = 30;
+        const BOTTOM_PAD  = 10;
+        const DINO_X      = 25;
+        const DINO_W      = 44, DINO_H = 47;
+        const DUCK_W      = 44, DUCK_H = 28;   // squashed duck hitbox
+        const GROUND_LINE = H - BOTTOM_PAD - DINO_H;
 
         // ── Game state ──────────────────────────────────────────────────────
         let state = 'idle';  // idle | playing | over
