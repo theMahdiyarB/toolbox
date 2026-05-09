@@ -21010,42 +21010,66 @@ self.onmessage=function(e){
 
       // ── T-REX ──────────────────────────────────────────────
       function mgTrex(area) {
-        // ── Chrome Dino — sprite-based faithful implementation ──────────────
+        // ══ Chrome T-Rex — faithful sprite-based implementation ══════════════
         const W = 600, H = 150;
-        const FPS = 60;
-        const GROUND_Y = H - 10;  // y of ground line
 
-        // Sprite images (1x, from Chrome's offline page)
-        const SPR_TREX    = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQgAAAAvAgMAAABiRrxWAAAADFBMVEX///9TU1P39/f///+TS9URAAAAAXRSTlMAQObYZgAAAPpJREFUeF7d0jFKRkEMhdGLMM307itNLALyVmHvJuzTDMjdn72E95PGFEZSmeoU4YMMgxhskvQec8YSVFX1NhGcS5ywtbmC8khcZeKq+ZWJ4F8Sr2+ZCErjkJFEfcjAc/6/BMlfcz6xHdhRthYzIZhIHMcTVY1scUUiAphK8CMSPUbieTBhvD9Lj0vyV4wklEGzHpciKGOJoBp7XDcFs4kWxxM7Ey3iZ8JbzASAvMS7XLOJHTTvEkEZSeQl7DMuwVyCasqK5+XzQRYLUJlMbPXjFcn3m8eKBSjWZMJwvGIOvViAzCbUj1VEDoqFOEQGE3SyInJQLOQMJL4B7enP1UbLXJQAAAAASUVORK5CYII=';
-        const SPR_CACTUS_S= 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAAAjCAMAAABRlI+PAAAADFBMVEX////////39/dTU1PhglcSAAAAAXRSTlMAQObYZgAAAPNJREFUeF7tlkEKwzAMBLXr//+5iQhU7gRRQkyhZI+DhwH74jhmO+oIJBVwURljuAXagG5QqkSgBLqg3JnxJ1Cb8SmQ3o6gpO85owGlOB4m2BNKJ11BSd01owGlOHkcIAuHkz6UNpPKgozPM54dADHjJuNhZiJxdQCQgZJeBczgCAAy3yhPJvcnmdC9mZwBIsQMFV5AkzHBNknFgcKM+oyDIFcfCAoy03m+jSMIcmoVZkKqSjr1fghyahRmoKRUHYLiSI1SMlCq5CDgX6BXmKkfn+oQ0KEyyrzoy8GbXJ9xrM/YjhUZgl9nnsyTCe9rgSRdV15CwRcIEu8GGQAAAABJRU5ErkJggg==';
-        const SPR_CACTUS_L= 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAyCAMAAACJUtIoAAAACVBMVEX////39/dTU1OabbyfAAAAAXRSTlMAQObYZgAAAXhJREFUeF7t2NGqAjEMANGM///RlwvaYQndULuFPJgHUYaEI6IPhgNAOA8HZ+3U6384F5y1U6YzAZTWG+dZamnFEstBFtCKJZSHWMADLJ18z+JqpQeLdKoDC8siC5iFCQs4znIxB5B1t6F3lQWkL4N0JsF+u6GXJdbI+FKW+yWr3lhgCZ2VSag3Nlk/FnRkIRbasLCO0oulikMsvmGpeiGLZ1jOMgtIP5bODivYYUXEIVbwFCt4khVssRgsgidZwQaLd2A8m7MYLGTl4KeQQs2y4kMAMGGlmQViDIb5O6xZnnLD485dIBzqDSE1yyFdL4Iqu4XJqUUWl/NVAFSZq1P6a5aqbAUM2epQbBioWflUBABiUyhYyZoCBev8XyMAObDNOhOAfiyxmHU0YNlldGAphGjFCjA3YkUn1o/1Y3EkZFZ5isCC6NUgwDBn1RuXH96doNfAhDXfsIyJ2AnolcCVhay0kcYbW0HvCO8OwIcJ3GzkORpkFuUP/1Ec8FW1qJkAAAAASUVORK5CYII=';
-        const SPR_CLOUD   = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAOCAQAAAD6HOaKAAAAU0lEQVR4XrWSsQkAQAgD3X9El/ELixQpJHCfdApnUCtXz7o49cgagaGPaq4rIwAP9s/C7R7UX3inJ0BDb6qWDC7ScOR/QWjRlFizuPwLtTLj+qkH6DjD2wLtikUAAAAASUVORK5CYII=';
-        const SPR_HORIZON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLAAAAAMAgMAAAAPCKxBAAAABlBMVEX///9TU1NYzE1OAAAAAXRSTlMAQObYZgAAALJJREFUeF7t1EEKAyEMhtEvMNm7sPfJEVyY+1+ltLgYAsrQCtWhbxEhQvgxIJtSZypxa/WGshgzKdbq/UihMFMlt3o/CspEYoihIMaAb6mCvM6C+BTAeyo+wN4yykV/6pVfkdLpVyI1hh7GJ6QunUoLEQlQglNP2nkQkeF8+ei9cLxMue1qxVRfk1Ej0s6AEGWfVOk0QUtnK5Xo0Lac6wpdtnQqB6VxomPaz+dgF1PaqqmeWJlz1jYUaSIAAAAASUVORK5CYII=';
-        const SPR_TEXT    = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAL8AAAAYAgMAAADWncTDAAAABlBMVEX///9TU1NYzE1OAAAAAXRSTlMAQObYZgAAAO1JREFUeF690TFqxUAQA1BNoRtk7jMu3E9Auv9Vgr/5A863Y9zEhVhkHmhZsEGkw4Lppmllh1tcLHx+aRj2YnEDuQFvcQW+EoZY0TQLCZbEVxRxAvY+i8ikW0C0bwFdbictG2zvu/4EcCuBF0B23IBsQHZBYgm1n86BN+BmyV5rQFyCJAiDJSTfgBV9BbjvXdzIcKchpMOYd3gO/jvCeuUGFALg95J0/SrtQlrzz+sAjDwCIQsbWAdgbqrQpKYRjmPuAfU5dMC+c0rxOTiO+T6ZlK4pbcDLI1DIRaf3GxDGALkQHnD+cGhMKeox+AEOL3mLO7TQZgAAAABJRU5ErkJggg==';
-        const SPR_RESTART = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAgCAQAAADQmBIFAAAAZklEQVR4Xu3WMQoAIAxDUe/Y+58jYwV1CwQJWQT5o/DAoaWjV2i/LRym/A5FjEsR41LPQchByEHwIVAEC4gZpghmSDP8egXpr/hQZaAKQFQe+pBOQAblDC336qrlPpSg0MEjInbWTLFFmwc8TpTAAAAAAElFTkSuQmCC';
+        // ── Sprite base64 (1x from Chrome offline page) ──────────────────────
+        const SPR_TREX     = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQgAAAAvAgMAAABiRrxWAAAADFBMVEX///9TU1P39/f///+TS9URAAAAAXRSTlMAQObYZgAAAPpJREFUeF7d0jFKRkEMhdGLMM307itNLALyVmHvJuzTDMjdn72E95PGFEZSmeoU4YMMgxhskvQec8YSVFX1NhGcS5ywtbmC8khcZeKq+ZWJ4F8Sr2+ZCErjkJFEfcjAc/6/BMlfcz6xHdhRthYzIZhIHMcTVY1scUUiAphK8CMSPUbieTBhvD9Lj0vyV4wklEGzHpciKGOJoBp7XDcFs4kWxxM7Ey3iZ8JbzASAvMS7XLOJHTTvEkEZSeQl7DMuwVyCasqK5+XzQRYLUJlMbPXjFcn3m8eKBSjWZMJwvGIOvViAzCbUj1VEDoqFOEQGE3SyInJQLOQMJL4B7enP1UbLXJQAAAAASUVORK5CYII=';
+        const SPR_CACTUS_S = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAAAjCAMAAABRlI+PAAAADFBMVEX////////39/dTU1PhglcSAAAAAXRSTlMAQObYZgAAAPNJREFUeF7tlkEKwzAMBLXr//+5iQhU7gRRQkyhZI+DhwH74jhmO+oIJBVwURljuAXagG5QqkSgBLqg3JnxJ1Cb8SmQ3o6gpO85owGlOB4m2BNKJ11BSd01owGlOHkcIAuHkz6UNpPKgozPM54dADHjJuNhZiJxdQCQgZJeBczgCAAy3yhPJvcnmdC9mZwBIsQMFV5AkzHBNknFgcKM+oyDIFcfCAoy03m+jSMIcmoVZkKqSjr1fghyahRmoKRUHYLiSI1SMlCq5CDgX6BXmKkfn+oQ0KEyyrzoy8GbXJ9xrM/YjhUZgl9nnsyTCe9rgSRdV15CwRcIEu8GGQAAAABJRU5ErkJggg==';
+        const SPR_CACTUS_L = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAyCAMAAACJUtIoAAAACVBMVEX////39/dTU1OabbyfAAAAAXRSTlMAQObYZgAAAXhJREFUeF7t2NGqAjEMANGM///RlwvaYQndULuFPJgHUYaEI6IPhgNAOA8HZ+3U6384F5y1U6YzAZTWG+dZamnFEstBFtCKJZSHWMADLJ18z+JqpQeLdKoDC8siC5iFCQs4znIxB5B1t6F3lQWkL4N0JsF+u6GXJdbI+FKW+yWr3lhgCZ2VSag3Nlk/FnRkIRbasLCO0oulikMsvmGpeiGLZ1jOMgtIP5bODivYYUXEIVbwFCt4khVssRgsgidZwQaLd2A8m7MYLGTl4KeQQs2y4kMAMGGlmQViDIb5O6xZnnLD485dIBzqDSE1yyFdL4Iqu4XJqUUWl/NVAFSZq1P6a5aqbAUM2epQbBioWflUBABiUyhYyZoCBev8XyMAObDNOhOAfiyxmHU0YNlldGAphGjFCjA3YkUn1o/1Y3EkZFZ5isCC6NUgwDBn1RuXH96doNfAhDXfsIyJ2AnolcCVhay0kcYbW0HvCO8OwIcJ3GzkORpkFuUP/1Ec8FW1qJkAAAAASUVORK5CYII=';
+        const SPR_CLOUD    = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAOCAQAAAD6HOaKAAAAU0lEQVR4XrWSsQkAQAgD3X9El/ELixQpJHCfdApnUCtXz7o49cgagaGPaq4rIwAP9s/C7R7UX3inJ0BDb6qWDC7ScOR/QWjRlFizuPwLtTLj+qkH6DjD2wLtikUAAAAASUVORK5CYII=';
+        const SPR_HORIZON  = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLAAAAAMAgMAAAAPCKxBAAAABlBMVEX///9TU1NYzE1OAAAAAXRSTlMAQObYZgAAALJJREFUeF7t1EEKAyEMhtEvMNm7sPfJEVyY+1+ltLgYAsrQCtWhbxEhQvgxIJtSZypxa/WGshgzKdbq/UihMFMlt3o/CspEYoihIMaAb6mCvM6C+BTAeyo+wN4yykV/6pVfkdLpVyI1hh7GJ6QunUoLEQlQglNP2nkQkeF8+ei9cLxMue1qxVRfk1Ej0s6AEGWfVOk0QUtnK5Xo0Lac6wpdtnQqB6VxomPaz+dgF1PaqqmeWJlz1jYUaSIAAAAAsUVORK5CYII=';
+        const SPR_TEXT     = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAL8AAAAYAgMAAADWncTDAAAABlBMVEX///9TU1NYzE1OAAAAAXRSTlMAQObYZgAAAO1JREFUeF690TFqxUAQA1BNoRtk7jMu3E9Auv9Vgr/5A863Y9zEhVhkHmhZsEGkw4Lppmllh1tcLHx+aRj2YnEDuQFvcQW+EoZY0TQLCZbEVxRxAvY+i8ikW0C0bwFdbictG2zvu/4EcCuBF0B23IBsQHZBYgm1n86BN+BmyV5rQFyCJAiDJSTfgBV9BbjvXdzIcKchpMOYd3gO/jvCeuUGFALg95J0/SrtQlrzz+sAjDwCIQsbWAdgbqrQpKYRjmPuAfU5dMC+c0rxOTiO+T6ZlK4pbcDLI1DIRaf3GxDGALkQHnD+cGhMKeox+AEOL3mLO7TQZgAAAABJRU5ErkJggg==';
+        const SPR_RESTART  = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAgCAQAAADQmBIFAAAAZklEQVR4Xu3WMQoAIAxDUe/Y+58jYwV1CwQJWQT5o/DAoaWjV2i/LRym/A5FjEsR41LPQchByEHwIVAEC4gZpghmSDP8egXpr/hQZaAKQFQe+pBOQAblDC336qrlPpSg0MEjInbWTLFFmwc8TpTAAAAAAElFTkSuQmCC';
 
-        // Sprite frame layout (1x, 264×47, 6 frames × 44px):
+        // ── Sprite dimensions (verified from PNG headers) ────────────────────
+        // 1x-trex:       264×47  — 6 frames of 44px each, one row
+        // 1x-text:       191×24  — row0 (y=0,h=13): digits 0-9 then "HI" letters
+        //                          row1 (y=13,h=11): "GAME OVER" text
+        // 1x-obstacle-small: 102×35  — 6 small cactus variants of 17px each
+        // 1x-obstacle-large: 150×50  — 6 large cactus variants of 25px each
+        // 1x-horizon:    1200×12
+        // 1x-cloud:      46×14
+        // 1x-restart:    36×32
+
+        // ── Trex animation frames (x offset in sprite) ───────────────────────
+        // Frame order confirmed from Chrome animFrames config:
         // WAITING: [44,0]  RUNNING: [88,132]  JUMPING: [0]  CRASHED: [220]
-        // No duck frames — duck uses run frames with squashed height
         const FRAMES = {
-          WAIT:    { f:[44,0],    ms:1000/3  },
-          RUN:     { f:[88,132],  ms:1000/12 },
-          JUMP:    { f:[0],       ms:1000/60 },
-          CRASHED: { f:[220],     ms:1000/60 },
+          WAIT:    { f:[44,0],   ms:1000/3  },
+          RUN:     { f:[88,132], ms:1000/12 },
+          JUMP:    { f:[0],      ms:1000/60 },
+          CRASHED: { f:[220],    ms:1000/60 },
         };
 
-        // Obstacle specs — exact 1x sprite dimensions
-        const OBS_TYPES = [
-          { img:'cactusS', iw:102, ih:35, w:17, h:35, minGap:120 },
-          { img:'cactusL', iw:150, ih:50, w:25, h:50, minGap:120 },
-        ];
+        // ── Physics (Chrome source values) ──────────────────────────────────
+        const SPEED_INIT  = 6;
+        const SPEED_MAX   = 13;
+        const ACCEL       = 0.001;
+        const GRAVITY     = 0.6;
+        const JUMP_VEL    = -10;
+        const DROP_COEFF  = 3;
+        const MIN_JUMP_H  = 30;
+        const BOTTOM_PAD  = 10;
+        const DINO_X      = 25;
+        const DINO_W      = 44, DINO_H = 47;
+        const DUCK_W      = 44, DUCK_H = 26;
+        const HOR_W       = 1200, HOR_H = 12;
+        const CLOUD_W     = 46,  CLOUD_H = 14;
+        const GROUND_LINE = H - BOTTOM_PAD - DINO_H; // dino y when on ground
 
-        // Horizon (ground) sprite: 1200×12, tiled
-        const HOR_W = 1200, HOR_H = 12;
-        // Cloud sprite: 46×14
-        const CLOUD_W = 46, CLOUD_H = 14;
+        // ── Score digit sprite layout ────────────────────────────────────────
+        // top row of 1x-text: 10 digits + 2 letters = 12 chars
+        // each char = (191/12) ≈ 15.9px but Chrome uses fixed widths
+        // Actual: digit width=10px, height=13px, 11px spacing in the text sprite
+        // Characters: 0123456789HI at y=0
+        const DIGIT_W = 10, DIGIT_H = 13;
+        // x positions of each character in the sprite:
+        const DIGIT_X = [0,10,20,30,40,50,60,70,80,90, 100,110]; // 0-9, H, I
+        // "GAME OVER" text: x=0, y=13, w=191, h=11
 
-        // Canvas
+        // ── Canvas setup ─────────────────────────────────────────────────────
+        area.innerHTML = '';
         const canvas = document.createElement('canvas');
         canvas.width = W; canvas.height = H;
         canvas.style.cssText = 'display:block;max-width:100%;border-radius:10px;cursor:pointer;touch-action:manipulation';
@@ -21058,304 +21082,257 @@ self.onmessage=function(e){
 
         const btnRow = document.createElement('div');
         btnRow.style.cssText = 'display:flex;gap:10px;justify-content:center;margin-top:8px';
-        btnRow.innerHTML = '<button class="btn btn-tonal" id="tx-jump" style="padding:8px 28px;font-size:13px">▲ پرش</button><button class="btn btn-tonal" id="tx-duck" style="padding:8px 28px;font-size:13px">▼ خم</button>';
+        btnRow.innerHTML = `
+          <button class="btn btn-tonal" style="padding:8px 28px;font-size:13px">▲ پرش</button>
+          <button class="btn btn-tonal" style="padding:8px 28px;font-size:13px">▼ خم</button>`;
         area.appendChild(btnRow);
-        btnRow.querySelector('#tx-jump').addEventListener('pointerdown', e=>{ e.preventDefault(); doJump(); });
-        btnRow.querySelector('#tx-duck').addEventListener('pointerdown', e=>{ e.preventDefault(); doDuck(true); });
-        btnRow.querySelector('#tx-duck').addEventListener('pointerup',   ()=> doDuck(false));
-        btnRow.querySelector('#tx-duck').addEventListener('pointercancel',()=> doDuck(false));
+        const [jumpBtn, duckBtn] = btnRow.querySelectorAll('button');
+        jumpBtn.addEventListener('pointerdown', e=>{ e.preventDefault(); doJump(); });
+        duckBtn.addEventListener('pointerdown', e=>{ e.preventDefault(); doDuck(true); });
+        duckBtn.addEventListener('pointerup',   ()=> doDuck(false));
+        duckBtn.addEventListener('pointercancel',()=> doDuck(false));
 
-        // Load sprite images
+        // ── Load sprites ─────────────────────────────────────────────────────
         const IMG = {};
-        function loadImg(key, src) { IMG[key] = new Image(); IMG[key].src = src; }
-        loadImg('trex',    SPR_TREX);
-        loadImg('cactusS', SPR_CACTUS_S);
-        loadImg('cactusL', SPR_CACTUS_L);
-        loadImg('cloud',   SPR_CLOUD);
-        loadImg('horizon', SPR_HORIZON);
-        loadImg('text',    SPR_TEXT);
-        loadImg('restart', SPR_RESTART);
+        const sprSrcs = {
+          trex:SPR_TREX, cactusS:SPR_CACTUS_S, cactusL:SPR_CACTUS_L,
+          cloud:SPR_CLOUD, horizon:SPR_HORIZON, text:SPR_TEXT, restart:SPR_RESTART
+        };
+        let loadedCount = 0;
+        Object.entries(sprSrcs).forEach(([k,v])=>{
+          IMG[k] = new Image();
+          IMG[k].onload = ()=>{ loadedCount++; };
+          IMG[k].src = v;
+        });
 
-        // ── Physics & dimension constants ───────────────────────────────────
-        const SPEED_INIT  = 6;
-        const SPEED_MAX   = 13;
-        const ACCEL       = 0.001;
-        const GRAVITY     = 0.6;
-        const JUMP_VEL    = -10;
-        const DROP_COEFF  = 3;
-        const MIN_JUMP_H  = 30;
-        const BOTTOM_PAD  = 10;
-        const DINO_X      = 25;
-        const DINO_W      = 44, DINO_H = 47;
-        const DUCK_W      = 44, DUCK_H = 28;   // squashed duck hitbox
-        const GROUND_LINE = H - BOTTOM_PAD - DINO_H;
+        // ── Obstacle types ───────────────────────────────────────────────────
+        // Small cactus sprite (102×35): 6 variants each 17px wide
+        // Large cactus sprite (150×50): 6 variants each 25px wide
+        // We always draw from x=0 (first variant) for simplicity
+        const OBS_TYPES = [
+          { img:'cactusS', iw:102, ih:35, w:17, h:35 },
+          { img:'cactusS', iw:102, ih:35, w:34, h:35 },  // 2-wide cluster
+          { img:'cactusL', iw:150, ih:50, w:25, h:50 },
+          { img:'cactusL', iw:150, ih:50, w:50, h:50 },  // 2-wide cluster
+        ];
 
-        // ── Game state ──────────────────────────────────────────────────────
-        let state = 'idle';  // idle | playing | over
-        let speed, score, hiScore=0, frame, lastTime;
-        let horizonX1, horizonX2;
-        let dino, obstacles, clouds;
-        let raf = null;
+        // ── Game state ───────────────────────────────────────────────────────
+        let state = 'idle';
+        let speed, score, hiScore=0, frameN, lastTime;
+        let horizonX1, horizonX2, dino, obstacles, clouds, raf;
 
         function reset() {
-          speed = SPEED_INIT;
-          score = 0;
-          frame = 0;
-          horizonX1 = 0;
-          horizonX2 = HOR_W;
-          dino = {
-            x: DINO_X,
-            y: GROUND_LINE,
-            vy: 0,
-            jumping: false,
-            ducking: false,
-            speedDrop: false,
-            reachedMin: false,
-            animFrame: 0,
-            animTimer: 0,
-            blinkDelay: randBlink(),
-            blinkTimer: 0,
-          };
-          obstacles = [];
-          clouds = [{ x: W/2, y: 20 + Math.random()*20 }];
-          lastTime = null;
+          speed      = SPEED_INIT;
+          score      = 0;
+          frameN     = 0;
+          horizonX1  = 0;
+          horizonX2  = HOR_W;
+          dino       = { x:DINO_X, y:GROUND_LINE, vy:0,
+                         jumping:false, ducking:false,
+                         speedDrop:false, reachedMin:false,
+                         animFrame:0, animTimer:0 };
+          obstacles  = [];
+          clouds     = [{ x:W*0.6, y:20+Math.random()*20 }];
+          lastTime   = null;
         }
 
-        function randBlink() { return Math.random() * 7000; }
-
-        // ── Jump / Duck ─────────────────────────────────────────────────────
+        // ── Controls ─────────────────────────────────────────────────────────
         function doJump() {
-          if (state === 'idle' || state === 'over') { state='playing'; reset(); return; }
-          if (state !== 'playing') return;
-          if (dino.ducking) { dino.ducking=false; dino.speedDrop=false; return; }
+          if (state==='idle'||state==='over') { state='playing'; reset(); return; }
+          if (state!=='playing') return;
+          if (dino.ducking) { dino.ducking=false; return; }
           if (!dino.jumping) {
-            dino.jumping = true;
-            dino.vy = JUMP_VEL;
-            dino.reachedMin = false;
-            dino.speedDrop = false;
+            dino.jumping=true; dino.vy=JUMP_VEL;
+            dino.reachedMin=false; dino.speedDrop=false;
           }
         }
-
         function doDuck(on) {
-          if (state !== 'playing') return;
-          if (on) {
-            if (dino.jumping) {
-              dino.speedDrop = true;
-            } else {
-              dino.ducking = true;
-            }
-          } else {
-            dino.ducking = false;
-            dino.speedDrop = false;
-          }
+          if (state!=='playing') return;
+          if (on) { if (dino.jumping) dino.speedDrop=true; else dino.ducking=true; }
+          else    { dino.ducking=false; dino.speedDrop=false; }
         }
 
         // ── Update ───────────────────────────────────────────────────────────
         function update(dt) {
-          if (state !== 'playing') return;
-          frame++;
-          score += speed * dt / (1000/FPS) * 0.025;
-          if (score > hiScore) hiScore = score;
-          speed = Math.min(SPEED_MAX, SPEED_INIT + Math.floor(score) * ACCEL);
+          if (state!=='playing') return;
+          frameN++;
+          const norm = dt/16.67; // normalize to 60fps
 
-          // Dino physics
+          score += speed * norm * ACCEL * 10;
+          speed  = Math.min(SPEED_MAX, SPEED_INIT + score * ACCEL);
+
+          // Physics
           if (dino.jumping) {
             const coeff = dino.speedDrop ? DROP_COEFF : 1;
-            dino.y += dino.vy * coeff * dt / (1000/FPS);
-            dino.vy += GRAVITY * dt / (1000/FPS);
+            dino.y  += dino.vy * coeff * norm;
+            dino.vy += GRAVITY * norm;
             if (dino.y < GROUND_LINE - MIN_JUMP_H) dino.reachedMin = true;
-            if (dino.reachedMin && dino.vy > 0 && dino.speedDrop) {
-              dino.vy = Math.max(dino.vy, 5); // fast drop
-            }
             if (dino.y >= GROUND_LINE) {
-              dino.y = GROUND_LINE;
-              dino.vy = 0;
-              dino.jumping = false;
-              dino.speedDrop = false;
-              dino.reachedMin = false;
+              dino.y=GROUND_LINE; dino.vy=0;
+              dino.jumping=false; dino.speedDrop=false; dino.reachedMin=false;
             }
           }
 
-          // Dino animation timer
+          // Animation
           dino.animTimer += dt;
-          const st = dinoState();
-          const fms = FRAMES[st].ms;
-          if (dino.animTimer >= fms) {
+          const st = dinoSt();
+          if (dino.animTimer >= FRAMES[st].ms) {
             dino.animTimer = 0;
-            dino.animFrame = (dino.animFrame + 1) % FRAMES[st].f.length;
+            dino.animFrame = (dino.animFrame+1) % FRAMES[st].f.length;
           }
 
-          // Horizon scroll
-          const dx = speed * dt / (1000/FPS);
-          horizonX1 -= dx;
-          horizonX2 -= dx;
-          if (horizonX1 + HOR_W < 0) horizonX1 = horizonX2 + HOR_W;
-          if (horizonX2 + HOR_W < 0) horizonX2 = horizonX1 + HOR_W;
+          // Scroll
+          const dx = speed * norm;
+          horizonX1 -= dx; horizonX2 -= dx;
+          if (horizonX1 + HOR_W <= 0) horizonX1 = horizonX2 + HOR_W;
+          if (horizonX2 + HOR_W <= 0) horizonX2 = horizonX1 + HOR_W;
 
           // Clouds
-          clouds.forEach(c => c.x -= 0.2 * dt / (1000/FPS));
+          clouds.forEach(c => c.x -= 0.15*norm);
           clouds = clouds.filter(c => c.x + CLOUD_W > 0);
-          if (Math.random() < 0.008 * dt/(1000/FPS) && clouds.length < 6) {
-            clouds.push({ x: W + 10, y: 15 + Math.random()*28 });
-          }
+          if (Math.random() < 0.005*norm && clouds.length < 5)
+            clouds.push({ x:W+10, y:15+Math.random()*28 });
 
           // Obstacles
-          obstacles.forEach(o => o.x -= speed * dt / (1000/FPS));
-          obstacles = obstacles.filter(o => o.x + o.w*o.count + 20 > 0);
-          // Spawn
-          const lastObs = obstacles[obstacles.length-1];
-          const minGap = 120 + speed * 8;
-          if (frame > 50 && (!lastObs || lastObs.x < W - minGap)) {
-            spawnObstacle();
-          }
+          obstacles.forEach(o => o.x -= speed*norm);
+          obstacles = obstacles.filter(o => o.x + o.w > -50);
+          const last = obstacles[obstacles.length-1];
+          const gap  = (120 + speed*6) * norm;
+          if (frameN > 80 && (!last || last.x < W - gap))
+            spawnObs();
 
           // Collision
-          if (checkCollision()) {
-            state = 'over';
-            if (score > hiScore) hiScore = score;
-          }
+          if (hit()) { state='over'; if(score>hiScore) hiScore=score; }
         }
 
-        function dinoState() {
-          if (state === 'over') return 'CRASHED';
-          if (dino.jumping)    return 'JUMP';
-          if (dino.ducking)    return 'RUN';  // no duck sprite — use run frames
-          if (state === 'playing') return 'RUN';
+        function dinoSt() {
+          if (state==='over')      return 'CRASHED';
+          if (dino.jumping)        return 'JUMP';
+          if (state==='playing')   return 'RUN';
           return 'WAIT';
         }
 
-        function spawnObstacle() {
-          const type = OBS_TYPES[Math.floor(Math.random() * OBS_TYPES.length)];
-          const maxCols = speed > 8 ? 3 : speed > 6 ? 2 : 1;
-          const count = 1 + Math.floor(Math.random() * maxCols);
-          obstacles.push({
-            img: type.img,
-            iw: type.iw,    // sprite image total width
-            ih: type.ih,
-            w: type.w,      // single cactus width
-            h: type.h,
-            count,
-            x: W + 10,
-            y: GROUND_LINE + DINO_H - type.h
-          });
+        function spawnObs() {
+          const t = OBS_TYPES[Math.floor(Math.random()*OBS_TYPES.length)];
+          obstacles.push({ ...t, x:W+10, y:GROUND_LINE+DINO_H-t.h });
         }
 
-        // Hitbox collision (AABB with inset)
-        function checkCollision() {
-          const inset = 4;
-          const dh = dino.ducking ? DUCK_H : DINO_H;
-          const dw = dino.ducking ? DUCK_W : DINO_W;
-          const dx1 = dino.x + inset, dy1 = dino.y + DINO_H - dh + inset;
-          const dx2 = dx1 + dw - inset*2, dy2 = dy1 + dh - inset*2;
+        function hit() {
+          const pad = 5;
+          const dh  = dino.ducking ? DUCK_H : DINO_H;
+          const dw  = dino.ducking ? DUCK_W : DINO_W;
+          const dy  = dino.y + (DINO_H - dh);
+          const ax1=dino.x+pad, ay1=dy+pad, ax2=dino.x+dw-pad, ay2=dy+dh-pad;
           for (const o of obstacles) {
-            const totalW = o.w * o.count + (o.count-1)*2;
-            const ox1 = o.x + inset, oy1 = o.y + inset;
-            const ox2 = ox1 + totalW - inset*2, oy2 = oy1 + o.h - inset*2;
-            if (dx1<ox2 && dx2>ox1 && dy1<oy2 && dy2>oy1) return true;
+            if (ax1<o.x+o.w-pad && ax2>o.x+pad && ay1<o.y+o.h-pad && ay2>o.y+pad)
+              return true;
           }
           return false;
         }
 
         // ── Draw ─────────────────────────────────────────────────────────────
+        function spr(key, sx,sy,sw,sh, dx,dy,dw,dh) {
+          const im=IMG[key];
+          if (!im||!im.complete||!im.naturalWidth) return;
+          ctx.drawImage(im, sx,sy,sw,sh, dx,dy,dw,dh);
+        }
+
+        // Draw score string from digit sprite
+        function drawScore(str, rightX, y) {
+          // str is digits+H+I, each char mapped to DIGIT_X index
+          const chars = [...str];
+          const total = chars.length * (DIGIT_W + 2);
+          let cx = rightX - total;
+          for (const ch of chars) {
+            let idx = '0123456789HI'.indexOf(ch);
+            if (idx < 0) { cx += DIGIT_W+2; continue; }
+            spr('text', idx*(DIGIT_W+1), 0, DIGIT_W, DIGIT_H, cx, y, DIGIT_W, DIGIT_H);
+            cx += DIGIT_W + 2;
+          }
+        }
+
         function draw() {
           const dk = document.documentElement.getAttribute('data-theme')==='dark'
                   || (!document.documentElement.getAttribute('data-theme')
                   && window.matchMedia('(prefers-color-scheme:dark)').matches);
-
-          // CSS invert for dark mode — sprites are dark-on-transparent PNG
-          // invert(1) turns the white bg dark and dark pixels light. Clean solution.
+          // Use CSS invert for dark mode — sprites are dark-on-transparent
           canvas.style.filter = dk ? 'invert(1)' : 'none';
 
           ctx.fillStyle = '#f7f7f7';
-          ctx.fillRect(0, 0, W, H);
-
-          function spr(img, sx,sy,sw,sh, dx,dy,dw,dh) {
-            const im = IMG[img];
-            if (!im || !im.complete || !im.naturalWidth) return;
-            ctx.drawImage(im, sx,sy,sw,sh, dx,dy,dw,dh);
-          }
+          ctx.fillRect(0,0,W,H);
 
           // Clouds
-          clouds.forEach(c => spr('cloud', 0,0,CLOUD_W,CLOUD_H, c.x,c.y,CLOUD_W,CLOUD_H));
+          clouds.forEach(c => spr('cloud',0,0,CLOUD_W,CLOUD_H, c.x,c.y,CLOUD_W,CLOUD_H));
 
-          // Ground — two 1200px tiles scrolling
-          const groundY = GROUND_LINE + DINO_H;
-          spr('horizon', 0,0,HOR_W,HOR_H, horizonX1,groundY,HOR_W,HOR_H);
-          spr('horizon', 0,0,HOR_W,HOR_H, horizonX2,groundY,HOR_W,HOR_H);
+          // Ground
+          const gy = GROUND_LINE + DINO_H;
+          spr('horizon',0,0,HOR_W,HOR_H, horizonX1,gy,HOR_W,HOR_H);
+          spr('horizon',0,0,HOR_W,HOR_H, horizonX2,gy,HOR_W,HOR_H);
 
           // Obstacles
           for (const o of obstacles) {
-            for (let i=0; i<o.count; i++) {
-              spr(o.img, 0,0,o.iw,o.ih, o.x+i*(o.w+2),o.y,o.w,o.h);
-            }
+            spr(o.img, 0,0,o.w,o.ih, o.x,o.y,o.w,o.h);
           }
 
-          // T-Rex — pick frame x from FRAMES table
-          const st = dinoState();
-          const frameX = FRAMES[st].f[dino.animFrame % FRAMES[st].f.length];
+          // Dino
+          const st = dinoSt();
+          const fx = FRAMES[st].f[dino.animFrame % FRAMES[st].f.length];
           if (dino.ducking && state==='playing') {
-            // No duck sprite in 1x sheet — squash vertically
-            ctx.save();
-            const duckH = DINO_H * 0.55;
-            const duckY = dino.y + DINO_H - duckH;
-            ctx.drawImage(IMG['trex'], frameX,0,DINO_W,DINO_H, dino.x,duckY,DINO_W,duckH);
-            ctx.restore();
+            const dh2=DINO_H*0.55, dy2=dino.y+DINO_H-dh2;
+            ctx.drawImage(IMG.trex, fx,0,DINO_W,DINO_H, dino.x,dy2,DINO_W,dh2);
           } else {
-            spr('trex', frameX,0,DINO_W,DINO_H, dino.x,dino.y,DINO_W,DINO_H);
+            spr('trex', fx,0,DINO_W,DINO_H, dino.x,dino.y,DINO_W,DINO_H);
           }
 
-          // HUD score — #535353 is correct (becomes light after CSS invert in dark mode)
-          ctx.font = 'bold 12px "Courier New", monospace';
-          ctx.textAlign = 'right';
-          ctx.fillStyle = '#535353';
+          // Score HUD from sprite digits
           const sc = Math.floor(score).toString().padStart(5,'0');
           const hi = Math.floor(hiScore).toString().padStart(5,'0');
-          ctx.fillText(`HI ${hi}  ${sc}`, W-10, 16);
+          drawScore('HI', W-2-sc.length*(DIGIT_W+2)-(DIGIT_W+2)*2-8, 8);
+          drawScore(hi,   W-2-sc.length*(DIGIT_W+2)-6, 8);
+          drawScore(sc,   W-2, 8);
 
           // Overlay
-          if (state === 'idle') {
-            ctx.textAlign = 'center';
-            ctx.fillStyle = '#9e9e9e';
-            ctx.font = '12px monospace';
+          if (state==='idle') {
+            ctx.textAlign='center'; ctx.fillStyle='#9e9e9e';
+            ctx.font='12px monospace';
             ctx.fillText('لمس یا فضا = شروع  |  ↓ = خم', W/2, H/2+4);
-          } else if (state === 'over') {
-            // GAME OVER text sprite: 191×24 (top 11px = GAME OVER text)
-            spr('text',    0,0,191,11, W/2-95,H/2-28, 191,11);
-            spr('restart', 0,0,36, 32, W/2-18,H/2-8,  36, 32);
+          } else if (state==='over') {
+            // "GAME OVER" text: y=13, h=11 in 1x-text sprite
+            spr('text',    0,13,191,11, W/2-95, H/2-28, 191,11);
+            spr('restart', 0,0, 36, 32, W/2-18, H/2-8,  36, 32);
           }
 
           scoreEl.textContent = `امتیاز: ${Math.floor(score)}  —  بهترین: ${Math.floor(hiScore)}`;
         }
 
+        // ── Loop ─────────────────────────────────────────────────────────────
         function loop(ts) {
-          const dt = lastTime ? Math.min(ts - lastTime, 34) : 16;
+          const dt = lastTime ? Math.min(ts-lastTime, 50) : 16.67;
           lastTime = ts;
-          update(dt);
-          draw();
+          update(dt); draw();
           raf = requestAnimationFrame(loop);
           window._trexRAF = raf;
         }
 
-        // ── Input ─────────────────────────────────────────────────────────────
-        canvas.addEventListener('pointerdown', e => { e.preventDefault(); doJump(); });
-
+        // ── Input ────────────────────────────────────────────────────────────
+        canvas.addEventListener('pointerdown', e=>{ e.preventDefault(); doJump(); });
         if (window._trexKH) document.removeEventListener('keydown', window._trexKH);
-        window._trexKH = e => {
-          if (!document.getElementById('minigames')) return;
-          if (e.code==='Space'||e.key==='ArrowUp') { e.preventDefault(); doJump(); }
-          if (e.key==='ArrowDown') { e.preventDefault(); doDuck(true); }
+        if (window._trexKU) document.removeEventListener('keyup',   window._trexKU);
+        window._trexKH = e=>{
+          if (!area.isConnected) return;
+          if (e.code==='Space'||e.key==='ArrowUp'){ e.preventDefault(); doJump(); }
+          if (e.key==='ArrowDown'){ e.preventDefault(); doDuck(true); }
         };
-        const _trexKU = e => { if(e.key==='ArrowDown') doDuck(false); };
+        window._trexKU = e=>{ if(e.key==='ArrowDown') doDuck(false); };
         document.addEventListener('keydown', window._trexKH);
-        document.addEventListener('keyup',   _trexKU);
+        document.addEventListener('keyup',   window._trexKU);
         _mgListeners.keyboard = window._trexKH;
 
-        // Start idle state
-        reset();
-        draw();
+        reset(); draw();
         raf = requestAnimationFrame(loop);
         window._trexRAF = raf;
       }
+
 
       function mgWordle(area) {
         // Curated list of common 4-letter Persian words (no kashida, simple forms)
