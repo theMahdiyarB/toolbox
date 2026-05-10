@@ -2276,172 +2276,6 @@
 
 
   <body>
-    <div
-      class="drawer-overlay"
-      id="drawer-overlay"
-      onclick="closeDrawer()"
-    ></div>
-    <nav class="side-drawer" id="side-drawer">
-      <div class="drawer-header">
-        <span class="drawer-brand-icon">🧰</span>
-        <span class="drawer-brand-text">جعبه‌ابزار آفلاین</span>
-        <button class="drawer-close" onclick="closeDrawer()">✕</button>
-      </div>
-      <div class="drawer-scroll">
-        <div class="drawer-item active" onclick="showTool('home')" data-tool="home">
-          <span class="drawer-item__icon">🏠</span>خانه
-        </div>
-
-        <span class="drawer-section-label">🧮 محاسبه و ریاضی</span>
-        <div class="drawer-item" onclick="showTool('calc')" data-tool="calc"><span class="drawer-item__icon">🧮</span>ماشین‌حساب</div>
-        <div class="drawer-item" onclick="showTool('calculus')" data-tool="calculus"><span class="drawer-item__icon">∫</span>حسابان</div>
-        <div class="drawer-item" onclick="showTool('linsolve')" data-tool="linsolve"><span class="drawer-item__icon">📐</span>حل معادله</div>
-        <div class="drawer-item" onclick="showTool('bmi')" data-tool="bmi"><span class="drawer-item__icon">⚖️</span>شاخص BMI</div>
-        <div class="drawer-item" onclick="showTool('avg')" data-tool="avg"><span class="drawer-item__icon">📊</span>میانگین و آمار</div>
-        <div class="drawer-item" onclick="showTool('pct')" data-tool="pct"><span class="drawer-item__icon">%</span>محاسبه درصد</div>
-        <div class="drawer-item" onclick="showTool('matrix')" data-tool="matrix"><span class="drawer-item__icon">📐</span>ماتریس</div>
-        <div class="drawer-item" onclick="showTool('multable')" data-tool="multable"><span class="drawer-item__icon">✖️</span>جدول ضرب</div>
-        <div class="drawer-item" onclick="showTool('loan')" data-tool="loan"><span class="drawer-item__icon">🏦</span>محاسبه وام</div>
-        <div class="drawer-item" onclick="showTool('deposit')" data-tool="deposit"><span class="drawer-item__icon">💰</span>سود سپرده</div>
-        <div class="drawer-item" onclick="showTool('inflationdebt')" data-tool="inflationdebt"><span class="drawer-item__icon">📈</span>بدهی با تورم</div>
-        <div class="drawer-item" onclick="showTool('rentcalc')" data-tool="rentcalc"><span class="drawer-item__icon">🏠</span>رهن و اجاره</div>
-        <div class="drawer-item" onclick="showTool('taxdisc')" data-tool="taxdisc"><span class="drawer-item__icon">🏷️</span>مالیات و تخفیف</div>
-        <div class="drawer-item" onclick="showTool('tip')" data-tool="tip"><span class="drawer-item__icon">🍽️</span>دنگ — تقسیم هزینه</div>
-
-        <span class="drawer-section-label">⏱️ زمان و تقویم</span>
-        <div class="drawer-item" onclick="showTool('stopwatch')" data-tool="stopwatch"><span class="drawer-item__icon">⏱️</span>کرونومتر</div>
-        <div class="drawer-item" onclick="showTool('timer')" data-tool="timer"><span class="drawer-item__icon">⏳</span>تایمر</div>
-        <div class="drawer-item" onclick="showTool('pomodoro')" data-tool="pomodoro"><span class="drawer-item__icon">🍅</span>پومودورو</div>
-        <div class="drawer-item" onclick="showTool('counter')" data-tool="counter"><span class="drawer-item__icon">🔢</span>شمارنده</div>
-        <div class="drawer-item" onclick="showTool('timezone')" data-tool="timezone"><span class="drawer-item__icon">🌐</span>ساعت جهانی</div>
-        <div class="drawer-item" onclick="showTool('jcal')" data-tool="jcal"><span class="drawer-item__icon">📅</span>تقویم خورشیدی</div>
-        <div class="drawer-item" onclick="showTool('dateconv')" data-tool="dateconv"><span class="drawer-item__icon">🗓️</span>مبدل تاریخ</div>
-        <div class="drawer-item" onclick="showTool('age')" data-tool="age"><span class="drawer-item__icon">🎂</span>محاسبه سن</div>
-
-        <span class="drawer-section-label">📐 علوم و مهندسی</span>
-        <div class="drawer-item" onclick="showTool('unitconv')" data-tool="unitconv"><span class="drawer-item__icon">📏</span>تبدیل واحد</div>
-        <div class="drawer-item" onclick="showTool('geometry')" data-tool="geometry"><span class="drawer-item__icon">📐</span>هندسه</div>
-        <div class="drawer-item" onclick="showTool('periodic')" data-tool="periodic"><span class="drawer-item__icon">⚗️</span>جدول تناوبی</div>
-        <div class="drawer-item" onclick="showTool('resistor')" data-tool="resistor"><span class="drawer-item__icon">🔧</span>مقاومت رنگی</div>
-        <div class="drawer-item" onclick="showTool('subnet')" data-tool="subnet"><span class="drawer-item__icon">🌐</span>Subnet</div>
-
-        <span class="drawer-section-label">✏️ متن و محتوا</span>
-        <div class="drawer-item" onclick="showTool('text')" data-tool="text"><span class="drawer-item__icon">✏️</span>ابزار متن</div>
-        <div class="drawer-item" onclick="showTool('charcount')" data-tool="charcount"><span class="drawer-item__icon">#️⃣</span>آنالیز متن</div>
-        <div class="drawer-item" onclick="showTool('whitespace')" data-tool="whitespace"><span class="drawer-item__icon">␣</span>حذف فاصله</div>
-        <div class="drawer-item" onclick="showTool('oneline')" data-tool="oneline"><span class="drawer-item__icon">↔️</span>تک‌خطی کردن</div>
-        <div class="drawer-item" onclick="showTool('lorem')" data-tool="lorem"><span class="drawer-item__icon">📄</span>لورم ایپسوم</div>
-        <div class="drawer-item" onclick="showTool('markdown')" data-tool="markdown"><span class="drawer-item__icon">🖊️</span>تبدیل Markdown</div>
-        <div class="drawer-item" onclick="showTool('diff')" data-tool="diff"><span class="drawer-item__icon">🔀</span>مقایسه دو متن</div>
-        <div class="drawer-item" onclick="showTool('slugify')" data-tool="slugify"><span class="drawer-item__icon">🔗</span>ساخت Slug</div>
-        <div class="drawer-item" onclick="showTool('morse')" data-tool="morse"><span class="drawer-item__icon">📡</span>کد مورس</div>
-        <div class="drawer-item" onclick="showTool('roman')" data-tool="roman"><span class="drawer-item__icon">Ⅰ</span>اعداد رومی</div>
-        <div class="drawer-item" onclick="showTool('numconvert')" data-tool="numconvert"><span class="drawer-item__icon">🔢</span>تبدیل اعداد</div>
-        <div class="drawer-item" onclick="showTool('textfix')" data-tool="textfix"><span class="drawer-item__icon">🔤</span>رفع خرابی متن</div>
-        <div class="drawer-item" onclick="showTool('notes')" data-tool="notes"><span class="drawer-item__icon">📝</span>یادداشت و چک‌لیست</div>
-        <div class="drawer-item" onclick="showTool('emojis')" data-tool="emojis"><span class="drawer-item__icon">😀</span>ایموجی</div>
-        <div class="drawer-item" onclick="showTool('worldmap')" data-tool="worldmap"><span class="drawer-item__icon">🌍</span>نقشه جهان و پرچم‌ها</div>
-        <div class="drawer-item" onclick="showTool('emotcn')" data-tool="emotcn"><span class="drawer-item__icon">:‑)</span>اِموتیکون</div>
-        <div class="drawer-item" onclick="showTool('pasban')" data-tool="pasban"><span class="drawer-item__icon">📖</span>فرهنگ واژه پارسی</div>
-
-        <span class="drawer-section-label">💻 توسعه</span>
-        <div class="drawer-item" onclick="showTool('json')" data-tool="json"><span class="drawer-item__icon">📋</span>فرمت‌دهی JSON</div>
-        <div class="drawer-item" onclick="showTool('xml')" data-tool="xml"><span class="drawer-item__icon">🏷️</span>فرمت‌دهی XML</div>
-        <div class="drawer-item" onclick="showTool('htmlesc')" data-tool="htmlesc"><span class="drawer-item__icon">🔤</span>HTML Escaper</div>
-        <div class="drawer-item" onclick="showTool('hash')" data-tool="hash"><span class="drawer-item__icon">🔏</span>هش رمزنگاری</div>
-        <div class="drawer-item" onclick="showTool('crypto')" data-tool="crypto"><span class="drawer-item__icon">🔐</span>رمزنگاری متن</div>
-        <div class="drawer-item" onclick="showTool('jwt')" data-tool="jwt"><span class="drawer-item__icon">🔑</span>JWT Parser</div>
-        <div class="drawer-item" onclick="showTool('pxrem')" data-tool="pxrem"><span class="drawer-item__icon">📐</span>PX ↔ REM</div>
-        <div class="drawer-item" onclick="showTool('regex')" data-tool="regex"><span class="drawer-item__icon">🔍</span>تست Regex</div>
-        <div class="drawer-item" onclick="showTool('cron')" data-tool="cron"><span class="drawer-item__icon">🕐</span>Cron Parser</div>
-        <div class="drawer-item" onclick="showTool('urlparse')" data-tool="urlparse"><span class="drawer-item__icon">🌐</span>تجزیه URL</div>
-        <div class="drawer-item" onclick="showTool('numbase')" data-tool="numbase"><span class="drawer-item__icon">🔣</span>تبدیل مبنا</div>
-        <div class="drawer-item" onclick="showTool('asciitbl')" data-tool="asciitbl"><span class="drawer-item__icon">🔤</span>جدول ASCII</div>
-        <div class="drawer-item" onclick="showTool('enctools')" data-tool="enctools"><span class="drawer-item__icon">🔡</span>ابزار کدگذاری</div>
-        <div class="drawer-item" onclick="showTool('chart')" data-tool="chart"><span class="drawer-item__icon">📊</span>نمودار داده</div>
-        <div class="drawer-item" onclick="showTool('fakejson')" data-tool="fakejson"><span class="drawer-item__icon">🗄️</span>مولد JSON آزمایشی</div>
-        <div class="drawer-item" onclick="showTool('numwords')" data-tool="numwords"><span class="drawer-item__icon">💬</span>عدد به حروف</div>
-        <div class="drawer-item" onclick="showTool('seotools')" data-tool="seotools"><span class="drawer-item__icon">🔍</span>متا تگ SEO</div>
-        <div class="drawer-item" onclick="showTool('htaccess')" data-tool="htaccess"><span class="drawer-item__icon">⚙️</span>مولد .htaccess</div>
-        <div class="drawer-item" onclick="showTool('keypair')" data-tool="keypair"><span class="drawer-item__icon">🔐</span>کلیدهای RSA/ECC</div>
-
-        <span class="drawer-section-label">⚡ مولدها</span>
-        <div class="drawer-item" onclick="showTool('pass')" data-tool="pass"><span class="drawer-item__icon">🔐</span>رمز عبور</div>
-        <div class="drawer-item" onclick="showTool('uuid')" data-tool="uuid"><span class="drawer-item__icon">🪪</span>UUID / ULID</div>
-        <div class="drawer-item" onclick="showTool('randnum')" data-tool="randnum"><span class="drawer-item__icon">🎲</span>تصادفی‌ساز</div>
-        <div class="drawer-item" onclick="showTool('textbeauty')" data-tool="textbeauty"><span class="drawer-item__icon">✨</span>زیباساز متن</div>
-        <div class="drawer-item" onclick="showTool('invoice')" data-tool="invoice"><span class="drawer-item__icon">🧾</span>فاکتور رسمی</div>
-        <div class="drawer-item" onclick="showTool('rubik')" data-tool="rubik"><span class="drawer-item__icon">🧩</span>حل مکعب روبیک</div>
-        <div class="drawer-item" onclick="showTool('randip')" data-tool="randip"><span class="drawer-item__icon">🌐</span>IP تصادفی</div>
-        <div class="drawer-item" onclick="showTool('randcolor')" data-tool="randcolor"><span class="drawer-item__icon">🎨</span>رنگ تصادفی</div>
-        <div class="drawer-item" onclick="showTool('fake')" data-tool="fake"><span class="drawer-item__icon">👤</span>داده ساختگی</div>
-        <div class="drawer-item" onclick="showTool('credit')" data-tool="credit"><span class="drawer-item__icon">💳</span>کارت اعتباری</div>
-        <div class="drawer-item" onclick="showTool('avatar')" data-tool="avatar"><span class="drawer-item__icon">🖼️</span>آواتار</div>
-        <div class="drawer-item" onclick="showTool('placeholder')" data-tool="placeholder"><span class="drawer-item__icon">🗃️</span>تصویر جایگزین</div>
-        <div class="drawer-item" onclick="showTool('qr')" data-tool="qr"><span class="drawer-item__icon">📱</span>کد QR</div>
-        <div class="drawer-item" onclick="showTool('qrread')" data-tool="qrread"><span class="drawer-item__icon">📷</span>خواندن QR</div>
-        <div class="drawer-item" onclick="showTool('barcode')" data-tool="barcode"><span class="drawer-item__icon">📊</span>بارکد</div>
-
-        <span class="drawer-section-label">🎨 طراحی و رنگ</span>
-        <div class="drawer-item" onclick="showTool('colorpicker')" data-tool="colorpicker"><span class="drawer-item__icon">🖌️</span>تبدیل رنگ</div>
-        <div class="drawer-item" onclick="showTool('wcag')" data-tool="wcag"><span class="drawer-item__icon">♿</span>کنتراست WCAG</div>
-        <div class="drawer-item" onclick="showTool('colorblind')" data-tool="colorblind"><span class="drawer-item__icon">👁</span>شبیه‌ساز کوررنگی</div>
-        <div class="drawer-item" onclick="showTool('gradient')" data-tool="gradient"><span class="drawer-item__icon">🌈</span>گرادیان CSS</div>
-        <div class="drawer-item" onclick="showTool('shadow')" data-tool="shadow"><span class="drawer-item__icon">🌑</span>سایه CSS</div>
-        <div class="drawer-item" onclick="showTool('borderrad')" data-tool="borderrad"><span class="drawer-item__icon">⬛</span>گوشه‌گرد CSS</div>
-        <div class="drawer-item" onclick="showTool('aspect')" data-tool="aspect"><span class="drawer-item__icon">📐</span>نسبت ابعاد</div>
-        <div class="drawer-item" onclick="showTool('goldenratio')" data-tool="goldenratio"><span class="drawer-item__icon">φ</span>نسبت طلایی</div>
-        <div class="drawer-item" onclick="showTool('svgviewer')" data-tool="svgviewer"><span class="drawer-item__icon">🖼️</span>پیش‌نمایش SVG</div>
-        <div class="drawer-item" onclick="showTool('gridbuilder')" data-tool="gridbuilder"><span class="drawer-item__icon">⚏</span>Grid / Flexbox</div>
-        <div class="drawer-item" onclick="showTool('imgpalette')" data-tool="imgpalette"><span class="drawer-item__icon">🎨</span>پالت رنگ تعاملی</div>
-
-        <span class="drawer-section-label">📁 فایل</span>
-        <div class="drawer-item" onclick="showTool('imgtool')" data-tool="imgtool"><span class="drawer-item__icon">🖼️</span>ابزار تصویر</div>
-        <div class="drawer-item" onclick="showTool('bgremove')" data-tool="bgremove"><span class="drawer-item__icon">✂️</span>حذف پس‌زمینه</div>
-        <div class="drawer-item" onclick="showTool('ocrtool')" data-tool="ocrtool"><span class="drawer-item__icon">🔬</span>تشخیص متن OCR</div>
-        <div class="drawer-item" onclick="showTool('stttool')" data-tool="stttool"><span class="drawer-item__icon">🎙️</span>گفتار به متن STT</div>
-        <div class="drawer-item" onclick="showTool('pdftool')" data-tool="pdftool"><span class="drawer-item__icon">🛠️</span>ابزار PDF</div>
-        <div class="drawer-item" onclick="showTool('filesplit')" data-tool="filesplit"><span class="drawer-item__icon">🗂</span>تقسیم و مرج فایل</div>
-        <div class="drawer-item" onclick="showTool('watermark')" data-tool="watermark"><span class="drawer-item__icon">💧</span>واترمارک تصویر</div>
-        <div class="drawer-item" onclick="showTool('img2b64')" data-tool="img2b64"><span class="drawer-item__icon">🔄</span>تصویر ← Base64</div>
-        <div class="drawer-item" onclick="showTool('csvjson')" data-tool="csvjson"><span class="drawer-item__icon">↔️</span>CSV ↔ JSON</div>
-
-        <span class="drawer-section-label">🛠️ ایران و سیستم</span>
-        <div class="drawer-item" onclick="showTool('emergency')" data-tool="emergency"><span class="drawer-item__icon">🚨</span>شماره ضروری</div>
-        <div class="drawer-item" onclick="showTool('citycodes')" data-tool="citycodes"><span class="drawer-item__icon">📞</span>کد شهرها</div>
-        <div class="drawer-item" onclick="showTool('trafficfines')" data-tool="trafficfines"><span class="drawer-item__icon">🚗</span>جرایم رانندگی</div>
-        <div class="drawer-item" onclick="showTool('metromap')" data-tool="metromap"><span class="drawer-item__icon">🚇</span>نقشه مترو</div>
-        <div class="drawer-item" onclick="showTool('device')" data-tool="device"><span class="drawer-item__icon">💻</span>اطلاعات دستگاه</div>
-        <div class="drawer-item" onclick="showTool('ua')" data-tool="ua"><span class="drawer-item__icon">ℹ️</span>User Agent</div>
-
-        <span class="drawer-section-label">🎮 بازی و سرگرمی</span>
-        <div class="drawer-item" onclick="showTool('minigames')" data-tool="minigames"><span class="drawer-item__icon">🕹️</span>بازی‌های کوچک</div>
-        <div class="drawer-item" onclick="showTool('wordcloud')" data-tool="wordcloud"><span class="drawer-item__icon">☁️</span>ابر کلمات</div>
-        <div class="drawer-item" onclick="showTool('diwan')" data-tool="diwan"><span class="drawer-item__icon">📖</span>دیوان شعر</div>
-
-        <span class="drawer-section-label">🧭 ابزارهای تخصصی</span>
-        <div class="drawer-item" onclick="showTool('compass')" data-tool="compass"><span class="drawer-item__icon">🧭</span>قطب‌نما</div>
-        <div class="drawer-item" onclick="showTool('bmc')" data-tool="bmc"><span class="drawer-item__icon">🗂️</span>بوم کسب‌وکار</div>
-        <div class="drawer-item" onclick="showTool('eisenhower')" data-tool="eisenhower"><span class="drawer-item__icon">⬜</span>ماتریس آیزنهاور</div>
-        <div class="drawer-item" onclick="showTool('decmatrix')" data-tool="decmatrix"><span class="drawer-item__icon">📊</span>ماتریس تصمیم</div>
-        <div class="drawer-item" onclick="showTool('citation')" data-tool="citation"><span class="drawer-item__icon">📚</span>استناد دانشگاهی</div>
-        <div class="drawer-item" onclick="showTool('langscores')" data-tool="langscores"><span class="drawer-item__icon">🎓</span>محاسبه نمره</div>
-        <div class="drawer-item" onclick="showTool('audiotools')" data-tool="audiotools"><span class="drawer-item__icon">🔊</span>ابزار صوتی</div>
-        <div class="drawer-item" onclick="showTool('tts')" data-tool="tts"><span class="drawer-item__icon">🗣️</span>متن به گفتار (TTS)</div>
-
-        <span class="drawer-section-label">🌐 ابزار آنلاین</span>
-        <div class="drawer-item" onclick="showTool('weather')" data-tool="weather"><span class="drawer-item__icon">🌤️</span>آب‌وهوا</div>
-        <div class="drawer-item" onclick="showTool('earthquake')" data-tool="earthquake"><span class="drawer-item__icon">🌍</span>زمین‌لرزه</div>
-        <div class="drawer-item" onclick="showTool('translate')" data-tool="translate"><span class="drawer-item__icon">🌍</span>ترجمه</div>
-        <div class="drawer-item" onclick="showTool('currency')" data-tool="currency"><span class="drawer-item__icon">💹</span>قیمت</div>
-
-        <span class="drawer-section-label">ℹ️ درباره و نصب</span>
-        <div class="drawer-item" onclick="showTool('share')" data-tool="share"><span class="drawer-item__icon">🔗</span>اشتراک‌گذاری</div>
-        <div class="drawer-item" onclick="showTool('pwa')" data-tool="pwa"><span class="drawer-item__icon">📲</span>نصب اپ</div>
-        <div class="drawer-item" onclick="showTool('analytics')" data-tool="analytics"><span class="drawer-item__icon">📊</span>آمار بازدید</div>
-        <div class="drawer-item" onclick="showTool('about')" data-tool="about"><span class="drawer-item__icon">ℹ️</span>درباره جعبه‌ابزار</div>
-      </div>
-    </nav>
 
 <!-- ════ NAV RAIL (desktop) ════ -->
 <nav class="nav-rail" id="nav-rail" aria-label="ناوبری اصلی">
@@ -2859,6 +2693,7 @@
                 <div class="link-card" onclick="haptic(this);showTool('metromap')"><button class="fav-btn" data-tool="metromap" onclick="event.stopPropagation();toggleFav('metromap',this)">☆</button><span class="link-card__icon">🚇</span><span class="link-card__name">نقشه مترو</span><span class="link-card__desc">تهران، شیراز، اصفهان، مشهد</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('device')"><button class="fav-btn" data-tool="device" onclick="event.stopPropagation();toggleFav('device',this)">☆</button><span class="link-card__icon">💻</span><span class="link-card__name">اطلاعات دستگاه</span><span class="link-card__desc">صفحه، حافظه، OS</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('ua')"><button class="fav-btn" data-tool="ua" onclick="event.stopPropagation();toggleFav('ua',this)">☆</button><span class="link-card__icon">ℹ️</span><span class="link-card__name">User Agent</span><span class="link-card__desc">تشخیص مرورگر و سیستم‌عامل</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('constitution')"><button class="fav-btn" data-tool="constitution" onclick="event.stopPropagation();toggleFav('constitution',this)">☆</button><span class="link-card__icon">📜</span><span class="link-card__name">قانون اساسی</span><span class="link-card__desc">۱۴ فصل · ۱۷۷ اصل · جستجو</span></div>
               </div>
             </div>
 
@@ -2872,7 +2707,7 @@
               </div>
             </div>
 
-            <!-- ══ ابزارهای تخصصی جدید ══ -->
+            <!-- ══ ابزارهای تخصصی ══ -->
             <div class="section" id="sec-pro">
               <div class="section__title">🧭 ابزارهای تخصصی - کاملاً آفلاین</div>
               <div class="tool-grid">
@@ -2895,6 +2730,7 @@
                 <div class="link-card" onclick="haptic(this);showTool('earthquake')"><button class="fav-btn" data-tool="earthquake" onclick="event.stopPropagation();toggleFav('earthquake',this)">☆</button><span class="link-card__icon">🌍</span><span class="link-card__name">زمین‌لرزه</span><span class="link-card__desc">آخرین زلزله‌های ایران · IRSC</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('translate')"><button class="fav-btn" data-tool="translate" onclick="event.stopPropagation();toggleFav('translate',this)">☆</button><span class="link-card__icon">🌍</span><span class="link-card__name">ترجمه</span><span class="link-card__desc">ترجمه متن به ۱۳ زبان</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('currency')"><button class="fav-btn" data-tool="currency" onclick="event.stopPropagation();toggleFav('currency',this)">☆</button><span class="link-card__icon">💹</span><span class="link-card__name">قیمت و نرخ</span><span class="link-card__desc">ارز، طلا و رمزارز زنده</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('movies')"><button class="fav-btn" data-tool="movies" onclick="event.stopPropagation();toggleFav('movies',this)">☆</button><span class="link-card__icon">🎬</span><span class="link-card__name">بانک فیلم</span><span class="link-card__desc">جستجو · ژانر · پیشنهاد مشابه</span></div>
               </div>
             </div>
 
@@ -8773,12 +8609,125 @@
           <div class="tool-desc">قیمت لحظه‌ای ارزها، طلا و ارزهای دیجیتال از BrsAPI. نرخ تبدیل بین واحدهای مختلف. <strong>کاربرد:</strong> مقایسه نرخ ارز، برنامه‌ریزی مالی، خرید و فروش ارز.</div>
         </div>
 
+        <!-- ══ بانک فیلم ══ -->
+        <div id="movies" class="tool-card">
+          <div class="tool-title">🎬 بانک فیلم</div>
+
+          <!-- Tabs -->
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
+            <button class="btn btn-filled"  id="mv-tab-search" onclick="mvTab('search')">🔍 جستجو</button>
+            <button class="btn btn-tonal"   id="mv-tab-browse" onclick="mvTab('browse')">📋 مرور</button>
+            <button class="btn btn-tonal"   id="mv-tab-genre"  onclick="mvTab('genre')">🎭 ژانرها</button>
+            <button class="btn btn-tonal"   id="mv-tab-detail" onclick="mvTab('detail')" style="display:none">🎞️ جزئیات</button>
+          </div>
+
+          <!-- ── Search pane ── -->
+          <div id="mv-pane-search">
+            <div style="position:relative;margin-bottom:14px">
+              <div class="field__container">
+                <input id="mv-q" class="field__input" type="text" placeholder=" " autocomplete="off" dir="ltr"
+                  oninput="mvSearchDebounce()" onkeydown="if(event.key==='Enter')mvSearch(1)">
+                <label class="field-label" for="mv-q">نام فیلم</label>
+              </div>
+            </div>
+            <div id="mv-search-results"></div>
+            <div id="mv-search-pages" style="display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap"></div>
+          </div>
+
+          <!-- ── Browse pane ── -->
+          <div id="mv-pane-browse" style="display:none">
+            <div id="mv-browse-results"></div>
+            <div id="mv-browse-pages" style="display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap"></div>
+          </div>
+
+          <!-- ── Genre pane ── -->
+          <div id="mv-pane-genre" style="display:none">
+            <div id="mv-genre-list" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px"></div>
+            <div id="mv-genre-results"></div>
+            <div id="mv-genre-pages" style="display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap"></div>
+          </div>
+
+          <!-- ── Detail pane ── -->
+          <div id="mv-pane-detail" style="display:none">
+            <button onclick="mvBack()" class="btn btn-tonal" style="margin-bottom:14px;display:flex;align-items:center;gap:6px">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+              بازگشت
+            </button>
+            <div id="mv-detail-content"></div>
+            <!-- Similar movies -->
+            <div id="mv-similar-wrap" style="display:none;margin-top:20px">
+              <div style="font-size:.9rem;font-weight:600;margin-bottom:10px;color:var(--m3-on-surface-variant)">🎯 فیلم‌های مشابه (همان ژانر)</div>
+              <div id="mv-similar-list" style="display:flex;flex-wrap:wrap;gap:10px"></div>
+            </div>
+          </div>
+
+          <div class="tool-desc" style="margin-top:16px">جستجو و مرور بانک فیلم از MoviesAPI. مشاهده جزئیات کامل، پوستر، بازیگران، امتیاز IMDB، و پیشنهاد فیلم‌های مشابه بر اساس ژانر. <strong>کاربرد:</strong> انتخاب فیلم، بررسی اطلاعات، کشف فیلم‌های جدید.</div>
+        </div>
+
+        <!-- ══ قانون اساسی ══ -->
+        <div id="constitution" class="tool-card">
+          <div class="tool-title">📜 قانون اساسی جمهوری اسلامی ایران</div>
+
+          <!-- Header bar -->
+          <div style="display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+            <div style="flex:1;min-width:150px">
+              <label class="field-label">جستجو</label>
+              <div class="field__container">
+                <input id="cq-search" type="text" class="field__input" placeholder="جستجو در اصل‌ها…" autocomplete="off" oninput="cqFilter()">
+              </div>
+            </div>
+            <div style="flex:0 0 auto">
+              <label class="field-label">فصل</label>
+              <div class="field__container" style="padding:0 8px;height:44px">
+                <select id="cq-ch" class="field__input" style="cursor:pointer" onchange="cqFilter()">
+                  <option value="">همه فصل‌ها</option>
+                </select>
+              </div>
+            </div>
+            <button onclick="cqRandom()" title="اصل تصادفی" style="width:44px;height:44px;border-radius:50%;background:var(--m3-secondary-container);color:var(--m3-on-secondary-container);border:none;cursor:pointer;font-size:1.1rem;flex-shrink:0;transition:transform .3s">🎲</button>
+          </div>
+
+          <!-- Chapter pills -->
+          <div id="cq-pills" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px;scrollbar-width:none"></div>
+
+          <!-- Count -->
+          <div id="cq-count" style="font-size:.75rem;color:var(--m3-on-surface-variant);margin-bottom:10px"></div>
+
+          <!-- List -->
+          <div id="cq-list" style="display:flex;flex-direction:column;gap:10px"></div>
+
+          <!-- Full-screen reader overlay -->
+          <div id="cq-reader" style="display:none;position:fixed;inset:0;z-index:9999;background:var(--m3-surface);overflow-y:auto;padding:0 0 40px">
+            <div style="max-width:640px;margin:0 auto;padding:0 16px">
+              <!-- Sticky header -->
+              <div style="position:sticky;top:0;background:var(--m3-surface);z-index:1;padding:12px 0 10px;border-bottom:1px solid var(--m3-outline-variant);display:flex;align-items:center;gap:10px;margin-bottom:20px">
+                <button onclick="cqCloseReader()" style="width:40px;height:40px;border-radius:50%;background:var(--m3-surface-container);border:1px solid var(--m3-outline-variant);cursor:pointer;font-size:1rem;flex-shrink:0">✕</button>
+                <div style="flex:1;min-width:0">
+                  <div id="cq-r-chapter" style="font-size:.72rem;color:var(--m3-on-surface-variant)"></div>
+                  <div id="cq-r-num" style="font-size:1rem;font-weight:700"></div>
+                </div>
+                <button onclick="cqReaderNav(-1)" id="cq-r-prev" style="width:36px;height:36px;border-radius:50%;background:var(--m3-surface-container);border:1px solid var(--m3-outline-variant);cursor:pointer;font-size:1rem">‹</button>
+                <button onclick="cqReaderNav(1)"  id="cq-r-next" style="width:36px;height:36px;border-radius:50%;background:var(--m3-surface-container);border:1px solid var(--m3-outline-variant);cursor:pointer;font-size:1rem">›</button>
+              </div>
+              <!-- Body -->
+              <div id="cq-r-body" style="font-size:1rem;line-height:2.2;white-space:pre-wrap;font-family:Vazirmatn,sans-serif"></div>
+              <!-- History -->
+              <div id="cq-r-history-wrap" style="display:none;margin-top:24px;padding:14px;background:var(--m3-surface-container-low);border-radius:12px;border:1px solid var(--m3-outline-variant)">
+                <div style="font-size:.78rem;font-weight:600;color:var(--m3-on-surface-variant);margin-bottom:8px">📌 متن پیش از اصلاحات ۱۳۶۸</div>
+                <div id="cq-r-history" style="font-size:.88rem;line-height:1.9;color:var(--m3-on-surface-variant);white-space:pre-wrap"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-desc" style="margin-top:16px">متن کامل قانون اساسی جمهوری اسلامی ایران (اصلاحات ۱۳۶۸) در ۱۴ فصل و ۱۷۷ اصل. <strong>کاربرد:</strong> مطالعه، جستجو در اصول، مرور فصل‌ها.</a></div>
+        </div>
+
         </div><!-- /tool-container -->
 
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 7.10 - ۱۴۰۵/۰۲/۲۰
+          ℹ️ نسخه 7.12 - ۱۴۰۵/۰۲/۲۰
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -8861,8 +8810,10 @@
         numconvert:'تبدیل اعداد فارسی/لاتین', multable:'جدول ضرب تعاملی',
         linsolve:'حل معادله', enctools:'ابزار کدگذاری',
         jcal:'تقویم خورشیدی', geometry:'هندسه - محیط و مساحت',
-        qrread:'خواندن QR', periodic:'جدول تناوبی', metromap:'نقشه مترو و BRT',
-        emojis:'ایموجی', worldmap:'نقشه جهان و پرچم‌ها', calculus:'حسابان', emotcn:'اِموتیکون متنی', pasban:'فرهنگ واژه پارسی', pomodoro:'تایمر پومودورو', resistor:'مقاومت رنگی', chart:'نمودار داده', fakejson:'مولد JSON آزمایشی', subnet:'محاسبه‌گر Subnet', textfix:'تبدیل متن و کدگذاری', wcag:'کنتراست رنگ WCAG',
+        qrread:'خواندن QR', periodic:'جدول تناوبی', metromap:'نقشه مترو و BRT', constitution:'قانون اساسی',
+        emojis:'ایموجی', worldmap:'نقشه جهان و پرچم‌ها', calculus:'حسابان', emotcn:'اِموتیکون متنی',
+        pasban:'فرهنگ واژه پارسی', pomodoro:'تایمر پومودورو', resistor:'مقاومت رنگی', chart:'نمودار داده',
+        fakejson:'مولد JSON آزمایشی', subnet:'محاسبه‌گر Subnet', textfix:'تبدیل متن و کدگذاری', wcag:'کنتراست رنگ WCAG',
         imgpalette:'پالت رنگ تعاملی',
         ocrtool:'تشخیص متن OCR',
         stttool:'گفتار به متن STT',
@@ -8890,10 +8841,17 @@
         weather:'آب‌وهوا',
         earthquake:'زمین‌لرزه',
         translate:'ترجمه متن',
-        currency:'قیمت ارز و طلا'
+        currency:'قیمت ارز و طلا',
+        movies:'بانک فیلم'
       };
 
       function _applyTool(id, pushState) {
+        // Save home scroll position when leaving home
+        if (id !== 'home') {
+          try {
+            sessionStorage.setItem(_HOME_SCROLL_KEY, window.scrollY);
+          } catch(e) {}
+        }
         document.querySelectorAll('.tool-card').forEach(el => el.classList.remove('active'));
         const home = document.getElementById('home');
         if (home) home.style.display = (id === 'home') ? '' : 'none';
@@ -8930,8 +8888,17 @@
         // Back FAB: show when inside a tool, hide on home
         const backFab = document.getElementById('back-tool-fab');
         if (backFab) backFab.classList.toggle('visible', id !== 'home');
-        closeDrawer();
-        window.scrollTo(0, 0);
+        // Scroll: go to top for tools, restore home scroll for home
+        if (id === 'home') {
+          try {
+            const homeScroll = parseInt(sessionStorage.getItem(_HOME_SCROLL_KEY) || '0');
+            window.scrollTo(0, homeScroll);
+          } catch(e) {
+            window.scrollTo(0, 0);
+          }
+        } else {
+          window.scrollTo(0, 0);
+        }
         // Re-seed --val on sliders in the newly visible card
         if (id !== 'home') {
           const card = document.getElementById(id);
@@ -9066,9 +9033,6 @@
         }
       });
 
-      function openDrawer()  { document.getElementById('side-drawer').classList.add('open'); document.getElementById('drawer-overlay').classList.add('open'); document.body.style.overflow='hidden'; }
-      function closeDrawer() { document.getElementById('side-drawer').classList.remove('open'); document.getElementById('drawer-overlay').classList.remove('open'); document.body.style.overflow=''; }
-
       // ══ NAV RAIL: flyout submenu logic ══
       const RAIL_CATS = window.RAIL_CATS = {
         'sec-general': {
@@ -9163,7 +9127,7 @@
           tools: [
             {id:'emergency',icon:'🚨',name:'شماره ضروری'},{id:'citycodes',icon:'📞',name:'کد شهرها'},
             {id:'trafficfines',icon:'🚗',name:'جرایم رانندگی'},{id:'metromap',icon:'🚇',name:'نقشه مترو'},
-            {id:'device',icon:'💻',name:'اطلاعات دستگاه'},{id:'ua',icon:'ℹ️',name:'User Agent'}
+            {id:'device',icon:'💻',name:'اطلاعات دستگاه'},{id:'ua',icon:'ℹ️',name:'User Agent'},{id:'constitution',icon:'📜',name:'قانون اساسی'}
           ]
         },
         'sec-games': {
@@ -9186,7 +9150,7 @@
           icon: '🌐', label: 'ابزارهای آنلاین',
           tools: [
             {id:'weather',icon:'🌤️',name:'آب‌وهوا'},{id:'earthquake',icon:'🌍',name:'زمین‌لرزه'},{id:'translate',icon:'🌍',name:'ترجمه'},
-            {id:'currency',icon:'💹',name:'قیمت و نرخ'}
+            {id:'currency',icon:'💹',name:'قیمت و نرخ'},{id:'movies',icon:'🎬',name:'بانک فیلم'}
           ]
         },
         'sec-share': {
@@ -9417,6 +9381,7 @@
       //  UX #3: Last-used state persistence per tool (sessionStorage)
       // ══════════════════════════════════════════════════════
       const _SS_KEY = 'tb-state';
+      const _HOME_SCROLL_KEY = 'tb-home-scroll';
       function _saveToolState(id) {
         if (id === 'home') return;
         try {
@@ -26442,6 +26407,517 @@ self.onmessage=function(e){
           });
         })();
 
+
+        // ══════════════════════════════════════════════════
+        //  بانک فیلم — moviesapi.ir
+        // ══════════════════════════════════════════════════
+        (() => {
+          const BASE = 'https://moviesapi.ir/api/v1';
+          let mvCurrentTab = 'search';
+          let mvPrevTab    = 'search';
+          let mvGenres     = [];
+          let mvActiveGenreId   = null;
+          let mvActiveGenreName = '';
+          let mvSearchTimer = null;
+
+          function mvTab(tab) {
+            ['search','browse','genre','detail'].forEach(t => {
+              document.getElementById(`mv-pane-${t}`).style.display = t === tab ? '' : 'none';
+              const btn = document.getElementById(`mv-tab-${t}`);
+              if (btn) btn.className = t === tab ? 'btn btn-filled' : 'btn btn-tonal';
+            });
+            mvCurrentTab = tab;
+            if (tab === 'browse' && !document.getElementById('mv-browse-results').children.length) mvBrowse(1);
+            if (tab === 'genre'  && !mvGenres.length) mvLoadGenres();
+          }
+          window.mvTab = mvTab;
+
+          async function mvFetch(path) {
+            const r = await fetch(BASE + path);
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+          }
+
+          function mvSkeleton(containerId, count = 6) {
+            const c = document.getElementById(containerId);
+            if (!c) return;
+            c.innerHTML = Array.from({length: count}, () => `
+              <div style="display:flex;gap:10px;background:var(--m3-surface-container-low);border-radius:12px;padding:10px;border:1px solid var(--m3-outline-variant);animation:shimmer 1.2s infinite alternate">
+                <div style="width:54px;height:80px;border-radius:8px;background:var(--m3-surface-container-highest);flex-shrink:0"></div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:8px;justify-content:center">
+                  <div style="height:14px;border-radius:6px;background:var(--m3-surface-container-highest);width:60%"></div>
+                  <div style="height:11px;border-radius:6px;background:var(--m3-surface-container-highest);width:40%"></div>
+                  <div style="height:11px;border-radius:6px;background:var(--m3-surface-container-highest);width:80%"></div>
+                </div>
+              </div>`).join('');
+          }
+
+          function mvRenderList(movies, containerId) {
+            const c = document.getElementById(containerId);
+            if (!c) return;
+            if (!movies.length) { c.innerHTML = '<div style="text-align:center;padding:24px;color:var(--m3-on-surface-variant)">فیلمی یافت نشد</div>'; return; }
+            c.innerHTML = movies.map(m => {
+              const genres = (m.genres || []).map(g => `<span style="font-size:.68rem;background:var(--m3-secondary-container);color:var(--m3-on-secondary-container);border-radius:99px;padding:2px 8px">${g}</span>`).join('');
+              const poster = m.poster && m.poster.startsWith('http') ? m.poster : '';
+              return `
+              <div onclick="mvOpenDetail(${m.id})" style="display:flex;gap:10px;background:var(--m3-surface-container-low);border-radius:12px;padding:10px;border:1px solid var(--m3-outline-variant);cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--m3-surface-container)'" onmouseout="this.style.background='var(--m3-surface-container-low)'">
+                <div style="width:54px;height:80px;border-radius:8px;overflow:hidden;flex-shrink:0;background:var(--m3-surface-container-highest)">
+                  ${poster ? `<img src="${poster}" loading="lazy" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'">` : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.4rem">🎬</div>'}
+                </div>
+                <div style="flex:1;min-width:0;direction:ltr;text-align:left">
+                  <div style="font-weight:600;font-size:.88rem;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${m.title || '—'}</div>
+                  <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px">${genres}</div>
+                  <div style="font-size:.72rem;color:var(--m3-on-surface-variant)">ID: ${m.id}</div>
+                </div>
+              </div>`;
+            }).join('');
+          }
+
+          function mvRenderPages(meta, containerId, onPageClick) {
+            const c = document.getElementById(containerId);
+            if (!c || !meta) return;
+            const {current_page, page_count} = meta;
+            if (page_count <= 1) { c.innerHTML = ''; return; }
+            let btns = '';
+            const lo = Math.max(1, current_page - 2);
+            const hi = Math.min(page_count, current_page + 2);
+            if (lo > 1) btns += `<button class="btn btn-tonal" onclick="${onPageClick}(1)">۱</button>${lo>2?'<span style="align-self:center;color:var(--m3-on-surface-variant)">…</span>':''}`;
+            for (let p = lo; p <= hi; p++) {
+              btns += `<button class="btn ${p===current_page?'btn-filled':'btn-tonal'}" onclick="${onPageClick}(${p})">${p}</button>`;
+            }
+            if (hi < page_count) btns += `${hi<page_count-1?'<span style="align-self:center;color:var(--m3-on-surface-variant)">…</span>':''}<button class="btn btn-tonal" onclick="${onPageClick}(${page_count})">${page_count}</button>`;
+            c.innerHTML = btns;
+          }
+
+          function mvSearchDebounce() {
+            clearTimeout(mvSearchTimer);
+            mvSearchTimer = setTimeout(() => mvSearch(1), 450);
+          }
+          window.mvSearchDebounce = mvSearchDebounce;
+
+          async function mvSearch(page = 1) {
+            const q = (document.getElementById('mv-q')?.value || '').trim();
+            if (!q) { document.getElementById('mv-search-results').innerHTML = '<div style="text-align:center;padding:20px;color:var(--m3-on-surface-variant)">نام فیلم را به انگلیسی وارد کنید…</div>'; return; }
+            mvSkeleton('mv-search-results', 5);
+            document.getElementById('mv-search-pages').innerHTML = '';
+            try {
+              const data = await mvFetch(`/movies?q=${encodeURIComponent(q)}&page=${page}`);
+              mvRenderList(data.data || [], 'mv-search-results');
+              mvRenderPages(data.metadata, 'mv-search-pages', 'mvSearch');
+            } catch(e) {
+              document.getElementById('mv-search-results').innerHTML = `<div style="color:var(--m3-error);padding:12px;text-align:center">خطا: ${e.message}</div>`;
+            }
+          }
+          window.mvSearch = mvSearch;
+
+          async function mvBrowse(page = 1) {
+            mvSkeleton('mv-browse-results', 6);
+            document.getElementById('mv-browse-pages').innerHTML = '';
+            try {
+              const data = await mvFetch(`/movies?page=${page}`);
+              mvRenderList(data.data || [], 'mv-browse-results');
+              mvRenderPages(data.metadata, 'mv-browse-pages', 'mvBrowse');
+            } catch(e) {
+              document.getElementById('mv-browse-results').innerHTML = `<div style="color:var(--m3-error);padding:12px;text-align:center">خطا: ${e.message}</div>`;
+            }
+          }
+          window.mvBrowse = mvBrowse;
+
+          async function mvLoadGenres() {
+            const gl = document.getElementById('mv-genre-list');
+            if (gl) gl.innerHTML = '<div style="color:var(--m3-on-surface-variant)">در حال بارگذاری ژانرها…</div>';
+            try {
+              mvGenres = await mvFetch('/genres');
+              gl.innerHTML = mvGenres.map(g =>
+                `<button class="btn btn-tonal" id="mv-g-${g.id}" onclick="mvSelectGenre(${g.id},'${g.name}')" style="font-size:.8rem">${g.name}</button>`
+              ).join('');
+            } catch(e) {
+              gl.innerHTML = `<div style="color:var(--m3-error)">خطا در بارگذاری ژانرها</div>`;
+            }
+          }
+
+          async function mvSelectGenre(id, name) {
+            mvActiveGenreId = id;
+            mvActiveGenreName = name;
+            mvGenres.forEach(g => {
+              const b = document.getElementById(`mv-g-${g.id}`);
+              if (b) { b.className = g.id === id ? 'btn btn-filled' : 'btn btn-tonal'; b.style.fontSize = '.8rem'; }
+            });
+            await mvGenreMovies(1);
+          }
+          window.mvSelectGenre = mvSelectGenre;
+
+          async function mvGenreMovies(page = 1) {
+            if (!mvActiveGenreId) return;
+            mvSkeleton('mv-genre-results', 6);
+            document.getElementById('mv-genre-pages').innerHTML = '';
+            try {
+              const data = await mvFetch(`/genres/${mvActiveGenreId}/movies?page=${page}`);
+              mvRenderList(data.data || [], 'mv-genre-results');
+              mvRenderPages(data.metadata, 'mv-genre-pages', 'mvGenreMovies');
+            } catch(e) {
+              document.getElementById('mv-genre-results').innerHTML = `<div style="color:var(--m3-error);padding:12px;text-align:center">خطا: ${e.message}</div>`;
+            }
+          }
+          window.mvGenreMovies = mvGenreMovies;
+
+          async function mvOpenDetail(id) {
+            mvPrevTab = mvCurrentTab;
+            const detBtn = document.getElementById('mv-tab-detail');
+            if (detBtn) detBtn.style.display = '';
+            mvTab('detail');
+            const dc = document.getElementById('mv-detail-content');
+            const sw = document.getElementById('mv-similar-wrap');
+            if (dc) dc.innerHTML = `<div style="text-align:center;padding:32px;color:var(--m3-on-surface-variant)">در حال بارگذاری…</div>`;
+            if (sw) sw.style.display = 'none';
+            try {
+              const m = await mvFetch(`/movies/${id}`);
+              const poster = m.poster && (m.poster.startsWith('http') ? m.poster : `https://moviesapi.ir/images/${m.poster}`);
+              const genres = (m.genres || []).map(g =>
+                `<span style="font-size:.75rem;background:var(--m3-secondary-container);color:var(--m3-on-secondary-container);border-radius:99px;padding:3px 10px;cursor:pointer" onclick="mvQuickGenre('${g}')">${g}</span>`
+              ).join('');
+              const images = (m.images || []).map(img =>
+                `<img src="${img}" loading="lazy" style="height:90px;border-radius:8px;object-fit:cover;cursor:pointer" onclick="window.open('${img}','_blank')" onerror="this.style.display='none'">`
+              ).join('');
+              const stars = m.imdb_rating ? '⭐'.repeat(Math.round(parseFloat(m.imdb_rating)/2)) : '';
+              dc.innerHTML = `
+                <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px">
+                  ${poster ? `<img src="${poster}" style="width:110px;border-radius:12px;object-fit:cover;flex-shrink:0;box-shadow:0 4px 16px rgba(0,0,0,.3)" onerror="this.style.display='none'">` : ''}
+                  <div style="flex:1;min-width:180px;direction:ltr;text-align:left">
+                    <div style="font-size:1.15rem;font-weight:700;margin-bottom:6px">${m.title || '—'}</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">${genres}</div>
+                    <div style="font-size:.8rem;color:var(--m3-on-surface-variant);line-height:1.8">
+                      ${m.year    ? `<span>📅 ${m.year}</span>  ` : ''}
+                      ${m.runtime ? `<span>⏱ ${m.runtime}</span>  ` : ''}
+                      ${m.country ? `<span>🌍 ${m.country}</span>` : ''}
+                    </div>
+                    ${m.imdb_rating ? `<div style="margin-top:6px;font-size:.85rem">${stars} <strong>${m.imdb_rating}</strong>/10 <span style="font-size:.72rem;color:var(--m3-on-surface-variant)">(${m.imdb_votes} رأی)</span></div>` : ''}
+                    ${m.metascore  ? `<div style="font-size:.75rem;color:var(--m3-on-surface-variant)">Metascore: ${m.metascore}</div>` : ''}
+                  </div>
+                </div>
+                ${m.director ? `<div style="font-size:.8rem;margin-bottom:6px;direction:ltr"><strong>کارگردان:</strong> ${m.director}</div>` : ''}
+                ${m.actors   ? `<div style="font-size:.8rem;margin-bottom:6px;direction:ltr"><strong>بازیگران:</strong> ${m.actors}</div>` : ''}
+                ${m.writer   ? `<div style="font-size:.78rem;color:var(--m3-on-surface-variant);margin-bottom:6px;direction:ltr"><strong>نویسنده:</strong> ${m.writer}</div>` : ''}
+                ${m.plot     ? `<div style="font-size:.83rem;line-height:1.7;margin-bottom:10px;direction:ltr;background:var(--m3-surface-container-low);border-radius:10px;padding:10px;border:1px solid var(--m3-outline-variant)">${m.plot}</div>` : ''}
+                ${m.awards   ? `<div style="font-size:.78rem;color:var(--m3-tertiary,#7b5ea7);margin-bottom:10px;direction:ltr">🏆 ${m.awards}</div>` : ''}
+                ${m.rated    ? `<div style="font-size:.75rem;display:inline-block;border:1px solid var(--m3-outline);border-radius:6px;padding:2px 8px;margin-bottom:10px">${m.rated}</div>` : ''}
+                ${images     ? `<div style="margin-bottom:4px;font-size:.8rem;font-weight:600;color:var(--m3-on-surface-variant)">تصاویر</div><div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:4px">${images}</div>` : ''}
+                ${m.imdb_id  ? `<div style="margin-top:10px"><a href="https://www.imdb.com/title/${m.imdb_id}" target="_blank" rel="noopener" style="font-size:.78rem;color:var(--m3-primary);direction:ltr;display:inline-flex;align-items:center;gap:4px">🔗 مشاهده در IMDB ↗</a></div>` : ''}
+              `;
+              if (m.genres && m.genres.length) mvLoadSimilar(m.genres, id);
+            } catch(e) {
+              dc.innerHTML = `<div style="color:var(--m3-error);padding:16px;text-align:center">خطا در بارگذاری: ${e.message}</div>`;
+            }
+          }
+          window.mvOpenDetail = mvOpenDetail;
+
+          async function mvLoadSimilar(genres, currentId) {
+            const sw = document.getElementById('mv-similar-wrap');
+            const sl = document.getElementById('mv-similar-list');
+            if (!sw || !sl) return;
+            try {
+              if (!mvGenres.length) mvGenres = await mvFetch('/genres');
+              const gId = (mvGenres.find(g => genres.includes(g.name)) || {}).id;
+              if (!gId) return;
+              const data = await mvFetch(`/genres/${gId}/movies?page=1`);
+              const similar = (data.data || []).filter(m => m.id !== currentId).slice(0, 8);
+              if (!similar.length) return;
+              sl.innerHTML = similar.map(m => {
+                const poster = m.poster && m.poster.startsWith('http') ? m.poster : '';
+                return `
+                <div onclick="mvOpenDetail(${m.id})" style="width:80px;cursor:pointer;flex-shrink:0;text-align:center" title="${m.title}">
+                  <div style="width:80px;height:110px;border-radius:8px;overflow:hidden;background:var(--m3-surface-container-highest);margin-bottom:4px">
+                    ${poster ? `<img src="${poster}" loading="lazy" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'">` : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.6rem">🎬</div>'}
+                  </div>
+                  <div style="font-size:.65rem;line-height:1.3;color:var(--m3-on-surface-variant);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;direction:ltr">${m.title}</div>
+                </div>`;
+              }).join('');
+              sw.style.display = '';
+            } catch(e) { /* silently skip */ }
+          }
+
+          async function mvQuickGenre(genreName) {
+            if (!mvGenres.length) mvGenres = await mvFetch('/genres');
+            const g = mvGenres.find(x => x.name === genreName);
+            if (!g) return;
+            mvActiveGenreId = g.id;
+            mvActiveGenreName = g.name;
+            mvTab('genre');
+            if (!document.getElementById('mv-genre-list').children.length) await mvLoadGenres();
+            mvGenres.forEach(x => {
+              const b = document.getElementById(`mv-g-${x.id}`);
+              if (b) { b.className = x.id === g.id ? 'btn btn-filled' : 'btn btn-tonal'; b.style.fontSize = '.8rem'; }
+            });
+            mvGenreMovies(1);
+          }
+          window.mvQuickGenre = mvQuickGenre;
+
+          function mvBack() {
+            const detBtn = document.getElementById('mv-tab-detail');
+            if (detBtn) detBtn.style.display = 'none';
+            mvTab(mvPrevTab);
+          }
+          window.mvBack = mvBack;
+
+          document.addEventListener('DOMContentLoaded', () => {
+            const card = document.getElementById('movies');
+            if (!card) return;
+            let mvInited = false;
+            new MutationObserver(muts => {
+              muts.forEach(m => {
+                if (m.attributeName === 'class' && card.classList.contains('active') && !mvInited) {
+                  mvInited = true;
+                  document.getElementById('mv-search-results').innerHTML =
+                    '<div style="text-align:center;padding:28px;color:var(--m3-on-surface-variant)">🔍 نام فیلم را جستجو کنید یا به تب «مرور» بروید</div>';
+                }
+              });
+            }).observe(card, {attributes: true});
+            if (card.classList.contains('active')) {
+              mvInited = true;
+              document.getElementById('mv-search-results').innerHTML =
+                '<div style="text-align:center;padding:28px;color:var(--m3-on-surface-variant)">🔍 نام فیلم را جستجو کنید یا به تب «مرور» بروید</div>';
+            }
+          });
+        })();
+
+        // ══════════════════════════════════════════════════
+        //  قانون اساسی — loads /static/constitution.json
+        // ══════════════════════════════════════════════════
+        (() => {
+          const JSON_URL  = '/static/constitution.json';
+          const CH_COLORS = [
+            '#1565c0','#558b2f','#6a1b9a','#00695c','#e65100',
+            '#37474f','#ad1457','#0277bd','#4e342e','#2e7d32',
+            '#4527a0','#00838f','#c62828','#5d4037'
+          ];
+          const toFa = n => String(n).replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+
+          let cqChapters = [], cqArticles = [], cqFiltered = [];
+          let cqReaderIdx = 0, cqLoaded = false, cqLoading = false;
+
+          async function cqLoad() {
+            if (cqLoaded || cqLoading) return;
+            cqLoading = true;
+            const list = document.getElementById('cq-list');
+            if (list) list.innerHTML = '<div style="text-align:center;padding:32px;color:var(--m3-on-surface-variant)">در حال بارگذاری…</div>';
+            try {
+              const res = await fetch(JSON_URL);
+              if (!res.ok) throw new Error('HTTP ' + res.status);
+              const d = await res.json();
+              cqChapters = d.chapters;
+              cqArticles = d.articles;
+              cqLoaded   = true;
+              cqBuildUI();
+              cqFilter();
+            } catch(e) {
+              if (list) list.innerHTML = `<div style="color:var(--m3-error);padding:16px;text-align:center">خطا در بارگذاری: ${e.message}</div>`;
+            } finally { cqLoading = false; }
+          }
+
+          function cqBuildUI() {
+            // Chapter <select>
+            const sel = document.getElementById('cq-ch');
+            if (sel) cqChapters.forEach((ch, i) => {
+              const o = document.createElement('option');
+              o.value = ch;
+              o.textContent = `فصل ${toFa(i+1)}: ${ch}`;
+              sel.appendChild(o);
+            });
+
+            // Pills
+            const pills = document.getElementById('cq-pills');
+            if (!pills) return;
+            pills.innerHTML = '';
+            const makeBtn = (label, col, onclick) => {
+              const b = document.createElement('button');
+              b.className = 'btn btn-tonal';
+              b.style.cssText = `font-size:.72rem;flex-shrink:0;white-space:nowrap${col?`;border-bottom:2px solid ${col}`:''}`;
+              b.textContent = label;
+              b.onclick = onclick;
+              return b;
+            };
+            const allBtn = makeBtn('همه', '', () => {
+              document.getElementById('cq-ch').value = '';
+              document.getElementById('cq-search').value = '';
+              cqFilter();
+            });
+            allBtn.id = 'cq-pill-all';
+            pills.appendChild(allBtn);
+            cqChapters.forEach((ch, i) => {
+              const b = makeBtn(ch, CH_COLORS[i], () => {
+                document.getElementById('cq-ch').value = ch;
+                document.getElementById('cq-search').value = '';
+                cqFilter();
+              });
+              b.id = `cq-pill-${i}`;
+              pills.appendChild(b);
+            });
+          }
+
+          function cqSyncPills(activeCh) {
+            const allBtn = document.getElementById('cq-pill-all');
+            if (allBtn) allBtn.className = activeCh === '' ? 'btn btn-filled' : 'btn btn-tonal';
+            cqChapters.forEach((ch, i) => {
+              const b = document.getElementById(`cq-pill-${i}`);
+              if (!b) return;
+              b.className = ch === activeCh ? 'btn btn-filled' : 'btn btn-tonal';
+              b.style.cssText = `font-size:.72rem;flex-shrink:0;white-space:nowrap;border-bottom:2px solid ${CH_COLORS[i]}`;
+            });
+          }
+
+          function cqFilter() {
+            if (!cqLoaded) return;
+            const q  = (document.getElementById('cq-search')?.value || '').trim();
+            const ch = document.getElementById('cq-ch')?.value || '';
+            cqSyncPills(ch);
+            cqFiltered = cqArticles.filter(a =>
+              (!ch || a.ch === ch) &&
+              (!q  || a.text.includes(q) || String(a.n).includes(q))
+            );
+            const countEl = document.getElementById('cq-count');
+            if (countEl) countEl.textContent = (q || ch)
+              ? `${toFa(cqFiltered.length)} اصل یافت شد (از ${toFa(cqArticles.length)})`
+              : `${toFa(cqArticles.length)} اصل در ${toFa(cqChapters.length)} فصل`;
+            cqRender();
+          }
+          window.cqFilter = cqFilter;
+
+          function cqHighlight(text, q) {
+            if (!q) return text;
+            return text.replace(
+              new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'),
+              `<mark style="background:var(--m3-tertiary-container,#ffd700);border-radius:3px;padding:0 2px">${q}</mark>`
+            );
+          }
+
+          function cqRender() {
+            const list = document.getElementById('cq-list');
+            if (!list) return;
+            const q = (document.getElementById('cq-search')?.value || '').trim();
+            if (!cqFiltered.length) {
+              list.innerHTML = '<div style="text-align:center;padding:28px;color:var(--m3-on-surface-variant)">اصلی با این معیار یافت نشد</div>';
+              return;
+            }
+            list.innerHTML = cqFiltered.map((a, idx) => {
+              const chIdx = cqChapters.indexOf(a.ch);
+              const col   = CH_COLORS[chIdx] || 'var(--m3-primary)';
+              const hasHistory = a.history && a.history.length > 0;
+              // Preview: show context around match
+              let previewHtml;
+              if (q && a.text.includes(q)) {
+                const pos   = a.text.indexOf(q);
+                const start = Math.max(0, pos - 40);
+                const snip  = (start > 0 ? '…' : '') + a.text.slice(start, start + 160).replace(/\n/g, ' ');
+                previewHtml = cqHighlight(snip, q);
+              } else {
+                previewHtml = a.text.slice(0, 160).replace(/\n/g, ' ') + (a.text.length > 160 ? '…' : '');
+              }
+              const badge = hasHistory
+                ? ` <span style="font-size:.63rem;background:var(--m3-tertiary-container,#ffe082);color:var(--m3-on-surface-variant);border-radius:99px;padding:1px 6px;vertical-align:middle">اصلاحی</span>`
+                : '';
+              return `
+              <div onclick="cqOpenReader(${idx})" style="
+                background:var(--m3-surface-container-low);
+                border:1px solid var(--m3-outline-variant);
+                border-right:4px solid ${col};
+                border-radius:12px;padding:12px 14px;
+                cursor:pointer;transition:background .15s
+              " onmouseover="this.style.background='var(--m3-surface-container)'"
+                 onmouseout="this.style.background='var(--m3-surface-container-low)'">
+                <div style="display:flex;align-items:flex-start;gap:10px">
+                  <div style="min-width:42px;height:42px;border-radius:10px;background:${col}18;border:1.5px solid ${col}55;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;line-height:1.1">
+                    <span style="font-size:.58rem;color:${col};font-weight:600">اصل</span>
+                    <span style="font-size:.88rem;font-weight:700;color:${col}">${toFa(a.n)}</span>
+                  </div>
+                  <div style="min-width:0;flex:1">
+                    <div style="font-size:.72rem;color:${col};font-weight:600;margin-bottom:3px">${a.ch}${badge}</div>
+                    <div style="font-size:.82rem;line-height:1.7">${previewHtml}</div>
+                  </div>
+                </div>
+              </div>`;
+            }).join('');
+          }
+
+          function cqOpenReader(idx) {
+            cqReaderIdx = idx;
+            cqShowInReader(cqFiltered[idx]);
+            const r = document.getElementById('cq-reader');
+            r.style.display = '';
+            r.scrollTop = 0;
+          }
+          window.cqOpenReader = cqOpenReader;
+
+          function cqShowInReader(a) {
+            const chIdx = cqChapters.indexOf(a.ch);
+            const col   = CH_COLORS[chIdx] || 'var(--m3-primary)';
+            const q     = (document.getElementById('cq-search')?.value || '').trim();
+            const hasHistory = a.history && a.history.length > 0;
+
+            const chEl   = document.getElementById('cq-r-chapter');
+            const numEl  = document.getElementById('cq-r-num');
+            const bodyEl = document.getElementById('cq-r-body');
+            const hw     = document.getElementById('cq-r-history-wrap');
+            const histEl = document.getElementById('cq-r-history');
+            const prev   = document.getElementById('cq-r-prev');
+            const next   = document.getElementById('cq-r-next');
+
+            if (chEl)  { chEl.textContent = `فصل ${toFa(chIdx+1)}: ${a.ch}`; chEl.style.color = col; }
+            if (numEl) numEl.textContent = `اصل ${toFa(a.n)}`;
+            if (bodyEl) {
+              if (q && a.text.includes(q)) {
+                bodyEl.innerHTML = cqHighlight(a.text, q);
+              } else {
+                bodyEl.textContent = a.text;
+              }
+            }
+            if (hw)     hw.style.display = hasHistory ? '' : 'none';
+            if (histEl && hasHistory) histEl.textContent = a.history;
+            if (prev)   prev.disabled = cqReaderIdx === 0;
+            if (next)   next.disabled = cqReaderIdx === cqFiltered.length - 1;
+          }
+
+          function cqReaderNav(dir) {
+            const n = cqReaderIdx + dir;
+            if (n < 0 || n >= cqFiltered.length) return;
+            cqReaderIdx = n;
+            cqShowInReader(cqFiltered[cqReaderIdx]);
+            document.getElementById('cq-reader').scrollTop = 0;
+          }
+          window.cqReaderNav = cqReaderNav;
+
+          function cqCloseReader() {
+            document.getElementById('cq-reader').style.display = 'none';
+          }
+          window.cqCloseReader = cqCloseReader;
+
+          function cqRandom() {
+            if (!cqFiltered.length) return;
+            cqOpenReader(Math.floor(Math.random() * cqFiltered.length));
+            const btn = document.querySelector('[onclick="cqRandom()"]');
+            if (btn) { btn.style.transform='rotate(360deg)'; setTimeout(()=>btn.style.transform='',400); }
+          }
+          window.cqRandom = cqRandom;
+
+          document.addEventListener('keydown', e => {
+            if (document.getElementById('cq-reader')?.style.display === 'none') return;
+            if (e.key === 'Escape')     cqCloseReader();
+            if (e.key === 'ArrowLeft')  cqReaderNav(1);
+            if (e.key === 'ArrowRight') cqReaderNav(-1);
+          });
+
+          document.addEventListener('DOMContentLoaded', () => {
+            const card = document.getElementById('constitution');
+            if (!card) return;
+            new MutationObserver(muts => {
+              muts.forEach(m => {
+                if (m.attributeName === 'class' && card.classList.contains('active') && !cqLoaded)
+                  cqLoad();
+              });
+            }).observe(card, { attributes: true });
+            if (card.classList.contains('active')) cqLoad();
+          });
+        })();
+        
     </script>
   </body>
 </html>

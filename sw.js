@@ -6,7 +6,7 @@
 //    - External/opaque requests: Network-only (skip)
 // ============================================================
 
-const CACHE_VERSION = 'toolbox-v7.10';
+const CACHE_VERSION = 'toolbox-v7.12';
 const CACHE_SHELL   = CACHE_VERSION + '-shell';
 const CACHE_ASSETS  = CACHE_VERSION + '-assets';
 
@@ -17,12 +17,14 @@ const SHELL_URLS = [
   '/',
   '/index.html',
   '/iran.html',
+  '/resume.html',
   '/manifest.json',
   '/static/main.css',
   '/static/main.js',
   '/static/favicon.png',
   '/static/icon-512.png',
   '/static/Vazirmatn-VF.ttf',
+  '/static/constitution.json',
   '/static/lib/jsQR.min.js',
   '/static/lib/qr-code-styling.js',
   '/static/lib/browser-image-compression.js',
