@@ -2431,6 +2431,7 @@
 
         <span class="drawer-section-label">🌐 ابزار آنلاین</span>
         <div class="drawer-item" onclick="showTool('weather')" data-tool="weather"><span class="drawer-item__icon">🌤️</span>آب‌وهوا</div>
+        <div class="drawer-item" onclick="showTool('earthquake')" data-tool="earthquake"><span class="drawer-item__icon">🌍</span>زمین‌لرزه</div>
         <div class="drawer-item" onclick="showTool('translate')" data-tool="translate"><span class="drawer-item__icon">🌍</span>ترجمه</div>
         <div class="drawer-item" onclick="showTool('currency')" data-tool="currency"><span class="drawer-item__icon">💹</span>قیمت</div>
 
@@ -2891,6 +2892,7 @@
               <div class="section__title">🌐 ابزارهای آنلاین</div>
               <div class="tool-grid">
                 <div class="link-card" onclick="haptic(this);showTool('weather')"><button class="fav-btn" data-tool="weather" onclick="event.stopPropagation();toggleFav('weather',this)">☆</button><span class="link-card__icon">🌤️</span><span class="link-card__name">آب‌وهوا</span><span class="link-card__desc">وضعیت آب‌وهوای شهرهای ایران</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('earthquake')"><button class="fav-btn" data-tool="earthquake" onclick="event.stopPropagation();toggleFav('earthquake',this)">☆</button><span class="link-card__icon">🌍</span><span class="link-card__name">زمین‌لرزه</span><span class="link-card__desc">آخرین زلزله‌های ایران · IRSC</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('translate')"><button class="fav-btn" data-tool="translate" onclick="event.stopPropagation();toggleFav('translate',this)">☆</button><span class="link-card__icon">🌍</span><span class="link-card__name">ترجمه</span><span class="link-card__desc">ترجمه متن به ۱۳ زبان</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('currency')"><button class="fav-btn" data-tool="currency" onclick="event.stopPropagation();toggleFav('currency',this)">☆</button><span class="link-card__icon">💹</span><span class="link-card__name">قیمت و نرخ</span><span class="link-card__desc">ارز، طلا و رمزارز زنده</span></div>
               </div>
@@ -8602,6 +8604,90 @@
         </div>
         </div>
 
+        <!-- ══ زمین‌لرزه ══ -->
+        <div id="earthquake" class="tool-card">
+          <div class="tool-title">🌍 زمین‌لرزه‌های اخیر ایران</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+            <span style="font-size:.78rem;color:var(--m3-on-surface-variant)">منبع: مرکز لرزه‌نگاری کشوری · دانشگاه تهران</span>
+            <button onclick="eqLoad()" title="به‌روزرسانی" style="display:flex;align-items:center;gap:6px;background:var(--m3-surface-container);border:1px solid var(--m3-outline-variant);border-radius:99px;padding:4px 12px;cursor:pointer;color:inherit;font-family:inherit;transition:background 0.2s">
+              <span id="eq-dot" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--m3-primary);box-shadow:0 0 6px var(--m3-primary)"></span>
+              <span id="eq-ts" style="font-size:.72rem;color:var(--m3-on-surface-variant)">در حال بارگذاری…</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--m3-on-surface-variant)"><path d="M21 12a9 9 0 11-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path></svg>
+            </button>
+          </div>
+
+          <!-- Filters -->
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;align-items:flex-end">
+            <div style="flex:1;min-width:130px">
+              <label class="field-label">استان</label>
+              <div class="field__container" style="padding:0 8px;height:44px">
+                <select id="eq-f-prov" class="field__input" style="cursor:pointer" onchange="eqRender()">
+                  <option value="">همه استان‌ها</option>
+                </select>
+              </div>
+            </div>
+            <div style="flex:1;min-width:130px">
+              <label class="field-label">حداقل بزرگی</label>
+              <div class="field__container" style="padding:0 8px;height:44px">
+                <select id="eq-f-mag" class="field__input" style="cursor:pointer" onchange="eqRender()">
+                  <option value="0">همه</option>
+                  <option value="2.5">۲.۵+</option>
+                  <option value="3">۳.۰+</option>
+                  <option value="3.5">۳.۵+</option>
+                  <option value="4">۴.۰+</option>
+                  <option value="4.5">۴.۵+</option>
+                </select>
+              </div>
+            </div>
+            <div style="flex:1;min-width:130px">
+              <label class="field-label">حداکثر عمق (km)</label>
+              <div class="field__container" style="padding:0 8px;height:44px">
+                <select id="eq-f-dep" class="field__input" style="cursor:pointer" onchange="eqRender()">
+                  <option value="9999">همه</option>
+                  <option value="10">کم‌عمق (≤۱۰)</option>
+                  <option value="30">متوسط (≤۳۰)</option>
+                  <option value="70">عمیق (≤۷۰)</option>
+                </select>
+              </div>
+            </div>
+            <div style="flex:1;min-width:130px">
+              <label class="field-label">مرتب‌سازی</label>
+              <div class="field__container" style="padding:0 8px;height:44px">
+                <select id="eq-f-sort" class="field__input" style="cursor:pointer" onchange="eqRender()">
+                  <option value="time">جدیدترین</option>
+                  <option value="mag">بزرگ‌ترین</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Iran SVG Map -->
+          <div id="eq-map-wrap" style="position:relative;margin-bottom:16px;border-radius:12px;overflow:hidden;background:var(--m3-surface-container-low);border:1px solid var(--m3-outline-variant)">
+            <svg id="eq-map" viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;max-height:400px">
+              <!-- Iran border as embedded image -->
+              <image href="static/iran.svg" width="1000" height="800"/>
+              
+              <!-- Earthquake dots rendered by JS -->
+              <g id="eq-dots"></g>
+              
+              <!-- Tooltip -->
+              <g id="eq-tooltip" style="display:none;pointer-events:none">
+                <rect id="eq-tt-bg" rx="6" fill="var(--m3-surface)" stroke="var(--m3-outline)" stroke-width="1"/>
+                <text id="eq-tt-text" font-size="12" fill="var(--m3-on-surface)" font-family="system-ui,-apple-system,sans-serif"></text>
+              </g>
+            </svg>
+          </div>
+
+
+          <!-- Count badge -->
+          <div style="font-size:.8rem;color:var(--m3-on-surface-variant);margin-bottom:8px" id="eq-count-label"></div>
+
+          <!-- List -->
+          <div id="eq-list" style="display:flex;flex-direction:column;gap:8px"></div>
+
+          <div class="tool-desc" style="margin-top:16px">نمایش آخرین زمین‌لرزه‌های ایران و نواحی مجاور از مرکز لرزه‌نگاری کشوری (IRSC). داده‌ها به‌صورت XML بارگذاری می‌شوند. <strong>کاربرد:</strong> پایش لرزه‌خیزی، هشدار زودهنگام.</div>
+        </div>
+
         <!-- ══ ترجمه ══ -->
         <div id="translate" class="tool-card">
           <div class="tool-title">🌍 ترجمه متن</div>
@@ -8692,7 +8778,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 7.9 - ۱۴۰۵/۰۲/۱۹
+          ℹ️ نسخه 7.10 - ۱۴۰۵/۰۲/۲۰
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -8802,6 +8888,7 @@
         diwan:'دیوان شعر',
         filesplit:'تقسیم و مرج فایل',
         weather:'آب‌وهوا',
+        earthquake:'زمین‌لرزه',
         translate:'ترجمه متن',
         currency:'قیمت ارز و طلا'
       };
@@ -9098,7 +9185,7 @@
         'sec-online': {
           icon: '🌐', label: 'ابزارهای آنلاین',
           tools: [
-            {id:'weather',icon:'🌤️',name:'آب‌وهوا'},{id:'translate',icon:'🌍',name:'ترجمه'},
+            {id:'weather',icon:'🌤️',name:'آب‌وهوا'},{id:'earthquake',icon:'🌍',name:'زمین‌لرزه'},{id:'translate',icon:'🌍',name:'ترجمه'},
             {id:'currency',icon:'💹',name:'قیمت و نرخ'}
           ]
         },
@@ -26119,6 +26206,239 @@ self.onmessage=function(e){
             });
             obs.observe(card,{attributes:true});
             if(card.classList.contains('active')){curInit=true;curFetch();curTimer=setInterval(()=>{if(document.getElementById('currency')?.classList.contains('active'))curFetch();},REFRESH);}
+          });
+        })();
+
+        // ══════════════════════════════════════════════════
+        //  زمین‌لرزه — IRSC XML feed
+        // ══════════════════════════════════════════════════
+        (() => {
+          const EQ_PROXY = '/irsc-proxy';
+          let eqData = [];   // parsed, normalised records
+          let eqLoaded = false;
+
+          // Persian digit → ASCII
+          const faToNum = s => String(s).replace(/[۰-۹]/g, d => d.charCodeAt(0) - 1776);
+
+          // Extract province name from "شهر، استان" → "استان"
+          const province = reg => {
+            if (!reg) return '';
+            const p = reg.trim().split('،');
+            return p.length > 1 ? p[1].trim() : '';
+          };
+
+          // Magnitude colour
+          const magColor = m => {
+            if (m >= 5)   return '#d32f2f';
+            if (m >= 4)   return '#f57c00';
+            if (m >= 3)   return '#fbc02d';
+            return '#388e3c';
+          };
+
+          // Convert lat/lon to SVG coordinates (matching iran.svg viewBox 0 0 1000 800)
+          const toSVG = (lat, lon) => {
+            // Iran bounds: lat 25–40°N, lon 44–64°E
+            // Map to viewBox: x: 360-800, y: 89-511
+            const svgX = 360 + (lon - 44) / (64 - 44) * 440;
+            const svgY = 89 + (40 - lat) / (40 - 25) * 422;
+            return { x: svgX, y: svgY };
+          };
+
+          async function eqLoad() {
+            const dot = document.getElementById('eq-dot');
+            const ts  = document.getElementById('eq-ts');
+            if (dot) dot.style.animation = 'pulse2 1s infinite';
+            if (ts)  ts.textContent = 'در حال بارگذاری…';
+            try {
+              const res = await fetch(EQ_PROXY);
+              if (!res.ok) throw new Error('HTTP ' + res.status);
+              const text = await res.text();
+              const parser = new DOMParser();
+              const xml = parser.parseFromString(text, 'application/xml');
+              const items = Array.from(xml.querySelectorAll('item')).filter(el => el.querySelector('id'));
+
+              eqData = items.map(el => {
+                const g = t => el.querySelector(t)?.textContent?.trim() || '';
+                const mag = parseFloat(faToNum(g('mag')));
+                const dep = parseFloat(faToNum(g('dep')));
+                const lat = parseFloat(faToNum(g('lat')).replace(/[^0-9.]/g, ''));
+                const lon = parseFloat(faToNum(g('long')).replace(/[^0-9.]/g, ''));
+                return {
+                  id:   g('id'),
+                  reg1: g('reg1'), dis1: faToNum(g('dis1')),
+                  reg2: g('reg2'), dis2: faToNum(g('dis2')),
+                  reg3: g('reg3'), dis3: faToNum(g('dis3')),
+                  mag, dep, lat, lon,
+                  date: faToNum(g('date')),
+                  prov: province(g('reg1')),
+                };
+              }).filter(e => !isNaN(e.mag));
+
+              // Populate province filter
+              const sel = document.getElementById('eq-f-prov');
+              if (sel) {
+                const provs = [...new Set(eqData.map(e => e.prov).filter(Boolean))].sort();
+                const cur   = sel.value;
+                sel.innerHTML = '<option value="">همه استان‌ها</option>' +
+                  provs.map(p => `<option value="${p}"${p===cur?' selected':''}>${p}</option>`).join('');
+              }
+
+              const now = new Date();
+              if (ts) ts.textContent = `آخرین به‌روزرسانی: ${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
+              if (dot) dot.style.animation = '';
+              eqLoaded = true;
+              eqRender();
+            } catch(e) {
+              if (ts) ts.textContent = 'خطا در بارگذاری';
+              if (dot) { dot.style.animation=''; dot.style.background='#d32f2f'; }
+              const list = document.getElementById('eq-list');
+              if (list) list.innerHTML = `<div style="color:var(--m3-error);padding:12px;text-align:center">خطا در دریافت داده‌ها: ${e.message}</div>`;
+            }
+          }
+
+          function eqRender() {
+            if (!eqLoaded) return;
+            const prov = document.getElementById('eq-f-prov')?.value || '';
+            const minMag = parseFloat(document.getElementById('eq-f-mag')?.value || '0');
+            const maxDep = parseFloat(document.getElementById('eq-f-dep')?.value || '9999');
+            const sortBy = document.getElementById('eq-f-sort')?.value || 'time';
+
+            let filtered = eqData.filter(e =>
+              (!prov || e.prov === prov) &&
+              e.mag >= minMag &&
+              e.dep <= maxDep
+            );
+
+            if (sortBy === 'mag') {
+              filtered.sort((a,b) => b.mag - a.mag);
+            }
+            // default order from XML is already newest first
+
+            const countLbl = document.getElementById('eq-count-label');
+            if (countLbl) countLbl.textContent = `نمایش ${filtered.length} زمین‌لرزه از ${eqData.length} رویداد`;
+
+            eqRenderMap(filtered);
+            eqRenderList(filtered);
+          }
+
+          function eqRenderMap(items) {
+            const g = document.getElementById('eq-dots');
+            if (!g) return;
+            g.innerHTML = '';
+            items.forEach((e, i) => {
+              if (isNaN(e.lat) || isNaN(e.lon)) return;
+              const {x, y} = toSVG(e.lat, e.lon);
+              const r = Math.max(3, Math.min(12, e.mag * 2.2));
+              const col = magColor(e.mag);
+              const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+              circle.setAttribute('cx', x.toFixed(1));
+              circle.setAttribute('cy', y.toFixed(1));
+              circle.setAttribute('r', r.toFixed(1));
+              circle.setAttribute('fill', col);
+              circle.setAttribute('fill-opacity', '0.75');
+              circle.setAttribute('stroke', '#fff');
+              circle.setAttribute('stroke-width', '0.8');
+              circle.setAttribute('style', 'cursor:pointer');
+              circle.addEventListener('mouseenter', ev => eqShowTooltip(e, x, y));
+              circle.addEventListener('mouseleave', () => eqHideTooltip());
+              circle.addEventListener('click', () => {
+                document.getElementById(`eq-row-${e.id}`)?.scrollIntoView({behavior:'smooth',block:'nearest'});
+              });
+              g.appendChild(circle);
+            });
+          }
+
+          function eqShowTooltip(e, x, y) {
+            const ttg  = document.getElementById('eq-tooltip');
+            const ttbg = document.getElementById('eq-tt-bg');
+            const ttt  = document.getElementById('eq-tt-text');
+            if (!ttg || !ttbg || !ttt) return;
+            const label = `M${e.mag.toFixed(1)} · عمق ${e.dep}km · ${e.reg1}`;
+            ttt.textContent = label;
+            ttg.style.display = '';
+            // position tooltip above dot
+            const tw = label.length * 6.5 + 16;
+            const tx = Math.min(x, 590) - tw/2;
+            const ty = y - 28;
+            ttbg.setAttribute('x', tx); ttbg.setAttribute('y', ty);
+            ttbg.setAttribute('width', tw); ttbg.setAttribute('height', 20);
+            ttt.setAttribute('x', tx + tw/2); ttt.setAttribute('y', ty + 14);
+          }
+
+          function eqHideTooltip() {
+            const ttg = document.getElementById('eq-tooltip');
+            if (ttg) ttg.style.display = 'none';
+          }
+
+          function eqRenderList(items) {
+            const list = document.getElementById('eq-list');
+            if (!list) return;
+            if (!items.length) {
+              list.innerHTML = '<div style="text-align:center;padding:24px;color:var(--m3-on-surface-variant)">هیچ رویدادی با این فیلترها یافت نشد</div>';
+              return;
+            }
+            list.innerHTML = items.map(e => {
+              const col = magColor(e.mag);
+              const bigMag = e.mag >= 4;
+              return `
+              <div id="eq-row-${e.id}" style="
+                background:var(--m3-surface-container-low);
+                border:1px solid ${bigMag ? col : 'var(--m3-outline-variant)'};
+                border-radius:12px;padding:12px 14px;
+                display:flex;align-items:center;gap:12px;
+                ${bigMag?'box-shadow:0 2px 8px '+col+'44':''}
+              ">
+                <!-- Mag badge -->
+                <div style="
+                  min-width:48px;height:48px;border-radius:10px;
+                  background:${col};color:#fff;
+                  display:flex;flex-direction:column;align-items:center;justify-content:center;
+                  font-weight:700;font-size:1.05rem;line-height:1.1;flex-shrink:0
+                ">
+                  <span>${e.mag.toFixed(1)}</span>
+                  <span style="font-size:.58rem;font-weight:400;opacity:.85">ریشتر</span>
+                </div>
+                <!-- Info -->
+                <div style="flex:1;min-width:0;direction:rtl">
+                  <div style="font-weight:600;font-size:.88rem;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
+                    ${e.reg1}
+                    ${e.prov ? `<span style="font-size:.75rem;font-weight:400;color:var(--m3-on-surface-variant);margin-right:4px">(${e.prov})</span>` : ''}
+                  </div>
+                  <div style="font-size:.75rem;color:var(--m3-on-surface-variant);margin-bottom:4px">
+                    ${e.reg2 ? `${e.reg2} · ` : ''}${e.reg3 || ''}
+                  </div>
+                  <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">
+                    <span style="font-size:.72rem;background:var(--m3-surface-container);border-radius:99px;padding:2px 8px">
+                      🕳️ عمق: ${e.dep} km
+                    </span>
+                    <span style="font-size:.72rem;background:var(--m3-surface-container);border-radius:99px;padding:2px 8px">
+                      📅 ${e.date}
+                    </span>
+                    <span style="font-size:.72rem;background:var(--m3-surface-container);border-radius:99px;padding:2px 8px;direction:ltr">
+                      ${e.lat.toFixed(2)}°N ${e.lon.toFixed(2)}°E
+                    </span>
+                  </div>
+                </div>
+              </div>`;
+            }).join('');
+          }
+
+          // Expose globally
+          window.eqLoad   = eqLoad;
+          window.eqRender = eqRender;
+
+          // Auto-load when tool becomes active
+          document.addEventListener('DOMContentLoaded', () => {
+            const card = document.getElementById('earthquake');
+            if (!card) return;
+            new MutationObserver(muts => {
+              muts.forEach(m => {
+                if (m.attributeName === 'class' && card.classList.contains('active') && !eqLoaded) {
+                  eqLoad();
+                }
+              });
+            }).observe(card, {attributes: true});
+            if (card.classList.contains('active')) eqLoad();
           });
         })();
 
