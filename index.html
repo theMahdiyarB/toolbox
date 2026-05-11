@@ -8393,16 +8393,6 @@
         </div>
 
 
-      <!-- ── Search empty state ── -->
-      <div id="search-empty" role="status" aria-live="polite">
-          <div class="search-empty__icon">🔍</div>
-          <p class="search-empty__title">نتیجه‌ای یافت نشد</p>
-          <p class="search-empty__sub">عبارت دیگری امتحان کنید</p>
-          <button class="search-empty__btn" id="emptyClearBtn">پاک کردن</button>
-      </div>
-
-
-
         <!-- ══ آب‌وهوا ══ -->
         <div id="weather" class="tool-card">
           <div class="tool-title">🌤️ آب‌وهوای ایران</div>
@@ -8435,7 +8425,7 @@
             </div>
           </div>
           <!-- Detail view (replaces home) -->
-          <div id="wth-det-view" style="display:none">
+          <div id="wth-det-view" style="display:none"></div>
           <div class="tool-desc">نمایش آب‌وهوای فعلی و پیش‌بینی چند روزه برای شهر موردنظر. دما، رطوبت، باد، فشار هوا و وضعیت آسمان. <strong>کاربرد:</strong> برنامه‌ریزی سفر، فعالیت‌های فضای باز.</div>
         </div>
         </div>
@@ -8722,12 +8712,21 @@
           <div class="tool-desc" style="margin-top:16px">متن کامل قانون اساسی جمهوری اسلامی ایران (اصلاحات ۱۳۶۸) در ۱۴ فصل و ۱۷۷ اصل. <strong>کاربرد:</strong> مطالعه، جستجو در اصول، مرور فصل‌ها.</a></div>
         </div>
 
+
+
+      <!-- ── Search empty state ── -->
+      <div id="search-empty" role="status" aria-live="polite">
+          <div class="search-empty__icon">🔍</div>
+          <p class="search-empty__title">نتیجه‌ای یافت نشد</p>
+          <p class="search-empty__sub">عبارت دیگری امتحان کنید</p>
+          <button class="search-empty__btn" id="emptyClearBtn">پاک کردن</button>
+      </div>
         </div><!-- /tool-container -->
 
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 7.12 - ۱۴۰۵/۰۲/۲۰
+          ℹ️ نسخه 7.12 - ۱۴۰۵/۰۲/۲۱
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -25377,10 +25376,45 @@ self.onmessage=function(e){
                 fetch(`${PROXY_URL}?endpoint=forecast&code=${id}`).catch(()=>null),
                 fetch(`${PROXY_URL}?endpoint=getWrf&code=${id}`).catch(()=>null)
               ]);
-              const h = r1 && r1.ok ? (await r1.json())[0] || {} : {};
-              const fc = r2 && r2.ok ? (await r2.json())[0] || {} : {};
+              
+              let h = {};
+              let fc = {};
               let wrfRaw = [];
-              try { if (r3 && r3.ok) wrfRaw = await r3.json(); } catch(e) {}
+              
+              try { 
+                if (r1 && r1.ok) { 
+                  try {
+                    const data = await r1.json(); 
+                    h = (Array.isArray(data) ? data[0] : data) || {}; 
+                  } catch(parseErr) {
+                    const txt = await r1.text();
+                    console.warn('wFetch r1 parse error:', parseErr, 'Response (first 200 chars):', txt.substring(0, 200));
+                  }
+                } 
+              } catch(e) { console.warn('wFetch r1 error:', e); }
+              
+              try { 
+                if (r2 && r2.ok) { 
+                  try {
+                    const data = await r2.json(); 
+                    fc = (Array.isArray(data) ? data[0] : data) || {}; 
+                  } catch(parseErr) {
+                    const txt = await r2.text();
+                    console.warn('wFetch r2 parse error:', parseErr, 'Response (first 200 chars):', txt.substring(0, 200));
+                  }
+                } 
+              } catch(e) { console.warn('wFetch r2 error:', e); }
+              
+              try { 
+                if (r3 && r3.ok) { 
+                  try {
+                    wrfRaw = await r3.json(); 
+                  } catch(parseErr) {
+                    const txt = await r3.text();
+                    console.warn('wFetch r3 parse error:', parseErr, 'Response (first 200 chars):', txt.substring(0, 200));
+                  }
+                } 
+              } catch(e) { console.warn('wFetch r3 error:', e); }
 
               let baseDate = new Date();
               if (fc.date) baseDate = new Date(fc.date.replace(/\\/g, ''));
@@ -26215,7 +26249,7 @@ self.onmessage=function(e){
             if (dot) dot.style.animation = 'pulse2 1s infinite';
             if (ts)  ts.textContent = 'در حال بارگذاری…';
             try {
-              const res = await fetch(EQ_PROXY);
+              const res = await fetch(EQ_PROXY + '?source=irsc');
               if (!res.ok) throw new Error('HTTP ' + res.status);
               const text = await res.text();
               const parser = new DOMParser();
