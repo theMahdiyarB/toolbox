@@ -8486,23 +8486,6 @@
             </div>
           </div>
 
-          <!-- Iran SVG Map -->
-          <div id="eq-map-wrap" style="position:relative;margin-bottom:16px;border-radius:12px;overflow:hidden;background:var(--m3-surface-container-low);border:1px solid var(--m3-outline-variant)">
-            <svg id="eq-map" viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;max-height:400px">
-              <!-- Iran border as embedded image -->
-              <image href="static/iran.svg" width="1000" height="800"/>
-              
-              <!-- Earthquake dots rendered by JS -->
-              <g id="eq-dots"></g>
-              
-              <!-- Tooltip -->
-              <g id="eq-tooltip" style="display:none;pointer-events:none">
-                <rect id="eq-tt-bg" rx="6" fill="var(--m3-surface)" stroke="var(--m3-outline)" stroke-width="1"/>
-                <text id="eq-tt-text" font-size="12" fill="var(--m3-on-surface)" font-family="system-ui,-apple-system,sans-serif"></text>
-              </g>
-            </svg>
-          </div>
-
 
           <!-- Count badge -->
           <div style="font-size:.8rem;color:var(--m3-on-surface-variant);margin-bottom:8px" id="eq-count-label"></div>
@@ -8725,7 +8708,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 7.12 - ۱۴۰۵/۰۲/۲۱
+          ℹ️ نسخه 7.13 - ۱۴۰۵/۰۲/۲۷
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -26208,24 +26191,16 @@ self.onmessage=function(e){
         })();
 
         // ══════════════════════════════════════════════════
-        //  زمین‌لرزه — IRSC XML feed
+        //  زمین‌لرزه — Bale/IRSC JSON feed
         // ══════════════════════════════════════════════════
         (() => {
-          const EQ_PROXY = '/irsc-proxy';
-          let eqData = [];   // parsed, normalised records
-          let eqLoaded = false;
+          const EQ_PROXY    = '/irsc-proxy';
+          const REFRESH_MS  = 60 * 60 * 1000; // 1 hour
+          let eqData        = [];
+          let eqLoaded      = false;
+          let eqTimer       = null;
+          let eqExpandedId  = null;
 
-          // Persian digit → ASCII
-          const faToNum = s => String(s).replace(/[۰-۹]/g, d => d.charCodeAt(0) - 1776);
-
-          // Extract province name from "شهر، استان" → "استان"
-          const province = reg => {
-            if (!reg) return '';
-            const p = reg.trim().split('،');
-            return p.length > 1 ? p[1].trim() : '';
-          };
-
-          // Magnitude colour
           const magColor = m => {
             if (m >= 5)   return '#d32f2f';
             if (m >= 4)   return '#f57c00';
@@ -26233,14 +26208,7 @@ self.onmessage=function(e){
             return '#388e3c';
           };
 
-          // Convert lat/lon to SVG coordinates (matching iran.svg viewBox 0 0 1000 800)
-          const toSVG = (lat, lon) => {
-            // Iran bounds: lat 25–40°N, lon 44–64°E
-            // Map to viewBox: x: 360-800, y: 89-511
-            const svgX = 360 + (lon - 44) / (64 - 44) * 440;
-            const svgY = 89 + (40 - lat) / (40 - 25) * 422;
-            return { x: svgX, y: svgY };
-          };
+          const parseMag = s => parseFloat(String(s).replace(/[۰-۹]/g, d => d.charCodeAt(0) - 1776)) || NaN;
 
           async function eqLoad() {
             const dot = document.getElementById('eq-dot');
@@ -26248,124 +26216,99 @@ self.onmessage=function(e){
             if (dot) dot.style.animation = 'pulse2 1s infinite';
             if (ts)  ts.textContent = 'در حال بارگذاری…';
             try {
-              const res = await fetch(EQ_PROXY + '?source=irsc');
+              const res = await fetch(EQ_PROXY);
               if (!res.ok) throw new Error('HTTP ' + res.status);
-              const text = await res.text();
-              const parser = new DOMParser();
-              const xml = parser.parseFromString(text, 'application/xml');
-              const items = Array.from(xml.querySelectorAll('item')).filter(el => el.querySelector('id'));
+              const json = await res.json();
 
-              eqData = items.map(el => {
-                const g = t => el.querySelector(t)?.textContent?.trim() || '';
-                const mag = parseFloat(faToNum(g('mag')));
-                const dep = parseFloat(faToNum(g('dep')));
-                const lat = parseFloat(faToNum(g('lat')).replace(/[^0-9.]/g, ''));
-                const lon = parseFloat(faToNum(g('long')).replace(/[^0-9.]/g, ''));
-                return {
-                  id:   g('id'),
-                  reg1: g('reg1'), dis1: faToNum(g('dis1')),
-                  reg2: g('reg2'), dis2: faToNum(g('dis2')),
-                  reg3: g('reg3'), dis3: faToNum(g('dis3')),
-                  mag, dep, lat, lon,
-                  date: faToNum(g('date')),
-                  prov: province(g('reg1')),
-                };
-              }).filter(e => !isNaN(e.mag));
+              eqData = (json.items || []).map((item, i) => ({
+                id:        item.rid || String(i),
+                mag:       parseMag(item.mag),
+                location:  item.location || '',
+                datetime:  item.datetime || '',
+                lat:       parseFloat(item.lat)  || NaN,
+                lon:       parseFloat(item.lon)  || NaN,
+                depth:     item.depth || '',
+                cities:    item.cities || [],
+                provinces: item.provinces || [],
+                map_url:   item.map_url || '',
+              })).filter(e => !isNaN(e.mag));
 
-              // Populate province filter
+              // Province filter
               const sel = document.getElementById('eq-f-prov');
               if (sel) {
-                const provs = [...new Set(eqData.map(e => e.prov).filter(Boolean))].sort();
-                const cur   = sel.value;
+                const provSet = [...new Set(eqData.map(e => {
+                  const p = e.location?.split('-');
+                  return p && p.length > 1 ? p[0].trim() : '';
+                }).filter(Boolean))].sort();
+                const cur = sel.value;
                 sel.innerHTML = '<option value="">همه استان‌ها</option>' +
-                  provs.map(p => `<option value="${p}"${p===cur?' selected':''}>${p}</option>`).join('');
+                  provSet.map(p => `<option value="${p}"${p===cur?' selected':''}>${p}</option>`).join('');
               }
 
-              const now = new Date();
-              if (ts) ts.textContent = `آخرین به‌روزرسانی: ${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
-              if (dot) dot.style.animation = '';
+              // Update timestamp showing both cache time and next refresh
+              const cachedAt = new Date(json.cached_at * 1000);
+              const hh = cachedAt.getHours().toString().padStart(2,'0');
+              const mm = cachedAt.getMinutes().toString().padStart(2,'0');
+              if (ts) ts.textContent = `داده‌ها: ${hh}:${mm} · بعدی: ${nextRefreshLabel()}`;
+              if (dot) { dot.style.animation = ''; dot.style.background = 'var(--m3-primary)'; }
               eqLoaded = true;
               eqRender();
+
+              // Schedule next auto-refresh
+              if (eqTimer) clearTimeout(eqTimer);
+              eqTimer = setTimeout(eqLoad, REFRESH_MS);
+
             } catch(e) {
               if (ts) ts.textContent = 'خطا در بارگذاری';
-              if (dot) { dot.style.animation=''; dot.style.background='#d32f2f'; }
+              if (dot) { dot.style.animation = ''; dot.style.background = '#d32f2f'; }
               const list = document.getElementById('eq-list');
-              if (list) list.innerHTML = `<div style="color:var(--m3-error);padding:12px;text-align:center">خطا در دریافت داده‌ها: ${e.message}</div>`;
+              if (list) list.innerHTML = `<div style="color:var(--m3-error);padding:12px;text-align:center">خطا: ${e.message}</div>`;
             }
+          }
+
+          function nextRefreshLabel() {
+            const d = new Date(Date.now() + REFRESH_MS);
+            return `${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`;
           }
 
           function eqRender() {
             if (!eqLoaded) return;
-            const prov = document.getElementById('eq-f-prov')?.value || '';
+            const prov   = document.getElementById('eq-f-prov')?.value || '';
             const minMag = parseFloat(document.getElementById('eq-f-mag')?.value || '0');
-            const maxDep = parseFloat(document.getElementById('eq-f-dep')?.value || '9999');
+            const maxDep = document.getElementById('eq-f-dep')?.value || '9999';
             const sortBy = document.getElementById('eq-f-sort')?.value || 'time';
 
-            let filtered = eqData.filter(e =>
-              (!prov || e.prov === prov) &&
-              e.mag >= minMag &&
-              e.dep <= maxDep
-            );
+            let filtered = eqData.filter(e => {
+              const depNum = parseFloat(String(e.depth).replace(/[^0-9.]/g,'')) || 0;
+              const provMatch = !prov || (e.location || '').includes(prov);
+              return provMatch && e.mag >= minMag && depNum <= parseFloat(maxDep);
+            });
 
-            if (sortBy === 'mag') {
-              filtered.sort((a,b) => b.mag - a.mag);
-            }
-            // default order from XML is already newest first
+            if (sortBy === 'mag') filtered.sort((a,b) => b.mag - a.mag);
 
             const countLbl = document.getElementById('eq-count-label');
             if (countLbl) countLbl.textContent = `نمایش ${filtered.length} زمین‌لرزه از ${eqData.length} رویداد`;
 
-            eqRenderMap(filtered);
             eqRenderList(filtered);
           }
 
-          function eqRenderMap(items) {
-            const g = document.getElementById('eq-dots');
-            if (!g) return;
-            g.innerHTML = '';
-            items.forEach((e, i) => {
-              if (isNaN(e.lat) || isNaN(e.lon)) return;
-              const {x, y} = toSVG(e.lat, e.lon);
-              const r = Math.max(3, Math.min(12, e.mag * 2.2));
-              const col = magColor(e.mag);
-              const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
-              circle.setAttribute('cx', x.toFixed(1));
-              circle.setAttribute('cy', y.toFixed(1));
-              circle.setAttribute('r', r.toFixed(1));
-              circle.setAttribute('fill', col);
-              circle.setAttribute('fill-opacity', '0.75');
-              circle.setAttribute('stroke', '#fff');
-              circle.setAttribute('stroke-width', '0.8');
-              circle.setAttribute('style', 'cursor:pointer');
-              circle.addEventListener('mouseenter', ev => eqShowTooltip(e, x, y));
-              circle.addEventListener('mouseleave', () => eqHideTooltip());
-              circle.addEventListener('click', () => {
-                document.getElementById(`eq-row-${e.id}`)?.scrollIntoView({behavior:'smooth',block:'nearest'});
-              });
-              g.appendChild(circle);
-            });
-          }
 
-          function eqShowTooltip(e, x, y) {
-            const ttg  = document.getElementById('eq-tooltip');
-            const ttbg = document.getElementById('eq-tt-bg');
-            const ttt  = document.getElementById('eq-tt-text');
-            if (!ttg || !ttbg || !ttt) return;
-            const label = `M${e.mag.toFixed(1)} · عمق ${e.dep}km · ${e.reg1}`;
-            ttt.textContent = label;
-            ttg.style.display = '';
-            // position tooltip above dot
-            const tw = label.length * 6.5 + 16;
-            const tx = Math.min(x, 590) - tw/2;
-            const ty = y - 28;
-            ttbg.setAttribute('x', tx); ttbg.setAttribute('y', ty);
-            ttbg.setAttribute('width', tw); ttbg.setAttribute('height', 20);
-            ttt.setAttribute('x', tx + tw/2); ttt.setAttribute('y', ty + 14);
-          }
-
-          function eqHideTooltip() {
-            const ttg = document.getElementById('eq-tooltip');
-            if (ttg) ttg.style.display = 'none';
+          function eqToggleExpand(id) {
+            eqExpandedId = eqExpandedId === id ? null : id;
+            // Re-render list to reflect expansion state, preserve scroll
+            const list = document.getElementById('eq-list');
+            const row  = document.getElementById('eq-row-' + id);
+            const scrollY = list?.scrollTop || 0;
+            eqRenderList(eqData.filter(e => {
+              const prov   = document.getElementById('eq-f-prov')?.value || '';
+              const minMag = parseFloat(document.getElementById('eq-f-mag')?.value || '0');
+              const maxDep = parseFloat(document.getElementById('eq-f-dep')?.value || '9999');
+              const depNum = parseFloat(String(e.depth).replace(/[^0-9.]/g,'')) || 0;
+              const provMatch = !prov || (e.location||'').includes(prov);
+              return provMatch && e.mag >= minMag && depNum <= maxDep;
+            }));
+            if (list) list.scrollTop = scrollY;
+            document.getElementById('eq-row-' + id)?.scrollIntoView({behavior:'smooth', block:'nearest'});
           }
 
           function eqRenderList(items) {
@@ -26376,56 +26319,67 @@ self.onmessage=function(e){
               return;
             }
             list.innerHTML = items.map(e => {
-              const col = magColor(e.mag);
-              const bigMag = e.mag >= 4;
+              const col     = magColor(e.mag);
+              const bigMag  = e.mag >= 4;
+              const expanded = eqExpandedId === e.id;
+              const locParts = e.location.split('-');
+              const locShort = locParts[locParts.length-1].trim();
+              const locProv  = locParts.length > 1 ? locParts[0].trim() : '';
+
+              const detailHtml = expanded ? `
+                <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--m3-outline-variant);display:flex;flex-direction:column;gap:6px;direction:rtl">
+                  ${e.datetime ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">📅 تاریخ و زمان:</span> ${e.datetime}</div>` : ''}
+                  ${e.depth    ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">🕳️ عمق:</span> ${e.depth}</div>` : ''}
+                  ${(!isNaN(e.lat)&&!isNaN(e.lon)) ? `<div style="font-size:.78rem;direction:ltr"><span style="direction:rtl;color:var(--m3-on-surface-variant)">📍 مختصات:</span> ${e.lat.toFixed(3)}°N  ${e.lon.toFixed(3)}°E</div>` : ''}
+                  ${e.cities.length ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">🏙️ نزدیک‌ترین شهرها:</span><br>${e.cities.join('  ·  ')}</div>` : ''}
+                  ${e.provinces.length ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">🗺️ نزدیک‌ترین مراکز استان:</span><br>${e.provinces.join('  ·  ')}</div>` : ''}
+                  ${e.map_url ? `<a href="${e.map_url}" target="_blank" rel="noopener" style="font-size:.78rem;color:var(--m3-primary);text-decoration:none;display:inline-flex;align-items:center;gap:4px">🗺 نمایش روی نقشه گوگل ↗</a>` : ''}
+                </div>` : '';
+
               return `
-              <div id="eq-row-${e.id}" style="
-                background:var(--m3-surface-container-low);
-                border:1px solid ${bigMag ? col : 'var(--m3-outline-variant)'};
-                border-radius:12px;padding:12px 14px;
-                display:flex;align-items:center;gap:12px;
-                ${bigMag?'box-shadow:0 2px 8px '+col+'44':''}
-              ">
-                <!-- Mag badge -->
-                <div style="
-                  min-width:48px;height:48px;border-radius:10px;
-                  background:${col};color:#fff;
-                  display:flex;flex-direction:column;align-items:center;justify-content:center;
-                  font-weight:700;font-size:1.05rem;line-height:1.1;flex-shrink:0
-                ">
-                  <span>${e.mag.toFixed(1)}</span>
-                  <span style="font-size:.58rem;font-weight:400;opacity:.85">ریشتر</span>
+              <div id="eq-row-${e.id}"
+                onclick="window.eqToggleExpand('${e.id}')"
+                style="
+                  background:var(--m3-surface-container-low);
+                  border:1px solid ${bigMag ? col : 'var(--m3-outline-variant)'};
+                  border-radius:12px;padding:12px 14px;
+                  cursor:pointer;transition:background 0.15s;
+                  ${bigMag ? 'box-shadow:0 2px 8px '+col+'44;' : ''}
+                  ${expanded ? 'background:var(--m3-surface-container);' : ''}
+                "
+              >
+                <div style="display:flex;align-items:center;gap:12px">
+                  <!-- Mag badge -->
+                  <div style="
+                    min-width:48px;height:48px;border-radius:10px;
+                    background:${col};color:#fff;
+                    display:flex;flex-direction:column;align-items:center;justify-content:center;
+                    font-weight:700;font-size:1.05rem;line-height:1.1;flex-shrink:0
+                  ">
+                    <span>${e.mag.toFixed(1)}</span>
+                    <span style="font-size:.58rem;font-weight:400;opacity:.85">ریشتر</span>
+                  </div>
+                  <!-- Summary -->
+                  <div style="flex:1;min-width:0;direction:rtl">
+                    <div style="font-weight:600;font-size:.88rem;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
+                      ${locShort}
+                      ${locProv ? `<span style="font-size:.75rem;font-weight:400;color:var(--m3-on-surface-variant);margin-right:4px">(${locProv})</span>` : ''}
+                    </div>
+                    <div style="font-size:.75rem;color:var(--m3-on-surface-variant)">${e.datetime}</div>
+                  </div>
+                  <!-- Expand chevron -->
+                  <div style="color:var(--m3-on-surface-variant);font-size:.8rem;flex-shrink:0;transition:transform 0.2s;transform:rotate(${expanded?'180':'0'}deg)">▾</div>
                 </div>
-                <!-- Info -->
-                <div style="flex:1;min-width:0;direction:rtl">
-                  <div style="font-weight:600;font-size:.88rem;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
-                    ${e.reg1}
-                    ${e.prov ? `<span style="font-size:.75rem;font-weight:400;color:var(--m3-on-surface-variant);margin-right:4px">(${e.prov})</span>` : ''}
-                  </div>
-                  <div style="font-size:.75rem;color:var(--m3-on-surface-variant);margin-bottom:4px">
-                    ${e.reg2 ? `${e.reg2} · ` : ''}${e.reg3 || ''}
-                  </div>
-                  <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">
-                    <span style="font-size:.72rem;background:var(--m3-surface-container);border-radius:99px;padding:2px 8px">
-                      🕳️ عمق: ${e.dep} km
-                    </span>
-                    <span style="font-size:.72rem;background:var(--m3-surface-container);border-radius:99px;padding:2px 8px">
-                      📅 ${e.date}
-                    </span>
-                    <span style="font-size:.72rem;background:var(--m3-surface-container);border-radius:99px;padding:2px 8px;direction:ltr">
-                      ${e.lat.toFixed(2)}°N ${e.lon.toFixed(2)}°E
-                    </span>
-                  </div>
-                </div>
+                ${detailHtml}
               </div>`;
             }).join('');
           }
 
-          // Expose globally
-          window.eqLoad   = eqLoad;
-          window.eqRender = eqRender;
+          // Expose globals
+          window.eqLoad         = eqLoad;
+          window.eqRender       = eqRender;
+          window.eqToggleExpand = eqToggleExpand;
 
-          // Auto-load when tool becomes active
           document.addEventListener('DOMContentLoaded', () => {
             const card = document.getElementById('earthquake');
             if (!card) return;
