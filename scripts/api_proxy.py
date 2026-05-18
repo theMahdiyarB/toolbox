@@ -150,36 +150,39 @@ class ProxyHandler(BaseHTTPRequestHandler):
             log(f"weather upstream URL: {url}")
             self._upstream(url, content_type='application/json')
 
-        # ── /irsc-proxy ───────────────────────────────────────────────────
+        # /irsc-proxy — serve from file cache (populated by fetch_earthquakes.py cron)
         elif path == '/irsc-proxy':
-            now = time.time()
-            age = now - _eq_cache['ts']
-            log(f"irsc-proxy: cache_age={age:.0f}s TTL={CACHE_TTL}s data={'yes' if _eq_cache['data'] else 'no'}")
-
-            if _eq_cache['data'] is None or age > CACHE_TTL:
+            import os as _os, sys as _sys
+            cache_file = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), 'earthquakes.json')
+            log(f"irsc-proxy: reading cache file")
+            try:
+                with open(cache_file, 'r', encoding='utf-8') as cf:
+                    body = cf.read().encode('utf-8')
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json; charset=utf-8')
+                self._cors()
+                self.end_headers()
+                self.wfile.write(body)
+                log(f"irsc-proxy: served {len(body)} bytes")
+            except FileNotFoundError:
+                log("irsc-proxy: no cache file, triggering fetch_earthquakes.py")
+                import subprocess as _sp
+                script = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), 'fetch_earthquakes.py')
+                r = _sp.run([_sys.executable, script], timeout=35, capture_output=True)
+                log(f"fetch result: exit={r.returncode} {r.stdout.decode()[-200:]}")
                 try:
-                    _eq_cache['data'] = fetch_earthquakes()
-                    _eq_cache['ts']   = time.time()
-                    log(f"EQ cache refreshed: {len(_eq_cache['data'])} items")
-                except Exception as e:
-                    log(f"EQ fetch FAILED: {e}\n{traceback.format_exc()}")
-                    if _eq_cache['data'] is None:
-                        return self._json_error(502, str(e))
-                    log("Serving stale cache after fetch failure")
-
-            body = json.dumps({
-                'cached_at': int(_eq_cache['ts']),
-                'count':     len(_eq_cache['data']),
-                'items':     _eq_cache['data'],
-            }, ensure_ascii=False).encode('utf-8')
-
-            self.send_response(200)
-            self.send_header('Content-Type', 'application/json; charset=utf-8')
-            self._cors()
-            self.end_headers()
-            self.wfile.write(body)
-            log(f"irsc-proxy: sent {len(body)} bytes, {len(_eq_cache['data'])} items")
-
+                    with open(cache_file, 'r', encoding='utf-8') as cf:
+                        body = cf.read().encode('utf-8')
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json; charset=utf-8')
+                    self._cors()
+                    self.end_headers()
+                    self.wfile.write(body)
+                except Exception as e2:
+                    return self._json_error(502, f'Cache not ready: {e2}')
+            except Exception as e:
+                log(f"irsc-proxy error: {e}")
+                return self._json_error(502, str(e))
         else:
             log(f"404: {path}")
             self.send_error(404, 'Not found')
