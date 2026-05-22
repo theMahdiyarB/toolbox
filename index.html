@@ -18658,18 +18658,15 @@ self.onmessage=function(e){
             }
           }
         }
-        console.log('Total intersections:',intCount);
         
         // ─────────────────────────────────────────────────────
         // STEP 4: Combine all and return
         // ─────────────────────────────────────────────────────
         var all=extrema.concat(roots).concat(intersections);
-        console.log('Total special points before dedup:',all.length);
         // Final dedup: only remove points with identical type AND x-value within 0.005
         all=all.filter(function(p,i){
           return!all.slice(0,i).some(function(q){return q.type===p.type&&Math.abs(q.x-p.x)<0.005;});
         }).slice(0,50);
-        console.log('Total special points after dedup:',all.length, all);
         return all;
       }
 
