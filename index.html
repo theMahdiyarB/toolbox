@@ -14382,7 +14382,8 @@ self.onmessage=function(e){
         const device=detect(devices,ua)||'دسکتاپ';
         const verMatch=ua.match(/(Chrome|Firefox|Safari|Edge|OPR)\/(\d+\.?\d*)/i);
         const ver=verMatch?verMatch[2]:'-';
-        res.innerHTML=[['مرورگر',browser],['نسخه',ver],['سیستم‌عامل',os],['نوع دستگاه',device],['UA کامل',ua]].map(([k,v])=>`<div class="data-row"><span class="data-row__key">${k}</span><span class="data-row__val">${v}</span></div>`).join('');
+        const esc = (s) => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        res.innerHTML=[['مرورگر',browser],['نسخه',ver],['سیستم‌عامل',os],['نوع دستگاه',device],['UA کامل',ua]].map(([k,v])=>`<div class="data-row"><span class="data-row__key">${esc(k)}</span><span class="data-row__val">${esc(v)}</span></div>`).join('');
       }
 
       // ══════════════════════════════════════════════════════
