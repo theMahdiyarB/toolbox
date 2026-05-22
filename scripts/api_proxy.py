@@ -4,7 +4,6 @@ import os
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 import urllib.request
-import urllib.error
 import json
 import re
 import time
