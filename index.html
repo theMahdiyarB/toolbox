@@ -8414,6 +8414,21 @@
             <div id="wth-sug" style="display:none;position:absolute;top:calc(100% + 4px);right:0;left:0;background:var(--m3-surface-container-high);border:1px solid var(--m3-outline-variant);border-radius:16px;z-index:200;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.2);max-height:320px;overflow-y:auto"></div>
           </div>
           <!-- Home view -->
+          <!-- Warnings bar -->
+          <div id="wth-warn-bar" style="display:none;margin-bottom:12px"></div>
+
+          <!-- Extra tabs -->
+          <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap" id="wth-extra-tabs">
+            <button class="btn btn-tonal" id="wth-tab-home" onclick="wthShowTab('home')" style="font-size:.78rem;height:32px;padding:0 12px;background:var(--m3-primary-container);color:var(--m3-on-primary-container);font-weight:700">🔍 جستجو</button>
+            <button class="btn btn-tonal" id="wth-tab-prov" onclick="wthShowTab('prov')" style="font-size:.78rem;height:32px;padding:0 12px">🗺 دمای استان‌ها</button>
+            <button class="btn btn-tonal" id="wth-tab-ext" onclick="wthShowTab('ext')" style="font-size:.78rem;height:32px;padding:0 12px">🌡 گرم‌ترین و سردترین</button>
+          </div>
+
+          <!-- Province temps panel -->
+          <div id="wth-prov-panel" style="display:none;margin-bottom:14px"></div>
+          <!-- Extreme temps panel -->
+          <div id="wth-ext-panel" style="display:none;margin-bottom:14px"></div>
+
           <div id="wth-home-view">
             <div id="wth-pin-sec" style="display:none;margin-bottom:16px">
               <div class="wth-sec-hdr"><span class="wth-sec-hdr__ico">📌</span><span class="wth-sec-hdr__lbl">پین شده</span><span id="wth-pin-cnt" class="wth-sec-hdr__cnt"></span></div>
@@ -8708,7 +8723,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 7.14 - ۱۴۰۵/۰۲/۲۷
+          ℹ️ نسخه 7.15 - ۱۴۰۵/۰۳/۰۳
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -25315,6 +25330,7 @@ self.onmessage=function(e){
             const dirs = ['شمال','شمال‌شرق','شرق','جنوب‌شرق','جنوب','جنوب‌غرب','غرب','شمال‌غرب'];
             return dirs[Math.round(deg / 45) % 8];
           }
+          const windDirFromDeg = windDir; // alias for weatherapib wind_direction_id (degrees)
 
           const TT_DATA={
             humidity:{title:'رطوبت نسبی',body:'درصد رطوبت هوا نسبت به حداکثر مقدار ممکن در همان دما.',note:'بالای ۷۰٪ هوا را سنگین و مرطوب می‌کند.'},
@@ -25354,7 +25370,7 @@ self.onmessage=function(e){
             if(!id || !wMap[id]) return; 
             try {
               const [r1, r2, r3] = await Promise.all([
-                fetch(`${PROXY_URL}?endpoint=gethava&code=${id}`).catch(()=>null),
+                fetch(`${PROXY_URL}?endpoint=weatherapib&code=${id}`).catch(()=>null),
                 fetch(`${PROXY_URL}?endpoint=forecast&code=${id}`).catch(()=>null),
                 fetch(`${PROXY_URL}?endpoint=getWrf&code=${id}`).catch(()=>null)
               ]);
@@ -25399,27 +25415,31 @@ self.onmessage=function(e){
               } catch(e) { console.warn('wFetch r3 error:', e); }
 
               let baseDate = new Date();
-              if (fc.date) baseDate = new Date(fc.date.replace(/\\/g, ''));
-              else if (h.fav_data_time) baseDate = new Date(h.fav_data_time);
+              if (h.update_time) baseDate = new Date(h.update_time);
+              else if (fc.date) baseDate = new Date(fc.date.replace(/\\/g, ''));
               if (isNaN(baseDate.getTime())) baseDate = new Date();
               
               const baseDay = baseDate.getDay();
               const daysFa = ['یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه', 'شنبه'];
 
               wMap[id].current = {
-                temp_c: h.tf != null ? parseFloat(h.tf) : (h.t != null ? parseFloat(h.t) : null),
-                temp_max_c: h.maxtemp1 != null ? parseFloat(h.maxtemp1) : (fc.d1maxtemp != null ? parseFloat(fc.d1maxtemp) : null),
-                temp_min_c: h.mintemp1 != null ? parseFloat(h.mintemp1) : (fc.d1mintemp != null ? parseFloat(fc.d1mintemp) : null),
-                condition: fixChars(h.weather_24_fa), 
-                weather_code: h.weather,
-                humidity_pct: h.u != null ? Math.round(parseFloat(h.u)) : null,
-                wind_speed_ms: h.ff != null ? parseFloat(h.ff) : null, 
-                wind_direction: h.dd != null ? windDir(parseFloat(h.dd)) : '',
-                visibility: h.vv != null ? (parseFloat(h.vv) >= 9999 ? '∞' : Math.round(parseFloat(h.vv))) : null,
-                pressure: h.pqnh != null ? h.pqnh : (h.p0 != null ? h.p0 : null),
-                dew_point: h.td != null ? parseFloat(h.td) : null,
-                rainfall: h.rrr24 != null ? parseFloat(h.rrr24) : null,
-                last_updated: h.data_time_text ? h.data_time_text.slice(11,16) : ''
+                temp_c:         h.temprature_c != null ? parseFloat(h.temprature_c) : (h.tf != null ? parseFloat(h.tf) : (h.t != null ? parseFloat(h.t) : null)),
+                temp_max_c:     h.maxtemp1 != null ? parseFloat(h.maxtemp1) : (fc.d1maxtemp != null ? parseFloat(fc.d1maxtemp) : null),
+                temp_min_c:     h.mintemp1 != null ? parseFloat(h.mintemp1) : (fc.d1mintemp != null ? parseFloat(fc.d1mintemp) : null),
+                condition:      h.weather_desc_farsi ? fixChars(h.weather_desc_farsi) : fixChars(h.weather_24_fa),
+                weather_code:   h.weather_id || h.weather,
+                humidity_pct:   h.humidity != null ? Math.round(parseFloat(h.humidity)) : (h.u != null ? Math.round(parseFloat(h.u)) : null),
+                wind_speed_ms:  h.wind_speed_ms != null ? parseFloat(h.wind_speed_ms) : (h.ff != null ? parseFloat(h.ff) : null),
+                wind_direction: h.wind_direction_id != null ? windDirFromDeg(parseFloat(h.wind_direction_id)) : (h.dd != null ? windDir(parseFloat(h.dd)) : ''),
+                visibility:     h.visibility != null ? (parseFloat(h.visibility) >= 9999 ? '∞' : Math.round(parseFloat(h.visibility))) : (h.vv != null ? (parseFloat(h.vv) >= 9999 ? '∞' : Math.round(parseFloat(h.vv))) : null),
+                pressure:       h.pqnh != null ? h.pqnh : (h.p0 != null ? h.p0 : null),
+                dew_point:      h.td != null ? parseFloat(h.td) : null,
+                rainfall:       h.rain != null ? parseFloat(h.rain) : (h.rrr24 != null ? parseFloat(h.rrr24) : null),
+                sensation:      h.sensation_temperature != null ? parseFloat(h.sensation_temperature) : null,
+                hour24:         h.hour24 || '',
+                hour48:         h.hour48 || '',
+                hour72:         h.hour72 || '',
+                last_updated:   h.update_time ? h.update_time.slice(11,5) : (h.data_time_text ? h.data_time_text.slice(11,16) : '')
               };
               
               // Map 5-Day Forecast
@@ -25646,11 +25666,23 @@ self.onmessage=function(e){
             const metrics=[
               {ico:'💧',lbl:'رطوبت',key:'humidity',val:c.humidity_pct!=null?toPersian(c.humidity_pct)+'%':null},
               {ico:'💨',lbl:'باد',key:'wind',val:c.wind_speed_ms!=null?toPersian(c.wind_speed_ms)+' m/s'+(c.wind_direction?' - '+c.wind_direction:''):null},
+              {ico:'🌡️',lbl:'احساس دما',key:'sensation',val:c.sensation!=null?toPersian(c.sensation)+'°C':null},
               {ico:'👁️',lbl:'دید افقی',key:'visibility',val:c.visibility&&c.visibility!=='-'?String(c.visibility):null},
               {ico:'⏱️',lbl:'فشار',key:'pressure',val:c.pressure!=null?toPersian(c.pressure)+' hPa':null},
               {ico:'🌡️',lbl:'نقطه شبنم',key:'dew_point',val:c.dew_point!=null?toPersian(c.dew_point)+'°C':null},
               {ico:'🌧️',lbl:'بارندگی',key:'rainfall',val:c.rainfall!=null?toPersian(c.rainfall)+' mm':null},
             ].filter(m=>m.val);
+
+            // Hour forecast texts from weatherapib
+            const hourFcHtml = (c.hour24||c.hour48||c.hour72) ? `
+              <div style="background:var(--m3-surface-container-low);border:1px solid var(--m3-outline-variant);border-radius:14px;padding:14px 16px;margin-bottom:14px;direction:rtl">
+                <div style="font-weight:700;font-size:.85rem;margin-bottom:10px;color:var(--m3-on-surface)">🗓 پیش‌بینی کوتاه‌مدت</div>
+                <div style="display:flex;flex-direction:column;gap:8px;font-size:.82rem">
+                  ${c.hour24?`<div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--m3-primary);font-weight:600;white-space:nowrap;min-width:50px">۲۴ ساعت</span><span style="color:var(--m3-on-surface-variant)">${c.hour24}</span></div>`:''}
+                  ${c.hour48?`<div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--m3-primary);font-weight:600;white-space:nowrap;min-width:50px">۴۸ ساعت</span><span style="color:var(--m3-on-surface-variant)">${c.hour48}</span></div>`:''}
+                  ${c.hour72?`<div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--m3-primary);font-weight:600;white-space:nowrap;min-width:50px">۷۲ ساعت</span><span style="color:var(--m3-on-surface-variant)">${c.hour72}</span></div>`:''}
+                </div>
+              </div>` : '';
 
             const mHtml=metrics.length?`<div class="wth-metrics">${metrics.map(m=>`
               <div class="wth-mbox">
@@ -25730,9 +25762,153 @@ self.onmessage=function(e){
                 ${chipsHtml}
               </div>
               ${mHtml}
+              ${hourFcHtml}
               ${wrfHtml}
               ${fcHtml}
             </div>`;
+          }
+
+          // ── Warnings ────────────────────────────────────────────────────────
+          let wthWarnLoaded = false;
+          async function wthLoadWarnings() {
+            if (wthWarnLoaded) return;
+            try {
+              const r = await fetch('/weather-static?endpoint=warning');
+              if (!r.ok) return;
+              const data = await r.json();
+              const items = data.Items || [];
+              if (!items.length) return;
+              wthWarnLoaded = true;
+              const bar = document.getElementById('wth-warn-bar');
+              if (!bar) return;
+              const colors = { 1: '#f5c518', 2: '#ef8c00', 3: '#d32f2f' };
+              const labels = { 1: 'زرد', 2: 'نارنجی', 3: 'قرمز' };
+              bar.style.display = 'block';
+              bar.innerHTML = `
+                <div style="background:var(--m3-surface-container);border:1px solid var(--m3-outline-variant);border-radius:12px;padding:10px 12px;direction:rtl">
+                  <div style="font-weight:700;font-size:.82rem;margin-bottom:8px;color:var(--m3-on-surface)">⚠️ هشدارهای هواشناسی</div>
+                  <div style="display:flex;flex-wrap:wrap;gap:6px">
+                    ${items.map(w => {
+                      const lvl = w.msgtype || 2;
+                      const col = colors[lvl] || colors[2];
+                      const id = 'warn-' + w.OwnerId;
+                      return `<div style="position:relative;display:inline-block">
+                        <span id="${id}" onclick="wthWarnTooltip(event,'${id}')" style="
+                          display:inline-flex;align-items:center;gap:4px;
+                          background:${col}22;border:1px solid ${col};
+                          border-radius:20px;padding:3px 10px;font-size:.75rem;
+                          color:var(--m3-on-surface);cursor:pointer;font-weight:600
+                        ">
+                          <span style="width:7px;height:7px;border-radius:50%;background:${col};display:inline-block"></span>
+                          هشدار ${labels[lvl]||''}
+                          <span style="font-size:.68rem;opacity:.7">${w.OwnerDate||''}</span>
+                        </span>
+                        <div id="${id}-tip" style="display:none;position:absolute;top:110%;right:0;z-index:200;background:var(--m3-surface);border:1px solid var(--m3-outline-variant);border-radius:12px;padding:12px;min-width:240px;max-width:300px;font-size:.78rem;box-shadow:var(--m3-elevation-3);direction:rtl">
+                          <div style="font-weight:700;margin-bottom:6px;color:${col}">${w.OwnerTitle||''}</div>
+                          <div style="color:var(--m3-on-surface-variant);line-height:1.5">${(w.OwnerContent||'').slice(0,300)}</div>
+                        </div>
+                      </div>`;
+                    }).join('')}
+                  </div>
+                </div>`;
+            } catch(e) { console.warn('warnings fetch failed:', e); }
+          }
+          window.wthWarnTooltip = function(ev, id) {
+            ev.stopPropagation();
+            const tip = document.getElementById(id + '-tip');
+            if (!tip) return;
+            // close all others
+            document.querySelectorAll('[id$="-tip"]').forEach(t => { if (t.id !== id+'-tip') t.style.display='none'; });
+            tip.style.display = tip.style.display === 'none' ? 'block' : 'none';
+          };
+          document.addEventListener('click', () => {
+            document.querySelectorAll('[id$="-tip"]').forEach(t => t.style.display='none');
+          });
+
+          // ── Tab switcher ────────────────────────────────────────────────────
+          let wthProvLoaded = false, wthExtLoaded = false;
+          window.wthShowTab = async function(tab) {
+            const tabIds = ['home','prov','ext'];
+            tabIds.forEach(t => {
+              const btn = document.getElementById('wth-tab-'+t);
+              if (btn) { btn.style.background=''; btn.style.color=''; btn.style.fontWeight=''; }
+            });
+            const active = document.getElementById('wth-tab-'+tab);
+            if (active) { active.style.background='var(--m3-primary-container)'; active.style.color='var(--m3-on-primary-container)'; active.style.fontWeight='700'; }
+
+            document.getElementById('wth-home-view').style.display = tab==='home' ? '' : 'none';
+            document.getElementById('wth-prov-panel').style.display = tab==='prov' ? '' : 'none';
+            document.getElementById('wth-ext-panel').style.display = tab==='ext' ? '' : 'none';
+            document.getElementById('wth-det-view').style.display = 'none';
+
+            if (tab==='prov' && !wthProvLoaded) { wthProvLoaded=true; await wthLoadProvTemps(); }
+            if (tab==='ext' && !wthExtLoaded) { wthExtLoaded=true; await wthLoadExtTemps(); }
+          };
+
+          // ── Province temps ──────────────────────────────────────────────────
+          async function wthLoadProvTemps() {
+            const panel = document.getElementById('wth-prov-panel');
+            if (!panel) return;
+            panel.innerHTML = '<div style="text-align:center;padding:24px;color:var(--m3-on-surface-variant)">در حال بارگذاری…</div>';
+            try {
+              const r = await fetch('/weather-static?endpoint=ostemp');
+              if (!r.ok) throw new Error('HTTP ' + r.status);
+              const data = await r.json();
+              const rows = Array.isArray(data) ? data : [];
+              panel.innerHTML = `
+                <div style="background:var(--m3-surface-container-low);border:1px solid var(--m3-outline-variant);border-radius:14px;overflow:hidden;direction:rtl">
+                  <div style="padding:12px 16px;font-weight:700;font-size:.88rem;border-bottom:1px solid var(--m3-outline-variant)">🗺 بیشترین و کمترین دمای استان‌ها</div>
+                  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0">
+                    ${rows.map((row, i) => `
+                      <div style="padding:10px 14px;border-bottom:1px solid var(--m3-outline-variant);${i%2===0?'background:var(--m3-surface-container-lowest)':''}">
+                        <div style="font-weight:600;font-size:.82rem;margin-bottom:4px">${row.province||''}</div>
+                        <div style="display:flex;gap:12px;font-size:.78rem">
+                          <span style="color:#d32f2f">🔴 ${row.warmest?.name||''}: <strong>${row.warmest?.temp??'-'}°C</strong></span>
+                          <span style="color:#1565c0">🔵 ${row.coldest?.name||''}: <strong>${row.coldest?.temp??'-'}°C</strong></span>
+                        </div>
+                      </div>`).join('')}
+                  </div>
+                </div>`;
+            } catch(e) {
+              panel.innerHTML = `<div style="color:var(--m3-error);padding:16px;text-align:center">خطا در بارگذاری: ${e.message}</div>`;
+            }
+          }
+
+          // ── Extreme temps ───────────────────────────────────────────────────
+          async function wthLoadExtTemps() {
+            const panel = document.getElementById('wth-ext-panel');
+            if (!panel) return;
+            panel.innerHTML = '<div style="text-align:center;padding:24px;color:var(--m3-on-surface-variant)">در حال بارگذاری…</div>';
+            try {
+              const r = await fetch('/weather-static?endpoint=extemp');
+              if (!r.ok) throw new Error('HTTP ' + r.status);
+              const data = await r.json();
+              const warm = data.warm1 || [];
+              const cold = data.coldest15 || [];
+              panel.innerHTML = `
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;direction:rtl">
+                  <div style="background:var(--m3-surface-container-low);border:1px solid #d32f2f44;border-radius:14px;overflow:hidden">
+                    <div style="padding:10px 14px;font-weight:700;font-size:.85rem;border-bottom:1px solid var(--m3-outline-variant);color:#d32f2f">🔥 گرم‌ترین شهرها</div>
+                    ${warm.slice(0,15).map((s,i) => `
+                      <div style="padding:8px 14px;font-size:.78rem;${i%2===0?'background:var(--m3-surface-container-lowest)':''}">
+                        <div style="font-weight:600">${s.name||''}</div>
+                        <div style="color:var(--m3-on-surface-variant);font-size:.72rem">${s.province||''}</div>
+                        <div style="color:#d32f2f;font-weight:700">${s.max??'-'}°C</div>
+                      </div>`).join('')}
+                  </div>
+                  <div style="background:var(--m3-surface-container-low);border:1px solid #1565c044;border-radius:14px;overflow:hidden">
+                    <div style="padding:10px 14px;font-weight:700;font-size:.85rem;border-bottom:1px solid var(--m3-outline-variant);color:#1565c0">❄️ سردترین شهرها</div>
+                    ${cold.slice(0,15).map((s,i) => `
+                      <div style="padding:8px 14px;font-size:.78rem;${i%2===0?'background:var(--m3-surface-container-lowest)':''}">
+                        <div style="font-weight:600">${s.name||''}</div>
+                        <div style="color:var(--m3-on-surface-variant);font-size:.72rem">${s.province||''}</div>
+                        <div style="color:#1565c0;font-weight:700">${s.min??'-'}°C</div>
+                      </div>`).join('')}
+                  </div>
+                </div>`;
+            } catch(e) {
+              panel.innerHTML = `<div style="color:var(--m3-error);padding:16px;text-align:center">خطا در بارگذاری: ${e.message}</div>`;
+            }
           }
 
           window.wthClearQ=function(e){
@@ -25784,7 +25960,7 @@ self.onmessage=function(e){
               });
             });
             obs.observe(card,{attributes:true});
-            if(card.classList.contains('active')){wInit=true;wBoot();setTimeout(()=>{const q=document.getElementById('wth-q');if(q&&!q.dataset.wired){q.dataset.wired='1';q.addEventListener('input',wOnQ);q.addEventListener('keydown',e=>{if(e.key==='Escape')wthCloseSug();})}},100);}
+            if(card.classList.contains('active')){wInit=true;wBoot();wthLoadWarnings();setTimeout(()=>{const q=document.getElementById('wth-q');if(q&&!q.dataset.wired){q.dataset.wired='1';q.addEventListener('input',wOnQ);q.addEventListener('keydown',e=>{if(e.key==='Escape')wthCloseSug();})}},100);}
           });
         })();
 
@@ -26271,35 +26447,42 @@ self.onmessage=function(e){
             return `${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`;
           }
 
-          function eqFiltered() {
-            const prov   = document.getElementById('eq-f-prov')?.value || '';
-            const minMag = parseFloat(document.getElementById('eq-f-mag')?.value || '0');
-            const maxDep = parseFloat(document.getElementById('eq-f-dep')?.value || '9999');
-            const sortBy = document.getElementById('eq-f-sort')?.value || 'time';
-            let items = eqData.filter(e => {
-              const depNum = parseFloat(String(e.depth).replace(/[^0-9.]/g,'')) || 0;
-              const provMatch = !prov || (e.location || '').includes(prov);
-              return provMatch && e.mag >= minMag && depNum <= maxDep;
-            });
-            if (sortBy === 'mag') items.sort((a,b) => b.mag - a.mag);
-            else items.sort((a,b) => (b.date_ts||0) - (a.date_ts||0));
-            return items;
-          }
-
           function eqRender() {
             if (!eqLoaded) return;
-            const filtered = eqFiltered();
+            const prov   = document.getElementById('eq-f-prov')?.value || '';
+            const minMag = parseFloat(document.getElementById('eq-f-mag')?.value || '0');
+            const maxDep = document.getElementById('eq-f-dep')?.value || '9999';
+            const sortBy = document.getElementById('eq-f-sort')?.value || 'time';
+
+            let filtered = eqData.filter(e => {
+              const depNum = parseFloat(String(e.depth).replace(/[^0-9.]/g,'')) || 0;
+              const provMatch = !prov || (e.location || '').includes(prov);
+              return provMatch && e.mag >= minMag && depNum <= parseFloat(maxDep);
+            });
+
+            if (sortBy === 'mag') filtered.sort((a,b) => b.mag - a.mag);
+
             const countLbl = document.getElementById('eq-count-label');
             if (countLbl) countLbl.textContent = `نمایش ${filtered.length} زمین‌لرزه از ${eqData.length} رویداد`;
+
             eqRenderList(filtered);
           }
 
 
           function eqToggleExpand(id) {
             eqExpandedId = eqExpandedId === id ? null : id;
-            const list   = document.getElementById('eq-list');
+            // Re-render list to reflect expansion state, preserve scroll
+            const list = document.getElementById('eq-list');
+            const row  = document.getElementById('eq-row-' + id);
             const scrollY = list?.scrollTop || 0;
-            eqRenderList(eqFiltered());
+            eqRenderList(eqData.filter(e => {
+              const prov   = document.getElementById('eq-f-prov')?.value || '';
+              const minMag = parseFloat(document.getElementById('eq-f-mag')?.value || '0');
+              const maxDep = parseFloat(document.getElementById('eq-f-dep')?.value || '9999');
+              const depNum = parseFloat(String(e.depth).replace(/[^0-9.]/g,'')) || 0;
+              const provMatch = !prov || (e.location||'').includes(prov);
+              return provMatch && e.mag >= minMag && depNum <= maxDep;
+            }));
             if (list) list.scrollTop = scrollY;
             document.getElementById('eq-row-' + id)?.scrollIntoView({behavior:'smooth', block:'nearest'});
           }
@@ -26319,61 +26502,14 @@ self.onmessage=function(e){
               const locShort = locParts[locParts.length-1].trim();
               const locProv  = locParts.length > 1 ? locParts[0].trim() : '';
 
-              const hasCoord = !isNaN(e.lat) && !isNaN(e.lon);
-              const neshanUrl = hasCoord
-                ? `https://neshan.org/maps/iframe/places/${e.lat.toFixed(6)}/${e.lon.toFixed(6)}`
-                : '';
-
               const detailHtml = expanded ? `
-                <div style="margin-top:10px;border-radius:14px;overflow:hidden;border:1.5px solid color-mix(in srgb,${col} 30%,var(--m3-outline-variant));background:var(--m3-surface-container-low);direction:rtl">
-
-                  <!-- Stats grid -->
-                  <div style="padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-                    ${e.datetime ? `
-                    <div style="grid-column:1/-1;background:var(--m3-surface-container);border-radius:10px;padding:9px 12px;border:1px solid var(--m3-outline-variant)">
-                      <div style="font-size:.68rem;color:var(--m3-on-surface-variant);margin-bottom:2px">📅 تاریخ و زمان</div>
-                      <div style="font-weight:600;font-size:.83rem">${e.datetime}</div>
-                    </div>` : ''}
-                    ${e.depth ? `
-                    <div style="background:var(--m3-surface-container);border-radius:10px;padding:9px 12px;border:1px solid var(--m3-outline-variant)">
-                      <div style="font-size:.68rem;color:var(--m3-on-surface-variant);margin-bottom:2px">عمق کانون</div>
-                      <div style="font-weight:700;font-size:.88rem">${e.depth}</div>
-                    </div>` : ''}
-                    ${hasCoord ? `
-                    <div style="background:var(--m3-surface-container);border-radius:10px;padding:9px 12px;border:1px solid var(--m3-outline-variant)">
-                      <div style="font-size:.68rem;color:var(--m3-on-surface-variant);margin-bottom:2px">مختصات</div>
-                      <div style="font-weight:600;font-size:.76rem;direction:ltr;text-align:right">${e.lat.toFixed(3)}°N &nbsp;${e.lon.toFixed(3)}°E</div>
-                    </div>` : ''}
-                  </div>
-
-                  ${e.cities.length ? `
-                  <div style="padding:0 14px 10px">
-                    <div style="font-size:.7rem;color:var(--m3-on-surface-variant);margin-bottom:5px">نزدیک‌ترین شهرها</div>
-                    <div style="display:flex;flex-wrap:wrap;gap:5px">
-                      ${e.cities.map(c=>`<span style="background:color-mix(in srgb,${col} 10%,var(--m3-surface-container-high));border:1px solid color-mix(in srgb,${col} 25%,var(--m3-outline-variant));border-radius:20px;padding:2px 10px;font-size:.76rem">${c}</span>`).join('')}
-                    </div>
-                  </div>` : ''}
-
-                  ${e.provinces.length ? `
-                  <div style="padding:0 14px 10px">
-                    <div style="font-size:.7rem;color:var(--m3-on-surface-variant);margin-bottom:5px">نزدیک‌ترین مراکز استان</div>
-                    <div style="display:flex;flex-wrap:wrap;gap:5px">
-                      ${e.provinces.map(p=>`<span style="background:var(--m3-surface-container);border:1px solid var(--m3-outline-variant);border-radius:20px;padding:2px 10px;font-size:.76rem">${p}</span>`).join('')}
-                    </div>
-                  </div>` : ''}
-
-                  <!-- Action buttons -->
-                  <div style="padding:8px 14px 12px;display:flex;gap:8px;flex-wrap:wrap">
-                    ${neshanUrl ? `
-                    <a href="${neshanUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="flex:1;min-width:120px;display:inline-flex;align-items:center;justify-content:center;gap:5px;background:color-mix(in srgb,${col} 12%,var(--m3-surface-container-high));color:var(--m3-on-surface);text-decoration:none;font-size:.8rem;font-weight:600;padding:8px 12px;border-radius:10px;border:1.5px solid color-mix(in srgb,${col} 30%,var(--m3-outline-variant))">
-                      نشان ↗
-                    </a>` : ''}
-                    ${e.map_url ? `
-                    <a href="${e.map_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="flex:1;min-width:120px;display:inline-flex;align-items:center;justify-content:center;gap:5px;background:var(--m3-surface-container);color:var(--m3-on-surface-variant);text-decoration:none;font-size:.8rem;font-weight:500;padding:8px 12px;border-radius:10px;border:1px solid var(--m3-outline-variant)">
-                      گوگل مپ ↗
-                    </a>` : ''}
-                  </div>
-
+                <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--m3-outline-variant);display:flex;flex-direction:column;gap:6px;direction:rtl">
+                  ${e.datetime ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">📅 تاریخ و زمان:</span> ${e.datetime}</div>` : ''}
+                  ${e.depth    ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">🕳️ عمق:</span> ${e.depth}</div>` : ''}
+                  ${(!isNaN(e.lat)&&!isNaN(e.lon)) ? `<div style="font-size:.78rem;direction:ltr"><span style="direction:rtl;color:var(--m3-on-surface-variant)">📍 مختصات:</span> ${e.lat.toFixed(3)}°N  ${e.lon.toFixed(3)}°E</div>` : ''}
+                  ${e.cities.length ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">🏙️ نزدیک‌ترین شهرها:</span><br>${e.cities.join('  ·  ')}</div>` : ''}
+                  ${e.provinces.length ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">🗺️ نزدیک‌ترین مراکز استان:</span><br>${e.provinces.join('  ·  ')}</div>` : ''}
+                  ${e.map_url ? `<a href="${e.map_url}" target="_blank" rel="noopener" style="font-size:.78rem;color:var(--m3-primary);text-decoration:none;display:inline-flex;align-items:center;gap:4px">🗺 نمایش روی نقشه گوگل ↗</a>` : ''}
                 </div>` : '';
 
               return `
