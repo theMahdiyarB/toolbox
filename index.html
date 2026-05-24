@@ -14397,7 +14397,8 @@ self.onmessage=function(e){
         const device=detect(devices,ua)||'دسکتاپ';
         const verMatch=ua.match(/(Chrome|Firefox|Safari|Edge|OPR)\/(\d+\.?\d*)/i);
         const ver=verMatch?verMatch[2]:'-';
-        res.innerHTML=[['مرورگر',browser],['نسخه',ver],['سیستم‌عامل',os],['نوع دستگاه',device],['UA کامل',ua]].map(([k,v])=>`<div class="data-row"><span class="data-row__key">${k}</span><span class="data-row__val">${v}</span></div>`).join('');
+        const esc = (s) => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        res.innerHTML=[['مرورگر',browser],['نسخه',ver],['سیستم‌عامل',os],['نوع دستگاه',device],['UA کامل',ua]].map(([k,v])=>`<div class="data-row"><span class="data-row__key">${esc(k)}</span><span class="data-row__val">${esc(v)}</span></div>`).join('');
       }
 
       // ══════════════════════════════════════════════════════
@@ -18673,18 +18674,15 @@ self.onmessage=function(e){
             }
           }
         }
-        console.log('Total intersections:',intCount);
         
         // ─────────────────────────────────────────────────────
         // STEP 4: Combine all and return
         // ─────────────────────────────────────────────────────
         var all=extrema.concat(roots).concat(intersections);
-        console.log('Total special points before dedup:',all.length);
         // Final dedup: only remove points with identical type AND x-value within 0.005
         all=all.filter(function(p,i){
           return!all.slice(0,i).some(function(q){return q.type===p.type&&Math.abs(q.x-p.x)<0.005;});
         }).slice(0,50);
-        console.log('Total special points after dedup:',all.length, all);
         return all;
       }
 
