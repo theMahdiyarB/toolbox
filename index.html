@@ -2731,6 +2731,7 @@
                 <div class="link-card" onclick="haptic(this);showTool('translate')"><button class="fav-btn" data-tool="translate" onclick="event.stopPropagation();toggleFav('translate',this)">☆</button><span class="link-card__icon">🌍</span><span class="link-card__name">ترجمه</span><span class="link-card__desc">ترجمه متن به ۱۳ زبان</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('currency')"><button class="fav-btn" data-tool="currency" onclick="event.stopPropagation();toggleFav('currency',this)">☆</button><span class="link-card__icon">💹</span><span class="link-card__name">قیمت و نرخ</span><span class="link-card__desc">ارز، طلا و رمزارز زنده</span></div>
                 <div class="link-card" onclick="haptic(this);showTool('movies')"><button class="fav-btn" data-tool="movies" onclick="event.stopPropagation();toggleFav('movies',this)">☆</button><span class="link-card__icon">🎬</span><span class="link-card__name">بانک فیلم</span><span class="link-card__desc">جستجو · ژانر · پیشنهاد مشابه</span></div>
+                <div class="link-card" onclick="haptic(this);showTool('posttrack')"><button class="fav-btn" data-tool="posttrack" onclick="event.stopPropagation();toggleFav('posttrack',this)">☆</button><span class="link-card__icon">📦</span><span class="link-card__name">رهگیری مرسوله پستی</span><span class="link-card__desc">ردیابی بسته از پست ایران</span></div>
               </div>
             </div>
 
@@ -8711,6 +8712,174 @@
 
 
 
+        <!-- ══ رهگیری مرسوله پستی ══ -->
+        <div id="posttrack" class="tool-card">
+          <div class="tool-title">📦 رهگیری مرسوله پستی</div>
+
+          <!-- Search card -->
+          <div class="pt-search-card">
+            <div class="pt-search-card__inner">
+              <div class="pt-search-card__icon">📦</div>
+              <div class="pt-search-card__title">رهگیری مرسولات پستی</div>
+              <div class="pt-search-card__sub">کد ۲۴ رقمی بارکد خود را وارد کنید</div>
+              <div class="pt-search-row">
+                <input id="pt-input" type="text" inputmode="numeric" maxlength="30"
+                  placeholder="۱۹۳۷۹۰۵۰۵۷۰۱۳۴۴۹۱۰۰۰۰۱۴۷"
+                  autocomplete="off" spellcheck="false" dir="ltr"
+                  oninput="ptOnInput(this)"
+                  onkeydown="if(event.key==='Enter')ptSearch()"/>
+                <button id="pt-clear-btn" onclick="ptClear()" aria-label="پاک کردن" class="pt-clear-btn">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                </button>
+                <button onclick="ptSearch()" class="pt-search-btn">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                  جستجو
+                </button>
+              </div>
+              <div id="pt-charcount" class="pt-charcount">۰ / ۲۴</div>
+            </div>
+          </div>
+
+          <!-- Barcode chip -->
+          <div id="pt-chip" class="pt-chip" style="display:none">
+            <div class="pt-chip__left">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <span id="pt-chip-text"></span>
+            </div>
+            <button onclick="ptCopy()" class="pt-chip__copy" title="کپی">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+            </button>
+          </div>
+
+          <!-- Loading -->
+          <div id="pt-loading" style="display:none;text-align:center;padding:44px 0">
+            <div class="pt-spinner"></div>
+            <div style="font-size:.82rem;color:var(--m3-on-surface-variant);margin-top:16px">در حال دریافت اطلاعات…</div>
+          </div>
+
+          <!-- Empty -->
+          <div id="pt-empty" class="pt-empty">
+            <div class="pt-empty__icon">📭</div>
+            <div class="pt-empty__title">هنوز مرسوله‌ای جستجو نشده</div>
+            <div class="pt-empty__sub">کد ۲۴ رقمی روی برچسب یا رسید پستی را در کادر بالا وارد کنید</div>
+          </div>
+
+          <!-- Error -->
+          <div id="pt-error" class="pt-error" style="display:none">
+            <div class="pt-error__icon">⚠️</div>
+            <div id="pt-error-msg" class="pt-error__msg"></div>
+            <button onclick="ptSearch()" class="pt-error__btn">تلاش مجدد</button>
+          </div>
+
+          <!-- Not found -->
+          <div id="pt-notfound" class="pt-empty" style="display:none">
+            <div class="pt-empty__icon">🔍</div>
+            <div class="pt-empty__title">مرسوله‌ای یافت نشد</div>
+            <div class="pt-empty__sub">کد بارکد را بررسی کنید. ممکن است هنوز در سیستم ثبت نشده باشد.</div>
+          </div>
+
+          <!-- Results -->
+          <div id="pt-result" style="display:none">
+
+            <!-- Sender info card -->
+            <div class="pt-sender-card">
+              <div class="pt-sender-card__icon">🏪</div>
+              <div class="pt-sender-card__body">
+                <div id="pt-shop" class="pt-sender-card__shop"></div>
+                <div id="pt-recipient" class="pt-sender-card__recip"></div>
+              </div>
+            </div>
+
+            <!-- Status label -->
+            <div id="pt-latest-label" class="pt-latest-label"></div>
+
+            <!-- Timeline -->
+            <div id="pt-timeline" class="pt-timeline"></div>
+
+            <!-- Footer row -->
+            <div class="pt-footer">
+              <div id="pt-support" style="display:none" class="pt-footer__pill">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                <span id="pt-support-num"></span>
+              </div>
+              <a href="https://tracking.post.ir" target="_blank" rel="noopener" class="pt-footer__pill pt-footer__link">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+                سایت رسمی پست ایران
+              </a>
+            </div>
+          </div>
+
+          <div class="tool-desc" style="margin-top:20px">رهگیری مرسولات پستی از سامانه رسمی پست جمهوری اسلامی ایران. کد ۲۴ رقمی بارکد روی برچسب مرسوله را وارد کنید. <strong>نیاز به اینترنت دارد.</strong></div>
+
+          <style>
+            /* ── Search card ── */
+            .pt-search-card{border-radius:20px;background:var(--m3-primary);padding:2px;margin-bottom:18px;box-shadow:0 4px 24px color-mix(in srgb,var(--m3-primary) 35%,transparent)}
+            .pt-search-card__inner{background:var(--m3-primary);border-radius:18px;padding:22px 18px 24px;text-align:center}
+            .pt-search-card__icon{font-size:2.6rem;margin-bottom:8px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25))}
+            .pt-search-card__title{font-size:.98rem;font-weight:800;color:var(--m3-on-primary);margin-bottom:4px;letter-spacing:-.01em}
+            .pt-search-card__sub{font-size:.75rem;color:color-mix(in srgb,var(--m3-on-primary) 70%,transparent);margin-bottom:16px}
+            .pt-search-row{display:flex;align-items:center;background:color-mix(in srgb,var(--m3-on-primary) 12%,transparent);border-radius:14px;padding:4px 4px 4px 10px;gap:4px;border:1.5px solid color-mix(in srgb,var(--m3-on-primary) 20%,transparent)}
+            .pt-search-row:focus-within{border-color:color-mix(in srgb,var(--m3-on-primary) 60%,transparent)}
+            #pt-input{flex:1;background:none;border:none;outline:none;color:var(--m3-on-primary);font-size:.9rem;padding:8px 4px;font-family:inherit;caret-color:var(--m3-on-primary);letter-spacing:.03em;min-width:0;direction:ltr}
+            #pt-input::placeholder{color:color-mix(in srgb,var(--m3-on-primary) 40%,transparent);font-size:.76rem}
+            .pt-clear-btn{display:none;background:none;border:none;cursor:pointer;color:color-mix(in srgb,var(--m3-on-primary) 60%,transparent);padding:6px;border-radius:50%;line-height:1;flex-shrink:0}
+            .pt-search-btn{background:var(--m3-on-primary);color:var(--m3-primary);border:none;border-radius:10px;padding:8px 14px;cursor:pointer;font-size:.82rem;font-weight:800;font-family:inherit;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;transition:opacity .15s}
+            .pt-search-btn:active{opacity:.8}
+            .pt-charcount{font-size:.65rem;color:color-mix(in srgb,var(--m3-on-primary) 50%,transparent);margin-top:7px;text-align:left;direction:ltr}
+
+            /* ── Barcode chip ── */
+            .pt-chip{display:flex;align-items:center;justify-content:space-between;background:var(--m3-surface-container);border:1px solid var(--m3-outline-variant);border-radius:12px;padding:9px 12px;margin-bottom:14px;gap:10px}
+            .pt-chip__left{display:flex;align-items:center;gap:7px;min-width:0;color:var(--m3-primary);font-family:monospace;font-size:.78rem;letter-spacing:.04em;direction:ltr;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+            .pt-chip__copy{background:none;border:none;cursor:pointer;color:var(--m3-primary);padding:4px;border-radius:6px;flex-shrink:0;line-height:1}
+
+            /* ── Spinner ── */
+            .pt-spinner{width:36px;height:36px;border:3px solid var(--m3-outline-variant);border-top-color:var(--m3-primary);border-radius:50%;animation:pt-spin .7s linear infinite;margin:0 auto}
+            @keyframes pt-spin{to{transform:rotate(360deg)}}
+
+            /* ── Empty / not-found ── */
+            .pt-empty{text-align:center;padding:36px 16px}
+            .pt-empty__icon{font-size:3.6rem;opacity:.35;margin-bottom:10px}
+            .pt-empty__title{font-size:.93rem;font-weight:700;color:var(--m3-on-surface);margin-bottom:6px}
+            .pt-empty__sub{font-size:.76rem;color:var(--m3-on-surface-variant);line-height:1.65;max-width:280px;margin:0 auto}
+
+            /* ── Error ── */
+            .pt-error{background:var(--m3-error-container);border-radius:16px;padding:20px 16px;text-align:center}
+            .pt-error__icon{font-size:2rem;margin-bottom:8px}
+            .pt-error__msg{font-size:.85rem;color:var(--m3-on-error-container);line-height:1.65}
+            .pt-error__btn{margin-top:14px;background:var(--m3-error);color:var(--m3-on-error);border:none;border-radius:10px;padding:8px 22px;cursor:pointer;font-family:inherit;font-size:.82rem;font-weight:600}
+
+            /* ── Sender card ── */
+            .pt-sender-card{display:flex;align-items:center;gap:14px;background:var(--m3-secondary-container);border-radius:16px;padding:14px 16px;margin-bottom:6px}
+            .pt-sender-card__icon{font-size:2rem;flex-shrink:0}
+            .pt-sender-card__shop{font-size:.9rem;font-weight:800;color:var(--m3-on-secondary-container);letter-spacing:-.01em}
+            .pt-sender-card__recip{font-size:.75rem;color:var(--m3-on-secondary-container);opacity:.75;margin-top:3px}
+
+            /* ── Latest status label ── */
+            .pt-latest-label{font-size:.7rem;font-weight:600;color:var(--m3-primary);letter-spacing:.06em;text-transform:uppercase;padding:12px 4px 8px;opacity:.8}
+
+            /* ── Timeline ── */
+            .pt-timeline{position:relative;padding:4px 0;margin-bottom:16px}
+            .pt-tl-item{display:flex;align-items:flex-start;gap:0;position:relative;padding-bottom:0}
+            .pt-tl-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:44px}
+            .pt-tl-dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0;position:relative;z-index:1}
+            .pt-tl-dot--done{background:var(--m3-primary-container);box-shadow:0 0 0 3px color-mix(in srgb,var(--m3-primary) 15%,transparent)}
+            .pt-tl-dot--pending{background:var(--m3-surface-container-high);opacity:.4}
+            .pt-tl-line{width:2px;flex:1;min-height:20px;background:linear-gradient(to bottom,var(--m3-primary),var(--m3-outline-variant));margin:0 auto;opacity:.35}
+            .pt-tl-line--pending{background:var(--m3-outline-variant);opacity:.25}
+            .pt-tl-body{flex:1;padding:6px 0 20px 0;min-width:0}
+            .pt-tl-title{font-size:.88rem;font-weight:700;color:var(--m3-on-surface)}
+            .pt-tl-title--pending{font-size:.86rem;font-weight:500;color:var(--m3-on-surface-variant)}
+            .pt-tl-date{font-size:.73rem;color:var(--m3-on-surface-variant);margin-top:4px;display:flex;flex-wrap:wrap;gap:8px}
+            .pt-tl-date span{display:inline-flex;align-items:center;gap:3px}
+
+            /* ── Footer pills ── */
+            .pt-footer{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+            .pt-footer__pill{display:inline-flex;align-items:center;gap:5px;font-size:.75rem;color:var(--m3-on-surface-variant);background:var(--m3-surface-container);border:1px solid var(--m3-outline-variant);padding:7px 14px;border-radius:99px}
+            .pt-footer__link{color:var(--m3-primary);text-decoration:none}
+            .pt-footer__link:hover{background:var(--m3-surface-container-high)}
+          </style>
+        </div>
+
       <!-- ── Search empty state ── -->
       <div id="search-empty" role="status" aria-live="polite">
           <div class="search-empty__icon">🔍</div>
@@ -8723,7 +8892,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 7.15 - ۱۴۰۵/۰۳/۰۳
+          ℹ️ نسخه 8.0 - ۱۴۰۵/۰۳/۰۹
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -8838,7 +9007,8 @@
         earthquake:'زمین‌لرزه',
         translate:'ترجمه متن',
         currency:'قیمت ارز و طلا',
-        movies:'بانک فیلم'
+        movies:'بانک فیلم',
+        posttrack:'رهگیری مرسوله پستی'
       };
 
       function _applyTool(id, pushState) {
@@ -9146,7 +9316,7 @@
           icon: '🌐', label: 'ابزارهای آنلاین',
           tools: [
             {id:'weather',icon:'🌤️',name:'آب‌وهوا'},{id:'earthquake',icon:'🌍',name:'زمین‌لرزه'},{id:'translate',icon:'🌍',name:'ترجمه'},
-            {id:'currency',icon:'💹',name:'قیمت و نرخ'},{id:'movies',icon:'🎬',name:'بانک فیلم'}
+            {id:'currency',icon:'💹',name:'قیمت و نرخ'},{id:'movies',icon:'🎬',name:'بانک فیلم'},{id:'posttrack',icon:'📦',name:'رهگیری پستی'}
           ]
         },
         'sec-share': {
@@ -27078,7 +27248,149 @@ self.onmessage=function(e){
             if (card.classList.contains('active')) cqLoad();
           });
         })();
-        
+
+    // ══════════════════════════════════════════════════
+    // Post Tracking 
+    // ══════════════════════════════════════════════════
+    (function(){
+      'use strict';
+      const PROXY = '/post-track';
+      const toFa  = n => String(n).replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[+d]);
+      let _barcode = '';
+
+      function ptShow(id) {
+        ['pt-empty','pt-loading','pt-error','pt-notfound','pt-result'].forEach(s => {
+          const el = document.getElementById(s);
+          if (el) el.style.display = s === id ? 'block' : 'none';
+        });
+      }
+
+      window.ptOnInput = function(inp) {
+        const raw = inp.value.replace(/\D/g,'');
+        if (raw !== inp.value) inp.value = raw;
+        const cc = document.getElementById('pt-charcount');
+        if (cc) cc.textContent = toFa(raw.length) + '/۲۴';
+        const cb = document.getElementById('pt-clear-btn');
+        if (cb) cb.style.display = raw.length > 0 ? 'flex' : 'none';
+      };
+
+      window.ptClear = function() {
+        const inp = document.getElementById('pt-input');
+        if (inp) { inp.value = ''; ptOnInput(inp); inp.focus(); }
+        const chip = document.getElementById('pt-chip');
+        if (chip) chip.style.display = 'none';
+        ptShow('pt-empty');
+        _barcode = '';
+      };
+
+      window.ptCopy = function() {
+        if (_barcode) window.copyToClipboard(_barcode);
+      };
+
+      window.ptSearch = async function() {
+        const inp = document.getElementById('pt-input');
+        if (!inp) return;
+        const barcode = inp.value.replace(/\D/g,'').trim();
+        if (!barcode) { inp.focus(); return; }
+        _barcode = barcode;
+
+        const chip = document.getElementById('pt-chip');
+        const chipText = document.getElementById('pt-chip-text');
+        if (chip) chip.style.display = 'flex';
+        if (chipText) chipText.textContent = barcode;
+
+        ptShow('pt-loading');
+
+        try {
+          const resp = await fetch(PROXY + '?barcode=' + encodeURIComponent(barcode));
+          if (!resp.ok) {
+            let msg = 'خطای سرور (' + resp.status + ')';
+            try { const d = await resp.json(); msg = d.error || msg; } catch(_){}
+            throw new Error(msg);
+          }
+          const data = await resp.json();
+          if (data.error) throw new Error(data.error);
+          if (data.code !== 200 || !data.entries || !data.entries.barcode) {
+            ptShow('pt-notfound');
+            return;
+          }
+          ptRender(data.entries);
+          ptShow('pt-result');
+        } catch(e) {
+          const em = document.getElementById('pt-error-msg');
+          // Show friendly Persian message instead of raw exception
+          const raw = e.message || '';
+          let msg = 'خطا در اتصال به سرور. لطفاً دوباره تلاش کنید.';
+          if (raw.includes('502') || raw.includes('503')) msg = 'سرور رهگیری موقتاً در دسترس نیست. لطفاً چند لحظه دیگر دوباره تلاش کنید.';
+          else if (raw.includes('خطا')) msg = raw;
+          if (em) em.textContent = msg;
+          ptShow('pt-error');
+        }
+      };
+
+      function ptRender(e) {
+        const el = id => document.getElementById(id);
+        if (el('pt-shop')) el('pt-shop').textContent = e.shop_title || 'فرستنده نامشخص';
+        if (el('pt-recipient') && e.fullname) el('pt-recipient').textContent = 'گیرنده: ' + e.fullname;
+        if (e.support_number) {
+          const sup = el('pt-support');
+          if (sup) sup.style.display = 'flex';
+          const sn = el('pt-support-num');
+          if (sn) sn.textContent = 'پشتیبانی: ' + e.support_number;
+        }
+
+        const steps = [
+          { icon:'📥', title: e.sender_status_display   || 'آماده به ارسال',    date: e.sender_status_date,   time: e.sender_status_time,   done: !!e.sender_status_date },
+          { icon:'🚴', title: e.courier_status_display  || 'تحویل به نامه‌رسان', date: e.courier_status_date,  time: e.courier_status_time,  done: !!e.courier_status_date },
+          { icon:'✅', title: e.receiver_status_display || 'تأیید تحویل',        date: e.receiver_status_date, time: e.receiver_status_time, done: !!e.receiver_status_date },
+        ];
+
+        // Latest status label
+        const latest = steps.filter(s => s.done).pop();
+        const ll = el('pt-latest-label');
+        if (ll && latest) ll.textContent = '● آخرین وضعیت: ' + latest.title;
+
+        // Build timeline with connector lines
+        const tl = el('pt-timeline');
+        if (!tl) return;
+        tl.innerHTML = steps.map((s, i) => {
+          const isLast = i === steps.length - 1;
+          const dateHtml = s.done && s.date ? `
+            <div class="pt-tl-date">
+              <span>📅 ${s.date}</span>
+              ${s.time ? `<span>🕐 ${s.time}</span>` : ''}
+            </div>` : '';
+          const lineHtml = isLast ? '' :
+            `<div class="pt-tl-line${s.done ? '' : ' pt-tl-line--pending'}"></div>`;
+          return `<div class="pt-tl-item">
+            <div class="pt-tl-left">
+              <div class="pt-tl-dot ${s.done ? 'pt-tl-dot--done' : 'pt-tl-dot--pending'}">${s.icon}</div>
+              ${lineHtml}
+            </div>
+            <div class="pt-tl-body">
+              <div class="${s.done ? 'pt-tl-title' : 'pt-tl-title--pending'}">${s.title}</div>
+              ${dateHtml}
+            </div>
+          </div>`;
+        }).join('');
+
+        if (e.other_orders_count > 0) {
+          tl.innerHTML += `<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--m3-outline-variant);font-size:.75rem;color:var(--m3-on-surface-variant);text-align:center">
+            📬 ${toFa(e.other_orders_count)} مرسوله دیگر از این فروشگاه
+          </div>`;
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const card = document.getElementById('posttrack');
+        if (!card) return;
+        new MutationObserver(muts => {
+          for (const m of muts)
+            if (m.attributeName === 'class' && card.classList.contains('active'))
+              setTimeout(() => document.getElementById('pt-input')?.focus(), 80);
+        }).observe(card, { attributes: true });
+      });
+    }());
     </script>
   </body>
 </html>
