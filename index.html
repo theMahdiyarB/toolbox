@@ -6859,12 +6859,89 @@
           <div class="tool-desc">جدول مندلیف با تمام ۱۱۸ عنصر و نام فارسی. روی هر عنصر کلیک کنید تا جزئیات (جرم اتمی، گروه، دوره، ظرفیت) ببینید. حالت تمرین برای حفظ جدول. <strong>کاربرد:</strong> آموزش شیمی، مرجع سریع.</div>
         </div>
 
+        <style id="mm-nav-css">
+/* ===== Tehran Metro Navigator styles ===== */
+#mm-nav{ font-size:14px;
+  --mm-land:#eef1f3; --mm-land-stroke:#dde4e8; --mm-water:#cfe4f0; --mm-park:#dcecd2; --mm-road:#e2ddd4; --mm-mountain:#c9b79c; }
+[data-theme="dark"] #mm-nav, .dark #mm-nav{
+  --mm-land:#1e242a; --mm-land-stroke:#2b333a; --mm-water:#1b3a48; --mm-park:#20302426; --mm-park:#233026; --mm-road:#343b42; --mm-mountain:#4a3f30; }
+#mm-nav .mm-bar{ display:flex; flex-wrap:wrap; gap:10px; align-items:flex-end; margin-bottom:10px; }
+#mm-nav .mm-io{ display:flex; align-items:center; gap:8px; flex:1; min-width:260px; }
+#mm-nav .mm-combo{ position:relative; flex:1; min-width:0; }
+#mm-nav .mm-inp{ width:100%; padding-inline-start:30px !important; }
+#mm-nav .mm-inp-dot{ position:absolute; inset-inline-start:11px; top:50%; transform:translateY(-50%); width:9px;height:9px;border-radius:50%; pointer-events:none; }
+#mm-nav .mm-swap{ flex:0 0 auto; width:38px;height:38px;border-radius:10px; border:1.5px solid var(--m3-outline-variant); background:var(--m3-surface-container); color:var(--m3-on-surface); font-size:19px; cursor:pointer; }
+#mm-nav .mm-swap:hover{ border-color:var(--m3-primary); color:var(--m3-primary); }
+#mm-nav .mm-bar-actions{ display:flex; gap:6px; flex-wrap:wrap; }
+#mm-nav .mm-bar-actions .btn{ font-size:13px; }
+
+#mm-nav .mm-list{ display:none; position:absolute; z-index:40; inset-inline:0; top:calc(100% + 4px); max-height:280px; overflow-y:auto;
+  background:var(--m3-surface-container-high,#fff); border:1px solid var(--m3-outline-variant); border-radius:12px; box-shadow:var(--m3-elevation-2,0 6px 18px rgba(0,0,0,.14)); padding:4px; }
+#mm-nav .mm-item{ display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:8px; cursor:pointer; white-space:nowrap; }
+#mm-nav .mm-item:hover, #mm-nav .mm-item.active{ background:var(--m3-secondary-container,#e5f2fc); }
+#mm-nav .mm-item-dots{ display:inline-flex; gap:2px; flex:0 0 auto; }
+#mm-nav .mm-item-nm{ font-weight:600; color:var(--m3-on-surface); }
+#mm-nav .mm-dot{ width:9px;height:9px;border-radius:50%; display:inline-block; }
+
+#mm-nav .mm-chips{ display:flex; flex-direction:column; gap:6px; margin-bottom:8px; }
+#mm-nav .mm-chip-row{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+#mm-nav .mm-chip-lbl{ font-size:12px; color:var(--m3-on-surface-variant); font-weight:600; }
+#mm-nav .mm-chip{ font-size:12px; padding:4px 10px; border-radius:50px; border:1px solid var(--m3-outline-variant); background:var(--m3-surface-container); color:var(--m3-on-surface); cursor:pointer; }
+#mm-nav .mm-chip:hover{ border-color:var(--m3-primary); color:var(--m3-primary); }
+
+#mm-nav .mm-summary{ background:var(--m3-surface-container,#f4f4f4); border:1px solid var(--m3-outline-variant); border-radius:14px; padding:14px; margin-bottom:10px; }
+#mm-nav .mm-note{ text-align:center; color:var(--m3-on-surface-variant); font-size:13px; padding:6px; }
+#mm-nav .mm-sum-stats{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; padding-bottom:10px; margin-bottom:10px; border-bottom:1px dashed var(--m3-outline-variant); }
+#mm-nav .mm-stat{ display:flex; flex-direction:column; align-items:center; min-width:56px; }
+#mm-nav .mm-stat-n{ font-size:22px; font-weight:800; color:var(--m3-primary); line-height:1.1; }
+#mm-nav .mm-stat-l{ font-size:11px; color:var(--m3-on-surface-variant); }
+#mm-nav .mm-sum-actions{ margin-inline-start:auto; display:flex; gap:6px; flex-wrap:wrap; }
+#mm-nav .mm-mini{ font-size:12px !important; padding:6px 12px !important; }
+
+#mm-nav .mm-timeline{ display:flex; flex-direction:column; gap:2px; }
+#mm-nav .mm-transfer{ font-size:12px; color:var(--m3-on-surface-variant); padding:6px 4px; display:flex; align-items:center; gap:6px; }
+#mm-nav .mm-tr-ic{ font-size:14px; }
+#mm-nav .mm-seg{ display:flex; gap:10px; }
+#mm-nav .mm-seg-line{ flex:0 0 5px; width:5px; border-radius:3px; margin:6px 2px; }
+#mm-nav .mm-seg-body{ flex:1; padding:2px 0; }
+#mm-nav .mm-seg-head{ margin-bottom:4px; }
+#mm-nav .mm-line-badge{ display:inline-block; font-size:11px; font-weight:700; padding:2px 9px; border-radius:50px; }
+#mm-nav .mm-badges{ display:flex; gap:6px; flex-wrap:wrap; margin:8px 0; }
+#mm-nav .mm-stop{ display:flex; align-items:center; gap:8px; padding:3px 0; cursor:pointer; font-size:13px; color:var(--m3-on-surface); }
+#mm-nav .mm-stop:hover .mm-stop-nm{ color:var(--m3-primary); }
+#mm-nav .mm-stop-dot{ width:11px;height:11px;border-radius:50%; border:3px solid #888; background:var(--m3-surface,#fff); flex:0 0 auto; }
+#mm-nav .mm-stop.mm-start .mm-stop-dot, #mm-nav .mm-stop.mm-end .mm-stop-dot{ width:14px;height:14px; box-shadow:0 0 0 3px var(--m3-surface,#fff); }
+#mm-nav .mm-stop.mm-start .mm-stop-nm, #mm-nav .mm-stop.mm-end .mm-stop-nm{ font-weight:800; }
+
+#mm-nav .mm-map-wrap{ position:relative; width:100%; height:60vh; min-height:380px; border-radius:14px; overflow:hidden; border:1px solid var(--m3-outline-variant); background:var(--m3-surface-container-low,#fafafa); touch-action:none; }
+#mm-nav #mm-svg{ width:100%; height:100%; cursor:grab; display:block; }
+#mm-nav .mm-zoom{ position:absolute; top:10px; inset-inline-end:10px; display:flex; flex-direction:column; gap:6px; z-index:5; }
+#mm-nav .mm-zoom button{ width:40px;height:40px;border-radius:10px; border:1px solid var(--m3-outline-variant); background:var(--m3-surface-container-high,#fff); color:var(--m3-on-surface); font-size:18px; cursor:pointer; box-shadow:var(--m3-elevation-1,0 1px 4px rgba(0,0,0,.12)); }
+#mm-nav .mm-zoom button:hover{ border-color:var(--m3-primary); color:var(--m3-primary); }
+#mm-nav .mm-legend{ position:absolute; bottom:10px; inset-inline-start:10px; display:flex; gap:8px; flex-wrap:wrap; max-width:calc(100% - 20px); background:color-mix(in srgb,var(--m3-surface-container-high,#fff) 88%, transparent); border:1px solid var(--m3-outline-variant); border-radius:10px; padding:6px 10px; font-size:11px; z-index:4; }
+#mm-nav .mm-leg{ display:inline-flex; align-items:center; gap:4px; color:var(--m3-on-surface); }
+#mm-nav .mm-toast{ position:absolute; top:10px; inset-inline-start:50%; transform:translateX(-50%); background:var(--m3-inverse-surface,#2c2c2b); color:var(--m3-inverse-on-surface,#fff); font-size:12px; padding:8px 16px; border-radius:50px; opacity:0; transition:opacity .25s; pointer-events:none; z-index:20; }
+
+#mm-nav .mm-sheet{ position:absolute; inset:0; background:rgba(0,0,0,.28); z-index:15; display:flex; align-items:flex-end; justify-content:center; }
+#mm-nav .mm-sheet-card{ width:100%; max-width:520px; background:var(--m3-surface-container-high,#fff); border-radius:18px 18px 0 0; padding:16px 18px 20px; box-shadow:0 -6px 24px rgba(0,0,0,.2); max-height:90%; overflow-y:auto; animation:mmUp .22s ease; }
+@keyframes mmUp{ from{ transform:translateY(20px); opacity:.4; } to{ transform:translateY(0); opacity:1; } }
+#mm-nav .mm-sheet-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+#mm-nav .mm-sheet-title{ font-size:18px; font-weight:800; color:var(--m3-on-surface); }
+#mm-nav .mm-sheet-x{ border:none; background:var(--m3-surface-container-highest,#eee); color:var(--m3-on-surface); width:32px;height:32px;border-radius:50%; cursor:pointer; font-size:15px; flex:0 0 auto; }
+#mm-nav .mm-sheet-btns{ display:flex; gap:6px; flex-wrap:wrap; margin:12px 0; }
+#mm-nav .mm-sheet-sec{ margin-top:8px; }
+#mm-nav .mm-sec-h{ font-size:12px; font-weight:700; color:var(--m3-on-surface-variant); margin-bottom:6px; }
+#mm-nav .mm-amens{ display:flex; gap:6px; flex-wrap:wrap; }
+#mm-nav .mm-amen{ font-size:12px; padding:5px 10px; border-radius:8px; background:var(--m3-secondary-container,#e5f2fc); color:var(--m3-on-secondary-container,#0b3a5e); }
+#mm-nav .mm-addr{ margin-top:10px; font-size:12.5px; color:var(--m3-on-surface-variant); line-height:1.6; }
+@media (max-width:560px){ #mm-nav .mm-bar-actions{ width:100%; } #mm-nav .mm-bar-actions .btn{ flex:1; } #mm-nav .mm-map-wrap{ height:52vh; } }
+
+        </style>
         <!-- ══ METRO MAP ══ -->
         <div id="metromap" class="tool-card">
-
-          <div class="tool-title">🚇 نقشه مترو و BRT</div>
+          <div class="tool-title">🚇 نقشه و مسیریاب مترو</div>
           <!-- City selector - M3 segmented button -->
-          <div style="display:inline-flex;border:1.5px solid var(--m3-outline-variant);border-radius:50px;overflow:hidden;margin-bottom:12px;max-width:100%">
+          <div style="display:inline-flex;border:1.5px solid var(--m3-outline-variant);border-radius:50px;overflow:hidden;margin-bottom:10px;max-width:100%">
             <button class="btn btn-filled" id="mm-tab-tehran"  onclick="mmSetCity('tehran')"
               style="border-radius:0;border:none;padding:8px 16px;font-size:13px">🚇 تهران</button>
             <button class="btn btn-tonal"  id="mm-tab-shiraz"  onclick="mmSetCity('shiraz')"
@@ -6874,21 +6951,74 @@
             <button class="btn btn-tonal"  id="mm-tab-mashhad" onclick="mmSetCity('mashhad')"
               style="border-radius:0;border:none;padding:8px 14px;font-size:13px">مشهد</button>
           </div>
-          <!-- Map controls -->
-          <div class="btn-row" style="margin-bottom:10px;flex-wrap:wrap;gap:6px">
-            <button class="btn btn-tonal" onclick="mmZoom(0.15)"  style="min-width:44px;font-size:1.2rem" title="بزرگ‌نمایی">＋</button>
-            <button class="btn btn-tonal" onclick="mmZoom(-0.15)" style="min-width:44px;font-size:1.2rem" title="کوچک‌نمایی">－</button>
-            <button class="btn btn-tonal" onclick="mmZoomReset()">↺ ریست نما</button>
-            <button class="btn btn-tonal" onclick="mmFullscreen()">⛶ تمام‌صفحه</button>
-            <button class="btn btn-filled" id="mm-dl-btn" onclick="mmDownload()">⬇️ دانلود PDF</button>
+
+          <!-- Tehran view sub-tabs: interactive navigator vs PDF/image -->
+          <div id="mm-subtabs" style="display:none">
+            <div style="display:inline-flex;border:1.5px solid var(--m3-outline-variant);border-radius:50px;overflow:hidden;margin-bottom:12px;max-width:100%">
+              <button class="btn btn-filled" id="mm-sub-nav" onclick="tmSetView('nav')"
+                style="border-radius:0;border:none;border-inline-end:1px solid var(--m3-outline-variant);padding:7px 15px;font-size:12.5px">🧭 مسیریاب تعاملی</button>
+              <button class="btn btn-tonal"  id="mm-sub-img" onclick="tmSetView('img')"
+                style="border-radius:0;border:none;padding:7px 15px;font-size:12.5px">🗺 نقشه PDF</button>
+            </div>
           </div>
-          <!-- Image viewer: pan+zoom with touch/mouse -->
-          <div id="mm-wrap" style="overflow:hidden;border-radius:14px;border:1px solid var(--m3-outline-variant);background:#1a1a1a;position:relative;width:100%;height:70vh;cursor:grab;touch-action:none;user-select:none">
-            <div id="mm-loading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;z-index:2">⏳ در حال بارگذاری...</div>
-            <img id="mm-img" alt="نقشه مترو" draggable="false"
-              style="position:absolute;top:0;left:0;transform-origin:0 0;max-width:none;display:none;image-rendering:high-quality">
+
+          <!-- ═════ TEHRAN NAVIGATOR ═════ -->
+          <div id="mm-nav" dir="rtl" style="display:none">
+            <div class="mm-bar">
+              <div class="mm-io">
+                <div class="mm-combo">
+                  <input id="mm-from-input" class="text-input mm-inp" type="text" autocomplete="off" placeholder="ایستگاه مبدأ"
+                    oninput="tmRenderList('from')" onfocus="tmOpen('from')" onkeydown="tmKey('from',event)">
+                  <span class="mm-inp-dot" style="background:#46A171"></span>
+                  <div id="mm-from-list" class="mm-list"></div>
+                </div>
+                <button class="mm-swap" onclick="tmSwap()" title="جابجایی مبدأ و مقصد" aria-label="جابجایی">⇆</button>
+                <div class="mm-combo">
+                  <input id="mm-to-input" class="text-input mm-inp" type="text" autocomplete="off" placeholder="ایستگاه مقصد"
+                    oninput="tmRenderList('to')" onfocus="tmOpen('to')" onkeydown="tmKey('to',event)">
+                  <span class="mm-inp-dot" style="background:#E56458"></span>
+                  <div id="mm-to-list" class="mm-list"></div>
+                </div>
+              </div>
+              <div class="mm-bar-actions">
+                <button class="btn btn-filled" id="mm-find-btn" onclick="tmFindRoute()">🧭 مسیریابی</button>
+                <button class="btn btn-tonal"  id="mm-clear-btn" onclick="tmClear()">✕ پاک کردن</button>
+              </div>
+            </div>
+
+            <div id="mm-chips" class="mm-chips"></div>
+            <div id="mm-summary" class="mm-summary" style="display:none"></div>
+
+            <div id="mm-map-wrap" class="mm-map-wrap">
+              <svg id="mm-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"></svg>
+              <div class="mm-zoom">
+                <button onclick="tmZoom(1.3)" aria-label="zoom in">＋</button>
+                <button onclick="tmZoom(1/1.3)" aria-label="zoom out">－</button>
+                <button onclick="tmResetView()" aria-label="reset">↺</button>
+              </div>
+              <div id="mm-legend" class="mm-legend"></div>
+              <div id="mm-toast" class="mm-toast"></div>
+              <div id="mm-sheet" class="mm-sheet" style="display:none" onclick="if(event.target===this)tmCloseSheet()"></div>
+            </div>
           </div>
-          <div class="tool-desc">نقشه‌های مترو شهرهای ایران با قابلیت زوم و پن. <strong>کاربرد:</strong> یافتن مسیر مترو، برنامه‌ریزی سفر درون‌شهری.</div>
+
+          <!-- ═════ IMAGE / PDF VIEWER (all cities incl. Tehran PDF tab) ═════ -->
+          <div id="mm-viewer" style="display:none">
+            <div class="btn-row" style="margin-bottom:10px;flex-wrap:wrap;gap:6px">
+              <button class="btn btn-tonal" onclick="mmZoom(0.15)"  style="min-width:44px;font-size:1.2rem" title="بزرگ‌نمایی">＋</button>
+              <button class="btn btn-tonal" onclick="mmZoom(-0.15)" style="min-width:44px;font-size:1.2rem" title="کوچک‌نمایی">－</button>
+              <button class="btn btn-tonal" onclick="mmZoomReset()">↺ ریست نما</button>
+              <button class="btn btn-tonal" onclick="mmFullscreen()">⛶ تمام‌صفحه</button>
+              <button class="btn btn-filled" id="mm-dl-btn" onclick="mmDownload()">⬇️ دانلود PDF</button>
+            </div>
+            <div id="mm-wrap" style="overflow:hidden;border-radius:14px;border:1px solid var(--m3-outline-variant);background:#1a1a1a;position:relative;width:100%;height:70vh;cursor:grab;touch-action:none;user-select:none">
+              <div id="mm-loading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;z-index:2">⏳ در حال بارگذاری...</div>
+              <img id="mm-img" alt="نقشه مترو" draggable="false"
+                style="position:absolute;top:0;left:0;transform-origin:0 0;max-width:none;display:none;image-rendering:high-quality">
+            </div>
+          </div>
+
+          <div class="tool-desc">مسیریاب آفلاین متروی تهران با جستجوی ایستگاه، کوتاه‌ترین مسیر (دیکسترا)، تعداد تعویض خط، جزئیات ایستگاه و نقشه‌ی قابل زوم با پس‌زمینه‌ی آفلاین شهر. نمای PDF و نقشه شهرهای دیگر به صورت تصویری. <strong>کاربرد:</strong> یافتن مسیر مترو، برنامه‌ریزی سفر درون‌شهری.<br><span style="font-size:11px;opacity:.65">داده‌ی گراف مترو: <code>mostafa-kheibary/tehran-metro-data</code> · نقشه‌ی پایه‌ی شهر: <code>yassermzh/iran-map</code></span></div>
         </div>
 
         <!-- ══ emojis ══ -->
@@ -8892,7 +9022,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 8.0 - ۱۴۰۵/۰۳/۰۹
+          ℹ️ نسخه 8.3 - ۱۴۰۵/۰۴/۱۹
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -18051,200 +18181,493 @@ self.onmessage=function(e){
       }
 
       // ══════════════════════════════════════════════════════
-      //  METRO MAP - JPG image viewer with pan/zoom
+      //  METRO MAP - Tehran live navigator + PDF/image viewer
       // ══════════════════════════════════════════════════════
-      const MM_JPG = {
-        tehran:  'static/maps/tehran-metro.jpg',
-        shiraz:  'static/maps/shiraz-metro.jpg',
-        isfahan: 'static/maps/isfahan-metro.jpg',
-        mashhad: 'static/maps/mashhad-metro.jpg',
-      };
-      const MM_PDF = {
-        tehran:  'static/maps/tehran-metro.pdf',
-        shiraz:  'static/maps/shiraz-metro.pdf',
-        isfahan: 'static/maps/isfahan-metro.pdf',
-        mashhad: 'static/maps/mashhad-metro.pdf',
-      };
+// ══════════════════════════════════════════════════════
+//  TEHRAN METRO NAVIGATOR  (Persian-only, offline)
+//  Data: static/maps/tehran-metro-stations.json
+//  Optional basemap: static/maps/tehran-map.geojson
+// ══════════════════════════════════════════════════════
+var TM = {
+  S:null, adj:null, keys:[], coords:{}, geo:null, bgSVG:'',
+  proj:null, vb:{x:0,y:0,w:1000,h:800}, base:{x:0,y:0,w:1000,h:800},
+  from:'', to:'', result:null, ready:false, loading:false,
+  active:{from:-1,to:-1}
+};
+var TM_LINE = {
+  1:{c:'#E0001F', fa:'خط ۱'},
+  2:{c:'#2F4389', fa:'خط ۲'},
+  3:{c:'#67C5F5', fa:'خط ۳'},
+  4:{c:'#F8E100', fa:'خط ۴'},
+  5:{c:'#007E46', fa:'خط ۵'},
+  6:{c:'#EF639F', fa:'خط ۶'},
+  7:{c:'#7F0B74', fa:'خط ۷'}
+};
+var TM_TXT = {
+  from:'ایستگاه مبدأ',to:'ایستگاه مقصد',find:'مسیریابی',clear:'پاک کردن',
+  stops:'ایستگاه',transfers:'تعویض خط',time:'زمان تقریبی',min:'دقیقه',
+  noroute:'مسیری یافت نشد',pick:'مبدأ و مقصد را انتخاب کنید',same:'مبدأ و مقصد یکسان است',
+  fav:'علاقه‌مندی‌ها',recent:'جستجوهای اخیر',share:'اشتراک مسیر',copy:'کپی مسیر',copied:'کپی شد ✓',
+  setFrom:'مبدأ',setTo:'مقصد',amenities:'امکانات',address:'نشانی',close:'بستن',
+  transferAt:'تعویض در',legend:'راهنمای خطوط',loading:'در حال بارگذاری داده…',
+  err:'خطا در بارگذاری داده ایستگاه‌ها (static/maps/tehran-metro-stations.json)'
+};
+var TM_AMEN = [
+  ['wc','🚻','سرویس بهداشتی'],['elevator','🛗','آسانسور'],
+  ['atm','🏧','خودپرداز'],['coffeeShop','☕','کافی‌شاپ'],
+  ['fastFood','🍔','فست‌فود'],['groceryStore','🛒','فروشگاه'],
+  ['freeWifi','📶','وای‌فای رایگان'],['prayerRoom','🕌','نمازخانه'],
+  ['creditTicketSales','🎫','فروش بلیت'],['waitingChair','💺','صندلی انتظار'],
+  ['bicycleParking','🚲','پارکینگ دوچرخه'],['blindPath','♿','مسیر نابینایان'],
+  ['camera','📷','دوربین'],['metroPolice','👮','پلیس مترو'],
+  ['waterCooler','🚰','آبسردکن'],['fireExtinguisher','🧯','کپسول آتش']
+];
 
-      var _mmCity = 'tehran';
-      var _mmScale = 1, _mmX = 0, _mmY = 0;
-      var _mmDragging = false, _mmDragStartX = 0, _mmDragStartY = 0, _mmDragOriginX = 0, _mmDragOriginY = 0;
-      var _mmPinchDist = 0;
+function tmT(k){ return TM_TXT[k]; }
+function tmNum(x){ var d='۰۱۲۳۴۵۶۷۸۹'; return String(x).replace(/[0-9]/g,function(n){return d[+n];}); }
+function tmName(k){ if(!TM.S||!TM.S[k]) return k; return (TM.S[k].translations&&TM.S[k].translations.fa)||k; }
+function tmSlug(k){ return k.toLowerCase().replace(/[()']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
 
-      function mmSetCity(city) {
-        _mmCity = city;
-        ['tehran','shiraz','isfahan','mashhad'].forEach(c => {
-          const b = document.getElementById('mm-tab-'+c);
-          if (b) b.className = 'btn '+(c===city?'btn-filled':'btn-tonal');
-        });
-        const img     = document.getElementById('mm-img');
-        const loading = document.getElementById('mm-loading');
-        const fallback = document.getElementById('mm-map');
-        if (fallback) fallback.innerHTML = '';
-        if (img) { img.style.display = 'none'; }
-        if (loading) { loading.style.display = 'flex'; loading.textContent = '⏳ در حال بارگذاری...'; }
-        // Reset pan/zoom
-        _mmScale = 1; _mmX = 0; _mmY = 0;
-        if (img) {
-          img.onload = mmImgLoaded;
-          img.onerror = mmImgError;
-          img.src = MM_JPG[city];
-        }
+// ---------- data + graph ----------
+function tmCommon(a,b){ var sb=new Set(b.lines); return a.lines.filter(function(l){return sb.has(l);}); }
+function tmBuildGraph(S){
+  var adj={}; Object.keys(S).forEach(function(k){adj[k]=[];});
+  Object.keys(S).forEach(function(k){
+    var v=S[k]; (v.relations||[]).forEach(function(r){
+      if(r===k||!S[r]) return;
+      var cl=tmCommon(v,S[r]); var lines=cl.length?cl:[v.lines[0]];
+      if(!adj[k].some(function(e){return e.to===r;})) adj[k].push({to:r,lines:lines});
+      if(!adj[r].some(function(e){return e.to===k;})) adj[r].push({to:k,lines:lines});
+    });
+  });
+  return adj;
+}
+function tmRoute(from,to){
+  var adj=TM.adj, RIDE=1, TRANSFER=3.5;
+  if(from===to) return {path:[from],segments:[],transfers:0,stops:0};
+  var dist=new Map(), prev=new Map();
+  var s0=from+'@0'; dist.set(s0,0); prev.set(s0,null);
+  var pq=[[0,s0,from,0]];
+  function pop(){var bi=0;for(var i=1;i<pq.length;i++)if(pq[i][0]<pq[bi][0])bi=i;return pq.splice(bi,1)[0];}
+  var best=null,bestCost=Infinity;
+  while(pq.length){
+    var t=pop(),cost=t[0],sk=t[1],stn=t[2],ln=t[3];
+    if(cost>(dist.has(sk)?dist.get(sk):Infinity)) continue;
+    if(stn===to && cost<bestCost){bestCost=cost;best=sk;}
+    var es=adj[stn];
+    for(var i=0;i<es.length;i++){var e=es[i];
+      for(var j=0;j<e.lines.length;j++){var nl=e.lines[j];
+        var transfer=(ln!==0&&ln!==nl)?TRANSFER:0;
+        var nc=cost+RIDE+transfer, nk=e.to+'@'+nl;
+        if(nc<(dist.has(nk)?dist.get(nk):Infinity)){dist.set(nk,nc);prev.set(nk,sk);pq.push([nc,nk,e.to,nl]);}
       }
+    }
+  }
+  if(!best) return null;
+  var chain=[],cur=best; while(cur){chain.push(cur);cur=prev.get(cur);} chain.reverse();
+  var path=chain.map(function(x){return x.split('@')[0];});
+  var lines=chain.map(function(x){return parseInt(x.split('@')[1],10);});
+  var segs=[],transfers=0;
+  for(var k=1;k<path.length;k++){var nl2=lines[k];
+    if(segs.length&&segs[segs.length-1].line===nl2){segs[segs.length-1].stations.push(path[k]);}
+    else{ if(segs.length)transfers++; segs.push({line:nl2,stations:[path[k-1],path[k]]}); }
+  }
+  return {path:path,segments:segs,transfers:transfers,stops:path.length-1};
+}
 
-      function mmImgLoaded() {
-        const img     = document.getElementById('mm-img');
-        const wrap    = document.getElementById('mm-wrap');
-        const loading = document.getElementById('mm-loading');
-        if (!img || !wrap) return;
-        if (loading) loading.style.display = 'none';
-        // Fit image to container initially
-        const ww = wrap.clientWidth, wh = wrap.clientHeight;
-        const iw = img.naturalWidth, ih = img.naturalHeight;
-        _mmScale = Math.min(ww / iw, wh / ih, 1);
-        _mmX = (ww - iw * _mmScale) / 2;
-        _mmY = (wh - ih * _mmScale) / 2;
-        img.style.display = 'block';
-        mmApplyTransform();
-        // Setup pan/zoom events once
-        if (!wrap._mmEventsSet) {
-          wrap._mmEventsSet = true;
-          mmSetupEvents(wrap, img);
-        }
-      }
+// ---------- projection ----------
+function tmProject(){
+  var S=TM.S, keys=Object.keys(S);
+  var lat=keys.map(function(k){return S[k].latitude;});
+  var lon=keys.map(function(k){return S[k].longitude;});
+  var minLat=Math.min.apply(null,lat),maxLat=Math.max.apply(null,lat);
+  var minLon=Math.min.apply(null,lon),maxLon=Math.max.apply(null,lon);
+  var midLat=(minLat+maxLat)/2*Math.PI/180, kx=Math.cos(midLat);
+  var pad=48, W=1000;
+  var gw=(maxLon-minLon)*kx, gh=(maxLat-minLat);
+  var H=Math.round((W-2*pad)*(gh/gw))+2*pad;
+  TM.proj={minLon:minLon,maxLat:maxLat,kx:kx,gw:gw,gh:gh,pad:pad,W:W,H:H};
+  var coords={};
+  keys.forEach(function(k){ coords[k]=tmXY(S[k].longitude,S[k].latitude); });
+  TM.coords=coords;
+  TM.base={x:0,y:0,w:W,h:H};
+  TM.vb={x:0,y:0,w:W,h:H};
+}
+function tmXY(lon,lat){
+  var p=TM.proj;
+  return { x:p.pad+((lon-p.minLon)*p.kx)/p.gw*(p.W-2*p.pad),
+           y:p.pad+((p.maxLat-lat)/p.gh)*(p.H-2*p.pad) };
+}
 
-      function mmImgError() {
-        const loading = document.getElementById('mm-loading');
-        if (loading) {
-          loading.textContent = '⚠ تصویر نقشه یافت نشد - فایل static/maps/' + _mmCity + '-metro.jpg را بررسی کنید';
-        }
-      }
+// ---------- offline basemap (GeoJSON) ----------
+function tmBuildBg(){
+  TM.bgSVG='';
+  if(!TM.geo||!TM.geo.features||!TM.proj) return;
+  function pathFrom(coords,close){
+    var d=''; for(var i=0;i<coords.length;i++){ var p=tmXY(coords[i][0],coords[i][1]); d+=(i?' L':'M')+p.x.toFixed(1)+' '+p.y.toFixed(1); }
+    return d+(close?' Z':'');
+  }
+  var out='';
+  TM.geo.features.forEach(function(f){
+    var g=f.geometry; if(!g) return; var kind=(f.properties&&f.properties.kind)||'land';
+    var fill = kind==='water'?'var(--mm-water)' : kind==='park'?'var(--mm-park)' : 'var(--mm-land)';
+    if(g.type==='Polygon'||g.type==='MultiPolygon'){
+      var polys = g.type==='Polygon'?[g.coordinates]:g.coordinates;
+      polys.forEach(function(poly){ var d=poly.map(function(r){return pathFrom(r,true);}).join(' ');
+        out+='<path d="'+d+'" fill="'+fill+'" stroke="var(--mm-land-stroke)" stroke-width="0.6" fill-rule="evenodd" opacity="0.5"/>'; });
+    } else if(g.type==='LineString'||g.type==='MultiLineString'){
+      var lns = g.type==='LineString'?[g.coordinates]:g.coordinates;
+      var col = kind==='mountain'?'var(--mm-mountain)':kind==='water'?'var(--mm-water)':'var(--mm-road)';
+      var sw = kind==='highway'?2.2:(kind==='mountain'?1.6:1.2);
+      lns.forEach(function(ls){ out+='<path d="'+pathFrom(ls,false)+'" fill="none" stroke="'+col+'" stroke-width="'+sw+'" stroke-linejoin="round" stroke-linecap="round" opacity="0.75"'+(kind==='mountain'?' stroke-dasharray="5 4"':'')+'/>'; });
+    }
+  });
+  TM.bgSVG=out;
+}
 
-      function mmApplyTransform() {
-        const img = document.getElementById('mm-img');
-        if (img) img.style.transform = `translate(${_mmX}px,${_mmY}px) scale(${_mmScale})`;
-      }
+// ---------- map render ----------
+function tmEdgeKey(a,b){ return a<b? a+'|'+b : b+'|'+a; }
+function tmRenderMap(){
+  var S=TM.S, C=TM.coords, svg=document.getElementById('mm-svg');
+  if(!svg||!S) return;
+  var routeSet=new Set(), routeEdges=new Set();
+  if(TM.result&&TM.result.path){
+    TM.result.path.forEach(function(k){routeSet.add(k);});
+    for(var i=1;i<TM.result.path.length;i++) routeEdges.add(tmEdgeKey(TM.result.path[i-1],TM.result.path[i]));
+  }
+  var hasRoute=routeSet.size>0;
+  var edges='', done=new Set();
+  Object.keys(S).forEach(function(k){
+    TM.adj[k].forEach(function(e){
+      var ek=tmEdgeKey(k,e.to); if(done.has(ek)) return; done.add(ek);
+      var a=C[k],b=C[e.to]; if(!a||!b) return;
+      var n=e.lines.length;
+      e.lines.forEach(function(ln,idx){
+        var col=(TM_LINE[ln]||{}).c||'#888';
+        var off=(idx-(n-1)/2)*3.2;
+        var dim=hasRoute && !routeEdges.has(ek);
+        edges+='<line x1="'+a.x+'" y1="'+(a.y+off)+'" x2="'+b.x+'" y2="'+(b.y+off)+'" stroke="'+col+'" stroke-width="'+(dim?2.4:3.4)+'" stroke-linecap="round" opacity="'+(dim?0.28:0.95)+'"/>';
+      });
+    });
+  });
+  var overlay='';
+  if(hasRoute){
+    for(var r=1;r<TM.result.path.length;r++){
+      var a2=C[TM.result.path[r-1]],b2=C[TM.result.path[r]];
+      overlay+='<line x1="'+a2.x+'" y1="'+a2.y+'" x2="'+b2.x+'" y2="'+b2.y+'" stroke="var(--m3-primary,#2783DE)" stroke-width="6.5" stroke-linecap="round" opacity="0.9"/>';
+    }
+  }
+  var nodes='', labels='';
+  Object.keys(S).forEach(function(k){
+    var p=C[k]; if(!p) return; var stn=S[k];
+    var inter=stn.lines.length>1;
+    var onRoute=routeSet.has(k);
+    var isEnd=hasRoute&&(k===TM.result.path[0]||k===TM.result.path[TM.result.path.length-1]);
+    var col=(TM_LINE[stn.lines[0]]||{}).c||'#888';
+    var rad=isEnd?7:(inter?5:3.2);
+    var fill=inter?'var(--m3-surface,#fff)':col;
+    var stroke=isEnd?'var(--m3-primary,#2783DE)':(inter?'#333':col);
+    var sw=isEnd?3:(inter?2:1);
+    var dimN=hasRoute&&!onRoute;
+    nodes+='<circle class="mm-node" data-k="'+encodeURIComponent(k)+'" cx="'+p.x+'" cy="'+p.y+'" r="'+rad+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'" opacity="'+(dimN?0.3:1)+'" style="cursor:pointer"><title>'+tmName(k).replace(/"/g,'')+'</title></circle>';
+    // labels: when routing -> only route stations; otherwise -> ALL stations (small)
+    var showLbl = hasRoute ? onRoute : true;
+    if(showLbl){
+      var fs = isEnd?9.5 : (inter?6 : 4.6);
+      var fw = (isEnd||inter)?'700':'500';
+      labels+='<text class="mm-lbl" x="'+p.x+'" y="'+(p.y-rad-2)+'" text-anchor="middle" font-size="'+fs+'" font-weight="'+fw+'" fill="var(--m3-on-surface,#222)" paint-order="stroke" stroke="var(--m3-surface,#fff)" stroke-width="2" style="pointer-events:none">'+tmName(k)+'</text>';
+    }
+  });
+  svg.setAttribute('viewBox', TM.vb.x+' '+TM.vb.y+' '+TM.vb.w+' '+TM.vb.h);
+  svg.innerHTML='<g>'+TM.bgSVG+edges+overlay+nodes+labels+'</g>';
+  Array.prototype.forEach.call(svg.querySelectorAll('.mm-node'),function(c){
+    c.addEventListener('click',function(ev){ev.stopPropagation();tmShowStation(decodeURIComponent(c.getAttribute('data-k')));});
+  });
+}
 
-      function mmZoom(delta) {
-        const wrap = document.getElementById('mm-wrap');
-        if (!wrap) return;
-        const cx = wrap.clientWidth / 2, cy = wrap.clientHeight / 2;
-        const newScale = Math.max(0.2, Math.min(10, _mmScale + delta * _mmScale));
-        // Zoom toward center
-        _mmX = cx - (cx - _mmX) * (newScale / _mmScale);
-        _mmY = cy - (cy - _mmY) * (newScale / _mmScale);
-        _mmScale = newScale;
-        mmApplyTransform();
-      }
+// ---------- viewBox zoom/pan ----------
+function tmApplyVB(){ var svg=document.getElementById('mm-svg'); if(svg) svg.setAttribute('viewBox',TM.vb.x+' '+TM.vb.y+' '+TM.vb.w+' '+TM.vb.h); }
+function tmZoom(f,cx,cy){
+  var svg=document.getElementById('mm-svg'); if(!svg) return;
+  var rect=svg.getBoundingClientRect();
+  if(cx==null){cx=rect.left+rect.width/2;cy=rect.top+rect.height/2;}
+  var px=TM.vb.x+(cx-rect.left)/rect.width*TM.vb.w;
+  var py=TM.vb.y+(cy-rect.top)/rect.height*TM.vb.h;
+  var nw=TM.vb.w/f, nh=TM.vb.h/f;
+  var minW=TM.base.w*0.12, maxW=TM.base.w*1.6;
+  if(nw<minW){nw=minW;nh=TM.base.h*(minW/TM.base.w);}
+  if(nw>maxW){nw=maxW;nh=TM.base.h*(maxW/TM.base.w);}
+  TM.vb.x=px-(cx-rect.left)/rect.width*nw;
+  TM.vb.y=py-(cy-rect.top)/rect.height*nh;
+  TM.vb.w=nw; TM.vb.h=nh; tmApplyVB();
+}
+function tmResetView(){ TM.vb={x:TM.base.x,y:TM.base.y,w:TM.base.w,h:TM.base.h}; tmApplyVB(); }
+function tmSetupMapEvents(){
+  var svg=document.getElementById('mm-svg'); if(!svg||svg._ev) return; svg._ev=true;
+  var drag=false,sx=0,sy=0,ox=0,oy=0,pinch=0;
+  svg.addEventListener('mousedown',function(e){drag=true;sx=e.clientX;sy=e.clientY;ox=TM.vb.x;oy=TM.vb.y;svg.style.cursor='grabbing';});
+  window.addEventListener('mousemove',function(e){ if(!drag)return; var r=svg.getBoundingClientRect(); TM.vb.x=ox-(e.clientX-sx)/r.width*TM.vb.w; TM.vb.y=oy-(e.clientY-sy)/r.height*TM.vb.h; tmApplyVB(); });
+  window.addEventListener('mouseup',function(){drag=false;svg.style.cursor='grab';});
+  svg.addEventListener('wheel',function(e){e.preventDefault();tmZoom(e.deltaY>0?1/1.15:1.15,e.clientX,e.clientY);},{passive:false});
+  svg.addEventListener('touchstart',function(e){ if(e.touches.length===1){drag=true;sx=e.touches[0].clientX;sy=e.touches[0].clientY;ox=TM.vb.x;oy=TM.vb.y;} else if(e.touches.length===2){drag=false;var dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY;pinch=Math.sqrt(dx*dx+dy*dy);} },{passive:false});
+  svg.addEventListener('touchmove',function(e){ var r=svg.getBoundingClientRect(); if(e.touches.length===1&&drag){TM.vb.x=ox-(e.touches[0].clientX-sx)/r.width*TM.vb.w;TM.vb.y=oy-(e.touches[0].clientY-sy)/r.height*TM.vb.h;tmApplyVB();} else if(e.touches.length===2){var dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY,d=Math.sqrt(dx*dx+dy*dy);var cx=(e.touches[0].clientX+e.touches[1].clientX)/2,cy=(e.touches[0].clientY+e.touches[1].clientY)/2;if(pinch)tmZoom(d/pinch,cx,cy);pinch=d;} e.preventDefault(); },{passive:false});
+  svg.addEventListener('touchend',function(){drag=false;pinch=0;});
+}
 
-      function mmZoomReset() {
-        const img  = document.getElementById('mm-img');
-        const wrap = document.getElementById('mm-wrap');
-        if (!img || !wrap) return;
-        const ww = wrap.clientWidth, wh = wrap.clientHeight;
-        const iw = img.naturalWidth  || ww;
-        const ih = img.naturalHeight || wh;
-        _mmScale = Math.min(ww / iw, wh / ih, 1);
-        _mmX = (ww - iw * _mmScale) / 2;
-        _mmY = (wh - ih * _mmScale) / 2;
-        mmApplyTransform();
-      }
+// ---------- comboboxes ----------
+function tmMatch(q){
+  q=(q||'').trim().toLowerCase();
+  var out=TM.keys.slice();
+  if(q){ out=out.filter(function(k){ var fa=(TM.S[k].translations&&TM.S[k].translations.fa||''); return k.toLowerCase().indexOf(q)>=0 || fa.indexOf(q)>=0; }); }
+  return out.slice(0,80);
+}
+function tmRenderList(which){
+  var box=document.getElementById('mm-'+which+'-list'); if(!box) return;
+  var inp=document.getElementById('mm-'+which+'-input');
+  var list=tmMatch(inp?inp.value:'');
+  TM.active[which]=-1;
+  if(!list.length){ box.innerHTML='<div class="mm-item" style="opacity:.6">—</div>'; box.style.display='block'; return; }
+  box.innerHTML=list.map(function(k,i){
+    var dots=TM.S[k].lines.map(function(l){return '<span class="mm-dot" style="background:'+((TM_LINE[l]||{}).c||'#888')+'"></span>';}).join('');
+    return '<div class="mm-item" data-k="'+encodeURIComponent(k)+'" data-i="'+i+'"><span class="mm-item-dots">'+dots+'</span><span class="mm-item-nm">'+tmName(k)+'</span></div>';
+  }).join('');
+  box.style.display='block';
+  Array.prototype.forEach.call(box.querySelectorAll('.mm-item'),function(el){
+    if(!el.getAttribute('data-k')) return;
+    el.addEventListener('mousedown',function(e){e.preventDefault();tmSelect(which,decodeURIComponent(el.getAttribute('data-k')));});
+  });
+}
+function tmOpen(which){ tmRenderList(which); }
+function tmCloseLists(){ ['from','to'].forEach(function(w){var b=document.getElementById('mm-'+w+'-list'); if(b) b.style.display='none';}); }
+function tmSelect(which,k){
+  TM[which]=k;
+  var inp=document.getElementById('mm-'+which+'-input'); if(inp) inp.value=tmName(k);
+  var b=document.getElementById('mm-'+which+'-list'); if(b) b.style.display='none';
+  if(TM.from&&TM.to) tmFindRoute();
+}
+function tmKey(which,e){
+  var box=document.getElementById('mm-'+which+'-list'); if(!box||box.style.display==='none'){ if(e.key==='ArrowDown'){tmOpen(which);} return; }
+  var items=box.querySelectorAll('.mm-item[data-k]');
+  if(e.key==='ArrowDown'){e.preventDefault();TM.active[which]=Math.min(items.length-1,TM.active[which]+1);tmHi(which,items);}
+  else if(e.key==='ArrowUp'){e.preventDefault();TM.active[which]=Math.max(0,TM.active[which]-1);tmHi(which,items);}
+  else if(e.key==='Enter'){e.preventDefault();var i=TM.active[which]<0?0:TM.active[which];if(items[i])tmSelect(which,decodeURIComponent(items[i].getAttribute('data-k')));}
+  else if(e.key==='Escape'){box.style.display='none';}
+}
+function tmHi(which,items){ Array.prototype.forEach.call(items,function(el,i){ el.classList.toggle('active',i===TM.active[which]); if(i===TM.active[which]) el.scrollIntoView({block:'nearest'}); }); }
+function tmSwap(){ var f=TM.from; TM.from=TM.to; TM.to=f;
+  var a=document.getElementById('mm-from-input'),b=document.getElementById('mm-to-input');
+  if(a) a.value=TM.from?tmName(TM.from):''; if(b) b.value=TM.to?tmName(TM.to):'';
+  if(TM.from&&TM.to) tmFindRoute();
+}
 
-      function mmFullscreen() {
-        const wrap = document.getElementById('mm-wrap');
-        if (!wrap) return;
-        if (document.fullscreenElement) document.exitFullscreen();
-        else if (wrap.requestFullscreen) wrap.requestFullscreen();
-        else if (wrap.webkitRequestFullscreen) wrap.webkitRequestFullscreen();
-      }
+// ---------- route ----------
+function tmFindRoute(){
+  var msg=document.getElementById('mm-summary');
+  if(!TM.from||!TM.to){ if(msg){msg.style.display='block';msg.innerHTML='<div class="mm-note">'+tmT('pick')+'</div>';} return; }
+  if(TM.from===TM.to){ if(msg){msg.style.display='block';msg.innerHTML='<div class="mm-note">'+tmT('same')+'</div>';} return; }
+  var res=tmRoute(TM.from,TM.to); TM.result=res;
+  tmRenderSummary(); tmRenderMap(); tmAddRecent(TM.from,TM.to); tmUpdateURL();
+}
+function tmEstMin(res){ return Math.max(2, res.stops*2 + res.transfers*4); }
+function tmRenderSummary(){
+  var el=document.getElementById('mm-summary'); if(!el) return; var res=TM.result;
+  if(!res){ el.style.display='none'; return; } el.style.display='block';
+  if(!res.path||res.stops===0){ el.innerHTML='<div class="mm-note">'+tmT('noroute')+'</div>'; return; }
+  var mins=tmEstMin(res);
+  var head='<div class="mm-sum-stats">'+
+    '<div class="mm-stat"><span class="mm-stat-n">'+tmNum(res.stops)+'</span><span class="mm-stat-l">'+tmT('stops')+'</span></div>'+
+    '<div class="mm-stat"><span class="mm-stat-n">'+tmNum(res.transfers)+'</span><span class="mm-stat-l">'+tmT('transfers')+'</span></div>'+
+    '<div class="mm-stat"><span class="mm-stat-n">'+tmNum(mins)+'</span><span class="mm-stat-l">'+tmT('time')+' ('+tmT('min')+')</span></div>'+
+    '<div class="mm-sum-actions">'+
+      '<button class="btn btn-tonal mm-mini" onclick="tmCopyRoute()">📋 '+tmT('copy')+'</button>'+
+      '<button class="btn btn-tonal mm-mini" onclick="tmShareLink()">🔗 '+tmT('share')+'</button>'+
+    '</div></div>';
+  var tl='<div class="mm-timeline">';
+  res.segments.forEach(function(seg,si){
+    var L=TM_LINE[seg.line]||{c:'#888'};
+    if(si>0){ tl+='<div class="mm-transfer"><span class="mm-tr-ic">🔁</span>'+tmT('transferAt')+' <b>'+tmName(seg.stations[0])+'</b></div>'; }
+    tl+='<div class="mm-seg"><div class="mm-seg-line" style="background:'+L.c+'"></div><div class="mm-seg-body">'+
+        '<div class="mm-seg-head"><span class="mm-line-badge" style="background:'+L.c+';color:'+tmTextOn(L.c)+'">'+L.fa+'</span></div>';
+    seg.stations.forEach(function(k,idx){
+      var role=''; if(si===0&&idx===0) role=' mm-start'; if(si===res.segments.length-1&&idx===seg.stations.length-1) role=' mm-end';
+      tl+='<div class="mm-stop'+role+'" onclick="tmShowStation(\''+k.replace(/\\/g,'').replace(/'/g,"\\'")+'\')"><span class="mm-stop-dot" style="border-color:'+L.c+'"></span><span class="mm-stop-nm">'+tmName(k)+'</span></div>';
+    });
+    tl+='</div></div>';
+  });
+  tl+='</div>';
+  el.innerHTML=head+tl;
+}
+function tmTextOn(hex){ hex=hex.replace('#',''); if(hex.length===3)hex=hex.split('').map(function(c){return c+c;}).join(''); var r=parseInt(hex.slice(0,2),16),g=parseInt(hex.slice(2,4),16),b=parseInt(hex.slice(4,6),16); return (r*299+g*587+b*114)/1000>150?'#111':'#fff'; }
 
-      function mmDownload() {
-        const pdfPath = MM_PDF[_mmCity];
-        if (!pdfPath) return;
-        const a = document.createElement('a');
-        a.href = pdfPath;
-        a.download = (_mmCity||'metro') + '-map.pdf';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }
+// ---------- station detail sheet ----------
+function tmShowStation(k){
+  if(!TM.S[k]) return; var stn=TM.S[k];
+  var sheet=document.getElementById('mm-sheet'); if(!sheet) return;
+  var badges=stn.lines.map(function(l){var L=TM_LINE[l]||{c:'#888'};return '<span class="mm-line-badge" style="background:'+L.c+';color:'+tmTextOn(L.c)+'">'+L.fa+'</span>';}).join('');
+  var amen=TM_AMEN.filter(function(a){return stn[a[0]]===true;}).map(function(a){return '<span class="mm-amen">'+a[1]+' '+a[2]+'</span>';}).join('');
+  var fav=tmIsFav(k);
+  var addr = stn.address? '<div class="mm-addr"><b>'+tmT('address')+':</b> '+stn.address+'</div>':'';
+  sheet.innerHTML='<div class="mm-sheet-card">'+
+    '<div class="mm-sheet-head">'+
+      '<div class="mm-sheet-title">'+tmName(k)+'</div>'+
+      '<button class="mm-sheet-x" onclick="tmCloseSheet()" aria-label="'+tmT('close')+'">✕</button>'+
+    '</div>'+
+    '<div class="mm-badges">'+badges+'</div>'+
+    '<div class="mm-sheet-btns">'+
+      '<button class="btn btn-filled mm-mini" onclick="tmSetEndpoint(\'from\',\''+k.replace(/'/g,"\\'")+'\')">🟢 '+tmT('setFrom')+'</button>'+
+      '<button class="btn btn-filled mm-mini" onclick="tmSetEndpoint(\'to\',\''+k.replace(/'/g,"\\'")+'\')">🔴 '+tmT('setTo')+'</button>'+
+      '<button class="btn btn-tonal mm-mini" onclick="tmToggleFav(\''+k.replace(/'/g,"\\'")+'\')">'+(fav?'★':'☆')+' '+tmT('fav')+'</button>'+
+    '</div>'+
+    (amen?'<div class="mm-sheet-sec"><div class="mm-sec-h">'+tmT('amenities')+'</div><div class="mm-amens">'+amen+'</div></div>':'')+
+    addr+
+  '</div>';
+  sheet.style.display='block';
+}
+function tmCloseSheet(){ var s=document.getElementById('mm-sheet'); if(s) s.style.display='none'; }
+function tmSetEndpoint(which,k){ tmSelect(which,k); tmCloseSheet(); }
 
-      function mmSetupEvents(wrap, img) {
-        // Mouse drag
-        wrap.addEventListener('mousedown', function(e) {
-          _mmDragging = true;
-          _mmDragStartX = e.clientX; _mmDragStartY = e.clientY;
-          _mmDragOriginX = _mmX; _mmDragOriginY = _mmY;
-          wrap.style.cursor = 'grabbing';
-          e.preventDefault();
-        });
-        window.addEventListener('mousemove', function(e) {
-          if (!_mmDragging) return;
-          _mmX = _mmDragOriginX + (e.clientX - _mmDragStartX);
-          _mmY = _mmDragOriginY + (e.clientY - _mmDragStartY);
-          mmApplyTransform();
-        });
-        window.addEventListener('mouseup', function() {
-          _mmDragging = false;
-          wrap.style.cursor = 'grab';
-        });
-        // Mouse wheel zoom
-        wrap.addEventListener('wheel', function(e) {
-          e.preventDefault();
-          const rect = wrap.getBoundingClientRect();
-          const px = e.clientX - rect.left, py = e.clientY - rect.top;
-          const delta = e.deltaY > 0 ? -0.1 : 0.1;
-          const newScale = Math.max(0.2, Math.min(10, _mmScale + delta * _mmScale));
-          _mmX = px - (px - _mmX) * (newScale / _mmScale);
-          _mmY = py - (py - _mmY) * (newScale / _mmScale);
-          _mmScale = newScale;
-          mmApplyTransform();
-        }, {passive: false});
-        // Touch drag + pinch zoom
-        wrap.addEventListener('touchstart', function(e) {
-          if (e.touches.length === 1) {
-            _mmDragging = true;
-            _mmDragStartX = e.touches[0].clientX; _mmDragStartY = e.touches[0].clientY;
-            _mmDragOriginX = _mmX; _mmDragOriginY = _mmY;
-          } else if (e.touches.length === 2) {
-            _mmDragging = false;
-            const dx = e.touches[0].clientX - e.touches[1].clientX;
-            const dy = e.touches[0].clientY - e.touches[1].clientY;
-            _mmPinchDist = Math.sqrt(dx*dx + dy*dy);
-          }
-          e.preventDefault();
-        }, {passive: false});
-        wrap.addEventListener('touchmove', function(e) {
-          if (e.touches.length === 1 && _mmDragging) {
-            _mmX = _mmDragOriginX + (e.touches[0].clientX - _mmDragStartX);
-            _mmY = _mmDragOriginY + (e.touches[0].clientY - _mmDragStartY);
-            mmApplyTransform();
-          } else if (e.touches.length === 2) {
-            const dx = e.touches[0].clientX - e.touches[1].clientX;
-            const dy = e.touches[0].clientY - e.touches[1].clientY;
-            const dist = Math.sqrt(dx*dx + dy*dy);
-            const cx = (e.touches[0].clientX + e.touches[1].clientX)/2;
-            const cy_t = (e.touches[0].clientY + e.touches[1].clientY)/2;
-            const rect = wrap.getBoundingClientRect();
-            const px = cx - rect.left, py = cy_t - rect.top;
-            const newScale = Math.max(0.2, Math.min(10, _mmScale * (dist / _mmPinchDist)));
-            _mmX = px - (px - _mmX) * (newScale / _mmScale);
-            _mmY = py - (py - _mmY) * (newScale / _mmScale);
-            _mmScale = newScale;
-            _mmPinchDist = dist;
-            mmApplyTransform();
-          }
-          e.preventDefault();
-        }, {passive: false});
-        wrap.addEventListener('touchend', function() { _mmDragging = false; });
-        // Double tap to zoom in
-        let _mmLastTap = 0;
-        wrap.addEventListener('touchend', function(e) {
-          const now = Date.now();
-          if (now - _mmLastTap < 300) { mmZoom(0.5); }
-          _mmLastTap = now;
-        });
-      }
+// ---------- favorites + recent ----------
+function tmFavs(){ try{return JSON.parse(localStorage.getItem('tm-fav')||'[]');}catch(e){return [];} }
+function tmIsFav(k){ return tmFavs().indexOf(k)>=0; }
+function tmToggleFav(k){ var f=tmFavs(); var i=f.indexOf(k); if(i>=0)f.splice(i,1); else f.push(k); try{localStorage.setItem('tm-fav',JSON.stringify(f));}catch(e){} tmRenderChips(); tmShowStation(k); }
+function tmRecents(){ try{return JSON.parse(localStorage.getItem('tm-recent')||'[]');}catch(e){return [];} }
+function tmAddRecent(f,t){ var r=tmRecents().filter(function(x){return !(x.f===f&&x.t===t);}); r.unshift({f:f,t:t}); r=r.slice(0,6); try{localStorage.setItem('tm-recent',JSON.stringify(r));}catch(e){} tmRenderChips(); }
+function tmRenderChips(){
+  var el=document.getElementById('mm-chips'); if(!el) return; var html='';
+  var favs=tmFavs();
+  if(favs.length){ html+='<div class="mm-chip-row"><span class="mm-chip-lbl">★ '+tmT('fav')+':</span>'+favs.map(function(k){return '<button class="mm-chip" onclick="tmShowStation(\''+k.replace(/'/g,"\\'")+'\')">'+tmName(k)+'</button>';}).join('')+'</div>'; }
+  var rec=tmRecents();
+  if(rec.length){ html+='<div class="mm-chip-row"><span class="mm-chip-lbl">🕘 '+tmT('recent')+':</span>'+rec.map(function(x){return '<button class="mm-chip" onclick="tmRunRecent(\''+x.f.replace(/'/g,"\\'")+'\',\''+x.t.replace(/'/g,"\\'")+'\')">'+tmName(x.f)+' ← '+tmName(x.t)+'</button>';}).join('')+'</div>'; }
+  el.innerHTML=html;
+}
+function tmRunRecent(f,t){ tmSelect('from',f); tmSelect('to',t); }
+
+// ---------- share / copy / url ----------
+function tmUpdateURL(){ if(typeof IS_BALE!=='undefined'&&IS_BALE) return; try{ var u=new URL(location.href); u.searchParams.set('tool','metromap'); if(TM.from)u.searchParams.set('from',tmSlug(TM.from)); if(TM.to)u.searchParams.set('to',tmSlug(TM.to)); history.replaceState(history.state,'',u.toString().replace(/#.*/,'')+'#metromap'); }catch(e){} }
+function tmKeyFromSlug(s){ for(var i=0;i<TM.keys.length;i++){ if(tmSlug(TM.keys[i])===s) return TM.keys[i]; } return ''; }
+function tmShareLink(){
+  var u; try{ u=new URL(location.href); }catch(e){ u=null; }
+  var link = u? (u.origin+u.pathname+'?tool=metromap'+(TM.from?'&from='+tmSlug(TM.from):'')+(TM.to?'&to='+tmSlug(TM.to):'')) : '';
+  if(navigator.clipboard&&link) navigator.clipboard.writeText(link);
+  tmToast(tmT('copied'));
+}
+function tmCopyRoute(){
+  if(!TM.result||!TM.result.path) return;
+  var lines=[]; lines.push(tmName(TM.from)+'  ←  '+tmName(TM.to));
+  TM.result.segments.forEach(function(seg){ var L=TM_LINE[seg.line]||{}; lines.push('• '+(L.fa||'')+': '+seg.stations.map(tmName).join(' ← ')); });
+  lines.push(tmT('stops')+': '+tmNum(TM.result.stops)+' | '+tmT('transfers')+': '+tmNum(TM.result.transfers)+' | ~'+tmNum(tmEstMin(TM.result))+' '+tmT('min'));
+  var txt=lines.join('\n'); if(navigator.clipboard) navigator.clipboard.writeText(txt); tmToast(tmT('copied'));
+}
+function tmToast(msg){ var t=document.getElementById('mm-toast'); if(!t)return; t.textContent=msg; t.style.opacity='1'; clearTimeout(t._h); t._h=setTimeout(function(){t.style.opacity='0';},1600); }
+
+// ---------- text / clear / legend ----------
+function tmApplyText(){
+  var nav=document.getElementById('mm-nav'); if(nav) nav.setAttribute('dir','rtl');
+  var fi=document.getElementById('mm-from-input'),ti=document.getElementById('mm-to-input');
+  if(fi){fi.placeholder=tmT('from'); fi.value=TM.from?tmName(TM.from):'';}
+  if(ti){ti.placeholder=tmT('to'); ti.value=TM.to?tmName(TM.to):'';}
+  var fb=document.getElementById('mm-find-btn'); if(fb) fb.textContent='🧭 '+tmT('find');
+  var cb=document.getElementById('mm-clear-btn'); if(cb) cb.textContent='✕ '+tmT('clear');
+  tmRenderLegend(); tmRenderChips(); tmRenderSummary(); tmRenderMap();
+}
+function tmClear(){ TM.from='';TM.to='';TM.result=null; var a=document.getElementById('mm-from-input'),b=document.getElementById('mm-to-input'); if(a)a.value='';if(b)b.value=''; var s=document.getElementById('mm-summary'); if(s)s.style.display='none'; tmCloseSheet(); tmResetView(); tmRenderMap(); tmUpdateURL(); }
+function tmRenderLegend(){
+  var el=document.getElementById('mm-legend'); if(!el) return;
+  el.innerHTML='<span class="mm-chip-lbl">'+tmT('legend')+':</span>'+Object.keys(TM_LINE).map(function(l){var L=TM_LINE[l];return '<span class="mm-leg"><span class="mm-dot" style="background:'+L.c+'"></span>'+L.fa+'</span>';}).join('');
+}
+
+// ---------- init ----------
+function tmInit(){
+  if(TM.ready){ tmApplyText(); setTimeout(tmResetView,30); return; }
+  if(TM.loading) return; TM.loading=true;
+  var svg=document.getElementById('mm-svg'); if(svg) svg.innerHTML='<text x="20" y="40" font-size="16" fill="var(--m3-on-surface-variant,#888)">'+tmT('loading')+'</text>';
+  var src = (window.TM_PRELOAD)? Promise.resolve(window.TM_PRELOAD) : fetch('static/maps/tehran-metro-stations.json').then(function(r){return r.json();});
+  src.then(function(data){
+    TM.S=data; TM.keys=Object.keys(data).sort(function(a,b){ return (data[a].translations.fa||a).localeCompare(data[b].translations.fa||b,'fa'); });
+    TM.adj=tmBuildGraph(data); tmProject(); TM.ready=true; TM.loading=false;
+    tmSetupMapEvents();
+    // optional offline basemap (non-blocking)
+    tmLoadBasemap().then(function(){ tmBuildBg(); tmRenderMap(); });
+    tmApplyText(); tmRenderMap();
+    try{ var p=new URLSearchParams(location.search); var f=p.get('from'),t=p.get('to');
+      if(f){var fk=tmKeyFromSlug(f); if(fk)tmSelect('from',fk);} if(t){var tk=tmKeyFromSlug(t); if(tk)tmSelect('to',tk);} }catch(e){}
+    document.addEventListener('click',function(e){ if(!e.target.closest('.mm-combo')) tmCloseLists(); });
+    setTimeout(tmResetView,30);
+  }).catch(function(){ TM.loading=false; var s=document.getElementById('mm-summary'); if(s){s.style.display='block';s.innerHTML='<div class="mm-note" style="color:var(--m3-error,#d33)">'+tmT('err')+'</div>';} });
+}
+function tmLoadBasemap(){
+  if(TM.geo) return Promise.resolve();
+  if(window.TM_GEO){ TM.geo=window.TM_GEO; return Promise.resolve(); }
+  return fetch('static/maps/tehran-map.geojson').then(function(r){ return r.ok?r.json():null; }).then(function(j){ if(j) TM.geo=j; }).catch(function(){});
+}
+
+
+// ---------- City switch + Tehran view sub-tabs ----------
+var MM_JPG = {
+  tehran:'static/maps/tehran-metro.jpg', shiraz:'static/maps/shiraz-metro.jpg',
+  isfahan:'static/maps/isfahan-metro.jpg', mashhad:'static/maps/mashhad-metro.jpg'
+};
+var MM_PDF = {
+  tehran:'static/maps/tehran-metro.pdf', shiraz:'static/maps/shiraz-metro.pdf',
+  isfahan:'static/maps/isfahan-metro.pdf', mashhad:'static/maps/mashhad-metro.pdf'
+};
+var _mmCity='tehran', _mmView='nav', _mmScale=1, _mmX=0, _mmY=0;
+var _mmDragging=false,_mmDragStartX=0,_mmDragStartY=0,_mmDragOriginX=0,_mmDragOriginY=0,_mmPinchDist=0;
+
+// City tab: Tehran -> sub-tabs (navigator/PDF); other cities -> image viewer only
+function mmSetCity(city){
+  _mmCity=city;
+  ['tehran','shiraz','isfahan','mashhad'].forEach(function(c){var b=document.getElementById('mm-tab-'+c); if(b) b.className='btn '+(c===city?'btn-filled':'btn-tonal');});
+  var sub=document.getElementById('mm-subtabs');
+  if(city==='tehran'){ if(sub) sub.style.display=''; tmSetView(_mmView||'nav'); return; }
+  if(sub) sub.style.display='none';
+  var nav=document.getElementById('mm-nav'); if(nav) nav.style.display='none';
+  mmShowViewer(); mmLoadImage(city);
+}
+// Tehran sub-tab switch
+function tmSetView(view){
+  _mmView=view;
+  var bn=document.getElementById('mm-sub-nav'), bi=document.getElementById('mm-sub-img');
+  if(bn) bn.className='btn '+(view==='nav'?'btn-filled':'btn-tonal');
+  if(bi) bi.className='btn '+(view==='img'?'btn-filled':'btn-tonal');
+  var nav=document.getElementById('mm-nav'), viewer=document.getElementById('mm-viewer');
+  if(view==='nav'){ if(viewer) viewer.style.display='none'; if(nav) nav.style.display=''; if(typeof tmInit==='function') tmInit(); }
+  else { if(nav) nav.style.display='none'; mmShowViewer(); mmLoadImage('tehran'); }
+}
+function mmShowViewer(){ var v=document.getElementById('mm-viewer'); if(v) v.style.display=''; }
+function mmLoadImage(city){
+  var img=document.getElementById('mm-img'), loading=document.getElementById('mm-loading');
+  if(img){img.style.display='none';}
+  if(loading){loading.style.display='flex';loading.textContent='⏳ در حال بارگذاری...';}
+  _mmScale=1;_mmX=0;_mmY=0;
+  if(img){img.onload=mmImgLoaded;img.onerror=mmImgError;img.src=MM_JPG[city];}
+}
+function mmImgLoaded(){
+  var img=document.getElementById('mm-img'),wrap=document.getElementById('mm-wrap'),loading=document.getElementById('mm-loading');
+  if(!img||!wrap)return; if(loading)loading.style.display='none';
+  var ww=wrap.clientWidth,wh=wrap.clientHeight,iw=img.naturalWidth,ih=img.naturalHeight;
+  _mmScale=Math.min(ww/iw,wh/ih,1); _mmX=(ww-iw*_mmScale)/2; _mmY=(wh-ih*_mmScale)/2;
+  img.style.display='block'; mmApplyTransform();
+  if(!wrap._mmEventsSet){wrap._mmEventsSet=true; mmSetupEvents(wrap,img);}
+}
+function mmImgError(){ var loading=document.getElementById('mm-loading'); if(loading) loading.textContent='⚠ تصویر نقشه یافت نشد - فایل static/maps/'+_mmCity+'-metro.jpg را بررسی کنید'; }
+function mmApplyTransform(){ var img=document.getElementById('mm-img'); if(img) img.style.transform='translate('+_mmX+'px,'+_mmY+'px) scale('+_mmScale+')'; }
+function mmZoom(delta){ var wrap=document.getElementById('mm-wrap'); if(!wrap)return; var cx=wrap.clientWidth/2,cy=wrap.clientHeight/2; var ns=Math.max(0.2,Math.min(10,_mmScale+delta*_mmScale)); _mmX=cx-(cx-_mmX)*(ns/_mmScale); _mmY=cy-(cy-_mmY)*(ns/_mmScale); _mmScale=ns; mmApplyTransform(); }
+function mmZoomReset(){ var img=document.getElementById('mm-img'),wrap=document.getElementById('mm-wrap'); if(!img||!wrap)return; var ww=wrap.clientWidth,wh=wrap.clientHeight,iw=img.naturalWidth||ww,ih=img.naturalHeight||wh; _mmScale=Math.min(ww/iw,wh/ih,1); _mmX=(ww-iw*_mmScale)/2; _mmY=(wh-ih*_mmScale)/2; mmApplyTransform(); }
+function mmFullscreen(){ var wrap=document.getElementById('mm-wrap'); if(!wrap)return; if(document.fullscreenElement)document.exitFullscreen(); else if(wrap.requestFullscreen)wrap.requestFullscreen(); else if(wrap.webkitRequestFullscreen)wrap.webkitRequestFullscreen(); }
+function mmDownload(){ var p=MM_PDF[_mmCity]; if(!p)return; var a=document.createElement('a'); a.href=p; a.download=(_mmCity||'metro')+'-map.pdf'; document.body.appendChild(a); a.click(); document.body.removeChild(a); }
+function mmSetupEvents(wrap,img){
+  wrap.addEventListener('mousedown',function(e){_mmDragging=true;_mmDragStartX=e.clientX;_mmDragStartY=e.clientY;_mmDragOriginX=_mmX;_mmDragOriginY=_mmY;wrap.style.cursor='grabbing';e.preventDefault();});
+  window.addEventListener('mousemove',function(e){if(!_mmDragging)return;_mmX=_mmDragOriginX+(e.clientX-_mmDragStartX);_mmY=_mmDragOriginY+(e.clientY-_mmDragStartY);mmApplyTransform();});
+  window.addEventListener('mouseup',function(){_mmDragging=false;wrap.style.cursor='grab';});
+  wrap.addEventListener('wheel',function(e){e.preventDefault();var r=wrap.getBoundingClientRect();var px=e.clientX-r.left,py=e.clientY-r.top;var d=e.deltaY>0?-0.1:0.1;var ns=Math.max(0.2,Math.min(10,_mmScale+d*_mmScale));_mmX=px-(px-_mmX)*(ns/_mmScale);_mmY=py-(py-_mmY)*(ns/_mmScale);_mmScale=ns;mmApplyTransform();},{passive:false});
+  wrap.addEventListener('touchstart',function(e){if(e.touches.length===1){_mmDragging=true;_mmDragStartX=e.touches[0].clientX;_mmDragStartY=e.touches[0].clientY;_mmDragOriginX=_mmX;_mmDragOriginY=_mmY;}else if(e.touches.length===2){_mmDragging=false;var dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY;_mmPinchDist=Math.sqrt(dx*dx+dy*dy);}e.preventDefault();},{passive:false});
+  wrap.addEventListener('touchmove',function(e){if(e.touches.length===1&&_mmDragging){_mmX=_mmDragOriginX+(e.touches[0].clientX-_mmDragStartX);_mmY=_mmDragOriginY+(e.touches[0].clientY-_mmDragStartY);mmApplyTransform();}else if(e.touches.length===2){var dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY,dist=Math.sqrt(dx*dx+dy*dy);var cx=(e.touches[0].clientX+e.touches[1].clientX)/2,cy=(e.touches[0].clientY+e.touches[1].clientY)/2,r=wrap.getBoundingClientRect();var px=cx-r.left,py=cy-r.top;var ns=Math.max(0.2,Math.min(10,_mmScale*(dist/_mmPinchDist)));_mmX=px-(px-_mmX)*(ns/_mmScale);_mmY=py-(py-_mmY)*(ns/_mmScale);_mmScale=ns;_mmPinchDist=dist;mmApplyTransform();}e.preventDefault();},{passive:false});
+  wrap.addEventListener('touchend',function(){_mmDragging=false;});
+  var _mmLastTap=0; wrap.addEventListener('touchend',function(){var now=Date.now(); if(now-_mmLastTap<300){mmZoom(0.5);} _mmLastTap=now;});
+}
+
+
 
       // ══════════════════════════════════════════════════════
       //  EMOJIS - 500+ emojis with categories
