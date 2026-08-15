@@ -11,13 +11,12 @@ const CACHE_SHELL   = CACHE_VERSION + '-shell';
 const CACHE_ASSETS  = CACHE_VERSION + '-assets';
 
 // Pages that must be served as their own HTML (not redirected to index.html)
-const STANDALONE_PAGES = ['/iran', '/iran/', '/iran.html', '/resume', '/resume/', '/resume.html'];
+const STANDALONE_PAGES = ['/iran', '/iran/', '/iran.html'];
 
 const SHELL_URLS = [
   '/',
   '/index.html',
   '/iran.html',
-  '/resume.html',
   '/manifest.json',
   '/static/main.css',
   '/static/main.js',

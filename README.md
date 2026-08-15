@@ -4,7 +4,7 @@
 
 # 🧰 جعبه‌ابزار آفلاین
 
-**بیش از ۱۱۰ ابزار** کاربردی، سبک و آفلاین، قابل نصب روی موبایل و دسکتاپ.
+**بیش از ۱۲۰ ابزار** کاربردی، سبک و آفلاین، قابل نصب روی موبایل و دسکتاپ.
 
 🌐 **پیاده‌سازی‌شده:** [mahdiyar.info](https://mahdiyar.info/)
 
@@ -202,15 +202,21 @@ toolbox/
 ├── iran.html                          ← صفحه منابع اینترنت ایران
 ├── sw.js                              ← سرویس Service Worker (آفلاین)
 ├── manifest.json                      ← تنظیمات PWA (نصب اپ)
-├── tts_server.py                      ← سرور TTS (Text-to-Speech)
-├── tts.service                        ← فایل سروی سیستم‌عامل Linux
+├── scripts/ai_service.py              ← سرور TTS/OCR/STT (Text-to-Speech)
+├── scripts/ai_service.service         ← فایل سروی سیستم‌عامل Linux
 ├── .gitignore                         ← فایل‌های نادیده‌گرفته شده در Git
 ├── LICENSE                            ← مجوز MIT
 ├── README.md                          ← این فایل
 │
-├── scripts/                           ← اسکریپت‌های کمکی
+├── scripts/                           ← اسکریپت‌های سمت سرور (Python)
+│   ├── api_proxy.py                   ← پروکسی واحد درخواست‌های خارجی (هواشناسی، زلزله/irsc، رهگیری پست)
+│   │                                    اجرا به‌عنوان سرور (پورت ۸۰۸۵) یا کرون: python3 api_proxy.py --fetch-eq
+│   ├── bale_bot.py                    ← ربات تلگرام/بل (پاسخ به دستورات و دریافت داده از مینی‌اپ)
+│   ├── ai_service.py                  ← سرویس TTS/OCR/STT (Text-to-Speech و غیره)
+│   ├── ai_service.service             ← فایل سرویس سیستم‌عامل Linux
 │   ├── parse_logs.py                  ← تحلیل لاگ‌های سایت
-│   └── weather_proxy.py               ← پروکسی برای سرویس هواشناسی
+│   ├── pytest.ini                     ← تنظیمات تست (pytest)
+│   └── tests/                         ← تست‌های واحد (scripts/tests/)
 │
 ├── static/
 │   ├── main.css                       ← استایل‌های مشترک
@@ -260,6 +266,22 @@ toolbox/
 │           ├── toc.ncx                ← فهرست مطالب
 │           └── cat*.xhtml             ← فصل‌ها و بخش‌ها
 ```
+
+### معماری سمت سرور (Backend)
+
+تمام درخواست‌هایی که از مرورگر به سایت‌های دیگر (CORS) نیاز دارند از یک پروکسی واحد عبور می‌کنند:
+
+- **`scripts/api_proxy.py`** — تک‌فایلِ تمام درخواست‌های خارجی:
+  - `/weather-proxy` و `/weather-static` → سرویس هواشناسی (irimo.ir)
+  - `/irsc-proxy` → داده‌های زلزله (ble.ir) — فایل `earthquakes.json` را از دیسک می‌خواند و سرویس می‌کند
+  - `/post-track` → رهگیری مرسوله (tapin.ir)
+  - اجرا به دو شکل:
+    - **سرور:** `python3 scripts/api_proxy.py` (گوش‌دهنده روی پورت ۸۰۸۵)
+    - **کرون زلزله:** `*/15 * * * * python3 scripts/api_proxy.py --fetch-eq` → اسکرپ زلزله را دریافت، پردازش و در `earthquakes.json` کش می‌کند (برای جلوگیری از محدودیت نرخ هنگام باز کردن ابزار توسط کاربر)
+- **`scripts/bale_bot.py`** — ربات تلگرام/بل؛ به دستورات پاسخ می‌دهد و داده‌های بازگشتی از مینی‌اپ را دریافت می‌کند.
+- **`scripts/ai_service.py`** — سرویس TTS/OCR/STT (متن‌به‌گفتار و غیره).
+
+> نکته: پردازندهٔ دادهٔ زلزله (`parse_earthquakes`) درون `api_proxy.py` است؛ هیچ فایل مستقل دیگری برای زلزله وجود ندارد.
 
 ---
 
