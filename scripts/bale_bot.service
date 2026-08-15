@@ -1,0 +1,18 @@
+[Unit]
+Description=Toolbox Bale/Telegram Bot
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/toolbox/scripts
+# Put the real token in bale_bot.py TOKEN constant (top of file), or export it.
+ExecStart=/var/www/toolbox/venv/bin/python /var/www/toolbox/scripts/bale_bot.py
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

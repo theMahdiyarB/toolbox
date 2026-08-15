@@ -1,0 +1,17 @@
+[Unit]
+Description=Toolbox API Proxy (weather / earthquake / post-track)
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/toolbox/scripts
+ExecStart=/var/www/toolbox/venv/bin/python /var/www/toolbox/scripts/api_proxy.py
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
