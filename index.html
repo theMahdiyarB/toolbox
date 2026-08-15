@@ -26977,6 +26977,11 @@ function mmSetupEvents(wrap,img){
 
           const parseMag = s => parseFloat(String(s).replace(/[۰-۹]/g, d => d.charCodeAt(0) - 1776)) || NaN;
 
+          // upstream (ble.ir scrape) is untrusted — escape before innerHTML
+          const esc = s => String(s == null ? '' : s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          const safeUrl = u => (/^https?:\/\//i.test(u || '') ? u : '');
+
           async function eqLoad() {
             const dot = document.getElementById('eq-dot');
             const ts  = document.getElementById('eq-ts');
@@ -27095,12 +27100,12 @@ function mmSetupEvents(wrap,img){
 
               const detailHtml = expanded ? `
                 <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--m3-outline-variant);display:flex;flex-direction:column;gap:6px;direction:rtl">
-                  ${e.datetime ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">📅 تاریخ و زمان:</span> ${e.datetime}</div>` : ''}
-                  ${e.depth    ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">🕳️ عمق:</span> ${e.depth}</div>` : ''}
+                  ${e.datetime ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">📅 تاریخ و زمان:</span> ${esc(e.datetime)}</div>` : ''}
+                  ${e.depth    ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">🕳️ عمق:</span> ${esc(e.depth)}</div>` : ''}
                   ${(!isNaN(e.lat)&&!isNaN(e.lon)) ? `<div style="font-size:.78rem;direction:ltr"><span style="direction:rtl;color:var(--m3-on-surface-variant)">📍 مختصات:</span> ${e.lat.toFixed(3)}°N  ${e.lon.toFixed(3)}°E</div>` : ''}
-                  ${e.cities.length ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">🏙️ نزدیک‌ترین شهرها:</span><br>${e.cities.join('  ·  ')}</div>` : ''}
-                  ${e.provinces.length ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">🗺️ نزدیک‌ترین مراکز استان:</span><br>${e.provinces.join('  ·  ')}</div>` : ''}
-                  ${e.map_url ? `<a href="${e.map_url}" target="_blank" rel="noopener" style="font-size:.78rem;color:var(--m3-primary);text-decoration:none;display:inline-flex;align-items:center;gap:4px">🗺 نمایش روی نقشه گوگل ↗</a>` : ''}
+                  ${e.cities.length ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">🏙️ نزدیک‌ترین شهرها:</span><br>${esc(e.cities.join('  ·  '))}</div>` : ''}
+                  ${e.provinces.length ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">🗺️ نزدیک‌ترین مراکز استان:</span><br>${esc(e.provinces.join('  ·  '))}</div>` : ''}
+                  ${safeUrl(e.map_url) ? `<a href="${safeUrl(e.map_url)}" target="_blank" rel="noopener" style="font-size:.78rem;color:var(--m3-primary);text-decoration:none;display:inline-flex;align-items:center;gap:4px">🗺 نمایش روی نقشه گوگل ↗</a>` : ''}
                 </div>` : '';
 
               return `
@@ -27129,10 +27134,10 @@ function mmSetupEvents(wrap,img){
                   <!-- Summary -->
                   <div style="flex:1;min-width:0;direction:rtl">
                     <div style="font-weight:600;font-size:.88rem;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
-                      ${locShort}
-                      ${locProv ? `<span style="font-size:.75rem;font-weight:400;color:var(--m3-on-surface-variant);margin-right:4px">(${locProv})</span>` : ''}
+                      ${esc(locShort)}
+                      ${locProv ? `<span style="font-size:.75rem;font-weight:400;color:var(--m3-on-surface-variant);margin-right:4px">(${esc(locProv)})</span>` : ''}
                     </div>
-                    <div style="font-size:.75rem;color:var(--m3-on-surface-variant)">${e.datetime}</div>
+                    <div style="font-size:.75rem;color:var(--m3-on-surface-variant)">${esc(e.datetime)}</div>
                   </div>
                   <!-- Expand chevron -->
                   <div style="color:var(--m3-on-surface-variant);font-size:.8rem;flex-shrink:0;transition:transform 0.2s;transform:rotate(${expanded?'180':'0'}deg)">▾</div>
@@ -27680,6 +27685,9 @@ function mmSetupEvents(wrap,img){
       const PROXY = '/post-track';
       const toFa  = n => String(n).replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[+d]);
       let _barcode = '';
+        // tapin.ir response is untrusted — escape before innerHTML
+        const esc = s => String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
       function ptShow(id) {
         ['pt-empty','pt-loading','pt-error','pt-notfound','pt-result'].forEach(s => {
@@ -27780,8 +27788,8 @@ function mmSetupEvents(wrap,img){
           const isLast = i === steps.length - 1;
           const dateHtml = s.done && s.date ? `
             <div class="pt-tl-date">
-              <span>📅 ${s.date}</span>
-              ${s.time ? `<span>🕐 ${s.time}</span>` : ''}
+              <span>📅 ${esc(s.date)}</span>
+              ${s.time ? `<span>🕐 ${esc(s.time)}</span>` : ''}
             </div>` : '';
           const lineHtml = isLast ? '' :
             `<div class="pt-tl-line${s.done ? '' : ' pt-tl-line--pending'}"></div>`;
@@ -27791,7 +27799,7 @@ function mmSetupEvents(wrap,img){
               ${lineHtml}
             </div>
             <div class="pt-tl-body">
-              <div class="${s.done ? 'pt-tl-title' : 'pt-tl-title--pending'}">${s.title}</div>
+              <div class="${s.done ? 'pt-tl-title' : 'pt-tl-title--pending'}">${esc(s.title)}</div>
               ${dateHtml}
             </div>
           </div>`;
