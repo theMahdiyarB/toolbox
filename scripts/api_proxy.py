@@ -11,6 +11,7 @@ import traceback
 import subprocess
 
 LOG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'api_proxy.log')
+CACHE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'earthquakes.json')
 
 def log(msg):
     ts = time.strftime('%Y-%m-%d %H:%M:%S')
@@ -39,18 +40,12 @@ BALE_URL       = 'https://ble.ir/irsc_public'
 TAPIN_URL      = 'https://search.tapin.ir/order/'
 
 
-def fetch_earthquakes():
-    log(f"EQ fetch starting from {BALE_URL}")
-    result = subprocess.run(
-        ['curl','-s','--max-time','20',
-         '-H','User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36',
-         '-H','Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-         '-H','Accept-Language: fa,en;q=0.9','--compressed', BALE_URL],
-        capture_output=True, timeout=25)
-    if result.returncode != 0:
-        raise RuntimeError(f"curl failed (exit {result.returncode}): {result.stderr.decode()[:200]}")
-    html = result.stdout.decode('utf-8', errors='replace')
-    log(f"EQ fetch OK, HTML length={len(html)}")
+def parse_earthquakes(html: str) -> list:
+    """Parse IRSC/ble.ir earthquake reports out of a Next.js __NEXT_DATA__ blob.
+
+    Returns a list of dicts; raises ValueError if __NEXT_DATA__ is absent.
+    Behavior is locked by scripts/tests/test_eq_parser.py.
+    """
     m = re.search(r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>', html, re.DOTALL)
     if not m:
         raise ValueError('__NEXT_DATA__ not found')
@@ -60,32 +55,70 @@ def fetch_earthquakes():
     for msg in messages:
         if msg.get('type') != 'TEXT':
             continue
-        text = msg.get('message',{}).get('textMessage',{}).get('text','')
+        text = msg.get('message', {}).get('textMessage', {}).get('text', '')
         if 'گزارش مقدماتی زمین' not in text:
             continue
         eq = {'rid': str(msg['rid']), 'date_ts': msg['date']}
+
         def make_find(t):
             def find(label):
                 r = re.search(label + r'[:\s]*([^\n]+)', t)
                 return r.group(1).strip() if r else ''
             return find
         find = make_find(text)
+
         eq['mag']      = find('بزرگی')
         eq['location'] = find('محل وقوع')
         eq['datetime'] = find('تاریخ و زمان وقوع به وقت محلی')
         eq['lon']      = find('طول جغرافیایی')
         eq['lat']      = find('عرض جغرافیایی')
         eq['depth']    = find('عمق زمین')
-        cities_m = re.search(r'نزدیک\u200cترین شهرها:\s*\n((?:[^\n]+\n?){1,5})', text)
+
+        cities_m = re.search(r'نزدیک‌ترین شهرها:\s*\n((?:[^\n]+\n?){1,5})', text)
         eq['cities'] = [l.strip() for l in cities_m.group(1).strip().splitlines() if l.strip()] if cities_m else []
-        provs_m = re.search(r'نزدیک\u200cترین مراکز استان:\s*\n((?:[^\n]+\n?){1,3})', text)
+
+        provs_m = re.search(r'نزدیک‌ترین مراکز استان:\s*\n((?:[^\n]+\n?){1,3})', text)
         eq['provinces'] = [l.strip() for l in provs_m.group(1).strip().splitlines() if l.strip()] if provs_m else []
+
         maps_m = re.search(r'(https://www\.google\.com/maps/place/[^\s\n]+)', text)
         eq['map_url'] = maps_m.group(1).strip() if maps_m else ''
+
         if eq['mag']:
             earthquakes.append(eq)
-    log(f"EQ parsed {len(earthquakes)} earthquakes")
     return earthquakes
+
+
+def fetch_eq_html() -> str:
+    """Scrape ble.ir/irsc_public and return the raw HTML (no parse/cache here)."""
+    log(f"EQ fetch starting from {BALE_URL}")
+    result = subprocess.run(
+        ['curl', '-s', '--max-time', '20',
+         '-H', 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36',
+         '-H', 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+         '-H', 'Accept-Language: fa,en;q=0.9', '--compressed', BALE_URL],
+        capture_output=True, timeout=25)
+    if result.returncode != 0:
+        raise RuntimeError(f"curl failed (exit {result.returncode}): {result.stderr.decode()[:200]}")
+    html = result.stdout.decode('utf-8', errors='replace')
+    log(f"EQ fetch OK, HTML length={len(html)}")
+    return html
+
+
+def fetch_eq_and_cache() -> int:
+    """Cron entry point: scrape, parse, and write earthquakes.json. Returns count."""
+    html = fetch_eq_html()
+    earthquakes = parse_earthquakes(html)
+    if not earthquakes:
+        raise RuntimeError("EQ fetch: no earthquakes parsed, not caching")
+    output = {
+        'cached_at': int(time.time()),
+        'count':     len(earthquakes),
+        'items':     earthquakes,
+    }
+    with open(CACHE_FILE, 'w', encoding='utf-8') as f:
+        json.dump(output, f, ensure_ascii=False)
+    log(f"EQ cache updated: {len(earthquakes)} items")
+    return len(earthquakes)
 
 
 def fetch_post_tracking(barcode):
@@ -173,9 +206,8 @@ class ProxyHandler(BaseHTTPRequestHandler):
                     return self._json_error(502, str(e))
 
         elif path == '/irsc-proxy':
-            cache_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'earthquakes.json')
             try:
-                with open(cache_file, 'r', encoding='utf-8') as cf:
+                with open(CACHE_FILE, 'r', encoding='utf-8') as cf:
                     body = cf.read().encode('utf-8')
                 self.send_response(200)
                 self.send_header('Content-Type', 'application/json; charset=utf-8')
@@ -183,11 +215,10 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 self.wfile.write(body)
                 log(f"irsc-proxy: served {len(body)} bytes")
             except FileNotFoundError:
-                script = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fetch_earthquakes.py')
-                r = subprocess.run([sys.executable, script], timeout=35, capture_output=True)
-                log(f"fetch result: exit={r.returncode}")
+                # Cache missing: generate it inline (no external script).
                 try:
-                    with open(cache_file, 'r', encoding='utf-8') as cf:
+                    fetch_eq_and_cache()
+                    with open(CACHE_FILE, 'r', encoding='utf-8') as cf:
                         body = cf.read().encode('utf-8')
                     self.send_response(200)
                     self.send_header('Content-Type', 'application/json; charset=utf-8')
@@ -251,6 +282,14 @@ class ProxyHandler(BaseHTTPRequestHandler):
 
 
 if __name__ == '__main__':
+    if len(sys.argv) > 1 and sys.argv[1] == '--fetch-eq':
+        # Standalone cron mode: scrape + cache, then exit.
+        try:
+            n = fetch_eq_and_cache()
+            sys.exit(0)
+        except Exception as e:
+            log(f"fetch-eq failed: {e}")
+            sys.exit(1)
     log(f"api_proxy starting on port 8085 — log file: {LOG_FILE}")
     server = HTTPServer(('0.0.0.0', 8085), ProxyHandler)
     log("Listening on: /weather-proxy  /weather-static  /irsc-proxy  /post-track")

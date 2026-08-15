@@ -1,8 +1,8 @@
 """Shared fixtures for the scripts/ test suite.
 
 These let the earthquake-parser tests run WITHOUT network: we hand the parser
-a fake ble.ir-style `__NEXT_DATA__` HTML containing one earthquake report and
-one non-matching TEXT message.
+(a api_proxy.parse_earthquakes) a fake ble.ir-style `__NEXT_DATA__` HTML containing
+one earthquake report and one non-matching TEXT message.
 """
 import json
 import pytest

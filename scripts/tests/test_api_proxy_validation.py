@@ -10,7 +10,7 @@ import api_proxy
 from api_proxy import WEATHER_ENDPOINTS, WEATHER_STATIC
 
 
-# Mirrors api_proxy.py:208 — keep verbatim until Plan 004 extracts shared code.
+# Mirrors api_proxy.py:208
 POST_TRACK_BARCODE_RE = re.compile(r"^\d{10,30}$")
 
 
