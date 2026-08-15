@@ -39,6 +39,12 @@ _STATIC_TTL   = 300
 BALE_URL       = 'https://ble.ir/irsc_public'
 TAPIN_URL      = 'https://search.tapin.ir/order/'
 
+# Origins allowed to call this proxy from a browser (CORS).
+# Same-origin requests (no Origin header) always work; cross-origin is only
+# allowed when the request Origin is in this set. Override for your deploy by
+# editing this list — no env files needed.
+ALLOWED_ORIGINS = {'https://mahdiyar.info'}
+
 
 def parse_earthquakes(html: str) -> list:
     """Parse IRSC/ble.ir earthquake reports out of a Next.js __NEXT_DATA__ blob.
@@ -153,7 +159,10 @@ class ProxyHandler(BaseHTTPRequestHandler):
         log(f"ERROR {self.address_string()} {fmt % args}")
 
     def _cors(self):
-        self.send_header('Access-Control-Allow-Origin', '*')
+        origin = self.headers.get('Origin', '')
+        if origin in ALLOWED_ORIGINS:
+            self.send_header('Access-Control-Allow-Origin', origin)
+        # else: same-origin requests need no header; unknown cross-origin is denied.
         self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
 
@@ -291,6 +300,7 @@ if __name__ == '__main__':
             log(f"fetch-eq failed: {e}")
             sys.exit(1)
     log(f"api_proxy starting on port 8085 — log file: {LOG_FILE}")
-    server = HTTPServer(('0.0.0.0', 8085), ProxyHandler)
+    # Bind to loopback only; expose publicly via the reverse proxy (Caddy).
+    server = HTTPServer(('127.0.0.1', 8085), ProxyHandler)
     log("Listening on: /weather-proxy  /weather-static  /irsc-proxy  /post-track")
     server.serve_forever()

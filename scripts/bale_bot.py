@@ -2,9 +2,6 @@ import logging
 import hmac
 import hashlib
 import json
-import re
-import subprocess
-import time
 import os
 from urllib.parse import parse_qsl
 from telegram import (
@@ -18,6 +15,8 @@ from telegram.ext import (
 
 TOKEN       = "BALE_BOT_TOKEN"
 BASE_URL    = "https://tapi.bale.ai/bot"
+# Deploy-specific: the public URL of the toolbox the bot opens via WebApp.
+# Edit this to your own domain when deploying elsewhere.
 TOOLBOX_URL = "https://mahdiyar.info"
 
 logging.basicConfig(level=logging.INFO)
@@ -298,84 +297,6 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
         await update.message.reply_text(f"داده دریافت شد:\n`{raw}`", parse_mode="Markdown")
 
 
-# ── Earthquake fetcher ───────────────────────────────────────────────────────
-SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
-CACHE_FILE  = os.path.join(SCRIPT_DIR, 'earthquakes.json')
-BALE_URL    = 'https://ble.ir/irsc_public'
-
-def _parse_earthquakes(html: str) -> list:
-    m = re.search(r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>', html, re.DOTALL)
-    if not m:
-        return []
-    data     = json.loads(m.group(1))
-    messages = data['props']['pageProps']['messages']
-    earthquakes = []
-    for msg in messages:
-        if msg.get('type') != 'TEXT':
-            continue
-        text = msg.get('message', {}).get('textMessage', {}).get('text', '')
-        if 'گزارش مقدماتی زمین' not in text:
-            continue
-        def make_find(t):
-            def find(label):
-                r = re.search(label + r'[:\s]*([^\n]+)', t)
-                return r.group(1).strip() if r else ''
-            return find
-        find = make_find(text)
-        cities_m = re.search(r'نزدیک\u200cترین شهرها:\s*\n((?:[^\n]+\n?){1,5})', text)
-        provs_m  = re.search(r'نزدیک\u200cترین مراکز استان:\s*\n((?:[^\n]+\n?){1,3})', text)
-        maps_m   = re.search(r'(https://www\.google\.com/maps/place/[^\s\n]+)', text)
-        eq = {
-            'rid':       str(msg['rid']),
-            'date_ts':   msg['date'],
-            'mag':       find('بزرگی'),
-            'location':  find('محل وقوع'),
-            'datetime':  find('تاریخ و زمان وقوع به وقت محلی'),
-            'lon':       find('طول جغرافیایی'),
-            'lat':       find('عرض جغرافیایی'),
-            'depth':     find('عمق زمین'),
-            'cities':    [l.strip() for l in cities_m.group(1).strip().splitlines() if l.strip()] if cities_m else [],
-            'provinces': [l.strip() for l in provs_m.group(1).strip().splitlines()  if l.strip()] if provs_m  else [],
-            'map_url':   maps_m.group(1).strip() if maps_m else '',
-        }
-        if eq['mag']:
-            earthquakes.append(eq)
-    return earthquakes
-
-async def fetch_eq_job(context):
-    logger.info("EQ fetch job started")
-    try:
-        result = subprocess.run([
-            'curl', '-s', '--max-time', '20',
-            '-H', 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36',
-            '-H', 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            '-H', 'Accept-Language: fa,en;q=0.9',
-            '--compressed', BALE_URL,
-        ], capture_output=True, timeout=25)
-
-        html = result.stdout.decode('utf-8', errors='replace')
-        if len(html) < 1000:
-            logger.warning(f"EQ fetch: short response ({len(html)} bytes), keeping stale cache")
-            return
-
-        earthquakes = _parse_earthquakes(html)
-        if not earthquakes:
-            logger.warning("EQ fetch: no earthquakes parsed, keeping stale cache")
-            return
-
-        output = {
-            'cached_at': int(time.time()),
-            'count':     len(earthquakes),
-            'items':     earthquakes,
-        }
-        with open(CACHE_FILE, 'w', encoding='utf-8') as f:
-            json.dump(output, f, ensure_ascii=False)
-        logger.info(f"EQ cache updated: {len(earthquakes)} items")
-
-    except Exception as e:
-        logger.error(f"EQ fetch failed: {e}")
-
-
 # ── main ──────────────────────────────────────────────────────────────────────
 def main():
     app = Application.builder().token(TOKEN).base_url(BASE_URL).build()
@@ -392,12 +313,6 @@ def main():
 
     # Category keyboard presses (must be after WEB_APP_DATA handler)
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_handler))
-
-    # Schedule earthquake fetch every 15 minutes
-    job_queue = app.job_queue
-    if job_queue:
-        job_queue.run_repeating(fetch_eq_job, interval=900, first=10)
-        logger.info("EQ fetch job scheduled every 15 min")
 
     app.run_polling()
 

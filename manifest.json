@@ -1,4 +1,5 @@
 {
+  "_comment": "Deploy-specific fields: id, start_url, scope and the shortcut URLs below are tied to mahdiyar.info. For your own domain, replace every 'https://mahdiyar.info' occurrence (e.g. id, start_url, scope, shortcuts[].url, action) with your origin — the PWA will only install on the matching domain.",
   "name": "جعبه‌ابزار آفلاین",
   "short_name": "جعبه‌ابزار",
   "description": "بیش از ۱۰۰ ابزار کاربردی؛ کاملاً آفلاین، بدون نیاز به اینترنت",
