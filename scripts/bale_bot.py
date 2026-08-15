@@ -298,25 +298,6 @@ async def web_app_data_handler(update: Update, context: ContextTypes.DEFAULT_TYP
         await update.message.reply_text(f"داده دریافت شد:\n`{raw}`", parse_mode="Markdown")
 
 
-# ── Validate initData on your backend ────────────────────────────────────────
-def validate_init_data(init_data: str) -> bool:
-    """
-    Call this on your web server when the miniapp POSTs initData to you.
-    Verifies the HMAC-SHA256 signature to confirm data came from Bale.
-    """
-    try:
-        parsed = dict(parse_qsl(init_data, strict_parsing=True))
-        received_hash = parsed.pop("hash", None)
-        if not received_hash:
-            return False
-        data_check_string = "\n".join(f"{k}={v}" for k, v in sorted(parsed.items()))
-        secret_key = hmac.new(b"WebAppData", TOKEN.encode(), hashlib.sha256).digest()
-        computed   = hmac.new(secret_key, data_check_string.encode(), hashlib.sha256).hexdigest()
-        return hmac.compare_digest(computed, received_hash)
-    except Exception:
-        return False
-
-
 # ── Earthquake fetcher ───────────────────────────────────────────────────────
 SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
 CACHE_FILE  = os.path.join(SCRIPT_DIR, 'earthquakes.json')
