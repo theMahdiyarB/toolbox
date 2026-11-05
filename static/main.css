@@ -3234,3 +3234,57 @@ button.m3-field__trailing-icon:hover {
   outline: none;
   box-shadow: none;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   ADDITIONS (append-only; nothing above was changed or removed,
+   so iran.html keeps working exactly as before)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Dark theme: tokens that existed only for light */
+:root[data-theme="dark"]{
+  --m3-success:#7fd99a;--m3-on-success:#00391b;--m3-success-container:#1b5130;--m3-on-success-container:#9bf6b4;
+  --m3-warning:#ffb95c;--m3-on-warning:#472a00;--m3-warning-container:#653e00;--m3-on-warning-container:#ffddb3;
+  --m3-tertiary:#ffb95c;--m3-on-tertiary:#472a00;--m3-tertiary-container:#653e00;--m3-on-tertiary-container:#ffddb3;
+  --m3-surface-dim:#0e1415;--m3-surface-bright:#323a3c;
+  --m3-outline:#6f8c90; /* ≥3:1 on the dark surface (was #4a6366 ≈2.7:1) */
+}
+
+/* Small utilities */
+.btn-xs{padding:4px 12px;font-size:12px;min-height:28px}
+.ltr{direction:ltr;unicode-bidi:isolate}.rtl{direction:rtl}
+.u-hidden{display:none!important}
+.u-mt-8{margin-top:8px}.u-mt-12{margin-top:12px}.u-mb-8{margin-bottom:8px}.u-mb-12{margin-bottom:12px}
+
+/* Focus ring stays visible in Windows High-Contrast mode */
+:focus-visible{outline:2px solid transparent}
+@media (forced-colors:active){:focus-visible{outline:2px solid Highlight;outline-offset:2px}.link-card,.btn{border:1px solid ButtonText}}
+
+/* Bigger touch targets on phones/tablets */
+@media (pointer:coarse){
+  .btn{min-height:44px}
+  .fav-btn{position:absolute}
+  .fav-btn::after{content:"";position:absolute;inset:-8px}
+}
+
+/* Font: to shrink Vazirmatn-VF.ttf (~800KB) to ~150KB, run
+     pyftsubset Vazirmatn-VF.ttf --unicodes="U+0020-007E,U+00A0-00FF,U+060C,U+061B,U+061F,U+0600-06FF,U+200C-200F,U+FB50-FDFF,U+FE70-FEFF" --flavor=woff2 --layout-features='*' --output-file=Vazirmatn-VF.woff2
+   then add:  src:url("../fonts/Vazirmatn-VF.woff2") format("woff2"), <existing ttf src> in the @font-face above. */
+
+/* ═══ tb-ux: UX additions (safe to move into main.css) ═══ */
+.link-card:focus-visible,.fav-btn:focus-visible,.tbx-ib:focus-visible,.btn:focus-visible,.tool-card button:focus-visible,.tool-card a:focus-visible,.tool-card summary:focus-visible{outline:3px solid var(--m3-primary,#006874);outline-offset:2px;border-radius:12px}
+.tool-err:empty{display:none}
+.tool-err:not(:empty){display:block;margin-top:8px;padding:8px 12px;border-radius:10px;background:var(--m3-error-container,#ffdad6);color:var(--m3-on-error-container,#410002);font-size:13px;line-height:1.7}
+.tool-err:not(:empty)::before{content:"⚠ "}
+.tool-sub{font-size:13px;color:var(--m3-on-surface-variant);margin:-4px 0 10px;line-height:1.7}
+.data-row__val[data-copy]{cursor:copy}
+.data-row__val[data-copy]:hover{text-decoration:underline dotted}
+.tb-offline-note{margin:0 0 12px;padding:10px 12px;border-radius:12px;background:var(--m3-tertiary-container,#ffe9b5);color:var(--m3-on-tertiary-container,#3a2a00);font-size:13px;line-height:1.7}
+#tb-net{position:fixed;inset-inline-start:12px;bottom:76px;z-index:9999;max-width:calc(100vw - 24px);padding:8px 14px;border-radius:999px;font-size:13px;background:var(--m3-inverse-surface,#2e3132);color:var(--m3-inverse-on-surface,#eff1f1);box-shadow:0 2px 10px rgba(0,0,0,.3);display:none;align-items:center;gap:8px}
+#tb-net.show{display:flex}
+#tb-net button{border:0;border-radius:999px;padding:4px 10px;cursor:pointer;background:var(--m3-primary,#006874);color:var(--m3-on-primary,#fff);font:inherit}
+#tb-install{position:fixed;inset-inline:12px;bottom:76px;z-index:9998;padding:12px 14px;border-radius:16px;background:var(--m3-surface-container-high,#e7e8e8);color:var(--m3-on-surface,#191c1d);box-shadow:0 4px 16px rgba(0,0,0,.25);display:none;gap:10px;align-items:center;flex-wrap:wrap;font-size:13px;line-height:1.7}
+#tb-install.show{display:flex}
+#tb-install b{flex:1;min-width:180px;font-weight:600}
+.tbx-stop{border:0;background:var(--m3-secondary-container);border-radius:8px;padding:2px 10px;cursor:pointer;margin-top:6px;font:inherit;font-size:12px;color:inherit}
+@media (min-width:900px){#tb-net,#tb-install{bottom:16px}#tb-install{inset-inline:auto 16px;max-width:420px}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
