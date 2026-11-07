@@ -19,12 +19,14 @@
         }
       })();
     </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>منابع و خدمات داخلی ایران</title>
     <meta name="description" content="مجموعه جامع لینک‌ها، ابزارها و خدمات قابل دسترسی در شرایط محدودیت اینترنت — همه در یک جا">
     <meta name="theme-color" content="#006874">
     <link rel="icon" type="image/png" href="static/favicon.png">
     <link rel="stylesheet" href="static/main.css">
+    <link rel="stylesheet" href="static/icons.css">
+    <script>try{var c=localStorage.getItem('tb-dyn-css');if(c){var s=document.createElement('style');s.id='tb-dyn';s.textContent=c;document.head.appendChild(s)}if(localStorage.getItem('tb-rail')==='expanded')document.documentElement.setAttribute('data-rail','expanded')}catch(e){}</script>
     <script src="static/main.js" defer></script>
     <style>
       /* ── Alternating section backgrounds ── */
@@ -155,8 +157,12 @@
       /* Ensure the heading itself is relatively positioned for pseudo-elements */
       .section-heading {
         position: sticky;
-        top: 0;
+        top: var(--appbar-h, 64px);
       }
+      /* iran map logo in the rail: do not clip it to the 32px indicator pill */
+      .rail-header .rail-item-icon { width: 56px !important; height: 56px !important; overflow: visible !important; }
+      .rail-header .rail-item-icon svg { width: 56px; height: 56px; }
+      .rail-toolbox-fab__icon img { width: 28px; height: 28px; object-fit: contain; display: block; }
 
       /* ── Compact rail items on short screens ── */
       @media (max-height: 700px) {
@@ -259,7 +265,7 @@
         </a>
     </div>
     <a href="https://mahdiyar.info" class="rail-toolbox-fab" aria-label="جعبه‌ابزار" style="margin-bottom: var(--m3-spacing-48);">
-        <span class="rail-toolbox-fab__icon">🧰</span>
+        <span class="rail-toolbox-fab__icon"><img src="static/favicon.png" alt="" width="28" height="28"></span>
         <span class="rail-toolbox-fab__label">جعبه‌ابزار</span>
     </a>
     <div class="rail-items">
@@ -4379,17 +4385,7 @@
     onScroll();
 })();
 
-/* ════════════════════════════════════════════════════════════
-   STICKY HEADING SENTINEL
-════════════════════════════════════════════════════════════ */
-(function () {
-    const obs = new IntersectionObserver(
-        entries => entries.forEach(e =>
-            e.target.classList.toggle('is-stuck', e.intersectionRatio < 1)),
-        { threshold: [1], rootMargin: '-1px 0px 0px 0px' }
-    );
-    document.querySelectorAll('.section-heading').forEach(h => obs.observe(h));
-})();
+/* sticky heading state is handled in static/main.js */
 
 /* ════════════════════════════════════════════════════════════
    SEARCH

@@ -19,6 +19,8 @@ const SHELL_URLS = [
   '/iran.html',
   '/manifest.json',
   '/static/main.css',
+  '/static/tools.css',
+  '/static/icons.css',
   '/static/main.js',
   '/static/favicon.png',
   '/static/icon-512.png',
