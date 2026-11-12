@@ -918,6 +918,20 @@
           pwa: "install_mobile",
           analytics: "monitoring",
           about: "info",
+          plate: "directions_car",
+          phone: "smartphone",
+          bill: "receipt",
+          bankid: "verified_user",
+          kbfix: "keyboard",
+          epoch: "more_time",
+          typetest: "speed",
+          flashcards: "style",
+          expenses: "payments",
+          habits: "task_alt",
+          breathe: "self_improvement",
+          exif: "camera",
+          favicon: "web_asset",
+          qrdata: "wifi",
           pass: "password",
         },
         cats: {
@@ -1445,6 +1459,12 @@
               )
             );
         }
+        if (
+          a &&
+          e.matches(".tool-title,.recent-chip") &&
+          e.querySelector(".ms")
+        )
+          return void (e.__ms = 1);
         if (!e.matches(".ms")) {
           for (
             var i,
