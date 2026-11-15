@@ -520,3 +520,12 @@
 @keyframes cxShake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
 @keyframes cxIn{from{opacity:0;transform:translateY(-6px)}}
 @media (prefers-reduced-motion:reduce){#calc .cx.shake,#calc .cx-hist{animation:none}}
+
+/* ══ currency sources ══ */
+#currency .cur-banner{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--m3-secondary-container);color:var(--m3-on-secondary-container);border-radius:18px;padding:12px 16px;font-size:.82rem;margin-bottom:14px;line-height:1.7}
+#currency .cur-banner--err{background:var(--m3-error-container);color:var(--m3-on-error-container)}
+#currency .cur-banner .btn{height:34px;padding:0 14px;font-size:.78rem}
+#currency .cur-foot{margin-top:16px;font-size:.74rem;color:var(--m3-on-surface-variant);line-height:1.9}
+#currency .cur-foot details{margin-top:6px}
+#currency .cur-foot summary{cursor:pointer;color:var(--m3-primary);font-weight:600}
+#currency .cur-foot input{width:100%;max-width:420px;margin-top:6px;padding:9px 14px;border:1px solid var(--m3-outline-variant);border-radius:99px;background:var(--m3-surface-container-low);color:var(--m3-on-surface);font:inherit;direction:ltr}

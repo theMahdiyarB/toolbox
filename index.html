@@ -6232,7 +6232,7 @@
             </div>
           </div>
           <div id="cur-content"></div>
-          <div class="tool-desc">قیمت لحظه‌ای ارزها، طلا و ارزهای دیجیتال از BrsAPI. نرخ تبدیل بین واحدهای مختلف. <strong>کاربرد:</strong> مقایسه نرخ ارز، برنامه‌ریزی مالی، خرید و فروش ارز.</div>
+          <div class="tool-desc">قیمت لحظه‌ای ارز و طلا از priceto.day با پشتیبان‌های Widgetify و نرخ‌سنج و ارزهای دیجیتال از نوبیتکس؛ در صورت قطع همه‌ی منابع، آخرین نرخ ذخیره‌شده نمایش داده می‌شود. نرخ تبدیل بین واحدهای مختلف. <strong>کاربرد:</strong> مقایسه نرخ ارز، برنامه‌ریزی مالی، خرید و فروش ارز.</div>
         </template>
 
         <!-- ══ بانک فیلم ══ -->
@@ -6464,7 +6464,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 10.5 - ۱۴۰۵/۰۸/۲۴
+          ℹ️ نسخه 10.6 - ۱۴۰۵/۰۸/۲۴
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -23675,7 +23675,8 @@ function mmSetupEvents(wrap,img){
             if(c.visibility&&c.visibility!=='-')tiles.push(tile('👁️','دید افقی','visibility','<span dir="ltr">'+toPersian(String(c.visibility))+(c.visibility==='∞'?'':' m')+'</span>',''));
             if(c.dew_point!=null)tiles.push(tile('💦','نقطه شبنم','dew_point','<span dir="ltr">'+toPersian(c.dew_point)+'°C</span>',''));
             if(c.rainfall!=null)tiles.push(tile('🌧️','بارندگی ۲۴ساعته','rainfall','<span dir="ltr">'+toPersian(c.rainfall)+' mm</span>','<div class="wx-meter wx-rain" dir="ltr"><b style="width:'+Math.min(100,c.rainfall/30*100).toFixed(0)+'%"></b></div>'));
-            const notes=[['۲۴ ساعت',c.hour24],['۴۸ ساعت',c.hour48],['۷۲ ساعت',c.hour72]].filter(x=>x[1]);
+            const hasTxt=v=>v&&String(v).replace(/<[^>]*>|&nbsp;|[\s\u200c\u200f\u200e—–-]/g,'').length>1;
+            const notes=[['۲۴ ساعت',c.hour24],['۴۸ ساعت',c.hour48],['۷۲ ساعت',c.hour72]].filter(x=>hasTxt(x[1]));
             const gLo=fc.length?Math.min(...fc.map(d=>d.temp_min_c!=null?d.temp_min_c:d.temp_max_c).filter(v=>v!=null)):0, gHi=fc.length?Math.max(...fc.map(d=>d.temp_max_c!=null?d.temp_max_c:d.temp_min_c).filter(v=>v!=null)):1;
             const days=fc.map(d=>{
               const txt=(d.condition_day?`<div><b>☀️ روز</b> ${d.condition_day}</div>`:'')+(d.condition_night?`<div><b>🌙 شب</b> ${d.condition_night}</div>`:'')+(!d.condition_day&&!d.condition_night&&d.condition?`<div>${d.condition}</div>`:'');
@@ -23893,7 +23894,93 @@ function mmSetupEvents(wrap,img){
         //  CURRENCY TOOL
         // ═══════════════════════════════
         (function(){
-          const BRS = 'https://brsapi.ir/Api/Market/Gold_Currency.php?key=FreeFusNYvmUj8BOKoqzaZSlwYnQONdS';
+          // ── منابع داده: priceto.day → Widgetify → نرخ‌سنج → کش محلی ──
+          const CUR_LS = { get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } } };
+          const CUR_KEY = 'tb-cur-cache';
+          const CUR_ORDER = ['USDT_IRT', 'USD', 'EUR', 'GBP', 'AED', 'TRY', 'CNY', 'CAD', 'AUD', 'CHF', 'SAR', 'QAR', 'KWD', 'OMR', 'IQD', 'AFN', 'RUB', 'INR', 'JPY'];
+          const GOLD_ORDER = ['IR_GOLD_18K', 'IR_GOLD_24K', 'IR_GOLD_MELTED', 'IR_COIN_EMAMI', 'IR_COIN_BAHAR', 'IR_COIN_HALF', 'IR_COIN_QUARTER', 'IR_COIN_1G', 'XAUUSD'];
+          const NAMES = {
+            USDT_IRT: ['تتر', 'Tether'], USD: ['دلار آمریکا', 'US Dollar'], EUR: ['یورو', 'Euro'], GBP: ['پوند انگلیس', 'British Pound'], AED: ['درهم امارات', 'UAE Dirham'], TRY: ['لیر ترکیه', 'Turkish Lira'], CNY: ['یوان چین', 'Chinese Yuan'], CAD: ['دلار کانادا', 'Canadian Dollar'], AUD: ['دلار استرالیا', 'Australian Dollar'],
+            CHF: ['فرانک سوئیس', 'Swiss Franc'], SAR: ['ریال عربستان', 'Saudi Riyal'], QAR: ['ریال قطر', 'Qatari Riyal'], KWD: ['دینار کویت', 'Kuwaiti Dinar'], OMR: ['ریال عمان', 'Omani Rial'], IQD: ['دینار عراق', 'Iraqi Dinar'], AFN: ['افغانی', 'Afghan Afghani'], RUB: ['روبل روسیه', 'Russian Ruble'], INR: ['روپیه هند', 'Indian Rupee'], JPY: ['ین ژاپن', 'Japanese Yen'],
+            IR_GOLD_18K: ['طلای ۱۸ عیار (گرم)', '18K Gold'], IR_GOLD_24K: ['طلای ۲۴ عیار (گرم)', '24K Gold'], IR_GOLD_MELTED: ['مثقال طلا', 'Gold Mesghal'], IR_COIN_EMAMI: ['سکه امامی', 'Emami Coin'], IR_COIN_BAHAR: ['سکه بهار آزادی', 'Bahar Azadi'], IR_COIN_HALF: ['نیم‌سکه', 'Half Coin'], IR_COIN_QUARTER: ['ربع‌سکه', 'Quarter Coin'], IR_COIN_1G: ['سکه گرمی', 'Gram Coin'], XAUUSD: ['انس جهانی طلا', 'Gold Ounce']
+          };
+          const mk = (sym, price, pct, o) => Object.assign({ symbol: sym, name: NAMES[sym] ? NAMES[sym][0] : sym, name_en: NAMES[sym] ? NAMES[sym][1] : '', price: price, unit: sym === 'XAUUSD' ? 'دلار' : 'تومان', change_percent: pct || 0, time_unix: Date.now() / 1000 }, o || {});
+          const okN = v => typeof v === 'number' && isFinite(v) && v > 0;
+          async function jget(url, opt, ms) {
+            const c = new AbortController(), t = setTimeout(() => c.abort(), ms || 7000);
+            try { const r = await fetch(url, Object.assign({ signal: c.signal, headers: { accept: 'application/json' } }, opt)); if (!r.ok) throw new Error('HTTP ' + r.status); return await r.json(); }
+            finally { clearTimeout(t); }
+          }
+          async function pool(tasks, n) {
+            const out = new Array(tasks.length).fill(null); let i = 0;
+            await Promise.all(Array.from({ length: Math.min(n, tasks.length) }, async () => { while (i < tasks.length) { const k = i++; try { out[k] = await tasks[k](); } catch (e) { out[k] = null; } } }));
+            return out;
+          }
+          // 1) priceto.day — تاریخچه‌ی هر نماد: آخرین نقطه = نرخ فعلی، نقطه‌ی روز قبل = مبنای درصد تغییر
+          const PT = [['usd', 'irr', 'c', 'USD'], ['euro', 'irr', 'c', 'EUR'], ['gbp', 'irr', 'c', 'GBP'], ['aed', 'irr', 'c', 'AED'], ['try', 'irr', 'c', 'TRY'], ['cny', 'irr', 'c', 'CNY'], ['cad', 'irr', 'c', 'CAD'], ['aud', 'irr', 'c', 'AUD'], ['tether', 'irr', 'c', 'USDT_IRT'],
+            ['gold-18k', 'irr', 'g', 'IR_GOLD_18K'], ['gold-24k', 'irr', 'g', 'IR_GOLD_24K'], ['gold-miskal', 'irr', 'g', 'IR_GOLD_MELTED'], ['coin-emami', 'irr', 'g', 'IR_COIN_EMAMI'], ['coin-baharazadi', 'irr', 'g', 'IR_COIN_BAHAR'], ['coin-baharazadi-nim', 'irr', 'g', 'IR_COIN_HALF'], ['coin-baharazadi-rob', 'irr', 'g', 'IR_COIN_QUARTER'], ['coin-gerami', 'irr', 'g', 'IR_COIN_1G'], ['gold-ounce', 'usd', 'g', 'XAUUSD']];
+          async function pPriceto() {
+            const res = await pool(PT.map(([s, b]) => () => jget('https://api.priceto.day/v1/history/' + b + '/' + s)), 8);
+            const out = { gold: [], currency: [] };
+            res.forEach((r, i) => {
+              if (!r || !r.success || !Array.isArray(r.result) || !r.result.length) return;
+              const [, b, g, code] = PT[i], pts = r.result.filter(p => okN(p.price)), last = pts[pts.length - 1]; if (!last) return;
+              const day = t => String(t).slice(0, 10), prev = pts.slice(0, -1).reverse().find(p => day(p.time) !== day(last.time));
+              const div = b === 'irr' ? 10 : 1, pct = prev ? (last.price - prev.price) / prev.price * 100 : 0;
+              (g === 'g' ? out.gold : out.currency).push(mk(code, last.price / div, pct));
+            });
+            return out;
+          }
+          // 2) Widgetify — rialPrice = تومان؛ changePercentage آماده؛ useDollar = قیمت به دلار
+          const WG_CUR = { USD: 'USD', EUR: 'EUR', GBP: 'GBP', AED: 'AED', TRY: 'TRY', CNY: 'CNY', CAD: 'CAD', AUD: 'AUD', CHF: 'CHF', SAR: 'SAR', QAR: 'QAR', KWD: 'KWD', OMR: 'OMR', IQD: 'IQD', AFN: 'AFN', RUB: 'RUB', INR: 'INR', JPY: 'JPY', GRAM: 'IR_GOLD_18K' };
+          const WG_CRYPTO = ['BTC', 'ETH', 'TON', 'BNB', 'SOL', 'DOGE', 'ADA', 'AVAX', 'SHIB', 'LINK']; // USDT/XRP/TRX/DOT/LTC/ATOM در Widgetify خطای ۵۰۰ می‌دهند؛ هرگز درخواست نمی‌شوند
+          const WG_BAD = 'tb-wg-bad';
+          const wgBad = () => { const o = CUR_LS.get(WG_BAD, {}), n = Date.now(); Object.keys(o).forEach(k => { if (n - o[k] > 864e5) delete o[k]; }); return o; };
+          const wgGet = async (k, bad) => { if (bad[k]) return null; try { return await jget('https://api.widgetify.ir/currencies/' + k); } catch (e) { bad[k] = Date.now(); CUR_LS.set(WG_BAD, bad); return null; } };
+          const wgRow = d => d && okN(d.rialPrice) ? d : null;
+          async function pWidgetify() {
+            const keys = Object.keys(WG_CUR), bad = wgBad(), res = await pool(keys.map(k => () => wgGet(k, bad)), 6), out = { gold: [], currency: [] };
+            res.forEach((d, i) => { d = wgRow(d); if (!d) return; const sym = WG_CUR[keys[i]]; (GOLD_ORDER.includes(sym) ? out.gold : out.currency).push(mk(sym, d.rialPrice, parseFloat(d.changePercentage) || 0, d.useDollar ? { unit: 'دلار' } : {})); });
+            return out;
+          }
+          async function wgCryptoLoad(only) {
+            const list = WG_CRYPTO.filter(k => !only || only.includes(k)), bad = wgBad(), res = await pool(list.map(k => () => wgGet(k, bad)), 6), out = {};
+            res.forEach((d, i) => { d = wgRow(d); if (d) out[list[i]] = { v: d.rialPrice, usd: !!d.useDollar, pct: parseFloat(d.changePercentage) || 0 }; });
+            return out;
+          }
+          // 3) نرخ‌سنج — بدون کلید
+          const NK = { dollar: 'USD', euro: 'EUR', yuan: 'CNY', aed: 'AED', lira: 'TRY', pound: 'GBP', tether: 'USDT_IRT', gold: 'IR_GOLD_18K', gold24: 'IR_GOLD_24K', coin: 'IR_COIN_EMAMI', bahar: 'IR_COIN_BAHAR', half: 'IR_COIN_HALF', quarter: 'IR_COIN_QUARTER', gram: 'IR_COIN_1G' };
+          async function pNerkh() {
+            const j = await jget('https://nerkh.jahankhahan.shop/data/live.json'), r = j && j.rates; if (!r) return null;
+            const ch = j.change || {}, out = { gold: [], currency: [] }, tm = j.time || '';
+            Object.keys(NK).forEach(k => { const v = parseFloat(r[k]); if (!okN(v)) return; const sym = NK[k]; (GOLD_ORDER.includes(sym) ? out.gold : out.currency).push(mk(sym, v, parseFloat(ch[k]) || 0, { time_text: tm })); });
+            const ou = parseFloat(j.ounce); if (okN(ou)) out.gold.push(mk('XAUUSD', ou, parseFloat(ch.ounce) || 0, { time_text: tm }));
+            return out;
+          }
+          // پشتیبان نوبیتکس: بیت‌پین (قیمت به تومان و تتر) — به قالب آمار نوبیتکس تبدیل می‌شود
+          async function bitpinStats() {
+            const arr = await jget('https://api.bitpin.ir/api/v1/mkt/tickers/', null, 8000); if (!Array.isArray(arr)) return null;
+            const rls = {}, usdt = {};
+            arr.forEach(x => {
+              const m = /^([A-Z0-9]+)_(IRT|USDT)$/.exec(x && x.symbol || ''); if (!m) return; const p = parseFloat(x.price); if (!okN(p)) return;
+              const sym = m[1] === 'SHIB' ? '1k_shib' : m[1].toLowerCase(), k = m[1] === 'SHIB' ? 1000 : 1, pct = String(x.daily_change_price != null ? x.daily_change_price : 0);
+              if (m[2] === 'IRT') rls[sym + '-rls'] = { latest: String(p * k * 10), dayChange: pct }; else usdt[sym + '-usdt'] = { latest: String(p * k), dayChange: pct };
+            });
+            return { rls, usdt };
+          }
+          const CUR_PROVIDERS = [['priceto.day', pPriceto], ['Widgetify', pWidgetify], ['نرخ‌سنج', pNerkh]];
+          async function curLoadRates() {
+            const got = { gold: [], currency: [] }, used = [], failed = [];
+            const has = s => got.gold.concat(got.currency).some(x => x.symbol === s);
+            for (const [name, fn] of CUR_PROVIDERS) {
+              if (got.gold.length >= 8 && got.currency.length >= 8) break;
+              try { const d = await fn(); if (!d) continue; let n = 0; ['gold', 'currency'].forEach(g => (d[g] || []).forEach(it => { if (!has(it.symbol)) { got[g].push(it); n++; } })); (n ? used : failed).push(name); }
+              catch (e) { failed.push(name); }
+            }
+            const srt = (a, o) => a.sort((x, y) => (o.indexOf(x.symbol) + 1 || 99) - (o.indexOf(y.symbol) + 1 || 99));
+            srt(got.gold, GOLD_ORDER); srt(got.currency, CUR_ORDER);
+            return { data: got, used, failed };
+          }
           const NB  = 'https://apiv2.nobitex.ir/v3/orderbook/all';
           const REFRESH=60000;
           // Crypto list and metadata
@@ -24006,7 +24093,7 @@ function mmSetupEvents(wrap,img){
               Object.entries(CRYPTO_SVG_RAW).map(([sym,svg])=>[sym, sanitizeSvg(svg,'ci-'+sym.toLowerCase())])
             );
 
-          let curState={tab:'all',unit:'toman',data:null,nbRls:null,nbUsdt:null,loading:true,error:null};
+          let curState={tab:'all',unit:'toman',data:null,nbRls:null,nbUsdt:null,loading:true,error:null,notice:'',sources:[],stale:false};
           let curTimer,curInit=false;
 
           // Number formatting
@@ -24088,7 +24175,7 @@ function mmSetupEvents(wrap,img){
                             ${iconContent}
                           </g>
                         </svg>`;
-            return buildCard(svg,'cur-card__badge--gold','طلا',item.name,item.name_en||'',priceHtml,unit,pct,toTime(item.time_unix));
+            return buildCard(svg,'cur-card__badge--gold','طلا',item.name,item.name_en||'',priceHtml,unit,pct,(item.time_text||toTime(item.time_unix)));
           }
 
           function currencyCard(item){
@@ -24114,7 +24201,7 @@ function mmSetupEvents(wrap,img){
             }
             const pct=parseFloat(item.change_percent)||0;
             const svg=CURRENCY_SVG[item.symbol]||CURRENCY_SVG[item.symbol.replace('_IRT','')]||`<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><circle cx="17" cy="17" r="17" fill="var(--m3-primary)"/><text x="17" y="21" text-anchor="middle" font-size="8" font-weight="700" fill="white">${item.symbol}</text></svg>`;
-            return buildCard(svg,'cur-card__badge--curr',item.symbol.replace('_IRT',''),item.name,item.name_en||'',priceHtml,unit,pct,toTime(item.time_unix));
+            return buildCard(svg,'cur-card__badge--curr',item.symbol.replace('_IRT',''),item.name,item.name_en||'',priceHtml,unit,pct,(item.time_text||toTime(item.time_unix)));
           }
 
           function cryptoCard(item){
@@ -24130,18 +24217,23 @@ function mmSetupEvents(wrap,img){
               if(stats && stats.latest){
                 priceHtml = fNum(Math.round(parseFloat(stats.latest)/10), true);
                 unit = 'تومان';
-                pct = parseFloat(stats.dayChange || 0);
+                pct = parseFloat(stats.dayChange || 0); if(stats.src) source = stats.src;
               }
             } else {
               const stats = (curState.nbUsdt || {})[searchKey + '-usdt'];
               if(stats && stats.latest){
                 priceHtml = fDollar(parseFloat(stats.latest));
                 unit = 'USD';
-                pct = parseFloat(stats.dayChange || 0);
+                pct = parseFloat(stats.dayChange || 0); if(stats.src) source = stats.src;
               }
             }
 
-            if(!priceHtml) { priceHtml = '---'; unit = ''; }
+            if(!priceHtml && curState.wg && curState.wg[sym]) {
+              const w = curState.wg[sym], ur = getUsdRate();
+              if(curState.unit === 'toman'){ priceHtml = fNum(Math.round(w.usd ? w.v * ur : w.v), true); unit = 'تومان'; } else { priceHtml = fDollar(w.usd ? w.v : w.v / ur); unit = 'USD'; }
+              pct = w.pct; source = 'ویجتی‌فای';
+            }
+            if(!priceHtml) return '';
 
             const svg = CRYPTO_SVG[sym] || `<svg viewBox="0 0 34 34"><circle cx="17" cy="17" r="17" fill="${meta.clr || '#888'}"/><text x="17" y="21" text-anchor="middle" font-size="8" font-weight="700" fill="white">${sym}</text></svg>`;
             return buildCard(svg, 'cur-card__badge--crypto', sym, meta.fa || sym, sym, priceHtml, unit, pct, source);
@@ -24151,20 +24243,25 @@ function mmSetupEvents(wrap,img){
             return`<div class="cur-cards-grid">${Array.from({length:n},()=>`<div class="cur-skeleton"><div class="cur-sk-line" style="width:40%;height:24px;margin-bottom:10px"></div><div class="cur-sk-line" style="width:60%"></div><div class="cur-sk-line" style="width:45%"></div><div class="cur-sk-line" style="width:70%;height:18px;margin-top:8px"></div></div>`).join('')}</div>`;
           }
 
+          function curFoot(){
+            const src=(curState.sources||[]).length?curState.sources.join(' + '):'—';
+            return `<div class="cur-foot">منبع نرخ ارز و طلا: ${src}${curState.stale?' (ذخیره‌شده)':''} · رمزارز: نوبیتکس (پشتیبان: بیت‌پین و Widgetify). اعداد برآورد بازار آزاد هستند و توصیه‌ی مالی نیستند.</div>`;
+          }
+
           function curRender(){
             const el=document.getElementById('cur-content');if(!el)return;
             if(curState.loading){el.innerHTML=skeletons();return;}
-            if(curState.error){el.innerHTML=`<div style="background:color-mix(in srgb,var(--m3-error,#b91c1c) 8%,transparent);border:1px solid color-mix(in srgb,var(--m3-error,#b91c1c) 25%,transparent);border-radius:14px;padding:16px;color:var(--m3-error,#b91c1c);font-size:.85rem;text-align:center">⚠️ ${curState.error}</div>`;return;}
-            const brs=curState.data;
-            let html='';
+            const banner=curState.error?`<div class="cur-banner cur-banner--err"><span>⚠️ ${curState.error}</span><button type="button" class="btn btn-tonal" onclick="curRetry()">تلاش دوباره</button></div>`:(curState.notice?`<div class="cur-banner">${curState.notice}</div>`:'');
+            const brs=curState.data||{gold:[],currency:[]};
+            let html=banner;
             if(curState.tab==='all'||curState.tab==='gold'){
-              html+=`<div class="cur-section-title">🥇 طلا و سکه</div><div class="cur-cards-grid">${(brs.gold||[]).map(goldCard).join('')}</div>`;
+              if((brs.gold||[]).length)html+=`<div class="cur-section-title">🥇 طلا و سکه</div><div class="cur-cards-grid">${(brs.gold||[]).map(goldCard).join('')}</div>`;
             }
             if(curState.tab==='all'||curState.tab==='currency'){
               const list=brs.currency||[];
               const mainSet=['USDT_IRT','USD','EUR','GBP','AED','TRY'];
               const main=curState.tab==='all'?list.filter(c=>mainSet.some(s=>c.symbol===s||c.symbol===s+'_IRT')):list;
-              html+=`<div class="cur-section-title">💵 ${curState.tab==='all'?'ارزهای منتخب':'ارزهای خارجی'}</div><div class="cur-cards-grid">${main.map(currencyCard).join('')}</div>`;
+              if(main.length)html+=`<div class="cur-section-title">💵 ${curState.tab==='all'?'ارزهای منتخب':'ارزهای خارجی'}</div><div class="cur-cards-grid">${main.map(currencyCard).join('')}</div>`;
             }
             if (curState.tab === 'all' || curState.tab === 'crypto') {
                 const cryptoCards = CRYPTO.map(c => {
@@ -24175,40 +24272,61 @@ function mmSetupEvents(wrap,img){
                     });
                 }).join('');
 
-                html += `<div class="cur-section-title">🪙 رمزارز</div><div class="cur-cards-grid">${cryptoCards}</div>`;
+                if(cryptoCards.trim()) html += `<div class="cur-section-title">🪙 رمزارز</div><div class="cur-cards-grid">${cryptoCards}</div>`;
             }
-            el.innerHTML=html||'<div style="text-align:center;padding:32px;color:var(--m3-on-surface-variant)">داده‌ای یافت نشد</div>';
+            el.innerHTML=(html||'<div style="text-align:center;padding:32px;color:var(--m3-on-surface-variant)">داده‌ای یافت نشد</div>')+curFoot();
           }
 
           async function curFetch(){
             if(!document.getElementById('cur-content'))return;
-            curState.loading=true; curState.error=null; curRender();
+            const first = !curState.data;
+            if(first){ curState.loading=true; curState.error=null; curRender(); }
             const dot=document.getElementById('cur-dot'), badge=document.getElementById('cur-badge-text');
-            
-            try {
-              // Map local symbols to Nobitex symbols (e.g. SHIB -> 1k_shib)
-              const syms = CRYPTO.map(c => (c.nid || c.s).toLowerCase()).join(',');
-              const NB_STATS = 'https://apiv2.nobitex.ir/market/stats?srcCurrency=' + syms;
-
-              const [brsRes, nbRlsRes, nbUsdtRes] = await Promise.all([
-                fetch(BRS).then(r => r.json()),
-                fetch(NB_STATS + '&dstCurrency=rls').then(r => r.json()),
-                fetch(NB_STATS + '&dstCurrency=usdt').then(r => r.json())
-              ]);
-
-              curState.data = brsRes;
-              curState.nbRls = nbRlsRes.stats || {};
-              curState.nbUsdt = nbUsdtRes.stats || {};
-              curState.loading = false;
-
-              if(badge) badge.textContent = 'بروزرسانی: ' + new Date().toLocaleTimeString('fa-IR');
-              if(dot){dot.style.background='var(--m3-primary)'; dot.style.animation='pulse2 2s infinite';}
-            } catch(e) {
-              curState.loading=false; curState.error='خطا در دریافت اطلاعات نوبیتکس';
-              if(dot){dot.style.background='var(--m3-error)'; dot.style.animation='none';}
+            if(dot){dot.style.background='var(--m3-primary)';dot.style.animation='pulse2 1s infinite';}
+            const NB_NO = ['TON']; // نوبیتکس این نماد را ندارد (InvalidCurrency)
+            const syms = CRYPTO.filter(c => !NB_NO.includes(c.s)).map(c => (c.nid || c.s).toLowerCase()).join(',');
+            const NB_STATS = 'https://apiv2.nobitex.ir/market/stats?srcCurrency=' + syms;
+            const nbGet = async dst => {
+              try { return await jget(NB_STATS + '&dstCurrency=' + dst); }
+              catch(e) { // یک نماد نامعتبر کل درخواست گروهی را ۴۰۰ می‌کند؛ تک‌تک می‌گیریم
+                const list = syms.split(','), res = await pool(list.map(s => () => jget('https://apiv2.nobitex.ir/market/stats?srcCurrency=' + s + '&dstCurrency=' + dst, null, 5000)), 6), stats = {};
+                res.forEach(r => { if (r && r.stats) Object.assign(stats, r.stats); });
+                return Object.keys(stats).length ? { stats } : null;
+              }
+            };
+            const [rates, nbRls, nbUsdt] = await Promise.all([curLoadRates().catch(()=>null), nbGet('rls'), nbGet('usdt')]);
+            const stR=Object.assign({},(nbRls&&nbRls.stats)||{}), stU=Object.assign({},(nbUsdt&&nbUsdt.stats)||{}), kk=c=>(c.nid||c.s).toLowerCase();
+            let nbSrc=(Object.keys(stR).length||Object.keys(stU).length)?'نوبیتکس':'';
+            if(CRYPTO.some(c=>!stR[kk(c)+'-rls']||!stU[kk(c)+'-usdt'])){
+              try{ const bp=await bitpinStats(); if(bp){ let used=false; CRYPTO.forEach(c=>{ const k=kk(c); if(!stR[k+'-rls']&&bp.rls[k+'-rls']){stR[k+'-rls']=bp.rls[k+'-rls'];stR[k+'-rls'].src='بیت‌پین';used=true;} if(!stU[k+'-usdt']&&bp.usdt[k+'-usdt']){stU[k+'-usdt']=bp.usdt[k+'-usdt'];stU[k+'-usdt'].src='بیت‌پین';used=true;} }); if(used&&!nbSrc)nbSrc='بیت‌پین'; } }catch(e){}
+            }
+            curState.nbRls=stR; curState.nbUsdt=stU; curState.cryptoSrc=nbSrc;
+            { const miss=CRYPTO.filter(c=>!stR[kk(c)+'-rls']).map(c=>c.s); if(miss.length){ try{ curState.wg=await wgCryptoLoad(miss); }catch(e){ curState.wg={}; } } else curState.wg=null; }
+            const hasRates = rates && (rates.data.gold.length + rates.data.currency.length) > 0;
+            curState.loading=false; curState.notice='';
+            if(hasRates){
+              curState.data=rates.data; curState.sources=rates.used; curState.stale=false;
+              CUR_LS.set(CUR_KEY,{data:rates.data,ts:Date.now(),sources:rates.used});
+              if(badge) badge.textContent='بروزرسانی: '+new Date().toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})+' · منبع: '+rates.used.join(' + ');
+              if(dot){dot.style.background='var(--m3-primary)';dot.style.animation='pulse2 2s infinite';}
+              if(rates.failed.length && rates.used.length) curState.notice='';
+            } else {
+              const c=CUR_LS.get(CUR_KEY,null);
+              if(c&&c.data){
+                curState.data=c.data; curState.stale=true; curState.sources=c.sources||[];
+                const t=new Date(c.ts).toLocaleString('fa-IR',{hour:'2-digit',minute:'2-digit',day:'numeric',month:'short'});
+                curState.notice='⚠️ دریافت نرخ زنده از هیچ‌کدام از منابع ممکن نشد؛ آخرین نرخ ذخیره‌شده ('+t+') نمایش داده می‌شود.';
+                if(badge) badge.textContent='قدیمی · '+t;
+                if(dot){dot.style.background='var(--m3-error)';dot.style.animation='none';}
+              } else if(!curState.data){
+                curState.error='دریافت نرخ از منابع (priceto.day و نرخ‌سنج) ممکن نشد. اتصال اینترنت را بررسی کنید و دوباره تلاش کنید.';
+                if(badge) badge.textContent='خطا در دریافت';
+                if(dot){dot.style.background='var(--m3-error)';dot.style.animation='none';}
+              }
             }
             curRender();
           }
+          window.curRetry=function(){curState.error=null;curFetch();};
 
           window.curSwitchTab=function(tab,btn){
             curState.tab=tab;
