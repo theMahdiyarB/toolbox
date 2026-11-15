@@ -2334,22 +2334,25 @@
         a && n("tb-seed") && !s("#tb-dyn") ? I(C, !1) : M(),
         (function () {
           var a = s(".page-wrapper");
-          if (a && !s(".tb-appbar")) {
+          if (a) {
             var n = (r = !!t.getElementById("home"))
                 ? "جعبه‌ابزار آفلاین"
                 : "منابع ایران",
-              o = c("header", "tb-appbar is-sticky");
-            ((o.innerHTML =
-              '<div class="tb-appbar__lead"><button type="button" class="ib" data-back aria-label="بازگشت">' +
-              l("arrow_forward") +
-              '</button><div class="tb-appbar__title" id="tb-appbar-title">' +
-              n +
-              '</div></div><div class="tb-appbar__search"></div><div class="tb-appbar__actions"><button type="button" class="ib" data-act="theme" aria-label="تغییر پوسته">' +
-              l("dark_mode") +
-              '</button><button type="button" class="ib" data-act="look" aria-label="ظاهر و رنگ">' +
-              l("palette") +
-              "</button></div>"),
-              a.insertBefore(o, a.firstChild));
+              o = s(".tb-appbar"),
+              fr = !o;
+            fr && (o = c("header", "tb-appbar is-sticky"));
+            (fr &&
+              (o.innerHTML =
+                '<div class="tb-appbar__lead"><button type="button" class="ib" data-back aria-label="بازگشت">' +
+                l("arrow_forward") +
+                '</button><div class="tb-appbar__title" id="tb-appbar-title">' +
+                n +
+                '</div></div><div class="tb-appbar__search"></div><div class="tb-appbar__actions"><button type="button" class="ib" data-act="theme" aria-label="تغییر پوسته">' +
+                l("dark_mode") +
+                '</button><button type="button" class="ib" data-act="look" aria-label="ظاهر و رنگ">' +
+                l("palette") +
+                "</button></div>"),
+              fr && a.insertBefore(o, a.firstChild));
             var i = o.querySelector("[data-act=theme] .ms");
             (f(),
               new MutationObserver(f).observe(e, {

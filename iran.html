@@ -211,9 +211,9 @@
       /* ensure link-card has relative positioning for the dot */
       .link-card { position: relative; }
 
-      /* ── Global (worldwide) cards — hidden until confirmed reachable ── */
+      /* ── Global (worldwide) cards — never hidden on an inconclusive probe ── */
       .global-card {
-        display: none;
+        display: flex; /* A blocked probe must not hide a potentially reachable link. */
       }
       .global-card.reachable {
         display: flex;
@@ -353,6 +353,7 @@
 
 <!-- ════ PAGE WRAPPER ════ -->
 <div class="page-wrapper">
+<header class="tb-appbar is-sticky"><div class="tb-appbar__lead"><button type="button" class="ib" data-back aria-label="بازگشت"><span class="ms" data-i="arrow_forward" aria-hidden="true"></span></button><div class="tb-appbar__title" id="tb-appbar-title">منابع ایران</div></div><div class="tb-appbar__search"></div><div class="tb-appbar__actions"><button type="button" class="ib" data-act="theme" aria-label="تغییر پوسته"><span class="ms" data-i="dark_mode" aria-hidden="true"></span></button><button type="button" class="ib" data-act="look" aria-label="ظاهر و رنگ"><span class="ms" data-i="palette" aria-hidden="true"></span></button></div></header>
 <main class="main-content">
 
 <!-- HERO -->
@@ -4553,8 +4554,7 @@
    SITE STATUS CHECKER
    — Adds a beating green dot (online) or red dot (offline)
      to every .link-card that has an href starting with http.
-   — Global (.global-card) cards are hidden by default and
-     only revealed when their target is reachable.
+   — Global (.global-card) links stay visible even when status is unknown.
 ════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
@@ -4572,38 +4572,24 @@
     return dot;
   }
 
-  /* Check reachability using an Image probe — works from file://, mobile,
-     and any browser without CORS restrictions.
-     Strategy: request /favicon.ico from the origin.
-     - If the server is UP: the browser establishes a TCP connection and gets
-       a response. onerror fires quickly (non-image 404 is still a response).
-     - If the server is DOWN / DNS fails: nothing fires until our timeout.
-     We treat "onerror within timeout" as ONLINE (got a response, even if 404)
-     and "timeout with no event" as OFFLINE. */
+  /* Cross-origin image probes cannot distinguish network failures, 404s,
+     and non-image responses. Only a successful favicon image proves reachability.
+     Everything else is UNKNOWN; don't claim offline or hide any link. */
   function checkURL(url) {
     return new Promise(function(resolve) {
       var origin;
-      try { origin = new URL(url).origin; } catch(e) { return resolve(false); }
-
-      var img = new Image();
-      var settled = false;
-      var TIMEOUT = 8000;
-
-      var timer = setTimeout(function() {
-        if (!settled) { settled = true; img.src = ''; resolve(false); }
-      }, TIMEOUT);
-
-      function markOnline() {
-        if (!settled) { settled = true; clearTimeout(timer); resolve(true); }
+      try { origin = new URL(url).origin; } catch(e) { resolve(null); return; }
+      var img = new Image(), settled = false;
+      var timer = setTimeout(function() { finish(null); img.src = ''; }, 8000);
+      function finish(status) {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        img.onload = img.onerror = null;
+        resolve(status);
       }
-
-      /* onload: got actual image bytes → definitely online */
-      img.onload = markOnline;
-
-      /* onerror: browser received a response (even 404 / non-image) → online.
-         True network failures (DNS error, no route) take the full timeout. */
-      img.onerror = markOnline;
-
+      img.onload = function() { finish(true); };   // confirmed usable image
+      img.onerror = function() { finish(null); }; // error is ambiguous
       img.src = origin + '/favicon.ico?_=' + Date.now();
     });
   }
@@ -4638,8 +4624,8 @@
           card.classList.add('reachable');
         }
       } else {
-        dot.classList.add('offline');
-        // global cards stay hidden (display:none) when offline
+        dot.classList.add('unknown'); // no trustworthy offline conclusion
+        dot.title = 'وضعیت دسترسی نامشخص است';
       }
     });
   });
