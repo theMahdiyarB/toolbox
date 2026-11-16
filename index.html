@@ -6232,7 +6232,7 @@
             </div>
           </div>
           <div id="cur-content"></div>
-          <div class="tool-desc">قیمت لحظه‌ای ارز و طلا از priceto.day با پشتیبان‌های Widgetify و نرخ‌سنج و ارزهای دیجیتال از نوبیتکس؛ در صورت قطع همه‌ی منابع، آخرین نرخ ذخیره‌شده نمایش داده می‌شود. نرخ تبدیل بین واحدهای مختلف. <strong>کاربرد:</strong> مقایسه نرخ ارز، برنامه‌ریزی مالی، خرید و فروش ارز.</div>
+          <div class="tool-desc">قیمت لحظه‌ای ارز و طلا از priceto.day با پشتیبان‌های Widgetify، نرخ‌سنج، Iran Market، قیمت آنلاین و zipodo و ارزهای دیجیتال از نوبیتکس؛ در صورت قطع همه‌ی منابع، آخرین نرخ ذخیره‌شده نمایش داده می‌شود. نرخ تبدیل بین واحدهای مختلف. <strong>کاربرد:</strong> مقایسه نرخ ارز، برنامه‌ریزی مالی، خرید و فروش ارز.</div>
         </template>
 
         <!-- ══ بانک فیلم ══ -->
@@ -6464,7 +6464,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 10.6 - ۱۴۰۵/۰۸/۲۴
+          ℹ️ نسخه 10.7 - ۱۴۰۵/۰۸/۲۵
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -23894,7 +23894,7 @@ function mmSetupEvents(wrap,img){
         //  CURRENCY TOOL
         // ═══════════════════════════════
         (function(){
-          // ── منابع داده: priceto.day → Widgetify → نرخ‌سنج → کش محلی ──
+          // ── منابع داده: priceto.day → Widgetify → نرخ‌سنج → Iran Market → قیمت آنلاین → zipodo → کش محلی ──
           const CUR_LS = { get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } } };
           const CUR_KEY = 'tb-cur-cache';
           const CUR_ORDER = ['USDT_IRT', 'USD', 'EUR', 'GBP', 'AED', 'TRY', 'CNY', 'CAD', 'AUD', 'CHF', 'SAR', 'QAR', 'KWD', 'OMR', 'IQD', 'AFN', 'RUB', 'INR', 'JPY'];
@@ -23968,12 +23968,36 @@ function mmSetupEvents(wrap,img){
             });
             return { rls, usdt };
           }
-          const CUR_PROVIDERS = [['priceto.day', pPriceto], ['Widgetify', pWidgetify], ['نرخ‌سنج', pNerkh]];
+          // ── پشتیبان‌های تازه: iran-market (GitHub)، قیمت آنلاین (gheymat)، zipodo (فقط تتر) ──
+          const IM_MAP = { GOLD_18K_IRR: 'IR_GOLD_18K', GOLD_24K_IRR: 'IR_GOLD_24K', GOLD_MELTED_IRR: 'IR_GOLD_MELTED', COIN_EMAMI_IRR: 'IR_COIN_EMAMI', COIN_BAHAR_IRR: 'IR_COIN_BAHAR', COIN_HALF_IRR: 'IR_COIN_HALF', COIN_QUARTER_IRR: 'IR_COIN_QUARTER', COIN_GRAM_IRR: 'IR_COIN_1G', USDT_IRR: 'USDT_IRT' };
+          function imMap(x) { if (!x || x.currency !== 'IRT') return null; let s = IM_MAP[x.symbol]; if (!s) { const m = /^([A-Z]{3})_IRR_FREE$/.exec(x.symbol || ''); if (m && NAMES[m[1]]) s = m[1]; } return s || null; }
+          const imRun = file => async () => {
+            const j = await jget('https://raw.githubusercontent.com/iran-market/iran-market.github.io/main/data/' + file, null, 8000); if (!j || !Array.isArray(j.data)) return null;
+            const out = { gold: [], currency: [] };
+            j.data.forEach(x => { const s = imMap(x), p = parseFloat(x && x.price); if (!s || !okN(p) || x.stale === true) return; (GOLD_ORDER.includes(s) ? out.gold : out.currency).push(mk(s, p, parseFloat(x.change_pct) || 0, { time_text: x.timestamp_jalali || '', time_unix: x.timestamp ? Date.parse(x.timestamp) / 1000 : Date.now() / 1000 })); });
+            return out;
+          };
+          const pIranMarket = imRun('popular.json'), pIranMarketAll = imRun('latest-toman.json');
+          const GH_MAP = { USDT: 'USDT_IRT', GOLD18: 'IR_GOLD_18K', GOLD24: 'IR_GOLD_24K' };
+          async function pGheymat() {
+            const j = await jget('https://backend.gheymat.online/api/prices?quote_currency=IRT&price_source=GHEYMAT&only_updated=1', null, 8000); if (!j || !Array.isArray(j.data)) return null;
+            const out = { gold: [], currency: [] };
+            j.data.forEach(x => {
+              if (!x || x.is_up_to_date === false) return; const b = String(x.symbol || '').split('-')[0], s = GH_MAP[b] || (NAMES[b] ? b : null), p = parseFloat(x.buy_price); if (!s || !okN(p)) return;
+              (GOLD_ORDER.includes(s) ? out.gold : out.currency).push(mk(s, p, parseFloat(x.change) || 0, { time_unix: x.created_at ? Date.parse(x.created_at) / 1000 : Date.now() / 1000 }));
+            });
+            return out;
+          }
+          async function pZipodo() {
+            const j = await jget('https://api.zipodo.ir/usdt/', null, 6000), p = parseFloat(j && j.price); if (!okN(p)) return null;
+            return { gold: [], currency: [mk('USDT_IRT', p, 0)] };
+          }
+          const CUR_PROVIDERS = [['priceto.day', pPriceto], ['Widgetify', pWidgetify], ['نرخ‌سنج', pNerkh], ['Iran Market', pIranMarket], ['قیمت آنلاین', pGheymat], ['Iran Market+', pIranMarketAll], ['zipodo', pZipodo]];
           async function curLoadRates() {
             const got = { gold: [], currency: [] }, used = [], failed = [];
             const has = s => got.gold.concat(got.currency).some(x => x.symbol === s);
             for (const [name, fn] of CUR_PROVIDERS) {
-              if (got.gold.length >= 8 && got.currency.length >= 8) break;
+              if (got.gold.length >= 8 && got.currency.length >= 8 && has('USDT_IRT')) break;
               try { const d = await fn(); if (!d) continue; let n = 0; ['gold', 'currency'].forEach(g => (d[g] || []).forEach(it => { if (!has(it.symbol)) { got[g].push(it); n++; } })); (n ? used : failed).push(name); }
               catch (e) { failed.push(name); }
             }
