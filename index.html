@@ -6086,68 +6086,31 @@
         <!-- ══ زمین‌لرزه ══ -->
         <div id="earthquake" class="tool-card" data-lazy="1"></div><template id="tpl-earthquake">
           <div class="tool-title">🌍 زمین‌لرزه‌های اخیر ایران</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-            <span style="font-size:.78rem;color:var(--m3-on-surface-variant)">منبع: مرکز لرزه‌نگاری کشوری · دانشگاه تهران</span>
-            <button onclick="eqLoad()" title="به‌روزرسانی" style="display:flex;align-items:center;gap:6px;background:var(--m3-surface-container);border:1px solid var(--m3-outline-variant);border-radius:99px;padding:4px 12px;cursor:pointer;color:inherit;font-family:inherit;transition:background 0.2s">
-              <span id="eq-dot" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--m3-primary);box-shadow:0 0 6px var(--m3-primary)"></span>
-              <span id="eq-ts" style="font-size:.72rem;color:var(--m3-on-surface-variant)">در حال بارگذاری…</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--m3-on-surface-variant)"><path d="M21 12a9 9 0 11-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path></svg>
-            </button>
+          <div class="eq">
+            <div class="eq-hero" id="eq-hero" aria-live="polite"></div>
+            <div class="eq-bar">
+              <div class="eq-seg" id="eq-src" role="group" aria-label="منبع داده">
+                <button type="button" data-v="auto" aria-pressed="true">خودکار</button>
+                <button type="button" data-v="EMSC" aria-pressed="false">EMSC</button>
+                <button type="button" data-v="USGS" aria-pressed="false">USGS</button>
+                <button type="button" data-v="IRSC" aria-pressed="false">IRSC</button>
+              </div>
+              <button type="button" class="eq-refresh" id="eq-refresh" title="به‌روزرسانی"><span class="eq-dot" id="eq-dot"></span><span id="eq-ts">در حال بارگذاری…</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></button>
+            </div>
+            <div class="eq-filters">
+              <div class="eq-seg" id="eq-f-time" role="group" aria-label="بازه‌ی زمانی"><button type="button" data-v="1">۲۴ ساعت</button><button type="button" data-v="7" aria-pressed="true">۷ روز</button><button type="button" data-v="30">۳۰ روز</button><button type="button" data-v="0">همه</button></div>
+              <div class="eq-seg" id="eq-f-mag" role="group" aria-label="حداقل بزرگی"><button type="button" data-v="0" aria-pressed="true">همه</button><button type="button" data-v="3">۳+</button><button type="button" data-v="4">۴+</button><button type="button" data-v="5">۵+</button></div>
+            </div>
+            <div class="eq-filters">
+              <div class="field__container eq-sel"><select id="eq-f-prov" class="field__input" aria-label="استان"><option value="">همه استان‌ها</option></select></div>
+              <div class="field__container eq-sel"><select id="eq-f-dep" class="field__input" aria-label="عمق"><option value="9999">هر عمقی</option><option value="10">کم‌عمق (≤۱۰ km)</option><option value="30">متوسط (≤۳۰ km)</option><option value="70">تا ۷۰ km</option></select></div>
+              <div class="eq-seg" id="eq-f-sort" role="group" aria-label="مرتب‌سازی"><button type="button" data-v="time" aria-pressed="true">جدیدترین</button><button type="button" data-v="mag">بزرگ‌ترین</button></div>
+            </div>
+            <div class="eq-note" id="eq-note" hidden></div>
+            <div class="eq-count" id="eq-count-label"></div>
+            <div class="eq-list" id="eq-list"></div>
           </div>
-
-          <!-- Filters -->
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;align-items:flex-end">
-            <div style="flex:1;min-width:130px">
-              <label class="field-label">استان</label>
-              <div class="field__container" style="padding:0 8px;height:44px">
-                <select id="eq-f-prov" class="field__input" style="cursor:pointer" onchange="eqRender()">
-                  <option value="">همه استان‌ها</option>
-                </select>
-              </div>
-            </div>
-            <div style="flex:1;min-width:130px">
-              <label class="field-label">حداقل بزرگی</label>
-              <div class="field__container" style="padding:0 8px;height:44px">
-                <select id="eq-f-mag" class="field__input" style="cursor:pointer" onchange="eqRender()">
-                  <option value="0">همه</option>
-                  <option value="2.5">۲.۵+</option>
-                  <option value="3">۳.۰+</option>
-                  <option value="3.5">۳.۵+</option>
-                  <option value="4">۴.۰+</option>
-                  <option value="4.5">۴.۵+</option>
-                </select>
-              </div>
-            </div>
-            <div style="flex:1;min-width:130px">
-              <label class="field-label">حداکثر عمق (km)</label>
-              <div class="field__container" style="padding:0 8px;height:44px">
-                <select id="eq-f-dep" class="field__input" style="cursor:pointer" onchange="eqRender()">
-                  <option value="9999">همه</option>
-                  <option value="10">کم‌عمق (≤۱۰)</option>
-                  <option value="30">متوسط (≤۳۰)</option>
-                  <option value="70">عمیق (≤۷۰)</option>
-                </select>
-              </div>
-            </div>
-            <div style="flex:1;min-width:130px">
-              <label class="field-label">مرتب‌سازی</label>
-              <div class="field__container" style="padding:0 8px;height:44px">
-                <select id="eq-f-sort" class="field__input" style="cursor:pointer" onchange="eqRender()">
-                  <option value="time">جدیدترین</option>
-                  <option value="mag">بزرگ‌ترین</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-
-          <!-- Count badge -->
-          <div style="font-size:.8rem;color:var(--m3-on-surface-variant);margin-bottom:8px" id="eq-count-label"></div>
-
-          <!-- List -->
-          <div id="eq-list" style="display:flex;flex-direction:column;gap:8px"></div>
-
-          <div class="tool-desc" style="margin-top:16px">نمایش آخرین زمین‌لرزه‌های ایران و نواحی مجاور از مرکز لرزه‌نگاری کشوری (IRSC). داده‌ها به‌صورت XML بارگذاری می‌شوند. <strong>کاربرد:</strong> پایش لرزه‌خیزی، هشدار زودهنگام.</div>
+          <div class="tool-desc" style="margin-top:16px">آخرین زمین‌لرزه‌های ایران و نواحی مجاور، از جدیدترین به قدیمی‌ترین. در حالت «خودکار» ابتدا EMSC (مرکز لرزه‌شناسی اروپا-مدیترانه)، سپس USGS و در صورت در دسترس نبودن هر دو، مرکز لرزه‌نگاری کشوری (IRSC) استفاده می‌شود؛ آخرین داده‌ی موفق برای حالت آفلاین ذخیره می‌ماند. مکان رویدادهای EMSC و USGS نسبت به نزدیک‌ترین مرکز استان نوشته می‌شود. بزرگی‌ها برآورد اولیه‌اند و ممکن است به‌روز شوند. <strong>کاربرد:</strong> پایش لرزه‌خیزی.</div>
         </template>
 
         <!-- ══ ترجمه ══ -->
@@ -6464,7 +6427,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span class="body-medium footer-muted">
-          ℹ️ نسخه 10.7 - ۱۴۰۵/۰۸/۲۵
+          ℹ️ نسخه 10.8 - ۱۴۰۵/۰۸/۲۵
         </span>
         <span class="body-medium footer-muted">
           By <a href="https://github.com/themahdiyarb/toolbox" target="_blank" rel="noopener">theMahdiyarB</a>
@@ -6504,7 +6467,7 @@
     </div>
     <script>
 /* tb-lazy: tool panels live in <template>s and are filled in on first use (or when any code asks for one of their element ids) */
-(function(){var M={"calc":["calc-disp", "calc-mode-btn", "calc-sci-panel", "cx", "cx-2nd", "cx-frac", "cx-hist", "cx-hl", "cx-hn", "cx-hyp", "cx-last", "cx-mem", "cx-res"],"bmi":["bmi-cat","bmi-h","bmi-res","bmi-val","bmi-w"],"avg":["avg-cnt","avg-input","avg-max","avg-mean","avg-med","avg-min","avg-res","avg-std","avg-sum"],"pct":["p1r","p1x","p1y","p2r","p2x","p2y","p3a","p3b","p3r"],"stopwatch":["lap-list","sw-btn","sw-time"],"timer":["tmr-display","tmr-done","tmr-h","tmr-inputs","tmr-label","tmr-m","tmr-play-btn","tmr-ring","tmr-s"],"unitconv":["uc-cat","uc-from","uc-result","uc-to","uc-val"],"age":["age-cal-mi","age-cal-sh","age-d","age-dob","age-jd","age-jdate","age-jm","age-jy","age-m","age-miladi-wrap","age-next","age-res","age-shamsi-wrap","age-td","age-th","age-today-j","age-wd","age-y"],"loan":["ln-amt","ln-int","ln-mo","ln-pmt","ln-rate","ln-res","ln-tot"],"tip":["dang-extra","dang-history","dang-pct","dang-people","dang-result","dang-session-name","dang-session-sel","dang-summary","dang-total"],"notes":["check-list","check-new","check-progress","notes-grid","notes-tab-check","notes-tab-check-wrap","notes-tab-notes","notes-tab-notes-wrap"],"text":["txt-src"],"charcount":["cc-avgword","cc-chars","cc-freq","cc-input","cc-lines","cc-paras","cc-read","cc-sentences","cc-stats-row","cc-words"],"whitespace":["ws-input","ws-output"],"oneline":["ol-input","ol-output"],"lorem":["lorem-lang","lorem-par","lorem-res"],"markdown":["md-html-out","md-html-src","md-preview","md-src"],"diff":["diff-a","diff-b","diff-out"],"slugify":["slug-in","slug-out"],"json":["json-in","json-out"],"xml":["xml-in","xml-out"],"htmlesc":["he-input","he-output"],"hash":["hash-algo","hash-input","hash-output"],"crypto":["crypto-algo","crypto-emoji","crypto-error","crypto-fmt-en","crypto-fmt-fa","crypto-fmt-hex","crypto-key","crypto-output","crypto-text"],"jwt":["jwt-exp","jwt-head","jwt-input","jwt-output","jwt-pay"],"pxrem":["px-base","px-val","rem-val"],"regex":["rx-flags","rx-info","rx-out","rx-pat","rx-text"],"cron":["cron-input","cron-result"],"urlparse":["url-input","url-res"],"numbase":["nb-bin","nb-dec","nb-hex","nb-oct"],"pass":["pass-len","pass-len-num","pass-len-v","pass-lower","pass-num","pass-out","pass-str","pass-sym","pass-upper"],"uuid":["uuid-out"],"randnum":["card-count","card-deck-status","card-display","card-drawn-list","coin-heads","coin-inner","coin-result","coin-scene","coin-tails","dice-count","dice-scene","dice-sides","dice-sum","list-input","list-pick-n","list-result","list-unique","rand-cnt","rand-max","rand-min","rand-panel-card","rand-panel-coin","rand-panel-dice","rand-panel-list","rand-panel-num","rand-panel-wheel","rand-res","rand-tab-card","rand-tab-coin","rand-tab-dice","rand-tab-list","rand-tab-num","rand-tab-wheel","wheel-canvas","wheel-history","wheel-input","wheel-remove","wheel-result","wheel-spin-btn"],"textbeauty":["tb-count","tb-filters","tb-input","tb-results"],"rubik":["rubik-color-btns","rubik-error","rubik-moves-input","rubik-net-wrap","rubik-solution-info","rubik-solution-moves","rubik-solution-wrap"],"randip":["ip-v4","ip-v6","randip-out"],"randcolor":["rc-hex","rc-hsl","rc-rgb","rc-swatch"],"fake":["fake-addr","fake-dob","fake-email","fake-id","fake-job","fake-lang","fake-name","fake-phone","fake-res"],"credit":["cc-out","cc-type"],"avatar":["avatar-svg"],"placeholder":["ph-bg","ph-bg-btn","ph-bg-lbl","ph-bg-swatch","ph-canvas","ph-col","ph-col-btn","ph-col-lbl","ph-col-swatch","ph-h","ph-preview","ph-txt","ph-w"],"qr":["qr-smsnum","qr-smsmsg","qr-mto","qr-msub","qr-mbody","qr-telnum","qr-glat","qr-glon","qr-tab-sms","qr-tab-sms-wrap","qr-tab-mail","qr-tab-mail-wrap","qr-tab-tel","qr-tab-tel-wrap","qr-tab-geo","qr-tab-geo-wrap","qr-bg","qr-bg-btn","qr-bg-lbl","qr-bg-swatch","qr-corner-style","qr-dot-style","qr-error","qr-fg","qr-fg-btn","qr-fg-lbl","qr-fg-swatch","qr-input","qr-level","qr-output","qr-render","qr-size","qr-status","qr-tab-contact","qr-tab-contact-wrap","qr-tab-text","qr-tab-text-wrap","qr-tab-wifi","qr-tab-wifi-wrap","qr-vcemail","qr-vcname","qr-vcorg","qr-vctel","qr-vctitle","qr-vcurl","qr-wenc","qr-whidden","qr-wpass","qr-wssid"],"barcode":["bc-dl","bc-input","bc-out"],"colorpicker":["cp-cmyk","cp-hex","cp-hsl","cp-hsv","cp-name","cp-picker","cp-picker-btn","cp-picker-swatch","cp-rgb","cp-swatch"],"gradient":["gr-3color","gr-c1","gr-c1-btn","gr-c1-lbl","gr-c1-swatch","gr-c2","gr-c2-btn","gr-c2-lbl","gr-c2-swatch","gr-c3","gr-c3-btn","gr-c3-lbl","gr-c3-swatch","gr-code","gr-deg","gr-preview","gr-type"],"shadow":["sh-bl","sh-bl-num","sh-blv","sh-box","sh-code","sh-col","sh-col-btn","sh-col-lbl","sh-col-swatch","sh-inset","sh-op","sh-op-num","sh-opv","sh-preview","sh-sp","sh-sp-num","sh-spv","sh-x","sh-x-num","sh-xv","sh-y","sh-y-num","sh-yv"],"borderrad":["br-bl","br-bl-num","br-blv","br-br","br-br-num","br-brv","br-code","br-preview","br-sync","br-tl","br-tl-num","br-tlv","br-tr","br-tr-num","br-trv"],"aspect":["ar-h","ar-ratio","ar-sh","ar-sw","ar-w"],"imgtool":["it-root"],"pdftool":["pt-root"],"img2b64":["i2b-err","i2b-file","i2b-info","i2b-out","i2b-res"],"csvjson":["cj-in","cj-out"],"filesplit":["filesplit-error","filesplit-file","filesplit-file-info","filesplit-merge-bar","filesplit-merge-files","filesplit-merge-info","filesplit-merge-password","filesplit-merge-progress","filesplit-merge-status","filesplit-merge-upload","filesplit-merge-wrap","filesplit-password","filesplit-pwd","filesplit-pwd-input","filesplit-pwd-merge","filesplit-pwd-merge-input","filesplit-size","filesplit-split-bar","filesplit-split-progress","filesplit-split-status","filesplit-split-wrap","filesplit-tab-merge","filesplit-tab-split","filesplit-unit","filesplit-upload"],"device":["device-list"],"ua":["ua-input","ua-res"],"morse":["morse-flash-btn","morse-in","morse-lang-en","morse-lang-fa","morse-mode-m2t","morse-mode-t2m","morse-out","morse-play-btn","morse-vis"],"roman":["roman-dec","roman-dec-out","roman-in","roman-out"],"asciitbl":["ascii-q","ascii-tbody"],"timezone":["tz-add-select","tz-from","tz-grid","tz-jalali-now","tz-local-clock","tz-local-date","tz-src"],"counter":["ctr-laps","ctr-step","ctr-val"],"matrix":["mat-a","mat-b","mat-res"],"numwords":["nw-in", "nw-lang-en", "nw-lang-fa", "nw-ord", "nw-out", "nw-out-en", "nw-speak-btn", "nw-w-in", "nw-w-out"],"colorblind":["cb-hex","cb-pick","cb-pick-btn","cb-pick-lbl","cb-pick-swatch","cb-swatches"],"share":["share-example-url","share-native-btn","share-qr","share-url-input","share-url-lbl"],"pwa":["pwa-install-wrap"],"analytics":["analytics-root","refresh-btn","updated-label"],"dateconv":["dc-gdate","dc-hd","dc-hm","dc-hy","dc-in-g","dc-in-h","dc-in-j","dc-jd","dc-jm","dc-jy","dc-result","dc-tab-g","dc-tab-h","dc-tab-j"],"emergency":[],"citycodes":["cc-list","cc-search"],"trafficfines":["tf-list","tf-search"],"deposit":["dep-amt","dep-months","dep-rate","dep-result","dep-type"],"inflationdebt":["ifd-amount","ifd-breakdown","ifd-cbi-preview","ifd-from","ifd-panel-cbi","ifd-panel-manual","ifd-result","ifd-result-mult","ifd-result-val","ifd-rows","ifd-tab-cbi","ifd-tab-manual","ifd-to"],"rentcalc":["rent-deposit","rent-monthly","rent-rate","rent-result"],"taxdisc":["disc-pct","disc-price","disc-result","td-disc-wrap","td-tab-disc","td-tab-vat","td-vat-wrap","vat-price","vat-rate","vat-result"],"numconvert":["nc-digits-only","nc-in","nc-mode-a2f","nc-mode-f2l","nc-mode-l2f","nc-out"],"multable":["mt-ans","mt-feedback","mt-from","mt-q","mt-quiz","mt-quiz-btn","mt-table","mt-to"],"linsolve":["ls-2","ls-3","ls-a1","ls-a1b","ls-a2","ls-a2b","ls-a3","ls-b1","ls-b1b","ls-b2","ls-b2b","ls-b3","ls-c1","ls-c1b","ls-c2","ls-c2b","ls-c3","ls-d1","ls-d2","ls-d3","ls-eq","ls-eq-plot","ls-result","ls-single","ls-single-res","ls-tab-2","ls-tab-3","ls-tab-single"],"enctools":["enc-dir-dec","enc-dir-enc","enc-dir-row","enc-in","enc-mode-b64","enc-mode-bin","enc-mode-hex","enc-mode-ts","enc-mode-txt","enc-mode-uni","enc-mode-url","enc-out","enc-table","enc-ts-panel"],"jcal":["jcal-dow","jcal-event","jcal-grid","jcal-month-label","jcal-selected-label","jcal-selected-subs","jcal-title","jcal-year-picker"],"geometry":["geo-formula","geo-inputs","geo-result","geo-shape","geo-svg"],"qrread":["qrr-cam-btn","qrr-canvas","qrr-file","qrr-history","qrr-result","qrr-video","qrr-zone"],"periodic":["pt-grid","pt-info","pt-legend","pt-quiz-fb","pt-quiz-opts","pt-quiz-q","pt-quiz-score","pt-quiz-wrap","pt-search","pt-tab-quiz","pt-tab-table","pt-table-wrap"],"metromap":["tm2","mm-chips","mm-clear-btn","mm-dl-btn","mm-find-btn","mm-from-input","mm-from-list","mm-img","mm-legend","mm-loading","mm-map-wrap","mm-nav","mm-sheet","mm-sub-img","mm-sub-nav","mm-subtabs","mm-summary","mm-svg","mm-tab-isfahan","mm-tab-mashhad","mm-tab-shiraz","mm-tab-tehran","mm-to-input","mm-to-list","mm-toast","mm-viewer","mm-wrap"],"emojis":["emo-cat","emo-copied","emo-grid","emo-search"],"worldmap":["wm-ci-capital", "wm-ci-details", "wm-ci-flag", "wm-ci-name", "wm-color-area", "wm-color-continent", "wm-color-plain", "wm-color-pop", "wm-coord", "wm-country-info", "wm-flag-search", "wm-flags-grid", "wm-loc-btn", "wm-loc-res", "wm-map-loading", "wm-panel-flags", "wm-panel-map", "wm-panel-proj", "wm-panel-quiz", "wm-proj-cards", "wm-qt-capital", "wm-qt-country", "wm-qt-flag", "wm-quiz-card", "wm-quiz-score", "wm-search", "wm-svg-container", "wm-svg-wrap", "wm-tab-flags", "wm-tab-map", "wm-tab-proj", "wm-tab-quiz", "wm-tooltip"],"calculus":["calc-deriv-plot","calc-deriv-res","calc-deriv-wrap","calc-deriv-x","calc-fn","calc-fn-list","calc-fp-container","calc-graph-wrap","calc-gxa","calc-gxb","calc-ia","calc-ib","calc-ifn","calc-indef-fn","calc-indef-res","calc-indef-wrap","calc-integ-plot","calc-integ-res","calc-integ-wrap","calc-lfn","calc-limit-res","calc-limit-wrap","calc-lx","calc-preset","calc-special-pts","calc-tab-deriv","calc-tab-graph","calc-tab-indef","calc-tab-integ","calc-tab-limit"],"emotcn":["etcn-cat","etcn-copied","etcn-grid","etcn-search"],"pasban":["pasban-clear","pasban-input","pasban-results","pasban-status"],"pomodoro":["pom-btn","pom-dots","pom-long","pom-phase","pom-ring","pom-session","pom-short","pom-time","pom-work"],"resistor":["res-b3","res-b4","res-b5","res-bands","res-combo-res","res-combo-wrap","res-decode-wrap","res-result","res-tab-combo","res-tab-decode","res-vals","res-visual","res-visual-bands","res-visual-body"],"textfix":["tf-info","tf-input","tf-output","tf-output-wrap","tf-tab-enc","tf-tab-fix"],"chart":["chart-canvas","chart-data","chart-type"],"fakejson":["fj-count","fj-out","fj-schema"],"subnet":["sn-input","sn-int2ip-n","sn-int2ip-res","sn-ip2int-ip","sn-ip2int-res","sn-result"],"wcag":["wcag-bg","wcag-bg-btn","wcag-bg-hex","wcag-bg-swatch","wcag-fg","wcag-fg-btn","wcag-fg-hex","wcag-fg-swatch","wcag-prev-large","wcag-prev-small","wcag-preview","wcag-result","wcag-suggest"],"imgpalette":["icp-canvas","icp-count","icp-file","icp-hidden","icp-main","icp-swatches","icp-zone"],"about":[],"minigames":["mg-area","mg-back-btn","mg-game-wrap","mg-menu"],"wordcloud":["wc-canvas","wc-copy-btn","wc-dl-btn","wc-empty","wc-input","wc-lang-en","wc-lang-fa","wc-max","wc-minfreq","wc-progress","wc-progress-bar","wc-progress-txt","wc-rotate","wc-scheme","wc-shape","wc-stats","wc-stopwords"],"compass":["compass-canvas","compass-direction","compass-north-pip","compass-status"],"goldenratio":["gr-results","gr-svg","gr-unit","gr-val"],"svgviewer":["svg-info","svg-input","svg-preview"],"gridbuilder":["gb-code","gb-cols","gb-falign","gb-fcount","gb-fdir","gb-fgap","gb-fjust","gb-flex-wrap","gb-fwrap","gb-gap","gb-grid-wrap","gb-preview","gb-rows","gb-tab-flex","gb-tab-grid","gb-tcols","gb-trows"],"bmc":["bmc-grid"],"eisenhower":["eis-grid","eis-new","eis-quad"],"citation":["cit-fields","cit-output","cit-result","cit-style","cit-tab-article","cit-tab-book","cit-tab-website"],"langscores":["conv-ielts","conv-result","conv-toefl","gpa-calc","gpa-conv","gpa-conv-result","gpa-in-scale","gpa-in-val","gpa-result","gpa-rows","gpa-scale","gpa-tab-calc","gpa-tab-conv","ielts-l","ielts-r","ielts-result","ielts-s","ielts-w","ls2-conv","ls2-gpa","ls2-ielts","ls2-tab-conv","ls2-tab-gpa","ls2-tab-ielts","ls2-tab-toefl","ls2-toefl","toefl-l","toefl-r","toefl-result","toefl-s","toefl-w"],"keypair":["kp-algo","kp-cipher","kp-enc-dec","kp-gen-btn","kp-output","kp-plain","kp-progress","kp-prv","kp-pub","kp-size"],"htaccess":["ht-block-xml","ht-cache","ht-err404","ht-err500","ht-etag","ht-gzip","ht-hsts","ht-https","ht-nodir","ht-nowww","ht-output","ht-rob","ht-spa","ht-trailslash","ht-www"],"decmatrix":["dm-crit-new","dm-criteria-list","dm-matrix-wrap","dm-opt-new","dm-options-list","dm-result"],"watermark":["wm-base-inp","wm-base-zone","wm-canvas","wm-dl-btn","wm-img-label","wm-logo-inp","wm-logo-label","wm-logo-zone","wm-opacity","wm-pos","wm-scale","wm-text"],"bgremove":["bgr-bar","bgr-custom-color","bgr-err","bgr-file","bgr-orig","bgr-preview","bgr-progress-wrap","bgr-result","bgr-status","bgr-zone"],"ocrtool":["ocr-drop","ocr-file-in","ocr-lang-both","ocr-lang-en","ocr-lang-fa","ocr-output","ocr-pdf-ctrl","ocr-pdf-pages","ocr-previews","ocr-progress","ocr-progress-bar","ocr-progress-label","ocr-result-wrap","ocr-run-btn","ocr-stats"],"stttool":["stt-file-in","stt-lang-auto","stt-lang-en","stt-lang-fa","stt-meta","stt-output","stt-rec-btn","stt-rec-info","stt-result-wrap","stt-send-rec-btn","stt-status","stt-timer","stt-waveform"],"seotools":["seo-can","seo-chars","seo-desc","seo-img","seo-og","seo-output","seo-rob","seo-site","seo-title","seo-tw","seo-type","seo-url"],"audiotools":["at-audio-controls","at-audio-inp","at-audio-player","at-beep-end","at-beep-start","at-beep-status","at-beep-type","at-beep-wrap","at-freq","at-freq-val","at-gen-wrap","at-play-btn","at-tab-beep","at-tab-gen","at-vol","at-wave","at-wave-plot"],"tts":["tts-audio","tts-brate","tts-brate-val","tts-browser-section","tts-browser-warn","tts-dl-btn","tts-engine","tts-input","tts-lang","tts-piper-section","tts-pitch","tts-pitch-val","tts-speak-btn","tts-speed","tts-speed-val","tts-status","tts-status-icon","tts-status-text","tts-voice"],"diwan":["diwan-categories","diwan-category-select","diwan-poem-content","diwan-poem-detail","diwan-poems-list","diwan-poems-view","diwan-poet-select","diwan-search"],"weather":["wth-bd","wth-clr","wth-det-view","wth-dot","wth-ext-panel","wth-extra-tabs","wth-home-view","wth-pin-cnt","wth-pin-row","wth-pin-sec","wth-prov-panel","wth-q","wth-rec-cnt","wth-rec-grid","wth-rec-sec","wth-sug","wth-tab-ext","wth-tab-home","wth-tab-prov","wth-ts","wth-warn-bar"],"earthquake":["eq-count-label","eq-dot","eq-f-dep","eq-f-mag","eq-f-prov","eq-f-sort","eq-list","eq-ts"],"translate":["tr-btn","tr-clear-btn","tr-from","tr-input","tr-output","tr-output-wrap","tr-to"],"currency":["cur-badge-text","cur-content","cur-dot","cur-lbl-toman","cur-lbl-usd","cur-tab-all","cur-tab-crypto","cur-tab-curr","cur-tab-gold","cur-unit-switch","cur-unit-thumb","cur-update-badge"],"movies":["mv-browse-pages","mv-browse-results","mv-detail-content","mv-genre-list","mv-genre-pages","mv-genre-results","mv-pane-browse","mv-pane-detail","mv-pane-genre","mv-pane-search","mv-q","mv-search-pages","mv-search-results","mv-similar-list","mv-similar-wrap","mv-tab-browse","mv-tab-detail","mv-tab-genre","mv-tab-search"],"constitution":["cq-ch","cq-count","cq-list","cq-pills","cq-r-body","cq-r-chapter","cq-r-history","cq-r-history-wrap","cq-r-next","cq-r-num","cq-r-prev","cq-reader","cq-search"],"posttrack":["pt-charcount","pt-chip","pt-chip-text","pt-clear-btn","pt-empty","pt-error","pt-error-msg","pt-input","pt-latest-label","pt-loading","pt-notfound","pt-recipient","pt-result","pt-shop","pt-support","pt-support-num","pt-timeline"],"resume":["rs-design", "rs-form", "rs-imp", "rs-pages", "rs-paper", "rs-pv", "rs-score"],"payroll":["pr-end-in", "pr-end-out", "pr-in", "pr-out", "pr-p1", "pr-p2"],"docsuite":["ds-design", "ds-form", "ds-hist", "ds-imp", "ds-paper", "ds-pv", "ds-types"],"bankid":["bk-fw", "bk-in", "bk-lbl", "bk-res", "bk-tw", "bk-txt"],"kbfix":["kb-in", "kb-out"],"epoch":["ep-dt", "ep-in", "ep-jd", "ep-jm", "ep-jt", "ep-jy", "ep-now", "ep-out", "ep-res"],"typetest":["tt-acc", "tt-best", "tt-dur", "tt-in", "tt-res", "tt-time", "tt-words", "tt-wpm"],"flashcards":["fc-pane", "fc-stats"],"expenses":["ex-amt", "ex-bars", "ex-cat", "ex-date", "ex-jd", "ex-list", "ex-month", "ex-note", "ex-sum"],"habits":["hb-list", "hb-name", "hb-rng", "hb-wk"],"breathe":["br-btn", "br-count", "br-info", "br-min", "br-orb", "br-pat", "br-phase"],"exif":["ef-zone", "exif-file", "exif-gps", "exif-main", "exif-map", "exif-msg", "exif-tbl"],"favicon":["fv-bg", "fv-code", "fv-file", "fv-main", "fv-pad", "fv-prev", "fv-transp"],"plate":["pl-a", "pl-b", "pl-car", "pl-ch", "pl-find", "pl-m", "pl-mot", "pl-p", "pl-q", "pl-res"],"phone":["ph-bin", "ph-bout", "ph-bsum", "ph-bulk", "ph-in", "ph-list", "ph-one", "ph-res"],"bill":["bl-bar", "bl-bc", "bl-id", "bl-ids", "bl-pay", "bl-res"]},inv={},nat=document.getElementById.bind(document),done={},hooks={};
+(function(){var M={"calc":["calc-disp", "calc-mode-btn", "calc-sci-panel", "cx", "cx-2nd", "cx-frac", "cx-hist", "cx-hl", "cx-hn", "cx-hyp", "cx-last", "cx-mem", "cx-res"],"bmi":["bmi-cat","bmi-h","bmi-res","bmi-val","bmi-w"],"avg":["avg-cnt","avg-input","avg-max","avg-mean","avg-med","avg-min","avg-res","avg-std","avg-sum"],"pct":["p1r","p1x","p1y","p2r","p2x","p2y","p3a","p3b","p3r"],"stopwatch":["lap-list","sw-btn","sw-time"],"timer":["tmr-display","tmr-done","tmr-h","tmr-inputs","tmr-label","tmr-m","tmr-play-btn","tmr-ring","tmr-s"],"unitconv":["uc-cat","uc-from","uc-result","uc-to","uc-val"],"age":["age-cal-mi","age-cal-sh","age-d","age-dob","age-jd","age-jdate","age-jm","age-jy","age-m","age-miladi-wrap","age-next","age-res","age-shamsi-wrap","age-td","age-th","age-today-j","age-wd","age-y"],"loan":["ln-amt","ln-int","ln-mo","ln-pmt","ln-rate","ln-res","ln-tot"],"tip":["dang-extra","dang-history","dang-pct","dang-people","dang-result","dang-session-name","dang-session-sel","dang-summary","dang-total"],"notes":["check-list","check-new","check-progress","notes-grid","notes-tab-check","notes-tab-check-wrap","notes-tab-notes","notes-tab-notes-wrap"],"text":["txt-src"],"charcount":["cc-avgword","cc-chars","cc-freq","cc-input","cc-lines","cc-paras","cc-read","cc-sentences","cc-stats-row","cc-words"],"whitespace":["ws-input","ws-output"],"oneline":["ol-input","ol-output"],"lorem":["lorem-lang","lorem-par","lorem-res"],"markdown":["md-html-out","md-html-src","md-preview","md-src"],"diff":["diff-a","diff-b","diff-out"],"slugify":["slug-in","slug-out"],"json":["json-in","json-out"],"xml":["xml-in","xml-out"],"htmlesc":["he-input","he-output"],"hash":["hash-algo","hash-input","hash-output"],"crypto":["crypto-algo","crypto-emoji","crypto-error","crypto-fmt-en","crypto-fmt-fa","crypto-fmt-hex","crypto-key","crypto-output","crypto-text"],"jwt":["jwt-exp","jwt-head","jwt-input","jwt-output","jwt-pay"],"pxrem":["px-base","px-val","rem-val"],"regex":["rx-flags","rx-info","rx-out","rx-pat","rx-text"],"cron":["cron-input","cron-result"],"urlparse":["url-input","url-res"],"numbase":["nb-bin","nb-dec","nb-hex","nb-oct"],"pass":["pass-len","pass-len-num","pass-len-v","pass-lower","pass-num","pass-out","pass-str","pass-sym","pass-upper"],"uuid":["uuid-out"],"randnum":["card-count","card-deck-status","card-display","card-drawn-list","coin-heads","coin-inner","coin-result","coin-scene","coin-tails","dice-count","dice-scene","dice-sides","dice-sum","list-input","list-pick-n","list-result","list-unique","rand-cnt","rand-max","rand-min","rand-panel-card","rand-panel-coin","rand-panel-dice","rand-panel-list","rand-panel-num","rand-panel-wheel","rand-res","rand-tab-card","rand-tab-coin","rand-tab-dice","rand-tab-list","rand-tab-num","rand-tab-wheel","wheel-canvas","wheel-history","wheel-input","wheel-remove","wheel-result","wheel-spin-btn"],"textbeauty":["tb-count","tb-filters","tb-input","tb-results"],"rubik":["rubik-color-btns","rubik-error","rubik-moves-input","rubik-net-wrap","rubik-solution-info","rubik-solution-moves","rubik-solution-wrap"],"randip":["ip-v4","ip-v6","randip-out"],"randcolor":["rc-hex","rc-hsl","rc-rgb","rc-swatch"],"fake":["fake-addr","fake-dob","fake-email","fake-id","fake-job","fake-lang","fake-name","fake-phone","fake-res"],"credit":["cc-out","cc-type"],"avatar":["avatar-svg"],"placeholder":["ph-bg","ph-bg-btn","ph-bg-lbl","ph-bg-swatch","ph-canvas","ph-col","ph-col-btn","ph-col-lbl","ph-col-swatch","ph-h","ph-preview","ph-txt","ph-w"],"qr":["qr-smsnum","qr-smsmsg","qr-mto","qr-msub","qr-mbody","qr-telnum","qr-glat","qr-glon","qr-tab-sms","qr-tab-sms-wrap","qr-tab-mail","qr-tab-mail-wrap","qr-tab-tel","qr-tab-tel-wrap","qr-tab-geo","qr-tab-geo-wrap","qr-bg","qr-bg-btn","qr-bg-lbl","qr-bg-swatch","qr-corner-style","qr-dot-style","qr-error","qr-fg","qr-fg-btn","qr-fg-lbl","qr-fg-swatch","qr-input","qr-level","qr-output","qr-render","qr-size","qr-status","qr-tab-contact","qr-tab-contact-wrap","qr-tab-text","qr-tab-text-wrap","qr-tab-wifi","qr-tab-wifi-wrap","qr-vcemail","qr-vcname","qr-vcorg","qr-vctel","qr-vctitle","qr-vcurl","qr-wenc","qr-whidden","qr-wpass","qr-wssid"],"barcode":["bc-dl","bc-input","bc-out"],"colorpicker":["cp-cmyk","cp-hex","cp-hsl","cp-hsv","cp-name","cp-picker","cp-picker-btn","cp-picker-swatch","cp-rgb","cp-swatch"],"gradient":["gr-3color","gr-c1","gr-c1-btn","gr-c1-lbl","gr-c1-swatch","gr-c2","gr-c2-btn","gr-c2-lbl","gr-c2-swatch","gr-c3","gr-c3-btn","gr-c3-lbl","gr-c3-swatch","gr-code","gr-deg","gr-preview","gr-type"],"shadow":["sh-bl","sh-bl-num","sh-blv","sh-box","sh-code","sh-col","sh-col-btn","sh-col-lbl","sh-col-swatch","sh-inset","sh-op","sh-op-num","sh-opv","sh-preview","sh-sp","sh-sp-num","sh-spv","sh-x","sh-x-num","sh-xv","sh-y","sh-y-num","sh-yv"],"borderrad":["br-bl","br-bl-num","br-blv","br-br","br-br-num","br-brv","br-code","br-preview","br-sync","br-tl","br-tl-num","br-tlv","br-tr","br-tr-num","br-trv"],"aspect":["ar-h","ar-ratio","ar-sh","ar-sw","ar-w"],"imgtool":["it-root"],"pdftool":["pt-root"],"img2b64":["i2b-err","i2b-file","i2b-info","i2b-out","i2b-res"],"csvjson":["cj-in","cj-out"],"filesplit":["filesplit-error","filesplit-file","filesplit-file-info","filesplit-merge-bar","filesplit-merge-files","filesplit-merge-info","filesplit-merge-password","filesplit-merge-progress","filesplit-merge-status","filesplit-merge-upload","filesplit-merge-wrap","filesplit-password","filesplit-pwd","filesplit-pwd-input","filesplit-pwd-merge","filesplit-pwd-merge-input","filesplit-size","filesplit-split-bar","filesplit-split-progress","filesplit-split-status","filesplit-split-wrap","filesplit-tab-merge","filesplit-tab-split","filesplit-unit","filesplit-upload"],"device":["device-list"],"ua":["ua-input","ua-res"],"morse":["morse-flash-btn","morse-in","morse-lang-en","morse-lang-fa","morse-mode-m2t","morse-mode-t2m","morse-out","morse-play-btn","morse-vis"],"roman":["roman-dec","roman-dec-out","roman-in","roman-out"],"asciitbl":["ascii-q","ascii-tbody"],"timezone":["tz-add-select","tz-from","tz-grid","tz-jalali-now","tz-local-clock","tz-local-date","tz-src"],"counter":["ctr-laps","ctr-step","ctr-val"],"matrix":["mat-a","mat-b","mat-res"],"numwords":["nw-in", "nw-lang-en", "nw-lang-fa", "nw-ord", "nw-out", "nw-out-en", "nw-speak-btn", "nw-w-in", "nw-w-out"],"colorblind":["cb-hex","cb-pick","cb-pick-btn","cb-pick-lbl","cb-pick-swatch","cb-swatches"],"share":["share-example-url","share-native-btn","share-qr","share-url-input","share-url-lbl"],"pwa":["pwa-install-wrap"],"analytics":["analytics-root","refresh-btn","updated-label"],"dateconv":["dc-gdate","dc-hd","dc-hm","dc-hy","dc-in-g","dc-in-h","dc-in-j","dc-jd","dc-jm","dc-jy","dc-result","dc-tab-g","dc-tab-h","dc-tab-j"],"emergency":[],"citycodes":["cc-list","cc-search"],"trafficfines":["tf-list","tf-search"],"deposit":["dep-amt","dep-months","dep-rate","dep-result","dep-type"],"inflationdebt":["ifd-amount","ifd-breakdown","ifd-cbi-preview","ifd-from","ifd-panel-cbi","ifd-panel-manual","ifd-result","ifd-result-mult","ifd-result-val","ifd-rows","ifd-tab-cbi","ifd-tab-manual","ifd-to"],"rentcalc":["rent-deposit","rent-monthly","rent-rate","rent-result"],"taxdisc":["disc-pct","disc-price","disc-result","td-disc-wrap","td-tab-disc","td-tab-vat","td-vat-wrap","vat-price","vat-rate","vat-result"],"numconvert":["nc-digits-only","nc-in","nc-mode-a2f","nc-mode-f2l","nc-mode-l2f","nc-out"],"multable":["mt-ans","mt-feedback","mt-from","mt-q","mt-quiz","mt-quiz-btn","mt-table","mt-to"],"linsolve":["ls-2","ls-3","ls-a1","ls-a1b","ls-a2","ls-a2b","ls-a3","ls-b1","ls-b1b","ls-b2","ls-b2b","ls-b3","ls-c1","ls-c1b","ls-c2","ls-c2b","ls-c3","ls-d1","ls-d2","ls-d3","ls-eq","ls-eq-plot","ls-result","ls-single","ls-single-res","ls-tab-2","ls-tab-3","ls-tab-single"],"enctools":["enc-dir-dec","enc-dir-enc","enc-dir-row","enc-in","enc-mode-b64","enc-mode-bin","enc-mode-hex","enc-mode-ts","enc-mode-txt","enc-mode-uni","enc-mode-url","enc-out","enc-table","enc-ts-panel"],"jcal":["jcal-dow","jcal-event","jcal-grid","jcal-month-label","jcal-selected-label","jcal-selected-subs","jcal-title","jcal-year-picker"],"geometry":["geo-formula","geo-inputs","geo-result","geo-shape","geo-svg"],"qrread":["qrr-cam-btn","qrr-canvas","qrr-file","qrr-history","qrr-result","qrr-video","qrr-zone"],"periodic":["pt-grid","pt-info","pt-legend","pt-quiz-fb","pt-quiz-opts","pt-quiz-q","pt-quiz-score","pt-quiz-wrap","pt-search","pt-tab-quiz","pt-tab-table","pt-table-wrap"],"metromap":["tm2","mm-chips","mm-clear-btn","mm-dl-btn","mm-find-btn","mm-from-input","mm-from-list","mm-img","mm-legend","mm-loading","mm-map-wrap","mm-nav","mm-sheet","mm-sub-img","mm-sub-nav","mm-subtabs","mm-summary","mm-svg","mm-tab-isfahan","mm-tab-mashhad","mm-tab-shiraz","mm-tab-tehran","mm-to-input","mm-to-list","mm-toast","mm-viewer","mm-wrap"],"emojis":["emo-cat","emo-copied","emo-grid","emo-search"],"worldmap":["wm-ci-capital", "wm-ci-details", "wm-ci-flag", "wm-ci-name", "wm-color-area", "wm-color-continent", "wm-color-plain", "wm-color-pop", "wm-coord", "wm-country-info", "wm-flag-search", "wm-flags-grid", "wm-loc-btn", "wm-loc-res", "wm-map-loading", "wm-panel-flags", "wm-panel-map", "wm-panel-proj", "wm-panel-quiz", "wm-proj-cards", "wm-qt-capital", "wm-qt-country", "wm-qt-flag", "wm-quiz-card", "wm-quiz-score", "wm-search", "wm-svg-container", "wm-svg-wrap", "wm-tab-flags", "wm-tab-map", "wm-tab-proj", "wm-tab-quiz", "wm-tooltip"],"calculus":["calc-deriv-plot","calc-deriv-res","calc-deriv-wrap","calc-deriv-x","calc-fn","calc-fn-list","calc-fp-container","calc-graph-wrap","calc-gxa","calc-gxb","calc-ia","calc-ib","calc-ifn","calc-indef-fn","calc-indef-res","calc-indef-wrap","calc-integ-plot","calc-integ-res","calc-integ-wrap","calc-lfn","calc-limit-res","calc-limit-wrap","calc-lx","calc-preset","calc-special-pts","calc-tab-deriv","calc-tab-graph","calc-tab-indef","calc-tab-integ","calc-tab-limit"],"emotcn":["etcn-cat","etcn-copied","etcn-grid","etcn-search"],"pasban":["pasban-clear","pasban-input","pasban-results","pasban-status"],"pomodoro":["pom-btn","pom-dots","pom-long","pom-phase","pom-ring","pom-session","pom-short","pom-time","pom-work"],"resistor":["res-b3","res-b4","res-b5","res-bands","res-combo-res","res-combo-wrap","res-decode-wrap","res-result","res-tab-combo","res-tab-decode","res-vals","res-visual","res-visual-bands","res-visual-body"],"textfix":["tf-info","tf-input","tf-output","tf-output-wrap","tf-tab-enc","tf-tab-fix"],"chart":["chart-canvas","chart-data","chart-type"],"fakejson":["fj-count","fj-out","fj-schema"],"subnet":["sn-input","sn-int2ip-n","sn-int2ip-res","sn-ip2int-ip","sn-ip2int-res","sn-result"],"wcag":["wcag-bg","wcag-bg-btn","wcag-bg-hex","wcag-bg-swatch","wcag-fg","wcag-fg-btn","wcag-fg-hex","wcag-fg-swatch","wcag-prev-large","wcag-prev-small","wcag-preview","wcag-result","wcag-suggest"],"imgpalette":["icp-canvas","icp-count","icp-file","icp-hidden","icp-main","icp-swatches","icp-zone"],"about":[],"minigames":["mg-area","mg-back-btn","mg-game-wrap","mg-menu"],"wordcloud":["wc-canvas","wc-copy-btn","wc-dl-btn","wc-empty","wc-input","wc-lang-en","wc-lang-fa","wc-max","wc-minfreq","wc-progress","wc-progress-bar","wc-progress-txt","wc-rotate","wc-scheme","wc-shape","wc-stats","wc-stopwords"],"compass":["compass-canvas","compass-direction","compass-north-pip","compass-status"],"goldenratio":["gr-results","gr-svg","gr-unit","gr-val"],"svgviewer":["svg-info","svg-input","svg-preview"],"gridbuilder":["gb-code","gb-cols","gb-falign","gb-fcount","gb-fdir","gb-fgap","gb-fjust","gb-flex-wrap","gb-fwrap","gb-gap","gb-grid-wrap","gb-preview","gb-rows","gb-tab-flex","gb-tab-grid","gb-tcols","gb-trows"],"bmc":["bmc-grid"],"eisenhower":["eis-grid","eis-new","eis-quad"],"citation":["cit-fields","cit-output","cit-result","cit-style","cit-tab-article","cit-tab-book","cit-tab-website"],"langscores":["conv-ielts","conv-result","conv-toefl","gpa-calc","gpa-conv","gpa-conv-result","gpa-in-scale","gpa-in-val","gpa-result","gpa-rows","gpa-scale","gpa-tab-calc","gpa-tab-conv","ielts-l","ielts-r","ielts-result","ielts-s","ielts-w","ls2-conv","ls2-gpa","ls2-ielts","ls2-tab-conv","ls2-tab-gpa","ls2-tab-ielts","ls2-tab-toefl","ls2-toefl","toefl-l","toefl-r","toefl-result","toefl-s","toefl-w"],"keypair":["kp-algo","kp-cipher","kp-enc-dec","kp-gen-btn","kp-output","kp-plain","kp-progress","kp-prv","kp-pub","kp-size"],"htaccess":["ht-block-xml","ht-cache","ht-err404","ht-err500","ht-etag","ht-gzip","ht-hsts","ht-https","ht-nodir","ht-nowww","ht-output","ht-rob","ht-spa","ht-trailslash","ht-www"],"decmatrix":["dm-crit-new","dm-criteria-list","dm-matrix-wrap","dm-opt-new","dm-options-list","dm-result"],"watermark":["wm-base-inp","wm-base-zone","wm-canvas","wm-dl-btn","wm-img-label","wm-logo-inp","wm-logo-label","wm-logo-zone","wm-opacity","wm-pos","wm-scale","wm-text"],"bgremove":["bgr-bar","bgr-custom-color","bgr-err","bgr-file","bgr-orig","bgr-preview","bgr-progress-wrap","bgr-result","bgr-status","bgr-zone"],"ocrtool":["ocr-drop","ocr-file-in","ocr-lang-both","ocr-lang-en","ocr-lang-fa","ocr-output","ocr-pdf-ctrl","ocr-pdf-pages","ocr-previews","ocr-progress","ocr-progress-bar","ocr-progress-label","ocr-result-wrap","ocr-run-btn","ocr-stats"],"stttool":["stt-file-in","stt-lang-auto","stt-lang-en","stt-lang-fa","stt-meta","stt-output","stt-rec-btn","stt-rec-info","stt-result-wrap","stt-send-rec-btn","stt-status","stt-timer","stt-waveform"],"seotools":["seo-can","seo-chars","seo-desc","seo-img","seo-og","seo-output","seo-rob","seo-site","seo-title","seo-tw","seo-type","seo-url"],"audiotools":["at-audio-controls","at-audio-inp","at-audio-player","at-beep-end","at-beep-start","at-beep-status","at-beep-type","at-beep-wrap","at-freq","at-freq-val","at-gen-wrap","at-play-btn","at-tab-beep","at-tab-gen","at-vol","at-wave","at-wave-plot"],"tts":["tts-audio","tts-brate","tts-brate-val","tts-browser-section","tts-browser-warn","tts-dl-btn","tts-engine","tts-input","tts-lang","tts-piper-section","tts-pitch","tts-pitch-val","tts-speak-btn","tts-speed","tts-speed-val","tts-status","tts-status-icon","tts-status-text","tts-voice"],"diwan":["diwan-categories","diwan-category-select","diwan-poem-content","diwan-poem-detail","diwan-poems-list","diwan-poems-view","diwan-poet-select","diwan-search"],"weather":["wth-bd","wth-clr","wth-det-view","wth-dot","wth-ext-panel","wth-extra-tabs","wth-home-view","wth-pin-cnt","wth-pin-row","wth-pin-sec","wth-prov-panel","wth-q","wth-rec-cnt","wth-rec-grid","wth-rec-sec","wth-sug","wth-tab-ext","wth-tab-home","wth-tab-prov","wth-ts","wth-warn-bar"],"earthquake":["eq-count-label", "eq-dot", "eq-f-dep", "eq-f-mag", "eq-f-prov", "eq-f-sort", "eq-f-time", "eq-hero", "eq-list", "eq-note", "eq-refresh", "eq-src", "eq-ts"],"translate":["tr-btn","tr-clear-btn","tr-from","tr-input","tr-output","tr-output-wrap","tr-to"],"currency":["cur-badge-text","cur-content","cur-dot","cur-lbl-toman","cur-lbl-usd","cur-tab-all","cur-tab-crypto","cur-tab-curr","cur-tab-gold","cur-unit-switch","cur-unit-thumb","cur-update-badge"],"movies":["mv-browse-pages","mv-browse-results","mv-detail-content","mv-genre-list","mv-genre-pages","mv-genre-results","mv-pane-browse","mv-pane-detail","mv-pane-genre","mv-pane-search","mv-q","mv-search-pages","mv-search-results","mv-similar-list","mv-similar-wrap","mv-tab-browse","mv-tab-detail","mv-tab-genre","mv-tab-search"],"constitution":["cq-ch","cq-count","cq-list","cq-pills","cq-r-body","cq-r-chapter","cq-r-history","cq-r-history-wrap","cq-r-next","cq-r-num","cq-r-prev","cq-reader","cq-search"],"posttrack":["pt-charcount","pt-chip","pt-chip-text","pt-clear-btn","pt-empty","pt-error","pt-error-msg","pt-input","pt-latest-label","pt-loading","pt-notfound","pt-recipient","pt-result","pt-shop","pt-support","pt-support-num","pt-timeline"],"resume":["rs-design", "rs-form", "rs-imp", "rs-pages", "rs-paper", "rs-pv", "rs-score"],"payroll":["pr-end-in", "pr-end-out", "pr-in", "pr-out", "pr-p1", "pr-p2"],"docsuite":["ds-design", "ds-form", "ds-hist", "ds-imp", "ds-paper", "ds-pv", "ds-types"],"bankid":["bk-fw", "bk-in", "bk-lbl", "bk-res", "bk-tw", "bk-txt"],"kbfix":["kb-in", "kb-out"],"epoch":["ep-dt", "ep-in", "ep-jd", "ep-jm", "ep-jt", "ep-jy", "ep-now", "ep-out", "ep-res"],"typetest":["tt-acc", "tt-best", "tt-dur", "tt-in", "tt-res", "tt-time", "tt-words", "tt-wpm"],"flashcards":["fc-pane", "fc-stats"],"expenses":["ex-amt", "ex-bars", "ex-cat", "ex-date", "ex-jd", "ex-list", "ex-month", "ex-note", "ex-sum"],"habits":["hb-list", "hb-name", "hb-rng", "hb-wk"],"breathe":["br-btn", "br-count", "br-info", "br-min", "br-orb", "br-pat", "br-phase"],"exif":["ef-zone", "exif-file", "exif-gps", "exif-main", "exif-map", "exif-msg", "exif-tbl"],"favicon":["fv-bg", "fv-code", "fv-file", "fv-main", "fv-pad", "fv-prev", "fv-transp"],"plate":["pl-a", "pl-b", "pl-car", "pl-ch", "pl-find", "pl-m", "pl-mot", "pl-p", "pl-q", "pl-res"],"phone":["ph-bin", "ph-bout", "ph-bsum", "ph-bulk", "ph-in", "ph-list", "ph-one", "ph-res"],"bill":["bl-bar", "bl-bc", "bl-id", "bl-ids", "bl-pay", "bl-res"]},inv={},nat=document.getElementById.bind(document),done={},hooks={};
 Object.keys(M).forEach(function(p){M[p].forEach(function(i){if(!(i in inv))inv[i]=p;});});
 function hydrate(p){if(done[p])return;var ph=nat(p),t=nat('tpl-'+p);if(!ph||!t)return;done[p]=1;ph.innerHTML=t.innerHTML;ph.removeAttribute('data-lazy');t.remove();
  try{document.dispatchEvent(new CustomEvent('tb:hydrated',{detail:{id:p,el:ph}}));}catch(e){}
@@ -24385,211 +24348,6 @@ function mmSetupEvents(wrap,img){
         })();
 
         // ══════════════════════════════════════════════════
-        //  زمین‌لرزه — Bale/IRSC JSON feed
-        // ══════════════════════════════════════════════════
-        (() => {
-          const EQ_PROXY    = '/irsc-proxy';
-          const REFRESH_MS  = 60 * 60 * 1000; // 1 hour
-          let eqData        = [];
-          let eqLoaded      = false;
-          let eqTimer       = null;
-          let eqExpandedId  = null;
-
-          const magColor = m => {
-            if (m >= 5)   return '#d32f2f';
-            if (m >= 4)   return '#f57c00';
-            if (m >= 3)   return '#fbc02d';
-            return '#388e3c';
-          };
-
-          const parseMag = s => parseFloat(String(s).replace(/[۰-۹]/g, d => d.charCodeAt(0) - 1776)) || NaN;
-
-          async function eqLoad() {
-            const dot = document.getElementById('eq-dot');
-            const ts  = document.getElementById('eq-ts');
-            if (dot) dot.style.animation = 'pulse2 1s infinite';
-            if (ts)  ts.textContent = 'در حال بارگذاری…';
-            try {
-              const res = await fetch(EQ_PROXY);
-              if (!res.ok) throw new Error('HTTP ' + res.status);
-              const json = await res.json();
-
-              eqData = (json.items || []).map((item, i) => ({
-                id:        item.rid || String(i),
-                mag:       parseMag(item.mag),
-                location:  item.location || '',
-                datetime:  item.datetime || '',
-                lat:       parseFloat(item.lat)  || NaN,
-                lon:       parseFloat(item.lon)  || NaN,
-                depth:     item.depth || '',
-                cities:    item.cities || [],
-                provinces: item.provinces || [],
-                map_url:   item.map_url || '',
-              })).filter(e => !isNaN(e.mag));
-
-              // Province filter
-              const sel = document.getElementById('eq-f-prov');
-              if (sel) {
-                const provSet = [...new Set(eqData.map(e => {
-                  const p = e.location?.split('-');
-                  return p && p.length > 1 ? p[0].trim() : '';
-                }).filter(Boolean))].sort();
-                const cur = sel.value;
-                sel.innerHTML = '<option value="">همه استان‌ها</option>' +
-                  provSet.map(p => `<option value="${p}"${p===cur?' selected':''}>${p}</option>`).join('');
-              }
-
-              // Update timestamp showing both cache time and next refresh
-              const cachedAt = new Date(json.cached_at * 1000);
-              const hh = cachedAt.getHours().toString().padStart(2,'0');
-              const mm = cachedAt.getMinutes().toString().padStart(2,'0');
-              if (ts) ts.textContent = `داده‌ها: ${hh}:${mm} · بعدی: ${nextRefreshLabel()}`;
-              if (dot) { dot.style.animation = ''; dot.style.background = 'var(--m3-primary)'; }
-              eqLoaded = true;
-              eqRender();
-
-              // Schedule next auto-refresh
-              if (eqTimer) clearTimeout(eqTimer);
-              eqTimer = setTimeout(eqLoad, REFRESH_MS);
-
-            } catch(e) {
-              if (ts) ts.textContent = 'خطا در بارگذاری';
-              if (dot) { dot.style.animation = ''; dot.style.background = '#d32f2f'; }
-              const list = document.getElementById('eq-list');
-              if (list) list.innerHTML = `<div style="color:var(--m3-error);padding:12px;text-align:center">خطا: ${e.message}</div>`;
-            }
-          }
-
-          function nextRefreshLabel() {
-            const d = new Date(Date.now() + REFRESH_MS);
-            return `${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`;
-          }
-
-          function eqRender() {
-            if (!eqLoaded) return;
-            const prov   = document.getElementById('eq-f-prov')?.value || '';
-            const minMag = parseFloat(document.getElementById('eq-f-mag')?.value || '0');
-            const maxDep = document.getElementById('eq-f-dep')?.value || '9999';
-            const sortBy = document.getElementById('eq-f-sort')?.value || 'time';
-
-            let filtered = eqData.filter(e => {
-              const depNum = parseFloat(String(e.depth).replace(/[^0-9.]/g,'')) || 0;
-              const provMatch = !prov || (e.location || '').includes(prov);
-              return provMatch && e.mag >= minMag && depNum <= parseFloat(maxDep);
-            });
-
-            if (sortBy === 'mag') filtered.sort((a,b) => b.mag - a.mag);
-
-            const countLbl = document.getElementById('eq-count-label');
-            if (countLbl) countLbl.textContent = `نمایش ${filtered.length} زمین‌لرزه از ${eqData.length} رویداد`;
-
-            eqRenderList(filtered);
-          }
-
-
-          function eqToggleExpand(id) {
-            eqExpandedId = eqExpandedId === id ? null : id;
-            // Re-render list to reflect expansion state, preserve scroll
-            const list = document.getElementById('eq-list');
-            const row  = document.getElementById('eq-row-' + id);
-            const scrollY = list?.scrollTop || 0;
-            eqRenderList(eqData.filter(e => {
-              const prov   = document.getElementById('eq-f-prov')?.value || '';
-              const minMag = parseFloat(document.getElementById('eq-f-mag')?.value || '0');
-              const maxDep = parseFloat(document.getElementById('eq-f-dep')?.value || '9999');
-              const depNum = parseFloat(String(e.depth).replace(/[^0-9.]/g,'')) || 0;
-              const provMatch = !prov || (e.location||'').includes(prov);
-              return provMatch && e.mag >= minMag && depNum <= maxDep;
-            }));
-            if (list) list.scrollTop = scrollY;
-            document.getElementById('eq-row-' + id)?.scrollIntoView({behavior:'smooth', block:'nearest'});
-          }
-
-          function eqRenderList(items) {
-            const list = document.getElementById('eq-list');
-            if (!list) return;
-            if (!items.length) {
-              list.innerHTML = '<div style="text-align:center;padding:24px;color:var(--m3-on-surface-variant)">هیچ رویدادی با این فیلترها یافت نشد</div>';
-              return;
-            }
-            list.innerHTML = items.map(e => {
-              const col     = magColor(e.mag);
-              const bigMag  = e.mag >= 4;
-              const expanded = eqExpandedId === e.id;
-              const locParts = e.location.split('-');
-              const locShort = locParts[locParts.length-1].trim();
-              const locProv  = locParts.length > 1 ? locParts[0].trim() : '';
-
-              const detailHtml = expanded ? `
-                <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--m3-outline-variant);display:flex;flex-direction:column;gap:6px;direction:rtl">
-                  ${e.datetime ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">📅 تاریخ و زمان:</span> ${e.datetime}</div>` : ''}
-                  ${e.depth    ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">🕳️ عمق:</span> ${e.depth}</div>` : ''}
-                  ${(!isNaN(e.lat)&&!isNaN(e.lon)) ? `<div style="font-size:.78rem;direction:ltr"><span style="direction:rtl;color:var(--m3-on-surface-variant)">📍 مختصات:</span> ${e.lat.toFixed(3)}°N  ${e.lon.toFixed(3)}°E</div>` : ''}
-                  ${e.cities.length ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">🏙️ نزدیک‌ترین شهرها:</span><br>${e.cities.join('  ·  ')}</div>` : ''}
-                  ${e.provinces.length ? `<div style="font-size:.78rem"><span style="color:var(--m3-on-surface-variant)">🗺️ نزدیک‌ترین مراکز استان:</span><br>${e.provinces.join('  ·  ')}</div>` : ''}
-                  ${e.map_url ? `<a href="${e.map_url}" target="_blank" rel="noopener" style="font-size:.78rem;color:var(--m3-primary);text-decoration:none;display:inline-flex;align-items:center;gap:4px">🗺 نمایش روی نقشه گوگل ↗</a>` : ''}
-                </div>` : '';
-
-              return `
-              <div id="eq-row-${e.id}"
-                onclick="window.eqToggleExpand('${e.id}')"
-                style="
-                  background:var(--m3-surface-container-low);
-                  border:1px solid ${bigMag ? col : 'var(--m3-outline-variant)'};
-                  border-radius:12px;padding:12px 14px;
-                  cursor:pointer;transition:background 0.15s;
-                  ${bigMag ? 'box-shadow:0 2px 8px '+col+'44;' : ''}
-                  ${expanded ? 'background:var(--m3-surface-container);' : ''}
-                "
-              >
-                <div style="display:flex;align-items:center;gap:12px">
-                  <!-- Mag badge -->
-                  <div style="
-                    min-width:48px;height:48px;border-radius:10px;
-                    background:${col};color:#fff;
-                    display:flex;flex-direction:column;align-items:center;justify-content:center;
-                    font-weight:700;font-size:1.05rem;line-height:1.1;flex-shrink:0
-                  ">
-                    <span>${e.mag.toFixed(1)}</span>
-                    <span style="font-size:.58rem;font-weight:400;opacity:.85">ریشتر</span>
-                  </div>
-                  <!-- Summary -->
-                  <div style="flex:1;min-width:0;direction:rtl">
-                    <div style="font-weight:600;font-size:.88rem;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
-                      ${locShort}
-                      ${locProv ? `<span style="font-size:.75rem;font-weight:400;color:var(--m3-on-surface-variant);margin-right:4px">(${locProv})</span>` : ''}
-                    </div>
-                    <div style="font-size:.75rem;color:var(--m3-on-surface-variant)">${e.datetime}</div>
-                  </div>
-                  <!-- Expand chevron -->
-                  <div style="color:var(--m3-on-surface-variant);font-size:.8rem;flex-shrink:0;transition:transform 0.2s;transform:rotate(${expanded?'180':'0'}deg)">▾</div>
-                </div>
-                ${detailHtml}
-              </div>`;
-            }).join('');
-          }
-
-          // Expose globals
-          window.eqLoad         = eqLoad;
-          window.eqRender       = eqRender;
-          window.eqToggleExpand = eqToggleExpand;
-
-          document.addEventListener('DOMContentLoaded', () => {
-            const card = document.getElementById('earthquake');
-            if (!card) return;
-            new MutationObserver(muts => {
-              muts.forEach(m => {
-                if (m.attributeName === 'class' && card.classList.contains('active') && !eqLoaded) {
-                  eqLoad();
-                }
-              });
-            }).observe(card, {attributes: true});
-            if (card.classList.contains('active')) eqLoad();
-          });
-        })();
-
-
-        // ══════════════════════════════════════════════════
         //  بانک فیلم — moviesapi.ir
         // ══════════════════════════════════════════════════
         (() => {
@@ -26748,6 +26506,150 @@ window.UI_KEYS = {"# Generated by جعبه‌ابزار آفلاین\\n\\n": "# 
     setMode(S.mode); paintFlags(); renderHist(); preview();
     new MutationObserver(() => { if (el.classList.contains('active') && matchMedia('(hover:hover)').matches) setTimeout(() => inp.focus({ preventScroll: true }), 50); }).observe(el, { attributes: true, attributeFilter: ['class'] });
   });
+})();
+
+// ══ زمین‌لرزه v2: EMSC → USGS → IRSC، جدیدترین اول ══
+(() => {
+  const T = window.TBIZ;
+  const BBOX = { minlat: 24, maxlat: 40.5, minlon: 43.5, maxlon: 64 };
+  const CACHE = 'tb-eq-cache', REFRESH = 5 * 60 * 1000, OFF = 12600; // +03:30
+  const CAPS = [['تهران', 35.69, 51.39, 'تهران'], ['کرج', 35.84, 50.99, 'البرز'], ['قم', 34.64, 50.88, 'قم'], ['قزوین', 36.27, 50.0, 'قزوین'], ['زنجان', 36.68, 48.48, 'زنجان'], ['اردبیل', 38.25, 48.3, 'اردبیل'], ['تبریز', 38.08, 46.29, 'آذربایجان شرقی'], ['ارومیه', 37.55, 45.07, 'آذربایجان غربی'], ['رشت', 37.28, 49.58, 'گیلان'], ['ساری', 36.56, 53.06, 'مازندران'], ['گرگان', 36.84, 54.43, 'گلستان'], ['بجنورد', 37.47, 57.33, 'خراسان شمالی'], ['مشهد', 36.3, 59.6, 'خراسان رضوی'], ['بیرجند', 32.87, 59.22, 'خراسان جنوبی'], ['سمنان', 35.58, 53.39, 'سمنان'], ['یزد', 31.9, 54.37, 'یزد'], ['کرمان', 30.28, 57.08, 'کرمان'], ['زاهدان', 29.5, 60.86, 'سیستان و بلوچستان'], ['بندرعباس', 27.18, 56.27, 'هرمزگان'], ['بوشهر', 28.92, 50.84, 'بوشهر'], ['شیراز', 29.59, 52.58, 'فارس'], ['اهواز', 31.32, 48.67, 'خوزستان'], ['یاسوج', 30.67, 51.59, 'کهگیلویه و بویراحمد'], ['شهرکرد', 32.33, 50.86, 'چهارمحال و بختیاری'], ['اصفهان', 32.65, 51.67, 'اصفهان'], ['اراک', 34.09, 49.69, 'مرکزی'], ['همدان', 34.8, 48.51, 'همدان'], ['کرمانشاه', 34.31, 47.07, 'کرمانشاه'], ['سنندج', 35.31, 47.0, 'کردستان'], ['خرم‌آباد', 33.49, 48.35, 'لرستان'], ['ایلام', 33.64, 46.42, 'ایلام']];
+  const S = { items: [], src: 'auto', used: '', at: 0, stale: false, time: 7, mag: 0, dep: 9999, prov: '', sort: 'time', open: null, loading: false, timer: 0, root: null, seq: 0 };
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const fs = s => String(s).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+  const fa = (n, d) => (+n).toLocaleString('fa-IR', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0, useGrouping: false });
+  const en = s => String(s == null ? '' : s).replace(/[۰-۹]/g, d => d.charCodeAt(0) - 1776).replace(/[٠-٩]/g, d => d.charCodeAt(0) - 1632);
+  const col = m => m >= 5 ? '#c62828' : m >= 4 ? '#ef6c00' : m >= 3 ? '#b58900' : '#2e7d32';
+  // ── تقویم ──
+  const fl = Math.floor;
+  function g2j(gy, gm, gd) { const t = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334], g2 = gm > 2 ? gy + 1 : gy; let days = 355666 + 365 * gy + fl((g2 + 3) / 4) - fl((g2 + 99) / 100) + fl((g2 + 399) / 400) + gd + t[gm - 1], jy = -1595 + 33 * fl(days / 12053); days %= 12053; jy += 4 * fl(days / 1461); days %= 1461; if (days > 365) { jy += fl((days - 1) / 365); days = (days - 1) % 365; } return [jy, days < 186 ? 1 + fl(days / 31) : 7 + fl((days - 186) / 30), 1 + (days < 186 ? days % 31 : (days - 186) % 30)]; }
+  function j2g(jy, jm, jd) { jy += 1595; let days = -355668 + 365 * jy + fl(jy / 33) * 8 + fl(((jy % 33) + 3) / 4) + jd + (jm < 7 ? (jm - 1) * 31 : (jm - 7) * 30 + 186), gy = 400 * fl(days / 146097); days %= 146097; if (days > 36524) { gy += 100 * fl(--days / 36524); days %= 36524; if (days >= 365) days++; } gy += 4 * fl(days / 1461); days %= 1461; if (days > 365) { gy += fl((days - 1) / 365); days = (days - 1) % 365; } let gd = days + 1; const a = [0, 31, (gy % 4 === 0 && gy % 100 !== 0) || gy % 400 === 0 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; let gm = 0; while (gm < 13 && gd > a[gm]) gd -= a[gm++]; return [gy, gm, gd]; }
+  const JM = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+  const tehran = ts => { const d = new Date((ts + OFF) * 1000), j = g2j(d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate()); return { j, h: d.getUTCHours(), mi: d.getUTCMinutes(), day: Math.floor((ts + OFF) / 86400) }; };
+  const p2 = n => String(n).padStart(2, '0');
+  const fmtT = ts => { if (!isFinite(ts)) return ''; const t = tehran(ts); return fa(t.j[0]) + '/' + fs(p2(t.j[1])) + '/' + fs(p2(t.j[2])) + ' · ' + fs(p2(t.h)) + ':' + fs(p2(t.mi)); };
+  const hm = ts => { const t = tehran(ts); return fs(p2(t.h)) + ':' + fs(p2(t.mi)); };
+  function rel(ts) { const s = Date.now() / 1000 - ts; if (s < 0) return 'همین حالا'; if (s < 60) return 'همین حالا'; if (s < 3600) return fa(Math.floor(s / 60)) + ' دقیقه پیش'; if (s < 86400) return fa(Math.floor(s / 3600)) + ' ساعت پیش'; return fa(Math.floor(s / 86400)) + ' روز پیش'; }
+  function dayLabel(ts) { const t = tehran(ts), n = tehran(Date.now() / 1000), d = n.day - t.day; if (d === 0) return 'امروز'; if (d === 1) return 'دیروز'; return fa(t.j[2]) + ' ' + JM[t.j[1] - 1] + ' ' + fa(t.j[0]); }
+  // ── جغرافیا ──
+  const rad = x => x * Math.PI / 180;
+  function dist(a, b, c, d) { const x = rad(c - a), y = rad(d - b), h = Math.sin(x / 2) ** 2 + Math.cos(rad(a)) * Math.cos(rad(c)) * Math.sin(y / 2) ** 2; return 12742 * Math.asin(Math.sqrt(h)); }
+  function dir(a, b, c, d) { const y = Math.sin(rad(d - b)) * Math.cos(rad(c)), x = Math.cos(rad(a)) * Math.sin(rad(c)) - Math.sin(rad(a)) * Math.cos(rad(c)) * Math.cos(rad(d - b)); const br = (Math.atan2(y, x) * 180 / Math.PI + 360) % 360; return ['شمال', 'شمال‌شرق', 'شرق', 'جنوب‌شرق', 'جنوب', 'جنوب‌غرب', 'غرب', 'شمال‌غرب'][Math.round(br / 45) % 8]; }
+  function nearest(lat, lon, n) { return CAPS.map(c => ({ n: c[0], p: c[3], km: dist(c[1], c[2], lat, lon), d: dir(c[1], c[2], lat, lon) })).sort((a, b) => a.km - b.km).slice(0, n || 3); }
+  const title = s => String(s || '').toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+  function decorate(e) { // برای منابع خارجی: مکان فارسی نسبت به نزدیک‌ترین مرکز استان
+    const n = nearest(e.lat, e.lon, 3); e.near = n.map(x => `${x.n} (${fa(Math.round(x.km))} km)`);
+    e.prov = n[0].km <= 300 ? n[0].p : '';
+    e.place = n[0].km <= 250 ? (n[0].km < 15 ? 'نزدیک ' + n[0].n : `${fa(Math.round(n[0].km))} کیلومتر ${n[0].d} ${n[0].n}`) : (title(e.region) || 'خارج از ایران');
+    return e;
+  }
+  // ── شبکه ──
+  async function jget(url, ms) { const c = new AbortController(), t = setTimeout(() => c.abort(), ms || 9000); try { const r = await fetch(url, { signal: c.signal, headers: { accept: 'application/json' } }); if (!r.ok) throw new Error('HTTP ' + r.status); return await r.json(); } finally { clearTimeout(t); } }
+  const since = d => new Date(Date.now() - d * 864e5).toISOString().slice(0, 19);
+  const bb = `minlatitude=${BBOX.minlat}&maxlatitude=${BBOX.maxlat}&minlongitude=${BBOX.minlon}&maxlongitude=${BBOX.maxlon}`;
+  const SRC = {
+    async EMSC() {
+      const j = await jget(`https://www.seismicportal.eu/fdsnws/event/1/query?format=json&limit=400&orderby=time&starttime=${since(30)}&${bb}`);
+      return (j.features || []).map(f => { const p = f.properties || {}, ts = Date.parse(p.time) / 1000; return decorate({ id: 'E' + (p.unid || p.source_id || ts), ts, mag: +p.mag, mt: p.magtype || '', lat: +p.lat, lon: +p.lon, depth: Math.abs(+p.depth), region: p.flynn_region, auth: p.auth || '', src: 'EMSC' }); });
+    },
+    async USGS() {
+      const j = await jget(`https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=400&orderby=time&starttime=${since(30)}&${bb}`);
+      return (j.features || []).filter(f => !f.properties.type || f.properties.type === 'earthquake').map(f => { const p = f.properties, g = f.geometry.coordinates; return decorate({ id: 'U' + f.id, ts: p.time / 1000, mag: +p.mag, mt: p.magType || '', lat: +g[1], lon: +g[0], depth: Math.abs(+g[2]), region: String(p.place || '').replace(/^.*? of /, ''), auth: 'USGS', src: 'USGS' }); });
+    },
+    async IRSC() {
+      const j = await jget('/irsc-proxy');
+      return (j.items || []).map((it, i) => {
+        const loc = String(it.location || ''), parts = loc.split('-'), n = (en(it.datetime).match(/\d+/g) || []).map(Number); let ts = NaN;
+        if (n.length >= 3) { let y = n[0], m = n[1], d = n[2]; if (String(n[0]).length < 4 && String(n[2]).length === 4) { y = n[2]; d = n[0]; } const hh = n[3] || 0, mi = n[4] || 0, ss = n[5] || 0; let g = y < 1700 ? j2g(y, m, d) : [y, m, d]; ts = Date.UTC(g[0], g[1] - 1, g[2], hh, mi, ss) / 1000 - OFF; }
+        const e = { id: 'I' + (it.rid || i), ts, mag: parseFloat(en(it.mag)), mt: 'ML', lat: parseFloat(it.lat), lon: parseFloat(it.lon), depth: parseFloat(en(it.depth)), place: parts[parts.length - 1].trim(), prov: parts.length > 1 ? parts[0].trim() : '', near: (it.cities || []).slice(0, 4), auth: 'IRSC', src: 'IRSC', txt: it.datetime || '' };
+        if (!isFinite(e.depth)) e.depth = NaN; return e;
+      });
+    }
+  };
+  const ORDER = { auto: ['EMSC', 'USGS', 'IRSC'], EMSC: ['EMSC'], USGS: ['USGS'], IRSC: ['IRSC'] };
+  const clean = a => { const seen = new Set(); return a.filter(e => isFinite(e.mag) && isFinite(e.lat) && isFinite(e.lon) && !seen.has(e.id) && seen.add(e.id)); };
+  const byTime = (a, b) => (isFinite(b.ts) ? b.ts : 0) - (isFinite(a.ts) ? a.ts : 0);
+  async function load(manual) {
+    if (S.loading) return; S.loading = true; const my = ++S.seq; ui('load');
+    const failed = []; let ok = null;
+    for (const k of ORDER[S.src]) { try { const a = clean(await SRC[k]()); if (a.length) { ok = { k, a }; break; } failed.push(k); } catch (e) { failed.push(k); } }
+    if (my !== S.seq) { S.loading = false; return; }
+    S.loading = false;
+    if (ok) { S.items = ok.a.sort(byTime); S.used = ok.k; S.at = Date.now(); S.stale = false; S.failed = failed; try { localStorage.setItem(CACHE, JSON.stringify({ used: ok.k, at: S.at, items: S.items.slice(0, 400) })); } catch (e) { } }
+    else { let c = null; try { c = JSON.parse(localStorage.getItem(CACHE)); } catch (e) { } if (c && c.items && c.items.length) { S.items = c.items; S.used = c.used; S.at = c.at; S.stale = true; S.failed = failed; } else { S.failed = failed; S.err = true; } }
+    ui(ok ? 'ok' : 'bad'); render();
+  }
+  function ui(st) {
+    const d = $('eq-dot'), t = $('eq-ts'); if (!d || !t) return;
+    d.className = 'eq-dot' + (st === 'load' ? ' load' : st === 'bad' ? ' bad' : '');
+    t.textContent = st === 'load' ? 'در حال بارگذاری…' : S.at ? `${S.used} · ${hm(S.at / 1000)}${S.stale ? ' (ذخیره‌شده)' : ''}` : 'خطا در بارگذاری';
+  }
+  // ── نمایش ──
+  function filtered() {
+    const lim = S.time ? Date.now() / 1000 - S.time * 86400 : 0;
+    const a = S.items.filter(e => e.mag >= S.mag && (!isFinite(e.depth) || e.depth <= S.dep) && (!S.prov || e.prov === S.prov) && (!lim || !isFinite(e.ts) || e.ts >= lim));
+    return S.sort === 'mag' ? a.sort((x, y) => y.mag - x.mag || byTime(x, y)) : a.sort(byTime);
+  }
+  function fillProv() {
+    const sel = $('eq-f-prov'); if (!sel) return; const ps = [...new Set(S.items.map(e => e.prov).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fa')); if (S.prov && !ps.includes(S.prov)) ps.push(S.prov);
+    sel.innerHTML = '<option value="">همه استان‌ها</option>' + ps.map(p => `<option value="${esc(p)}"${p === S.prov ? ' selected' : ''}>${esc(p)}</option>`).join('');
+  }
+  function hero() {
+    const h = $('eq-hero'); if (!h) return; if (!S.items.length) { h.innerHTML = ''; return; }
+    const all = S.items.slice().sort(byTime), last = all[0], day = Date.now() / 1000 - 86400, in24 = all.filter(e => e.ts >= day), big = (in24.length ? in24 : all.slice(0, 50)).reduce((a, b) => b.mag > a.mag ? b : a);
+    h.innerHTML = `<div class="eq-tile lead"><small>آخرین رویداد · ${isFinite(last.ts) ? rel(last.ts) : ''}</small><b style="color:inherit">${fa(last.mag, 1)} ریشتر</b><span>${esc(last.place)}</span></div>
+      <div class="eq-tile"><small>${in24.length ? 'بزرگ‌ترین در ۲۴ ساعت' : 'بزرگ‌ترین اخیر'}</small><b style="color:${col(big.mag)}">${fa(big.mag, 1)}</b><span>${esc(big.place)}</span></div>
+      <div class="eq-tile"><small>رویداد در ۲۴ ساعت</small><b>${fa(in24.length)}</b><span>از ${fa(S.items.length)} رویداد ثبت‌شده</span></div>`;
+  }
+  function note() {
+    const n = $('eq-note'); if (!n) return; let m = '';
+    if (S.stale) m = 'اتصال به منابع برقرار نشد؛ آخرین داده‌ی ذخیره‌شده نمایش داده می‌شود. <button type="button" data-a="retry">تلاش دوباره</button>';
+    else if (S.src === 'auto' && S.failed && S.failed.length && S.used) m = `${S.failed.join('، ')} در دسترس نبود؛ داده از ${S.used} گرفته شد.`;
+    n.hidden = !m; n.innerHTML = m;
+  }
+  function row(e) {
+    const o = S.open === e.id, c = col(e.mag), big = e.mag >= 4, isNew = isFinite(e.ts) && Date.now() / 1000 - e.ts < 3600;
+    const geo = `${e.lat.toFixed(3)}, ${e.lon.toFixed(3)}`;
+    return `<div class="eq-row${o ? ' open' : ''}${big ? ' big' : ''}" data-id="${esc(e.id)}" style="--eqc:${c}${big ? '66' : ''}"><div class="eq-main" style="--eqc:${c}"><div class="eq-mag">${fa(e.mag, 1)}<i>${esc(e.mt || 'ریشتر')}</i></div><div class="eq-txt"><div class="eq-place">${esc(e.place)}${e.prov && e.prov !== e.place ? ` <small style="font-weight:400;color:var(--m3-on-surface-variant)">(${esc(e.prov)})</small>` : ''}</div><div class="eq-sub">${isFinite(e.ts) ? `<span>${fmtT(e.ts)}</span><span>· ${rel(e.ts)}</span>` : `<span>${esc(e.txt)}</span>`}${isFinite(e.depth) ? `<span>· عمق ${fa(Math.round(e.depth))} km</span>` : ''}${isNew ? '<span class="eq-new">جدید</span>' : ''}</div></div><div class="eq-chev">▾</div></div>${o ? `<div class="eq-det">
+      <div><small>زمان (به وقت تهران)</small>${isFinite(e.ts) ? fmtT(e.ts) : esc(e.txt)}</div><div><small>عمق</small>${isFinite(e.depth) ? fa(e.depth, 1) + ' کیلومتر' : '—'}</div>
+      <div><small>بزرگی ${esc(e.mt || '')}</small>${fa(e.mag, 1)}</div><div><small>مختصات</small><span class="ltr" style="display:block">${geo}</span></div>
+      ${e.near && e.near.length ? `<div class="wide"><small>نزدیک‌ترین ${e.src === 'IRSC' ? 'شهرها' : 'مراکز استان'}</small>${e.near.map(esc).join(' · ')}</div>` : ''}
+      ${e.region ? `<div class="wide"><small>ناحیه‌ی گزارش‌شده</small><span class="ltr" style="display:block">${esc(title(e.region))}</span></div>` : ''}
+      <div><small>منبع</small>${esc(e.src)}${e.auth && e.auth !== e.src ? ' (' + esc(e.auth) + ')' : ''}</div>
+      <div class="eq-acts"><a href="https://www.google.com/maps?q=${e.lat},${e.lon}" target="_blank" rel="noopener">🗺 نقشه گوگل ↗</a><a href="https://www.openstreetmap.org/?mlat=${e.lat}&mlon=${e.lon}#map=8/${e.lat}/${e.lon}" target="_blank" rel="noopener">OpenStreetMap ↗</a><button type="button" data-a="copy" data-v="${geo}">کپی مختصات</button></div></div>` : ''}</div>`;
+  }
+  function render() {
+    const list = $('eq-list'); if (!list) return; fillProv(); hero(); note(); ui(S.err ? 'bad' : 'ok');
+    const cnt = $('eq-count-label');
+    if (S.err) { list.innerHTML = '<div class="eq-empty">دریافت داده از هیچ‌کدام از منابع ممکن نشد.<br><button type="button" class="eq-link" data-a="retry" style="margin-top:8px;border:0;background:var(--m3-primary);color:var(--m3-on-primary);border-radius:99px;padding:8px 18px;font:inherit;font-weight:700;cursor:pointer">تلاش دوباره</button></div>'; if (cnt) cnt.textContent = ''; return; }
+    const a = filtered(); if (cnt) cnt.textContent = `${fa(a.length)} زمین‌لرزه از ${fa(S.items.length)} رویداد · ${S.sort === 'time' ? 'از جدید به قدیم' : 'از بزرگ به کوچک'}`;
+    if (!a.length) { list.innerHTML = '<div class="eq-empty">رویدادی با این فیلترها یافت نشد.</div>'; return; }
+    let h = '', lastDay = null;
+    a.slice(0, 150).forEach(e => { if (S.sort === 'time' && isFinite(e.ts)) { const d = dayLabel(e.ts); if (d !== lastDay) { h += `<div class="eq-day">${d}</div>`; lastDay = d; } } h += row(e); });
+    if (a.length > 150) h += `<div class="eq-empty">${fa(a.length - 150)} رویداد دیگر؛ فیلترها را محدودتر کنید.</div>`;
+    list.innerHTML = h;
+  }
+  function seg(id, key, cast) { const g = $(id); if (!g) return; g.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; S[key] = cast ? cast(b.dataset.v) : b.dataset.v; g.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); if (key === 'src') { S.open = null; load(); } else render(); }); }
+  T.on('earthquake', root => {
+    S.root = root; if (!S.items.length) { const l = $('eq-list'); if (l) l.innerHTML = '<div class="eq-sk"></div><div class="eq-sk"></div><div class="eq-sk"></div>'; }
+    seg('eq-src', 'src'); seg('eq-f-time', 'time', Number); seg('eq-f-mag', 'mag', Number); seg('eq-f-sort', 'sort');
+    $('eq-f-prov').addEventListener('change', e => { S.prov = e.target.value; render(); });
+    $('eq-f-dep').addEventListener('change', e => { S.dep = +e.target.value; render(); });
+    $('eq-refresh').addEventListener('click', () => load(true));
+    root.addEventListener('click', ev => {
+      const a = ev.target.closest('[data-a]');
+      if (a) { if (a.dataset.a === 'retry') load(true); else if (a.dataset.a === 'copy') { try { navigator.clipboard.writeText(a.dataset.v); T.toast && T.toast('مختصات کپی شد'); } catch (e) { } } return; }
+      if (ev.target.closest('.eq-det')) return;
+      const r = ev.target.closest('.eq-row'); if (r) { S.open = S.open === r.dataset.id ? null : r.dataset.id; render(); const x = root.querySelector('.eq-row.open'); if (x) x.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+    });
+    let c = null; try { c = JSON.parse(localStorage.getItem(CACHE)); } catch (e) { }
+    if (c && c.items && c.items.length) { S.items = c.items; S.used = c.used; S.at = c.at; S.stale = true; render(); S.stale = false; }
+    load();
+    clearInterval(S.timer); S.timer = setInterval(() => { if (!document.hidden && root.isConnected && root.classList.contains('active')) load(); }, REFRESH);
+  });
+  window.eqLoad = () => load(true);
+  window.eqSelfTest = { j2g, g2j, SRC, S };
 })();
 
 

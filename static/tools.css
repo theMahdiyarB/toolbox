@@ -521,6 +521,59 @@
 @keyframes cxIn{from{opacity:0;transform:translateY(-6px)}}
 @media (prefers-reduced-motion:reduce){#calc .cx.shake,#calc .cx-hist{animation:none}}
 
+/* ══ earthquake v2 ══ */
+#earthquake .eq{display:flex;flex-direction:column;gap:10px}
+#earthquake .eq-hero{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:560px){#earthquake .eq-hero{grid-template-columns:1fr 1fr}#earthquake .eq-hero .eq-tile:first-child{grid-column:1/-1}}
+#earthquake .eq-tile{background:var(--m3-surface-container-low);border-radius:20px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0;animation:eqIn .3s both}
+#earthquake .eq-tile small{font-size:.7rem;color:var(--m3-on-surface-variant);font-weight:600}
+#earthquake .eq-tile b{font-size:1.5rem;line-height:1.2;font-variant-numeric:tabular-nums}
+#earthquake .eq-tile span{font-size:.75rem;color:var(--m3-on-surface-variant);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#earthquake .eq-tile.lead{background:var(--m3-primary-container);color:var(--m3-on-primary-container)}
+#earthquake .eq-tile.lead small,#earthquake .eq-tile.lead span{color:inherit;opacity:.8}
+#earthquake .eq-bar,#earthquake .eq-filters{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#earthquake .eq-bar{justify-content:space-between}
+#earthquake .eq-seg{display:inline-flex;background:var(--m3-surface-container-high);border-radius:99px;padding:3px;gap:2px;max-width:100%}
+#earthquake .eq-seg button{border:0;background:transparent;color:var(--m3-on-surface-variant);font:inherit;font-size:.78rem;font-weight:700;padding:6px 12px;border-radius:99px;cursor:pointer;min-height:32px;white-space:nowrap;transition:background .15s,color .15s}
+#earthquake .eq-seg button[aria-pressed=true]{background:var(--m3-secondary-container);color:var(--m3-on-secondary-container)}
+#earthquake .eq-seg button:focus-visible,#earthquake .eq-refresh:focus-visible{outline:2px solid var(--m3-primary);outline-offset:2px}
+#earthquake .eq-refresh{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--m3-outline-variant);background:var(--m3-surface-container);color:var(--m3-on-surface-variant);font:inherit;font-size:.72rem;border-radius:99px;padding:6px 12px;cursor:pointer;min-height:34px}
+#earthquake .eq-dot{width:8px;height:8px;border-radius:50%;background:var(--m3-primary);box-shadow:0 0 6px var(--m3-primary)}
+#earthquake .eq-dot.load{animation:eqPulse 1s infinite}
+#earthquake .eq-dot.bad{background:var(--m3-error);box-shadow:none}
+#earthquake .eq-sel{flex:1;min-width:130px;padding:0 8px;height:40px}
+#earthquake .eq-sel select{cursor:pointer}
+#earthquake .eq-note{background:var(--m3-tertiary-container);color:var(--m3-on-tertiary-container);border-radius:14px;padding:8px 12px;font-size:.78rem;line-height:1.6}
+#earthquake .eq-note[hidden]{display:none}
+#earthquake .eq-note button{border:0;background:none;color:inherit;font:inherit;font-weight:800;text-decoration:underline;cursor:pointer;padding:0 4px}
+#earthquake .eq-count{font-size:.78rem;color:var(--m3-on-surface-variant)}
+#earthquake .eq-list{display:flex;flex-direction:column;gap:8px}
+#earthquake .eq-day{font-size:.76rem;font-weight:800;color:var(--m3-primary);padding:8px 4px 0;position:sticky;top:0;background:var(--m3-surface);z-index:1}
+#earthquake .eq-row{background:var(--m3-surface-container-low);border:1px solid var(--m3-outline-variant);border-radius:18px;padding:10px 12px;cursor:pointer;transition:background .15s;animation:eqIn .25s both}
+#earthquake .eq-row:hover,#earthquake .eq-row.open{background:var(--m3-surface-container)}
+#earthquake .eq-row.big{box-shadow:0 2px 10px var(--eqc);border-color:var(--eqc)}
+#earthquake .eq-main{display:flex;align-items:center;gap:12px}
+#earthquake .eq-mag{flex:none;width:50px;height:50px;border-radius:14px;background:var(--eqc);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;line-height:1.05;font-variant-numeric:tabular-nums}
+#earthquake .eq-mag i{font-style:normal;font-size:.55rem;font-weight:500;opacity:.9}
+#earthquake .eq-txt{flex:1;min-width:0}
+#earthquake .eq-place{font-weight:700;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#earthquake .eq-sub{font-size:.74rem;color:var(--m3-on-surface-variant);display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:2px}
+#earthquake .eq-new{background:var(--m3-error);color:var(--m3-on-error,#fff);border-radius:99px;font-size:.62rem;font-weight:800;padding:1px 7px}
+#earthquake .eq-chev{flex:none;color:var(--m3-on-surface-variant);transition:transform .2s;font-size:.8rem}
+#earthquake .eq-row.open .eq-chev{transform:rotate(180deg)}
+#earthquake .eq-det{margin-top:10px;padding-top:10px;border-top:1px solid var(--m3-outline-variant);display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px 12px;font-size:.78rem;cursor:default}
+#earthquake .eq-det div small{display:block;color:var(--m3-on-surface-variant);font-size:.68rem}
+#earthquake .eq-det .wide{grid-column:1/-1}
+#earthquake .eq-det .ltr{direction:ltr;text-align:right;font-variant-numeric:tabular-nums}
+#earthquake .eq-acts{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap}
+#earthquake .eq-acts a,#earthquake .eq-acts button{border:0;border-radius:99px;background:var(--m3-secondary-container);color:var(--m3-on-secondary-container);font:inherit;font-size:.74rem;font-weight:700;padding:6px 12px;text-decoration:none;cursor:pointer;min-height:32px;display:inline-flex;align-items:center}
+#earthquake .eq-empty{text-align:center;padding:28px 12px;color:var(--m3-on-surface-variant)}
+#earthquake .eq-sk{height:70px;border-radius:18px;background:linear-gradient(90deg,var(--m3-surface-container-low),var(--m3-surface-container-high),var(--m3-surface-container-low));background-size:200% 100%;animation:eqSk 1.2s infinite}
+@keyframes eqIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes eqPulse{50%{opacity:.25}}
+@keyframes eqSk{to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){#earthquake .eq-tile,#earthquake .eq-row,#earthquake .eq-dot.load,#earthquake .eq-sk{animation:none}}
+
 /* ══ currency sources ══ */
 #currency .cur-banner{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--m3-secondary-container);color:var(--m3-on-secondary-container);border-radius:18px;padding:12px 16px;font-size:.82rem;margin-bottom:14px;line-height:1.7}
 #currency .cur-banner--err{background:var(--m3-error-container);color:var(--m3-on-error-container)}
