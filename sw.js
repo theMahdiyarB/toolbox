@@ -6,7 +6,7 @@
 //    - External/opaque requests: Network-only (skip)
 // ============================================================
 
-const CACHE_VERSION = 'toolbox-v11.0';
+const CACHE_VERSION = 'toolbox-v11.1';
 const CACHE_SHELL   = CACHE_VERSION + '-shell';
 const CACHE_ASSETS  = CACHE_VERSION + '-assets';
 
@@ -38,6 +38,7 @@ const SHELL_URLS = [
   '/static/lib/ort-bundled.mjs',
   '/static/lib/fflate.min.js',
   '/static/lib/UPNG.js',
+  '/static/lib/scanic.mjs',
   '/static/lib/mozjpeg_enc.js',
   '/static/lib/mozjpeg_enc.wasm',
   '/static/poems/akhavan/structure.json',

@@ -22,7 +22,7 @@ Stack: static `index.html` + `static/{main.css,tools.css,icons.css,main.js}`; `s
 ```
 index.html            the whole app (~2.8 MB): markup, per-tool templates, scripts, translation dictionary
 iran.html             standalone page: Iranian internet resources (separate from the SPA)
-sw.js                 service worker (cache toolbox-v11.0, network-first navigations)
+sw.js                 service worker (cache toolbox-v11.1, network-first navigations)
 manifest.json         PWA manifest (relative URLs, maskable icon)
 scripts/              server-side: api_proxy.py, ai_service.py (TTS/OCR/STT), bale_bot.py, parse_logs.py, tests/
 static/lib/           vendored libs: math.js, function-plot, jsQR, qr-code-styling, browser-image-compression,
@@ -80,6 +80,7 @@ How it works (all inlined in `index.html`):
 ## 8. Notable subsystems
 
 - **Metro (`tm2`, inline in `index.html`)**: data blob `tb-metro-data` (stations `[en, fa, lat, lon, address, id, lines, …]`, `ln` lines with main list `m` and branches `b`, `ed` edges, `sv` timetable services), four cities (Tehran, Shiraz, Isfahan, Mashhad). Dijkstra over (station,line) states with transfer penalty (`mode` fast/fewest); legs rendered by `renderLeg`; `dirTerm(leg)` computes the terminal station in the travel direction and shows «به سمت X» at the start and at every line change. Station names are bilingual in the data (EN is free).
+- **Scan tab (`pdftool` → `sc`)**: pages hold the original File + corner points; only the current page keeps decoded canvases (others are released; warped result kept as a JPEG blob). Auto-detect = `scanDocument(canvas,{mode:'detect'})` from `static/lib/scanic.mjs` (lazy `import()`, MIT, WASM inlined); our own homography + bilinear warp; filters are plain Canvas code (levels stretch, background-division “magic colour” for shadow removal, Otsu B&W). Output goes through `TBX.compress` → pdf-lib and `saved('scp', …)`.
 - **Image/PDF tools**: `imgtool` (editor + batch, mozjpeg/UPNG/browser-image-compression, HEIC), `pdftool` (pdf-lib + pdf.js: merge/split/organize/compress/extract/security/edit; helper `saved(id, bytes, orig, name)`), all outputs go through `TBX.dlAs`.
 - **Doc suite / résumé / payroll / expenses**: inline in `index.html`; PDF/Word/print export, data in localStorage.
 - **Weather / earthquake / prices / movies / translate / post-tracking**: all go through the proxy. Earthquake data = IRSC via Bale channel (cached to `earthquakes.json` by cron) + EMSC.
@@ -126,4 +127,4 @@ Playwright + Chromium are available. Typical: serve with `python3 -m http.server
 
 ## 14. Working with the owner
 
-Present changed files at the end of each reply and say what was done and what remains. Prefer exact, minimal replacements. If a feature is flaky, propose removing it. Say plainly when something could not be verified (e.g. live external APIs are untestable from the sandbox).
+Developer: Mahdiyar (Iran). Present changed files at the end of each reply and say what was done and what remains. Prefer exact, minimal replacements. If a feature is flaky, propose removing it. Say plainly when something could not be verified (e.g. live external APIs are untestable from the sandbox).
