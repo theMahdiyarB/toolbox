@@ -1,14 +1,11 @@
 {
-  "_comment": "Deploy-specific fields: id, start_url, scope and the shortcut URLs below are tied to mahdiyar.info. For your own domain, replace every 'https://mahdiyar.info' occurrence (e.g. id, start_url, scope, shortcuts[].url, action) with your origin — the PWA will only install on the matching domain.",
   "name": "جعبه‌ابزار آفلاین",
   "short_name": "جعبه‌ابزار",
   "description": "بیش از ۱۰۰ ابزار کاربردی؛ کاملاً آفلاین، بدون نیاز به اینترنت",
-  "id": "https://mahdiyar.info/",
-  "start_url": "https://mahdiyar.info/?source=pwa",
-  "scope": "https://mahdiyar.info/",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
   "display": "standalone",
-  "display_override": ["window-controls-overlay", "standalone"],
-  "orientation": "portrait",
   "theme_color": "#006874",
   "background_color": "#006874",
   "lang": "fa",
@@ -21,9 +18,9 @@
       "purpose": "any"
     },
     {
-      "src": "static/icon-512.png",
+      "src": "static/icon-maskable-512.jpg",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/jpeg",
       "purpose": "maskable"
     },
     {
@@ -49,51 +46,64 @@
       "label": "نمای دسکتاپ جعبه‌ابزار"
     }
   ],
-  "categories": ["utilities", "productivity", "education"],
+  "categories": [
+    "utilities",
+    "productivity",
+    "education"
+  ],
   "shortcuts": [
     {
       "name": "ماشین‌حساب",
       "short_name": "حساب",
-      "url": "https://mahdiyar.info/?source=shortcut#calc",
+      "url": "/?source=shortcut#calc",
       "description": "محاسبات ریاضی",
-      "icons": [{ "src": "static/favicon.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "static/favicon.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "تقویم خورشیدی",
       "short_name": "تقویم",
-      "url": "https://mahdiyar.info/?source=shortcut#jcal",
+      "url": "/?source=shortcut#jcal",
       "description": "تقویم با مناسبت‌ها",
-      "icons": [{ "src": "static/favicon.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "static/favicon.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "کد QR",
       "short_name": "QR",
-      "url": "https://mahdiyar.info/?source=shortcut#qr",
+      "url": "/?source=shortcut#qr",
       "description": "ساخت کد QR",
-      "icons": [{ "src": "static/favicon.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "static/favicon.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "شماره ضروری",
       "short_name": "اورژانس",
-      "url": "https://mahdiyar.info/?source=shortcut#emergency",
+      "url": "/?source=shortcut#emergency",
       "description": "اورژانس، پلیس، آتش‌نشانی",
-      "icons": [{ "src": "static/favicon.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "static/favicon.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ],
-  "share_target": {
-    "action": "https://mahdiyar.info/",
-    "method": "GET",
-    "enctype": "application/x-www-form-urlencoded",
-    "params": {
-      "title": "title",
-      "text": "text",
-      "url": "url"
-    }
-  },
   "prefer_related_applications": false,
   "handle_links": "preferred",
   "launch_handler": {
     "client_mode": "navigate-existing"
-  },
-  "edge_side_panel": { "preferred_width": 400 }
+  }
 }

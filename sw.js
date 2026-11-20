@@ -6,7 +6,7 @@
 //    - External/opaque requests: Network-only (skip)
 // ============================================================
 
-const CACHE_VERSION = 'toolbox-v10.8';
+const CACHE_VERSION = 'toolbox-v11.0';
 const CACHE_SHELL   = CACHE_VERSION + '-shell';
 const CACHE_ASSETS  = CACHE_VERSION + '-assets';
 
@@ -140,26 +140,39 @@ self.addEventListener('fetch', function(event) {
       return;
     }
 
-    // All other navigations → SPA shell (index.html)
+    // All other navigations → SPA shell (index.html): NETWORK-FIRST (4s timeout), cache fallback.
+    // The fresh copy is always stored under '/index.html' so the offline shell never goes stale.
     event.respondWith(
-      caches.match('/index.html', { cacheName: CACHE_SHELL })
-        .then(function(cached) {
-          if (cached) {
-            fetch(event.request)
-              .then(function(response) {
-                if (response && response.ok) {
-                  caches.open(CACHE_SHELL).then(function(c) { c.put(event.request, response); });
-                }
-              }).catch(function() {});
-            return cached;
-          }
-          return fetch(event.request).catch(function() {
-            return new Response(
-              '<h1 dir="rtl" style="font-family:sans-serif;text-align:center;padding:40px">برای اولین بار باید آنلاین باشید تا اپ کش شود</h1>',
-              { status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
-            );
+      new Promise(function(resolve) {
+        var settled = false;
+        function fallback() {
+          caches.match('/index.html', { cacheName: CACHE_SHELL }).then(function(cached) {
+            if (settled) return;
+            if (cached) { settled = true; resolve(cached); return; }
           });
-        })
+        }
+        var timer = setTimeout(fallback, 4000);
+        fetch(event.request).then(function(response) {
+          clearTimeout(timer);
+          if (response && response.ok) {
+            var copy = response.clone();
+            caches.open(CACHE_SHELL).then(function(c) { c.put('/index.html', copy); });
+            if (!settled) { settled = true; resolve(response); }
+          } else if (!settled) {
+            caches.match('/index.html', { cacheName: CACHE_SHELL }).then(function(c) {
+              if (!settled) { settled = true; resolve(c || response); }
+            });
+          }
+        }).catch(function() {
+          clearTimeout(timer);
+          caches.match('/index.html', { cacheName: CACHE_SHELL }).then(function(cached) {
+            if (settled) return; settled = true;
+            resolve(cached || new Response(
+              '<h1 dir="rtl" style="font-family:sans-serif;text-align:center;padding:40px">برای اولین بار باید آنلاین باشید تا اپ کش شود</h1>',
+              { status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8' } }));
+          });
+        });
+      })
     );
     return;
   }
